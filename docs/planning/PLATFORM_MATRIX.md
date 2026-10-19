@@ -64,3 +64,9 @@ Kontrollert 2026-10-19 i lokal macOS SDK 26.2, Foundation.swiftmodule/x86_64-app
 | JSONEncoder / JSONDecoder, grunnklassene | iOS 8, macOS 10.10, watchOS 2, tvOS 9 | Innen alle valgte minimum; nyere medlemmer må kontrolleres separat |
 
 Kontrollen er positivt deklarasjonsbevis for disse kandidatene, ikke en påstand om at hele HTTP-kontrakten er implementert eller testet. Konkrete overloads/egenskaper for HTTPURLResponse, URLRequest, øvrige JSON-strategier, OSLog og concurrency kontrolleres videre før relevante deloppgaver blir Ready. Ingen build-/teststatus i matrisen endres av denne kontrollen.
+
+## Avgrenset kilde-/deklarasjonskontroll ved DEC-05
+
+Kontrollert 2026-10-19 i lokal SDK 26.2. _Concurrency.swiftmodule/x86_64-apple-macos.swiftinterface angir ContinuousClock fra iOS 16/macOS 13/watchOS 9/tvOS 16 og CancellationError fra iOS 13/macOS 10.15/watchOS 6/tvOS 13; begge er innen de valgte minimumene. Ingen nye OS 26-spesifikke klokkeegenskaper er valgt.
+
+Foundation/Headers/NSURLSession.h bekrefter skillet mellom request-timeout som venter på nye data, resource-timeout og effekten av session-invalidation på sessionens tasks. Samme header sier at connectivityventing ikke følger request-timeout på samme måte. Derfor er bibliotekets samlede budsjett et separat kontraktskrav. Disse lesekontrollene verifiserer ikke faktisk cancellation, timeout eller tilgjengelighet på alle SDK-er/runtimes; ingen bygg-/teststatus endres.

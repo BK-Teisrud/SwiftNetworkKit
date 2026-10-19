@@ -8,7 +8,7 @@ Status: Planlagt kontrakt, 2026-10-19, se [ADR-0005](../decisions/ADR-0005-http-
 | --- | --- |
 | NetworkClient / APIClient | Injiserbar klientgrense og konkret URLSession-basert klient; ingen global singleton som eneste bruksmåte |
 | Endpoint | Beskriver HTTP-kall, responstype/-strategi og eksplisitte kallvalg |
-| NetworkConfiguration | Klientens baseURL, standardheaders og øvrige konfigurasjonsvalg; samtidighet og snapshots avgjøres i DEC-05 |
+| NetworkConfiguration | Klientens baseURL, standardheaders og øvrige konfigurasjonsvalg; samtidighet og snapshots følger DEC-05 / ADR-0006 |
 | HTTPMethod | GET, POST, PUT, PATCH, DELETE, HEAD og OPTIONS; også en eksplisitt, gyldig HTTP-metodestreng |
 | NetworkResponse | Dekodet verdi, HTTP-status og responsheaders; metadata finnes også for Data/tekst/tomt svar |
 | EmptyResponse | Markerer uttrykkelig at det ikke skal dekodes en responsmodell |
@@ -47,7 +47,7 @@ Responsheaders skal tilby case-insensitive oppslag. Bevar verdier slik URLSessio
 | Tekst | UTF-8-kodet tekst | UTF-8 som standard; ustøttet eller ugyldig deklarert encoding gir decodingfeil, ikke stille datatap |
 | Tomt | Request uten body | Eksplisitt EmptyResponse, uten JSON-dekoding |
 
-Encoder-/decoderstrategier velges før utførelse. Ingen mutasjon av en delt instans midt i et request er en del av kontrakten; eierskap og samtidighet fastsettes i DEC-05. Et generelt custom-decoder-/pluginrammeverk inngår ikke.
+Encoder-/decoderstrategier velges før utførelse. Ingen mutasjon av en delt instans midt i et request er en del av kontrakten; eierskap og samtidighet følger [livssykluskontrakten](CONCURRENCY_AND_LIFECYCLE.md). Et generelt custom-decoder-/pluginrammeverk inngår ikke.
 
 Status valideres før normal responsdekoding. HEAD/204 kan håndteres med eksplisitt tom-responskontrakt. Dersom en JSON-modell er valgt og body er tom, er det en decoding-/kontraktfeil; klienten lager ikke et kunstig standardobjekt. Tom Data og tom tekst er tillatt når disse responsstrategiene er valgt. En eksplisitt tom respons dekoder ingen payload og returnerer fortsatt status/headers.
 
@@ -73,8 +73,8 @@ Planlagt rekkefølge: valider input → bygg/valider request og encode valgt bod
 | invalidResponse | Responsen er ikke HTTP eller bryter responskontrakten, eksempelvis oppgitt feil Content-Type |
 | encoding | Requestbody kunne ikke kodes; ingen request sendes |
 | decoding | Godkjent HTTP-respons kunne ikke tolkes som valgt modell/tekst |
-| timeout | Timeout skilt fra vanlig transportfeil; nøyaktige deadline-/sessionregler avgjøres i DEC-05 |
-| CancellationError | Egen feil utenfor NetworkError for faktisk kansellering; normalisering av systemets cancel-signaler avgjøres i DEC-05 |
+| timeout | Timeout skilt fra vanlig transportfeil; 30 sekunder inaktivitet / 60 sekunder samlet budsjett som standard, presisert i ADR-0006 |
+| CancellationError | Egen feil utenfor NetworkError for faktisk kansellering; systemets cancel-signaler normaliseres etter registrert årsak i ADR-0006, med timeout skilt fra caller-cancel |
 
 Ingen feilkategori gir automatisk rett til retry. Feiltekst og diagnostikk skal ikke inneholde tokens, cookies, rå URL-parametere eller payloads som standard. Et underliggende Error-/metadataobjekt er ikke en tillatelse til å logge alt. Policy for eventuell tilgang til HTTP-error-body avgjøres i DEC-06; ingen ubegrenset lagring eller inkludering i feiltekst velges her.
 

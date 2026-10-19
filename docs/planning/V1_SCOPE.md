@@ -12,7 +12,7 @@ Dette inkluderer nødvendige grunnkrav til URL-/requestbygging, konfigurasjon, s
 
 ## Sporbar leveransegrense
 
-Tabellen avgrenser domener på scope-nivå. [HTTP_API_CONTRACT.md](HTTP_API_CONTRACT.md) / ADR-0005 presiserer HTTP-/respons-/feilkontrakten. Gjenværende concurrency- og policygrenser dokumenteres i DEC-05–DEC-06 før Ready. En rad er ikke en garanti for at alle punktene i originaldomenet er valgt.
+Tabellen avgrenser domener på scope-nivå. [HTTP_API_CONTRACT.md](HTTP_API_CONTRACT.md) / ADR-0005 presiserer HTTP-/respons-/feilkontrakten. [CONCURRENCY_AND_LIFECYCLE.md](CONCURRENCY_AND_LIFECYCLE.md) / ADR-0006 presiserer concurrency og session-eierskap. DEC-06 presiserer gjenværende sikkerhets-/nettverkspolicy før Ready. En rad er ikke en garanti for at alle punktene i originaldomenet er valgt.
 
 | Domene | Inngår i v1 | Utsatt / ingen leveranseforpliktelse i v1 |
 | --- | --- | --- |
@@ -39,7 +39,7 @@ Tabellen avgrenser domener på scope-nivå. [HTTP_API_CONTRACT.md](HTTP_API_CONT
 
 ## Fortsatt åpne kontraktsspørsmål
 
-DEC-04 / ADR-0005 vedtar typed endpoints pluss rå URLRequest, JSON/Data/tekst/EmptyResponse, respons-wrapper, strukturerte feil med separat CancellationError og 2xx som standard med eksplisitte kallunntak. HTTP_API_CONTRACT.md konkretiserer metoder, URL/query, headerprioritet, body og validering. DEC-05 avgjør concurrency, session-eierskap og clocks. DEC-06 avgjør auth-integrasjon, credentials ved redirects og konkret system-cache-/nettverkspolicy. Disse oppgavene kan ikke utvide v1 til avanserte moduler uten nytt scopevedtak.
+DEC-04 / ADR-0005 vedtar typed endpoints pluss rå URLRequest, JSON/Data/tekst/EmptyResponse, respons-wrapper, strukturerte feil med separat CancellationError og 2xx som standard med eksplisitte kallunntak. HTTP_API_CONTRACT.md konkretiserer metoder, URL/query, headerprioritet, body og validering. DEC-05 / ADR-0006 vedtar gjenbrukt egen session med injeksjonsmulighet, isolert state, cancellation/shutdown og 30 sekunder inaktivitet / 60 sekunder samlet budsjett med kontrollert klokke. DEC-06 avgjør auth-integrasjon, credentials ved redirects og konkret system-cache-/nettverkspolicy. Disse oppgavene kan ikke utvide v1 til avanserte moduler uten nytt scopevedtak.
 
 OS-minimum er vedtatt i DEC-01 / ADR-0004: iOS/iPadOS 17, macOS 14, watchOS 10 og tvOS 17. Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus er valgt. Se [plattformmatrisen](PLATFORM_MATRIX.md). Konkrete API-symboler og faktisk runtime-kompatibilitet er fortsatt ikke verifisert. Ingen avgrensning i tabellen fritar kjernen fra nødvendige sikkerhets-, personvern- eller plattformkrav. Eksempelvis er avansert sikkerhetsmodul utsatt, mens system trust er et grunnkrav i v1.
 
