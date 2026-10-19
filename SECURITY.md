@@ -10,7 +10,7 @@ Ingen produktversjoner er lansert. Når 1.0 finnes, vedlikeholdes siste stabile 
 
 ## Krav til senere implementasjon
 
-System trust og HTTPS som standard; ingen TLS-bypass. Ingen sensitive logger som standard, ingen ekstern telemetri som standard. Credentials isoleres per konto/host/miljø. Redirect, idempotens, cancellation, cache og samtidighet inngår i sikkerhetsgjennomgang. Pinning, mTLS og OIDC krever separat beslutning og review.
+System trust og HTTPS som standard; ingen TLS-bypass. [ADR-0007 og sikkerhetspolicyen](docs/planning/SECURITY_AND_NETWORK_POLICY.md) fastsetter eksplisitt HTTP-unntak bare for localhost/loopback under utvikling, ingen automatisk cookie-/credential-/cachelagring, liten auth-header-provider og avgrenset redirect-/diagnostikkpolicy. Dette er planlagte krav, ikke implementerte eller bestått testede sikkerhetsegenskaper. Ingen sensitive logger som standard, ingen ekstern telemetri som standard. Credentials isoleres per konto/host/miljø. Redirect, idempotens, cancellation, cache og samtidighet inngår i sikkerhetsgjennomgang. Pinning, mTLS og OIDC krever separat beslutning og review.
 
 ## Hendelser
 

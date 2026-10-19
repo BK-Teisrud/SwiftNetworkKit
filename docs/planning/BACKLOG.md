@@ -9,7 +9,7 @@ Baseline: 20 domene-epics, 7 beslutningsoppgaver og 3 styrings-/releaseoppgaver.
 | DEC-03 | Vedtatt: Teisrud Development AS; proprietær policy (ADR-0002) | governance | F0 |
 | DEC-04 | Vedtatt: HTTP-/respons-/feilkontrakt (ADR-0005) | governance | F0 |
 | DEC-05 | Vedtatt: session-eierskap, 30/60-grenser, concurrency og shutdown (ADR-0006) | governance | F0 |
-| DEC-06 | Vedta sikkerhets-, auth-, retry- og cachegrenser | governance | F0 |
+| DEC-06 | Vedtatt: sikkerhets-/auth-/lagrings-/nettverkspolicy (ADR-0007) | governance | F0 |
 | DEC-07 | Vedta CI-verktøy, matrise og kostnadsramme | governance | F0 |
 | NK-01 | HTTP og forespørsler | core | F1 |
 | NK-02 | Endpoints og URL-bygging | core | F1 |
@@ -37,7 +37,7 @@ Baseline: 20 domene-epics, 7 beslutningsoppgaver og 3 styrings-/releaseoppgaver.
 
 ## Vedtatt scope
 
-[V1_SCOPE.md](V1_SCOPE.md) avgrenser inkludert og utsatt omfang for alle 20 domener. Domene-epics holdes åpne til valgt arbeid er levert. DEC-04 / ADR-0005 fastsetter [HTTP-kontrakten](HTTP_API_CONTRACT.md); DEC-05 / ADR-0006 fastsetter [livssykluskontrakten](CONCURRENCY_AND_LIFECYCLE.md). DEC-06 presiserer gjenværende sikkerhets-/auth-/nettverkspolicy før deloppgaver blir Ready.
+[V1_SCOPE.md](V1_SCOPE.md) avgrenser inkludert og utsatt omfang for alle 20 domener. Domene-epics holdes åpne til valgt arbeid er levert. DEC-04 / ADR-0005 fastsetter [HTTP-kontrakten](HTTP_API_CONTRACT.md); DEC-05 / ADR-0006 fastsetter [livssykluskontrakten](CONCURRENCY_AND_LIFECYCLE.md). DEC-06 / ADR-0007 fastsetter [sikkerhets-/nettverkspolicyen](SECURITY_AND_NETWORK_POLICY.md); konkrete verifikasjonsoppgaver kreves fortsatt før Ready.
 
 ## Før en epic kan planlegges som utvikling
 

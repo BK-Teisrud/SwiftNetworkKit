@@ -20,7 +20,7 @@ Modellen kan håndtere JSON-modeller, Data og tekst uten at alle responstyper p�
 
 ## URL og parametere
 
-BaseURL er eksplisitt injisert og må være en gyldig absolutt HTTP(S)-URL; sikkerhetspolicyen i DEC-06 avgjør hvilke slike URL-er som faktisk er tillatt. En relativ endpoint-path kan ikke utilsiktet erstatte scheme, host eller port. Fragments og URL-userinfo brukes ikke som requestparametere/credential-kanal.
+BaseURL er eksplisitt injisert og må være en gyldig absolutt HTTP(S)-URL; [sikkerhetspolicyen](SECURITY_AND_NETWORK_POLICY.md) / ADR-0007 tillater HTTPS og et eksplisitt utviklingsunntak bare for localhost/loopback. En relativ endpoint-path kan ikke utilsiktet erstatte scheme, host eller port. Fragments og URL-userinfo brukes ikke som requestparametere/credential-kanal.
 
 Path bygges av eksplisitte segmenter, med encoding per segment. Segmentdata må ikke tolkes som separatorer, query eller ny origin. Punkt-/traversalsegmenter og malformed input må håndteres eksplisitt med valideringsfeil der de ellers ville endret tiltenkt path. Ferdig prosentkodet tekst er ingen standardinngang; klienten skal unngå dobbel encoding og prosesskrasj på ugyldig encoding.
 
@@ -34,7 +34,7 @@ Headernavn sammenlignes uten hensyn til store/små bokstaver. Ett eksplisitt req
 
 JSON får application/json som standard Content-Type, og tekst får text/plain med UTF-8. For Data velges content type eksplisitt, med application/octet-stream som standard når ingen er angitt. Eksplisitt Content-Type fra kallet har forrang, men må være et bevisst kallvalg; den endrer ikke automatisk body-encoder. Ingen body betyr at klienten ikke legger til en body-content-type av seg selv.
 
-Transportstyrte felter som Content-Length skal ikke beregnes manuelt av biblioteket. Endelig systembehandling av slike felter følger URLSession. Auth-provider og redirect-prioritet fastsettes i DEC-06 uten å innføre et generelt interceptorrammeverk.
+Transportstyrte felter som Content-Length skal ikke beregnes manuelt av biblioteket. Endelig systembehandling av slike felter følger URLSession. Auth-provider, headerkonflikter og redirectgrense følger ADR-0007 uten å innføre et generelt interceptorrammeverk. Forskjellige provider-/eksplisitte auth-verdier med samme navn avvises.
 
 Responsheaders skal tilby case-insensitive oppslag. Bevar verdier slik URLSession eksponerer dem; ikke lov opprinnelig casing, rå headerrekkefølge eller gjentatte wire-headere som systemet allerede har slått sammen. Sensitive metadata kan være tilgjengelige for vertappen uten dermed å være tillatt i logger eller feiltekst.
 
@@ -59,7 +59,7 @@ Multipart, body streams, filbaserte upload/download-API-er, progress, streaming,
 
 Standard er 200–299. Et kall kan eksplisitt erstatte standarden med et ikke-tomt, gyldig sett/område av HTTP-statuskoder. Valget tilhører kallet og må dokumenteres; det finnes ingen skjult global «aksepter alt»-policy. En akseptert status hopper ikke over bodykontrakt eller sikkerhetsregler.
 
-Status gjelder den endelige HTTP-responsen som URLSession gir klienten etter gjeldende redirect-policy. Å akseptere en status gir ikke i seg selv kontroll over URLSessions redirects; det avklares i DEC-06.
+Status gjelder den endelige HTTP-responsen som URLSession gir klienten etter gjeldende redirect-policy. Å akseptere en status gir ikke i seg selv kontroll over URLSessions redirects; ADR-0007 fastsetter samme-origin GET/HEAD-redirects med maks fem hopp og ingen automatisk cross-origin/downgrade/mutasjonsreplay.
 
 Planlagt rekkefølge: valider input → bygg/valider request og encode valgt body → anvend konfigurasjon og vedtatte sikkerhetsgrenser → utfør URLSession → bekreft HTTP-respons → valider status og eventuell content type → håndter valgt responsstrategi → returner NetworkResponse. Cancellation gjelder gjennom operasjonen. Ingen egen retrymotor eller token-refresh-syklus inngår i denne kontrakten.
 
@@ -76,7 +76,7 @@ Planlagt rekkefølge: valider input → bygg/valider request og encode valgt bod
 | timeout | Timeout skilt fra vanlig transportfeil; 30 sekunder inaktivitet / 60 sekunder samlet budsjett som standard, presisert i ADR-0006 |
 | CancellationError | Egen feil utenfor NetworkError for faktisk kansellering; systemets cancel-signaler normaliseres etter registrert årsak i ADR-0006, med timeout skilt fra caller-cancel |
 
-Ingen feilkategori gir automatisk rett til retry. Feiltekst og diagnostikk skal ikke inneholde tokens, cookies, rå URL-parametere eller payloads som standard. Et underliggende Error-/metadataobjekt er ikke en tillatelse til å logge alt. Policy for eventuell tilgang til HTTP-error-body avgjøres i DEC-06; ingen ubegrenset lagring eller inkludering i feiltekst velges her.
+Ingen feilkategori gir automatisk rett til retry. Feiltekst og diagnostikk skal ikke inneholde tokens, cookies, rå URL-parametere eller payloads som standard. Et underliggende Error-/metadataobjekt er ikke en tillatelse til å logge alt. ADR-0007 fastsetter at HTTP-feil ikke tar med rå error-body, og v1 har ingen egen error-body-capture. Appen kan velge eksplisitt akseptert status med JSON/Data-kontrakt hvis den trenger en API-feilpayload.
 
 ## Senere akseptansebevis
 
