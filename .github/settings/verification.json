@@ -5,9 +5,10 @@
   "project_visibility": "private",
   "rulesets": {
     "ruleset-main": 25428389,
-    "ruleset-release-tags": 25428391
+    "ruleset-release-tags": 25428391,
+    "ruleset-release-tag-creation": 25432767
   },
-  "custom_label_count": 21,
+  "custom_label_count": 16,
   "milestone_count": 7,
   "initial_issue_numbers": [
     1,
@@ -172,8 +173,58 @@
       28
     ],
     "implementation_authorized": false,
-    "remaining_repository_issue": 30,
-    "f0_milestone_closed": false
+    "remaining_repository_issue": null,
+    "f0_milestone_closed": true
   },
-  "implementation_authorized": false
+  "implementation_authorized": false,
+  "pre_code_preparation": {
+    "date": "2026-10-19",
+    "tasks": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64
+    ],
+    "start_gate": 41,
+    "workflow_test_issue": 40,
+    "workflow_test": {
+      "import_backlog": true,
+      "done_does_not_close": true,
+      "reopened_backlog": true,
+      "completed_done": true
+    },
+    "status_labels_removed": true,
+    "status_field_authoritative": true,
+    "work_queue_view": 7,
+    "completed_view": 8,
+    "main_bypass_actors": [],
+    "tag_creation_bypass": "RepositoryRole admin, creation only",
+    "tag_update_deletion_bypass_actors": [],
+    "immutable_releases": true,
+    "web_commit_signoff_required": false,
+    "two_factor": "owner attests enabled; not independently verified",
+    "contact_address": null,
+    "physical_devices": "owner reports all target device types on latest updates; exact versions unverified",
+    "minimum_os_runtime_evidence": "not obtained; release blocked until I21/I22 evidence",
+    "implementation_authorized": false
+  }
 }

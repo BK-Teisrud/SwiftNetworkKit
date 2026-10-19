@@ -14,4 +14,4 @@ Solo-profil: alle endringer etter bootstrap går gjennom PR; ingen påkrevd ekst
 
 Team-profil aktiveres først når en annen kvalifisert person har write-tilgang: minst én godkjenning, Code Owner review, avvis foreldede godkjenninger og krev godkjenning av siste push fra en annen person. Ingen udokumentert bypass.
 
-Akutte hendelser: opprett privat sikkerhetssak, begrens skade og dokumenter tiltak. Regelbypass brukes kun av repo-admin, via PR, med begrunnelse og etterkontroll senest neste arbeidsdag. Konto-/organisasjonseier kan fortsatt endre reglene; repooppsett kan ikke eliminere denne fullmakten.
+Akutte hendelser: opprett privat sikkerhetssak, begrens skade og dokumenter tiltak. Main har ingen konfigurert bypass. Eventuelle nødstilte regelendringer må begrunnes, begrenses og etterkontrolleres senest neste arbeidsdag; ordinære rettinger følger PR. Konto-/organisasjonseier kan fortsatt endre reglene; repooppsett kan ikke eliminere denne fullmakten.

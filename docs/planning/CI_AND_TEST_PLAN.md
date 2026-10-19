@@ -54,7 +54,7 @@ Ved runtime-/tidsproblemer skal jobben feile med en konkret årsak. Ikke bytt ti
 2. Alle obligatoriske jobber kjører på PR-en og deretter på main. En manglende Package.swift eller tom testsuite er ingen suksess.
 3. Kontroller at quality-gate rapporteres med stabilt checknavn og samler alle påkrevde plattform-/test-/docjobber uten grønn skip-path.
 4. Legg først da quality-gate til som required status check, med korrekt Actions-integrasjon og oppdatert branch-policy. Ingen ondsinnet/tilfeldig check med samme navn skal regnes som likt bevis.
-5. Kontroller en ny PR mot håndhevet regel. Eventuell admin-bypass må vurderes før required-check innføres, slik at den ikke blir en rutinemessig omgåelse.
+5. Kontroller en ny PR mot håndhevet regel. Main har ingen bypass. Bevar dette når required checks innføres.
 
 Ingen required status check legges til nå. Ingen status som bare bekrefter at «kode ikke finnes» innføres.
 

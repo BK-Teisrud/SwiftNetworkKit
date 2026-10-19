@@ -15,3 +15,7 @@ Solo-profil krever PR og løste review-tråder, men null obligatoriske approvals
 ## Konsekvenser
 
 Oppsettet kan brukes av én maintainer uten review-deadlock. Fremtidig CI må etableres og ha kjørt før status checks blir obligatoriske. Offentlig repo uten valgt lisens er synlig, men ikke presentert som fritt lisensiert. Produkt- og lisensbeslutninger krever egne ADR-er.
+
+## Senere herding
+
+ADR-0010 erstatter den opprinnelige admin-bypass- og tagmodellen. Gjeldende main har ingen bypass; tag-oppretting og uforanderlighet håndheves separat.

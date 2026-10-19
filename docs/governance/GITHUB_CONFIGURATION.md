@@ -13,19 +13,19 @@ Repo: BK-Teisrud/SwiftNetworkKit. Dette dokumentet beskriver ønsket konfigurasj
 | Merge | Bare squash; PR-tittel og body som commitgrunnlag |
 | Branch cleanup / update | Automatisk sletting etter merge; update branch tillatt |
 | Auto-merge | Av inntil ekte kvalitetsporter er etablert |
-| Web sign-off | På; attestering, ikke kryptografisk signatur eller egen lisensavtale |
+| Web sign-off | Av etter uttrykkelig eiergodkjenning; ingen DCO-avtale er valgt |
 | Template repo / Pages / deploy | Ikke aktivert; ingen nettside eller distribusjon nå |
 | Topics | swift, networking, apple, swift-package-manager, urlsession, swift-concurrency |
 
 ## Main-regel: main-protection-solo
 
-Aktiv for default branch: ingen sletting, ingen force-push, lineær historikk, PR kreves, alle review-tråder løst, kun squash. Null obligatoriske approvals i solo-profil. Foreldede approvals avvises om de finnes. Admin-bypass er bare tillatt gjennom PR; admin kan administrere selve reglene. Ingen required status checks før reell CI finnes. Dette er en dokumentasjonsfase med manuell verifikasjon, ikke en påstand om automatisert kvalitetskontroll.
+Aktiv for default branch: ingen sletting, ingen force-push, lineær historikk, PR kreves, alle review-tråder løst, kun squash. Null obligatoriske approvals i solo-profil. Foreldede approvals avvises om de finnes. Ingen bypass-aktører er konfigurert; også admin følger PR-reglene. Repo-admin kan fortsatt administrere selve reglene. Ingen required status checks før reell CI finnes. Dette er en dokumentasjonsfase med manuell verifikasjon, ikke en påstand om automatisert kvalitetskontroll.
 
 Team-overgang: minst én annen kvalifisert write-bruker/CODEOWNER før aktivering av én approval, Code Owner review og godkjenning av siste push fra annen person. Ikke aktiver krav som låser eneste maintainer ute.
 
-## Releasetagger: release-tags-protection
+## Releasetagger og immutable releases
 
-refs/tags/v* beskyttes mot oppretting, oppdatering og sletting for vanlige write-brukere. Repository admin har bypass for å opprette godkjente releasetagger; policy forbyr flytting/sletting også for admin. Ingen tag opprettes nå. Ikke markedsfør tagbeskyttelsen som absolutt vern mot repo-admin.
+refs/tags/v* omfattes av to aktive regler: release-tags-authorized-creation (25432767) begrenser oppretting, med admin-unntak kun for creation; release-tags-no-rewrite (25428391) blokkerer update/deletion uten bypass. Alle matchende regler gjelder samtidig. Immutable releases er aktivert for publiserte releases; utkast må kvalitetssikres før publisering. Ingen tag/release opprettes nå. Admin kan fortsatt endre innstillingene selv; dette er ikke et absolutt vern mot kontoeieren.
 
 ## Sikkerhet
 
@@ -33,11 +33,11 @@ Dependency graph og Dependabot alerts ønskes aktivert. Secret scanning og push 
 
 Actions: read-only GITHUB_TOKEN, ingen tillatelse til å opprette/godkjenne PR-er, kun lokale og GitHub-eide actions tillates som forberedende restriksjon. Ingen workflows eller runner-minutter brukes av oppsettet. Full commit-SHA er nå påkrevd gjennom repositoryinnstillingen sha_pinning_required=true, lest tilbake 2026-10-19. DEC-07 / ADR-0008 fastsetter videre CI-/testplan; ingen eksterne reusable workflows eller tredjeparts setup-actions er valgt. Ingen selvhostede runners, secrets, environments, deployments, webhooks eller ekstra apps er opprettet.
 
-Rettighetshaver og rettighetspolicy er vedtatt i ADR-0002: Teisrud Development AS, proprietært, bruk etter særskilt skriftlig tillatelse. Repoet forblir offentlig under BK-Teisrud. Kontosikkerhet (2FA/passkey), private kontaktkanaler og eventuell senere flytting til organisasjon krever separat avklaring. Det er ikke endret andre repoer eller organisasjonsregler.
+Rettighetshaver og rettighetspolicy er vedtatt i ADR-0002: Teisrud Development AS, proprietært, bruk etter særskilt skriftlig tillatelse. Repoet forblir offentlig under BK-Teisrud. Eier bekrefter 2FA aktivert; dette er ikke en uavhengig kontoaudit. Ingen kontaktadresse er avklart; se PRE_CODE_READINESS.md. Eventuell senere organisasjonsflytting er ikke valgt. Det er ikke endret andre repoer eller organisasjonsregler.
 
 ## Prosjekt og planlegging
 
-21 egendefinerte labels, 7 milepæler uten oppdiktede datoer og 30 startissues, hvor beslutningsoppgaver lukkes etter vedtak. Live status ligger i GitHub. Ingen automatisk stale-lukking. Prosjektfelt og visninger beskrives i PROJECT_MANAGEMENT.md; aktive elementer og API-bevis føres i GITHUB_REGISTER.md og SETUP_STATUS.md.
+16 egendefinerte labels uten status-dobbeltføring, 7 milepæler uten oppdiktede datoer, 30 opprinnelige issues og I01–I23/startport/testissue, hvor beslutningsoppgaver lukkes etter vedtak. Live status ligger i GitHub. Ingen automatisk stale-lukking. Prosjektfelt og visninger beskrives i PROJECT_MANAGEMENT.md; aktive elementer og API-bevis føres i GITHUB_REGISTER.md og SETUP_STATUS.md.
 
 ## Vedlikehold av oppsettet
 

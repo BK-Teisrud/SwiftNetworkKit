@@ -17,3 +17,11 @@ Eier for alle åpne risikoer ved bootstrap: @BK-Teisrud. Vurderes ved ukentlig t
 | R11 | Endrede GitHub-regler/verktøy / middels / middels | Kvartalsvis innstillingskontroll, Actions-budsjett og minstetilgang. | Alle |
 
 Aksept av rest-risiko krever kommentar i relevant issue og ADR ved varig avvik. Kritiske sikkerhetsfunn blokkerer release til de er rettet eller scope er fjernet med begrunnelse.
+
+## Konkret restarbeid før release
+
+R2: Minimums-OS-testmiljø er ikke bekreftet. I21 / #62 blokkerer release; nyere enheter og installerte nyere runtimes er ikke erstatning. Se TEST_ENVIRONMENTS.md.
+
+R9: Ingen kontaktadresse finnes ennå. Ingen privat lisens-/bidragsprosess tilbys før egnet kanal er avklart. Dette blokkerer ikke separat godkjent intern implementasjon.
+
+R11: Admin kan endre selve rulesets selv om main/update/deletion ikke har bypass. Ingen teknisk garanti mot kontoeieren gis. Eier bekrefter 2FA, men en uavhengig kontoaudit er ikke utført.

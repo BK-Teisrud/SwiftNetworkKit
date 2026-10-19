@@ -1,0 +1,305 @@
+{
+  "as_of": "2026-10-19",
+  "implementation_authorized": false,
+  "start_gate": 41,
+  "tasks": [
+    {
+      "order": 1,
+      "key": "I01",
+      "number": 42,
+      "title": "[I01] Opprett Swift-pakke og testtarget etter startgodkjenning",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/42",
+      "milestone": "F1 – HTTP-kjerne",
+      "blocked_by": [
+        "START"
+      ],
+      "parent": 27
+    },
+    {
+      "order": 2,
+      "key": "I02",
+      "number": 43,
+      "title": "[I02] Definer immutable HTTP-verdier, respons og feiltaksonomi",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/43",
+      "milestone": "F1 – HTTP-kjerne",
+      "blocked_by": [
+        "START",
+        "I01"
+      ],
+      "parent": 11
+    },
+    {
+      "order": 3,
+      "key": "I03",
+      "number": 44,
+      "title": "[I03] Implementer konfigurasjonssnapshots og interne testgrenser",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/44",
+      "milestone": "F1 – HTTP-kjerne",
+      "blocked_by": [
+        "START",
+        "I02"
+      ],
+      "parent": 22
+    },
+    {
+      "order": 4,
+      "key": "I04",
+      "number": 45,
+      "title": "[I04] Implementer sikker endpoint- og URL-bygging",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/45",
+      "milestone": "F1 – HTTP-kjerne",
+      "blocked_by": [
+        "START",
+        "I03"
+      ],
+      "parent": 9
+    },
+    {
+      "order": 5,
+      "key": "I05",
+      "number": 46,
+      "title": "[I05] Implementer headers og request-koding",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/46",
+      "milestone": "F1 – HTTP-kjerne",
+      "blocked_by": [
+        "START",
+        "I04"
+      ],
+      "parent": 8
+    },
+    {
+      "order": 6,
+      "key": "I06",
+      "number": 47,
+      "title": "[I06] Aktiver reell PR-CI for alle fire plattformfamilier",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/47",
+      "milestone": "F1 – HTTP-kjerne",
+      "blocked_by": [
+        "START",
+        "I05"
+      ],
+      "parent": 23
+    },
+    {
+      "order": 7,
+      "key": "I07",
+      "number": 48,
+      "title": "[I07] Implementer responsstrategier og HTTP-statuskontroll",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/48",
+      "milestone": "F1 – HTTP-kjerne",
+      "blocked_by": [
+        "START",
+        "I06"
+      ],
+      "parent": 10
+    },
+    {
+      "order": 8,
+      "key": "I08",
+      "number": 49,
+      "title": "[I08] Implementer URLSession-eierskap og transportadapter",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/49",
+      "milestone": "F1 – HTTP-kjerne",
+      "blocked_by": [
+        "START",
+        "I07"
+      ],
+      "parent": 21
+    },
+    {
+      "order": 9,
+      "key": "I09",
+      "number": 50,
+      "title": "[I09] Implementer HTTPS-, loopback- og redirect-policy",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/50",
+      "milestone": "F1 – HTTP-kjerne",
+      "blocked_by": [
+        "START",
+        "I08"
+      ],
+      "parent": 25
+    },
+    {
+      "order": 10,
+      "key": "I10",
+      "number": 51,
+      "title": "[I10] Koble typesikre og rå kall til én sikker HTTP-pipeline",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/51",
+      "milestone": "F1 – HTTP-kjerne",
+      "blocked_by": [
+        "START",
+        "I09"
+      ],
+      "parent": 8
+    },
+    {
+      "order": 11,
+      "key": "I11",
+      "number": 52,
+      "title": "[I11] Verifiser første HTTP-kjerne og F1-port",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/52",
+      "milestone": "F1 – HTTP-kjerne",
+      "blocked_by": [
+        "START",
+        "I10"
+      ],
+      "parent": 23
+    },
+    {
+      "order": 12,
+      "key": "I12",
+      "number": 53,
+      "title": "[I12] Implementer kansellering og samlet tidsbudsjett",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/53",
+      "milestone": "F2 – Produksjonsherding og v1-port",
+      "blocked_by": [
+        "START",
+        "I11"
+      ],
+      "parent": 21
+    },
+    {
+      "order": 13,
+      "key": "I13",
+      "number": 54,
+      "title": "[I13] Implementer shutdown og samtidighetsisolasjon",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/54",
+      "milestone": "F2 – Produksjonsherding og v1-port",
+      "blocked_by": [
+        "START",
+        "I12"
+      ],
+      "parent": 21
+    },
+    {
+      "order": 14,
+      "key": "I14",
+      "number": 55,
+      "title": "[I14] Implementer avgrenset auth-header-provider",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/55",
+      "milestone": "F2 – Produksjonsherding og v1-port",
+      "blocked_by": [
+        "START",
+        "I13"
+      ],
+      "parent": 25
+    },
+    {
+      "order": 15,
+      "key": "I15",
+      "number": 56,
+      "title": "[I15] Implementer sanitert og valgfri diagnostikk",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/56",
+      "milestone": "F2 – Produksjonsherding og v1-port",
+      "blocked_by": [
+        "START",
+        "I14"
+      ],
+      "parent": 20
+    },
+    {
+      "order": 16,
+      "key": "I16",
+      "number": 57,
+      "title": "[I16] Verifiser sikker lagring og injisert session-profil",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/57",
+      "milestone": "F2 – Produksjonsherding og v1-port",
+      "blocked_by": [
+        "START",
+        "I15"
+      ],
+      "parent": 25
+    },
+    {
+      "order": 17,
+      "key": "I17",
+      "number": 58,
+      "title": "[I17] Fullfør testmatrise og regresjonssuite",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/58",
+      "milestone": "F2 – Produksjonsherding og v1-port",
+      "blocked_by": [
+        "START",
+        "I16"
+      ],
+      "parent": 23
+    },
+    {
+      "order": 18,
+      "key": "I18",
+      "number": 59,
+      "title": "[I18] Fullfør API-review, DocC og integrasjonsveiledning",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/59",
+      "milestone": "F2 – Produksjonsherding og v1-port",
+      "blocked_by": [
+        "START",
+        "I17"
+      ],
+      "parent": 27
+    },
+    {
+      "order": 19,
+      "key": "I19",
+      "number": 60,
+      "title": "[I19] Utfør sikkerhets- og personvernreview før v1",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/60",
+      "milestone": "F2 – Produksjonsherding og v1-port",
+      "blocked_by": [
+        "START",
+        "I18"
+      ],
+      "parent": 25
+    },
+    {
+      "order": 20,
+      "key": "I20",
+      "number": 61,
+      "title": "[I20] Mål grunnleggende ressursbruk og pakkekvalitet",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/61",
+      "milestone": "F2 – Produksjonsherding og v1-port",
+      "blocked_by": [
+        "START",
+        "I19"
+      ],
+      "parent": 27
+    },
+    {
+      "order": 21,
+      "key": "I21",
+      "number": 62,
+      "title": "[I21] Skaff og dokumenter minimums-OS-runtimebevis",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/62",
+      "milestone": "F2 – Produksjonsherding og v1-port",
+      "blocked_by": [
+        "START",
+        "I20"
+      ],
+      "parent": 23
+    },
+    {
+      "order": 22,
+      "key": "I22",
+      "number": 63,
+      "title": "[I22] Utfør representative tester på fysiske Apple-enheter",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/63",
+      "milestone": "F2 – Produksjonsherding og v1-port",
+      "blocked_by": [
+        "START",
+        "I21"
+      ],
+      "parent": 23
+    },
+    {
+      "order": 23,
+      "key": "I23",
+      "number": 64,
+      "title": "[I23] Gjennomfør v1-releaseprøve uten publisering",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/64",
+      "milestone": "F2 – Produksjonsherding og v1-port",
+      "blocked_by": [
+        "START",
+        "I22"
+      ],
+      "parent": 27
+    }
+  ]
+}

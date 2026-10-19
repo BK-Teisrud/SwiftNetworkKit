@@ -9,7 +9,7 @@ Etter implementasjonsbeslutning brukes SemVer: 0.x for eksplisitt ustabile prere
 1. Egen release-PR med scope, verifisert commit, changelog, API-/plattformendringer, kjente problemer og migrasjon.
 2. Bekreft grønn faktisk CI, kravsporbarhet, lisens og sikkerhetsvurdering. Fjern aldri funn bare for å få en release ut.
 3. Merge til main. Maintainer oppretter verifiserbar annotert/signert tag på godkjent commit; tagger flyttes aldri.
-4. Opprett GitHub Release med eksplisitte release notes og SHA. Prerelease markeres som sådan. Ingen auto-publisering nå.
+4. Opprett release-utkast med eksplisitte release notes og SHA; last opp og kontroller eventuelle artefakter før publisering. Prerelease markeres som sådan. Immutable releases er aktivert: publisering låser release-tag og tilhørende assets. Krev eget faktisk releaseklarsignal før publisering; ingen auto-publisering nå.
 5. Verifiser at fremtidig SPM-produkt kan resolves/buildes fra taggen og at dokumentasjonen peker til riktig versjon.
 
 En feilrelease korrigeres med ny patch/tag. Marker berørt release tydelig; ikke skriv om publisert historikk. Sårbarheter følger SECURITY.md og eventuelt advisory.

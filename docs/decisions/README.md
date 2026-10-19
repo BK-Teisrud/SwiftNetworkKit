@@ -23,3 +23,5 @@
 ADR-0009 registrerer at hovedvalg og dokumenterte standarddetaljer i ADR-0002–ADR-0008 er godkjent samlet. Ingen av disse vedtakene gir implementasjonsklarsignal.
 
 Bruk [malen](TEMPLATE.md). En foreslått ADR gir ikke klarsignal til implementasjon. Godkjenning krever eierens eksplisitte beslutning i tilhørende issue/PR. Endre ikke historiske beslutninger uten spor; erstatt dem med ny ADR.
+
+- [ADR-0010 – Forberedelser og GitHub-herding](ADR-0010-pre-code-governance.md)

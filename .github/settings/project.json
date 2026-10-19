@@ -1,0 +1,272 @@
+{
+  "verified_on": "2026-10-19",
+  "url": "https://github.com/users/BK-Teisrud/projects/6",
+  "visibility": "private",
+  "fields": {
+    "Title": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6l8",
+      "databaseId": 429255263,
+      "name": "Title"
+    },
+    "Assignees": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6mI",
+      "databaseId": 429255266,
+      "name": "Assignees"
+    },
+    "Status": {
+      "id": "PVTSSF_lAHOAz1qP84Bny9dzhmV6mU",
+      "databaseId": 429255269,
+      "name": "Status",
+      "options": [
+        {
+          "id": "f75ad846",
+          "name": "Backlog"
+        },
+        {
+          "id": "3ac0ff0a",
+          "name": "Ready"
+        },
+        {
+          "id": "47fc9ee4",
+          "name": "In Progress"
+        },
+        {
+          "id": "5e80b65a",
+          "name": "In Review"
+        },
+        {
+          "id": "7c50a863",
+          "name": "Blocked"
+        },
+        {
+          "id": "98236657",
+          "name": "Done"
+        },
+        {
+          "id": "48bcd7eb",
+          "name": "Not Planned"
+        }
+      ]
+    },
+    "Labels": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6mc",
+      "databaseId": 429255271,
+      "name": "Labels"
+    },
+    "Linked pull requests": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6mo",
+      "databaseId": 429255274,
+      "name": "Linked pull requests"
+    },
+    "Milestone": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6m0",
+      "databaseId": 429255277,
+      "name": "Milestone"
+    },
+    "Repository": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6nA",
+      "databaseId": 429255280,
+      "name": "Repository"
+    },
+    "Reviewers": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6nY",
+      "databaseId": 429255286,
+      "name": "Reviewers"
+    },
+    "Parent issue": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6ng",
+      "databaseId": 429255288,
+      "name": "Parent issue"
+    },
+    "Sub-issues progress": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6ns",
+      "databaseId": 429255291,
+      "name": "Sub-issues progress"
+    },
+    "Created": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6n4",
+      "databaseId": 429255294,
+      "name": "Created"
+    },
+    "Updated": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6oE",
+      "databaseId": 429255297,
+      "name": "Updated"
+    },
+    "Closed": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6oM",
+      "databaseId": 429255299,
+      "name": "Closed"
+    },
+    "Priority": {
+      "id": "PVTSSF_lAHOAz1qP84Bny9dzhmV6s4",
+      "databaseId": 429255374,
+      "name": "Priority",
+      "options": [
+        {
+          "id": "0f3c1f37",
+          "name": "P0"
+        },
+        {
+          "id": "531e87c3",
+          "name": "P1"
+        },
+        {
+          "id": "84f49e48",
+          "name": "P2"
+        },
+        {
+          "id": "f196c8ba",
+          "name": "P3"
+        }
+      ]
+    },
+    "Scope": {
+      "id": "PVTSSF_lAHOAz1qP84Bny9dzhmV6s8",
+      "databaseId": 429255375,
+      "name": "Scope",
+      "options": [
+        {
+          "id": "6bf8f6ef",
+          "name": "KJERNE"
+        },
+        {
+          "id": "9f4e163a",
+          "name": "UTVIDELSE"
+        },
+        {
+          "id": "3ba3c1d2",
+          "name": "FORSKNING"
+        },
+        {
+          "id": "48085f76",
+          "name": "STYRING"
+        }
+      ]
+    },
+    "Start date": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6tA",
+      "databaseId": 429255376,
+      "name": "Start date"
+    },
+    "Target date": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmV6wQ",
+      "databaseId": 429255428,
+      "name": "Target date"
+    },
+    "Order": {
+      "id": "PVTF_lAHOAz1qP84Bny9dzhmWWts",
+      "databaseId": 429284059,
+      "name": "Order"
+    }
+  },
+  "views": [
+    {
+      "id": "PVTV_lAHOAz1qP84Bny9dzgMI8fM",
+      "number": 1,
+      "name": "Backlog",
+      "layout": "TABLE_LAYOUT",
+      "filter": "is:open"
+    },
+    {
+      "id": "PVTV_lAHOAz1qP84Bny9dzgMI8m0",
+      "number": 2,
+      "name": "Arbeidsbrett",
+      "layout": "BOARD_LAYOUT",
+      "filter": "is:issue -status:\"Not Planned\""
+    },
+    {
+      "id": "PVTV_lAHOAz1qP84Bny9dzgMI8m8",
+      "number": 3,
+      "name": "Roadmap",
+      "layout": "ROADMAP_LAYOUT",
+      "filter": null
+    },
+    {
+      "id": "PVTV_lAHOAz1qP84Bny9dzgMI8nA",
+      "number": 4,
+      "name": "Fase 0",
+      "layout": "TABLE_LAYOUT",
+      "filter": "is:open milestone:\"F0 – Arkitektur og beslutninger\""
+    },
+    {
+      "id": "PVTV_lAHOAz1qP84Bny9dzgMI8nE",
+      "number": 5,
+      "name": "Beslutninger",
+      "layout": "TABLE_LAYOUT",
+      "filter": "label:\"type: decision\""
+    },
+    {
+      "id": "PVTV_lAHOAz1qP84Bny9dzgMI8nI",
+      "number": 6,
+      "name": "Utvidelser og forskning",
+      "layout": "TABLE_LAYOUT",
+      "filter": "label:\"scope: extension\",\"scope: research\""
+    },
+    {
+      "id": "PVTV_lAHOAz1qP84Bny9dzgMI_-U",
+      "number": 7,
+      "name": "Arbeidskø",
+      "layout": "TABLE_LAYOUT",
+      "filter": "is:open -label:\"type: epic\" -label:\"scope: extension\" -label:\"scope: research\""
+    },
+    {
+      "id": "PVTV_lAHOAz1qP84Bny9dzgMI_-Y",
+      "number": 8,
+      "name": "Ferdig",
+      "layout": "TABLE_LAYOUT",
+      "filter": "is:closed reason:completed"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "PWF_lAHOAz1qP84Bny9dzgduXYk",
+      "name": "Auto-add sub-issues to project",
+      "enabled": true
+    },
+    {
+      "id": "PWF_lAHOAz1qP84Bny9dzgdulTw",
+      "name": "Auto-add to project",
+      "enabled": true
+    },
+    {
+      "id": "PWF_lAHOAz1qP84Bny9dzgduXYc",
+      "name": "Auto-close issue",
+      "enabled": false
+    },
+    {
+      "id": "PWF_lAHOAz1qP84Bny9dzgduXY8",
+      "name": "Item added to project",
+      "enabled": true
+    },
+    {
+      "id": "PWF_lAHOAz1qP84Bny9dzgduXYE",
+      "name": "Item closed",
+      "enabled": true
+    },
+    {
+      "id": "PWF_lAHOAz1qP84Bny9dzgdukh8",
+      "name": "Item reopened",
+      "enabled": true
+    },
+    {
+      "id": "PWF_lAHOAz1qP84Bny9dzgduXYw",
+      "name": "Pull request linked to issue",
+      "enabled": false
+    },
+    {
+      "id": "PWF_lAHOAz1qP84Bny9dzgduXYQ",
+      "name": "Pull request merged",
+      "enabled": true
+    }
+  ],
+  "queue_sort": {
+    "view": 7,
+    "field": "Order",
+    "direction": "ascending",
+    "hierarchy": false,
+    "verified_via": "UI saved, reloaded and read back"
+  },
+  "workflow_configuration": "See docs/planning/PROJECT_MANAGEMENT.md",
+  "product_workflows_present": false
+}

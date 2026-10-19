@@ -57,3 +57,10 @@ Opprettet 2026-10-19. Dette er startregisteret; live status ligger i GitHub. Ing
 37 GitHub blocked-by-relasjoner er opprettet: GATE-00 blokkeres av DEC-01–DEC-07; NK-01–NK-20 blokkeres av GATE-00; REL-01 blokkeres av de ti KJERNE-domenene. Dette viser planleggingsrekkefølge; det er ikke en automatisk merge-sperre. En godkjent arkitekturport erstatter heller ikke sikkerhetsreview og modulspesifikke avhengigheter.
 
 OPS-01 er en åpen kontrolloppgave for prosjekteier og senere team-overgang, ikke et uimplementert produktkrav.
+
+## Konkret arbeidskø etter F0
+
+- [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41): uttrykkelig kodegodkjenning, fortsatt åpen.
+- [I01–I23 med fullstendige issue-lenker](WORK_QUEUE.md): #42–64, alle Blocked før kodestart.
+- [Oppsettsverifikasjon #40](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/40): gjennomført uten produktkode.
+- [Sortert arbeidskø](https://github.com/users/BK-Teisrud/projects/6/views/7) og [Ferdig](https://github.com/users/BK-Teisrud/projects/6/views/8).

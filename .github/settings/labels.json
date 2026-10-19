@@ -27,7 +27,7 @@
   {
     "name": "scope: core",
     "color": "0052CC",
-    "description": "KJERNE; delscope må vedtas"
+    "description": "KJERNE; delscope m\u00e5 vedtas"
   },
   {
     "name": "scope: extension",
@@ -37,7 +37,7 @@
   {
     "name": "scope: research",
     "color": "F9D0C4",
-    "description": "Forskning før produktvedtak"
+    "description": "Forskning f\u00f8r produktvedtak"
   },
   {
     "name": "scope: governance",
@@ -52,7 +52,7 @@
   {
     "name": "priority: P1",
     "color": "D93F0B",
-    "description": "Neste nødvendige kjernearbeid"
+    "description": "Neste n\u00f8dvendige kjernearbeid"
   },
   {
     "name": "priority: P2",
@@ -63,31 +63,6 @@
     "name": "priority: P3",
     "color": "C5DEF5",
     "description": "Lavere prioritet eller forskning"
-  },
-  {
-    "name": "status: triage",
-    "color": "EDEDED",
-    "description": "Må avklares før Ready"
-  },
-  {
-    "name": "status: ready",
-    "color": "0E8A16",
-    "description": "Klar og uten blokkerende beslutninger"
-  },
-  {
-    "name": "status: in-progress",
-    "color": "1D76DB",
-    "description": "Aktivt arbeid"
-  },
-  {
-    "name": "status: review",
-    "color": "5319E7",
-    "description": "Venter på review/egenkontroll"
-  },
-  {
-    "name": "status: blocked",
-    "color": "B60205",
-    "description": "Eksplisitt blokkert; lenk til årsak"
   },
   {
     "name": "breaking-change",
