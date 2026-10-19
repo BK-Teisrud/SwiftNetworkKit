@@ -44,9 +44,7 @@
   "blocked_by_count": 37,
   "implementation_started": false,
   "product_ci_present": false,
-  "open_decisions": [
-    "DEC-07"
-  ],
+  "open_decisions": [],
   "approved_decisions": {
     "DEC-03": {
       "date": "2026-10-19",
@@ -133,6 +131,27 @@
       "adr": "docs/decisions/ADR-0007-security-and-network-policy.md",
       "contract": "docs/planning/SECURITY_AND_NETWORK_POLICY.md",
       "implementation_or_tests_run": false
+    },
+    "DEC-07": {
+      "date": "2026-10-19",
+      "runners": "standard GitHub-hosted only; no paid add-ons",
+      "planned_primary_runner": "macos-15 arm64",
+      "planned_xcode": "26.3; explicit selection and preflight",
+      "planned_pr_platforms": [
+        "macOS",
+        "iOS/iPadOS",
+        "watchOS",
+        "tvOS"
+      ],
+      "release": "separate minimum-OS, representative runtime and required device evidence",
+      "test_tools": "bundled Swift Testing, XCTest as needed; Apple/official tools",
+      "initial_artifact_upload": false,
+      "initial_explicit_actions_cache": false,
+      "sha_pinning_required_verified": true,
+      "workflow_count_verified": 0,
+      "adr": "docs/decisions/ADR-0008-ci-tools-and-budget.md",
+      "plan": "docs/planning/CI_AND_TEST_PLAN.md",
+      "ci_or_product_tests_run": false
     }
   }
 }

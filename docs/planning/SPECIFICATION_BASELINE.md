@@ -21,7 +21,7 @@ Spesifikasjonen nevner retry i målbeskrivelsen, men klassifiserer robusthet som
 
 ## Åpent før kode
 
-DEC-04 / ADR-0005 fastsetter HTTP-/respons-/feilkontrakten, inkludert typed + raw, respons-wrapper, JSON/Data/tekst/tomt, separat CancellationError og eksplisitte statusunntak. DEC-05 / ADR-0006 fastsetter concurrency/session-eierskap, cancellation/shutdown og 30/60-sekunders tidsgrenser. DEC-06 / ADR-0007 fastsetter header-provider, ingen automatiske lagre som standard, HTTPS med eksplisitt loopback-utviklingsunntak og avgrenset redirect-/nettverks-/diagnostikkpolicy. Eksakt CI-matrise og testverktøy avklares i DEC-07 innen valgt verktøygrunnlag. VisionOS og Combine er utsatt etter v1-scope. Valgte API-symboler og runtime-kompatibilitet må verifiseres før leveranse; plattformvedtak alene er ikke testbevis.
+DEC-04 / ADR-0005 fastsetter HTTP-/respons-/feilkontrakten, inkludert typed + raw, respons-wrapper, JSON/Data/tekst/tomt, separat CancellationError og eksplisitte statusunntak. DEC-05 / ADR-0006 fastsetter concurrency/session-eierskap, cancellation/shutdown og 30/60-sekunders tidsgrenser. DEC-06 / ADR-0007 fastsetter header-provider, ingen automatiske lagre som standard, HTTPS med eksplisitt loopback-utviklingsunntak og avgrenset redirect-/nettverks-/diagnostikkpolicy. DEC-07 / ADR-0008 fastsetter CI-/testplan med fire PR-plattformer, standardrunners uten betalte tillegg og egne minimums-OS-/releasebevis. Faktiske schemes/destinations og vellykket kjøring må fortsatt verifiseres i første reelle CI-PR. VisionOS og Combine er utsatt etter v1-scope. Valgte API-symboler og runtime-kompatibilitet må verifiseres før leveranse; plattformvedtak alene er ikke testbevis.
 
 ## Sporbarhet
 

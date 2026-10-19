@@ -10,7 +10,7 @@ Baseline: 20 domene-epics, 7 beslutningsoppgaver og 3 styrings-/releaseoppgaver.
 | DEC-04 | Vedtatt: HTTP-/respons-/feilkontrakt (ADR-0005) | governance | F0 |
 | DEC-05 | Vedtatt: session-eierskap, 30/60-grenser, concurrency og shutdown (ADR-0006) | governance | F0 |
 | DEC-06 | Vedtatt: sikkerhets-/auth-/lagrings-/nettverkspolicy (ADR-0007) | governance | F0 |
-| DEC-07 | Vedta CI-verktøy, matrise og kostnadsramme | governance | F0 |
+| DEC-07 | Vedtatt: fire PR-plattformer, standardrunners, null betalte tillegg (ADR-0008) | governance | F0 |
 | NK-01 | HTTP og forespørsler | core | F1 |
 | NK-02 | Endpoints og URL-bygging | core | F1 |
 | NK-03 | Respons og databehandling | core | F1 |

@@ -31,13 +31,13 @@ refs/tags/v* beskyttes mot oppretting, oppdatering og sletting for vanlige write
 
 Dependency graph og Dependabot alerts ønskes aktivert. Secret scanning og push protection ønskes aktivert der repo/konto støtter det. Privat sårbarhetsrapportering aktiveres. Ingen Dependabot-versjonsfil uten manifests; security updates kan ikke gi meningsfull produktbeskyttelse før pakke/dependencies finnes. Code scanning/CodeQL må vurderes etter verktøy- og språkmatrix, og er ikke satt opp nå.
 
-Actions: read-only GITHUB_TOKEN, ingen tillatelse til å opprette/godkjenne PR-er, kun lokale og GitHub-eide actions tillates som forberedende restriksjon. Ingen workflows eller runner-minutter brukes av oppsettet. SHA-pinning og eventuell Apple-action må godkjennes i DEC-07. Ingen selvhostede runners, secrets, environments, deployments, webhooks eller ekstra apps er opprettet.
+Actions: read-only GITHUB_TOKEN, ingen tillatelse til å opprette/godkjenne PR-er, kun lokale og GitHub-eide actions tillates som forberedende restriksjon. Ingen workflows eller runner-minutter brukes av oppsettet. Full commit-SHA er nå påkrevd gjennom repositoryinnstillingen sha_pinning_required=true, lest tilbake 2026-10-19. DEC-07 / ADR-0008 fastsetter videre CI-/testplan; ingen eksterne reusable workflows eller tredjeparts setup-actions er valgt. Ingen selvhostede runners, secrets, environments, deployments, webhooks eller ekstra apps er opprettet.
 
 Rettighetshaver og rettighetspolicy er vedtatt i ADR-0002: Teisrud Development AS, proprietært, bruk etter særskilt skriftlig tillatelse. Repoet forblir offentlig under BK-Teisrud. Kontosikkerhet (2FA/passkey), private kontaktkanaler og eventuell senere flytting til organisasjon krever separat avklaring. Det er ikke endret andre repoer eller organisasjonsregler.
 
 ## Prosjekt og planlegging
 
-21 egendefinerte labels, 7 milepæler uten oppdiktede datoer og 30 åpne startissues. Ingen automatisk stale-lukking. Prosjektfelt og visninger beskrives i PROJECT_MANAGEMENT.md; aktive elementer og API-bevis føres i GITHUB_REGISTER.md og SETUP_STATUS.md.
+21 egendefinerte labels, 7 milepæler uten oppdiktede datoer og 30 startissues, hvor beslutningsoppgaver lukkes etter vedtak. Live status ligger i GitHub. Ingen automatisk stale-lukking. Prosjektfelt og visninger beskrives i PROJECT_MANAGEMENT.md; aktive elementer og API-bevis føres i GITHUB_REGISTER.md og SETUP_STATUS.md.
 
 ## Vedlikehold av oppsettet
 
