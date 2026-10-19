@@ -45,7 +45,6 @@
   "implementation_started": false,
   "product_ci_present": false,
   "open_decisions": [
-    "DEC-04",
     "DEC-05",
     "DEC-06",
     "DEC-07"
@@ -92,6 +91,25 @@
       "product_build_or_tests_run": false,
       "adr": "docs/decisions/ADR-0004-platforms-and-toolchain.md",
       "platform_matrix": "docs/planning/PLATFORM_MATRIX.md"
+    },
+    "DEC-04": {
+      "date": "2026-10-19",
+      "request_entry_points": [
+        "typed_endpoint",
+        "raw_URLRequest"
+      ],
+      "response": "value + HTTP status + headers",
+      "formats": [
+        "JSON",
+        "Data",
+        "UTF-8 text",
+        "explicit empty"
+      ],
+      "errors": "structured NetworkError; separate CancellationError",
+      "default_success_status": "200-299; explicit per-call override",
+      "adr": "docs/decisions/ADR-0005-http-api-contract.md",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "implementation_or_tests_run": false
     }
   }
 }

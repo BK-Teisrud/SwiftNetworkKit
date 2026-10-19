@@ -7,7 +7,7 @@ Baseline: 20 domene-epics, 7 beslutningsoppgaver og 3 styrings-/releaseoppgaver.
 | DEC-01 | Vedtatt: OS 17/14/10/17, Xcode 26.3+, Swift tools 6.2 / Swift 6 (ADR-0004) | governance | F0 |
 | DEC-02 | Vedtatt: HTTP-kjerne; produkt/modul NetworkKit, én bibliotekmodul (ADR-0003) | governance | F0 |
 | DEC-03 | Vedtatt: Teisrud Development AS; proprietær policy (ADR-0002) | governance | F0 |
-| DEC-04 | Vedta endpoint-, response- og feilkontrakt | governance | F0 |
+| DEC-04 | Vedtatt: HTTP-/respons-/feilkontrakt (ADR-0005) | governance | F0 |
 | DEC-05 | Vedta concurrency, cancellation og session-eierskap | governance | F0 |
 | DEC-06 | Vedta sikkerhets-, auth-, retry- og cachegrenser | governance | F0 |
 | DEC-07 | Vedta CI-verktøy, matrise og kostnadsramme | governance | F0 |
@@ -37,7 +37,7 @@ Baseline: 20 domene-epics, 7 beslutningsoppgaver og 3 styrings-/releaseoppgaver.
 
 ## Vedtatt scope
 
-[V1_SCOPE.md](V1_SCOPE.md) avgrenser inkludert og utsatt omfang for alle 20 domener. Domene-epics holdes åpne til valgt arbeid er levert. DEC-04–DEC-06 presiserer kontrakter før deloppgaver blir Ready.
+[V1_SCOPE.md](V1_SCOPE.md) avgrenser inkludert og utsatt omfang for alle 20 domener. Domene-epics holdes åpne til valgt arbeid er levert. DEC-04 / ADR-0005 fastsetter [HTTP-kontrakten](HTTP_API_CONTRACT.md); DEC-05–DEC-06 presiserer gjenværende concurrency- og policygrenser før deloppgaver blir Ready.
 
 ## Før en epic kan planlegges som utvikling
 

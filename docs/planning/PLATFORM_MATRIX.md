@@ -51,3 +51,16 @@ Registrer per kontroll: commit-SHA, dato, Xcode-build, Swift-versjon, SDK, fakti
 Planen skal dekke bygg for alle valgte plattformer og relevante normal-/feil-/cancellation-/concurrencytester. Testing på minimums-OS og representative nyere stabile runtimes planlegges i DEC-07. Hvis en minimumsruntime ikke kan kjøres i tilgjengelig CI, må et eksplisitt alternativ med reelt testbevis avklares før release; et nyere simulatorbygg alene dekker ikke dette.
 
 Fysisk enhetstest brukes der scenarioet krever det. Bakgrunnsoverføringer, Keychain-grupper og lokalnett er utsatt etter v1-scope og er ikke påstått støttet gjennom denne matrisen. Ingen byggetest eller runtime-verifikasjon er bestått ennå.
+
+## Avgrenset deklarasjonskontroll ved DEC-04
+
+Kontrollert 2026-10-19 i lokal macOS SDK 26.2, Foundation.swiftmodule/x86_64-apple-macos.swiftinterface. Availability-annotasjoner nevner de fire målplattformene, men denne kontrollen erstatter ikke lesing/bygg mot hvert plattform-SDK og tester på runtimes.
+
+| Symbol | Deklarert minimum i kontrollert interface | Forhold til vedtatt v1-minimum |
+| --- | --- | --- |
+| URLSession.data(for:delegate:) | iOS 15, macOS 12, watchOS 8, tvOS 15 | Innen alle valgte minimum |
+| URLComponents | iOS 8, macOS 10.10, watchOS 2, tvOS 9 | Innen alle valgte minimum |
+| URLQueryItem | iOS 8, macOS 10.10, watchOS 2, tvOS 9 | Innen alle valgte minimum |
+| JSONEncoder / JSONDecoder, grunnklassene | iOS 8, macOS 10.10, watchOS 2, tvOS 9 | Innen alle valgte minimum; nyere medlemmer må kontrolleres separat |
+
+Kontrollen er positivt deklarasjonsbevis for disse kandidatene, ikke en påstand om at hele HTTP-kontrakten er implementert eller testet. Konkrete overloads/egenskaper for HTTPURLResponse, URLRequest, øvrige JSON-strategier, OSLog og concurrency kontrolleres videre før relevante deloppgaver blir Ready. Ingen build-/teststatus i matrisen endres av denne kontrollen.

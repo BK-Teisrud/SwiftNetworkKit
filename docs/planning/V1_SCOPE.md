@@ -12,13 +12,13 @@ Dette inkluderer nødvendige grunnkrav til URL-/requestbygging, konfigurasjon, s
 
 ## Sporbar leveransegrense
 
-Tabellen avgrenser domener på scope-nivå. Nøyaktig HTTP-kontrakt og underpunktutvalg dokumenteres videre i DEC-04–DEC-06 før Ready. En rad er ikke en garanti for at alle punktene i originaldomenet er valgt.
+Tabellen avgrenser domener på scope-nivå. [HTTP_API_CONTRACT.md](HTTP_API_CONTRACT.md) / ADR-0005 presiserer HTTP-/respons-/feilkontrakten. Gjenværende concurrency- og policygrenser dokumenteres i DEC-05–DEC-06 før Ready. En rad er ikke en garanti for at alle punktene i originaldomenet er valgt.
 
 | Domene | Inngår i v1 | Utsatt / ingen leveranseforpliktelse i v1 |
 | --- | --- | --- |
 | NK-01 HTTP | Requestutførelse, definerte timeout-/cancelregler og nødvendige HTTP-operasjoner for kjernen | Generelt interceptorrammeverk og avansert transportstyring |
 | NK-02 Endpoints | Typesikre kall, injisert baseURL, sikker URL-/parameterbygging | Automatisk API-versjonshåndtering og avanserte encodingvarianter |
-| NK-03 Respons | JSON og nødvendig status-/responsvalidering | Streaming, AsyncSequence-responser og eget rammeverk for alternative dataformater |
+| NK-03 Respons | JSON, rå Data/tekst, eksplisitt tomt svar, status-/responsvalidering og respons-wrapper | Streaming, AsyncSequence-responser og eget rammeverk for alternative dataformater |
 | NK-04 Feil | Forståelige transport-, HTTP-, encoding-/decoding-, timeout- og cancellationkontrakter | Retryklassifisering for en fremtidig resiliensmotor |
 | NK-05 Autentisering | Ingen egen auth-modul; vertappens nødvendige integrationsgrense avgjøres i DEC-04/06 | Keychain-adapter, login, OAuth/OIDC, token refresh og flerprofilhåndtering |
 | NK-06 Sikkerhet | HTTPS/system trust og trygg håndtering av credentials som grunnkrav | Pinning, mTLS, signering/HMAC, egne trust-policyer og egen sikkerhetsmodul |
@@ -39,7 +39,7 @@ Tabellen avgrenser domener på scope-nivå. Nøyaktig HTTP-kontrakt og underpunk
 
 ## Fortsatt åpne kontraktsspørsmål
 
-DEC-04 avgjør blant annet metodeutvalg, rå URLRequest, tomme svar, metadata, headers/body og encoder-/decodergrenser. DEC-05 avgjør concurrency, session-eierskap og clocks. DEC-06 avgjør auth-integrasjon, credentials ved redirects og konkret system-cache-/nettverkspolicy. Disse oppgavene kan ikke utvide v1 til avanserte moduler uten nytt scopevedtak.
+DEC-04 / ADR-0005 vedtar typed endpoints pluss rå URLRequest, JSON/Data/tekst/EmptyResponse, respons-wrapper, strukturerte feil med separat CancellationError og 2xx som standard med eksplisitte kallunntak. HTTP_API_CONTRACT.md konkretiserer metoder, URL/query, headerprioritet, body og validering. DEC-05 avgjør concurrency, session-eierskap og clocks. DEC-06 avgjør auth-integrasjon, credentials ved redirects og konkret system-cache-/nettverkspolicy. Disse oppgavene kan ikke utvide v1 til avanserte moduler uten nytt scopevedtak.
 
 OS-minimum er vedtatt i DEC-01 / ADR-0004: iOS/iPadOS 17, macOS 14, watchOS 10 og tvOS 17. Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus er valgt. Se [plattformmatrisen](PLATFORM_MATRIX.md). Konkrete API-symboler og faktisk runtime-kompatibilitet er fortsatt ikke verifisert. Ingen avgrensning i tabellen fritar kjernen fra nødvendige sikkerhets-, personvern- eller plattformkrav. Eksempelvis er avansert sikkerhetsmodul utsatt, mens system trust er et grunnkrav i v1.
 
