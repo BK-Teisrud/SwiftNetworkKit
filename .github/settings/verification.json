@@ -47,10 +47,17 @@
   "open_decisions": [
     "DEC-01",
     "DEC-02",
-    "DEC-03",
     "DEC-04",
     "DEC-05",
     "DEC-06",
     "DEC-07"
-  ]
+  ],
+  "approved_decisions": {
+    "DEC-03": {
+      "date": "2026-10-19",
+      "rights_holder": "Teisrud Development AS",
+      "rights_policy": "proprietary; separate written permission required",
+      "adr": "docs/decisions/ADR-0002-ownership-and-rights.md"
+    }
+  }
 }

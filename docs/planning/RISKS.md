@@ -12,7 +12,7 @@ Eier for alle åpne risikoer ved bootstrap: @BK-Teisrud. Vurderes ved ukentlig t
 | R6 | Utdatert eller lekket cache / middels / høy | HTTP-semantikk, kontoisolasjon, sletting og eksplisitt offline-policy. | F3 |
 | R7 | Bakgrunnsleveranse loves uten OS-støtte / høy / høy | Entitlements, hostapp-ansvar og fysisk testbevis per plattform. | F4 |
 | R8 | Solo-maintainer og review-flaskehals / høy / middels | PR-spor, liten WIP, team-profil når reviewer finnes. | Alle |
-| R9 | Uavklart lisens / høy / høy | Ingen OSS-løfter eller eksterne kodebidrag før DEC-03. | F0 |
+| R9 | Bruk eller eksterne bidrag uten nødvendige rettigheter / middels / høy | DEC-03 avgjort: Teisrud Development AS, proprietær policy. LICENSE og ADR-0002 presiserer tillatelseskrav og GitHub-unntak. Skriftlig avtale før eksterne innholdsbidrag eller tredjepartsdistribusjon. | F0 og release |
 | R10 | Falsk trygghet fra grønn CI / middels / høy | Ingen dummy-checks; ekte matrise og releasebevis. | F1 |
 | R11 | Endrede GitHub-regler/verktøy / middels / middels | Kvartalsvis innstillingskontroll, Actions-budsjett og minstetilgang. | Alle |
 

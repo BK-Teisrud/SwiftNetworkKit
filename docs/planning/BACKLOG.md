@@ -6,7 +6,7 @@ Baseline: 20 domene-epics, 7 beslutningsoppgaver og 3 styrings-/releaseoppgaver.
 | --- | --- | --- | --- |
 | DEC-01 | Fastsett minimums-OS og Swift/Xcode/SDK | governance | F0 |
 | DEC-02 | Vedta v1-scope og modul-/produktnavn | governance | F0 |
-| DEC-03 | Velg lisens og rettighetshaver | governance | F0 |
+| DEC-03 | Vedtatt: Teisrud Development AS; proprietær policy (ADR-0002) | governance | F0 |
 | DEC-04 | Vedta endpoint-, response- og feilkontrakt | governance | F0 |
 | DEC-05 | Vedta concurrency, cancellation og session-eierskap | governance | F0 |
 | DEC-06 | Vedta sikkerhets-, auth-, retry- og cachegrenser | governance | F0 |
