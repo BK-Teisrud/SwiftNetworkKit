@@ -21,7 +21,7 @@ Spesifikasjonen nevner retry i målbeskrivelsen, men klassifiserer robusthet som
 
 ## Åpent før kode
 
-Public API, raw-request-støtte, headers/body-modell, auth-integrasjonsgrense og konkret system-cache-/nettverkspolicy avklares videre i DEC-04–DEC-06. Eksakt CI-matrise og testverktøy avklares i DEC-07 innen valgt verktøygrunnlag. VisionOS og Combine er utsatt etter v1-scope. Valgte API-symboler og runtime-kompatibilitet må verifiseres før leveranse; plattformvedtak alene er ikke testbevis.
+DEC-04 / ADR-0005 fastsetter HTTP-/respons-/feilkontrakten, inkludert typed + raw, respons-wrapper, JSON/Data/tekst/tomt, separat CancellationError og eksplisitte statusunntak. Concurrency/session-eierskap og auth-/redirect-/cache-/nettverkspolicy avklares i DEC-05–DEC-06. Eksakt CI-matrise og testverktøy avklares i DEC-07 innen valgt verktøygrunnlag. VisionOS og Combine er utsatt etter v1-scope. Valgte API-symboler og runtime-kompatibilitet må verifiseres før leveranse; plattformvedtak alene er ikke testbevis.
 
 ## Sporbarhet
 
