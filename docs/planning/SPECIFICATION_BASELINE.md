@@ -5,6 +5,7 @@ Kilde: NetworkKit_Teknisk_Spesifikasjon.pdf, versjon 1.0, 19.10.2026, 15 sider. 
 ## Vedtatt i dette oppsettet
 
 - Repository-navn: SwiftNetworkKit, GitHub-kontoeier BK-Teisrud, offentlig synlighet, etter brukerens valg.
+- Vedtatt v1: HTTP-kjerne først, senere utvidelser. Pakke SwiftNetworkKit, bibliotekprodukt/modul/importnavn NetworkKit; én bibliotekmodul. Se V1_SCOPE.md og ADR-0003.
 - Rettighetshaver: Teisrud Development AS. Proprietær rettighetspolicy; tredjepartsbruk krever særskilt tillatelse, med forbehold for lov og GitHub-vilkår. Se ADR-0002 og LICENSE.
 - Kun repo-/GitHub-oppsett, dokumentasjon og planlegging nå. Ingen Swift-filer, Package.swift, prototyper, tester eller kjørbare workflows.
 - Produktet skal bruke native Apple-API-er og Swift-standardbibliotek uten eksterne pakkedependencies, også uten separat distribuerte Apple-pakker som SwiftNIO.
@@ -15,11 +16,11 @@ Kilde: NetworkKit_Teknisk_Spesifikasjon.pdf, versjon 1.0, 19.10.2026, 15 sider. 
 
 KJERNE, UTVIDELSE og FORSKNING beholdes fra §4. KJERNE på et domene betyr ikke at alle underpunktene automatisk tas med i v1.0. Hvert domene må få en godkjent delkravliste og eksplisitte utsettelser før implementasjon. Roadmap er en foreslått rekkefølge, ikke bekreftet produktstøtte eller datoavtale.
 
-Spesifikasjonen nevner retry i målbeskrivelsen, men klassifiserer robusthet som UTVIDELSE. Derfor må v1-scope eksplisitt beslutte om første versjon har ingen automatisk retry eller en minimal policy. Den lover ikke avansert retry, cache, auth eller transport ved første release.
+Spesifikasjonen nevner retry i målbeskrivelsen, men klassifiserer robusthet som UTVIDELSE. Vedtaket i ADR-0003 avgrenser v1 til HTTP-kjerne uten egen retry-/resiliensmodul. DEC-06 avklarer kontrakt og systempolicy innen denne grensen. Avansert retry, cache, auth og lavnivåtransport er senere leveranser.
 
 ## Åpent før kode
 
-Minimums-OS, Swift/Xcode, modul- og produktnavn, public API, raw-request-støtte, headers/body-modell, auth-scope, cache/offline-policy, telemetry, Combine og visionOS. Ingen av disse fremstilles som vedtatt støtte.
+Minimums-OS, Swift/Xcode, public API, raw-request-støtte, headers/body-modell, auth-scope, cache/offline-policy, telemetry, Combine og visionOS. Ingen av disse fremstilles som vedtatt støtte.
 
 ## Sporbarhet
 

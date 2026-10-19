@@ -5,7 +5,7 @@ Baseline: 20 domene-epics, 7 beslutningsoppgaver og 3 styrings-/releaseoppgaver.
 | ID | Krav / oppgave | Klassifisering | Fase |
 | --- | --- | --- | --- |
 | DEC-01 | Fastsett minimums-OS og Swift/Xcode/SDK | governance | F0 |
-| DEC-02 | Vedta v1-scope og modul-/produktnavn | governance | F0 |
+| DEC-02 | Vedtatt: HTTP-kjerne; produkt/modul NetworkKit, én bibliotekmodul (ADR-0003) | governance | F0 |
 | DEC-03 | Vedtatt: Teisrud Development AS; proprietær policy (ADR-0002) | governance | F0 |
 | DEC-04 | Vedta endpoint-, response- og feilkontrakt | governance | F0 |
 | DEC-05 | Vedta concurrency, cancellation og session-eierskap | governance | F0 |
@@ -34,6 +34,10 @@ Baseline: 20 domene-epics, 7 beslutningsoppgaver og 3 styrings-/releaseoppgaver.
 | GATE-00 | Godkjenn arkitekturport og klarsignal før kode | governance | F0 |
 | REL-01 | Verifiser første stabile kjernerelease | governance | F2 |
 | OPS-01 | Kontroller GitHub-oppsett og team-overgang | governance | F0 |
+
+## Vedtatt scope
+
+[V1_SCOPE.md](V1_SCOPE.md) avgrenser inkludert og utsatt omfang for alle 20 domener. Domene-epics holdes åpne til valgt arbeid er levert. DEC-04–DEC-06 presiserer kontrakter før deloppgaver blir Ready.
 
 ## Før en epic kan planlegges som utvikling
 
