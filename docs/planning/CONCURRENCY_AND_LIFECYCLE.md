@@ -25,7 +25,7 @@ En injisert session som også brukes utenfor klienten, skal ikke få andre tasks
 
 Bare foreground datarequests innenfor HTTP-kjernen støttes. Bakgrunnssessions og body-stream-varianter faller utenfor v1 og skal avvises eksplisitt. Appens eksterne invalidation av en lånt session kan fortsatt stoppe klientens requests; dette kan ikke repareres ved å opprette en ny session skjult.
 
-Sikkerhetspolicy og håndtering av cookies/cache/credentials ved injeksjon avgjøres i DEC-06. En session som ikke lar klienten oppfylle den avtalte kontrakten, må få dokumentert avvisning fremfor en skjult svekkelse.
+[Sikkerhetspolicyen](SECURITY_AND_NETWORK_POLICY.md) / ADR-0007 fastsetter lagringsprofil, provider- og delegategrenser ved injeksjon. En session som ikke lar klienten oppfylle den avtalte kontrakten, må få dokumentert avvisning fremfor en skjult svekkelse.
 
 ## Standardgrenser og presedens
 
@@ -40,7 +40,7 @@ Raw URLRequest bruker også denne policyen. Fordi URLRequest allerede har en sta
 
 Appens injiserte session kan ha en kortere resource-timeout eller andre systembegrensninger. Et lengre budsjett i biblioteket kan ikke forlenge dem. Den eide sessionens resource-timeout må heller ikke feilaktig låses til 60 sekunder slik at lengre, eksplisitte kallvalg blir lovet uten å fungere. Skill systemets resource-grense fra bibliotekets budsjett og dokumenter den effektive begrensningen.
 
-Vent på connectivity kan ha andre systemregler enn request-timeout. Bibliotekets samlede budsjett gjelder fortsatt ved eventuell slik venting; konkret nettverkspolicy avgjøres i DEC-06.
+Vent på connectivity kan ha andre systemregler enn request-timeout. Bibliotekets samlede budsjett gjelder fortsatt ved eventuell slik venting; ADR-0007 setter waitsForConnectivity av som standard, med eksplisitt appvalg for systemventing innen samlet budsjett.
 
 ## Klokke, frist og opprydding
 

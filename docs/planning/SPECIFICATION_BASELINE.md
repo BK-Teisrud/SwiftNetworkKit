@@ -17,11 +17,11 @@ Kilde: NetworkKit_Teknisk_Spesifikasjon.pdf, versjon 1.0, 19.10.2026, 15 sider. 
 
 KJERNE, UTVIDELSE og FORSKNING beholdes fra §4. KJERNE på et domene betyr ikke at alle underpunktene automatisk tas med i v1.0. Hvert domene må få en godkjent delkravliste og eksplisitte utsettelser før implementasjon. Roadmap er en foreslått rekkefølge, ikke bekreftet produktstøtte eller datoavtale.
 
-Spesifikasjonen nevner retry i målbeskrivelsen, men klassifiserer robusthet som UTVIDELSE. Vedtaket i ADR-0003 avgrenser v1 til HTTP-kjerne uten egen retry-/resiliensmodul. DEC-06 avklarer kontrakt og systempolicy innen denne grensen. Avansert retry, cache, auth og lavnivåtransport er senere leveranser.
+Spesifikasjonen nevner retry i målbeskrivelsen, men klassifiserer robusthet som UTVIDELSE. Vedtaket i ADR-0003 avgrenser v1 til HTTP-kjerne uten egen retry-/resiliensmodul. DEC-06 / ADR-0007 fastsetter ingen egen automatisk retry og eksplisitt system-/sikkerhetspolicy innen denne grensen. Avansert retry, cache, auth og lavnivåtransport er senere leveranser.
 
 ## Åpent før kode
 
-DEC-04 / ADR-0005 fastsetter HTTP-/respons-/feilkontrakten, inkludert typed + raw, respons-wrapper, JSON/Data/tekst/tomt, separat CancellationError og eksplisitte statusunntak. DEC-05 / ADR-0006 fastsetter concurrency/session-eierskap, cancellation/shutdown og 30/60-sekunders tidsgrenser. Auth-/redirect-/cache-/nettverkspolicy avklares i DEC-06. Eksakt CI-matrise og testverktøy avklares i DEC-07 innen valgt verktøygrunnlag. VisionOS og Combine er utsatt etter v1-scope. Valgte API-symboler og runtime-kompatibilitet må verifiseres før leveranse; plattformvedtak alene er ikke testbevis.
+DEC-04 / ADR-0005 fastsetter HTTP-/respons-/feilkontrakten, inkludert typed + raw, respons-wrapper, JSON/Data/tekst/tomt, separat CancellationError og eksplisitte statusunntak. DEC-05 / ADR-0006 fastsetter concurrency/session-eierskap, cancellation/shutdown og 30/60-sekunders tidsgrenser. DEC-06 / ADR-0007 fastsetter header-provider, ingen automatiske lagre som standard, HTTPS med eksplisitt loopback-utviklingsunntak og avgrenset redirect-/nettverks-/diagnostikkpolicy. Eksakt CI-matrise og testverktøy avklares i DEC-07 innen valgt verktøygrunnlag. VisionOS og Combine er utsatt etter v1-scope. Valgte API-symboler og runtime-kompatibilitet må verifiseres før leveranse; plattformvedtak alene er ikke testbevis.
 
 ## Sporbarhet
 

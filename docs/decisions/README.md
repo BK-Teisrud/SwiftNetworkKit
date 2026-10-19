@@ -13,7 +13,8 @@
 | DEC-04 | Endpoint, raw request, headers/body og feilkontrakt | Vedtatt: typed + raw, respons-wrapper, JSON/Data/tekst/tomt, separat cancellation; ADR-0005 |
 | [ADR-0006](ADR-0006-concurrency-and-lifecycle.md) | Session-eierskap, concurrency og tidsgrenser | Hovedvalg godkjent; livssyklusdetaljer dokumentert |
 | DEC-05 | Cancellation, clocks, session-eierskap og concurrency | Vedtatt: egen + injisert session, 30/60 sekunder, isolert state og eksplisitt shutdown; ADR-0006 |
-| DEC-06 | Auth, retry, cache, privacy og sikkerhetsgrenser | Åpen |
+| [ADR-0007](ADR-0007-security-and-network-policy.md) | Sikkerhet, auth, lagring og nettverk | Hovedvalg godkjent; standarddetaljer dokumentert |
+| DEC-06 | Auth, retry, cache, privacy og sikkerhetsgrenser | Vedtatt: ingen automatiske lagre, header-provider, HTTPS med loopback-unntak; ADR-0007 |
 | DEC-07 | Offisielle verktøy, CI-budsjett og forsyningskjede | Åpen |
 
 Bruk [malen](TEMPLATE.md). En foreslått ADR gir ikke klarsignal til implementasjon. Godkjenning krever eierens eksplisitte beslutning i tilhørende issue/PR. Endre ikke historiske beslutninger uten spor; erstatt dem med ny ADR.

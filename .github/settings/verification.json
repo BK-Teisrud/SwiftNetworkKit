@@ -45,7 +45,6 @@
   "implementation_started": false,
   "product_ci_present": false,
   "open_decisions": [
-    "DEC-06",
     "DEC-07"
   ],
   "approved_decisions": {
@@ -121,6 +120,18 @@
       "shutdown": "stop new calls, cancel own operations; invalidate owned session only",
       "adr": "docs/decisions/ADR-0006-concurrency-and-lifecycle.md",
       "contract": "docs/planning/CONCURRENCY_AND_LIFECYCLE.md",
+      "implementation_or_tests_run": false
+    },
+    "DEC-06": {
+      "date": "2026-10-19",
+      "storage_default": "no automatic cookie, credential or HTTP cache storage; explicit app-managed opt-in required for other system storage",
+      "auth": "injectable header provider plus explicit headers; app owns login/storage/refresh",
+      "transport": "HTTPS/system trust; explicit development-only HTTP loopback exception without credentials",
+      "redirect_default": "same-origin GET/HEAD only; at most 5 hops; no cross-origin, downgrade or mutating replay",
+      "retry": "no library automatic retry or token refresh",
+      "diagnostics": "sanitized allowlist; no external telemetry or raw error body capture",
+      "adr": "docs/decisions/ADR-0007-security-and-network-policy.md",
+      "contract": "docs/planning/SECURITY_AND_NETWORK_POLICY.md",
       "implementation_or_tests_run": false
     }
   }

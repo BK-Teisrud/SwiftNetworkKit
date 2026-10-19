@@ -15,6 +15,7 @@ Repoet og pakken heter **SwiftNetworkKit**. Bibliotekproduktet, modulen og impor
 - [Oppsettsstatus og verifikasjon](docs/governance/SETUP_STATUS.md)
 - [Alle GitHub-innstillinger og regler](docs/governance/GITHUB_CONFIGURATION.md)
 - [Arbeidsflyt og prosjektstyring](docs/planning/PROJECT_MANAGEMENT.md)
+- [Sikkerhets- og nettverkspolicy](docs/planning/SECURITY_AND_NETWORK_POLICY.md)
 - [Concurrency og livssyklus](docs/planning/CONCURRENCY_AND_LIFECYCLE.md)
 - [HTTP-, respons- og feilkontrakt](docs/planning/HTTP_API_CONTRACT.md)
 - [Plattform- og verktøymatrise](docs/planning/PLATFORM_MATRIX.md)
