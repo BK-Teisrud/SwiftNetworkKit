@@ -1,19 +1,19 @@
-# ADR-0010 – Forberedelser og GitHub-herding før kodestart
+# ADR-0010: Preparation and GitHub hardening before implementation
 
-Status: Vedtatt innenfor eierens oppdrag om å fullføre forberedelsene. Dato: 2026-10-19.
+Status: Accepted within the owner's request to complete preparations. Date: 2026-10-19.
 
-## Beslutning
+## Decision
 
-Én prosjektstatus erstatter status-labels; nummererte underoppgaver har kriterier og native avhengigheter. Egen START-00 bevarer kravet om uttrykkelig kodegodkjenning. Done lukker ikke issue automatisk. Fullført-visning bruker completed; avviste oppgaver er Not Planned.
+One project status field replaces status labels. Numbered subtasks have acceptance criteria and native dependencies. A separate START-00 gate preserves the need for explicit implementation authorization. Done does not automatically close an issue. The completed view filters on completed; rejected work uses Not Planned.
 
-Main har ingen bypass. v*-tag-oppretting begrenses til admin gjennom separat creation-unntak, mens update/deletion har egen regel uten unntak. Publiserte releases er immutable. Obligatorisk web sign-off slås av fordi ingen DCO-avtale er valgt. Eier svarte konkret «Ja, gjennomfør begge endringene» på spørsmålet om sign-off og avgrenset tag-unntak. Dette er ikke tillatelse til å opprette en tag eller publisere release.
+Main has no bypass. A separate creation rule restricts v* tags to admins; update/deletion have a rule without bypass. Published releases are immutable. Mandatory web commit sign-off is disabled because no DCO agreement was selected. The owner specifically answered, in translation, “Yes, carry out both changes,” regarding sign-off and the limited tag exception. This does not authorize tag creation or release publication.
 
-## Begrunnelse og begrensninger
+## Rationale and limitations
 
-Dobbeltført status ga risiko for motstridende køer. Deloppgaver med kontrakt/testbevis gir faktisk arbeidsrekkefølge. Ingen required CI-checks ennå, fordi intet produkt finnes; I06 skal innføre reelle checks etter negativ og positiv verifikasjon. Ingen reviewkrav fra en ikke-eksisterende annen maintainer. Ingen signerte commits før signeringsoppsett er avklart.
+Duplicate status tracking risked conflicting queues. Tasks with contracts and required test evidence provide an actionable sequence. No CI checks are required yet because no product exists; I06 introduces real checks after positive and negative verification. Do not require review from a nonexistent second maintainer or signed commits before signing is configured.
 
-Eier bekrefter 2FA og nyere enheter av alle typer, men ingen kontaktadresse. Ingen adresse eller minimums-OS-testbevis er oppfunnet. Minimumsbevis er releasekrav; kontakt må avklares før ekstern lisens-/bidragsprosess tilbys. Ingen kjøp, oppgraderinger, tilganger eller betalte tjenester legges til. Admin kan fortsatt endre regler; vern mot kontoeier kan ikke garanteres.
+The owner confirms 2FA and current devices of every type, but no contact address. No address or minimum-OS test evidence is invented. Minimum-OS evidence is a release requirement; establish contact before offering external licensing/contribution processes. Add no purchases, upgrades, access grants, or paid services. Admins can still change rules; protection against the account owner cannot be guaranteed.
 
-## Verifikasjon
+## Verification
 
-Se SETUP_STATUS.md, PROJECT_MANAGEMENT.md, WORK_QUEUE.md, TEST_ENVIRONMENTS.md og PRE_CODE_READINESS.md. Ingen kode eller workflows innføres av dette vedtaket. ADR-0009 om separat kodegodkjenning gjelder fortsatt.
+See SETUP_STATUS.md, PROJECT_MANAGEMENT.md, WORK_QUEUE.md, TEST_ENVIRONMENTS.md, and PRE_CODE_READINESS.md. This decision introduces no code or workflows. ADR-0009's separate implementation-authorization requirement remains in force.

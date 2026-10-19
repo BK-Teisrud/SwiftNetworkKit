@@ -1,15 +1,15 @@
-# GitHub-register
+# GitHub register
 
-Opprettet 2026-10-19. Dette er startregisteret; live status ligger i GitHub. Ingen av produktkravene er implementert.
+Created 2026-10-19. This register records the initial setup and subsequent preparation; live status is in GitHub. No product requirements are implemented.
 
 - [Repository](https://github.com/BK-Teisrud/SwiftNetworkKit)
-- [Prosjekt: SwiftNetworkKit Roadmap](https://github.com/users/BK-Teisrud/projects/6) (privat; krever eierens tilgang)
-- [Milepæler](https://github.com/BK-Teisrud/SwiftNetworkKit/milestones)
-- [Aktive rulesets](https://github.com/BK-Teisrud/SwiftNetworkKit/rules)
+- [Project: SwiftNetworkKit Roadmap](https://github.com/users/BK-Teisrud/projects/6) (private; owner access required)
+- [Milestones](https://github.com/BK-Teisrud/SwiftNetworkKit/milestones)
+- [Active rulesets](https://github.com/BK-Teisrud/SwiftNetworkKit/rules)
 
 ## Issues
 
-| Stabil ID | GitHub issue |
+| Stable ID | GitHub issue |
 | --- | --- |
 | DEC-01 | [#1](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/1) |
 | DEC-02 | [#2](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/2) |
@@ -42,25 +42,25 @@ Opprettet 2026-10-19. Dette er startregisteret; live status ligger i GitHub. Ing
 | REL-01 | [#29](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/29) |
 | OPS-01 | [#30](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/30) |
 
-## Milepæler
+## Milestones
 
-- [F0 – Arkitektur og beslutninger](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/1)
-- [F1 – HTTP-kjerne](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/2)
-- [F2 – Produksjonsherding og v1-port](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/3)
-- [F3 – Resiliens og tillegg](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/4)
-- [F4 – Filoverføringer](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/5)
-- [F5 – Sanntid](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/6)
-- [F6 – Spesialisert og forskning](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/7)
+- [F0 – Architecture and decisions](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/1)
+- [F1 – HTTP core](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/2)
+- [F2 – Production hardening and v1 gate](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/3)
+- [F3 – Resilience and extensions](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/4)
+- [F4 – File transfers](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/5)
+- [F5 – Real-time communication](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/6)
+- [F6 – Specialized features and research](https://github.com/BK-Teisrud/SwiftNetworkKit/milestone/7)
 
-## Faktiske avhengigheter
+## Native dependencies
 
-37 GitHub blocked-by-relasjoner er opprettet: GATE-00 blokkeres av DEC-01–DEC-07; NK-01–NK-20 blokkeres av GATE-00; REL-01 blokkeres av de ti KJERNE-domenene. Dette viser planleggingsrekkefølge; det er ikke en automatisk merge-sperre. En godkjent arkitekturport erstatter heller ikke sikkerhetsreview og modulspesifikke avhengigheter.
+The original 37 blocked-by relations connected GATE-00 to DEC-01–DEC-07, NK-01–NK-20 to GATE-00, and REL-01 to ten CORE domains. Subsequent preparation added START-00 blockers for core epics/release and 45 verified blocker links across I01–I23, plus the final rehearsal dependency for REL-01. These express planning order, not automatic merge enforcement. Architecture approval does not replace security review or task-specific dependencies.
 
-OPS-01 er en åpen kontrolloppgave for prosjekteier og senere team-overgang, ikke et uimplementert produktkrav.
+OPS-01 / #30 is complete through PR #65; team review remains a future transition requiring an actual additional reviewer, not an undelivered product requirement.
 
-## Konkret arbeidskø etter F0
+## Concrete work queue after F0
 
-- [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41): uttrykkelig kodegodkjenning, fortsatt åpen.
-- [I01–I23 med fullstendige issue-lenker](WORK_QUEUE.md): #42–64, alle Blocked før kodestart.
-- [Oppsettsverifikasjon #40](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/40): gjennomført uten produktkode.
-- [Sortert arbeidskø](https://github.com/users/BK-Teisrud/projects/6/views/7) og [Ferdig](https://github.com/users/BK-Teisrud/projects/6/views/8).
+- [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41): explicit implementation authorization, still open.
+- [I01–I23 with all issue links](WORK_QUEUE.md): #42–64, all Blocked before authorization.
+- [Setup verification #40](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/40): completed without product code.
+- [Sorted Work Queue](https://github.com/users/BK-Teisrud/projects/6/views/7) and [Completed](https://github.com/users/BK-Teisrud/projects/6/views/8).

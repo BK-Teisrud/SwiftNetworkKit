@@ -1,43 +1,46 @@
 # SwiftNetworkKit
 
-Native nettverksbibliotek for Apple-plattformer, planlagt som Swift Package uten eksterne pakkedependencies.
+A native networking library for Apple platforms, planned as a Swift package with no external package dependencies.
 
-**Status: F0-planlegging godkjent; implementasjon er ikke autorisert. Ingen bibliotekskode, Swift Package, tester eller produktrelease er opprettet.** Repoet inneholder prosjektgrunnlag og GitHub-oppsett. Ikke legg dette til som en fungerende dependency.
+**Status: F0 planning is approved; implementation is not authorized. No library code, Swift package, tests, or product release has been created.** This repository contains project planning and GitHub configuration. Do not add it as a working dependency.
 
-## Prosjektgrunnlag
+## Project foundations
 
-Foundation/URLSession er primær HTTP-transport. Swift Concurrency, injiserbare tjenester, system trust og personverntrygge standardverdier er førende. Network.framework vurderes for særskilte lavnivåbehov. Ingen egen HTTP-, TLS- eller kryptografistakk og ingen backend som produkt.
+Foundation/URLSession is the primary HTTP transport. Swift Concurrency, injectable services, system trust, and privacy-preserving defaults guide the design. Network.framework may be considered for specific low-level requirements. The project will not implement its own HTTP, TLS, or cryptographic stack, or provide a backend product.
 
-Repoet og pakken heter **SwiftNetworkKit**. Bibliotekproduktet, modulen og importnavnet blir **NetworkKit**, med én bibliotekmodul i v1. Første stabile versjon avgrenses til HTTP-kjernen; øvrige moduler kommer senere. Dette er vedtatt planlegging, ikke opprettede targets eller ferdig funksjonalitet. Se [v1-scope](docs/planning/V1_SCOPE.md) og [ADR-0003](docs/decisions/ADR-0003-v1-scope-and-naming.md).
+The repository and package are named **SwiftNetworkKit**. The library product, module, and import name will be **NetworkKit**, with one library module in v1. The first stable release is limited to the HTTP core; other modules are deferred. These are approved plans, not existing targets or delivered functionality. See [v1 scope](docs/planning/V1_SCOPE.md) and [ADR-0003](docs/decisions/ADR-0003-v1-scope-and-naming.md).
 
-## Dokumentasjon
+## Documentation
 
-- [Klarhetskontroll før kodestart](docs/planning/PRE_CODE_READINESS.md)
-- [Nummerert arbeidsrekkefølge](docs/planning/WORK_QUEUE.md)
-- [Testmiljøinventar og manglende minimums-OS-bevis](docs/planning/TEST_ENVIRONMENTS.md)
+- [Readiness review before implementation](docs/planning/PRE_CODE_READINESS.md)
+- [Numbered work queue](docs/planning/WORK_QUEUE.md)
+- [Test environment inventory and outstanding minimum-OS evidence](docs/planning/TEST_ENVIRONMENTS.md)
+- [Setup status and verification](docs/governance/SETUP_STATUS.md)
+- [GitHub settings and rules](docs/governance/GITHUB_CONFIGURATION.md)
+- [Workflow and project management](docs/planning/PROJECT_MANAGEMENT.md)
+- [Approved F0 baseline: implementation remains unauthorized](docs/planning/F0_REVIEW.md)
+- [CI and test plan](docs/planning/CI_AND_TEST_PLAN.md)
+- [Security and network policy](docs/planning/SECURITY_AND_NETWORK_POLICY.md)
+- [Concurrency and lifecycle](docs/planning/CONCURRENCY_AND_LIFECYCLE.md)
+- [HTTP, response, and error contract](docs/planning/HTTP_API_CONTRACT.md)
+- [Platform and toolchain matrix](docs/planning/PLATFORM_MATRIX.md)
+- [Roadmap and delivery gates](docs/planning/ROADMAP.md)
+- [Requirements traceability and backlog](docs/planning/BACKLOG.md)
+- [Specification baseline](docs/planning/SPECIFICATION_BASELINE.md)
+- [Decision log](docs/decisions/README.md)
+- [Quality gates and test strategy](docs/governance/QUALITY.md)
+- [Release and compatibility policy](docs/governance/RELEASE_POLICY.md)
+- [Risk register](docs/planning/RISKS.md)
+- [Contributing](CONTRIBUTING.md), [security](SECURITY.md), and [governance](GOVERNANCE.md)
 
-- [Oppsettsstatus og verifikasjon](docs/governance/SETUP_STATUS.md)
-- [Alle GitHub-innstillinger og regler](docs/governance/GITHUB_CONFIGURATION.md)
-- [Arbeidsflyt og prosjektstyring](docs/planning/PROJECT_MANAGEMENT.md)
-- [Samlet godkjent F0-grunnlag – fortsatt ingen kode](docs/planning/F0_REVIEW.md)
-- [CI- og testplan](docs/planning/CI_AND_TEST_PLAN.md)
-- [Sikkerhets- og nettverkspolicy](docs/planning/SECURITY_AND_NETWORK_POLICY.md)
-- [Concurrency og livssyklus](docs/planning/CONCURRENCY_AND_LIFECYCLE.md)
-- [HTTP-, respons- og feilkontrakt](docs/planning/HTTP_API_CONTRACT.md)
-- [Plattform- og verktøymatrise](docs/planning/PLATFORM_MATRIX.md)
-- [Roadmap og leveranseporter](docs/planning/ROADMAP.md)
-- [Kravsporbarhet og backlog](docs/planning/BACKLOG.md)
-- [Spesifikasjonsgrunnlag](docs/planning/SPECIFICATION_BASELINE.md)
-- [Beslutningslogg](docs/decisions/README.md)
-- [Kvalitet og teststrategi](docs/governance/QUALITY.md)
-- [Release- og kompatibilitetspolicy](docs/governance/RELEASE_POLICY.md)
-- [Risikoregister](docs/planning/RISKS.md)
-- [Bidrag](CONTRIBUTING.md), [sikkerhet](SECURITY.md), [forvaltning](GOVERNANCE.md)
+## Platforms and rights
 
-## Plattform og lisens
+Approved v1 targets: **iOS/iPadOS 17+, macOS 14+, watchOS 10+, and tvOS 17+**. visionOS is deferred. Development baseline: **Xcode 26.3+, Swift tools 6.2, and Swift 6 language mode with strict concurrency checking**. See the [platform matrix](docs/planning/PLATFORM_MATRIX.md) and [ADR-0004](docs/decisions/ADR-0004-platforms-and-toolchain.md). These are approved targets; no product builds or runtime tests have run.
 
-Vedtatt for v1: **iOS/iPadOS 17+, macOS 14+, watchOS 10+ og tvOS 17+**. VisionOS utsettes. Utviklingsgrunnlag: **Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus med streng samtidighetskontroll**. Se [plattformmatrisen](docs/planning/PLATFORM_MATRIX.md) og [ADR-0004](docs/decisions/ADR-0004-platforms-and-toolchain.md). Dette er vedtatte mål; ingen produktbygg eller runtime-tester er kjørt.
+**Rights holder: Teisrud Development AS. SwiftNetworkKit is proprietary.** Third-party use requires separate written permission from the company, subject to statutory rights and GitHub's applicable terms. Public visibility permits viewing and forking through GitHub; the project grants no additional open-source license or general permission to use the material in applications.
 
-**Rettighetshaver: Teisrud Development AS. SwiftNetworkKit er proprietært.** Tredjepartsbruk krever særskilt skriftlig tillatelse fra selskapet, med forbehold for lovbestemte rettigheter og GitHubs gjeldende vilkår. Offentlig synlighet gir adgang til visning og forking gjennom GitHub, men prosjektet gir ingen ytterligere åpen kildekode-lisens eller generell tillatelse til bruk i apper.
+See the [rights notice](LICENSE) and [ownership and rights decision](docs/decisions/ADR-0002-ownership-and-rights.md). Ask maintainer @BK-Teisrud for a confirmed permission-request contact channel; do not share confidential information publicly.
 
-Se [rettighetsnotisen](LICENSE) og [beslutningen om eierskap og rettigheter](docs/decisions/ADR-0002-ownership-and-rights.md). Be maintainer @BK-Teisrud om en bekreftet kontaktkanal for tillatelser; ikke del fortrolige opplysninger offentlig.
+## Language
+
+All repository documentation and GitHub project content use English. The owner and assistant continue to communicate in Norwegian. See [the language policy](docs/governance/LANGUAGE_POLICY.md).

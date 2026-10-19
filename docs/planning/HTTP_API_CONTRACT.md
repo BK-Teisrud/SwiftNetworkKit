@@ -1,90 +1,90 @@
-# HTTP-, respons- og feilkontrakt for v1
+# HTTP, response, and error contract for v1
 
-Status: Planlagt kontrakt, 2026-10-19, se [ADR-0005](../decisions/ADR-0005-http-api-contract.md). Prosjekteier har valgt hovedalternativene; reglene under konkretiserer dem. Ingen implementasjon eller beståtte produkttester finnes.
+Status: Planned contract, 2026-10-19; see [ADR-0005](../decisions/ADR-0005-http-api-contract.md). The owner selected the core choices; the rules below elaborate them. No implementation or passed product tests exist.
 
-## Offentlig modell og de to inngangene
+## Public model and entry points
 
-| Konsept | Kontrakt |
+| Concept | Contract |
 | --- | --- |
-| NetworkClient / APIClient | Injiserbar klientgrense og konkret URLSession-basert klient; ingen global singleton som eneste bruksmåte |
-| Endpoint | Beskriver HTTP-kall, responstype/-strategi og eksplisitte kallvalg |
-| NetworkConfiguration | Klientens baseURL, standardheaders og øvrige konfigurasjonsvalg; samtidighet og snapshots følger DEC-05 / ADR-0006 |
-| HTTPMethod | GET, POST, PUT, PATCH, DELETE, HEAD og OPTIONS; også en eksplisitt, gyldig HTTP-metodestreng |
-| NetworkResponse | Dekodet verdi, HTTP-status og responsheaders; metadata finnes også for Data/tekst/tomt svar |
-| EmptyResponse | Markerer uttrykkelig at det ikke skal dekodes en responsmodell |
-| NetworkError | Strukturerte vanlige feil; cancellation holdes separat som CancellationError |
+| NetworkClient / APIClient | Injectable client boundary and concrete URLSession-based client; a global singleton is not the only usage pattern |
+| Endpoint | Describes an HTTP call, response type/strategy, and explicit call options |
+| NetworkConfiguration | Client baseURL, default headers, and configuration; concurrency and snapshots follow DEC-05 / ADR-0006 |
+| HTTPMethod | GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS, and an explicit valid HTTP method string |
+| NetworkResponse | Decoded value, HTTP status, and response headers, including metadata for Data/text/empty responses |
+| EmptyResponse | Explicitly indicates that no response model is decoded |
+| NetworkError | Structured ordinary failures; cancellation remains separate as CancellationError |
 
-Typed endpoint er standard. Rå URLRequest tilbys som alternativ for kallbygging; konsumenten velger også her en responsstrategi og eventuelt statusunntak. Requestbygging er allerede utført i raw-tilfellet, men validering og samme klientpipeline gjelder fortsatt. Ustøttede inputvarianter avvises, de ignoreres ikke.
+Typed endpoints are the default. Raw URLRequest is an alternative request-building input; consumers still select a response strategy and any status exception. Although raw requests are already constructed, validation and the same client pipeline apply. Reject unsupported inputs rather than ignoring them.
 
-Modellen kan håndtere JSON-modeller, Data og tekst uten at alle responstyper påtvinges én generisk JSON-/Decodable-strategi. Ingen eksakte Swift-signaturer, navn på enum-cases eller kildekode er vedtatt her; offentlige konseptnavn og adferd ligger til grunn for senere API-review.
+Support JSON models, Data, and text without forcing every response through one generic JSON/Decodable strategy. Exact Swift signatures, enum case names, and source code are not decided here; the concepts and behavior guide later API review.
 
-## URL og parametere
+## URLs and parameters
 
-BaseURL er eksplisitt injisert og må være en gyldig absolutt HTTP(S)-URL; [sikkerhetspolicyen](SECURITY_AND_NETWORK_POLICY.md) / ADR-0007 tillater HTTPS og et eksplisitt utviklingsunntak bare for localhost/loopback. En relativ endpoint-path kan ikke utilsiktet erstatte scheme, host eller port. Fragments og URL-userinfo brukes ikke som requestparametere/credential-kanal.
+Inject an explicit baseURL that is a valid absolute HTTP(S) URL. The [security policy](SECURITY_AND_NETWORK_POLICY.md) / ADR-0007 allows HTTPS and an explicit development-only localhost/loopback exception. A relative endpoint path must not inadvertently replace scheme, host, or port. Fragments and URL userinfo are not request parameters or credential channels.
 
-Path bygges av eksplisitte segmenter, med encoding per segment. Segmentdata må ikke tolkes som separatorer, query eller ny origin. Punkt-/traversalsegmenter og malformed input må håndteres eksplisitt med valideringsfeil der de ellers ville endret tiltenkt path. Ferdig prosentkodet tekst er ingen standardinngang; klienten skal unngå dobbel encoding og prosesskrasj på ugyldig encoding.
+Build paths from explicit segments, encoding each segment. Segment data must not become separators, query text, or a new origin. Handle dot/traversal segments and malformed input explicitly, returning validation errors when they would change the intended path. Pre-percent-encoded text is not the standard input; avoid double encoding and crashes on invalid encoding.
 
-Query er en ordnet liste med navn og valgfrie verdier. Rekkefølge og gjentatte navn beholdes; arrays uttrykkes som gjentatte navn. En utelatt parameter tas ikke med, nil-verdi betyr navn uten likhetstegn, og tom streng betyr eksplisitt tom verdi. Ingen automatisk bracket-/comma-/form-encoding i v1. Spesialkontrakter kan bygges som rå request, med samme URL-/sikkerhetsvalidering.
+Queries are ordered lists of names and optional values. Preserve ordering and repeated names; represent arrays with repeated names. Omitted parameters are absent, nil means a name without an equals sign, and an empty string means an explicitly empty value. No automatic bracket/comma/form encoding in v1. Use raw requests for special contracts, subject to the same URL/security validation.
 
-URL-bygging skal være komponentbasert, ikke usikker strengkonkatenering. Ingen garanti om manuell HTTP-versjonsforhandling gis.
+Build URLs from components, not unsafe string concatenation. No manual HTTP-version-negotiation guarantee is provided.
 
 ## Headers
 
-Headernavn sammenlignes uten hensyn til store/små bokstaver. Ett eksplisitt requestvalg erstatter klientens default med samme navn; omvendt prioritet er ikke tillatt. Ugyldige headernavn og CR/LF i input skal gi invalidRequest før nettverk. Motstridende duplikater skal ikke vilkårlig sammenføyes.
+Compare header names case-insensitively. An explicit request value overrides the client default with the same name, never the reverse. Invalid names and CR/LF input cause invalidRequest before networking. Do not arbitrarily combine conflicting duplicates.
 
-JSON får application/json som standard Content-Type, og tekst får text/plain med UTF-8. For Data velges content type eksplisitt, med application/octet-stream som standard når ingen er angitt. Eksplisitt Content-Type fra kallet har forrang, men må være et bevisst kallvalg; den endrer ikke automatisk body-encoder. Ingen body betyr at klienten ikke legger til en body-content-type av seg selv.
+Default Content-Type is application/json for JSON, text/plain with UTF-8 for text, and application/octet-stream for Data when none is explicitly selected. Explicit call Content-Type takes precedence as a deliberate choice; it does not automatically change the body encoder. Do not add a body content type when no body exists.
 
-Transportstyrte felter som Content-Length skal ikke beregnes manuelt av biblioteket. Endelig systembehandling av slike felter følger URLSession. Auth-provider, headerkonflikter og redirectgrense følger ADR-0007 uten å innføre et generelt interceptorrammeverk. Forskjellige provider-/eksplisitte auth-verdier med samme navn avvises.
+Do not manually compute transport-managed fields such as Content-Length. URLSession governs final system handling. Authentication providers, header conflicts, and redirect boundaries follow ADR-0007 without a general interceptor framework. Reject differing provider/explicit authentication values for the same name.
 
-Responsheaders skal tilby case-insensitive oppslag. Bevar verdier slik URLSession eksponerer dem; ikke lov opprinnelig casing, rå headerrekkefølge eller gjentatte wire-headere som systemet allerede har slått sammen. Sensitive metadata kan være tilgjengelige for vertappen uten dermed å være tillatt i logger eller feiltekst.
+Response headers support case-insensitive lookup. Preserve values as URLSession exposes them; do not promise original casing, raw ordering, or repeated wire headers already combined by the system. Metadata accessible to the app is not automatically permitted in logs or error text.
 
-## Body og responsstrategier
+## Body and response strategies
 
-| Variant | Request | Respons |
+| Variant | Request | Response |
 | --- | --- | --- |
-| JSON | Encodable-baserte payloads med konfigurerbar Apple JSONEncoder-strategi | Eksplisitt valgt modell med Apple JSONDecoder-strategi |
-| Data | Rå bytepayload med Content-Type | Rå Data uten JSON-dekoding |
-| Tekst | UTF-8-kodet tekst | UTF-8 som standard; ustøttet eller ugyldig deklarert encoding gir decodingfeil, ikke stille datatap |
-| Tomt | Request uten body | Eksplisitt EmptyResponse, uten JSON-dekoding |
+| JSON | Encodable payloads with configurable Apple JSONEncoder strategies | Explicitly selected model with Apple JSONDecoder strategies |
+| Data | Raw bytes with Content-Type | Raw Data without JSON decoding |
+| Text | UTF-8 text | UTF-8 by default; unsupported or invalid declared encoding causes decoding failure rather than silent data loss |
+| Empty | No request body | Explicit EmptyResponse, without JSON decoding |
 
-Encoder-/decoderstrategier velges før utførelse. Ingen mutasjon av en delt instans midt i et request er en del av kontrakten; eierskap og samtidighet følger [livssykluskontrakten](CONCURRENCY_AND_LIFECYCLE.md). Et generelt custom-decoder-/pluginrammeverk inngår ikke.
+Select encoder/decoder strategies before execution. Mutating a shared instance during a request is outside the contract; ownership and concurrency follow the [lifecycle contract](CONCURRENCY_AND_LIFECYCLE.md). A general custom-decoder/plugin framework is excluded.
 
-Status valideres før normal responsdekoding. HEAD/204 kan håndteres med eksplisitt tom-responskontrakt. Dersom en JSON-modell er valgt og body er tom, er det en decoding-/kontraktfeil; klienten lager ikke et kunstig standardobjekt. Tom Data og tom tekst er tillatt når disse responsstrategiene er valgt. En eksplisitt tom respons dekoder ingen payload og returnerer fortsatt status/headers.
+Validate status before normal response decoding. HEAD/204 may use the explicit empty-response contract. Empty body with a selected JSON model is a decoding/contract error; do not manufacture a default object. Empty Data/text are valid under those strategies. An explicitly empty response decodes no payload but still returns status/headers.
 
-Valgt JSON-strategi aksepterer manglende Content-Type, men hvis serveren oppgir Content-Type må den angi application/json eller en subtype med +json. Et annet oppgitt format gir invalidResponse før JSON-dekoding. Raw Data-strategien påtvinges ingen JSON-Content-Type. V1 inkluderer ikke et generelt system for å slå av validering; en server med feilaktig content type kan håndteres gjennom rå Data og eksplisitt appstyrt behandling.
+JSON accepts a missing Content-Type; when supplied, it must be application/json or a +json subtype. Another declared format causes invalidResponse before JSON decoding. Raw Data imposes no JSON content type. There is no general validation-disable mechanism; apps may handle a server's incorrect content type through raw Data and explicit app-side processing.
 
-Multipart, body streams, filbaserte upload/download-API-er, progress, streaming, XML-/andre formater og WebSocket er utsatt. En rå URLRequest med httpBodyStream skal avvises som utenfor v1-kontrakten; den er ingen bakvei til streamingstøtte. Hele Data-responser lastes i minnet; v1 skal ikke presenteres som et storfil-/streamingbibliotek.
+Multipart, body streams, file upload/download APIs, progress, streaming, XML/other formats, and WebSocket are deferred. Reject raw URLRequest with httpBodyStream as outside v1; it is not a back door to streaming. Entire Data responses are loaded into memory. Do not present v1 as a large-file/streaming library.
 
-## HTTP-status og pipeline
+## HTTP status and pipeline
 
-Standard er 200–299. Et kall kan eksplisitt erstatte standarden med et ikke-tomt, gyldig sett/område av HTTP-statuskoder. Valget tilhører kallet og må dokumenteres; det finnes ingen skjult global «aksepter alt»-policy. En akseptert status hopper ikke over bodykontrakt eller sikkerhetsregler.
+Success defaults to 200–299. A call may explicitly replace this with a nonempty valid set/range of HTTP status codes. Document this per-call choice; no hidden global accept-all policy. Accepted status does not bypass body contracts or security.
 
-Status gjelder den endelige HTTP-responsen som URLSession gir klienten etter gjeldende redirect-policy. Å akseptere en status gir ikke i seg selv kontroll over URLSessions redirects; ADR-0007 fastsetter samme-origin GET/HEAD-redirects med maks fem hopp og ingen automatisk cross-origin/downgrade/mutasjonsreplay.
+Status refers to the final HTTP response URLSession exposes after redirect policy. Accepting a status does not control redirects. ADR-0007 permits same-origin GET/HEAD redirects up to five hops, with no automatic cross-origin, downgrade, or mutating replay.
 
-Planlagt rekkefølge: valider input → bygg/valider request og encode valgt body → anvend konfigurasjon og vedtatte sikkerhetsgrenser → utfør URLSession → bekreft HTTP-respons → valider status og eventuell content type → håndter valgt responsstrategi → returner NetworkResponse. Cancellation gjelder gjennom operasjonen. Ingen egen retrymotor eller token-refresh-syklus inngår i denne kontrakten.
+Planned order: validate input → build/validate request and encode body → apply configuration and security boundaries → execute URLSession → confirm HTTP response → validate status and any content type → apply response strategy → return NetworkResponse. Cancellation applies throughout. No library retry engine or token-refresh cycle is included.
 
-## Feilkontrakt
+## Error contract
 
-| Kategori | Betydning |
+| Category | Meaning |
 | --- | --- |
-| invalidRequest | Ugyldig URL, metode, header, konfigurasjon eller ustøttet requestvariant; ingen nettverksutførelse ved lokal avvisning |
-| transport | System-/nettverksfeil; underliggende URLError-kode/årsak beholdes der relevant, inkludert trust-/TLS-feil uten credential-dump |
-| httpStatus | Endelig HTTP-status er utenfor det eksplisitt godkjente settet; status og nødvendige metadata beholdes |
-| invalidResponse | Responsen er ikke HTTP eller bryter responskontrakten, eksempelvis oppgitt feil Content-Type |
-| encoding | Requestbody kunne ikke kodes; ingen request sendes |
-| decoding | Godkjent HTTP-respons kunne ikke tolkes som valgt modell/tekst |
-| timeout | Timeout skilt fra vanlig transportfeil; 30 sekunder inaktivitet / 60 sekunder samlet budsjett som standard, presisert i ADR-0006 |
-| CancellationError | Egen feil utenfor NetworkError for faktisk kansellering; systemets cancel-signaler normaliseres etter registrert årsak i ADR-0006, med timeout skilt fra caller-cancel |
+| invalidRequest | Invalid URL, method, header, configuration, or unsupported input; local rejection performs no network operation |
+| transport | System/network failure; retain relevant URLError code/cause, including trust/TLS failures, without credential dumps |
+| httpStatus | Final status falls outside the explicitly accepted set; retain status and necessary metadata |
+| invalidResponse | Non-HTTP response or contract violation, such as an incorrect declared Content-Type |
+| encoding | Request body could not be encoded; no request is sent |
+| decoding | An accepted HTTP response could not be interpreted as the selected model/text |
+| timeout | Separate from ordinary transport failures; defaults to 30-second inactivity / 60-second total budget under ADR-0006 |
+| CancellationError | Separate from NetworkError for actual cancellation; normalize system cancellation signals using ADR-0006's recorded cause, distinguishing timeout from caller cancellation |
 
-Ingen feilkategori gir automatisk rett til retry. Feiltekst og diagnostikk skal ikke inneholde tokens, cookies, rå URL-parametere eller payloads som standard. Et underliggende Error-/metadataobjekt er ikke en tillatelse til å logge alt. ADR-0007 fastsetter at HTTP-feil ikke tar med rå error-body, og v1 har ingen egen error-body-capture. Appen kan velge eksplisitt akseptert status med JSON/Data-kontrakt hvis den trenger en API-feilpayload.
+No category automatically authorizes retry. Default error text and diagnostics exclude tokens, cookies, raw URL parameters, and payloads. An underlying Error/metadata object is not permission to log everything. ADR-0007 excludes raw error-body capture in v1. Apps needing an API error payload may explicitly accept its status with a JSON/Data response contract.
 
-## Senere akseptansebevis
+## Required future acceptance evidence
 
-- Samme kontrakt for typed endpoint og rå request; raw kan ikke omgå sikkerhets- eller statusregler.
-- GET/POST og øvrige valgte metoder, JSON/Data/tekst/EmptyResponse, 204/HEAD, valgte statusunntak og feil Content-Type.
-- URL-segmenter med reservedtegn, query med duplikater/nil/tom verdi, malformed URL/encoding og forsøk på origin-/path-endring.
-- Case-insensitive headere, default versus requestvalg, CR/LF-avvisning og eksplisitt Content-Type.
-- Transportfeil, timeout, encoding/decodingfeil, invalidResponse og cancellation før/under operasjonen.
-- Feil og logger uten sensitive standarddata; responseheaders håndteres med dokumenterte systembegrensninger.
+- Contract parity between typed endpoints and raw requests; no security/status bypass.
+- GET/POST and other selected methods, JSON/Data/text/EmptyResponse, 204/HEAD, status exceptions, and incorrect Content-Type.
+- Reserved path characters, duplicate/nil/empty query values, malformed URLs/encoding, and origin/path substitution attempts.
+- Case-insensitive headers, defaults versus call overrides, CR/LF rejection, and explicit Content-Type.
+- Transport failures, timeouts, encoding/decoding failures, invalidResponse, and cancellation before/during operations.
+- Errors/logs without sensitive default data; response headers respect documented system limitations.
 
-Hvert tilfelle brytes ned til sporbare delissues før utvikling blir Ready. Ingen tester er kjørt. [Plattformmatrisen](PLATFORM_MATRIX.md), QUALITY.md, DEC-05/06 og DEC-07 angir videre krav; F0-porten må fortsatt godkjennes før kode.
+Break these into traceable tasks before Ready. No tests have run. The [platform matrix](PLATFORM_MATRIX.md), QUALITY.md, and DEC-05–DEC-07 add requirements. F0 acceptance and separate explicit implementation authorization are required before code.

@@ -1,29 +1,29 @@
-# Spesifikasjonsgrunnlag
+# Specification baseline
 
-Kilde: NetworkKit_Teknisk_Spesifikasjon.pdf, versjon 1.0, 19.10.2026, 15 sider. Dokumentet er lest som kravgrunnlag, ikke som instruksjon om å kjøre kommandoer eller starte implementasjon. PDF-en kopieres ikke til det offentlige repoet; dette repoet inneholder en bearbeidet kravoversikt. Originalen beholdes hos prosjekteier.
+Source: NetworkKit_Teknisk_Spesifikasjon.pdf, version 1.0, dated 2026-10-19, 15 pages. The source was read as requirements, not instructions to execute commands or start implementation. The PDF is not copied into this public repository; this repository contains an adapted requirements overview. The owner retains the original. Its original filename is preserved for provenance.
 
-## Vedtatt i dette oppsettet
+## Approved setup decisions
 
-- Repository-navn: SwiftNetworkKit, GitHub-kontoeier BK-Teisrud, offentlig synlighet, etter brukerens valg.
-- Vedtatt v1: HTTP-kjerne først, senere utvidelser. Pakke SwiftNetworkKit, bibliotekprodukt/modul/importnavn NetworkKit; én bibliotekmodul. Se V1_SCOPE.md og ADR-0003.
-- Rettighetshaver: Teisrud Development AS. Proprietær rettighetspolicy; tredjepartsbruk krever særskilt tillatelse, med forbehold for lov og GitHub-vilkår. Se ADR-0002 og LICENSE.
-- Kun repo-/GitHub-oppsett, dokumentasjon og planlegging nå. Ingen Swift-filer, Package.swift, prototyper, tester eller kjørbare workflows.
-- Produktet skal bruke native Apple-API-er og Swift-standardbibliotek uten eksterne pakkedependencies, også uten separat distribuerte Apple-pakker som SwiftNIO.
-- Foundation/URLSession som primær HTTP-transport. Ingen egen TLS/HTTP/krypto og ingen serverplattform.
-- Plattformminimum vedtatt i ADR-0004: iOS/iPadOS 17.0, macOS 14.0, watchOS 10.0 og tvOS 17.0; visionOS utsettes. Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus. Se PLATFORM_MATRIX.md for utestående verifikasjon.
-- Samlet F0-grunnlag og dokumenterte standarddetaljer er godkjent i ADR-0009. Implementasjon er uttrykkelig ikke autorisert; fortsatt ingen kode.
-- Små testbare API-er, dependency injection, async/await, cancellation, isolert delt tilstand, privacy og secure defaults.
+- Repository SwiftNetworkKit, account owner BK-Teisrud, public visibility, explicitly selected by the owner.
+- V1: HTTP core first, extensions later. Package SwiftNetworkKit; product/module/import NetworkKit; one library module. See V1_SCOPE.md and ADR-0003.
+- Rights holder Teisrud Development AS. Proprietary; third-party use requires separate permission, subject to law/GitHub terms. See ADR-0002 and LICENSE.
+- Repository/GitHub setup, documentation, and planning only. No Swift files, Package.swift, prototypes, tests, or executable workflows.
+- Native Apple APIs and the Swift standard library without external package dependencies, including separately distributed Apple packages such as SwiftNIO.
+- Foundation/URLSession is the primary HTTP transport. No custom TLS/HTTP/cryptographic stack or server platform.
+- ADR-0004 minimums: iOS/iPadOS 17.0, macOS 14.0, watchOS 10.0, tvOS 17.0; visionOS deferred. Xcode 26.3+, Swift tools 6.2, Swift 6 mode. See PLATFORM_MATRIX.md for outstanding verification.
+- ADR-0009 accepts the combined F0 baseline/defaults. Implementation is explicitly unauthorized; still no code.
+- Small testable APIs, dependency injection, async/await, cancellation, isolated shared state, privacy, and secure defaults.
 
-## Tolkning av scope
+## Scope interpretation
 
-KJERNE, UTVIDELSE og FORSKNING beholdes fra §4. KJERNE på et domene betyr ikke at alle underpunktene automatisk tas med i v1.0. Hvert domene må få en godkjent delkravliste og eksplisitte utsettelser før implementasjon. Roadmap er en foreslått rekkefølge, ikke bekreftet produktstøtte eller datoavtale.
+CORE, EXTENSION, and RESEARCH correspond to the original classifications in §4. A CORE domain does not automatically include every subrequirement in v1.0. Approve included requirements and explicit deferrals before implementation. The roadmap defines a proposed sequence, not verified product support or agreed dates.
 
-Spesifikasjonen nevner retry i målbeskrivelsen, men klassifiserer robusthet som UTVIDELSE. Vedtaket i ADR-0003 avgrenser v1 til HTTP-kjerne uten egen retry-/resiliensmodul. DEC-06 / ADR-0007 fastsetter ingen egen automatisk retry og eksplisitt system-/sikkerhetspolicy innen denne grensen. Avansert retry, cache, auth og lavnivåtransport er senere leveranser.
+The specification mentions retry in its goals but classifies resilience as EXTENSION. ADR-0003 limits v1 to the HTTP core without a custom retry/resilience module. DEC-06 / ADR-0007 prohibits library automatic retries and defines system/security policy within that boundary. Advanced retry, caching, authentication, and low-level transports are later deliveries.
 
-## Åpent før kode
+## Outstanding before code and delivery
 
-DEC-04 / ADR-0005 fastsetter HTTP-/respons-/feilkontrakten, inkludert typed + raw, respons-wrapper, JSON/Data/tekst/tomt, separat CancellationError og eksplisitte statusunntak. DEC-05 / ADR-0006 fastsetter concurrency/session-eierskap, cancellation/shutdown og 30/60-sekunders tidsgrenser. DEC-06 / ADR-0007 fastsetter header-provider, ingen automatiske lagre som standard, HTTPS med eksplisitt loopback-utviklingsunntak og avgrenset redirect-/nettverks-/diagnostikkpolicy. DEC-07 / ADR-0008 fastsetter CI-/testplan med fire PR-plattformer, standardrunners uten betalte tillegg og egne minimums-OS-/releasebevis. Faktiske schemes/destinations og vellykket kjøring må fortsatt verifiseres i første reelle CI-PR. VisionOS og Combine er utsatt etter v1-scope. Valgte API-symboler og runtime-kompatibilitet må verifiseres før leveranse; plattformvedtak alene er ikke testbevis.
+DEC-04 / ADR-0005 defines typed/raw calls, response wrappers, JSON/Data/text/empty, separate CancellationError, and explicit status exceptions. DEC-05 / ADR-0006 defines concurrency/session ownership, cancellation/shutdown, and 30/60 limits. DEC-06 / ADR-0007 defines the header provider, stores off by default, HTTPS with explicit loopback development access, and bounded redirect/network/diagnostic policy. DEC-07 / ADR-0008 defines four PR platforms, standard runners without paid add-ons, and separate minimum-OS/release evidence. Verify actual schemes/destinations and successful runs in the first real CI PR. visionOS and Combine are deferred. Verify selected symbols/runtime compatibility before delivery; platform decisions alone are not test evidence.
 
-## Sporbarhet
+## Traceability
 
-Domener får NK-01–NK-20 etter spesifikasjonens §4.1–§4.20. Styrings- og beslutningsoppgaver får SETUP-/DEC-/REL-ID. GitHub issue-nummer er separat fra stabil krav-ID. Delkrav opprettes som NK-XX-01 osv. ved nedbryting, med kildepunkt, kontrakt, plattformer og testbevis. Ingen krav regnes som levert bare fordi et planleggingsissue er lukket.
+NK-01–NK-20 correspond to specification §4.1–§4.20. Governance/decision tasks use SETUP-/DEC-/REL-IDs. GitHub issue numbers are separate from stable requirement IDs. Create subrequirements such as NK-XX-01 during decomposition, with source section, contract, platforms, and evidence. Closing a planning issue does not deliver product requirements.

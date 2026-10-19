@@ -1,32 +1,32 @@
-name: Forslag eller arkitekturbeslutning
-description: Strukturert forslag eller arkitekturbeslutning uten sensitive data.
-title: "[Forslag eller arkitekturbeslutning] "
+name: Proposal or architecture decision
+description: A structured proposal or architecture decision without sensitive data.
+title: "[Proposal or architecture decision] "
 labels: ["type: decision"]
 body:
   - type: markdown
     attributes:
-      value: "Repoet er offentlig. Bruk syntetiske data; rapporter sikkerhet privat."
+      value: "This repository is public. Use synthetic data; report vulnerabilities privately."
   - type: textarea
     id: problem
     attributes:
-      label: Problem og kravreferanse
+      label: Problem and requirement references
     validations:
       required: true
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternativer og avveininger
+      label: Alternatives and trade-offs
     validations:
       required: true
   - type: textarea
     id: scope
     attributes:
-      label: Scope, sikkerhet og plattformer
+      label: Scope, security, and platforms
     validations:
       required: true
   - type: textarea
     id: acceptance
     attributes:
-      label: Beslutningskriterier
+      label: Decision criteria
     validations:
       required: true

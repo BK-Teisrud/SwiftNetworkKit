@@ -1,20 +1,20 @@
-# ADR-NNNN: Tittel
+# ADR-NNNN: Title
 
-Dato: YYYY-MM-DD
-Status: Foreslått
-Eier:
-Issue / krav:
+Date: YYYY-MM-DD
+Status: Proposed
+Owner:
+Issue / requirement:
 
-## Kontekst og problem
+## Context and problem
 
-## Alternativer
+## Alternatives
 
-## Beslutning og begrunnelse
+## Decision and rationale
 
-## Sikkerhet, personvern, plattformer og kompatibilitet
+## Security, privacy, platforms, and compatibility
 
-## Konsekvenser og utsatt scope
+## Consequences and deferred scope
 
-## Godkjenning og verifikasjon
+## Approval and verification
 
-## Erstatter / erstattes av
+## Supersedes / superseded by

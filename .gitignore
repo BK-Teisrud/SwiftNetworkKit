@@ -1,13 +1,13 @@
 # macOS
 .DS_Store
 .AppleDouble
-# Swift / Xcode – for fremtidig implementasjon
+# Swift / Xcode – for future implementation
 .build/
 .swiftpm/
 DerivedData/
 *.xcuserstate
 xcuserdata/
-# Lokale hemmeligheter og verktøyfiler
+# Local secrets and tool files
 .env
 .env.*
 !.env.example
@@ -15,5 +15,5 @@ xcuserdata/
 *.pfx
 *.key
 *.mobileprovision
-# Midlertidig output
+# Temporary output
 tmp/

@@ -1,17 +1,18 @@
-# Endringslogg
+# Changelog
 
 ## Unreleased
 
-### Prosjektoppsett
+### Project setup
 
-- GATE-00 / #28 vedtatt: samlet F0-planlegging og standarddetaljer godkjent av prosjekteier. Implementasjon er ikke autorisert; ingen kode. OPS-01 / #30 og F0-milepælen holdes åpne for gjenstående repoarbeid.
-
-- Repo, arbeidsflyt, sikkerhetspolicy, roadmap, kravsporbarhet og oppgavemaler etablert.
-- Ingen bibliotekskode eller produktrelease. Ingen SemVer-tag opprettet.
-- DEC-07 vedtatt: standard GitHub-runners uten betalte tillegg, fire PR-plattformfamilier og egen release-/minimums-OS-kontroll. SHA-pinning for Actions er aktivert; ingen workflows er opprettet.
-- DEC-06 vedtatt: ingen automatiske cookie-/credential-/cachelagre, injiserbar auth-header-provider, HTTPS med eksplisitt loopback-unntak og avgrenset redirect-/injeksjons-/diagnostikkpolicy.
-- DEC-05 vedtatt: gjenbrukt egen session pluss injeksjon, 30 sekunder inaktivitet / 60 sekunder samlet budsjett, isolert state, cancellation og kontrollert shutdown.
-- DEC-04 vedtatt: typed endpoints og rå URLRequest, respons-wrapper, JSON/Data/tekst/tomt, strukturerte feil med separat CancellationError og eksplisitte HTTP-statusunntak.
-- DEC-01 vedtatt: iOS/iPadOS 17, macOS 14, watchOS 10 og tvOS 17; Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus. Plattformmatrise skiller støtteplan fra utestående testbevis.
-- DEC-02 vedtatt: HTTP-kjerne først. Repo/pakke SwiftNetworkKit; produkt/modul/importnavn NetworkKit, én bibliotekmodul i v1.
-- DEC-03 vedtatt: Teisrud Development AS er rettighetshaver; proprietær rettighetspolicy med særskilt skriftlig tillatelse for tredjepartsbruk.
+- English is now the language of all documentation and editable GitHub project content; owner–assistant conversations remain in Norwegian. Existing decisions, identifiers, links, and implementation restrictions are preserved.
+- Preparations completed through PR #65: one project status model, a sorted work queue, 23 implementation tasks, a separate start-authorization gate, hardened main/tag rules, immutable releases, and a test environment inventory. OPS-01 / #30 and F0 are complete; START-00 / #41 remains open.
+- GATE-00 / #28 accepted: the owner approved the complete F0 planning baseline and documented defaults. Implementation remains unauthorized.
+- Repository, workflow, security policy, roadmap, requirements traceability, and issue templates established.
+- No library code or product release. No SemVer tag created.
+- DEC-07 accepted: standard GitHub-hosted runners without paid add-ons, all four platform families on PRs, and separate release/minimum-OS checks. Action SHA pinning is enabled; no workflows exist.
+- DEC-06 accepted: no automatic cookie/credential/cache storage, an injectable authentication-header provider, HTTPS with an explicit loopback exception, and bounded redirect/injection/diagnostic policies.
+- DEC-05 accepted: a reused owned session plus injection, 30-second inactivity timeout / 60-second total budget, isolated state, cancellation, and controlled shutdown.
+- DEC-04 accepted: typed endpoints and raw URLRequest, response wrapper, JSON/Data/text/empty responses, structured errors with a separate CancellationError, and explicit HTTP-status exceptions.
+- DEC-01 accepted: iOS/iPadOS 17, macOS 14, watchOS 10, and tvOS 17; Xcode 26.3+, Swift tools 6.2, and Swift 6 language mode. The platform matrix distinguishes planned support from outstanding evidence.
+- DEC-02 accepted: HTTP core first. Repository/package SwiftNetworkKit; product/module/import NetworkKit, with one library module in v1.
+- DEC-03 accepted: Teisrud Development AS is the rights holder; proprietary rights policy with separate written permission required for third-party use.

@@ -1,24 +1,25 @@
-## Formål
+## Purpose
 
-Hva endres, hvorfor, og hva blir resultatet?
+What changes, why, and what is the resulting behavior?
 
-## Sporbarhet
+## Traceability
 
 Issue: #
-Krav / ADR:
+Requirement / ADR:
 
-## Verifikasjon
+## Verification
 
-Beskriv hva som faktisk er kontrollert og resultatet. Oppgi «ikke relevant» med begrunnelse der det passer.
+Describe actual checks and results. State “not applicable” with a reason where appropriate.
 
-## Risiko og kompatibilitet
+## Risks and compatibility
 
-Sikkerhet/personvern, plattformer, offentlig API og eventuell migrasjon:
+Security/privacy, platforms, public API, and any migration:
 
-## Sjekkliste
+## Checklist
 
-- [ ] Endringen er avgrenset til avtalt scope.
-- [ ] Akseptansekriterier er oppfylt og dokumentasjon oppdatert.
-- [ ] Ingen hemmeligheter, persondata eller uavklarte rettigheter er lagt til.
-- [ ] Relevante beslutninger, backlog og changelog er oppdatert.
-- [ ] Ingen implementasjonskode er lagt til i planleggingsfasen.
+- [ ] The change stays within the agreed scope.
+- [ ] Acceptance criteria are met and documentation is updated.
+- [ ] No secrets, personal data, or unresolved rights are introduced.
+- [ ] Relevant decisions, backlog, and changelog are updated.
+- [ ] No implementation code is introduced during the planning stage.
+- [ ] All GitHub content and documentation are in English.

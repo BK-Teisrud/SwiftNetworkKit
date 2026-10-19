@@ -3,11 +3,11 @@ changelog:
     labels:
       - skip-changelog
   categories:
-    - title: Endringer i offentlig API
+    - title: Public API changes
       labels: ["breaking-change"]
-    - title: Nye funksjoner
+    - title: New features
       labels: ["type: feature"]
-    - title: Feilrettinger
+    - title: Bug fixes
       labels: ["type: bug"]
-    - title: Dokumentasjon og vedlikehold
+    - title: Documentation and maintenance
       labels: ["*"]

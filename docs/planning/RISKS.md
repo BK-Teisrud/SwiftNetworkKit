@@ -1,27 +1,27 @@
-# Risikoregister
+# Risk register
 
-Eier for alle åpne risikoer ved bootstrap: @BK-Teisrud. Vurderes ved ukentlig triage og faseporter.
+Owner of initial open risks: @BK-Teisrud. Review weekly during triage and at phase gates.
 
-| ID | Risiko / sannsynlighet / konsekvens | Tiltak og utløsende signal | Port |
+| ID | Risk / likelihood / impact | Mitigation and trigger | Gate |
 | --- | --- | --- | --- |
-| R1 | Overengineering / høy / høy | ADR-0003 og V1_SCOPE.md fastsetter HTTP-kjerne og én bibliotekmodul i v1; nye moduler krever vedtak og behov. Scope vokser uten brukerflyt → stopp og revurder. | F0 |
-| R2 | OS-forskjeller / høy / høy | ADR-0004 og PLATFORM_MATRIX.md fastsetter OS-minimum/verktøy. Konkrete symboler, guards og runtime-/enhetstester må fortsatt verifiseres. Simulatorbygg alene er utilstrekkelig. | F0–F4 |
-| R3 | Dupliserte sideeffekter ved retry / middels / høy | Default uten usikker retry, idempotens og bounded attempts. | F3 |
-| R4 | Credentials i logger/redirect/cache / middels / kritisk | Negative redaction/isolasjons-/redirecttester, privat security review. | F2 |
-| R5 | Refresh-storm/deadlock / middels / høy | Single-flight og test av samtidighet/cancel før auth-modul. | F3 |
-| R6 | Utdatert eller lekket cache / middels / høy | HTTP-semantikk, kontoisolasjon, sletting og eksplisitt offline-policy. | F3 |
-| R7 | Bakgrunnsleveranse loves uten OS-støtte / høy / høy | Entitlements, hostapp-ansvar og fysisk testbevis per plattform. | F4 |
-| R8 | Solo-maintainer og review-flaskehals / høy / middels | PR-spor, liten WIP, team-profil når reviewer finnes. | Alle |
-| R9 | Bruk eller eksterne bidrag uten nødvendige rettigheter / middels / høy | DEC-03 avgjort: Teisrud Development AS, proprietær policy. LICENSE og ADR-0002 presiserer tillatelseskrav og GitHub-unntak. Skriftlig avtale før eksterne innholdsbidrag eller tredjepartsdistribusjon. | F0 og release |
-| R10 | Falsk trygghet fra grønn CI / middels / høy | Ingen dummy-checks; ekte matrise og releasebevis. | F1 |
-| R11 | Endrede GitHub-regler/verktøy / middels / middels | Kvartalsvis innstillingskontroll, Actions-budsjett og minstetilgang. | Alle |
+| R1 | Overengineering / high / high | ADR-0003/V1_SCOPE defines the HTTP core and one library module; new modules require a need and decision. Unjustified scope growth → stop and reassess. | F0 |
+| R2 | OS differences / high / high | ADR-0004/PLATFORM_MATRIX sets minimums/tools. Verify symbols, guards, runtime/device behavior; simulator builds alone are insufficient. | F0–F4 |
+| R3 | Duplicate retry side effects / medium / high | No unsafe retry by default; require idempotency and bounded attempts. | F3 |
+| R4 | Credentials in logs/redirects/cache / medium / critical | Negative redaction/isolation/redirect tests and private security review. | F2 |
+| R5 | Refresh storms/deadlocks / medium / high | Single-flight and concurrency/cancellation tests before an authentication module. | F3 |
+| R6 | Stale/leaked cache / medium / high | HTTP semantics, account isolation, deletion, explicit offline policy. | F3 |
+| R7 | Unsupported background promises / high / high | Entitlements, host-app responsibilities, physical evidence per platform. | F4 |
+| R8 | Solo-maintainer review bottleneck / high / medium | PR audit trail, low WIP, team profile once a reviewer exists. | All |
+| R9 | Use/contributions without rights / medium / high | DEC-03: Teisrud Development AS, proprietary policy. LICENSE/ADR-0002 clarify permission and GitHub exceptions. Written agreements before external content contributions/distribution. | F0 and release |
+| R10 | False confidence from passing CI / medium / high | No dummy checks; real matrix and release evidence. | F1 |
+| R11 | Changing GitHub rules/tools / medium / medium | Quarterly settings review, Actions limits, least privilege. | All |
 
-Aksept av rest-risiko krever kommentar i relevant issue og ADR ved varig avvik. Kritiske sikkerhetsfunn blokkerer release til de er rettet eller scope er fjernet med begrunnelse.
+Accept residual risks in the relevant issue, with an ADR for lasting deviations. Critical security findings block release until fixed or the affected scope is explicitly removed with rationale.
 
-## Konkret restarbeid før release
+## Concrete outstanding release work
 
-R2: Minimums-OS-testmiljø er ikke bekreftet. I21 / #62 blokkerer release; nyere enheter og installerte nyere runtimes er ikke erstatning. Se TEST_ENVIRONMENTS.md.
+R2: Minimum-OS environments are unconfirmed. I21 / #62 blocks release; newer devices/runtimes are not substitutes. See TEST_ENVIRONMENTS.md.
 
-R9: Ingen kontaktadresse finnes ennå. Ingen privat lisens-/bidragsprosess tilbys før egnet kanal er avklart. Dette blokkerer ikke separat godkjent intern implementasjon.
+R9: No contact address exists. Do not offer private licensing/contribution processes until an appropriate channel is established. This does not block separately authorized internal implementation.
 
-R11: Admin kan endre selve rulesets selv om main/update/deletion ikke har bypass. Ingen teknisk garanti mot kontoeieren gis. Eier bekrefter 2FA, men en uavhengig kontoaudit er ikke utført.
+R11: Admins can change rulesets even without main/update/deletion bypasses. No technical protection against the account owner is guaranteed. The owner confirms 2FA; no independent account audit was performed.

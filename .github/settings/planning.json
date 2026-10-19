@@ -2,194 +2,194 @@
   "milestones": [
     {
       "id": "F0",
-      "title": "F0 – Arkitektur og beslutninger",
-      "description": "Godkjent lisens, v1-scope, plattform-/verktøymatrise, API- og concurrencybeslutninger. Ingen kode før egen implementasjonsbeslutning."
+      "title": "F0 – Architecture and decisions",
+      "description": "Approved rights policy, v1 scope, platform/toolchain matrix, API and concurrency decisions. Code requires separate implementation authorization."
     },
     {
       "id": "F1",
-      "title": "F1 – HTTP-kjerne",
-      "description": "Valgte endpoint-, request-, response-, feil- og konfigurasjonskontrakter oppfylt; deterministiske tester og reell plattform-CI."
+      "title": "F1 – HTTP core",
+      "description": "Satisfy selected endpoint, request, response, error, and configuration contracts; deterministic tests and real platform CI."
     },
     {
       "id": "F2",
-      "title": "F2 – Produksjonsherding og v1-port",
-      "description": "Privacy/logging, cancellation, auth hooks, sikkerhetsreview, DocC og dokumentert releaseport. v1 først etter alle godkjente kjernekriterier."
+      "title": "F2 – Production hardening and v1 gate",
+      "description": "Privacy/logging, cancellation, authentication hooks, security review, DocC, and a documented release gate. Release v1 only after every approved core criterion is met."
     },
     {
       "id": "F3",
-      "title": "F3 – Resiliens og tillegg",
-      "description": "Eksplisitt valgte retry/cache/auth/monitoring/ytelse-moduler med policy- og samtidighetstester."
+      "title": "F3 – Resilience and extensions",
+      "description": "Explicitly selected retry/cache/authentication/monitoring/performance modules with policy and concurrency tests."
     },
     {
       "id": "F4",
-      "title": "F4 – Filoverføringer",
-      "description": "Upload/download/progress/cleanup og dokumenterte background-begrensninger per plattform."
+      "title": "F4 – File transfers",
+      "description": "Upload/download/progress/cleanup and documented per-platform background limitations."
     },
     {
       "id": "F5",
-      "title": "F5 – Sanntid",
-      "description": "WebSocket-state, backpressure, reconnect, autentisering og shutdown verifisert."
+      "title": "F5 – Real-time communication",
+      "description": "Verified WebSocket state, backpressure, reconnect, authentication, and shutdown."
     },
     {
       "id": "F6",
-      "title": "F6 – Spesialisert og forskning",
-      "description": "Kun ved godkjent produktbehov, teknisk validering, entitlements og separat sikkerhetsgjennomgang."
+      "title": "F6 – Specialized features and research",
+      "description": "Only for approved product needs, with technical validation, entitlements, and separate security review."
     }
   ],
   "issues": [
     {
       "id": "DEC-01",
-      "title": "[DEC-01] Fastsett minimums-OS og Swift/Xcode/SDK",
+      "title": "[DEC-01] Set minimum OS versions and the Swift/Xcode/SDK baseline",
       "phase": "F0",
       "labels": [
         "type: decision",
         "scope: governance",
         "priority: P1"
       ],
-      "body": "## Formål\n\nPlattformmatrise for iOS/iPadOS, macOS, watchOS, tvOS; eksplisitt beslutning om visionOS. Verifiser konkrete API-er mot valgt SDK.\n\n## Akseptansekriterier\n\n- [ ] Alternativer og konsekvenser dokumentert i ADR.\n- [ ] Prosjekteier har godkjent beslutningen i issue/PR.\n- [ ] Berørt roadmap, krav og risiko er oppdatert.\n- [ ] Ingen implementasjonskode lagt til.\n\n## Avhengigheter\n\nF0-porten kan ikke lukkes før denne beslutningen. Samordnes med øvrige DEC-issues."
+      "body": "## Purpose\n\nDefine the iOS/iPadOS, macOS, watchOS, and tvOS matrix; explicitly decide visionOS support. Verify concrete APIs against the selected SDK.\n\n## Acceptance criteria\n\n- [ ] Alternatives and consequences documented in an ADR.\n- [ ] Owner approval recorded for the decision.\n- [ ] Affected roadmap, requirements, and risks updated.\n- [ ] No implementation code added.\n\n## Dependencies\n\nF0 cannot close before this decision. Coordinate with the other DEC issues.\n"
     },
     {
       "id": "DEC-02",
-      "title": "[DEC-02] Vedta v1-scope og modul-/produktnavn",
+      "title": "[DEC-02] Approve v1 scope and module/product naming",
       "phase": "F0",
       "labels": [
         "type: decision",
         "scope: governance",
         "priority: P1"
       ],
-      "body": "## Formål\n\nInkluderte og utsatte delkrav i alle kjernedomener; avklar SwiftNetworkKit versus NetworkKit som produkt-/importnavn og targetgrenser.\n\n## Akseptansekriterier\n\n- [ ] Alternativer og konsekvenser dokumentert i ADR.\n- [ ] Prosjekteier har godkjent beslutningen i issue/PR.\n- [ ] Berørt roadmap, krav og risiko er oppdatert.\n- [ ] Ingen implementasjonskode lagt til.\n\n## Avhengigheter\n\nF0-porten kan ikke lukkes før denne beslutningen. Samordnes med øvrige DEC-issues."
+      "body": "## Purpose\n\nIdentify included/deferred requirements across core domains; resolve SwiftNetworkKit versus NetworkKit product/import names and target boundaries.\n\n## Acceptance criteria\n\n- [ ] Alternatives and consequences documented in an ADR.\n- [ ] Owner approval recorded for the decision.\n- [ ] Affected roadmap, requirements, and risks updated.\n- [ ] No implementation code added.\n\n## Dependencies\n\nF0 cannot close before this decision. Coordinate with the other DEC issues.\n"
     },
     {
       "id": "DEC-03",
-      "title": "[DEC-03] Velg lisens og rettighetshaver",
+      "title": "[DEC-03] Select the rights policy and rights holder",
       "phase": "F0",
       "labels": [
         "type: decision",
         "scope: governance",
         "priority: P1"
       ],
-      "body": "## Formål\n\nDokumenter rettighetshaver, valgt lisens og konsekvenser for distribusjon/bidrag. Ingen lisens antas på eierens vegne.\n\n## Akseptansekriterier\n\n- [ ] Alternativer og konsekvenser dokumentert i ADR.\n- [ ] Prosjekteier har godkjent beslutningen i issue/PR.\n- [ ] Berørt roadmap, krav og risiko er oppdatert.\n- [ ] Ingen implementasjonskode lagt til.\n\n## Avhengigheter\n\nF0-porten kan ikke lukkes før denne beslutningen. Samordnes med øvrige DEC-issues."
+      "body": "## Purpose\n\nDocument the rights holder, selected rights policy, and distribution/contribution implications. Do not assume a license on the owner's behalf.\n\n## Acceptance criteria\n\n- [ ] Alternatives and consequences documented in an ADR.\n- [ ] Owner approval recorded for the decision.\n- [ ] Affected roadmap, requirements, and risks updated.\n- [ ] No implementation code added.\n\n## Dependencies\n\nF0 cannot close before this decision. Coordinate with the other DEC issues.\n"
     },
     {
       "id": "DEC-04",
-      "title": "[DEC-04] Vedta endpoint-, response- og feilkontrakt",
+      "title": "[DEC-04] Approve endpoint, response, and error contracts",
       "phase": "F0",
       "labels": [
         "type: decision",
         "scope: governance",
         "priority: P1"
       ],
-      "body": "## Formål\n\nAvklar typed/raw API, headers, body, ikke-JSON, 204/HEAD, interceptor-rekkefølge og feiltaksonomi uten implementasjon.\n\n## Akseptansekriterier\n\n- [ ] Alternativer og konsekvenser dokumentert i ADR.\n- [ ] Prosjekteier har godkjent beslutningen i issue/PR.\n- [ ] Berørt roadmap, krav og risiko er oppdatert.\n- [ ] Ingen implementasjonskode lagt til.\n\n## Avhengigheter\n\nF0-porten kan ikke lukkes før denne beslutningen. Samordnes med øvrige DEC-issues."
+      "body": "## Purpose\n\nResolve typed/raw APIs, headers, bodies, non-JSON responses, 204/HEAD, interceptor ordering, and error taxonomy without implementation.\n\n## Acceptance criteria\n\n- [ ] Alternatives and consequences documented in an ADR.\n- [ ] Owner approval recorded for the decision.\n- [ ] Affected roadmap, requirements, and risks updated.\n- [ ] No implementation code added.\n\n## Dependencies\n\nF0 cannot close before this decision. Coordinate with the other DEC issues.\n"
     },
     {
       "id": "DEC-05",
-      "title": "[DEC-05] Vedta concurrency, cancellation og session-eierskap",
+      "title": "[DEC-05] Approve concurrency, cancellation, and session ownership",
       "phase": "F0",
       "labels": [
         "type: decision",
         "scope: governance",
         "priority: P1"
       ],
-      "body": "## Formål\n\nBeskriv actor-grenser, Sendable, clock, shutdown og injisert/delt URLSession; definer testbare kontrakter.\n\n## Akseptansekriterier\n\n- [ ] Alternativer og konsekvenser dokumentert i ADR.\n- [ ] Prosjekteier har godkjent beslutningen i issue/PR.\n- [ ] Berørt roadmap, krav og risiko er oppdatert.\n- [ ] Ingen implementasjonskode lagt til.\n\n## Avhengigheter\n\nF0-porten kan ikke lukkes før denne beslutningen. Samordnes med øvrige DEC-issues."
+      "body": "## Purpose\n\nDescribe actor boundaries, Sendable, clocks, shutdown, and injected/shared URLSession ownership; define testable contracts.\n\n## Acceptance criteria\n\n- [ ] Alternatives and consequences documented in an ADR.\n- [ ] Owner approval recorded for the decision.\n- [ ] Affected roadmap, requirements, and risks updated.\n- [ ] No implementation code added.\n\n## Dependencies\n\nF0 cannot close before this decision. Coordinate with the other DEC issues.\n"
     },
     {
       "id": "DEC-06",
-      "title": "[DEC-06] Vedta sikkerhets-, auth-, retry- og cachegrenser",
+      "title": "[DEC-06] Approve security, authentication, retry, and cache boundaries",
       "phase": "F0",
       "labels": [
         "type: decision",
         "scope: governance",
         "priority: P1"
       ],
-      "body": "## Formål\n\nAvklar hooks kontra OAuth/OIDC, minimal v1-retry eller ingen automatisk retry, redirect credentials, privacy og offline/telemetry-policy.\n\n## Akseptansekriterier\n\n- [ ] Alternativer og konsekvenser dokumentert i ADR.\n- [ ] Prosjekteier har godkjent beslutningen i issue/PR.\n- [ ] Berørt roadmap, krav og risiko er oppdatert.\n- [ ] Ingen implementasjonskode lagt til.\n\n## Avhengigheter\n\nF0-porten kan ikke lukkes før denne beslutningen. Samordnes med øvrige DEC-issues."
+      "body": "## Purpose\n\nResolve hooks versus OAuth/OIDC, minimal retry versus no automatic retry, redirect credentials, privacy, and offline/telemetry policy.\n\n## Acceptance criteria\n\n- [ ] Alternatives and consequences documented in an ADR.\n- [ ] Owner approval recorded for the decision.\n- [ ] Affected roadmap, requirements, and risks updated.\n- [ ] No implementation code added.\n\n## Dependencies\n\nF0 cannot close before this decision. Coordinate with the other DEC issues.\n"
     },
     {
       "id": "DEC-07",
-      "title": "[DEC-07] Vedta CI-verktøy, matrise og kostnadsramme",
+      "title": "[DEC-07] Approve CI tools, matrix, and cost limits",
       "phase": "F0",
       "labels": [
         "type: decision",
         "scope: governance",
         "priority: P1"
       ],
-      "body": "## Formål\n\nDefiner konkrete fremtidige jobs, offisielle verktøy, actions-policy, macOS-kostnader og required check-innføring. Ingen workflow nå.\n\n## Akseptansekriterier\n\n- [ ] Alternativer og konsekvenser dokumentert i ADR.\n- [ ] Prosjekteier har godkjent beslutningen i issue/PR.\n- [ ] Berørt roadmap, krav og risiko er oppdatert.\n- [ ] Ingen implementasjonskode lagt til.\n\n## Avhengigheter\n\nF0-porten kan ikke lukkes før denne beslutningen. Samordnes med øvrige DEC-issues."
+      "body": "## Purpose\n\nDefine concrete future jobs, official tools, action policies, macOS costs, and required-check adoption. No workflow now.\n\n## Acceptance criteria\n\n- [ ] Alternatives and consequences documented in an ADR.\n- [ ] Owner approval recorded for the decision.\n- [ ] Affected roadmap, requirements, and risks updated.\n- [ ] No implementation code added.\n\n## Dependencies\n\nF0 cannot close before this decision. Coordinate with the other DEC issues.\n"
     },
     {
       "id": "NK-01",
-      "title": "[NK-01] HTTP og forespørsler",
+      "title": "[NK-01] HTTP and requests",
       "phase": "F1",
       "labels": [
         "type: epic",
         "scope: core",
         "priority: P1"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.1. Klassifisering: CORE.\n\nMetoder, body, headers, cookies, redirects, timeout, cancellation, prioritet, raw request og interceptors.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.1 brutt ned med stabile NK-01-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.1. Classification: CORE.\n\nMethods, bodies, headers, cookies, redirects, timeouts, cancellation, priority, raw requests, and interceptors.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.1 into stable NK-01-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-02",
-      "title": "[NK-02] Endpoints og URL-bygging",
+      "title": "[NK-02] Endpoints and URL construction",
       "phase": "F1",
       "labels": [
         "type: epic",
         "scope: core",
         "priority: P1"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.2. Klassifisering: CORE.\n\nTyped endpoint, baseURL, path/query-encoding, URL-validering, API-versjonering og per-endpoint policy.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.2 brutt ned med stabile NK-02-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.2. Classification: CORE.\n\nTyped endpoints, baseURL, path/query encoding, URL validation, API versioning, and per-endpoint policies.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.2 into stable NK-02-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-03",
-      "title": "[NK-03] Respons og databehandling",
+      "title": "[NK-03] Responses and data handling",
       "phase": "F1",
       "labels": [
         "type: epic",
         "scope: core",
         "priority: P1"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.3. Klassifisering: CORE.\n\nDecodable, strategier, raw responses, 204/HEAD, status/headers, Content-Type, streaming og custom decoders.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.3 brutt ned med stabile NK-03-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.3. Classification: CORE.\n\nDecodable, strategies, raw responses, 204/HEAD, status/headers, Content-Type, streaming, and custom decoders.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.3 into stable NK-03-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-04",
-      "title": "[NK-04] Feilhåndtering",
+      "title": "[NK-04] Error handling",
       "phase": "F1",
       "labels": [
         "type: epic",
         "scope: core",
         "priority: P1"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.4. Klassifisering: CORE.\n\nTransport/HTTP/encoding/decoding/timeout/cancellation/security, retry-klassifisering og trygg diagnostikk.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.4 brutt ned med stabile NK-04-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.4. Classification: CORE.\n\nTransport/HTTP/encoding/decoding/timeout/cancellation/security errors, retry classification, and safe diagnostics.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.4 into stable NK-04-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-05",
-      "title": "[NK-05] Autentisering",
+      "title": "[NK-05] Authentication",
       "phase": "F3",
       "labels": [
         "type: epic",
         "scope: extension",
         "priority: P2"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.5. Klassifisering: EXTENSION.\n\nProviders, Basic/Digest, OAuth/PKCE, OIDC, single-flight refresh, Keychain, profiler og logout.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.5 brutt ned med stabile NK-05-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning. NK-02/NK-04/NK-14 må ha vedtatte kontrakter.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.5. Classification: EXTENSION.\n\nProviders, Basic/Digest, OAuth/PKCE, OIDC, single-flight refresh, Keychain, profiles, and logout.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.5 into stable NK-05-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-06",
-      "title": "[NK-06] Sikkerhet og TLS",
+      "title": "[NK-06] Security and TLS",
       "phase": "F6",
       "labels": [
         "type: epic",
         "scope: extension",
         "priority: P2"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.6. Klassifisering: EXTENSION.\n\nSystem trust er kjerneprinsipp; avansert pinning, mTLS og signering krever separat scope og rotasjons-/reviewplan.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.6 brutt ned med stabile NK-06-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.6. Classification: EXTENSION.\n\nSystem trust is a core principle; advanced pinning, mTLS, and signing require separate scope and rotation/review plans.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.6 into stable NK-06-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-07",
-      "title": "[NK-07] Retry og robusthet",
+      "title": "[NK-07] Retries and resilience",
       "phase": "F3",
       "labels": [
         "type: epic",
         "scope: extension",
         "priority: P2"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.7. Klassifisering: EXTENSION.\n\nBackoff/jitter, Retry-After, idempotens, circuit breaker, rate/concurrency limits og kansellerbar venting.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.7 brutt ned med stabile NK-07-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning. NK-02/NK-04/NK-14 må ha vedtatte kontrakter.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.7. Classification: EXTENSION.\n\nBackoff/jitter, Retry-After, idempotency, circuit breakers, rate/concurrency limits, and cancellable waiting.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.7 into stable NK-07-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-08",
@@ -200,172 +200,172 @@
         "scope: extension",
         "priority: P2"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.8. Klassifisering: EXTENSION.\n\nURLCache, HTTP-validatorer, kapasitet, eventuell TTL, fallback, revalidation og metrics.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.8 brutt ned med stabile NK-08-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning. NK-02/NK-04/NK-14 må ha vedtatte kontrakter.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.8. Classification: EXTENSION.\n\nURLCache, HTTP validators, capacity, optional TTL, fallback, revalidation, and metrics.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.8 into stable NK-08-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-09",
-      "title": "[NK-09] Filoverføring",
+      "title": "[NK-09] File transfers",
       "phase": "F4",
       "labels": [
         "type: epic",
         "scope: extension",
         "priority: P2"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.9. Klassifisering: EXTENSION.\n\nUpload/multipart, download, progress, background, resume/range, checksum, cleanup og kø.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.9 brutt ned med stabile NK-09-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.9. Classification: EXTENSION.\n\nUpload/multipart, download, progress, background transfers, resume/range, checksums, cleanup, and queues.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.9 into stable NK-09-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-10",
-      "title": "[NK-10] WebSocket og sanntid",
+      "title": "[NK-10] WebSocket and real-time communication",
       "phase": "F5",
       "labels": [
         "type: epic",
         "scope: extension",
         "priority: P2"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.10. Klassifisering: EXTENSION.\n\nConnect/send/receive, strømmer, ping/pong, reconnect, auth, close og backpressure.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.10 brutt ned med stabile NK-10-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.10. Classification: EXTENSION.\n\nConnect/send/receive, streams, ping/pong, reconnect, authentication, close, and backpressure.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.10 into stable NK-10-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-11",
-      "title": "[NK-11] TCP, UDP og lokalt nettverk",
+      "title": "[NK-11] TCP, UDP, and local networking",
       "phase": "F6",
       "labels": [
         "type: epic",
         "scope: research",
         "priority: P3"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.11. Klassifisering: RESEARCH.\n\nNWConnection, system-TLS/QUIC, framing, Bonjour, peer-to-peer, listener, multicast og lifecycle.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.11 brutt ned med stabile NK-11-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.11. Classification: RESEARCH.\n\nNWConnection, system TLS/QUIC, framing, Bonjour, peer-to-peer, listeners, multicast, and lifecycle.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.11 into stable NK-11-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-12",
-      "title": "[NK-12] Nettverksstatus",
+      "title": "[NK-12] Network status",
       "phase": "F3",
       "labels": [
         "type: epic",
         "scope: extension",
         "priority: P2"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.12. Klassifisering: EXTENSION.\n\nNWPathMonitor, interfaces, constrained/expensive, IPv4/IPv6 og policy uten tilgjengelighetsgaranti.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.12 brutt ned med stabile NK-12-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.12. Classification: EXTENSION.\n\nNWPathMonitor, interfaces, constrained/expensive networks, IPv4/IPv6, and policy without availability guarantees.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.12 into stable NK-12-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-13",
-      "title": "[NK-13] Logging og observability",
+      "title": "[NK-13] Logging and observability",
       "phase": "F2",
       "labels": [
         "type: epic",
         "scope: core",
         "priority: P1"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.13. Klassifisering: CORE.\n\nStrukturerte hendelser, full redaction-policy, request-ID, task metrics, signposts og injiserbar sink.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.13 brutt ned med stabile NK-13-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.13. Classification: CORE.\n\nStructured events, comprehensive redaction policy, request IDs, task metrics, signposts, and an injectable sink.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.13 into stable NK-13-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-14",
-      "title": "[NK-14] Concurrency og livssyklus",
+      "title": "[NK-14] Concurrency and lifecycle",
       "phase": "F2",
       "labels": [
         "type: epic",
         "scope: core",
         "priority: P1"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.14. Klassifisering: CORE.\n\nasync/await, Sendable, actors, cancellation, batch, strømmer, valgfri deduplication og session-eierskap/shutdown.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.14 brutt ned med stabile NK-14-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.14. Classification: CORE.\n\nasync/await, Sendable, actors, cancellation, batching, streams, optional deduplication, and session ownership/shutdown.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.14 into stable NK-14-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-15",
-      "title": "[NK-15] Konfigurasjon",
+      "title": "[NK-15] Configuration",
       "phase": "F1",
       "labels": [
         "type: epic",
         "scope: core",
         "priority: P1"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.15. Klassifisering: CORE.\n\nMiljø, session injection, policies, headerkonflikter, nettverkskostnad og immutable snapshots.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.15 brutt ned med stabile NK-15-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.15. Classification: CORE.\n\nEnvironments, session injection, policies, header conflicts, network cost, and immutable snapshots.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.15 into stable NK-15-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-16",
-      "title": "[NK-16] Testing og mocking",
+      "title": "[NK-16] Testing and mocking",
       "phase": "F1",
       "labels": [
         "type: epic",
         "scope: core",
         "priority: P1"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.16. Klassifisering: CORE.\n\nMock client, URLProtocol, request assertions, controllable clock, cancellation og tester per valgt modul.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.16 brutt ned med stabile NK-16-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.16. Classification: CORE.\n\nMock clients, URLProtocol, request assertions, controlled clocks, cancellation, and tests for each selected module.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.16 into stable NK-16-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-17",
-      "title": "[NK-17] Ytelse og optimalisering",
+      "title": "[NK-17] Performance and optimization",
       "phase": "F3",
       "labels": [
         "type: epic",
         "scope: extension",
         "priority: P2"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.17. Klassifisering: EXTENSION.\n\nSession reuse, minne, grenser, coalescing, cache, energi og målte benchmarks.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.17 brutt ned med stabile NK-17-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.17. Classification: EXTENSION.\n\nSession reuse, memory, limits, coalescing, caching, energy, and measured benchmarks.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.17 into stable NK-17-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-18",
-      "title": "[NK-18] Personvern og databeskyttelse",
+      "title": "[NK-18] Privacy and data protection",
       "phase": "F2",
       "labels": [
         "type: epic",
         "scope: core",
         "priority: P1"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.18. Klassifisering: CORE.\n\nIngen sensitive logger/telemetri som standard, ephemeral sessions, isolasjon, filvern, sletting og dataminimering.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.18 brutt ned med stabile NK-18-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.18. Classification: CORE.\n\nNo sensitive logs/telemetry by default, ephemeral sessions, isolation, file protection, deletion, and data minimization.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.18 into stable NK-18-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-19",
-      "title": "[NK-19] Apple-plattformintegrasjon",
+      "title": "[NK-19] Apple platform integration",
       "phase": "F4",
       "labels": [
         "type: epic",
         "scope: extension",
         "priority: P2"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.19. Klassifisering: EXTENSION.\n\nAvailability er grunnkrav; background, lokalnett, Keychain-grupper, energi og lifecycle krever plattformbevis.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.19 brutt ned med stabile NK-19-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.19. Classification: EXTENSION.\n\nAvailability is foundational; background execution, local networking, Keychain groups, energy, and lifecycle require platform evidence.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.19 into stable NK-19-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "NK-20",
-      "title": "[NK-20] Utvikleropplevelse og API-design",
+      "title": "[NK-20] Developer experience and API design",
       "phase": "F2",
       "labels": [
         "type: epic",
         "scope: core",
         "priority: P1"
       ],
-      "body": "## Kilde og scope\n\nSpesifikasjon v1.0, §4.20. Klassifisering: CORE.\n\nErgonomi, typed endpoints, små protokoller, escape hatches, DocC, eksempler, SemVer, migration og CI.\n\nDette er et domene-epic, ikke en implementasjonsoppgave klar til arbeid. KJERNE gjelder domenet; hvert underpunkt må eksplisitt velges eller utsettes.\n\n## Akseptansekriterier\n\n- [ ] Underpunkter fra §4.20 brutt ned med stabile NK-20-XX-ID-er og egne issues.\n- [ ] Inkludert/utsatt scope og begrunnelse godkjent.\n- [ ] Input/output, feil, cancellation, privacy og plattformstøtte dokumentert for valgte delkrav.\n- [ ] Implementasjon og deterministiske normal-/feiltester for valgte delkrav godkjent etter implementasjonsstart.\n- [ ] DocC, availability og eventuelle entitlements/serverkrav dokumentert.\n- [ ] Epic lukkes først når valgte delkrav er levert med bevis; planlegging alene er ikke levering.\n\n## Avhengigheter\n\nDEC-01–DEC-07 og eksplisitt implementasjonsbeslutning.\n\n## Verifikasjon\n\nLenk til delissues, ADR, PR og faktiske test-/reviewresultater ved levering. Ingen støtte er verifisert ennå."
+      "body": "## Source and scope\n\nSpecification v1.0, §4.20. Classification: CORE.\n\nErgonomics, typed endpoints, small protocols, escape hatches, DocC, examples, SemVer, migration, and CI.\n\nThis is a domain epic, not a Ready implementation task. Domain classification does not automatically select every subrequirement; explicitly include or defer each one.\n\n## Acceptance criteria\n\n- [ ] Decompose §4.20 into stable NK-20-XX requirements and separate issues.\n- [ ] Approve included/deferred scope and rationale.\n- [ ] Document input/output, errors, cancellation, privacy, and platform support for selected requirements.\n- [ ] After implementation authorization, approve implementation and deterministic normal/error-path tests.\n- [ ] Document DocC, availability, and applicable entitlement/server requirements.\n- [ ] Close the epic only when selected requirements are delivered with evidence; planning alone is not delivery.\n\n## Dependencies\n\nDEC-01–DEC-07 and explicit implementation authorization.\n\n## Verification\n\nLink subtasks, ADRs, PRs, and actual test/review evidence upon delivery. No product support has been verified.\n"
     },
     {
       "id": "GATE-00",
-      "title": "[GATE-00] Godkjenn arkitekturport og klarsignal før kode",
+      "title": "[GATE-00] Approve the F0 baseline and record implementation status",
       "phase": "F0",
       "labels": [
         "type: task",
         "scope: governance",
         "priority: P1"
       ],
-      "body": "## Formål og akseptanse\n\nAlle DEC-issues besluttet; kjernekatalogens delkrav inkludert/utsatt; ingen blokkerende rettighets-/plattformvalg. Krever eksplisitt beslutning om å starte implementasjon.\n\n- [ ] Dokumenter faktisk resultat med lenker og eventuelle avvik.\n- [ ] Eier godkjenner relevant port.\n- [ ] Ikke lukk på grunnlag av planlagt arbeid."
+      "body": "## Purpose and acceptance\n\nAll DEC issues decided; core requirements explicitly included/deferred; no blocking rights/platform choices. Requires an explicit decision on whether implementation may start.\n\n- [ ] Record actual results with links and any deviations.\n- [ ] Owner approves the relevant gate.\n- [ ] Do not close based on planned work.\n"
     },
     {
       "id": "REL-01",
-      "title": "[REL-01] Verifiser første stabile kjernerelease",
+      "title": "[REL-01] Verify the first stable core release",
       "phase": "F2",
       "labels": [
         "type: task",
         "scope: governance",
         "priority: P1"
       ],
-      "body": "## Formål og akseptanse\n\nAlle inkluderte KJERNE-delkrav levert. Ekte CI-matrise grønn, privacy/security review, DocC, eksempler, lisens, benchmarks, kjente begrensninger og installasjon fra tag verifisert. Bruk RELEASE_POLICY.md.\n\n- [ ] Dokumenter faktisk resultat med lenker og eventuelle avvik.\n- [ ] Eier godkjenner relevant port.\n- [ ] Ikke lukk på grunnlag av planlagt arbeid."
+      "body": "## Purpose and acceptance\n\nDeliver all included CORE requirements. Require a real passing CI matrix, privacy/security review, DocC, examples, rights compliance, benchmarks, known limitations, and verified installation from the tag. Follow RELEASE_POLICY.md.\n\n- [ ] Record actual results with links and any deviations.\n- [ ] Owner approves the relevant gate.\n- [ ] Do not close based on planned work.\n"
     },
     {
       "id": "OPS-01",
-      "title": "[OPS-01] Kontroller GitHub-oppsett og team-overgang",
+      "title": "[OPS-01] Verify GitHub setup and the future team transition",
       "phase": "F0",
       "labels": [
         "type: task",
         "scope: governance",
         "priority: P1"
       ],
-      "body": "## Formål og akseptanse\n\nVerifiser regler, sikkerhet, innstillinger, labels, milepæler, issues og Projects mot GITHUB_CONFIGURATION.md. Noter eventuelle manuelle rester. Team-review aktiveres først ved ekstra reviewer.\n\n- [ ] Dokumenter faktisk resultat med lenker og eventuelle avvik.\n- [ ] Eier godkjenner relevant port.\n- [ ] Ikke lukk på grunnlag av planlagt arbeid."
+      "body": "## Purpose and acceptance\n\nVerify rules, security, settings, labels, milestones, issues, and Projects against GITHUB_CONFIGURATION.md. Record manual follow-ups. Enable team review only once another reviewer exists.\n\n- [ ] Document actual outcomes with links and deviations.\n- [ ] Owner approves the relevant gate.\n- [ ] Do not close based on planned work.\n"
     }
   ]
 }

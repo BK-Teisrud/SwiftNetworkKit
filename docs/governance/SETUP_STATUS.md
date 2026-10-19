@@ -1,44 +1,51 @@
-# Oppsettsstatus og verifikasjon
+# Setup status and verification
 
-Kontrollert 2026-10-19. [Offentlig repo](https://github.com/BK-Teisrud/SwiftNetworkKit), [privat prosjekt](https://github.com/users/BK-Teisrud/projects/6). Dette er faktiske innstillinger lest tilbake fra GitHub, ikke bare forslag i JSON. **Ingen produktkode eller kodegodkjenning.**
+Verified 2026-10-19. [Public repository](https://github.com/BK-Teisrud/SwiftNetworkKit), [private project](https://github.com/users/BK-Teisrud/projects/6). These settings were read back from GitHub, not merely proposed in JSON. **No product code or implementation authorization.**
 
-| Område | Resultat og begrunnelse |
+| Area | Result and rationale |
 | --- | --- |
-| Repo | Public, main, Issues/Projects på; Wiki/Discussions av for én dokumentasjonskilde |
-| Merge | Kun squash, auto-merge av, branch cleanup/update på |
-| Web sign-off | Av etter konkret eiergodkjenning; ingen DCO er valgt; ikke en endring av LICENSE |
-| Main | Ruleset 25428389 aktivt, PR og løste tråder, lineær historikk, ingen sletting/force-push; ingen bypass-aktører |
-| Tag-oppretting | 25432767 begrenser refs/tags/v*, admin-unntak gjelder bare creation |
-| Tag-uforanderlighet | 25428391 update/deletion uten bypass; gjelder også admin så lenge regelen består |
-| Release | Immutable releases aktivert, enforced_by_owner=false; kontoeier kan fortsatt endre innstillingen |
-| Actions | Read-only token, PR-approval av, GitHub-/lokale actions, SHA-låsing på; null workflows |
-| Security | Secret scanning/push protection og privat rapportering konfigurert; se tidligere baseline og repository-readback |
-| Labels | 16 egendefinerte type/scope/priority/øvrige labels; fem status-labels fjernet, også fra maler/seed |
-| Plan | Sju milepæler, ingen oppdiktede datoer; 30 startissues + 23 I-oppgaver + START-00 og verifikasjonsissue = 55 issues |
-| Oppgaver | I01–I23 (#42–64) har eier, milepæl, kriterier, foreldreepic og native avhengigheter; alle Blocked av #41 |
-| Prosjekt | Sju statusvalg, Priority/Scope og Order; åtte visninger inkludert Arbeidskø og Ferdig |
-| Arbeidskø | Flat tabell, Order stigende; lagret i UI og kontrollert etter reload |
-| Automasjon | Import, subissues, added/closed/reopened og PR merged på; Auto-close og PR linked av |
-| Kontosikkerhet | Eier bekrefter 2FA aktivert; ikke uavhengig verifisert, ingen credentials innhentet |
-| Kontakt | Ingen adresse avklart; ingen privat lisens-/bidragsprosess eller oppdiktet kontaktadresse |
-| Testmiljø | Ni nyere simulator-runtimes inventarført; ingen minimums-runtime eller produkttest verifisert |
+| Repository | Public, main, Issues/Projects enabled; Wiki/Discussions disabled for one documentation source |
+| Merge | Squash only, auto-merge off, branch cleanup/update enabled |
+| Web sign-off | Off with explicit owner approval; no DCO selected; LICENSE unchanged |
+| Main | Active ruleset 25428389: PRs, resolved threads, linear history, no deletion/force-push; no bypass actors |
+| Tag creation | 25432767 restricts refs/tags/v*; admin exception applies only to creation |
+| Tag immutability | 25428391 update/deletion without bypass, including admins while the rule remains active |
+| Releases | Immutable releases enabled, enforced_by_owner=false; account owner can still change the setting |
+| Actions | Read-only token, PR approval disabled, local/GitHub-owned actions, SHA pinning enabled; zero workflows |
+| Security | Secret scanning/push protection and private reporting configured; see baseline and repository readback |
+| Labels | Sixteen custom type/scope/priority/other labels; five status labels removed from GitHub, templates, and seed |
+| Planning | Seven milestones without invented dates; 30 initial issues + 23 implementation tasks + START-00 and verification issue = 55 issues |
+| Tasks | I01–I23 (#42–64) have owners, milestones, criteria, parent epics, and native dependencies; all Blocked by #41 |
+| Project | Seven statuses, Priority/Scope/Order; eight views including Work Queue and Completed |
+| Work queue | Flat table, ascending Order; saved in the UI and verified after reload |
+| Automation | Import, subissues, added/closed/reopened, and PR merged enabled; Auto-close and PR linked disabled |
+| Account security | Owner confirms 2FA; not independently audited, no credentials collected |
+| Contact | No established address or private licensing/contribution process; no invented contact information |
+| Test environment | Nine newer simulator runtimes inventoried; no minimum-runtime or product tests verified |
+| Language | English documentation and editable GitHub content; Norwegian owner–assistant conversations; ADR-0011 |
 
-## Funksjonstest av prosjektflyt
+## Project workflow functional test
 
-[Oppsettsissue #40](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/40) ble opprettet uten eksplisitt prosjektimport. Native auto-add tok det inn med Backlog. Prosjektstatus ble satt til Done, og API viste at issue fortsatt var open. Issue ble lukket som completed, gjenåpnet, og native workflow satte Backlog. Deretter ble det lukket på nytt og native workflow satte Done. Alle fire kontroller er bestått. Ingen produktkode eller testkode ble opprettet.
+[Setup issue #40](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/40) was created without explicit project import. Native automation imported it as Backlog. Setting project status to Done left the issue open, verified by API. It was closed as completed, reopened, and automatically returned to Backlog. Closing it again automatically set Done. All four checks passed. No product/test code was created.
 
-Native sub-issue-relasjoner er opprettet, alle 45 forventede blocked-by-relasjoner for I01–I23 er lest tilbake, og API-readback viser workflows enabled. PR merged/auto-add subissues er ikke separat ende-til-ende-testet med en produkt-PR; denne avgrensningen beholdes. Item closed skiller ikke reason i gjeldende oppsett: not planned må korrigeres manuelt til Not Planned; Ferdig filtrerer completed og unngår feil leveransetelling. Priority/Scope synkroniseres manuelt ved triage.
+Native subissue relations exist; all 45 expected I01–I23 blocked-by relations were read back, and workflow enabled states were confirmed. PR merged/auto-add subissues have not been separately tested end to end with a product PR. Item closed does not distinguish closure reason: manually set Not Planned for rejected work. Completed filters on reason:completed, preventing false delivery counts. Triage synchronizes Priority/Scope manually.
 
-## Verifikasjonsgrunnlag
+## Verification baseline
 
-Repository-settings, effektive main-regler, alle tre rulesets, immutable-releases, Actions-token/policy/workflowantall, labels, prosjektvisninger/workflows/felt og oppgavestatus er lest tilbake. Alle 23 deloppgaver har Blocked, P1, KJERNE og korrekt numerisk Order. Arbeidskøens stigende sortering og avskrudd hierarki er lagret og kontrollert etter reload i nettleseren. JSON, YAML, lokale dokumentlenker, whitespace og filinventar kontrolleres før dokumentasjons-PR.
+Read back repository settings, effective main rules, all three rulesets, immutable releases, Actions token/policy/workflow count, labels, project views/workflows/fields, and task status. All 23 tasks have Blocked, P1, CORE, and correct numeric Order. Saved ascending queue order and disabled hierarchy were verified after browser reload. Check JSON, YAML, local documentation links, whitespace, and file inventory before documentation PRs.
 
-Konfigurasjonsgrunnlag: .github/settings og .github/rulesets. Filer er versjonerte snapshots, ikke automatisk synk eller et skript som skal kjøres ukritisk. Historisk planning.json er opprinnelig seed, ikke live status. Ingen aktive Actions-workflows, Swift-filer, Package.swift, prototyper, tester, tagger eller releases finnes i leveransen. Ingen produktbygg/test hevdes bestått.
+Configuration baselines live in .github/settings and .github/rulesets. They are versioned snapshots, not automatic synchronization or scripts to run blindly. Historical planning.json is the initial seed, not live status. No active Actions workflows, Swift files, Package.swift, prototypes, tests, tags, or releases are delivered. No product build/test is claimed to pass.
 
-## Hva som er ferdig og hva som gjenstår
+## Completed and outstanding work
 
-F0-planlegging og forberedende repoarbeid er fullført; OPS-01 / #30 avsluttes med dokumentasjons-PR-en og F0-milepælen avsluttes deretter. Dette er ingen produktlevering. [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41) i F1 forblir åpen til eier uttrykkelig godkjenner kodestart. I01 er første kodeoppgave etter denne godkjenningen.
+F0 planning and repository preparation are complete. PR #65 closed OPS-01 / #30; F0 was then closed with zero open issues. This is not product delivery. [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41) in F1 remains open until explicit owner authorization. I01 is the first code task after approval.
 
-[PRE_CODE_READINESS.md](../planning/PRE_CODE_READINESS.md) viser restpunktene: faktisk API-symbolkontroll per oppgave, reell CI i I06 og minimums-OS-/enhetsbevis i I21/I22. Nyere enheter er eieroppgitt uten eksakte versjoner. Manglende minimumsmiljø blokkerer release; ingen kjøp/oppgraderinger eller endret OS-støtte er godkjent.
+[PRE_CODE_READINESS.md](../planning/PRE_CODE_READINESS.md) records outstanding per-task symbol checks, real CI in I06, and minimum-OS/device evidence in I21/I22. Newer device access is owner-reported without exact versions. Missing minimum environments block release; no purchases/upgrades or support changes are approved.
 
-Ingen ekstra reviewer er påkrevd før en reell medmaintainer finnes. Ingen signerte commits er påkrevd uten avklart signeringsoppsett. Ingen tomme status-checks, Dependabot-filer uten manifest, unødvendige tredjepartsverktøy, secrets, webhooks, apper, runners, betalingsprodukter eller publisering er opprettet. Main har ingen bypass, men repo-admin kan fortsatt endre reglene; ingen garanti mot kontoeieren gis. Prosjektet holdes privat, og daterte roadmap-bars utsettes til kapasitet/datoer faktisk er vedtatt.
+No additional reviewer is required before another actual maintainer exists. No signed-commit requirement before signing setup is agreed. No dummy checks, manifest-free Dependabot configuration, unnecessary third-party tools, secrets, webhooks, apps, runners, paid products, or publication. Main has no bypass, but admins can change rules; no protection against the account owner is guaranteed. The project stays private; dated roadmap bars await actual capacity/date decisions.
+
+## English-language migration
+
+ADR-0011 records the owner's explicit request for English GitHub content and Norwegian conversations. Current documentation, templates, descriptions, milestones, fields/options/views, and editable issue/PR text are translated without changing decisions or identifiers. Original Git history and source-document filenames remain intact. Translation does not approve implementation or publication.
+
+Language migration readback verified all 55 existing issues and 10 previous PR titles/bodies, seven milestones, eight views, and 16 custom label descriptions. Issue IDs/states/closure timestamps/checklists/labels/milestone associations, project option IDs/workflow enabled states, and security rules are preserved. All 23 implementation tasks remain Blocked; #41 remains open. The browser confirms English content and ascending Work Queue order. LICENSE is byte-for-byte unchanged. JSON/YAML, local links, whitespace, and the absence of product code were checked. No repository issue comments existed to translate.

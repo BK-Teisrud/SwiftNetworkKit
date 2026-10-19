@@ -1,85 +1,85 @@
-# Sikkerhet, autentisering og nettverkspolicy for v1
+# Security, authentication, and network policy for v1
 
-Status: Planlagt kontrakt 2026-10-19. Hovedvalg er godkjent av prosjekteier i [ADR-0007](../decisions/ADR-0007-security-and-network-policy.md); detaljene konkretiserer secure defaults. Ingen implementasjon eller beståtte sikkerhetstester finnes.
+Status: Planned contract, 2026-10-19. Core choices are accepted in [ADR-0007](../decisions/ADR-0007-security-and-network-policy.md); details elaborate secure defaults. No implementation or passed security tests exist.
 
-## URL, tillatte origins og lokal utvikling
+## URLs, permitted origins, and local development
 
-Produksjonsstandard er HTTPS med OS-ets system trust. En klient har en eksplisitt base-origin (scheme, normalisert host, effektiv port). Typed endpoints kan ikke endre den gjennom path/query. Rå requests til andre origins krever at den destinasjonen er eksplisitt tillatt i klientkonfigurasjonen før utførelse. En tillatt destinasjon betyr ikke at credentials kan deles mellom origins; auth-kontekst er bundet til konkret origin og appens konto-/miljøgrense.
+Production defaults to HTTPS with OS system trust. Each client has an explicit base origin: scheme, normalized host, and effective port. Typed endpoints cannot change it through path/query. Raw requests to another origin require explicit client-configuration permission before execution. A permitted destination does not permit sharing credentials across origins; bind authentication to the specific origin and app account/environment.
 
-Et eget, eksplisitt utviklingsvalg kan tillate HTTP bare til den normaliserte verten localhost eller en gyldig loopback-IP (127.0.0.0/8 eller ::1). Bruk faktisk URL-/IP-parsing; ikke suffix-/substringregler, skjulte tallrepresentasjoner eller DNS-oppslag som generell tillatelse. localhost.example.com, .local, RFC1918/LAN-adresser og andre domener omfattes ikke. IP-baserte IPv6-/IPv4-varianter må behandles konservativt; en form som ikke entydig valideres som loopback, avvises.
+An explicit development option may allow HTTP only to normalized localhost or a valid loopback IP (127.0.0.0/8 or ::1). Use actual URL/IP parsing, not suffix/substring matching, concealed numeric representations, or DNS resolution as general permission. Exclude localhost.example.com, .local, RFC1918/LAN addresses, and other domains. Treat IPv4/IPv6 variants conservatively; reject forms not unambiguously validated as loopback.
 
-Utviklingsvalget er av som standard og skal ikke aktiveres automatisk bare fordi URL-en inneholder et kjent navn. Ikke legg til eller svekk ATS-innstillinger i vertappen; nødvendige, snevre OS-/appunntak må appen selv vurdere og verifisere per plattform. Bibliotekets URL-tillatelse er ikke en garanti for at OS tillater forbindelsen.
+The option defaults off and is not enabled merely because a URL contains a familiar name. Do not add or weaken host-app ATS settings. The app must assess and verify necessary narrow OS/app exceptions per platform. Library URL permission does not guarantee OS permission to connect.
 
-Ingen auth-provider eller sensitive credential-headers brukes over HTTP, heller ikke i loopback-unntaket. En lokal tjeneste som trenger auth, bruker HTTPS etter standard trustregler. Ingen aksept av ugyldige sertifikater, TLS-bypass, egendefinert kryptografi eller automatisk installasjon av trust-røtter.
+Do not invoke authentication providers or send sensitive credential headers over HTTP, including loopback. Local services needing authentication use HTTPS with normal trust validation. No invalid certificates, TLS bypass, custom cryptography, or automatic trust-root installation.
 
-## Cookies, credentials og cache
+## Cookies, credentials, and cache
 
-Egen standardsession bygges fra ephemeral konfigurasjon, men lagring deaktiveres i tillegg eksplisitt:
+Create the owned default session from ephemeral configuration, additionally disabling storage explicitly:
 
-- Ingen httpCookieStorage og ingen automatisk mottak/sending av cookies i konfigurasjon/request.
-- Ingen URLCredentialStorage og ingen automatisk Basic/Digest-/klientidentitetsinnlogging fra lagre.
-- Ingen URLCache; requestpolicy som ikke bruker lokal cache. Ingen skjult egen minne-/diskcache.
-- Ikke skriv payloads, tokens, cookies eller diagnostikk til filer som en bibliotekssideeffekt.
+- No httpCookieStorage or automatic cookie receipt/sending in configuration/requests.
+- No URLCredentialStorage or automatic Basic/Digest/client-identity authentication from stores.
+- No URLCache; use a policy that does not use local cache. No hidden library memory/disk cache.
+- No payload, token, cookie, or diagnostic file writes as library side effects.
 
-Ephemeral alene tillater systemdata i RAM og er derfor ikke tilstrekkelig for den valgte standarden. Aktive requests og auth-headers finnes nødvendigvis midlertidig i minnet; dette er ingen garanti om null kopier, sikker minnesletting eller fravær av OS-/appstyrt diagnostikk.
+Ephemeral alone allows system data in RAM and is insufficient for this default. Active requests and authentication headers necessarily exist temporarily in memory; this is not a zero-copy, secure-erasure, or no-OS/app-diagnostics guarantee.
 
-En eksplisitt appstyrt lagringsprofil kan tilpasse URLSessions standardlagre/cache eller låne en app-eid session med slike lagre. Profilen skal beskrive den faktiske lagringen og appens ansvar for kontoisolasjon, kapasitet og sletting. Dette gir ingen ny egen cache-/offline-/TTL-strategi. Automatisk lagring forblir av uten dette uttrykkelige valget. En appstyrt profil må ikke svekke HTTPS-, origin-, redaction- eller redirectreglene.
+An explicit app-managed storage profile may customize URLSession stores/cache or borrow an app session using them. Describe actual storage and app responsibility for account isolation, capacity, and deletion. This adds no custom cache/offline/TTL strategy. Automatic storage remains off without explicit selection. Such profiles cannot weaken HTTPS, origin, redaction, or redirect rules.
 
-## Auth-provider og headerpresedens
+## Authentication provider and header precedence
 
-Appen kan injisere en asynkron provider for auth-headers. Providerens input begrenses til nødvendig origin, request-ID/metode og eksplisitt konto-/miljøkontekst; ingen automatisk tilgang til body, alle headers eller rå URL-parametere. Provider implementeres sikkert for samtidige kall eller isoleres av appen, og omfattes av operasjonens cancellation og totale tidsbudsjett.
+Apps may inject an asynchronous authentication-header provider. Limit input to necessary origin, request ID/method, and explicit account/environment context; do not automatically expose body, all headers, or raw URL parameters. The app makes the provider concurrency-safe or isolates it. It runs within operation cancellation and total time budget.
 
-Appen eier login, token-/Keychainlagring, fornyelse, utlogging og kontovalg. Ingen automatisk refresh på 401, skjult replay eller auth-provider-loop. Provider brukes én gang per opprinnelig operasjon; verdien skal ikke kopieres til en ny origin ved redirect. Caller kan eksplisitt velge et public/no-provider-kall. Dette slår ikke av sikkerhetsregler; appen må også unngå å legge egne sensitive headers på et public-kall.
+The app owns login, token/Keychain storage, renewal, logout, and account selection. No automatic 401 refresh, hidden replay, or provider loop. Invoke the provider once per original operation; do not copy its values to a new redirect origin. Callers may explicitly choose a public/no-provider call. This does not disable security; apps must also avoid adding sensitive explicit headers to public calls.
 
-Normale defaults viker for eksplisitte request-headers som beskrevet i HTTP-kontrakten. Providerens headers valideres med samme navn-/CRLF-regler. Hvis provider og en eksplisitt auth-header angir forskjellige verdier for samme navn, avvises konflikten som invalidRequest fremfor en skjult credential-overstyring. Like verdier er ikke to ulike credentials. Globale sensitive headers må være origin-/kontoavgrenset; et rått kall til en annen tillatt origin arver dem ikke.
+Explicit request headers override ordinary defaults under the HTTP contract. Validate provider headers with the same name/CRLF rules. Differing provider and explicit authentication values for the same name cause invalidRequest rather than hidden credential replacement. Identical values are not distinct credentials. Global sensitive headers must be origin/account scoped; raw calls to another permitted origin do not inherit them.
 
-URL-userinfo og query-baserte hemmeligheter er ikke støttede auth-mekanismer. Providerfeil før nettverk normaliseres til en trygg invalidRequest med providerfeilårsak; egen timeout/cancellation beholder kategoriene fra livssykluskontrakten. Rå providerfeiltekst dumpes ikke til logs.
+URL userinfo and query secrets are unsupported authentication mechanisms. Normalize pre-network provider failures to safe invalidRequest with a provider-failure cause; preserve timeout/cancellation categories from the lifecycle contract. Do not dump raw provider error text to logs.
 
-## Redirects og system trust
+## Redirects and system trust
 
-Automatisk redirect gjelder som standard bare GET/HEAD innen samme normaliserte origin og med samme metode. Hver destinasjon valideres på nytt mot URL-/scheme-/utviklingsreglene. Maks fem fulgte hopp per operasjon; løkker/overskridelse avvises med en trygg invalidResponse-årsak. Samme-origin betyr også samme effektive port, ikke bare samme hostnavn.
+By default, automatically follow only same-method GET/HEAD redirects within the same normalized origin. Revalidate every destination against URL, scheme, and development rules. Follow at most five hops per operation; loops/excess cause safe invalidResponse. Same origin includes the effective port, not just hostname.
 
-Cross-origin redirects, HTTPS → HTTP og redirects som innebærer replay av en muterende forespørsel følges ikke automatisk i v1. Delegate avviser redirect uten å sende request til målet. Den returnerte 3xx-responsen behandles etter vanlig statuskontrakt; et eksplisitt godkjent 3xx-svar kan leses av appen, men gir ikke tillatelse til automatisk videreføring. En app kan gjøre et nytt, separat validert kall etter eget bevisst valg.
+Do not automatically follow cross-origin redirects, HTTPS → HTTP, or redirects replaying a mutating request. The delegate rejects the redirect without contacting the destination. Process the resulting 3xx response under the normal status contract; explicitly accepting 3xx allows reading it, not automatic forwarding. Apps may deliberately make a new, separately validated call.
 
-Credentials, cookies og app-spesifikke sensitive headers sendes aldri automatisk til en annen origin. Tidsbudsjett fra opprinnelig inngang gjelder gjennom eventuelle tillatte redirects; det nullstilles ikke ved hvert hopp. Begrensningen gjelder både typed og raw requests.
+Never automatically send credentials, cookies, or app-sensitive headers to another origin. The original total budget applies across allowed redirects and does not reset at each hop. Typed and raw requests follow the same limits.
 
-Trust-challenges bruker systemverifisering. Auth-provider er ikke en challenge-/trust-provider. Ikke lever credentials for HTTP Basic/Digest/mTLS fra systemlagre som en skjult fallback; slike auth-funksjoner er ikke del av denne v1-grensen.
+Trust challenges use system verification. The authentication provider is not a challenge/trust provider. Do not silently supply Basic/Digest/mTLS credentials from system stores as fallback; those features are outside this v1 boundary.
 
-## Injisert session
+## Injected sessions
 
-Injeksjon er et uttrykkelig tillitsforhold til appen. Klienten endrer ikke sessionens globale konfigurasjon, delegate eller lagre, og ugyldiggjør den aldri. Ved oppretting kontrolleres tilgjengelig konfigurasjon og kompatibilitet med valgt lagrings-/sikkerhetsprofil. Bakgrunnssessions avvises; de kan følge redirects uten den kontrollen denne kontrakten krever.
+Injection explicitly trusts the app. The client never changes global session configuration, delegates, or stores, or invalidates the session. On creation, check accessible configuration and compatibility with the selected storage/security profile. Reject background sessions, which may follow redirects without required control.
 
-Streng standardprofil krever at injisert session også har deaktiverte lagre og automatisk cookiehåndtering. Vanlig URLSession.shared eller default-session med aktive standardlagre må derfor ikke godtas som streng standard uten eksplisitt appstyrt lagringsprofil.
+The strict default profile requires disabled stores and automatic cookie handling on injected sessions too. Ordinary URLSession.shared/default sessions with active stores cannot qualify as strict defaults without an explicit app-managed storage profile.
 
-Requests skal bruke klientens per-task delegate-/policygrense for redirect- og task-level challengekontroll der valgt URLSession-API gir dette. En eksisterende session-delegate kan ikke byttes og kan håndtere session-level trust-challenges. Derfor godtas i v1 ingen vilkårlig ekstern session-delegate som kan overstyre trust/auth/redirectpolicy; slike kombinasjoner avvises fremfor å hevdes kompatible. En minimal session uten en slik ekstern delegate er den planlagte injeksjonsbaselinen.
+Use the client's per-task delegate/policy boundary for redirects and task-level challenges where the selected URLSession API supports it. Existing session delegates cannot be replaced and may handle session-level trust challenges. V1 therefore rejects arbitrary external delegates capable of overriding trust/authentication/redirect policy rather than claiming compatibility. A minimal session without such a delegate is the planned injection baseline.
 
-Testtransport med URLProtocol kan brukes eksplisitt i tester. Det gir ikke produksjonsbevis for TLS, cookie-/cachepolicy eller faktisk nettverk. Appens egen kode/custom transports, proxies, OS-policy og eksterne endringer er utenfor en biblioteksikkerhetssandbox. Dersom nødvendig kontroll ikke kan dokumenteres eller håndheves i implementasjonen, skal kombinasjonen avvises og avviket tas opp før release; ikke endre systemsemantikk skjult.
+URLProtocol transport may be explicitly selected in tests. It does not prove production TLS, storage policy, or actual networking. App code/custom transports, proxies, OS policy, and external changes are outside a library security sandbox. If required control cannot be documented or enforced, reject the combination and resolve the gap before release; do not silently alter system semantics.
 
-## Retry, offline og nettverkskostnad
+## Retries, offline behavior, and network cost
 
-NetworkKit utfører ingen egen automatisk retry, 401-refresh, statusbasert replay, connectivity-probe eller offline-cachefallback i v1. Ett bibliotekskall starter én logisk HTTP-operasjon, men URLSession/OS kan ha intern tilkoblingshåndtering. Tillatte redirects er ikke en generell retrypolicy. Ikke lov nøyaktig én wire-request eller rollback av en allerede sendt mutasjon.
+NetworkKit performs no automatic library retry, 401 refresh, status replay, connectivity probe, or offline-cache fallback in v1. One call starts one logical HTTP operation, but URLSession/OS may manage internal connection attempts. Allowed redirects are not a general retry policy. Do not promise exactly one wire request or rollback of sent mutations.
 
-Standard waitsForConnectivity er av for egen session; appen kan velge systemets venting eksplisitt innen samme samlede tidsbudsjett. Bruk faktisk requestresultat, ikke path-monitor som forhåndsgaranti. Cellular/expensive/constrained følger URLSessions systemstandard med eksplisitte klientvalg ved behov, uten oppdiktede energigarantier eller global mutable policy. Ikke innfør nyere plattformspesifikke egenskaper uten availabilitykontroll.
+Owned sessions default waitsForConnectivity off; apps may explicitly select system waiting within the same total budget. Use actual request outcomes, not path monitoring as a preflight guarantee. Cellular/expensive/constrained access follows URLSession defaults with explicit client options where needed, without invented energy guarantees or global mutable policy. Check availability before adding newer platform properties.
 
-## Logger, feil og error-body
+## Logs, errors, and error bodies
 
-Ingen ekstern telemetri, analytics, tracking eller SaaS-sink følger biblioteket. Lokale diagnostikkhendelser bruker som standard kun en liten allowlist: tilfeldig request-ID, kjent standardmetode (eller klassifikasjonen «custom», uten rå egendefinert metodestreng), status, målt varighet og trygg feil-/terminalkategori. Ingen rå URL, hostname/path/query/fragment, body, headers, credentials, modellbeskrivelser eller underliggende localizedDescription logges automatisk. Logging kan slås av.
+No external telemetry, analytics, tracking, or SaaS sink. Default local diagnostic events use only a small allowlist: random request ID, known standard method (or “custom” without its raw string), status, measured duration, and safe error/terminal category. Do not automatically log raw URLs, hostname/path/query/fragment, bodies, headers, credentials, model descriptions, or underlying localizedDescription. Logging can be disabled.
 
-Appstyrte sinks får den samme sanerte hendelsesmodellen; ingen automatisk rå request/response-hook for å omgå redaction. Hvis vertappen selv logger sensitive verdier utenfor biblioteket, ligger dette utenfor bibliotekets beskyttelse.
+App-managed sinks receive the same sanitized event model, without raw request/response hooks bypassing redaction. Sensitive logging by the host app outside the library is outside its protection.
 
-En HTTP-statusfeil inneholder ikke rå error-body som standard, og v1 tilbyr ikke en egen valgfri error-body-capture-mekanisme. Det opprettes ingen ekstra beholdt kopi eller payload i feiltekst. URLSession-dataAPI-et kan allerede ha lest responsen i minnet; dette er ikke en garanti om null nettverks-/minnebruk for feilsvar. En app som trenger en bestemt API-feilpayload, kan uttrykkelig godkjenne statusen og velge JSON/Data-respons under samme øvrige kontrakt.
+HTTP status errors do not capture raw error bodies, and v1 offers no optional error-body capture mechanism. Retain no extra copy or payload in error text. URLSession's data API may already have read the response into memory; this is not a zero-network/memory-use guarantee for failures. Apps needing a specific API error payload may explicitly accept its status and select JSON/Data under all other contracts.
 
-Status/headers returneres til appen etter HTTP-kontrakten, men automatisk feilbeskrivelse og logging eksponerer ikke sensitive headerverdier. Bevar nødvendige systemfeilkoder/årsaker uten å presentere et underliggende errorobjekt som «trygt å logge».
+Return status/headers according to the HTTP contract, but do not expose sensitive headers in automatic error descriptions or logs. Preserve necessary system codes/causes without presenting underlying errors as safe to log.
 
-## Senere akseptansebevis
+## Required future acceptance evidence
 
-- Ingen automatisk cookie-/credential-/cachelagring i streng profil; explicit opt-in skiller faktisk appstyrt lagring fra standarden.
-- Auth-provider, eksplisitte headers, konflikter, opt-out, origin-/kontoavgrensning og cancellation/deadline gjennom provider.
-- HTTPS/system trust; utviklingsunntak av som standard; localhost/gyldig loopback versus lookalikes, IP-varianter, private LAN og redirects ut av loopback.
-- Ingen credentials over HTTP; ingen trust-bypass eller automatisk Basic/Digest/mTLS-fallback.
-- Samme-origin GET/HEAD-redirect innen fem hopp; cross-origin/portbytte/downgrade/mutasjon/løkker følger ikke automatisk.
-- Injisert session: profiler, delegatekompatibilitet, avvisning av bakgrunn/ustøttede kombinasjoner og ingen invalidation av andres session/tasks.
-- Redaction av tokens/cookies/URL/body/error descriptions i alle feil- og diagnosestier; ingen skjult telemetri, error-body-capture eller replay på 401/503.
-- Systempolicy for connectivity/kostnad og samme 30/60-budsjett gjennom tillatte hooks/redirects.
+- No automatic cookie/credential/cache storage in the strict profile; explicit opt-in distinguishes actual app-managed storage.
+- Provider, explicit headers, conflicts, opt-out, origin/account scoping, and cancellation/deadlines through provider execution.
+- HTTPS/system trust; development access off by default; valid localhost/loopback versus lookalikes, IP variants, private LAN, and redirects outside loopback.
+- No credentials over HTTP, trust bypass, or automatic Basic/Digest/mTLS fallback.
+- Same-origin GET/HEAD within five hops; no automatic cross-origin, port-changing, downgrade, mutating, or looping redirects.
+- Injected-session profiles, delegate compatibility, rejected background/unsupported combinations, and no invalidation of others' sessions/tasks.
+- Token/cookie/URL/body/error-description redaction on every error/diagnostic path; no hidden telemetry, error-body capture, or 401/503 replay.
+- System connectivity/cost policy and the same 30/60 budget across permitted hooks/redirects.
 
-Kravene brytes ned til sporbare deloppgaver før Ready, og utføres etter implementasjonsklarsignal. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 fastsetter planlagte tester/runtimes; faktisk kjøring og sikkerhetsbevis gjenstår. Ingen av disse sikkerhetsegenskapene er implementert eller funksjonstestet nå.
+Break requirements into traceable tasks before Ready and execute only after implementation authorization. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 defines planned tests/runtimes. Actual execution and security evidence remain outstanding; none of these properties is implemented or functionally tested yet.

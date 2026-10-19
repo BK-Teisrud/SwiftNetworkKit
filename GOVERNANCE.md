@@ -1,17 +1,21 @@
-# Forvaltning
+# Governance
 
-Rettighetshaver: Teisrud Development AS, etter prosjekteierens beslutning i ADR-0002. GitHub-kontoeier og maintainer: @BK-Teisrud. Tredjepartsbruk reguleres av LICENSE og eventuell særskilt skriftlig tillatelse fra selskapet. Eieren vedtar scope, prioritet, rettigheter, plattformstøtte og release. Bidragsytere foreslår endringer gjennom issues og pull requests.
+Rights holder: Teisrud Development AS, as selected by the project owner in ADR-0002. GitHub account owner and maintainer: @BK-Teisrud. Third-party use is governed by LICENSE and any separate written permission from the company. The owner decides scope, priorities, rights, platform support, and releases. Contributors propose changes through issues and pull requests.
 
-## Beslutninger
+## Decisions
 
-Varige valg føres i ADR-er med status Foreslått, Godkjent, Erstattet eller Avvist. Arkitektur, offentlig API, lagring, autentisering, nye moduler, verktøyavhengigheter og sikkerhetsunntak krever beslutningsgrunnlag. Endring av roadmap krever oppdatert milepæl, backlog, risiko og begrunnelse.
+Record lasting decisions in ADRs with status Proposed, Accepted, Superseded, or Rejected. Architecture, public APIs, storage, authentication, new modules, tool dependencies, and security exceptions require a documented decision. Roadmap changes require updated milestones, backlog, risks, and rationale.
 
-## Tilgang og review
+## Access and review
 
-Minst mulig tilgang. Ingen ekstra samarbeidspartnere, deploy keys, apper, webhooks eller secrets opprettes som del av dette oppsettet. Eieren bør bruke 2FA/passkey og recovery-koder; dette er en kontoinnstilling og er ikke verifisert her.
+Apply least privilege. This setup adds no collaborators, deploy keys, apps, webhooks, or secrets. The owner should use 2FA/passkeys and recovery codes. The owner has confirmed that 2FA is enabled; this is an attestation, not an independent account audit.
 
-Solo-profil: alle endringer etter bootstrap går gjennom PR; ingen påkrevd ekstern godkjenning fordi forfatter ikke kan godkjenne egen PR. CODEOWNERS angir ansvar, men er ikke alene en review-sperre. Sikkerhetsrelevante endringer får eksplisitt risikovurdering og dokumentert egenkontroll.
+Solo profile: every change after bootstrap goes through a PR. No external approval is required because authors cannot approve their own PRs. CODEOWNERS identifies responsibility but does not itself enforce review. Security-relevant changes require an explicit risk assessment and documented self-review.
 
-Team-profil aktiveres først når en annen kvalifisert person har write-tilgang: minst én godkjenning, Code Owner review, avvis foreldede godkjenninger og krev godkjenning av siste push fra en annen person. Ingen udokumentert bypass.
+Enable the team profile only when another qualified person has write access: require at least one approval, Code Owner review, dismissal of stale approvals, and approval of the latest push by someone other than its author. No undocumented bypasses.
 
-Akutte hendelser: opprett privat sikkerhetssak, begrens skade og dokumenter tiltak. Main har ingen konfigurert bypass. Eventuelle nødstilte regelendringer må begrunnes, begrenses og etterkontrolleres senest neste arbeidsdag; ordinære rettinger følger PR. Konto-/organisasjonseier kan fortsatt endre reglene; repooppsett kan ikke eliminere denne fullmakten.
+For urgent incidents, open a private security report, contain the impact, and document actions. Main has no configured bypass. Any emergency rule changes must be justified, narrowly scoped, and reviewed by the next business day; ordinary fixes follow the PR process. The account or organization owner can still change the rules themselves; repository configuration cannot remove that authority.
+
+## Language
+
+English is the language of repository documentation and GitHub content; Norwegian remains the language of owner–assistant conversations. The [language policy](docs/governance/LANGUAGE_POLICY.md) governs future updates.

@@ -1,21 +1,21 @@
-# Sikkerhet
+# Security
 
-## Rapporter privat
+## Report privately
 
-Bruk GitHubs **Report a vulnerability** under Security på dette repoet når privat rapportering er aktivert. Hvis knappen mangler, opprett et offentlig issue med bare teksten «Ønsker privat kontakt for sikkerhetsrapport», uten detaljer, og vent på en privat kanal. Ikke publiser sårbarhetsdetaljer, credentials eller persondata i offentlige issues.
+Use GitHub's **Report a vulnerability** under this repository's Security tab when private reporting is enabled. If the button is unavailable, open a public issue containing only “Requesting a private channel for a security report,” without details, and wait for a private channel. Do not publish vulnerability details, credentials, or personal information in public issues.
 
-Maintainer: @BK-Teisrud. Mål: første svar innen tre arbeidsdager, innledende vurdering innen sju. Dette er mål, ikke en døgnbemannet tjeneste eller garantert SLA.
+Maintainer: @BK-Teisrud. Targets: an initial response within three business days and an initial assessment within seven. These are goals, not a staffed 24/7 service or guaranteed SLA.
 
-Ingen produktversjoner er lansert. Når 1.0 finnes, vedlikeholdes siste stabile minor på gjeldende major; unntak dokumenteres i release-policy. Pre-release-versjoner har ingen produksjonsgaranti.
+No product versions have been released. After 1.0, the latest stable minor of the current major receives maintenance; exceptions are documented in the release policy. Prereleases carry no production-readiness guarantee.
 
-## Krav til senere implementasjon
+## Requirements for future implementation
 
-System trust og HTTPS som standard; ingen TLS-bypass. [ADR-0007 og sikkerhetspolicyen](docs/planning/SECURITY_AND_NETWORK_POLICY.md) fastsetter eksplisitt HTTP-unntak bare for localhost/loopback under utvikling, ingen automatisk cookie-/credential-/cachelagring, liten auth-header-provider og avgrenset redirect-/diagnostikkpolicy. Dette er planlagte krav, ikke implementerte eller bestått testede sikkerhetsegenskaper. Ingen sensitive logger som standard, ingen ekstern telemetri som standard. Credentials isoleres per konto/host/miljø. Redirect, idempotens, cancellation, cache og samtidighet inngår i sikkerhetsgjennomgang. Pinning, mTLS og OIDC krever separat beslutning og review.
+System trust and HTTPS by default; no TLS bypass. [ADR-0007 and the security policy](docs/planning/SECURITY_AND_NETWORK_POLICY.md) specify an explicit development-only HTTP exception for localhost/loopback, no automatic cookie/credential/cache storage, a small authentication-header provider, and bounded redirect and diagnostic policies. These are planned requirements, not implemented or successfully tested security properties. No sensitive logging or external telemetry by default. Isolate credentials by account, host, and environment. Security review covers redirects, idempotency, cancellation, caching, and concurrency. Pinning, mTLS, and OIDC require separate decisions and review.
 
-## Hendelser
+## Incidents
 
-Bekreft og begrens påvirkning, roter eksponerte secrets hos utsteder, fjern dem fra aktive flater og vurder historikk separat. Ikke anta at sletting av en fil gjør en offentlig hemmelighet trygg. Registrer privat tidslinje, berørte versjoner, retting og koordinert publisering. Publiser advisory og korrigert release når relevant.
+Confirm and contain the impact, rotate exposed secrets at the issuer, remove them from active surfaces, and assess history separately. Deleting a file does not make a public secret safe. Keep a private timeline of affected versions, remediation, and coordinated disclosure. Publish an advisory and corrected release when appropriate.
 
-## Andre fortrolige henvendelser
+## Other confidential inquiries
 
-Ingen generell privat kontaktadresse eller lisensadresse er publisert ennå. Ikke legg fortrolig forretningsinformasjon i offentlige issues. GitHubs private sårbarhetsrapportering brukes bare til sikkerhetsfunn; lisens-/bidragsprosess tilbys først når selskapet har avklart en egnet kontaktkanal.
+No general private contact or licensing address has been published. Do not post confidential business information in public issues. GitHub's private vulnerability reporting is reserved for security findings; licensing and contribution processes will be offered only after the company establishes an appropriate contact channel.

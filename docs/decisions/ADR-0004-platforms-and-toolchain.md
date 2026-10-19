@@ -1,51 +1,51 @@
-# ADR-0004: Plattformminimum og verktøygrunnlag for v1
+# ADR-0004: Minimum platforms and toolchain for v1
 
-Dato: 2026-10-19. Status: Godkjent av prosjekteier i chatten.
-Oppgave: [DEC-01 / #1](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/1).
+Date: 2026-10-19. Status: Accepted by the project owner in conversation.
+Issue: [DEC-01 / #1](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/1).
 
-## Godkjente valg
+## Approved choices
 
-Prosjekteier har uttrykkelig valgt alle følgende:
+The owner explicitly selected:
 
-- iOS/iPadOS, macOS, watchOS og tvOS i første stabile versjon. VisionOS utsettes.
-- Minimum iOS/iPadOS 17.0, macOS 14.0, watchOS 10.0 og tvOS 17.0.
-- Minimum Xcode 26.3, Swift tools 6.2 og Swift 6-språkmodus med streng samtidighetskontroll.
+- iOS/iPadOS, macOS, watchOS, and tvOS for the first stable release. visionOS is deferred.
+- Minimum iOS/iPadOS 17.0, macOS 14.0, watchOS 10.0, and tvOS 17.0.
+- Minimum Xcode 26.3, Swift tools 6.2, and Swift 6 language mode with strict concurrency checking.
 
-Repo/pakkenavn SwiftNetworkKit og produkt/modul NetworkKit følger ADR-0003. Dette vedtaket gjelder planlagt støtte og utviklingskrav; det bekrefter ikke fungerende produktkode eller tester.
+Repository/package SwiftNetworkKit and product/module NetworkKit follow ADR-0003. This decision sets planned support and development requirements; it does not establish working code or successful tests.
 
-## Beslutning og matrise
+## Decision and matrix
 
-[PLATFORM_MATRIX.md](../planning/PLATFORM_MATRIX.md) er autoritativ plattform- og verifikasjonsmatrise. Minimums-OS gjelder hvor konsumentappen skal kjøre. Xcode/Swift gjelder hvor pakken bygges. SDK-versjon er separat fra minimums-OS.
+[PLATFORM_MATRIX.md](../planning/PLATFORM_MATRIX.md) is the authoritative platform and verification matrix. Minimum OS versions describe where consuming apps run. Xcode/Swift describe where the package is built. SDK versions are separate from minimum OS versions.
 
-Bruk Xcode 26.3 som første planlagte referanse for bygg og tester. Før fremtidig CI opprettes i DEC-07/F1, registreres eksakt Xcode-build, kompilator, SDK, runner-arkitektur og test-runtime. Nyere stabile Xcode-versjoner kan tas i bruk etter kontroll; «26.3+» er ikke bevis for at alle fremtidige versjoner fungerer. Beta/RC er ikke eneste kvalitetsport.
+Use Xcode 26.3 as the first planned build/test reference. Before creating CI under DEC-07/F1, record the exact Xcode build, compiler, SDK, runner architecture, and test runtime. Newer stable Xcode releases may be adopted after verification; “26.3+” does not prove compatibility with all future releases. Beta/RC tools must not be the sole quality gate.
 
-Swift tools-minimum er 6.2. Senere pakkemanifest skal velge Swift 6-språkmodus uttrykkelig. Streng samtidighetskontroll gjelder fra starten; en Swift 5-modus inngår ikke som alternativ støtteprofil i v1. Dette oppretter ikke noe manifest nå.
+The Swift tools minimum is 6.2. The future manifest must explicitly select Swift 6 language mode. Strict concurrency checking applies from the outset; Swift 5 mode is not an alternative v1 support profile. No manifest is created now.
 
-## Observert miljø
+## Observed environment
 
-Read-only kontroll 2026-10-19 viser Xcode 26.3 (17C529), Apple Swift 6.2.4 og macOS 15.8.1. SDK-listen viser iOS/iPadOS 26.2, macOS 26.2, watchOS 26.2 og tvOS 26.2. Kompilatoren rapporterer et x86_64-vertsmiljø. Ingen produktbygg, pakkeløsing, simulatoroppstart eller runtime-tester er kjørt.
+A read-only inspection on 2026-10-19 showed Xcode 26.3 (17C529), Apple Swift 6.2.4, and macOS 15.8.1. Installed SDKs were iOS/iPadOS 26.2, macOS 26.2, watchOS 26.2, and tvOS 26.2. The compiler reported an x86_64 host. No product builds, package resolution, simulator boot, or runtime tests were performed.
 
-Apples støtteside oppgir en annen Swift-patch for Xcode 26.3 enn den lokale kompilatoren rapporterer. Swift 6.2-familien er felles; de lokale utskriftene er grunnlaget for det observerte miljøet. Eksakte patch-/build-identiteter må derfor registreres på den runneren som faktisk brukes fremfor å antas ut fra Xcode-navnet alene.
+Apple's support page lists a different Swift patch for Xcode 26.3 than the local compiler reports. Both belong to Swift 6.2; local output establishes the observed environment. Record exact patch/build identities on the actual runner instead of inferring them from the Xcode name.
 
-## Alternativer og begrunnelse
+## Alternatives and rationale
 
-- Bare iOS/macOS ville gitt færre plattformer å kontrollere. Prosjekteier ønsker også watchOS og tvOS fra v1.
-- Eldre minimum (iOS/tvOS 15, macOS 12, watchOS 9) ville inkludert flere eldre OS-er. Prosjekteier valgte en høyere felles baseline.
-- Nyere minimum (iOS/tvOS 18, macOS 15, watchOS 11) ville utelatt flere eldre OS-er. Ikke valgt.
-- Xcode 27.1 / Swift 6.4 ville krevd en annen lokal macOS-baseline. Prosjekteier valgte verktøygrunnlaget som passer den observerte installasjonen.
+- Supporting only iOS/macOS would reduce the matrix. The owner also wants watchOS and tvOS in v1.
+- Earlier minimums (iOS/tvOS 15, macOS 12, watchOS 9) would include more old OS versions. The owner selected a higher shared baseline.
+- Later minimums (iOS/tvOS 18, macOS 15, watchOS 11) would exclude more old OS versions. Not selected.
+- Xcode 27.1 / Swift 6.4 would require a different local macOS baseline. The owner chose tools suited to the observed installation.
 
-## Tilgjengelighet og releasebevis
+## Availability and release evidence
 
-Konkrete API-symboler fastsettes videre i DEC-04–DEC-06 og kontrolleres mot valgt SDK og alle fire OS-minimum før deloppgaver blir Ready. OS-/frameworknavn er ikke bevis for identisk adferd på alle plattformer. Nødvendige availability-/compile-time-grenser skal dokumenteres og senere verifiseres.
+Select concrete API symbols through DEC-04–DEC-06 and check them against the selected SDK and all four OS minimums before relevant tasks become Ready. OS/framework names do not establish identical behavior across platforms. Document and later verify necessary availability and compile-time boundaries.
 
-Bygg med et deklarert minimum er ikke det samme som runtime-test på minimums-OS. Matrisen skal vise både bygg og faktisk testet runtime med resultat. Manglende simulator/enhet/runner skal vises som manglende bevis og håndteres før støtte annonseres ved release. Ingen bestemt runner eller testkostnad er valgt her; det avgjøres i DEC-07.
+Building with a declared minimum is not equivalent to testing on that OS. Record both build results and actual runtimes. Missing simulators, devices, or runners are missing evidence to resolve before advertising release support. This ADR selects no particular runner or test cost; DEC-07 addresses those choices.
 
-Denne ADR-en lukker plattform-/verktøyvalget. Den lukker ikke symbolgjennomgang, implementasjon, tester eller F0-porten. Heving av minimums-OS etter 1.0 behandles etter releasepolicyens breaking-change-regler.
+This ADR resolves platform/toolchain selection, not symbol review, implementation, tests, or the F0 gate. Raising minimum OS versions after 1.0 follows the release policy's breaking-change rules.
 
-## Kilder
+## Sources
 
 - [Apple: SDKs and system requirements](https://developer.apple.com/xcode/system-requirements)
 - [Apple: Creating a standalone Swift package](https://developer.apple.com/documentation/xcode/creating-a-standalone-swift-package-with-xcode)
-- Lokal kontroll: xcodebuild -version, xcrun swift --version, sw_vers -productVersion og xcodebuild -showsdks.
+- Local inspection: xcodebuild -version, xcrun swift --version, sw_vers -productVersion, and xcodebuild -showsdks.
 
-ADR-0001 og tidligere ADR-er beholdes som historikk. Åpne plattform- og verktøyvalg fra disse avklares av denne beslutningen.
+ADR-0001 and earlier decisions remain historical. This decision resolves their open platform and toolchain choices.

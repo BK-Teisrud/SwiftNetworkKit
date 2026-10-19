@@ -1,4 +1,4 @@
-# Ansvar; review håndheves gjennom GitHub-regler når team-profil aktiveres.
+# Ownership; GitHub rules enforce reviews when the team profile is enabled.
 * @BK-Teisrud
 /.github/ @BK-Teisrud
 /docs/decisions/ @BK-Teisrud
