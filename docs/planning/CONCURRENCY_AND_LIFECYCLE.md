@@ -83,4 +83,4 @@ V1 har ikke en separat «la alle requests kjøre ferdig»-modus. Appen kan vente
 6. Idempotent shutdown, avvisning av nye kall, kansellert shutdownventer og ingen venting som låser egen opprydding.
 7. Ugyldige varigheter, raw-request-presedens, session med strengere resource-grense og ingen feilaktig garanti for harde frister i synkron kode.
 
-Disse er planlagte akseptansebevis, ikke beståtte tester. Testinfrastruktur og faktisk matrise avgjøres i DEC-07. F0 og uttrykkelig klarsignal kreves fortsatt før kode.
+Disse er planlagte akseptansebevis, ikke beståtte tester. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 fastsetter testinfrastruktur og planlagt matrise; faktisk CI-/runtime-verifikasjon gjenstår. F0 og uttrykkelig klarsignal kreves fortsatt før kode.

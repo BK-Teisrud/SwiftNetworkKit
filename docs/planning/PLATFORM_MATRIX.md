@@ -23,8 +23,8 @@ Et nyere SDK er verktøyets API-grunnlag, ikke et krav om at vertappen kjører d
 | Swift tools | Minimum 6.2 | Apple Swift 6.2.4 |
 | Swift-språkmodus | Swift 6, streng samtidighetskontroll | Ikke konfigurert i noen pakke ennå |
 | Vertens macOS | Må oppfylle systemkravet til valgt Xcode | 15.8.1 |
-| Vertens arkitektur | Ingen CI-runner valgt ennå | x86_64 rapportert av kompilatoren |
-| CI-SDK / runtime / runner | Eksakte verdier og kapasitet vedtas i DEC-07 | Ingen CI opprettet |
+| Vertens arkitektur | Standard GitHub macos-15 arm64 i planen; ingen jobb kjørt | x86_64 rapportert av kompilatoren |
+| CI-SDK / runtime / runner | ADR-0008 / CI_AND_TEST_PLAN.md fastsetter baseline; faktisk kjøring må bekrefte image, schemes og destinations | Ingen CI opprettet |
 
 Systemkravet til utviklermaskinen er separat fra bibliotekets minimum macOS 14.0. En lokal versjonskontroll er ikke et testresultat for biblioteket.
 
@@ -40,7 +40,7 @@ Foreløpige API-familier som må gjennomgås når kontraktene velges:
 | URL/JSON | URLComponents / Codable / JSONEncoder / JSONDecoder | Faktiske valgte overloads, parametersemantikk og encoder-/decoderstrategier |
 | Logging | OSLog | Konkret logging-API, privacy-markeringer og dataminimering |
 | Samtidighet | Swift Concurrency | Sendable, isolation, cancellation og eventuell clock-API; språk- og OS-krav vurderes separat |
-| Testing | Apples/offisielle testverktøy | Valg i DEC-07, tilgjengelige runtimes og plattformspesifikke begrensninger |
+| Testing | Apples/offisielle testverktøy | ADR-0008 velger Swift Testing/XCTest og offisielle verktøy; faktisk runtime-/harnessverifikasjon gjenstår |
 
 Tabellen er en arbeidsliste, ikke en påstand om at bestemte symboler er verifisert. Nye Foundation-/OSLog-/Concurrency-API-er kan ha høyere OS-krav enn produktets valgte minimum.
 
@@ -48,7 +48,7 @@ Tabellen er en arbeidsliste, ikke en påstand om at bestemte symboler er verifis
 
 Registrer per kontroll: commit-SHA, dato, Xcode-build, Swift-versjon, SDK, faktisk runtime og arkitektur, simulator/enhet, testtype og resultat eller konkret begrunnelse for manglende kjøring.
 
-Planen skal dekke bygg for alle valgte plattformer og relevante normal-/feil-/cancellation-/concurrencytester. Testing på minimums-OS og representative nyere stabile runtimes planlegges i DEC-07. Hvis en minimumsruntime ikke kan kjøres i tilgjengelig CI, må et eksplisitt alternativ med reelt testbevis avklares før release; et nyere simulatorbygg alene dekker ikke dette.
+Planen skal dekke bygg for alle valgte plattformer og relevante normal-/feil-/cancellation-/concurrencytester. ADR-0008 / [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) skiller PR-runtimes fra egen releasekontroll på minimums-OS og representative nyere stabile runtimes. Hvis en minimumsruntime ikke kan kjøres i tilgjengelig CI, må et eksplisitt alternativ med reelt testbevis avklares før release; et nyere simulatorbygg alene dekker ikke dette.
 
 Fysisk enhetstest brukes der scenarioet krever det. Bakgrunnsoverføringer, Keychain-grupper og lokalnett er utsatt etter v1-scope og er ikke påstått støttet gjennom denne matrisen. Ingen byggetest eller runtime-verifikasjon er bestått ennå.
 

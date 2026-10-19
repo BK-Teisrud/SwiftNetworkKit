@@ -82,4 +82,4 @@ Status/headers returneres til appen etter HTTP-kontrakten, men automatisk feilbe
 - Redaction av tokens/cookies/URL/body/error descriptions i alle feil- og diagnosestier; ingen skjult telemetri, error-body-capture eller replay på 401/503.
 - Systempolicy for connectivity/kostnad og samme 30/60-budsjett gjennom tillatte hooks/redirects.
 
-Kravene brytes ned til sporbare deloppgaver før Ready, og utføres etter implementasjonsklarsignal. DEC-07 avgjør faktiske tester/runtimes. Ingen av disse sikkerhetsegenskapene er implementert eller funksjonstestet nå.
+Kravene brytes ned til sporbare deloppgaver før Ready, og utføres etter implementasjonsklarsignal. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 fastsetter planlagte tester/runtimes; faktisk kjøring og sikkerhetsbevis gjenstår. Ingen av disse sikkerhetsegenskapene er implementert eller funksjonstestet nå.

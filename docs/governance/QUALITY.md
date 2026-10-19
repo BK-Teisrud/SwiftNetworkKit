@@ -22,9 +22,9 @@ Godkjent v1-scope, lisens, plattform-/verktøymatrise, API-/feilmodell, concurre
 
 ## CI-innføring
 
-Fase 0 beskriver konkrete jobs og stabilt navn på en samlet gate, for eksempel `quality-gate`. Fase 1 oppretter build/test/DocC/dependency-kontroll med Apples/offisielle verktøy. Ingen generisk workflow som alltid blir grønn eller hopper over produktkontroller ved manglende Package.swift. Aktiver required status check først etter vellykket reell kjøring på main og en PR. Unngå path filters som etterlater påkrevde sjekker ventende.
+[CI_AND_TEST_PLAN.md](../planning/CI_AND_TEST_PLAN.md) / ADR-0008 fastsetter source-integrity, macos-core, ios-core, watchos-core, tvos-core, documentation og quality-gate. Standard GitHub-runners uten betalte tillegg er valgt; fire plattformfamilier skal bygges ved hver PR etter innføring. Fase 1 oppretter build/test/DocC/dependency-kontroll med Apples/offisielle verktøy. Ingen generisk workflow som alltid blir grønn eller hopper over produktkontroller ved manglende Package.swift. Aktiver required status check først etter vellykket reell kjøring på main og en PR. Unngå path filters som etterlater påkrevde sjekker ventende.
 
-GITHUB_TOKEN gis read-only som standard; særskilte write-jobber begrunnes. Ingen pull_request_target som kjører upålitelig kode, ingen secrets i fork-PR-er. Verktøy og actions velges i ADR-DEC-07; eksterne actions krever eksplisitt avklaring mot kravet om offisielle verktøy og låses til full commit-SHA. Dependabot/workflow opprettes først når faktiske manifests og vedtatte verktøy finnes.
+GITHUB_TOKEN gis read-only som standard; særskilte write-jobber begrunnes. Ingen pull_request_target som kjører upålitelig kode, ingen secrets i fork-PR-er. ADR-0008 velger Apples/offisielle verktøy, Swift Testing som primær og XCTest ved særskilt behov. Bare nødvendige GitHub-eide actions er valgt, låst til full commit-SHA; SHA-kravet er også håndhevet i repositoryinnstillingene. Ingen eksterne reusable workflows innføres. Dependabot/workflow opprettes først når faktiske manifests og vedtatte verktøy finnes.
 
 ## Release
 
