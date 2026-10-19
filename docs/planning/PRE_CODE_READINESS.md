@@ -1,33 +1,33 @@
-# Klarhetskontroll før kodestart
+# Readiness review before implementation
 
-Dato: 2026-10-19. **Forberedelser er godkjent utført; implementasjon er fortsatt ikke autorisert.** F0-godkjenningen i ADR-0009 gjelder planlegging. Startporten [#41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41) forblir åpen til eier gir et eget uttrykkelig klarsignal.
+Date: 2026-10-19. **Preparations are approved and complete; implementation is still not authorized.** ADR-0009 approves planning. The [start gate #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41) stays open until separate explicit owner authorization.
 
-## Hva er klart
+## Ready foundations
 
-- Rettighetshaver Teisrud Development AS, proprietær policy, HTTP-kjerne og navn/modul er avklart.
-- OS 17/14/10/17, Xcode 26.3+, tools 6.2 og Swift 6 er vedtatt.
-- HTTP-, livssyklus-, sikkerhets- og CI-kontrakter er versjonert; utsatt scope er tydelig.
-- Arbeidet er brutt ned i I01–I23 med akseptansekriterier, testkrav, foreldreepics og native blocked-by-lenker. [Arbeidskøen](WORK_QUEUE.md) fastsetter anbefalt seriell rekkefølge.
-- Main krever PR uten bypass. Nye v*-tagger kan bare opprettes av admin gjennom avgrenset opprettingsunntak; endring/sletting har ingen bypass. Immutable releases er på. Web sign-off er av etter konkret eiergodkjenning, fordi prosjektet ikke bruker DCO.
-- Prosjektet har én statusmodell, sortert arbeidskø, ferdigvisning og kontrollert import/statusflyt.
-- Ingen produktkode, manifest, testkode, prototypes, workflows, releasetagger eller releases er opprettet.
+- Rights holder Teisrud Development AS, proprietary policy, HTTP-core scope, and naming/module boundaries are decided.
+- OS 17/14/10/17, Xcode 26.3+, tools 6.2, and Swift 6 are approved.
+- HTTP/lifecycle/security/CI contracts are versioned; deferred scope is explicit.
+- I01–I23 have criteria, test requirements, parent epics, and native blocked-by links. The [work queue](WORK_QUEUE.md) gives the recommended serial order.
+- Main requires PRs without bypass. A limited creation exception permits admins to create new v* tags; update/deletion have no bypass. Immutable releases are enabled. Web sign-off is disabled with specific approval because no DCO is used.
+- The project has one status model, a sorted work queue, a completed view, and verified import/status transitions.
+- No product code, manifest, test code, prototypes, workflows, release tags, or releases exist.
 
-## Avklaringer som ikke skal skjules
+## Outstanding items
 
-| Punkt | Faktisk status | Når må det løses? |
+| Item | Actual status | Required resolution |
 | --- | --- | --- |
-| Kodestart | Ikke godkjent; #41 åpen | Før I01 eller annet kode-/workflowarbeid |
-| Minimums-OS-testmiljø | Ikke tilgjengelighetsbekreftet; nyere runtimes er inventarført | Før release; I21 krever reelle bevis eller eksplisitt endring av støttevedtak |
-| Fysiske enheter | Eier oppgir alle typer med nyeste oppdateringer; eksakte versjoner ikke kontrollert | I22 før test/release |
-| Kontaktadresse | Eier: «ingen adresse ennå»; ingen adresse publiseres | Før private lisenshenvendelser/eksterne bidragsavtaler tilbys |
-| Kontosikkerhet | Eier bekrefter 2FA aktivert; ingen koder/nøkler innhentet | Vedlikehold; uavhengig kontoaudit er ikke utført |
-| Ekte CI | Planlagt; ingen workflows/checks finnes | I06 etter kodegodkjenning; krev checks først etter ekte verifisert kjøring |
-| API-symboler | Avgrenset SDK-kontroll i PLATFORM_MATRIX; faktiske nye overloads kontrolleres per oppgave | Før relevant oppgave blir Ready |
+| Implementation | Not authorized; #41 open | Before I01 or any code/workflow work |
+| Minimum-OS environments | Access unconfirmed; newer runtimes inventoried | Before release; I21 requires evidence or explicit revision of support |
+| Physical devices | Owner reports all types on current updates; exact versions unverified | I22 before testing/release |
+| Contact address | Owner stated, in translation, “no address yet”; none published | Before offering private licensing/contribution agreements |
+| Account security | Owner confirms 2FA; no codes/keys collected | Ongoing maintenance; no independent account audit performed |
+| Real CI | Planned; no workflows/checks exist | I06 after authorization; require checks only after verified real runs |
+| API symbols | Bounded SDK checks in PLATFORM_MATRIX; inspect actual new overloads per task | Before the relevant task becomes Ready |
 
-Manglende kontaktadresse og eldre OS-enheter er ikke en skjult påstand om full releaseberedskap. Intern implementasjon kan godkjennes separat uten kjøp eller oppgraderinger. Release forblir blokkert til faktisk testbevis foreligger. Hvis minimumsmiljø ikke kan skaffes, må eier endre støttekravet uttrykkelig; en nyere simulator erstatter ikke kravet.
+The missing contact address and older test environments do not imply full release readiness. Internal implementation may be approved separately without purchases/upgrades. Release remains blocked until actual evidence exists. If minimum environments cannot be obtained, the owner must explicitly revise support; newer simulators are not substitutes.
 
-## Etter et senere klarsignal
+## After later authorization
 
-Registrer eierens konkrete utsagn/dato/scope på #41, lukk porten og triager I01 til Ready. Velg deretter laveste Order med lukkede avhengigheter og oppfylte Ready-kriterier. Gjennomfør én oppgave om gangen med PR, tester og dokumentasjon. En ferdig plan eller høy prioritet lukker aldri startporten automatisk. Nytt releaseklarsignal kreves før tag/publisering.
+Record the owner's exact statement/date/scope on #41, close the gate, and triage I01 to Ready. Then select the lowest Order with closed blockers and satisfied Ready criteria. Complete one task at a time with a PR, tests, and documentation. A completed plan or high priority never closes the start gate automatically. Separate release authorization is required before tagging/publication.
 
-F0-milepælen kan avsluttes når OPS-01 og oppsettsverifikasjonen er fullført; #41 ligger i F1 og bevarer skillet mellom fullført forberedelse og autorisert utvikling.
+F0 and OPS-01 were completed through PR #65. #41 belongs to F1, preserving the distinction between completed preparation and authorized development. English GitHub content and Norwegian conversations follow [ADR-0011](../decisions/ADR-0011-language-policy.md); this language decision does not authorize code.

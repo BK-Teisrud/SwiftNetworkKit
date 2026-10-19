@@ -1,19 +1,19 @@
-# Release, versjonering og vedlikehold
+# Releases, versioning, and maintenance
 
-Ingen release, tag eller pakke publiseres i oppsettsfasen. Repoet er ikke installerbart ennå.
+Publish no release, tag, or package during setup. The repository is not installable yet.
 
-Etter implementasjonsbeslutning brukes SemVer: 0.x for eksplisitt ustabile prereleases; 1.0.0 først når godkjent kjernescope og releaseport er oppfylt. Fra 1.0: patch for bakoverkompatible feilrettinger, minor for kompatible tillegg, major for brudd. Tagformat vMAJOR.MINOR.PATCH; prerelease eksempel v0.1.0-alpha.1.
+After implementation authorization, use SemVer: 0.x for explicitly unstable prereleases; 1.0.0 only after the approved core scope and release gate are satisfied. From 1.0, patch means compatible fixes, minor means compatible additions, and major means breaking changes. Tag format: vMAJOR.MINOR.PATCH; prerelease example: v0.1.0-alpha.1.
 
-## Releaseprosedyre
+## Release procedure
 
-1. Egen release-PR med scope, verifisert commit, changelog, API-/plattformendringer, kjente problemer og migrasjon.
-2. Bekreft grønn faktisk CI, kravsporbarhet, lisens og sikkerhetsvurdering. Fjern aldri funn bare for å få en release ut.
-3. Merge til main. Maintainer oppretter verifiserbar annotert/signert tag på godkjent commit; tagger flyttes aldri.
-4. Opprett release-utkast med eksplisitte release notes og SHA; last opp og kontroller eventuelle artefakter før publisering. Prerelease markeres som sådan. Immutable releases er aktivert: publisering låser release-tag og tilhørende assets. Krev eget faktisk releaseklarsignal før publisering; ingen auto-publisering nå.
-5. Verifiser at fremtidig SPM-produkt kan resolves/buildes fra taggen og at dokumentasjonen peker til riktig versjon.
+1. Open a dedicated release PR recording scope, verified commit, changelog, API/platform changes, known issues, and migration guidance.
+2. Confirm actual passing CI, requirements traceability, rights compliance, and security review. Never dismiss findings merely to ship.
+3. Merge to main. The maintainer creates a verifiable annotated/signed tag on the approved commit. Never move tags.
+4. Prepare a release draft with explicit notes and SHA. Upload and verify any assets before publication. Mark prereleases accordingly. Immutable releases are enabled: publication locks the release tag and associated assets. Obtain separate actual release authorization before publication; no automatic publication now.
+5. Verify that the future SPM product resolves/builds from the tag and documentation points to the correct version.
 
-En feilrelease korrigeres med ny patch/tag. Marker berørt release tydelig; ikke skriv om publisert historikk. Sårbarheter følger SECURITY.md og eventuelt advisory.
+Correct faulty releases with a new patch/tag. Clearly identify affected releases; do not rewrite published history. Handle vulnerabilities under SECURITY.md and an advisory where appropriate.
 
-## Kompatibilitet
+## Compatibility
 
-Høyere minimums-OS, inkompatible public API-/Sendable-/feilendringer eller bortfall av dokumentert adferd regnes som breaking fra 1.0. Deprecations dokumenteres med erstatning; planlagt fjerning tidligst neste major, bortsett fra dokumenterte sikkerhetstiltak. Siste stabile minor på gjeldende major får ordinære rettinger. Eldre major støttes bare ved eksplisitt vedtak; lov ikke ubegrenset backport.
+From 1.0, higher minimum OS versions, incompatible public API/Sendable/error changes, or removal of documented behavior are breaking. Document deprecations with replacements; planned removal occurs no earlier than the next major, except documented security measures. The latest stable minor of the current major receives ordinary fixes. Older majors require explicit support decisions; do not promise unlimited backports.

@@ -1,21 +1,21 @@
-# ADR-0001: Repository og planleggingsfase
+# ADR-0001: Repository and planning stage
 
-Dato: 2026-10-19. Status: Godkjent for repooppsett.
+Date: 2026-10-19. Status: Accepted for repository setup.
 
-## Kontekst
+## Context
 
-Brukeren ønsker komplett GitHub-oppsett for PDF-spesifikasjonen, uten kode, og har valgt offentlig repo under BK-Teisrud med navnet SwiftNetworkKit.
+The owner requested a complete GitHub setup for the PDF specification, without code, and selected a public repository named SwiftNetworkKit under BK-Teisrud.
 
-## Beslutning
+## Decision
 
-Ett repo, main som default, kortlivede branches og squash-merge. Issues og milepæler er autoritativ backlog, supplert med GitHub Projects når autorisasjonen er på plass. Dokumentasjon er på norsk; symboler og etablerte tekniske navn beholdes. Ingen produktkode eller workflows aktiveres nå. Lisens og plattformversjoner er åpne.
+One repository, main as the default branch, short-lived branches, and squash merges. Issues and milestones are the authoritative backlog, supplemented by GitHub Projects once authorized. Documentation was initially written in Norwegian, retaining technical symbols and established names. ADR-0011 subsequently establishes English for all repository and GitHub content. No product code or workflows are enabled at this stage. Licensing and platform versions were initially unresolved.
 
-Solo-profil krever PR og løste review-tråder, men null obligatoriske approvals. Admin-bypass begrenses til PR. Tag-regler beskytter v*-navnerommet; admin får opprette releasetagger. Reviewkrav skjerpes når en reell medreviewer finnes.
+The solo profile requires PRs and resolved review threads, but zero mandatory approvals. The initial admin bypass was limited to PRs. Tag rules protect the v* namespace; admins may create release tags. Tighten review requirements when another qualified reviewer is available.
 
-## Konsekvenser
+## Consequences
 
-Oppsettet kan brukes av én maintainer uten review-deadlock. Fremtidig CI må etableres og ha kjørt før status checks blir obligatoriske. Offentlig repo uten valgt lisens er synlig, men ikke presentert som fritt lisensiert. Produkt- og lisensbeslutninger krever egne ADR-er.
+One maintainer can use the setup without a review deadlock. Future CI must exist and have run before checks become mandatory. A public repository without a selected license is visible but is not presented as freely licensed. Product and licensing decisions require separate ADRs.
 
-## Senere herding
+## Subsequent hardening
 
-ADR-0010 erstatter den opprinnelige admin-bypass- og tagmodellen. Gjeldende main har ingen bypass; tag-oppretting og uforanderlighet håndheves separat.
+ADR-0010 supersedes the original admin-bypass and tag model. Main now has no bypass; tag creation and immutability are enforced separately. ADR-0011 supersedes the original documentation-language choice. Historical decisions remain in Git history.

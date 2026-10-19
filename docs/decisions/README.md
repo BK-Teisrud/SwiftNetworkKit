@@ -1,27 +1,19 @@
-# Beslutningslogg
+# Decision log
 
-| ID | Tema | Status |
+| ID | Topic | Status |
 | --- | --- | --- |
-| ADR-0001 | Repo, arbeidsflyt og scope for oppsett | Godkjent for repooppsett |
-| [ADR-0002](ADR-0002-ownership-and-rights.md) | Rettighetshaver og proprietær rettighetspolicy | Godkjent av prosjekteier |
-| [ADR-0003](ADR-0003-v1-scope-and-naming.md) | HTTP-kjerne og navn på pakke, produkt og modul | Godkjent av prosjekteier |
-| [ADR-0004](ADR-0004-platforms-and-toolchain.md) | Plattformminimum og verktøygrunnlag | Godkjent av prosjekteier |
-| DEC-01 | Minimums-OS og Swift/Xcode/SDK-matrise | Godkjent: fire plattformer, Xcode 26.3+, Swift tools 6.2, Swift 6; ADR-0004 |
-| DEC-02 | v1-scope, modulnavn og targetgrenser | Godkjent: HTTP-kjerne først; NetworkKit, én bibliotekmodul; ADR-0003 |
-| DEC-03 | Lisens og rettighetshaver | Godkjent: Teisrud Development AS; proprietær policy, se ADR-0002 |
-| [ADR-0005](ADR-0005-http-api-contract.md) | HTTP-, respons- og feilkontrakt | Hovedvalg godkjent av prosjekteier; standarddetaljer dokumentert |
-| DEC-04 | Endpoint, raw request, headers/body og feilkontrakt | Vedtatt: typed + raw, respons-wrapper, JSON/Data/tekst/tomt, separat cancellation; ADR-0005 |
-| [ADR-0006](ADR-0006-concurrency-and-lifecycle.md) | Session-eierskap, concurrency og tidsgrenser | Hovedvalg godkjent; livssyklusdetaljer dokumentert |
-| DEC-05 | Cancellation, clocks, session-eierskap og concurrency | Vedtatt: egen + injisert session, 30/60 sekunder, isolert state og eksplisitt shutdown; ADR-0006 |
-| [ADR-0007](ADR-0007-security-and-network-policy.md) | Sikkerhet, auth, lagring og nettverk | Hovedvalg godkjent; standarddetaljer dokumentert |
-| DEC-06 | Auth, retry, cache, privacy og sikkerhetsgrenser | Vedtatt: ingen automatiske lagre, header-provider, HTTPS med loopback-unntak; ADR-0007 |
-| [ADR-0008](ADR-0008-ci-tools-and-budget.md) | CI, offisielle verktøy og kostnadsramme | Hovedvalg godkjent; gjennomføringsplan dokumentert |
-| DEC-07 | Offisielle verktøy, CI-budsjett og forsyningskjede | Vedtatt: standardrunners uten betalte tillegg, fire PR-plattformer og egne releasebevis; ADR-0008 |
-| [ADR-0009](ADR-0009-f0-approval-no-implementation.md) | Samlet F0-godkjenning og implementasjonsstatus | Godkjent planlegging; implementasjon ikke autorisert |
-| GATE-00 / #28 | Godkjenn F0-grunnlaget og avklar implementasjonsstatus | Godkjent av prosjekteier; fortsatt ingen kode |
+| [ADR-0001](ADR-0001-repository.md) | Repository, workflow, and setup scope | Accepted for setup; later hardening and language choices supersede relevant parts |
+| [ADR-0002](ADR-0002-ownership-and-rights.md) / DEC-03 | Rights holder and proprietary rights policy | Accepted: Teisrud Development AS; separate written permission |
+| [ADR-0003](ADR-0003-v1-scope-and-naming.md) / DEC-02 | HTTP core and package/product/module naming | Accepted: HTTP core first; NetworkKit, one library module |
+| [ADR-0004](ADR-0004-platforms-and-toolchain.md) / DEC-01 | Minimum platforms and toolchain | Accepted: four platform families; Xcode 26.3+, Swift tools 6.2, Swift 6 |
+| [ADR-0005](ADR-0005-http-api-contract.md) / DEC-04 | Endpoints, raw requests, responses, headers/body, and errors | Accepted: typed + raw, response wrapper, JSON/Data/text/empty, separate cancellation |
+| [ADR-0006](ADR-0006-concurrency-and-lifecycle.md) / DEC-05 | Session ownership, concurrency, cancellation, and clocks | Accepted: owned + injected session, 30/60 seconds, isolated state, explicit shutdown |
+| [ADR-0007](ADR-0007-security-and-network-policy.md) / DEC-06 | Security, authentication, storage, privacy, and networking | Accepted: no automatic stores, header provider, HTTPS with loopback exception |
+| [ADR-0008](ADR-0008-ci-tools-and-budget.md) / DEC-07 | CI, official tools, cost limits, and supply chain | Accepted: standard runners, no paid add-ons, four PR platforms, separate release evidence |
+| [ADR-0009](ADR-0009-f0-approval-no-implementation.md) / GATE-00 #28 | Combined F0 acceptance and implementation status | Planning accepted; implementation unauthorized |
+| [ADR-0010](ADR-0010-pre-code-governance.md) | Preparation and GitHub hardening | Accepted; preparations complete, start gate remains open |
+| [ADR-0011](ADR-0011-language-policy.md) | English GitHub content; Norwegian collaboration | Accepted by explicit owner request |
 
-ADR-0009 registrerer at hovedvalg og dokumenterte standarddetaljer i ADR-0002–ADR-0008 er godkjent samlet. Ingen av disse vedtakene gir implementasjonsklarsignal.
+ADR-0009 records combined acceptance of the core choices and documented defaults in ADR-0002–ADR-0008. None authorizes implementation.
 
-Bruk [malen](TEMPLATE.md). En foreslått ADR gir ikke klarsignal til implementasjon. Godkjenning krever eierens eksplisitte beslutning i tilhørende issue/PR. Endre ikke historiske beslutninger uten spor; erstatt dem med ny ADR.
-
-- [ADR-0010 – Forberedelser og GitHub-herding](ADR-0010-pre-code-governance.md)
+Use the [template](TEMPLATE.md). A proposed ADR does not authorize implementation. Acceptance requires the owner's explicit decision in the associated issue/PR or recorded conversation. Preserve a trace when superseding historical decisions; create a new ADR instead of silently changing their substance.

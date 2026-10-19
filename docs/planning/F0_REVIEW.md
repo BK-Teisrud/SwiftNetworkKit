@@ -1,46 +1,46 @@
-# Samlet godkjent F0-planleggingsgrunnlag
+# Approved F0 planning baseline
 
-Status: Godkjent av prosjekteier 2026-10-19. **Implementasjon er ikke autorisert; fortsatt ingen kode.** Se [ADR-0009](../decisions/ADR-0009-f0-approval-no-implementation.md).
-Dato: 2026-10-19. Arkitekturport: [GATE-00 / #28](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/28).
+Status: Accepted by the owner on 2026-10-19. **Implementation is not authorized; still no code.** See [ADR-0009](../decisions/ADR-0009-f0-approval-no-implementation.md).
+Date: 2026-10-19. Architecture gate: [GATE-00 / #28](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/28).
 
-## Vedtakene som er godkjent samlet
+## Decisions accepted together
 
-| Oppgave | Vedtak | Autoritativ dokumentasjon |
+| Issue | Decision | Authoritative documentation |
 | --- | --- | --- |
-| DEC-03 / #3 | Teisrud Development AS er rettighetshaver. Proprietært; tredjepartsbruk krever særskilt skriftlig tillatelse, med forbehold for lov/GitHub-vilkår. Repoet er offentlig under BK-Teisrud | [ADR-0002](../decisions/ADR-0002-ownership-and-rights.md), LICENSE |
-| DEC-02 / #2 | HTTP-kjerne først; repo/pakke SwiftNetworkKit, bibliotekprodukt/modul/importnavn NetworkKit, én bibliotekmodul | [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md), [v1-scope](V1_SCOPE.md) |
-| DEC-01 / #1 | iOS/iPadOS 17, macOS 14, watchOS 10, tvOS 17. Xcode 26.3+, Swift tools 6.2, Swift 6-modus. VisionOS utsettes | [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md), [plattformmatrise](PLATFORM_MATRIX.md) |
-| DEC-04 / #4 | Typed + raw requests; respons-wrapper; JSON/Data/tekst/tomt; strukturerte feil med separat CancellationError; 2xx med eksplisitte kallunntak | [ADR-0005](../decisions/ADR-0005-http-api-contract.md), [HTTP-kontrakt](HTTP_API_CONTRACT.md) |
-| DEC-05 / #5 | Gjenbrukt egen session pluss app-eid injeksjon. 30 sekunder inaktivitet / 60 sekunder samlet budsjett, konfigurerbart. Isolert state, entydig cancellation/timeout og kontrollert shutdown | [ADR-0006](../decisions/ADR-0006-concurrency-and-lifecycle.md), [livssyklus](CONCURRENCY_AND_LIFECYCLE.md) |
-| DEC-06 / #6 | Automatiske lagre av som standard; liten auth-header-provider; HTTPS med eksplisitt lokalt HTTP-unntak uten credentials; avgrensede redirects, injeksjon og sanerte logger | [ADR-0007](../decisions/ADR-0007-security-and-network-policy.md), [sikkerhetspolicy](SECURITY_AND_NETWORK_POLICY.md) |
-| DEC-07 / #7 | Standard GitHub-runners uten betalte tillegg. Fire PR-plattformfamilier og egne minimums-OS-/releasebevis. Offisielle testverktøy og SHA-låste Actions | [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md), [CI-/testplan](CI_AND_TEST_PLAN.md) |
+| DEC-03 / #3 | Teisrud Development AS holds the rights. Proprietary; third-party use requires separate written permission, subject to law/GitHub terms. Public under BK-Teisrud | [ADR-0002](../decisions/ADR-0002-ownership-and-rights.md), LICENSE |
+| DEC-02 / #2 | HTTP core first; repository/package SwiftNetworkKit, product/module/import NetworkKit, one library module | [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md), [v1 scope](V1_SCOPE.md) |
+| DEC-01 / #1 | iOS/iPadOS 17, macOS 14, watchOS 10, tvOS 17; Xcode 26.3+, Swift tools 6.2, Swift 6 mode; visionOS deferred | [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md), [platform matrix](PLATFORM_MATRIX.md) |
+| DEC-04 / #4 | Typed + raw requests; response wrapper; JSON/Data/text/empty; structured errors with separate CancellationError; 2xx with explicit call exceptions | [ADR-0005](../decisions/ADR-0005-http-api-contract.md), [HTTP contract](HTTP_API_CONTRACT.md) |
+| DEC-05 / #5 | Reused owned session plus app-owned injection; configurable 30-second inactivity / 60-second total budget; isolated state, unambiguous cancellation/timeout, controlled shutdown | [ADR-0006](../decisions/ADR-0006-concurrency-and-lifecycle.md), [lifecycle](CONCURRENCY_AND_LIFECYCLE.md) |
+| DEC-06 / #6 | Automatic stores off by default; small authentication-header provider; HTTPS with explicit local HTTP exception without credentials; bounded redirects, injection, sanitized logs | [ADR-0007](../decisions/ADR-0007-security-and-network-policy.md), [security policy](SECURITY_AND_NETWORK_POLICY.md) |
+| DEC-07 / #7 | Standard GitHub runners without paid add-ons; four PR platform families and separate minimum-OS/release evidence; official test tools, SHA-pinned actions | [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md), [CI/test plan](CI_AND_TEST_PLAN.md) |
 
-Prosjekteier har godkjent hovedvalgene og dokumenterte standarddetaljer samlet. Ingen funksjoner eller tester er fremstilt som implementert. Issues er live status; denne oversikten er beslutningsgrunnlaget.
+The owner accepted the core choices and documented defaults together. No feature or test is presented as implemented. Issues hold live status; this overview records the decision baseline.
 
-## Viktige konsekvenser av standarddetaljene
+## Material consequences of the defaults
 
-- Rå request følger samme tids-/sikkerhets-/statusregler; den er ingen generell bypass. JSON med tom body gir ikke et kunstig objekt.
-- Default 30/60 er ikke en hard sanntidsgaranti for synkron appkode; strengere grenser i en app-eid session består.
-- Shutdown kansellerer egne operasjoner og ugyldiggjør kun egen session. Ingen separat graceful-drain-modus i v1.
-- Ephemeral alene er ikke lik ingen RAM-lagring; lagre deaktiveres eksplisitt i standardprofilen. Annen systemlagring krever et uttrykkelig appvalg.
-- Auth-provider gjør ingen login/refresh. Ingen credentials over HTTP, heller ikke lokalt. Redirectstandard er samme-origin GET/HEAD, maks fem hopp; ingen automatisk mutasjonsreplay/cross-origin/downgrade.
-- Ingen generell error-body-capture, ekstern telemetri, egen retry-/cache-/offline-/streamingmodul eller nye pakkedependencies i v1.
-- CI-planen gir ikke automatisk minimums-OS-testdekning. Minimumsruntimes/enheter er ikke bekreftet tilgjengelige; manglende releasebevis skal ikke skjules med nyere simulatorresultater.
+- Raw requests follow the same timing/security/status policies; no general bypass. Empty JSON bodies do not produce manufactured objects.
+- The 30/60 defaults do not guarantee hard real-time return from synchronous app code; stricter borrowed-session limits remain effective.
+- Shutdown cancels only the client's operations and invalidates only its owned session. No separate graceful-drain mode in v1.
+- Ephemeral does not mean no RAM storage; explicitly disable stores in the default profile. Other system storage requires deliberate app choice.
+- Providers do not log in or refresh tokens. No credentials over HTTP, even locally. Redirect defaults: same-origin GET/HEAD, at most five hops; no automatic mutating replay/cross-origin/downgrade.
+- No generic error-body capture, external telemetry, custom retry/cache/offline/streaming module, or new package dependencies in v1.
+- CI plans do not establish minimum-OS coverage. Minimum runtimes/devices remain unconfirmed; newer simulator results must not hide missing evidence.
 
-## Hva F0-godkjenning betyr
+## Meaning of F0 approval
 
-Prosjekteier kan godkjenne dette som planleggings- og arkitekturgrunnlag og samtidig beslutte at implementasjon fortsatt er stanset. En slik godkjenning betyr ikke at biblioteket, manifest, tester, workflows eller produktrelease kan opprettes.
+The owner may approve the planning/architecture baseline while keeping implementation stopped. Such approval does not permit creating library code, manifests, tests, workflows, or releases.
 
-Før utviklingsoppgaver blir Ready må relevante kontrakter være brutt ned til konkrete delissues med nødvendige symbol-/availabilitykontroller og testbare kriterier. Før en release må reelle tester, sikkerhetsreview, runtime-/minimums-OS-bevis og alle leveransekrav være oppfylt.
+Before tasks become Ready, decompose contracts into concrete issues with necessary symbol/availability checks and testable criteria. Before release, satisfy real tests, security review, runtime/minimum-OS evidence, and delivery requirements.
 
-Bare et senere uttrykkelig implementasjonsklarsignal endrer kodeforbudet. Ingen PR eller lukking av en beslutningsoppgave gir dette automatisk. Ved fortsatt kodepause skal GATE-00 dokumentere både godkjent planlegging og «implementasjon ikke autorisert» eksplisitt.
+Only later explicit implementation authorization changes the restriction. PRs and closed decision issues do not grant it automatically. GATE-00 records both planning acceptance and implementation not authorized.
 
-## Kjente gjenstående forhold i GitHub-oppsettet
+## GitHub setup follow-up
 
-Gjennomgangen av selve repooppsettet identifiserte prosjektvisninger/statusdobbeltføring, admin-bypass, tag-/releasebeskyttelse, web sign-off og privat kontaktkanal som videre vurderingspunkter i OPS-01 / #30. SHA-låsing for Actions er nå aktivert. Disse punktene var ikke endret gjennom DEC-beslutningene. De er senere håndtert og verifisert i ADR-0010 og SETUP_STATUS.md; kontaktadresse er uttrykkelig utsatt.
+The setup review identified views/duplicate status, admin bypass, tag/release protection, web sign-off, and private contact channels as OPS-01 / #30 follow-ups. SHA pinning was enabled. These changes were separate from the DEC decisions and were subsequently addressed in ADR-0010 and SETUP_STATUS.md; a contact address is explicitly deferred.
 
-Ingen kontofakturering, abonnement, nye samarbeidspartnere, secrets eller eksterne apper er opprettet. Ingen Swift-filer, Package.swift, workflows eller releasetagger er lagt til.
+No billing settings, subscriptions, collaborators, secrets, or external apps were added. No Swift files, Package.swift, workflows, or release tags were created.
 
-## Godkjenning
+## Approval
 
-Prosjekteiers svar i chatten 2026-10-19: «Godkjenn F0-planleggingen; fortsatt ingen kode». Godkjenningen gjelder grunnlaget publisert gjennom PR #38, med standarddetaljene og begrensningene over. Utfallet registreres i GATE-00 og ADR-0009: planlegging godkjent, implementasjon ikke autorisert. Senere endringer krever dokumentert vurdering; kodearbeid krever eget uttrykkelig klarsignal.
+Owner response on 2026-10-19, translated from Norwegian: “Approve F0 planning; still no code.” Approval covers the baseline published through PR #38, including the defaults and limitations above. GATE-00 and ADR-0009 record planning accepted, implementation unauthorized. Later changes require documented assessment; code needs separate explicit approval.

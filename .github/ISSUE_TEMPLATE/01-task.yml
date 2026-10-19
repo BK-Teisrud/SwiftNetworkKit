@@ -1,32 +1,32 @@
-name: Arbeidsoppgave
-description: Strukturert arbeidsoppgave uten sensitive data.
-title: "[Arbeidsoppgave] "
+name: Task
+description: A structured task without sensitive data.
+title: "[Task] "
 labels: ["type: task"]
 body:
   - type: markdown
     attributes:
-      value: "Repoet er offentlig. Bruk syntetiske data; rapporter sikkerhet privat."
+      value: "This repository is public. Use synthetic data; report vulnerabilities privately."
   - type: textarea
     id: problem
     attributes:
-      label: Formål og omfang
+      label: Purpose and scope
     validations:
       required: true
   - type: textarea
     id: requirements
     attributes:
-      label: Kravreferanse og avhengigheter
+      label: Requirement references and dependencies
     validations:
       required: true
   - type: textarea
     id: acceptance
     attributes:
-      label: Akseptansekriterier
+      label: Acceptance criteria
     validations:
       required: true
   - type: textarea
     id: verification
     attributes:
-      label: Plan for verifikasjon
+      label: Verification plan
     validations:
       required: true

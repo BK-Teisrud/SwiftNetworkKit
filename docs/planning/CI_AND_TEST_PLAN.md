@@ -1,71 +1,71 @@
-# CI- og testplan etter implementasjonsklarsignal
+# CI and test plan after implementation authorization
 
-Status: Vedtatt hovedplan 2026-10-19, se [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md). Ingen workflow, testtarget, produktkode eller bestått CI finnes nå.
+Status: Core plan accepted 2026-10-19; see [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md). No workflows, test targets, product code, or passed CI runs exist.
 
-## Planlagte PR-jobber
+## Planned PR jobs
 
-Alle jobber kjøres på pull requests og relevante push til main etter at ekte CI innføres. Valget er fire plattformfamilier ved hver PR, ikke bare før release. Dokumentasjons-PR-er får ikke en skjult global omgåelse av den vedtatte matrisen.
+After real CI is introduced, run every job on pull requests and relevant pushes to main. The owner selected all four platform families on every PR, not only releases. Documentation PRs receive no hidden global bypass of this matrix.
 
-| Jobbnavn | Runner / verktøy | Faktisk kontroll som må finnes før jobben kan bli grønn |
+| Job | Runner / tools | Required real checks before success |
 | --- | --- | --- |
-| source-integrity | Standard GitHub-runner; offisielle/bundne systemverktøy | Manifest/dependency-/plattform-/språkmoduskrav, filformat og dokumentasjonslenker. Ingen eksterne Swift-pakkedependencies eller SwiftUI-import i biblioteket |
-| macos-core | macos-15, arm64, eksplisitt Xcode 26.3 | Produktbygg med macOS 14-minimum og unit-/direkte integrasjonstester på faktisk runner-OS |
-| ios-core | macos-15, arm64, eksplisitt Xcode 26.3 | iOS/iPadOS-produktbygg med 17-minimum og tester på valgt iPhone- og iPad-simulator, baseline runtime 26.2 |
-| watchos-core | macos-15, arm64, eksplisitt Xcode 26.3 | watchOS-produktbygg med 10-minimum og tester på valgt watchOS 26.2-simulator, med kompatibel iPhone-paring/harness der dette trengs |
-| tvos-core | macos-15, arm64, eksplisitt Xcode 26.3 | tvOS-produktbygg med 17-minimum og tester på valgt Apple TV-simulator, baseline runtime 26.2 |
-| documentation | Standard macOS-runner, Xcode 26.3 / DocC | Bygg dokumentasjon for bibliotekets faktiske public API, kontroller warnings/lenker og at guider stemmer med leveransen |
-| quality-gate | Liten standardrunner-jobb som samler resultat | Alle obligatoriske jobber har suksess; feil, manglende jobber og uventet skip gir ikke grønt resultat |
+| source-integrity | Standard GitHub runner; official/bundled tools | Manifest/dependency/platform/language-mode requirements, file formats, and documentation links; no external Swift packages or library SwiftUI imports |
+| macos-core | macos-15, arm64, explicitly selected Xcode 26.3 | Product build with macOS 14 minimum and unit/direct integration tests on the actual host OS |
+| ios-core | macos-15, arm64, explicitly selected Xcode 26.3 | iOS/iPadOS build with minimum 17 and tests on selected iPhone and iPad simulators; baseline runtime 26.2 |
+| watchos-core | macos-15, arm64, explicitly selected Xcode 26.3 | watchOS build with minimum 10 and tests on a selected watchOS 26.2 simulator, with compatible iPhone pairing/harness where needed |
+| tvos-core | macos-15, arm64, explicitly selected Xcode 26.3 | tvOS build with minimum 17 and tests on a selected Apple TV simulator; baseline runtime 26.2 |
+| documentation | Standard macOS runner, Xcode 26.3 / DocC | Build docs for the actual public API; check warnings/links and guide accuracy |
+| quality-gate | Small standard-runner aggregation job | Every mandatory job succeeds; failures, missing jobs, and unexpected skips cannot yield success |
 
-source-integrity og dokumentasjonskontroll er støttejobber, ikke nye produktavhengigheter. Eksakte schemes, testplaner og simulator-ID-er bindes og dokumenteres i første reelle CI-PR etter at pakken finnes. En nødvendig app-/testhost er kun testinfrastruktur og øker ikke antallet distribuerte bibliotekmoduler. Dersom valgt testharness ikke kan kjøre på en plattform, skal det løses eller løftes som eksplisitt blocker; bygg alene gis ikke nytt navn som «tester bestått».
+Source integrity and documentation checks are supporting jobs, not product dependencies. Bind and document actual schemes, test plans, and simulator IDs in the first real CI PR once the package exists. An app/test host is test infrastructure, not another distributed library module. Resolve unsupported test harnesses or raise explicit blockers; a build alone cannot be renamed “tests passed.”
 
-## Runner- og toolchainkontroll
+## Runner and toolchain verification
 
-Planlagt primær runner er standard macos-15 (arm64). Sett DEVELOPER_DIR til den faktisk installerte Xcode 26.3-installasjonen og kontroller versjonen før bruk; ikke stol på image-default eller macos-latest. Offisielt inventar lest 2026-10-19 viser Xcode 26.3 build 17C529 og SDK-/simulatorruntimes 26.2, mens standard-Xcode er eldre. macOS-host i inventaret er 15.7.9, ikke bibliotekets minimum 14.
+The planned primary runner is standard macos-15 (arm64). Set DEVELOPER_DIR to the installed Xcode 26.3 and verify its version. Do not rely on image defaults or macos-latest. Official inventory reviewed 2026-10-19 lists Xcode 26.3 build 17C529 and SDK/simulator runtimes 26.2, but an older default Xcode. The inventory's macOS host is 15.7.9, not the library minimum 14.
 
-Registrer ved hver kjøring imageversjon, host-OS/arkitektur, Xcode-build, Swift-patch, SDK, runtime og valgte destinations. Kontroller at kompilatoren oppfyller Swift tools 6.2 og at prosjektet bruker Swift 6. Plattformminimum skal settes eksplisitt i framtidig manifest. Manglende valgt toolchain/runtime feiler preflight; ikke fall stille tilbake til annet verktøy eller oppgrader minimumene automatisk.
+Record image version, host OS/architecture, Xcode build, Swift patch, SDK, runtime, and destinations per run. Verify Swift tools 6.2 compatibility and Swift 6 language mode. Declare platform minimums explicitly in the future manifest. Missing toolchain/runtime fails preflight; do not silently fall back or automatically raise minimums.
 
-Inventar er tilgjengelighetsgrunnlag, ikke faktisk verifisert CI eller en frosset image. Første CI-PR må bevise at runneren kan kjøre valgte destinations, inkludert watch-paring. Oppdatering av runner/Xcode/runtime går gjennom PR og beholder vedtatte produktminimum. Ingen beta/RC er eneste required gate.
+Inventory establishes potential availability, not successful CI or a frozen image. The first CI PR must demonstrate selected destinations, including Watch pairing. Runner/Xcode/runtime updates go through PRs and retain approved product minimums. Beta/RC tooling cannot be the sole required gate.
 
-## Teststrategi og sikkerhet
+## Test strategy and security
 
-Swift Testing er standard for nye unit-tester og direkte integrasjonstester. XCTest brukes ved konkret platform-/performance-/harnessbehov; bruk ikke assertions fra begge rammeverk vilkårlig i samme test. Begge kommer fra det valgte Apple-verktøygrunnlaget, uten eksterne Swift Package-dependencies.
+Use Swift Testing for new unit/direct integration tests. Use XCTest for specific platform/performance/harness needs; do not arbitrarily mix assertions from both frameworks within a test. Both come from the selected Apple toolchain, without external Swift packages.
 
-Bruk URLProtocol/mocktransport og kontrollert intern klokke til normalflyt, feil, timeout, cancellation, snapshots, concurrency, session-eierskap, shutdown og securitypolicy. Bruk bare syntetiske data og testcredentials. Ingen tester er avhengige av offentlige tredjeparts-API-er eller ekte tokens. En kontrollert loopback-testtjeneste eller fysisk testharness kan brukes der transportegenskaper må verifiseres; dette er ingen backend som produkt.
+Use URLProtocol/mock transports and a controlled internal clock for normal/error paths, timeouts, cancellation, snapshots, concurrency, session ownership, shutdown, and security policy. Use synthetic data/test credentials only. Depend on no public third-party API or real token. Controlled loopback services or physical harnesses may verify transport properties; neither is a backend product.
 
-URLProtocol-tester alene verifiserer ikke TLS/system trust, ekte redirectflyt, cache/cookie-lagring eller OS-spesifikke oppførsel. Slike kontrakter får reelle kontroller der de gjelder før release. Ikke sett en vilkårlig coverage-prosent som erstatning for kontraktsdekning; dokumenter hvilke normal-/feil-/race-/sikkerhetstilfeller som faktisk er testet.
+URLProtocol alone does not verify TLS/system trust, real redirects, cache/cookie storage, or OS-specific behavior. Verify those contracts where applicable before release. Do not substitute an arbitrary coverage percentage for contract coverage; record actual normal/error/race/security cases tested.
 
-Bruk bare GitHub-eide actions som er nødvendige, låst til full commit-SHA. Lokale workflowsteps bruker Apples/offisielle verktøy og tilgjengelige systemverktøy. Ingen tredjeparts Xcode-installer, SwiftLint/SwiftFormat/xcbeautify eller coverage-SaaS innføres bare fordi de er preinstallert på imagen. Ingen eksterne reusable workflows. DocC bygges med Xcode-verktøy, uten separat tredjeparts dokumentasjonsplugin.
+Use only necessary GitHub-owned actions pinned to full commit SHAs. Local steps use Apple/official and available system tools. Do not introduce third-party Xcode installers, SwiftLint/SwiftFormat/xcbeautify, or coverage SaaS merely because they are preinstalled. No external reusable workflows. Build DocC using Xcode tools without an external documentation plugin.
 
-Read-only GITHUB_TOKEN er standard. Checkout skal ikke beholde credentials til upålitelig kode. Ingen secrets til fork-PR-er, ingen pull_request_target som kjører PR-kode, ingen betrodde artifacts/caches fra upålitelig PR som senere publiseres med write-token. Ingen automatisk release-/publiseringsjobb eller nytt secret opprettes av CI-planen.
+Default GITHUB_TOKEN to read-only. Checkout must not retain credentials accessible to untrusted code. No fork-PR secrets, pull_request_target execution of PR code, or trust in untrusted PR artifacts/caches later published with write tokens. This plan adds no automatic publishing job or secret.
 
-## Kontrollert ressursbruk og kostnader
+## Resource and cost limits
 
-Kun standard GitHub-hostede runners i offentlig repo er godkjent. Ingen larger runners, abonnementer, selvhostede tjenester eller betalte tillegg. En framtidig endring til privat repo krever ny vurdering av pris/minutter før videre kjøring; gratis compute for offentlige standardrunners er ikke en garanti om gratis lagring eller alle kontotjenester.
+Only standard GitHub-hosted runners in the public repository are authorized. No larger runners, subscriptions, self-hosted services, or paid add-ons. Reassess pricing/minutes before running after a visibility change; free public standard-runner compute does not guarantee free storage or all account services.
 
-Første CI-versjon har ingen artifact-upload og ingen eksplisitt Actions-cache. Behold bare nødvendige, sanerte vanlige jobblogger innen kontoen/repoets gjeldende grenser. Dersom testresultatbundler eller annen opplasting trengs senere, vedtas liten størrelse/retensjon og kontrolleres mot gjenværende gratis lagring før aktivering. Ingen fakturerings-/abonnements-/budsjettinnstillinger for hele kontoen er endret nå.
+The first CI version has no artifact uploads or explicit Actions cache. Retain only necessary sanitized ordinary job logs within current account/repository limits. Before later uploads, agree small size/retention limits and check remaining free storage. No account-wide billing/subscription/budget settings have changed.
 
-Planlagt initial ressursramme er maks to samtidige macOS-matrisejobber per workflow og 30 minutters timeout per tung jobb. Ny push på samme PR erstatter/kansellerer foreldet PR-kjøring med ryddig avbrudd. Ikke kanseller en verifikasjon som allerede brukes som releasebevis. Disse workflowgrensene er planlagt, ikke konfigurert uten en workflow.
+Planned initial limits: at most two concurrent macOS matrix jobs per workflow and a 30-minute timeout per heavy job. A new push replaces/cancels obsolete runs on the same PR with clean cancellation. Do not cancel verification already serving as release evidence. These are planned limits, not configured workflows.
 
-Ved runtime-/tidsproblemer skal jobben feile med en konkret årsak. Ikke bytt til betalt runner, installasjon av uavklarte verktøy eller hopping over tester uten eget vedtak.
+Runtime/time-limit problems fail with a concrete reason. Do not switch to paid runners, install unapproved tools, or skip tests without a separate decision.
 
-## Required check innføres etter bevis
+## Require checks only after evidence
 
-1. Etter implementasjonsklarsignal opprettes en faktisk pakke og meningsfulle tester sammen med første CI-PR.
-2. Alle obligatoriske jobber kjører på PR-en og deretter på main. En manglende Package.swift eller tom testsuite er ingen suksess.
-3. Kontroller at quality-gate rapporteres med stabilt checknavn og samler alle påkrevde plattform-/test-/docjobber uten grønn skip-path.
-4. Legg først da quality-gate til som required status check, med korrekt Actions-integrasjon og oppdatert branch-policy. Ingen ondsinnet/tilfeldig check med samme navn skal regnes som likt bevis.
-5. Kontroller en ny PR mot håndhevet regel. Main har ingen bypass. Bevar dette når required checks innføres.
+1. After implementation authorization, create a real package and meaningful tests before introducing CI.
+2. Run every mandatory job on the CI PR and then main. Missing Package.swift or an empty test suite is not success.
+3. Verify a stable quality-gate check name aggregating all required platform/test/doc jobs without a green skip path.
+4. Only then require quality-gate, with the correct Actions integration and updated branch policy. An unrelated/malicious same-name check is not equivalent evidence.
+5. Verify enforcement on another PR. Main has no bypass; preserve that property.
 
-Ingen required status check legges til nå. Ingen status som bare bekrefter at «kode ikke finnes» innføres.
+No required check is added now. No check merely confirming that code does not exist is introduced.
 
-## Egen releasekontroll og minimums-OS
+## Separate release and minimum-OS checks
 
-PR-runtimes 26.2 og macOS-host 15.x dekker ikke minimum iOS/iPadOS 17, macOS 14, watchOS 10 eller tvOS 17. Det kontrollerte macos-15-inventaret gir ikke disse som et komplett minimumssett. Planen lover derfor ikke at alle minimumsruntimes finnes på standardrunners.
+PR runtimes 26.2 and macOS hosts 15.x do not test minimum iOS/iPadOS 17, macOS 14, watchOS 10, or tvOS 17. The inspected macos-15 inventory does not provide this complete set. Do not promise all minimum runtimes on standard runners.
 
-Før første release kreves registrerte bevis på de valgte minimumene: relevant offisiell simulator/runtime der tilgjengelig og kompatibel, eller eksisterende fysiske enheter/Mac-er med egnet app-/testharness. macOS minimum må være et faktisk runtimebevis, ikke bare deployment-target under nyere host. Ikke anta at en annen gammel runner kan bygge med Xcode 26.3 bare fordi den har riktig host-OS.
+Before the first release, record evidence for the approved minimums using compatible available official simulators/runtimes or existing devices/Macs with suitable test hosts. macOS minimum support needs actual runtime evidence, not a deployment target on a newer host. Do not assume an older runner supports Xcode 26.3 merely because its host OS matches.
 
-Tilgang til minimumsruntimes/enheter er ennå ikke verifisert eller anskaffet. Ingen utstyrskjøp, betalt tjeneste eller selvhostet GitHub-runner er autorisert. Hvis slikt bevis ikke kan skaffes innen vedtatt ramme, skal release blokkeres eller et eksplisitt nytt vedtak endre støttepåstanden; matrisen merkes aldri «bestått» ut fra antatt kompatibilitet.
+Access to minimum runtimes/devices remains unverified and has not been acquired. No equipment purchases, paid services, or self-hosted GitHub runners are authorized. If evidence cannot be obtained within approved constraints, block release or explicitly revise the support decision. Never mark assumed compatibility as passed.
 
-Releasekontrollen omfatter også representative nyere stabile runtimes, relevante fysiske scenarier, en dokumentert vurdering av Mac-arkitekturer, sikkerhet/personvern, offentlig API/DocC, rettighetspolicy og representative ytelses-/minnemålinger. Installasjon fra releasekandidatens commit/tag må verifiseres før endelig publisering, slik at feil ikke først oppdages etter en eventuell uforanderlig release.
+Release checks also cover representative newer stable runtimes, relevant physical scenarios, documented Mac-architecture assessment, security/privacy, public API/DocC, rights policy, and representative performance/memory measurements. Verify installation from the release candidate commit/tag before final publication to avoid discovering failures only after an immutable release.
 
-Oppdater [PLATFORM_MATRIX.md](PLATFORM_MATRIX.md) og REL-01 med commit, miljø, testnavn/resultat, relevante kjente begrensninger og eventuelle godkjente scopeendringer. Ingen releasekontroller er kjørt nå.
+Update [PLATFORM_MATRIX.md](PLATFORM_MATRIX.md) and REL-01 with commit, environment, test names/results, known limitations, and approved scope changes. No release checks have run.

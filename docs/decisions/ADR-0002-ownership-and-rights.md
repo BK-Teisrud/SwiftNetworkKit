@@ -1,39 +1,39 @@
-# ADR-0002: Rettighetshaver og proprietær rettighetspolicy
+# ADR-0002: Rights holder and proprietary rights policy
 
-Dato: 2026-10-19. Status: Godkjent av prosjekteier i chatten.
-Beslutningsoppgave: [DEC-03 / #3](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/3).
+Date: 2026-10-19. Status: Accepted by the project owner in conversation.
+Decision issue: [DEC-03 / #3](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/3).
 
-## Kontekst
+## Context
 
-Prosjekteier har valgt Teisrud Development AS som rettighetshaver og svart «Bruk krever tillatelse fra Teisrud Development AS». Repoet skal fortsatt være offentlig under BK-Teisrud, som tidligere besluttet. Repoets kontoeier og innholdets valgte rettighetshaver er separate roller.
+The owner selected Teisrud Development AS as the rights holder and stated, in translation, “Use requires permission from Teisrud Development AS.” The repository remains public under BK-Teisrud, as previously decided. Repository account ownership and ownership of the content are separate roles.
 
-## Alternativer
+## Alternatives
 
-- En permissiv åpen kildekode-lisens kunne tillatt tredjepartsbruk, også kommersiell bruk, uten særskilt tillatelse. Ikke valgt.
-- En delingspliktig lisens kunne gitt generell brukstillatelse med vilkår om deling av visse endringer. Ikke valgt.
-- Proprietær policy med særskilt tillatelse gir selskapet kontroll over tredjepartsbruk. Valgt uttrykkelig av prosjekteier.
+- A permissive open-source license could allow third-party use, including commercial use, without separate permission. Not selected.
+- A copyleft license could grant general permission subject to sharing certain changes. Not selected.
+- A proprietary policy requiring separate permission gives the company control over third-party use. Explicitly selected by the owner.
 
-## Beslutning
+## Decision
 
-Teisrud Development AS angis som rettighetshaver. Ingen åpen kildekode-lisens eller generell tredjepartsbrukstillatelse gis. Bruk utover lovbestemte rettigheter og GitHubs gjeldende vilkår krever særskilt skriftlig tillatelse fra selskapet. Rettighetsnotisen ligger i LICENSE og gjelder repoets eget innhold; den er ikke en ferdig kommersiell lisensavtale.
+Teisrud Development AS is identified as the rights holder. No open-source license or general permission for third-party use is granted. Use beyond statutory rights and GitHub's applicable terms requires separate written permission from the company. LICENSE contains the rights notice covering the repository's own content; it is not a complete commercial license agreement.
 
-Offentlig synlighet beholdes. Rettighetsnotisen forsøker ikke å oppheve rettigheter GitHub gir til visning og forking gjennom tjenesten. Prosjektet skal ikke presenteres som open source. Ved behov for fortrolig kildekode må synligheten vurderes separat; denne beslutningen endrer ikke synlighet.
+The repository remains public. The notice does not attempt to revoke rights GitHub grants for viewing and forking through the service. Do not describe the project as open source. Any need for confidential source code requires a separate visibility decision; this decision does not change visibility.
 
-## Bidrag og distribusjon
+## Contributions and distribution
 
-Feilrapporter og forslag er velkomne. Eksterne bidrag som endrer innhold, aksepteres først etter en avklart skriftlig bidragsavtale med selskapet. Ingen rettighetsoverføring fra tredjepart antas ut fra en PR, CODEOWNERS eller GitHub sign-off. Ingen CLA eller kommersiell standardavtale er opprettet nå.
+Bug reports and suggestions are welcome. External contributions changing content are accepted only after a written contribution agreement with the company has been agreed. No transfer of third-party rights is inferred from a PR, CODEOWNERS, or GitHub sign-off. No CLA or standard commercial agreement has been created.
 
-Før ekstern distribusjon skal aktuell tillatelse/avtale, omfang, mottaker og eventuelle vilkår være avklart. Ingen priser, supportløfter eller nye kontraktsvilkår er bestemt. Ved innføring av tredjepartsmateriale må eventuelle egne rettigheter og vilkår håndteres separat.
+Before external distribution, confirm the applicable permission/agreement, scope, recipient, and conditions. No prices, support commitments, or new contractual terms have been decided. Handle any third-party materials and their rights or terms separately.
 
-## Konsekvenser og verifikasjon
+## Consequences and verification
 
-README, bidragspolicy, styring, risiko og aktive beslutningsoversikter oppdateres. DEC-03 kan lukkes etter merge. F0 og implementasjon er fortsatt blokkert av øvrige beslutninger og krever eget klarsignal.
+Update README, contribution policy, governance, risks, and active decision summaries. DEC-03 may close after merge. At this decision's adoption, other decisions still blocked F0; implementation requires separate authorization.
 
-Beslutningen dokumenterer prosjekteierens valg av rettighetshaver; den er ikke en gjennomført kontroll av historiske ansettelses-, oppdrags- eller overdragelsesavtaler.
+This records the owner's selected rights holder. It does not constitute an audit of historical employment, commissioning, or assignment agreements.
 
-## Kilder
+## Sources
 
 - [GitHub: Licensing a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)
 - [GitHub Terms of Service, User-Generated Content](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service#d-user-generated-content)
 
-ADR-0001 beholdes som historisk oppsettsbeslutning. Denne ADR-en avgjør lisens-/rettighetsspørsmålet som da var åpent.
+ADR-0001 remains as historical context. This ADR resolves the licensing and rights questions that were open at that time.

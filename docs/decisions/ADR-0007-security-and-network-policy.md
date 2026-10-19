@@ -1,43 +1,43 @@
-# ADR-0007: Sikkerhets-, auth-, lagrings- og nettverkspolicy i v1
+# ADR-0007: Security, authentication, storage, and network policy in v1
 
-Dato: 2026-10-19. Status: Hovedvalg godkjent av prosjekteier; tilhørende standardregler dokumentert som konkretisering.
-Oppgave: [DEC-06 / #6](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/6).
+Date: 2026-10-19. Status: Core choices accepted by the owner; related defaults elaborate those choices.
+Issue: [DEC-06 / #6](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/6).
 
-## Godkjente hovedvalg
+## Approved choices
 
-Prosjekteier valgte i chatten:
+The owner selected:
 
-1. Ingen automatisk cookie-, credential- eller HTTP-cachelagring som standard.
-2. En injiserbar auth-provider for headers, i tillegg til eksplisitte request-headers. Appen eier innlogging, tokenlagring og eventuell fornyelse.
-3. HTTPS som standard med eksplisitt HTTP-unntak bare for localhost/loopback under lokal utvikling. Ingen TLS-bypass eller global ATS-deaktivering.
+1. No automatic cookie, credential, or HTTP-cache storage by default.
+2. An injectable authentication-header provider alongside explicit request headers. The app owns login, token storage, and renewal.
+3. HTTPS by default, with an explicit HTTP exception only for localhost/loopback during local development. No TLS bypass or global ATS disabling.
 
-## Beslutning
+## Decision
 
-[SECURITY_AND_NETWORK_POLICY.md](../planning/SECURITY_AND_NETWORK_POLICY.md) presiserer disse valgene innen HTTP-kjernen og ADR-0005/0006. Egen session bygger på ephemeral konfigurasjon med eksplisitt deaktiverte lagre; ephemeral alene betyr ikke «ingen lagring i RAM». En app kan bevisst velge annen systemlagring eller injisere en kompatibel session, men da skal den faktiske lagringsprofilen være eksplisitt og ikke beskrives som standardens null-lagring.
+[SECURITY_AND_NETWORK_POLICY.md](../planning/SECURITY_AND_NETWORK_POLICY.md) elaborates these choices within the HTTP core and ADR-0005/0006. Owned sessions use ephemeral configuration with stores explicitly disabled; ephemeral alone does not mean no in-memory storage. Apps may deliberately opt into other system storage or inject a compatible session, but the actual storage profile must be explicit and must not be described as the default no-storage profile.
 
-Auth-provider er en liten asynkron, kansellerbar og Sendable-kompatibel headergrense. Den får bare nødvendig kontekst og kjører innen samme totale tidsbudsjett. Den er ingen OAuth-/Keychain-/token-refreshmodul. URLSessions system trust beholdes, og mTLS, pinning og egne trust-policyer er utsatt.
+The authentication provider is a small asynchronous, cancellable, Sendable-compatible header boundary. It receives only necessary context and runs within the same total budget. It is not an OAuth, Keychain, or token-refresh module. Preserve URLSession system trust; defer mTLS, pinning, and custom trust policies.
 
-Som konkretisering av secure defaults begrenses automatiske redirects til validerte samme-origin GET/HEAD-kall, med endelig antall hopp. Cross-origin, HTTPS-nedgradering og muterende redirect-replay følges ikke automatisk. Rå request er ingen bypass. Logging/feiltekst bruker en liten allowlist med metadata og inkluderer ikke credentials, payload eller rå URL som standard.
+Secure defaults restrict automatic redirects to validated same-origin GET/HEAD calls with a finite hop count. Do not automatically follow cross-origin redirects, HTTPS downgrades, or mutating-request replays. Raw requests do not bypass policy. Logging and error text use a small metadata allowlist and exclude credentials, payloads, and raw URLs by default.
 
-En app-eid session er en betrodd injisert avhengighet, ikke en sikkerhetssandbox. Klienten skal kontrollere tilgjengelig konfigurasjon og egen kontroll over task-level policy; bakgrunnssessions og ukontrollerbare delegate-/policykombinasjoner avvises. Vilkårlig appkode, custom transports eller en ondsinnet ekstern session kan ikke sikkerhetssertifiseres av biblioteket.
+An app-owned session is a trusted injected dependency, not a security sandbox. Check accessible configuration and task-level policy control; reject background sessions and uncontrollable delegate/policy combinations. The library cannot certify arbitrary app code, custom transports, or malicious external sessions.
 
-## Scope og alternativer
+## Scope and alternatives
 
-Standard systemlagring/cache ville vært enklere for enkelte apper, men prosjekteier valgte minimal automatisk lagring. Annen systemlagring krever et eksplisitt klient-/injeksjonsvalg og appens ansvar for isolasjon/sletting; ingen egen cachemodul innføres.
+Default system storage/cache would simplify some apps, but the owner chose minimal automatic storage. Other system storage requires explicit client/injection choices and app responsibility for isolation/deletion; no custom cache module is introduced.
 
-Kun manuelle auth-headers ville gitt færre abstraheringer. Prosjekteier valgte en liten providergrense i tillegg, med eksplisitt avgrensning mot login, refresh og credential storage.
+Manual authentication headers alone would require fewer abstractions. The owner also selected a small provider boundary, explicitly excluding login, refresh, and credential storage.
 
-Kun HTTPS, også lokalt, var alternativet til et snevert utviklingsunntak. Prosjekteier valgte loopback-unntaket. Det gjelder ikke LAN/private IP-nett, .local, generelle hostunntak eller automatisk oppheving av vertappens ATS-policy.
+HTTPS everywhere, including local development, was the alternative to a narrow development exception. The owner selected loopback access. The exception does not cover LAN/private IP networks, .local names, arbitrary hosts, or automatic changes to the host app's ATS policy.
 
-Egen retrymotor, automatisk retry på 401/statusfeil, cache-/offline-/fallbackstrategier, telemetry, avansert security og nye transportmoduler inngår fortsatt ikke i v1. URLSession/OS kan ha interne forbindelsesforsøk; «ingen egen retry» er ikke en garanti for én wire-hendelse.
+A retry engine, automatic retries on 401/status errors, cache/offline/fallback strategies, telemetry, advanced security, and new transports remain outside v1. URLSession/OS may perform internal connection attempts; no library retry is not a guarantee of one wire event.
 
-## Verifikasjon og videre porter
+## Verification and later gates
 
-Apples dokumentasjon er lest for ephemeral storage, task-level delegate/redirect og ATS-lokalnett. Begrensningene er dokumentert; ingen implementasjon, nettverksprøve eller sikkerhetstest er gjennomført. Testkrav er angitt for originvalidering, loopback-parsing, credential-isolasjon, redirects, lagre, redaction og injeksjonsavvisning.
+Apple documentation was reviewed for ephemeral storage, task-level delegates/redirects, and ATS local networking. Limitations are documented; no implementation, network trial, or security tests have run. Tests are specified for origins, loopback parsing, credential isolation, redirects, storage, redaction, and injection rejection.
 
-DEC-07 og F0-porten gjenstår. Sikkerhetsreview og faktiske plattform-/runtime-bevis kreves før release. Denne beslutningen er ingen sikkerhetssertifisering.
+At adoption, DEC-07 and the F0 gate remained open. Security review and actual platform/runtime evidence are required before release. This decision is not a security certification.
 
-## Kilder
+## Sources
 
 - [Apple: ephemeral](https://developer.apple.com/documentation/foundation/urlsessionconfiguration/ephemeral)
 - [Apple: URLSession](https://developer.apple.com/documentation/foundation/urlsession)

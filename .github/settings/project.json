@@ -20,31 +20,45 @@
       "options": [
         {
           "id": "f75ad846",
-          "name": "Backlog"
+          "name": "Backlog",
+          "color": "GRAY",
+          "description": "Planned work not yet ready to start"
         },
         {
           "id": "3ac0ff0a",
-          "name": "Ready"
+          "name": "Ready",
+          "color": "BLUE",
+          "description": "Dependencies satisfied and necessary authorization recorded"
         },
         {
           "id": "47fc9ee4",
-          "name": "In Progress"
+          "name": "In Progress",
+          "color": "YELLOW",
+          "description": "Active work"
         },
         {
           "id": "5e80b65a",
-          "name": "In Review"
+          "name": "In Review",
+          "color": "PURPLE",
+          "description": "Awaiting review or verification"
         },
         {
           "id": "7c50a863",
-          "name": "Blocked"
+          "name": "Blocked",
+          "color": "RED",
+          "description": "Blocked; see dependencies or required authorization"
         },
         {
           "id": "98236657",
-          "name": "Done"
+          "name": "Done",
+          "color": "GREEN",
+          "description": "Closed as completed"
         },
         {
           "id": "48bcd7eb",
-          "name": "Not Planned"
+          "name": "Not Planned",
+          "color": "ORANGE",
+          "description": "Rejected or closed as not planned"
         }
       ]
     },
@@ -105,19 +119,27 @@
       "options": [
         {
           "id": "0f3c1f37",
-          "name": "P0"
+          "name": "P0",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "id": "531e87c3",
-          "name": "P1"
+          "name": "P1",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "id": "84f49e48",
-          "name": "P2"
+          "name": "P2",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "id": "f196c8ba",
-          "name": "P3"
+          "name": "P3",
+          "color": "GRAY",
+          "description": ""
         }
       ]
     },
@@ -128,19 +150,27 @@
       "options": [
         {
           "id": "6bf8f6ef",
-          "name": "KJERNE"
+          "name": "CORE",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "id": "9f4e163a",
-          "name": "UTVIDELSE"
+          "name": "EXTENSION",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "id": "3ba3c1d2",
-          "name": "FORSKNING"
+          "name": "RESEARCH",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "id": "48085f76",
-          "name": "STYRING"
+          "name": "GOVERNANCE",
+          "color": "GRAY",
+          "description": ""
         }
       ]
     },
@@ -171,7 +201,7 @@
     {
       "id": "PVTV_lAHOAz1qP84Bny9dzgMI8m0",
       "number": 2,
-      "name": "Arbeidsbrett",
+      "name": "Work Board",
       "layout": "BOARD_LAYOUT",
       "filter": "is:issue -status:\"Not Planned\""
     },
@@ -185,35 +215,35 @@
     {
       "id": "PVTV_lAHOAz1qP84Bny9dzgMI8nA",
       "number": 4,
-      "name": "Fase 0",
+      "name": "Phase 0",
       "layout": "TABLE_LAYOUT",
-      "filter": "is:open milestone:\"F0 – Arkitektur og beslutninger\""
+      "filter": "is:open milestone:\"F0 – Architecture and decisions\""
     },
     {
       "id": "PVTV_lAHOAz1qP84Bny9dzgMI8nE",
       "number": 5,
-      "name": "Beslutninger",
+      "name": "Decisions",
       "layout": "TABLE_LAYOUT",
       "filter": "label:\"type: decision\""
     },
     {
       "id": "PVTV_lAHOAz1qP84Bny9dzgMI8nI",
       "number": 6,
-      "name": "Utvidelser og forskning",
+      "name": "Extensions and Research",
       "layout": "TABLE_LAYOUT",
       "filter": "label:\"scope: extension\",\"scope: research\""
     },
     {
       "id": "PVTV_lAHOAz1qP84Bny9dzgMI_-U",
       "number": 7,
-      "name": "Arbeidskø",
+      "name": "Work Queue",
       "layout": "TABLE_LAYOUT",
       "filter": "is:open -label:\"type: epic\" -label:\"scope: extension\" -label:\"scope: research\""
     },
     {
       "id": "PVTV_lAHOAz1qP84Bny9dzgMI_-Y",
       "number": 8,
-      "name": "Ferdig",
+      "name": "Completed",
       "layout": "TABLE_LAYOUT",
       "filter": "is:closed reason:completed"
     }
@@ -268,5 +298,7 @@
     "verified_via": "UI saved, reloaded and read back"
   },
   "workflow_configuration": "See docs/planning/PROJECT_MANAGEMENT.md",
-  "product_workflows_present": false
+  "product_workflows_present": false,
+  "shortDescription": "Planning without implementation code. Issues are the authoritative backlog; phases are delivery gates without agreed dates.",
+  "readme": "See https://github.com/BK-Teisrud/SwiftNetworkKit/blob/main/docs/planning/PROJECT_MANAGEMENT.md for scope, workflow, WIP, and phase gates. No product code is implemented. Priority does not authorize implementation. All GitHub content is in English; owner–assistant conversations remain in Norwegian."
 }

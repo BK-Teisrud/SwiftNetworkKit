@@ -1,48 +1,48 @@
-# Leveransegrense for første stabile versjon
+# First stable release scope
 
-Status: Godkjent hovedscope og modulvalg 2026-10-19, se [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md). Ingen implementasjon finnes.
+Status: Core scope and module choices accepted 2026-10-19; see [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md). No implementation exists.
 
-Repo og pakkenavn er SwiftNetworkKit. Det distribueres ett bibliotekprodukt og én bibliotekmodul med navnet NetworkKit. Konsumentens importnavn blir NetworkKit. Egne tester kan senere få et testtarget; dette er ikke en ekstra bibliotekmodul.
+Repository/package SwiftNetworkKit distributes one library product and module named NetworkKit. Consumers import NetworkKit. Later test targets are not additional library modules.
 
-## Brukerflyt som v1 skal dekke
+## V1 user flow
 
-En vertapp konfigurerer og injiserer klienten, definerer et typesikkert HTTP-kall, sender forespørselen gjennom URLSession og får et JSON-resultat eller en forståelig feil. Operasjonen har definerte timeout- og cancellationregler. Logging er personverntrygg. Oppførselen kan testes deterministisk uten offentlig nettverk.
+A host app configures/injects the client, defines a typed HTTP call, executes it through URLSession, and receives JSON or a comprehensible error. Timeout/cancellation behavior is defined, logging preserves privacy, and behavior is deterministically testable without public networking.
 
-Dette inkluderer nødvendige grunnkrav til URL-/requestbygging, konfigurasjon, system trust, personvern, session-livssyklus og dokumentert plattformstøtte. Ingen avansert modul er nødvendig for denne brukerflyten.
+This includes necessary URL/request construction, configuration, system trust, privacy, session lifecycle, and documented platform support. No advanced module is required for this flow.
 
-## Sporbar leveransegrense
+## Traceable delivery boundary
 
-Tabellen avgrenser domener på scope-nivå. [HTTP_API_CONTRACT.md](HTTP_API_CONTRACT.md) / ADR-0005 presiserer HTTP-/respons-/feilkontrakten. [CONCURRENCY_AND_LIFECYCLE.md](CONCURRENCY_AND_LIFECYCLE.md) / ADR-0006 presiserer concurrency og session-eierskap. [SECURITY_AND_NETWORK_POLICY.md](SECURITY_AND_NETWORK_POLICY.md) / ADR-0007 presiserer sikkerhets-/nettverkspolicy. Konkrete verifikasjonsoppgaver kreves fortsatt før Ready. En rad er ikke en garanti for at alle punktene i originaldomenet er valgt.
+The table defines domain scope. [HTTP_API_CONTRACT.md](HTTP_API_CONTRACT.md) / ADR-0005 specifies HTTP/responses/errors; [CONCURRENCY_AND_LIFECYCLE.md](CONCURRENCY_AND_LIFECYCLE.md) / ADR-0006 specifies concurrency/ownership; [SECURITY_AND_NETWORK_POLICY.md](SECURITY_AND_NETWORK_POLICY.md) / ADR-0007 specifies security/networking. Concrete verification tasks remain necessary before Ready. A row does not select every original subrequirement.
 
-| Domene | Inngår i v1 | Utsatt / ingen leveranseforpliktelse i v1 |
+| Domain | Included in v1 | Deferred / no v1 commitment |
 | --- | --- | --- |
-| NK-01 HTTP | Requestutførelse, definerte timeout-/cancelregler og nødvendige HTTP-operasjoner for kjernen | Generelt interceptorrammeverk og avansert transportstyring |
-| NK-02 Endpoints | Typesikre kall, injisert baseURL, sikker URL-/parameterbygging | Automatisk API-versjonshåndtering og avanserte encodingvarianter |
-| NK-03 Respons | JSON, rå Data/tekst, eksplisitt tomt svar, status-/responsvalidering og respons-wrapper | Streaming, AsyncSequence-responser og eget rammeverk for alternative dataformater |
-| NK-04 Feil | Forståelige transport-, HTTP-, encoding-/decoding-, timeout- og cancellationkontrakter | Retryklassifisering for en fremtidig resiliensmotor |
-| NK-05 Autentisering | Liten injiserbar header-provider og eksplisitte headers; appen eier login, lagring og fornyelse | Keychain-adapter, login, OAuth/OIDC, token refresh og flerprofilhåndtering |
-| NK-06 Sikkerhet | HTTPS/system trust og trygg håndtering av credentials som grunnkrav | Pinning, mTLS, signering/HMAC, egne trust-policyer og egen sikkerhetsmodul |
-| NK-07 Resiliens | Definerte feil, timeout og cancellation | Egen retrypolicy/-motor, circuit breaker, rate limiting og køsystem |
-| NK-08 Cache | Ingen automatisk HTTP-cache som standard; annen URLSession-lagring krever eksplisitt appstyrt profil | Egen cachemodul, offline-/TTL-/fallbackstrategier og stale-while-revalidate |
-| NK-09 Overføringer | Vanlige HTTP-payloads innen kjernens kontrakt | Filoverførings-API, multipart, progress, resume og background transfers |
-| NK-10 Sanntid | Ikke del av HTTP-kjernen | WebSocket og reconnect |
-| NK-11 Lavnivåtransport | Ikke del av HTTP-kjernen | TCP/UDP, Bonjour, QUIC-API, listener og multicast |
-| NK-12 Nettverksstatus | Feil fra faktisk HTTP-operasjon håndteres | Egen NWPathMonitor-tjeneste og statusstrøm |
-| NK-13 Logging | Trygg logging/diagnostikk med dataminimering og testbar grense | Detaljert task-metrics-/signpostsystem og utvidet observabilityprodukt |
-| NK-14 Concurrency | async/await, nødvendig Sendable/isolation, cancellation og definert session-eierskap | Batch-API, generell deduplisering og strøm-/kørammeverk |
-| NK-15 Konfigurasjon | Injiserbar klient/sessionkonfigurasjon og definerte requeststandarder | Avanserte mutable policysystemer og modulspesifikke policyer |
-| NK-16 Testing | Deterministiske tester, injiserbar transport og negative/cancellationtester for valgt kjerne | Eget distribuert NetworkKitTesting-produkt og tester for utsatte moduler |
-| NK-17 Ytelse | Rimelig ressursbruk og representative målinger som del av kvalitet | Egen ytelsesmodul, coalescing og optimaliseringsprosjekt uten målt behov |
-| NK-18 Personvern | Ingen sensitive logger/ekstern telemetri som standard og dokumentert håndtering av sessiondata | Lagrings-/slette-API-er for egne cache-, auth- og overføringsmoduler |
-| NK-19 Plattform | Faktisk tilgjengelighet, guards og testmatrise for valgte plattformer | Background-, lokalnett-, App Groups- og andre avanserte plattformintegrasjoner |
-| NK-20 Utvikleropplevelse | Lite dokumentert API, HTTP-/JSON-/feil-/injeksjons-/testguider, DocC og releasekrav | Eksempler og API-er for utsatte moduler; Combine-adapter |
+| NK-01 HTTP and requests | Request execution, defined timeouts/cancellation, and core HTTP operations | General interceptor framework and advanced transport control |
+| NK-02 Endpoints and URL construction | Typed calls, injected baseURL, safe URL/parameter construction | Automatic API versioning and advanced encoding variants |
+| NK-03 Responses and data handling | JSON, raw Data/text, explicit empty responses, status/response validation, response wrapper | Streaming, AsyncSequence responses, custom alternative-format framework |
+| NK-04 Error handling | Clear transport/HTTP/coding/timeout/cancellation contracts | Retry classification for a future resilience engine |
+| NK-05 Authentication | Small injectable header provider and explicit headers; app-owned login/storage/renewal | Keychain adapter, login, OAuth/OIDC, refresh, multiple-profile management |
+| NK-06 Security and TLS | HTTPS/system trust and safe credential handling as foundations | Pinning, mTLS, signing/HMAC, custom trust policies, separate security module |
+| NK-07 Retries and resilience | Defined errors, timeouts, and cancellation | Custom retry engine/policy, circuit breakers, rate limiting, queues |
+| NK-08 Caching | No automatic HTTP cache; other URLSession storage requires explicit app-managed profiles | Custom cache module, offline/TTL/fallback, stale-while-revalidate |
+| NK-09 File transfers | Ordinary HTTP payloads under the core contract | File-transfer APIs, multipart, progress, resume, background transfers |
+| NK-10 WebSocket and real-time communication | Outside the HTTP core | WebSocket and reconnect |
+| NK-11 TCP, UDP, and local networking | Outside the HTTP core | TCP/UDP, Bonjour, QUIC APIs, listeners, multicast |
+| NK-12 Network status | Handle failures from actual HTTP operations | Separate NWPathMonitor service and status streams |
+| NK-13 Logging and observability | Safe logging/diagnostics with data minimization and a testable boundary | Detailed task metrics/signposts and expanded observability product |
+| NK-14 Concurrency and lifecycle | async/await, necessary Sendable/isolation, cancellation, defined session ownership | Batch APIs, generic deduplication, stream/queue frameworks |
+| NK-15 Configuration | Injectable client/session configuration and defined request defaults | Advanced mutable policy systems and module-specific policies |
+| NK-16 Testing and mocking | Deterministic tests, injectable transport, negative/cancellation tests for the core | Separate distributed NetworkKitTesting product and deferred-module tests |
+| NK-17 Performance and optimization | Reasonable resource use and representative quality measurements | Separate performance module, coalescing, unmeasured optimization projects |
+| NK-18 Privacy and data protection | No sensitive default logs/external telemetry; documented session data handling | Storage/deletion APIs for custom cache/authentication/transfer modules |
+| NK-19 Apple platform integration | Actual availability, guards, and a matrix for selected platforms | Background/local-network/App Groups and other advanced integrations |
+| NK-20 Developer experience and API design | Small documented API, HTTP/JSON/error/injection/testing guides, DocC, release requirements | Examples/APIs for deferred modules; Combine adapter |
 
-## Fortsatt åpne kontraktsspørsmål
+## Contract decisions and outstanding verification
 
-DEC-04 / ADR-0005 vedtar typed endpoints pluss rå URLRequest, JSON/Data/tekst/EmptyResponse, respons-wrapper, strukturerte feil med separat CancellationError og 2xx som standard med eksplisitte kallunntak. HTTP_API_CONTRACT.md konkretiserer metoder, URL/query, headerprioritet, body og validering. DEC-05 / ADR-0006 vedtar gjenbrukt egen session med injeksjonsmulighet, isolert state, cancellation/shutdown og 30 sekunder inaktivitet / 60 sekunder samlet budsjett med kontrollert klokke. DEC-06 / ADR-0007 vedtar header-provider, lagre av som standard, HTTPS med eksplisitt lokalt HTTP-unntak, avgrensede redirects og personverntrygg diagnostikk. Disse oppgavene kan ikke utvide v1 til avanserte moduler uten nytt scopevedtak.
+DEC-04 / ADR-0005 selects typed endpoints plus raw URLRequest, JSON/Data/text/EmptyResponse, response wrappers, structured errors with separate CancellationError, and 2xx with explicit call exceptions. HTTP_API_CONTRACT elaborates methods, URL/query, header precedence, bodies, and validation. DEC-05 / ADR-0006 selects reused owned sessions plus injection, isolated state, cancellation/shutdown, and a controlled-clock 30-second inactivity / 60-second total budget. DEC-06 / ADR-0007 selects the header provider, stores off by default, HTTPS with explicit local HTTP access, bounded redirects, and privacy-safe diagnostics. These decisions cannot expand v1 into advanced modules without a new scope decision.
 
-OS-minimum er vedtatt i DEC-01 / ADR-0004: iOS/iPadOS 17, macOS 14, watchOS 10 og tvOS 17. Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus er valgt. Se [plattformmatrisen](PLATFORM_MATRIX.md). Konkrete API-symboler og faktisk runtime-kompatibilitet er fortsatt ikke verifisert. Ingen avgrensning i tabellen fritar kjernen fra nødvendige sikkerhets-, personvern- eller plattformkrav. Eksempelvis er avansert sikkerhetsmodul utsatt, mens system trust er et grunnkrav i v1.
+DEC-01 / ADR-0004 selects iOS/iPadOS 17, macOS 14, watchOS 10, tvOS 17, Xcode 26.3+, Swift tools 6.2, and Swift 6 mode. See the [platform matrix](PLATFORM_MATRIX.md). Exact API symbols and runtime compatibility remain unverified. No exclusion waives necessary core security/privacy/platform requirements: advanced security modules are deferred, but system trust is foundational.
 
-## Ferdig og endringsstyring
+## Completion and change control
 
-V1 krever oppfylte valgte kontrakter, reelle tester/CI, dokumentert plattformstøtte, sikkerhets-/personverngjennomgang og releaseporten REL-01. Fase 0 og prosjekteierens uttrykkelige klarsignal kreves før implementasjon. Funksjoner legges ikke til i v1 bare fordi de står i spesifikasjonen; scopeendringer må ha begrunnelse og vedtak.
+V1 requires fulfilled contracts, real tests/CI, documented platform support, security/privacy review, and REL-01. F0 acceptance and explicit owner authorization are required before implementation. Specification catalog entries do not enter v1 automatically; scope changes require a reasoned decision.

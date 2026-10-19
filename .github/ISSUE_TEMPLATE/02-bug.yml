@@ -1,32 +1,32 @@
-name: Feilrapport
-description: Strukturert feilrapport uten sensitive data.
-title: "[Feilrapport] "
+name: Bug report
+description: A structured bug report without sensitive data.
+title: "[Bug report] "
 labels: ["type: bug"]
 body:
   - type: markdown
     attributes:
-      value: "Repoet er offentlig. Bruk syntetiske data; rapporter sikkerhet privat."
+      value: "This repository is public. Use synthetic data; report vulnerabilities privately."
   - type: textarea
     id: problem
     attributes:
-      label: Observerbar feil og forventet resultat
+      label: Observed behavior and expected result
     validations:
       required: true
   - type: textarea
     id: environment
     attributes:
-      label: Versjon, plattform og miljø
+      label: Version, platform, and environment
     validations:
       required: true
   - type: textarea
     id: reproduce
     attributes:
-      label: Reproduksjon med syntetiske data
+      label: Reproduction using synthetic data
     validations:
       required: true
   - type: textarea
     id: verification
     attributes:
-      label: Konsekvens og mulig regresjon
+      label: Impact and potential regression
     validations:
       required: true

@@ -1,24 +1,28 @@
-# Bidrag og arbeidsflyt
+# Contributing and workflow
 
-Prosjektet er i planleggingsfasen. Ikke start implementasjon før fase 0 er godkjent og implementasjonsarbeid er uttrykkelig besluttet. Teisrud Development AS er valgt rettighetshaver. Prosjektet er proprietært; se [LICENSE](LICENSE).
+The project is in its planning stage. Do not begin implementation until F0 is approved and implementation is separately and explicitly authorized. Teisrud Development AS is the designated rights holder. The project is proprietary; see [LICENSE](LICENSE).
 
-Feilrapporter og forslag er velkomne. Eksterne bidrag som endrer repoets innhold, aksepteres først etter at en skriftlig bidragsavtale med Teisrud Development AS er avklart. En PR eller sign-off behandles ikke som en automatisk overføring av rettigheter. Ikke send eksterne kodebidrag før dette er avklart. GitHubs gjeldende vilkår gjelder fortsatt for offentlig aktivitet på tjenesten.
+Bug reports and suggestions are welcome. External contributions that change repository content are accepted only after a written contribution agreement with Teisrud Development AS has been agreed. A pull request or sign-off does not automatically transfer rights. Do not submit external code contributions before this is resolved. GitHub's applicable terms continue to govern public activity on the service.
 
-1. Finn eller opprett et issue med kravreferanse, avgrensning og akseptansekriterier.
-2. Flytt et klart arbeid til Ready; legg inn eier, milepæl, prioritet og avhengigheter.
-3. Bruk kortlivet branch fra main: docs/<issue>-<kortnavn>, chore/<issue>-<kortnavn>, senere feat/, fix/, test/ eller refactor/.
-4. Åpne draft PR tidlig. Én hensikt per PR. Lenke til issue med Closes #nummer bare når hele oppgaven lukkes.
-5. Oppdater relevante dokumenter, ADR, kravsporbarhet og changelog. Dokumenter konkret verifikasjon og risiko.
-6. Løs alle review-tråder. Squash-merge med beskrivende tittel, eksempel docs: dokumenter plattformvalg. Branch slettes etter merge.
+1. Find or create an issue with requirement references, scope, and acceptance criteria.
+2. Move eligible work to Ready; specify an owner, milestone, priority, and dependencies.
+3. Use a short-lived branch from main: docs/<issue>-<short-name>, chore/<issue>-<short-name>, and, later, feat/, fix/, test/, or refactor/.
+4. Open a draft PR early. Keep one purpose per PR. Use Closes #number only when the entire issue is being completed.
+5. Update relevant documentation, ADRs, requirements traceability, and the changelog. Record concrete verification and risks.
+6. Resolve every review thread. Squash-merge with a descriptive title, such as docs: document platform decisions. Delete the branch after merging.
 
-Ingen direkte push til main etter bootstrap. Ingen develop-branch; release-branch opprettes bare ved dokumentert vedlikeholdsbehov. Ingen krav om daglig aktivitet eller automatisk lukking av gamle issues.
+No direct pushes to main after bootstrap. No develop branch; create a release branch only for a documented maintenance need. There is no daily-activity requirement or automatic closure of old issues.
 
-## Klar til arbeid
+## Definition of Ready
 
-Problem, omfang/utenfor omfang, krav-ID, testbare kriterier, avhengigheter og estimat er kjent. Ingen blokkerende arkitekturbeslutning er åpen. Sikkerhet og plattformkonsekvenser er vurdert.
+The problem, scope and exclusions, requirement IDs, testable criteria, dependencies, and estimate are understood. No blocking architecture decision remains open. Security and platform implications have been assessed. Implementation also requires the separate authorization recorded in START-00 / #41.
 
-## Ferdig
+## Definition of Done
 
-Akseptansekriteriene er oppfylt, relevante kontroller dokumentert, PR merget, docs/risiko/ADR oppdatert og issue lukket. Produktarbeid må i tillegg oppfylle QUALITY.md. Planlagte tester teller aldri som beståtte tester.
+Acceptance criteria are met, relevant checks are documented, the PR is merged, documentation/risks/ADRs are updated, and the issue is closed. Product work must also satisfy QUALITY.md. Planned tests never count as passed tests.
 
-Ikke legg tokens, cookies, reelle kundedata, private URL-er, rå request/response-dumper eller personopplysninger i offentlige issues eller fixtures. Bruk syntetiske eksempler.
+Do not include tokens, cookies, real customer data, private URLs, raw request/response dumps, or personal information in public issues or fixtures. Use synthetic examples.
+
+## Language
+
+Use English for all GitHub documentation, issues, PRs, comments, and project content. Owner–assistant conversations remain in Norwegian. See [LANGUAGE_POLICY.md](docs/governance/LANGUAGE_POLICY.md).

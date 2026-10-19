@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Sikkerhetsrapport
+  - name: Security report
     url: https://github.com/BK-Teisrud/SwiftNetworkKit/security
-    about: Rapporter sårbarheter privat. Ikke legg sensitive detaljer i issues.
+    about: Report vulnerabilities privately. Do not post sensitive details in issues.

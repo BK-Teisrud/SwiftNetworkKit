@@ -1,53 +1,55 @@
-# GitHub-konfigurasjon
+# GitHub configuration
 
-Repo: BK-Teisrud/SwiftNetworkKit. Dette dokumentet beskriver ønsket konfigurasjon; [oppsettsstatus](SETUP_STATUS.md) angir hva som faktisk er aktivert og verifisert. JSON-filer i .github/settings og .github/rulesets er versjonerte konfigurasjonsgrunnlag, ikke automatisk GitHub-synk.
+Repository: BK-Teisrud/SwiftNetworkKit. This document defines the intended configuration; [setup status](SETUP_STATUS.md) records what is active and verified. JSON files under .github/settings and .github/rulesets are versioned configuration baselines, not automatic GitHub synchronization.
 
-## Generelt
+## General settings
 
-| Innstilling | Valg og begrunnelse |
+| Setting | Choice and rationale |
 | --- | --- |
-| Synlighet / eier | Public / BK-Teisrud, uttrykkelig valgt av eier |
+| Visibility / owner | Public / BK-Teisrud, explicitly selected by the owner |
 | Default branch | main |
-| Issues / Projects | På; oppgaver og leveranseoversikt |
-| Wiki / Discussions | Av; docs i Git og issues gir én kilde |
-| Merge | Bare squash; PR-tittel og body som commitgrunnlag |
-| Branch cleanup / update | Automatisk sletting etter merge; update branch tillatt |
-| Auto-merge | Av inntil ekte kvalitetsporter er etablert |
-| Web sign-off | Av etter uttrykkelig eiergodkjenning; ingen DCO-avtale er valgt |
-| Template repo / Pages / deploy | Ikke aktivert; ingen nettside eller distribusjon nå |
+| Issues / Projects | Enabled for tasks and delivery tracking |
+| Wiki / Discussions | Disabled; Git documentation and issues provide one source of truth |
+| Merge | Squash only; PR title/body form the commit message |
+| Branch cleanup / update | Delete after merge; branch updates allowed |
+| Auto-merge | Disabled until real quality gates exist |
+| Web sign-off | Disabled with explicit owner approval; no DCO agreement selected |
+| Template repository / Pages / deployment | Not enabled; no website or distribution at this stage |
 | Topics | swift, networking, apple, swift-package-manager, urlsession, swift-concurrency |
 
-## Main-regel: main-protection-solo
+## Main rule: main-protection-solo
 
-Aktiv for default branch: ingen sletting, ingen force-push, lineær historikk, PR kreves, alle review-tråder løst, kun squash. Null obligatoriske approvals i solo-profil. Foreldede approvals avvises om de finnes. Ingen bypass-aktører er konfigurert; også admin følger PR-reglene. Repo-admin kan fortsatt administrere selve reglene. Ingen required status checks før reell CI finnes. Dette er en dokumentasjonsfase med manuell verifikasjon, ikke en påstand om automatisert kvalitetskontroll.
+Active on the default branch: no deletion or force-push, linear history, required PRs, all review threads resolved, squash only. Zero mandatory approvals in the solo profile. Dismiss stale approvals if present. No bypass actors; admins also follow PR rules, while retaining authority to administer the rules themselves. No required checks before real CI exists. This documentation stage uses manual verification, not claimed automated product assurance.
 
-Team-overgang: minst én annen kvalifisert write-bruker/CODEOWNER før aktivering av én approval, Code Owner review og godkjenning av siste push fra annen person. Ikke aktiver krav som låser eneste maintainer ute.
+Team transition: require another qualified write user/CODEOWNER before enabling one approval, Code Owner review, and approval of the latest push by another person. Do not lock out the sole maintainer.
 
-## Releasetagger og immutable releases
+## Release tags and immutable releases
 
-refs/tags/v* omfattes av to aktive regler: release-tags-authorized-creation (25432767) begrenser oppretting, med admin-unntak kun for creation; release-tags-no-rewrite (25428391) blokkerer update/deletion uten bypass. Alle matchende regler gjelder samtidig. Immutable releases er aktivert for publiserte releases; utkast må kvalitetssikres før publisering. Ingen tag/release opprettes nå. Admin kan fortsatt endre innstillingene selv; dette er ikke et absolutt vern mot kontoeieren.
+Two active rules apply to refs/tags/v*: release-tags-authorized-creation (25432767) restricts creation with an admin exception for creation only; release-tags-no-rewrite (25428391) blocks update/deletion without bypass. All matching rules apply together. Published releases are immutable; validate drafts before publication. No tags/releases are created now. Admins can still change settings; this is not absolute protection against the account owner.
 
-## Sikkerhet
+## Security
 
-Dependency graph og Dependabot alerts ønskes aktivert. Secret scanning og push protection ønskes aktivert der repo/konto støtter det. Privat sårbarhetsrapportering aktiveres. Ingen Dependabot-versjonsfil uten manifests; security updates kan ikke gi meningsfull produktbeskyttelse før pakke/dependencies finnes. Code scanning/CodeQL må vurderes etter verktøy- og språkmatrix, og er ikke satt opp nå.
+Enable dependency graph and Dependabot alerts where applicable. Enable secret scanning and push protection where supported, plus private vulnerability reporting. No Dependabot version-update file without manifests; security updates cannot meaningfully protect a product before packages/dependencies exist. Assess code scanning/CodeQL against the tool/language matrix after implementation; it is not configured now.
 
-Actions: read-only GITHUB_TOKEN, ingen tillatelse til å opprette/godkjenne PR-er, kun lokale og GitHub-eide actions tillates som forberedende restriksjon. Ingen workflows eller runner-minutter brukes av oppsettet. Full commit-SHA er nå påkrevd gjennom repositoryinnstillingen sha_pinning_required=true, lest tilbake 2026-10-19. DEC-07 / ADR-0008 fastsetter videre CI-/testplan; ingen eksterne reusable workflows eller tredjeparts setup-actions er valgt. Ingen selvhostede runners, secrets, environments, deployments, webhooks eller ekstra apps er opprettet.
+Actions: read-only GITHUB_TOKEN, no PR creation/approval permission, and only local/GitHub-owned actions as a preparatory restriction. Setup creates no workflows or runner usage. Full commit-SHA pinning is required through sha_pinning_required=true, read back on 2026-10-19. DEC-07 / ADR-0008 defines the future CI plan; no external reusable workflows or third-party setup actions. No self-hosted runners, secrets, environments, deployments, webhooks, or additional apps have been added.
 
-Rettighetshaver og rettighetspolicy er vedtatt i ADR-0002: Teisrud Development AS, proprietært, bruk etter særskilt skriftlig tillatelse. Repoet forblir offentlig under BK-Teisrud. Eier bekrefter 2FA aktivert; dette er ikke en uavhengig kontoaudit. Ingen kontaktadresse er avklart; se PRE_CODE_READINESS.md. Eventuell senere organisasjonsflytting er ikke valgt. Det er ikke endret andre repoer eller organisasjonsregler.
+ADR-0002 names Teisrud Development AS as rights holder and selects proprietary use by separate written permission. The repository remains public under BK-Teisrud. The owner attests that 2FA is enabled; no independent account audit was performed. No contact address is established; see PRE_CODE_READINESS.md. No organization transfer has been selected. Other repositories and organization policies are unchanged.
 
-## Prosjekt og planlegging
+## Projects and planning
 
-16 egendefinerte labels uten status-dobbeltføring, 7 milepæler uten oppdiktede datoer, 30 opprinnelige issues og I01–I23/startport/testissue, hvor beslutningsoppgaver lukkes etter vedtak. Live status ligger i GitHub. Ingen automatisk stale-lukking. Prosjektfelt og visninger beskrives i PROJECT_MANAGEMENT.md; aktive elementer og API-bevis føres i GITHUB_REGISTER.md og SETUP_STATUS.md.
+Sixteen custom labels avoid duplicate status tracking; seven milestones have no invented dates. The 30 original issues are supplemented by I01–I23, a start gate, and a verification issue. Decision issues close after acceptance. GitHub holds live status. No automated stale-issue closure. PROJECT_MANAGEMENT.md documents fields/views; GITHUB_REGISTER.md and SETUP_STATUS.md record live entities and verification.
 
-## Vedlikehold av oppsettet
+All documentation and editable GitHub content use English under [LANGUAGE_POLICY.md](LANGUAGE_POLICY.md). Owner–assistant conversations remain in Norwegian.
 
-Kvartalsvis og ved nye maintainere: les tilbake settings/rulesets, tilgang, Actions-policy, Security, milepæler og prosjekt. Endringer går gjennom PR og følges av API/UI-verifikasjon; JSON på disk er ikke bevis på aktiv håndheving. Ingen endring av default branch uten å kontrollere ~DEFAULT_BRANCH-regelen.
+## Maintaining the setup
 
-## Offisielle kilder kontrollert ved oppsett
+Quarterly and when maintainers change, read back settings/rulesets, access, Actions policy, Security, milestones, and project configuration. Changes go through PRs followed by API/UI verification; on-disk JSON alone does not prove enforcement. Recheck the ~DEFAULT_BRANCH rule before changing the default branch.
+
+## Official sources reviewed during setup
 
 - [Rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/creating-rulesets-for-a-repository)
-- [Tilgjengelige regler og bypass](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)
-- [GitHub Projects-visninger](https://docs.github.com/en/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/managing-your-views)
+- [Available rules and bypasses](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)
+- [GitHub Projects views](https://docs.github.com/en/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/managing-your-views)
 - [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
 
-Offentlige repoer støtter rulesets på GitHub Free. Privat repo ville krevd vurdering av abonnement. Funksjonsnavn og faktisk støtte kontrolleres mot GitHub-responsen for dette repoet.
+Public repositories support rulesets on GitHub Free. A private repository would require a subscription assessment. Check actual feature support against this repository's GitHub responses.

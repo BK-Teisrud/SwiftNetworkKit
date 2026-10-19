@@ -1,45 +1,45 @@
-# ADR-0005: HTTP-, respons- og feilkontrakt i v1
+# ADR-0005: HTTP, response, and error contract in v1
 
-Dato: 2026-10-19. Status: Godkjente hovedvalg fra prosjekteier; standarddetaljer dokumentert som konkretisering av disse valgene.
-Oppgave: [DEC-04 / #4](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/4).
+Date: 2026-10-19. Status: Core choices accepted by the owner; documented defaults elaborate those choices.
+Issue: [DEC-04 / #4](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/4).
 
-## Godkjenning og kontekst
+## Approval and context
 
-Prosjekteier valgte i chatten:
+The owner selected:
 
-1. Typesikre endepunkter som standard, med rå URLRequest ved behov under samme klientregler.
-2. Dekodet verdi sammen med HTTP-status og responsheaders.
-3. JSON, rå Data/tekst og eksplisitt tomt svar i v1; streaming og multipart utsettes.
-4. Strukturerte feil med separat CancellationError.
-5. HTTP 200–299 som standard, med eksplisitte unntak per kall.
+1. Typed endpoints by default, with raw URLRequest support under the same client policies.
+2. The decoded value together with HTTP status and response headers.
+3. JSON, raw Data/text, and explicitly empty responses in v1; streaming and multipart are deferred.
+4. Structured errors with a separate CancellationError.
+5. HTTP 200–299 by default, with explicit per-call exceptions.
 
-Disse valgene konkretiseres i [HTTP_API_CONTRACT.md](../planning/HTTP_API_CONTRACT.md), inkludert URL-, header-, body- og valideringsregler. Ingen Swift-kode eller offentlig symbolimplementasjon er opprettet.
+[HTTP_API_CONTRACT.md](../planning/HTTP_API_CONTRACT.md) elaborates these choices, including URL, header, body, and validation rules. No Swift code or public symbol implementation has been created.
 
-## Beslutning
+## Decision
 
-Én HTTP-klientkontrakt håndterer både typed endpoint og rå request. En injiserbar NetworkClient-grense, en konkret APIClient, Endpoint med tilknyttet responstype, NetworkResponse og NetworkError er de planlagte offentlige konseptnavnene. NetworkConfiguration, HTTPMethod og en eksplisitt EmptyResponse inngår i kontraktsmodellen. Eksakte Swift-signaturer fastsettes ved implementasjon innen disse kontraktene og må gjennom API-review; denne ADR-en inneholder ingen kodeskisse.
+One HTTP client contract serves typed endpoints and raw requests. The planned public concepts are an injectable NetworkClient boundary, a concrete APIClient, Endpoint with an associated response type, NetworkResponse, and NetworkError. NetworkConfiguration, HTTPMethod, and an explicit EmptyResponse are part of the contract model. Exact Swift signatures will be designed during implementation and reviewed against these contracts; this ADR contains no code sketch.
 
-Responsstrategi velges uttrykkelig: JSON, Data, tekst eller tomt svar. Dette unngår at Data/String feilaktig går gjennom JSON-dekoding bare fordi typene også kan ha Codable-konformitet. Rå request er en byggemåte, ikke en bypass av status-, decoding-, auth-, redirect- eller cancellationregler.
+Choose the response strategy explicitly: JSON, Data, text, or empty. This prevents Data/String from unintentionally passing through JSON decoding merely because they also conform to Codable. A raw request is an input mechanism, not a bypass of status, decoding, authentication, redirect, or cancellation rules.
 
-CancellationError er en egen kontrollflyt og pakkes ikke inn som vanlig NetworkError. Skillet mellom request-timeout, total deadline og session-eierskap konkretiseres i DEC-05. Auth-/redirect-/cache-/nettverkspolicy konkretiseres i DEC-06; hovedscope fra ADR-0003 kan ikke utvides gjennom disse detaljbeslutningene.
+CancellationError is separate control flow and is not wrapped as an ordinary NetworkError. DEC-05 elaborates request timeout, total deadline, and session ownership. DEC-06 elaborates authentication, redirects, caching, and network policy; these detailed decisions cannot expand ADR-0003's scope.
 
-## Alternativer og begrunnelse
+## Alternatives and rationale
 
-- Bare typed endpoints ville gjort v1 mindre fleksibel ved uvanlige HTTP-kontrakter. Prosjekteier valgte også raw URLRequest.
-- Bare dekodet verdi ville skjult status og headers som konsumenter kan trenge. Prosjekteier valgte respons-wrapper.
-- Bare JSON ville utelatt enkle tekst-/binær-/tom-responser. Prosjekteier valgte disse enkle variantene uten et generelt format-/streamingrammeverk.
-- En samlet feiltype med cancellation kunne vært enklere å liste i ett sted. Prosjekteier valgte separat CancellationError.
-- Fast 2xx-regel kunne vært mindre konfigurerbar. Eksplisitte lokale unntak ble valgt fremfor en global skjult endring av suksessbegrepet.
+- Typed endpoints alone would be less flexible for unusual HTTP contracts. The owner also selected raw URLRequest.
+- Returning only a decoded value would hide status and headers that consumers may need. The owner selected a response wrapper.
+- JSON alone would exclude simple text, binary, and empty responses. The owner selected these variants without a general format/streaming framework.
+- Combining cancellation with all other errors would make one exhaustive list possible. The owner selected a separate CancellationError.
+- A fixed 2xx rule would be less configurable. Explicit local exceptions were chosen instead of a hidden global redefinition of success.
 
-## Plattformkontroll og bevis
+## Platform checks and evidence
 
-Foundation-grunnlaget er kontrollert gjennom offentlige Apple-kilder og availability-deklarasjoner i lokal SDK 26.2. URLSession.data(for:delegate:), URLComponents, URLQueryItem og JSONEncoder/JSONDecoder har deklarert availability innen de vedtatte minimumene. Dette er en avgrenset deklarasjonskontroll i macOS-SDK-ens Swift-interface, ikke kryssplattformbygg eller runtime-bevis. Se den oppdaterte plattformmatrisen for omfanget.
+The Foundation baseline was checked using public Apple sources and availability declarations in local SDK 26.2. URLSession.data(for:delegate:), URLComponents, URLQueryItem, and JSONEncoder/JSONDecoder have declared availability within the approved minimums. This is a bounded declaration check in the macOS SDK's Swift interface, not a cross-platform build or runtime result. See the platform matrix for its scope.
 
-Testkontrakter for suksess, statusunntak, tomme svar, URL-/headerhåndtering, codingfeil og cancellation er beskrevet. De er ikke kjørt; ingen pakke eller tester finnes. Domene-epics lukkes først ved faktisk levering. DEC-05–DEC-07 og F0-porten forblir åpne.
+Test contracts cover success, status exceptions, empty responses, URL/header handling, coding failures, and cancellation. None has run; no package or tests exist. Domain epics close only upon delivery. At adoption, DEC-05–DEC-07 and the F0 gate remained open.
 
-## Kilder
+## Sources
 
 - [Apple: URLSession](https://developer.apple.com/documentation/foundation/urlsession)
 - [Apple: URLComponents](https://developer.apple.com/documentation/foundation/urlcomponents)
 - [Apple: CancellationError](https://developer.apple.com/documentation/swift/cancellationerror)
-- Lokal SDK: Foundation.framework/Modules/Foundation.swiftmodule/x86_64-apple-macos.swiftinterface, SDK 26.2; Xcode 26.3 (17C529).
+- Local SDK: Foundation.framework/Modules/Foundation.swiftmodule/x86_64-apple-macos.swiftinterface, SDK 26.2; Xcode 26.3 (17C529).

@@ -1,76 +1,74 @@
-# Plattform- og verktøymatrise
+# Platform and toolchain matrix
 
-Status: Vedtatt støtteplan 2026-10-19, se [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). Dette er ingen erklæring om verifisert produktstøtte; biblioteket er ennå ikke implementert.
+Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). This is not verified product support; the library is not implemented.
 
-## Vedtatt leveransegrunnlag
+## Approved delivery baseline
 
-| Plattform | Minimums-OS i v1 | SDK observert lokalt | Bygg | Unit / integrasjon | Testet runtime / enhet |
+| Platform | Minimum v1 OS | Locally observed SDK | Build | Unit / integration | Tested runtime / device |
 | --- | --- | --- | --- | --- | --- |
-| iOS | 17.0 | iOS 26.2 | Ikke kjørt | Ikke kjørt | Ikke verifisert |
-| iPadOS | 17.0 | iOS/iPadOS 26.2 | Ikke kjørt | Ikke kjørt | Ikke verifisert |
-| macOS | 14.0 | macOS 26.2 | Ikke kjørt | Ikke kjørt | Ikke verifisert |
-| watchOS | 10.0 | watchOS 26.2 | Ikke kjørt | Ikke kjørt | Ikke verifisert |
-| tvOS | 17.0 | tvOS 26.2 | Ikke kjørt | Ikke kjørt | Ikke verifisert |
-| visionOS | Utsatt; ingen v1-støtte | Ikke del av valgt leveranse | Ikke del av v1 | Ikke del av v1 | Ikke del av v1 |
+| iOS | 17.0 | iOS 26.2 | Not run | Not run | Unverified |
+| iPadOS | 17.0 | iOS/iPadOS 26.2 | Not run | Not run | Unverified |
+| macOS | 14.0 | macOS 26.2 | Not run | Not run | Unverified |
+| watchOS | 10.0 | watchOS 26.2 | Not run | Not run | Unverified |
+| tvOS | 17.0 | tvOS 26.2 | Not run | Not run | Unverified |
+| visionOS | Deferred; no v1 support | Outside selected delivery | Outside v1 | Outside v1 | Outside v1 |
 
-Et nyere SDK er verktøyets API-grunnlag, ikke et krav om at vertappen kjører denne OS-versjonen. iOS og iPadOS deler SDK-/deploymentgrunnlag, men relevante enhets-/miljøforskjeller må fortsatt vurderes. Ingen Mac Catalyst-, Linux-, Windows- eller Android-støtte er valgt.
+A newer SDK supplies build-time APIs; it does not require the host app to run that OS version. iOS/iPadOS share SDK/deployment foundations, but relevant device/environment differences still need assessment. Mac Catalyst, Linux, Windows, and Android support are not selected.
 
-## Verktøy
+## Tools
 
-| Felt | Vedtatt krav | Observert lokalt 2026-10-19 |
+| Setting | Approved requirement | Locally observed 2026-10-19 |
 | --- | --- | --- |
-| Xcode | 26.3 eller nyere stabil versjon, med faktisk verifikasjon før støtte hevdes | 26.3, build 17C529 |
+| Xcode | 26.3 or a newer stable version, verified before claiming support | 26.3, build 17C529 |
 | Swift tools | Minimum 6.2 | Apple Swift 6.2.4 |
-| Swift-språkmodus | Swift 6, streng samtidighetskontroll | Ikke konfigurert i noen pakke ennå |
-| Vertens macOS | Må oppfylle systemkravet til valgt Xcode | 15.8.1 |
-| Vertens arkitektur | Standard GitHub macos-15 arm64 i planen; ingen jobb kjørt | x86_64 rapportert av kompilatoren |
-| CI-SDK / runtime / runner | ADR-0008 / CI_AND_TEST_PLAN.md fastsetter baseline; faktisk kjøring må bekrefte image, schemes og destinations | Ingen CI opprettet |
+| Swift language mode | Swift 6, strict concurrency | No package configured yet |
+| Host macOS | Meets selected Xcode's system requirements | 15.8.1 |
+| Host architecture | Planned standard GitHub macos-15 arm64; no job run | Compiler reports x86_64 |
+| CI SDK / runtime / runner | ADR-0008 / CI_AND_TEST_PLAN.md baseline; actual runs must verify images, schemes, and destinations | No CI created |
 
-Systemkravet til utviklermaskinen er separat fra bibliotekets minimum macOS 14.0. En lokal versjonskontroll er ikke et testresultat for biblioteket.
+Development-host requirements are separate from the library's macOS 14.0 minimum. Local version inspection is not a library test result.
 
-## Påkrevd symbolkontroll før utviklingsoppgaver blir Ready
+## Symbol checks before Ready
 
-For hvert valgt symbol/API registreres: krav-ID, fullt symbolnavn, framework, SDK som ble kontrollert, tilgjengelighet per valgt OS, eventuell guard/fallback og hvordan adferden skal testes. Bruk SDK-/Apple-dokumentasjon; ikke anta tilgjengelighet ut fra frameworknavnet.
+For each selected API, record requirement ID, full symbol name, framework, inspected SDK, availability per target OS, required guard/fallback, and behavioral test plan. Use SDK/Apple documentation; do not infer availability from framework names.
 
-Foreløpige API-familier som må gjennomgås når kontraktene velges:
-
-| Område | Grunnlag | Kontroll som gjenstår |
+| Area | Foundation | Outstanding checks |
 | --- | --- | --- |
-| HTTP/session | Foundation / URLSession / URLRequest | Eksakte async-metoder, sessionkonfigurasjon, delegates, timeout og cancellation |
-| URL/JSON | URLComponents / Codable / JSONEncoder / JSONDecoder | Faktiske valgte overloads, parametersemantikk og encoder-/decoderstrategier |
-| Logging | OSLog | Konkret logging-API, privacy-markeringer og dataminimering |
-| Samtidighet | Swift Concurrency | Sendable, isolation, cancellation og eventuell clock-API; språk- og OS-krav vurderes separat |
-| Testing | Apples/offisielle testverktøy | ADR-0008 velger Swift Testing/XCTest og offisielle verktøy; faktisk runtime-/harnessverifikasjon gjenstår |
+| HTTP/session | Foundation / URLSession / URLRequest | Exact async methods, configuration, delegates, timeout, cancellation |
+| URL/JSON | URLComponents / Codable / JSONEncoder / JSONDecoder | Selected overloads, parameter semantics, coding strategies |
+| Logging | OSLog | Selected logging API, privacy markers, data minimization |
+| Concurrency | Swift Concurrency | Sendable, isolation, cancellation, clock APIs; assess language and OS requirements separately |
+| Testing | Apple/official tools | ADR-0008 selects Swift Testing/XCTest; actual runtime/harness verification remains |
 
-Tabellen er en arbeidsliste, ikke en påstand om at bestemte symboler er verifisert. Nye Foundation-/OSLog-/Concurrency-API-er kan ha høyere OS-krav enn produktets valgte minimum.
+This is a review checklist, not proof that every symbol is verified. Newer Foundation/OSLog/Concurrency APIs may require higher OS versions than the approved minimums.
 
-## Krav til fremtidig testbevis
+## Future test evidence
 
-Registrer per kontroll: commit-SHA, dato, Xcode-build, Swift-versjon, SDK, faktisk runtime og arkitektur, simulator/enhet, testtype og resultat eller konkret begrunnelse for manglende kjøring.
+For each check record commit SHA, date, Xcode build, Swift version, SDK, actual runtime/architecture, simulator/device, test type, and result or concrete reason for missing execution.
 
-Planen skal dekke bygg for alle valgte plattformer og relevante normal-/feil-/cancellation-/concurrencytester. ADR-0008 / [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) skiller PR-runtimes fra egen releasekontroll på minimums-OS og representative nyere stabile runtimes. Hvis en minimumsruntime ikke kan kjøres i tilgjengelig CI, må et eksplisitt alternativ med reelt testbevis avklares før release; et nyere simulatorbygg alene dekker ikke dette.
+Cover builds on every selected platform and relevant normal/error/cancellation/concurrency tests. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 separates PR runtimes from release tests on minimum OS versions and representative newer stable runtimes. If CI cannot run a minimum, establish an explicit alternative with real evidence before release; a newer simulator build is insufficient.
 
-Fysisk enhetstest brukes der scenarioet krever det. Bakgrunnsoverføringer, Keychain-grupper og lokalnett er utsatt etter v1-scope og er ikke påstått støttet gjennom denne matrisen. Ingen byggetest eller runtime-verifikasjon er bestått ennå.
+Use physical devices where scenarios require them. Background transfers, Keychain groups, and local networking are deferred by v1 scope and are not established by this matrix. No build/runtime verification has passed.
 
-## Avgrenset deklarasjonskontroll ved DEC-04
+## Bounded declaration check for DEC-04
 
-Kontrollert 2026-10-19 i lokal macOS SDK 26.2, Foundation.swiftmodule/x86_64-apple-macos.swiftinterface. Availability-annotasjoner nevner de fire målplattformene, men denne kontrollen erstatter ikke lesing/bygg mot hvert plattform-SDK og tester på runtimes.
+Inspected 2026-10-19 in local macOS SDK 26.2, Foundation.swiftmodule/x86_64-apple-macos.swiftinterface. Availability annotations name all four platforms, but this does not replace each platform SDK's inspection/builds or runtime tests.
 
-| Symbol | Deklarert minimum i kontrollert interface | Forhold til vedtatt v1-minimum |
+| Symbol | Declared minimum in inspected interface | Relation to v1 minimums |
 | --- | --- | --- |
-| URLSession.data(for:delegate:) | iOS 15, macOS 12, watchOS 8, tvOS 15 | Innen alle valgte minimum |
-| URLComponents | iOS 8, macOS 10.10, watchOS 2, tvOS 9 | Innen alle valgte minimum |
-| URLQueryItem | iOS 8, macOS 10.10, watchOS 2, tvOS 9 | Innen alle valgte minimum |
-| JSONEncoder / JSONDecoder, grunnklassene | iOS 8, macOS 10.10, watchOS 2, tvOS 9 | Innen alle valgte minimum; nyere medlemmer må kontrolleres separat |
+| URLSession.data(for:delegate:) | iOS 15, macOS 12, watchOS 8, tvOS 15 | Within every selected minimum |
+| URLComponents | iOS 8, macOS 10.10, watchOS 2, tvOS 9 | Within every selected minimum |
+| URLQueryItem | iOS 8, macOS 10.10, watchOS 2, tvOS 9 | Within every selected minimum |
+| JSONEncoder / JSONDecoder base classes | iOS 8, macOS 10.10, watchOS 2, tvOS 9 | Within every minimum; check newer members separately |
 
-Kontrollen er positivt deklarasjonsbevis for disse kandidatene, ikke en påstand om at hele HTTP-kontrakten er implementert eller testet. Konkrete overloads/egenskaper for HTTPURLResponse, URLRequest, øvrige JSON-strategier, OSLog og concurrency kontrolleres videre før relevante deloppgaver blir Ready. Ingen build-/teststatus i matrisen endres av denne kontrollen.
+This is positive declaration evidence for those candidates, not an implemented/tested HTTP contract. Inspect actual HTTPURLResponse/URLRequest overloads/properties, other JSON strategies, OSLog, and concurrency APIs before relevant tasks become Ready. These checks do not change build/test statuses.
 
-## Avgrenset kilde-/deklarasjonskontroll ved DEC-05
+## Bounded source/declaration check for DEC-05
 
-Kontrollert 2026-10-19 i lokal SDK 26.2. _Concurrency.swiftmodule/x86_64-apple-macos.swiftinterface angir ContinuousClock fra iOS 16/macOS 13/watchOS 9/tvOS 16 og CancellationError fra iOS 13/macOS 10.15/watchOS 6/tvOS 13; begge er innen de valgte minimumene. Ingen nye OS 26-spesifikke klokkeegenskaper er valgt.
+Inspected 2026-10-19 in local SDK 26.2. _Concurrency.swiftmodule/x86_64-apple-macos.swiftinterface declares ContinuousClock from iOS 16/macOS 13/watchOS 9/tvOS 16 and CancellationError from iOS 13/macOS 10.15/watchOS 6/tvOS 13. Both fit the selected minimums. No new OS 26-specific clock properties are selected.
 
-Foundation/Headers/NSURLSession.h bekrefter skillet mellom request-timeout som venter på nye data, resource-timeout og effekten av session-invalidation på sessionens tasks. Samme header sier at connectivityventing ikke følger request-timeout på samme måte. Derfor er bibliotekets samlede budsjett et separat kontraktskrav. Disse lesekontrollene verifiserer ikke faktisk cancellation, timeout eller tilgjengelighet på alle SDK-er/runtimes; ingen bygg-/teststatus endres.
+Foundation/Headers/NSURLSession.h confirms the distinction between wait-for-data request timeout, resource timeout, and session invalidation effects on tasks. It also distinguishes connectivity waiting from request timeout, motivating a separate total library budget. These reading checks establish neither actual cancellation/timeout behavior nor availability on every SDK/runtime. Build/test statuses remain unchanged.
 
-## Miljøinventar før kodestart
+## Environment inventory before implementation
 
-[TEST_ENVIRONMENTS.md](TEST_ENVIRONMENTS.md) registrerer installerte nyere runtimes, eieroppgitt enhetstilgang og manglende minimums-OS-miljøer. Ingen inventarføring endrer teststatusene over.
+[TEST_ENVIRONMENTS.md](TEST_ENVIRONMENTS.md) records installed newer runtimes, owner-reported devices, and missing minimum-OS environments. Inventory does not change the test statuses above.

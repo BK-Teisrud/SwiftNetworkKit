@@ -158,7 +158,7 @@
   "planning_approval": {
     "date": "2026-10-19",
     "approved": true,
-    "owner_response": "Godkjenn F0-planleggingen; fortsatt ingen kode",
+    "owner_response": "Approve F0 planning; still no code",
     "reviewed_base_commit": "2c5ee834a26df761a044bb478bd64fa69381534c",
     "review_document": "docs/planning/F0_REVIEW.md",
     "adr": "docs/decisions/ADR-0009-f0-approval-no-implementation.md",
@@ -174,7 +174,8 @@
     ],
     "implementation_authorized": false,
     "remaining_repository_issue": null,
-    "f0_milestone_closed": true
+    "f0_milestone_closed": true,
+    "owner_response_note": "Translated from Norwegian; original approval retained in conversation and Git history"
   },
   "implementation_authorized": false,
   "pre_code_preparation": {
@@ -226,5 +227,21 @@
     "physical_devices": "owner reports all target device types on latest updates; exact versions unverified",
     "minimum_os_runtime_evidence": "not obtained; release blocked until I21/I22 evidence",
     "implementation_authorized": false
+  },
+  "language_policy": {
+    "repository_and_github": "English",
+    "owner_assistant_conversation": "Norwegian",
+    "adr": "docs/decisions/ADR-0011-language-policy.md",
+    "historical_git_objects": "not rewritten",
+    "verified_on": "2026-10-19",
+    "translated_existing_issues": 55,
+    "translated_existing_pull_requests": 10,
+    "translated_milestones": 7,
+    "translated_project_views": 8,
+    "translated_custom_label_descriptions": 16,
+    "states_and_checkboxes_preserved": true,
+    "project_option_ids_and_workflows_preserved": true,
+    "security_rules_unchanged": true,
+    "work_queue_sort_verified_in_browser": true
   }
 }

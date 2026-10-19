@@ -1,48 +1,48 @@
-# ADR-0006: Session-eierskap, concurrency og tidsgrenser
+# ADR-0006: Session ownership, concurrency, and time limits
 
-Dato: 2026-10-19. Status: Hovedvalg godkjent av prosjekteier; livssyklus- og concurrencydetaljer dokumentert som konkretisering.
-Oppgave: [DEC-05 / #5](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/5).
+Date: 2026-10-19. Status: Core choices accepted by the owner; lifecycle and concurrency details elaborate those choices.
+Issue: [DEC-05 / #5](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/5).
 
-## Prosjekteierens valg
+## Owner's choices
 
-- Egen, gjenbrukt URLSession som standard, med støtte for injisert session. En app-eid injisert session ugyldiggjøres aldri av klienten.
-- Standard timeout etter 30 sekunder uten nye data og et samlet tidsbudsjett på 60 sekunder. Begge kan endres per klient eller kall.
+- A reused, owned URLSession by default, with support for injection. The client never invalidates an injected session owned by the app.
+- A default timeout after 30 seconds without new data and a 60-second total budget. Both are configurable per client or call.
 
-[CONCURRENCY_AND_LIFECYCLE.md](../planning/CONCURRENCY_AND_LIFECYCLE.md) konkretiserer disse valgene og kravene fra ADR-0003/0005 om trygg samtidig bruk og separat CancellationError. Ingen implementasjon eller eksakte Swift-signaturer opprettes nå.
+[CONCURRENCY_AND_LIFECYCLE.md](../planning/CONCURRENCY_AND_LIFECYCLE.md) elaborates these choices and ADR-0003/0005 requirements for safe concurrency and a separate CancellationError. No implementation or exact Swift signatures are created now.
 
-## Beslutning
+## Decision
 
-Klienten kan brukes av flere samtidige tasks. Konfigurasjon/requestinput er snapshots; delt muterbar tilstand isoleres. Ingen klientglobal actor får utilsiktet serialisere hele HTTP-/decodeoperasjonen. Typede verdier og klientgrenser skal tilfredsstille Swift 6-kontraktene uten generelle unchecked Sendable-unntak.
+Multiple concurrent tasks may use the client. Configuration and request input are snapshots; shared mutable state is isolated. No client-wide actor may unintentionally serialize the entire HTTP/decoding operation. Typed values and client boundaries must satisfy Swift 6 contracts without blanket unchecked Sendable exemptions.
 
-Klienten eier enten sin egen session eller låner en app-eid session; eierskap er eksplisitt og endres ikke under bruk. Shutdown stenger for nye kall og kansellerer klientens aktive operasjoner, med opprydding. Bare egen session kan ugyldiggjøres. Det inngår ingen separat graceful-drain-modus i v1; en app kan selv vente på sine kall før shutdown.
+The client either owns its session or borrows an app-owned session. Ownership is explicit and fixed during use. Shutdown rejects new calls, cancels the client's active operations, and performs cleanup. Only an owned session may be invalidated. A separate graceful-drain mode is outside v1; the app may await its calls before shutdown.
 
-Produksjonsklokken er monoton, med ContinuousClock som planlagt systemgrunnlag og en injiserbar intern clock/sleeper-grense for deterministiske tester. Et separat eksternt clock-bibliotek er ikke tillatt. Timeout, brukeravbrudd, shutdown og normal fullføring har eksplisitte terminalårsaker, slik at intern timeoutkansellering ikke feilaktig vises som brukerens CancellationError.
+The production clock is monotonic, with ContinuousClock as the planned system foundation and an injectable internal clock/sleeper boundary for deterministic tests. No external clock library is allowed. Timeout, user cancellation, shutdown, and normal completion have explicit terminal causes, preventing internal timeout cancellation from being reported as the user's CancellationError.
 
-## Begrunnelse og alternativer
+## Rationale and alternatives
 
-Kun egen session ville gitt mindre integrasjonsfleksibilitet. Prosjekteier valgte injeksjon i tillegg, og dermed også en tydelig grense for hva klienten kan styre på en lånt session.
+Owned sessions alone would be less flexible. The owner also chose injection, which requires a clear boundary around the client's control of a borrowed session.
 
-Lengre standardgrenser (60/300 sekunder) eller ingen samlet biblioteksfrist ble presentert som alternativer. Prosjekteier valgte 30/60 sekunder. Dette er HTTP-kjernens standardpolicy, ikke et signal om støtte for langvarige overføringer.
+Longer defaults (60/300 seconds) or no total library deadline were offered as alternatives. The owner chose 30/60 seconds. These are HTTP-core defaults, not support for long-running transfers.
 
-En global singleton, session per request, global requestlås eller bruk av veggklokke til deadlines ville svekket eierskap, ressursbruk, parallellitet eller testbarhet. De inngår ikke i kontrakten. Actor-isolering brukes på tilstanden som trenger det, ikke som et løfte om én bestemt offentlig implementasjonstype.
+A global singleton, one session per request, a global request lock, or wall-clock deadlines would weaken ownership, resource use, parallelism, or testability. They are outside the contract. Actor isolation applies to state requiring it, without promising one particular public implementation type.
 
-## Viktige begrensninger
+## Material limitations
 
-Request-timeout er URLSessions inaktivitets-/vent-på-data-semantikk, ikke total operasjonstid. Klientens samlede budsjett inkluderer også forberedelse, eventuelle hooks og responsbehandling. OS-planlegging og kooperativ cancellation betyr at det ikke er en hard sanntidsgaranti for retur nøyaktig etter 60 sekunder. Et sent resultat skal ikke leveres som suksess når den valgte fristen allerede er registrert utløpt.
+Request timeout follows URLSession's inactivity/wait-for-data semantics, not total elapsed operation time. The client's total budget also includes preparation, hooks, and response processing. OS scheduling and cooperative cancellation mean there is no hard real-time guarantee of returning at exactly 60 seconds. Do not return a late result as success once expiration of the selected deadline has been recorded.
 
-Appens injiserte session kan ha strengere resource-timeout eller eksterne invalidations som klienten ikke kan overstyre. Et kall kan ikke love å forlenge slike begrensninger. Raw URLRequest har samme eksplisitte tidsgrenser som typed endpoint. Sikkerhets-/auth-/redirect-/cachepolicy for eide og injiserte sessions fastsettes i DEC-06; inkonsekvent injeksjon skal avvises fremfor å gi et falskt sikkerhetsløfte.
+An injected session may impose stricter resource timeouts or external invalidation that the client cannot override. A call cannot promise to extend those constraints. Raw URLRequest uses the same explicit time limits as typed endpoints. DEC-06 sets security/authentication/redirect/cache policy for both ownership modes; reject incompatible injection instead of making a false security promise.
 
-## Kontroll og videre arbeid
+## Checks and next steps
 
-Apples beskrivelser og lokal SDK er kontrollert for request-timeout, session-invalidation og ContinuousClock/CancellationError. Grunnsymbolenes deklarerte availability ligger innenfor vedtatte OS-minimum. Dette er kilde-/deklarasjonskontroll, ikke produktbygg eller runtime-test.
+Apple documentation and local SDK declarations were inspected for request timeout, session invalidation, and ContinuousClock/CancellationError. The base symbols' declared availability fits the approved OS minimums. These are source/declaration checks, not builds or runtime tests.
 
-Testkrav for cancellation, eierskap, tidsfrister, races, shutdown og samtidige kall finnes i kontraktsdokumentet. Ingen slike tester er kjørt. DEC-06, DEC-07 og F0-porten gjenstår.
+The contract document specifies cancellation, ownership, deadline, race, shutdown, and concurrency tests. None has run. At adoption, DEC-06, DEC-07, and the F0 gate remained open.
 
-## Kilder
+## Sources
 
 - [Apple: timeoutIntervalForRequest](https://developer.apple.com/documentation/foundation/urlsessionconfiguration/timeoutintervalforrequest)
 - [Apple: invalidateAndCancel](https://developer.apple.com/documentation/foundation/urlsession/invalidateandcancel%28%29)
 - [Apple: Task.cancel](https://developer.apple.com/documentation/swift/task/cancel%28%29)
 - [Apple: TaskGroup](https://developer.apple.com/documentation/swift/taskgroup)
 - [Apple: ContinuousClock](https://developer.apple.com/documentation/swift/continuousclock)
-- Lokal SDK 26.2: Foundation/Headers/NSURLSession.h og usr/lib/swift/_Concurrency.swiftmodule/x86_64-apple-macos.swiftinterface.
+- Local SDK 26.2: Foundation/Headers/NSURLSession.h and usr/lib/swift/_Concurrency.swiftmodule/x86_64-apple-macos.swiftinterface.

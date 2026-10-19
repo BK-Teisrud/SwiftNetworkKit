@@ -1,40 +1,40 @@
-# ADR-0003: HTTP-kjerne i v1 og navn på pakke, produkt og modul
+# ADR-0003: HTTP core in v1 and package, product, and module names
 
-Dato: 2026-10-19. Status: Godkjent av prosjekteier i chatten.
-Oppgave: [DEC-02 / #2](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/2).
+Date: 2026-10-19. Status: Accepted by the project owner in conversation.
+Issue: [DEC-02 / #2](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/2).
 
-## Kontekst og godkjenning
+## Context and approval
 
-Prosjekteier valgte «HTTP-kjerne først; øvrige moduler kommer senere» og deretter «Repo SwiftNetworkKit, men produkt/importnavn NetworkKit, én modul». Dette fastsetter leveransegrensen og navnene. Det er ikke klarsignal til implementasjon.
+The owner selected, in translation, “HTTP core first; other modules later,” followed by “Repository SwiftNetworkKit, but product/import NetworkKit, one module.” This sets the delivery boundary and names. It does not authorize implementation.
 
-## Beslutning
+## Decision
 
-| Rolle | Vedtatt navn / grense |
+| Role | Approved name / boundary |
 | --- | --- |
-| GitHub-repository | SwiftNetworkKit |
-| Swift Package-navn | SwiftNetworkKit |
-| Bibliotekprodukt | NetworkKit |
-| Bibliotekmodul / target / importnavn | NetworkKit |
-| Antall bibliotekmoduler i v1 | Én |
+| GitHub repository | SwiftNetworkKit |
+| Swift package | SwiftNetworkKit |
+| Library product | NetworkKit |
+| Library module / target / import | NetworkKit |
+| Library modules in v1 | One |
 
-Navnene skal senere brukes konsekvent i pakkemanifest, dokumentasjon og konsumenteksempler. Pakken vil tilby produktet NetworkKit; konsumenter vil importere NetworkKit. Ingen manifest, target eller importkode opprettes nå. Egne testtargets er tillatt senere og teller ikke som ekstra distribuerte bibliotekmoduler. Et separat testhjelperprodukt inngår ikke i v1.
+Use these names consistently in the future manifest, documentation, and consumer examples. The package will expose NetworkKit, and consumers will import NetworkKit. No manifest, targets, or import code are created now. Separate test targets are allowed later and do not count as additional distributed library modules. A separate testing-helper product is outside v1.
 
-Første stabile versjon skal gi en avgrenset HTTP-kjerne med typesikre kall, JSON, forutsigbare feil, timeout/cancellation, trygg logging og deterministisk testing. Nødvendig konfigurasjon, dependency injection, personvern, dokumentasjon og plattformtilgjengelighet følger kjernen fra starten. URLSession er primær transport og sikre systemstandarder gjelder.
+The first stable release provides a bounded HTTP core with typed calls, JSON, predictable errors, timeout/cancellation, safe logging, and deterministic tests. Necessary configuration, dependency injection, privacy, documentation, and platform availability accompany the core from the outset. URLSession is the primary transport, with secure system defaults.
 
-Den normative leveransegrensen står i [V1_SCOPE.md](../planning/V1_SCOPE.md). Detaljer i offentlige kontrakter og policygrenser avgjøres fortsatt i DEC-04–DEC-06. Minimums-OS og verktøy velges i DEC-01 og DEC-07.
+[V1_SCOPE.md](../planning/V1_SCOPE.md) defines the normative delivery boundary. Public contract and policy details were assigned to DEC-04–DEC-06; minimum OS versions and tools to DEC-01 and DEC-07.
 
-## Alternativer og avveininger
+## Alternatives and trade-offs
 
-- SwiftNetworkKit som både repo og importnavn ville gitt ett navn overalt. Prosjekteier foretrekker NetworkKit som produkt-/importnavn.
-- Flere bibliotekmoduler fra starten ville gitt separate produkter, men flere avhengighets- og API-grenser før behovet er dokumentert. Ikke valgt.
-- Retry/cache eller hele funksjonskatalogen før første stabile versjon ville økt første leveranse. Prosjekteier valgte HTTP-kjerne først.
+- Using SwiftNetworkKit for both repository and import would provide one name everywhere. The owner prefers NetworkKit for the product/import.
+- Multiple library modules from the outset would provide separate products, but introduce dependency and API boundaries before a need is established. Not selected.
+- Delivering retry/cache or the full feature catalog before the first stable release would expand the initial delivery. The owner chose the HTTP core first.
 
-## Konsekvenser
+## Consequences
 
-F0 → F1 → F2 er veien til v1. F3–F6 beholdes som mulige senere leveranser. Det finnes ingen lovet dato for v1 eller senere moduler. Domene-epics beholder klassifiseringen fra spesifikasjonen, men er ikke automatisk løfte om alle underpunkter i v1.
+F0 → F1 → F2 is the path to v1. F3–F6 remain possible later releases. No delivery dates are promised. Domain epics retain their specification classifications without promising every subrequirement in v1.
 
-Interne typer brukes for kompleksitet som ikke trenger et offentlig kontraktsløfte. Separate moduler vurderes senere ved dokumentert behov, med eksplisitt vurdering av avhengigheter og kompatibilitet. Forslag som NetworkKitAuth og NetworkKitTesting i originalspesifikasjonen er ikke vedtatte v1-produkter.
+Use internal types for complexity that does not require a public contract. Consider separate modules later when a need is documented, explicitly assessing dependencies and compatibility. Original proposals such as NetworkKitAuth and NetworkKitTesting are not approved v1 products.
 
-Deloppgaver opprettes før utviklingsarbeid blir Ready, etter at relevante kontrakter er vedtatt. Å lukke DEC-02 betyr at scope og modulvalg er besluttet; det betyr ikke at domene-epics er levert eller at de øvrige F0-beslutningene er ferdige.
+Create concrete tasks before development becomes Ready, once relevant contracts are accepted. Closing DEC-02 records the scope and module decision; it does not deliver domain epics or complete the other F0 decisions.
 
-ADR-0001 beholdes som historikk; denne ADR-en avgjør navn og scope som der var åpne.
+ADR-0001 remains historical; this ADR resolves its open naming and scope questions.

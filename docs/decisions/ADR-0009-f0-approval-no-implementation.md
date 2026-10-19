@@ -1,31 +1,31 @@
-# ADR-0009: F0-planlegging godkjent; implementasjon ikke autorisert
+# ADR-0009: F0 planning accepted; implementation not authorized
 
-Dato: 2026-10-19. Status: Godkjent av prosjekteier i chatten.
-Oppgave: [GATE-00 / #28](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/28).
+Date: 2026-10-19. Status: Accepted by the project owner in conversation.
+Issue: [GATE-00 / #28](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/28).
 
-## Godkjenning
+## Approval
 
-Prosjekteier fikk et uttrykkelig spørsmål om godkjenning av det samlede F0-grunnlaget, inkludert dokumenterte standarddetaljer, med lenke til F0_REVIEW.md og klart skille mellom planlegging og kodearbeid.
+The owner was explicitly asked to approve the complete F0 baseline, including documented defaults, with a link to F0_REVIEW.md and a clear distinction between planning and implementation.
 
-Prosjekteiers svar var: «Godkjenn F0-planleggingen; fortsatt ingen kode».
+The owner's response, translated from Norwegian: “Approve F0 planning; still no code.”
 
-Vurderingsgrunnlaget er oversikten og dokumentene publisert gjennom PR #38, commit 2c5ee834a26df761a044bb478bd64fa69381534c. De sju enkeltbeslutningene i ADR-0002–ADR-0008 og deres tilhørende kontrakter godkjennes dermed samlet. Tidligere ADR-er beholdes som historikk; denne ADR-en registrerer den samlede aksepten.
+The reviewed baseline is the overview and documents published through PR #38, commit 2c5ee834a26df761a044bb478bd64fa69381534c. The seven decisions in ADR-0002–ADR-0008 and their contracts are thereby accepted together. Earlier ADRs remain historical; this ADR records the combined acceptance.
 
-## Beslutning
+## Decision
 
-- Planleggings- og arkitekturgrunnlaget er godkjent.
-- Implementasjon er ikke autorisert og har ikke startet.
-- Ingen Swift-kode, Package.swift, testtargets, kjørbare workflows, prototyper eller produktrelease skal opprettes uten et senere, uttrykkelig klarsignal fra prosjekteier.
-- GATE-00 kan lukkes som ferdig planleggingsbeslutning med dette uttrykkelige utfallet. Lukking er ikke tillatelse til å starte utvikling.
+- The planning and architecture baseline is accepted.
+- Implementation is not authorized and has not started.
+- Do not create Swift code, Package.swift, test targets, executable workflows, prototypes, or a product release without subsequent explicit authorization from the owner.
+- GATE-00 may close as a completed planning decision with this explicit outcome. Closure does not permit development to start.
 
-## Konsekvenser
+## Consequences
 
-Ingen vedtatte API-/sikkerhets-/testegenskaper hevdes implementert eller testet. Før senere utviklingsoppgaver blir Ready kreves konkret nedbryting, nødvendige symbol-/availabilitykontroller og testbare kriterier etter kontraktene. Faktisk CI, minimums-OS-/runtimebevis, sikkerhetsreview og releaseporter gjenstår til en senere autorisert fase.
+No approved API, security, or testing properties are claimed to exist or have passed tests. Before future tasks become Ready, provide concrete decomposition, necessary symbol/availability checks, and testable contractual criteria. Actual CI, minimum-OS/runtime evidence, security review, and release gates belong to a later authorized phase.
 
-OPS-01 / #30 holdes åpen for gjenstående GitHub-oppsett og kontrollpunkter. Det er en separat oppgave. F0-milepælen holdes åpen så lenge den har dette utestående arbeidet; «åtte av åtte beslutningsoppgaver» er ikke en påstand om at alt repoarbeid eller hele milepælen er ferdig.
+At adoption, OPS-01 / #30 remained open for GitHub setup and checks, separately from the eight planning decisions. F0 remained open while that work was outstanding. ADR-0010 and PR #65 later completed it; neither authorizes implementation.
 
-En framtidig endring av scope, rettigheter, plattformvalg, kontrakter, verktøy eller kostnadsramme må dokumenteres med begrunnelse og nødvendig eiergodkjenning. Et framtidig implementasjonsklarsignal registreres separat; denne beslutningen kan ikke tolkes som et slikt signal.
+Future changes to scope, rights, platforms, contracts, tools, or cost limits require documented rationale and necessary owner approval. Record any implementation authorization separately; this decision cannot be interpreted as such authorization.
 
-## Verifikasjon
+## Verification
 
-DEC-01–DEC-07 er dokumentert og avsluttet gjennom PR #32–#38. F0-godkjenningen publiseres gjennom en egen dokumentasjons-PR som lukker #28. JSON, lokale dokumentlenker og diff kontrolleres; fravær av Swift-filer, Package.swift og workflows bekreftes. GitHub har null registrerte workflows, og SHA-låsing for Actions er aktivert. Ingen produktbygg, tester eller publisering utføres som del av dette vedtaket.
+DEC-01–DEC-07 were documented and closed through PRs #32–#38. F0 approval was published through a separate documentation PR closing #28. JSON, local documentation links, and the diff were checked; absence of Swift files, Package.swift, and workflows was confirmed. GitHub reported zero workflows and enabled action SHA pinning. No product builds, tests, or publication were performed for this decision.
