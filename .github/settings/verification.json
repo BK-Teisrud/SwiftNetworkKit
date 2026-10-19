@@ -45,7 +45,6 @@
   "implementation_started": false,
   "product_ci_present": false,
   "open_decisions": [
-    "DEC-05",
     "DEC-06",
     "DEC-07"
   ],
@@ -109,6 +108,19 @@
       "default_success_status": "200-299; explicit per-call override",
       "adr": "docs/decisions/ADR-0005-http-api-contract.md",
       "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "implementation_or_tests_run": false
+    },
+    "DEC-05": {
+      "date": "2026-10-19",
+      "session": "owned reused default plus externally owned injected session",
+      "default_inactivity_seconds": 30,
+      "default_total_budget_seconds": 60,
+      "overrides": "per-call > client > defaults; stricter underlying session limits remain",
+      "concurrency": "Sendable-compatible client, snapshots, isolated mutable lifecycle state",
+      "clock": "monotonic ContinuousClock with internal injectable clock/sleeper",
+      "shutdown": "stop new calls, cancel own operations; invalidate owned session only",
+      "adr": "docs/decisions/ADR-0006-concurrency-and-lifecycle.md",
+      "contract": "docs/planning/CONCURRENCY_AND_LIFECYCLE.md",
       "implementation_or_tests_run": false
     }
   }

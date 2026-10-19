@@ -11,7 +11,8 @@
 | DEC-03 | Lisens og rettighetshaver | Godkjent: Teisrud Development AS; proprietær policy, se ADR-0002 |
 | [ADR-0005](ADR-0005-http-api-contract.md) | HTTP-, respons- og feilkontrakt | Hovedvalg godkjent av prosjekteier; standarddetaljer dokumentert |
 | DEC-04 | Endpoint, raw request, headers/body og feilkontrakt | Vedtatt: typed + raw, respons-wrapper, JSON/Data/tekst/tomt, separat cancellation; ADR-0005 |
-| DEC-05 | Cancellation, clocks, session-eierskap og concurrency | Åpen |
+| [ADR-0006](ADR-0006-concurrency-and-lifecycle.md) | Session-eierskap, concurrency og tidsgrenser | Hovedvalg godkjent; livssyklusdetaljer dokumentert |
+| DEC-05 | Cancellation, clocks, session-eierskap og concurrency | Vedtatt: egen + injisert session, 30/60 sekunder, isolert state og eksplisitt shutdown; ADR-0006 |
 | DEC-06 | Auth, retry, cache, privacy og sikkerhetsgrenser | Åpen |
 | DEC-07 | Offisielle verktøy, CI-budsjett og forsyningskjede | Åpen |
 

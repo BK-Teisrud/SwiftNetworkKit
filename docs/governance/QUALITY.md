@@ -11,6 +11,7 @@ Godkjent v1-scope, lisens, plattform-/verktøymatrise, API-/feilmodell, concurre
 - Bygg med valgt Swift/Xcode og strict concurrency; ingen udokumenterte warnings eller unchecked Sendable-unntak.
 - Deterministiske unit-tester uten offentlig nettverk. Mock client, URLProtocol og kontrollert klokke der passende.
 - Suksess, feil, encoding/decoding, tomme responser, timeout, cancellation, redirects og cleanup.
+- Session-eierskap, snapshot-isolasjon, 30/60-grenser med kontrollert klokke, entydige terminalutfall og shutdown følger [livssykluskontrakten](../planning/CONCURRENCY_AND_LIFECYCLE.md). Injisert session og andre konsumenters tasks må ikke ugyldiggjøres/avbrytes.
 - Sikkerhetskritiske negative tester: redaction, credential-isolasjon, host-skifte og idempotens.
 - Samtidighetstester for delt state, bounded køer og single-flight når slike funksjoner velges.
 - Public API, availability, DocC og migrasjon oppdatert; ingen eksterne Swift Package-dependencies.
