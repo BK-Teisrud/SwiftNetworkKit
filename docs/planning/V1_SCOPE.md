@@ -41,7 +41,7 @@ Tabellen avgrenser domener på scope-nivå. Nøyaktig HTTP-kontrakt og underpunk
 
 DEC-04 avgjør blant annet metodeutvalg, rå URLRequest, tomme svar, metadata, headers/body og encoder-/decodergrenser. DEC-05 avgjør concurrency, session-eierskap og clocks. DEC-06 avgjør auth-integrasjon, credentials ved redirects og konkret system-cache-/nettverkspolicy. Disse oppgavene kan ikke utvide v1 til avanserte moduler uten nytt scopevedtak.
 
-Ingen OS-minimum eller API-tilgjengelighet antas før DEC-01. Ingen avgrensning i tabellen fritar kjernen fra nødvendige sikkerhets-, personvern- eller plattformkrav. Eksempelvis er avansert sikkerhetsmodul utsatt, mens system trust er et grunnkrav i v1.
+OS-minimum er vedtatt i DEC-01 / ADR-0004: iOS/iPadOS 17, macOS 14, watchOS 10 og tvOS 17. Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus er valgt. Se [plattformmatrisen](PLATFORM_MATRIX.md). Konkrete API-symboler og faktisk runtime-kompatibilitet er fortsatt ikke verifisert. Ingen avgrensning i tabellen fritar kjernen fra nødvendige sikkerhets-, personvern- eller plattformkrav. Eksempelvis er avansert sikkerhetsmodul utsatt, mens system trust er et grunnkrav i v1.
 
 ## Ferdig og endringsstyring
 

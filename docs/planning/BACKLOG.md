@@ -4,7 +4,7 @@ Baseline: 20 domene-epics, 7 beslutningsoppgaver og 3 styrings-/releaseoppgaver.
 
 | ID | Krav / oppgave | Klassifisering | Fase |
 | --- | --- | --- | --- |
-| DEC-01 | Fastsett minimums-OS og Swift/Xcode/SDK | governance | F0 |
+| DEC-01 | Vedtatt: OS 17/14/10/17, Xcode 26.3+, Swift tools 6.2 / Swift 6 (ADR-0004) | governance | F0 |
 | DEC-02 | Vedtatt: HTTP-kjerne; produkt/modul NetworkKit, én bibliotekmodul (ADR-0003) | governance | F0 |
 | DEC-03 | Vedtatt: Teisrud Development AS; proprietær policy (ADR-0002) | governance | F0 |
 | DEC-04 | Vedta endpoint-, response- og feilkontrakt | governance | F0 |

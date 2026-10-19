@@ -17,7 +17,7 @@ Godkjent v1-scope, lisens, plattform-/verktøymatrise, API-/feilmodell, concurre
 
 ## Plattformmatrise
 
-Opprett en matrise med kolonnene plattform, minimum OS, testet OS, Swift, Xcode/SDK, build, unit, integration og device-verifikasjon. iOS/iPadOS, macOS, watchOS og tvOS vurderes hver for seg. visionOS tas kun inn etter beslutning. Simulatorbygg er ikke bevis for bakgrunnskjøring, Keychain, entitlements eller fysisk nettverk på enheter.
+[PLATFORM_MATRIX.md](../planning/PLATFORM_MATRIX.md) og ADR-0004 fastsetter iOS/iPadOS 17, macOS 14, watchOS 10 og tvOS 17, med Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus. Matrisen viser planlagt støtte og manglende bygg-/runtime-bevis. Oppdater den med testet OS, Swift, Xcode/SDK, build, unit, integration og device-verifikasjon etter faktisk kjøring. VisionOS er utsatt. Konkrete API-symboler kontrolleres mot alle minimumene før deloppgaver blir Ready. Simulatorbygg er ikke bevis for bakgrunnskjøring, Keychain, entitlements eller fysisk nettverk på enheter.
 
 ## CI-innføring
 
