@@ -1,7 +1,7 @@
 name: Feilrapport
 description: Strukturert feilrapport uten sensitive data.
 title: "[Feilrapport] "
-labels: ["type: bug", "status: triage"]
+labels: ["type: bug"]
 body:
   - type: markdown
     attributes:

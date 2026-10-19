@@ -42,3 +42,7 @@ Baseline: 20 domene-epics, 7 beslutningsoppgaver og 3 styrings-/releaseoppgaver.
 ## Før en epic kan planlegges som utvikling
 
 Bryt ned funksjonsfamiliene i separate delissues med kontrakt, testplan og spesifikasjonspunkt. Merk utelatelser eksplisitt. Bruk issue-avhengigheter der tilgjengelig og lenker i body uansett; en lenke er ikke en automatisk merge-sperre. Ingen domener er forhåndslukket eller fremstilt som levert.
+
+## Konkret implementasjonskø
+
+I01–I23 er opprettet som native underoppgaver med kriterier og avhengigheter. Se [WORK_QUEUE.md](WORK_QUEUE.md). Alle er Blocked av START-00 / #41; nedbrytingen gir ingen kodegodkjenning. Opprinnelig bootstrapfil planning.json er ikke et skript for å gjenopprette live status; work-queue.json beskriver den nye køen.

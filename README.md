@@ -12,6 +12,10 @@ Repoet og pakken heter **SwiftNetworkKit**. Bibliotekproduktet, modulen og impor
 
 ## Dokumentasjon
 
+- [Klarhetskontroll før kodestart](docs/planning/PRE_CODE_READINESS.md)
+- [Nummerert arbeidsrekkefølge](docs/planning/WORK_QUEUE.md)
+- [Testmiljøinventar og manglende minimums-OS-bevis](docs/planning/TEST_ENVIRONMENTS.md)
+
 - [Oppsettsstatus og verifikasjon](docs/governance/SETUP_STATUS.md)
 - [Alle GitHub-innstillinger og regler](docs/governance/GITHUB_CONFIGURATION.md)
 - [Arbeidsflyt og prosjektstyring](docs/planning/PROJECT_MANAGEMENT.md)

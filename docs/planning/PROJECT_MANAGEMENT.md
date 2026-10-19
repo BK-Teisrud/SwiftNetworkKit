@@ -1,42 +1,50 @@
 # Prosjektstyring
 
-## Kilder og ansvar
+GitHub Issues beskriver oppgaver og akseptansekriterier. Milepæler er leveranseporter. Projects viser arbeidsstatus; roadmap og ADR-er begrunner valgene. Maintainer @BK-Teisrud prioriterer. Prosjektet [SwiftNetworkKit Roadmap](https://github.com/users/BK-Teisrud/projects/6) er privat; repoets issues er offentlige.
 
-GitHub Issues er autoritativ oppgavebeskrivelse; milepæler angir leveranseporter. Projects gir arbeidsoversikt. Roadmap og ADR-er forklarer hvorfor. Ikke vedlikehold parallelle, avvikende oppgavetekster i prosjektkort. Maintainer @BK-Teisrud eier prioritering og triage. Dokumentasjonen viser baseline; live issue-status er gjeldende.
+## Én arbeidsstatus
 
-## Brett
+Prosjektfeltet Status er eneste arbeidsstatus: Backlog → Ready → In Progress → In Review → Done. Blocked angir en konkret sperre; Not Planned brukes for avvist/duplikat. Tidligere status-labels er fjernet for å unngå dobbeltføring. Issues sin open/closed og state reason angir faktisk avslutning. Done krever completed og oppfylte akseptansekriterier; å dra et kort til Done lukker ikke issue.
 
-Navn: SwiftNetworkKit Roadmap. Prosjektet holdes privat inntil innholdet er vurdert for offentlig visning; repoets issues er offentlige. Felter: Status (Todo / In Progress / Done; Todo brukes som Backlog/Ready skilt med status-label), Priority (P0/P1/P2/P3), Scope (KJERNE/UTVIDELSE/FORSKNING/STYRING). Bruk innebygde Assignees, Labels, Milestone og Repository. Ingen start-/sluttdatoer settes uten estimat og kapasitet.
+Ready krever uttrykkelig kodegodkjenning der relevant, lukkede blokkere, tydelig kontrakt/testplan og symbolkontroll for faktisk valgte API-er. Dependency-lenker er planleggingshjelp, ingen automatisk merge-sperre. En gjenåpnet oppgave går til Backlog og må triageres på nytt. Not planned settes manuelt i prosjektet etter lukking, fordi Item closed setter Done uten skille på årsak. Ferdig-visningen filtrerer på completed og skjuler dermed avviste oppgaver uansett prosjektfelt.
 
-Opprettede visninger (API-verifisert):
+Maks én aktiv implementasjonsoppgave per utvikler og to review-PR-er. Kun Ready trekkes inn. P0 er hendelse/port, P1 nødvendig kjerne, P2 senere tillegg, P3 forskning. Prioritet gir ikke tillatelse til å kode.
 
-| Visning | Oppsett |
+## Felter og visninger
+
+Status, Priority (P0–P3), Scope (KJERNE/UTVIDELSE/FORSKNING/STYRING), Order og innebygde Title/Assignees/Milestone/Parent issue vises i arbeidsoversiktene. Labels beskriver type/scope/prioritet; ved triage samsvares Priority/Scope med labels. Dette synkroniseres ikke automatisk. Ingen oppdiktede start-/sluttdatoer.
+
+| Visning | Bruk |
 | --- | --- |
-| Backlog | Tabell, åpne issues; Priority og Milestone er tilgjengelige felt |
-| Arbeidsbrett | Board gruppert Status, filtrert åpne issues |
-| Fase 0 | Milestone F0, vis avhengigheter og beslutninger |
-| Roadmap | Roadmap-layout opprettet; Start date/Target date finnes, men datoer er ikke satt |
-| Beslutninger | type: decision |
-| Utvidelser/forskning | scope: extension / scope: research |
+| Backlog | Alle åpne oppgaver, også epics og senere scope |
+| Arbeidsbrett | Status-kolonner, også Done; Not Planned skjules |
+| Roadmap | Faseoversikt uten oppdiktede daterte leveransebarer |
+| Fase 0 | Åpne oppsettsoppgaver i F0 |
+| Beslutninger | Beslutningsissues |
+| Utvidelser og forskning | Utsatt scope |
+| Arbeidskø | Åpne konkrete oppgaver uten epics/utvidelser/forskning, flat tabell sortert Order stigende |
+| Ferdig | Lukkede issues med reason:completed |
 
-Alle seks visninger er lest tilbake fra GitHub. Arbeidsbrettet har Status som kolonnefelt. Ingen egendefinert sortering eller datointervall-kobling er påstått konfigurert; dette kan tilpasses når arbeidet planlegges. Roadmap vil ikke vise daterte bars før datoer er vedtatt.
+Se [WORK_QUEUE.md](WORK_QUEUE.md) for den nummererte rekkefølgen. Order 0 er startporten; I01–I23 er 1–23; releaseporten er 24. Ingen produktoppgaver er Ready før kodegodkjenning. Epics brukes til sporbarhet, ikke som enorme enkeltoppgaver.
 
-## Status og WIP
+## Innebygde workflows
 
-status: triage → status: ready → status: in-progress → status: review → lukket som completed. status: blocked er eksplisitt; issue-body peker til blokkerende ID/issue. Prosjektstatus Todo omfatter triage/ready/blocked, In Progress omfatter in-progress/review, Done krever lukket med completed. Avvist/duplikat lukkes som not planned med forklaring, og holdes utenfor leveranseoversikten.
+Dette er Projects-funksjoner; ingen GitHub Actions-workflows er opprettet.
 
-Maks ett aktivt implementasjonsissue per utvikler og maks to aktive review-PR-er. Kun Ready kan trekkes inn. P0 = hendelse eller releaseblokker; P1 = neste nødvendige kjernearbeid; P2 = planlagt tillegg; P3 = usikker forskning. Høy prioritet er ikke tillatelse til å starte kode nå.
+| Workflow | Tilstand / begrunnelse |
+| --- | --- |
+| Auto-add to project | På, bare SwiftNetworkKit, filter is:issue; nye/oppdaterte rotissues importeres |
+| Auto-add sub-issues | På; underoppgaver beholdes i samme prosjekt |
+| Item added | På → Backlog; triage av Priority/Scope/Order kreves |
+| Item closed | På → Done; Not Planned korrigeres manuelt som beskrevet over |
+| Item reopened | På → Backlog |
+| Pull request merged | På → Done for PR-elementet; issue lukkes først ved faktisk avslutning |
+| Auto-close issue | Av; statusdrag skal ikke avslutte arbeid |
+| Pull request linked to issue | Av; en lenke skal ikke omgå startport eller starte arbeid |
+| Auto-archive / review approved / changes requested | Av; bevar historikk og unngå falske solo-reviewoverganger |
 
-## Rytme
+Oppsettsissue #40 brukes til funksjonstest av import, Done uten lukking, completed og reopened. Resultat og avgrensninger registreres i [oppsettsstatus](../governance/SETUP_STATUS.md). PR-/subissue-reglene er konfigurert og lest, men skal ikke fremstilles som separat ende-til-ende-testet uten bevis.
 
-Ukentlig triage: avklar nye issues, avhengigheter, risiko og neste Ready-arbeid. Før faseovergang: kontroller akseptansebevis og vedta scope. Etter release: vurder feil, sikkerhet og avvik. Ingen sprintdato eller leveringsgaranti er funnet på. Iterasjoner kan innføres etter kapasitet er kjent.
+## Vedlikehold
 
-## Automatisering
-
-Ingen GitHub Actions-workflows er opprettet. Prosjektet har seks innebygde workflows som API-et rapporterer som enabled: Auto-add sub-issues to project, Auto-close issue, Item added to project, Item closed, Pull request linked to issue og Pull request merged. Dette er GitHub Projects-funksjoner, ikke produktkode.
-
-Navn og enabled-status er verifisert; de interne overgangsinnstillingene er ikke eksponert i den brukte API-lesingen og er ikke funksjonstestet. Behandle derfor Done som en ferdigmarkering som kan lukke et issue via Auto-close issue; kontroller akseptanse først. Reopened → Todo er ikke verifisert og må kontrolleres manuelt. Ingen påstand om automatisk labelsynk eller full automatisk import av nye rotissues. Ved hver triage kontrollerer maintainer prosjektmedlemskap, status og labels. De 30 startissues er lagt til eksplisitt med Status, Priority og Scope.
-
-## Måling
-
-Følg antall blokkerte oppgaver, gjennomløpstid fra In Progress til Done, eldste WIP og antall åpne releaseblokker. Ikke bruk antall commits eller lukkede issues som mål på produktkvalitet.
+Ukentlig triage: nye issues, manglende felt, blokkere, WIP og neste Ready. Før faseovergang kontrolleres faktiske bevis. Etter release vurderes feil og risiko. Ingen sprintdato eller SLA er funnet på. Følg blokkert arbeid, gjennomløpstid og eldste WIP; antall commits er ikke produktkvalitet.

@@ -1,47 +1,44 @@
 # Oppsettsstatus og verifikasjon
 
-Dato: 2026-10-19. Repo: [BK-Teisrud/SwiftNetworkKit](https://github.com/BK-Teisrud/SwiftNetworkKit). Prosjekt: [SwiftNetworkKit Roadmap](https://github.com/users/BK-Teisrud/projects/6), privat og koblet til repoet.
+Kontrollert 2026-10-19. [Offentlig repo](https://github.com/BK-Teisrud/SwiftNetworkKit), [privat prosjekt](https://github.com/users/BK-Teisrud/projects/6). Dette er faktiske innstillinger lest tilbake fra GitHub, ikke bare forslag i JSON. **Ingen produktkode eller kodegodkjenning.**
 
-## Opprettet og kontrollert mot GitHub API
-
-| Område | Verifisert resultat |
+| Område | Resultat og begrunnelse |
 | --- | --- |
-| Repository | Offentlig, default main, korrekt eier/navn/beskrivelse og seks topics |
-| Merge | Kun squash; auto-merge av; branch cleanup og update branch på; web sign-off på |
-| Funksjoner | Issues og Projects på; Wiki og Discussions av |
-| Main | Aktivt ruleset 25428389: PR, løste tråder, lineær historikk, ingen force-push/sletting; admin-bypass bare gjennom PR |
-| Releasetagger | Aktivt ruleset 25428391: v* creation/update/deletion begrenset; repo-admin kan utføre releaseoperasjoner |
-| Security | Secret scanning og push protection enabled; privat rapportering enabled; vulnerability-alerts svarte HTTP 204 |
-| Actions | Read-only GITHUB_TOKEN, PR-approval av, bare lokale/GitHub-eide actions tillatt; full SHA-pinning påkrevd og lest tilbake; null workflows |
-| Labels | Alle 21 prosjektlabels finnes. GitHubs standardlabels er beholdt |
-| Milepæler | Sju, F0–F6, uten vedtatte forfallsdatoer |
-| Issues | 30 startissues med eier, labels, milepæl og akseptansekriterier |
-| Avhengigheter | 37 blocked-by-relasjoner mellom beslutninger, arkitekturport, domener og release |
-| Prosjekt | 30 issues, felter for Status/Priority/Scope samt Start date/Target date |
-| Visninger | Backlog, Arbeidsbrett, Roadmap, Fase 0, Beslutninger, Utvidelser og forskning; arbeidsbrettets kolonner er Status |
-| Prosjektautomasjon | Seks innebygde workflows rapportert enabled; intern overgangskonfigurasjon og ende-til-ende-effekt er ikke funksjonstestet |
-| Dokumentasjon | README, governance, bidrag, security, samarbeidsregler, changelog, ADR, roadmap, risiko, kravsporbarhet og maler |
+| Repo | Public, main, Issues/Projects på; Wiki/Discussions av for én dokumentasjonskilde |
+| Merge | Kun squash, auto-merge av, branch cleanup/update på |
+| Web sign-off | Av etter konkret eiergodkjenning; ingen DCO er valgt; ikke en endring av LICENSE |
+| Main | Ruleset 25428389 aktivt, PR og løste tråder, lineær historikk, ingen sletting/force-push; ingen bypass-aktører |
+| Tag-oppretting | 25432767 begrenser refs/tags/v*, admin-unntak gjelder bare creation |
+| Tag-uforanderlighet | 25428391 update/deletion uten bypass; gjelder også admin så lenge regelen består |
+| Release | Immutable releases aktivert, enforced_by_owner=false; kontoeier kan fortsatt endre innstillingen |
+| Actions | Read-only token, PR-approval av, GitHub-/lokale actions, SHA-låsing på; null workflows |
+| Security | Secret scanning/push protection og privat rapportering konfigurert; se tidligere baseline og repository-readback |
+| Labels | 16 egendefinerte type/scope/priority/øvrige labels; fem status-labels fjernet, også fra maler/seed |
+| Plan | Sju milepæler, ingen oppdiktede datoer; 30 startissues + 23 I-oppgaver + START-00 og verifikasjonsissue = 55 issues |
+| Oppgaver | I01–I23 (#42–64) har eier, milepæl, kriterier, foreldreepic og native avhengigheter; alle Blocked av #41 |
+| Prosjekt | Sju statusvalg, Priority/Scope og Order; åtte visninger inkludert Arbeidskø og Ferdig |
+| Arbeidskø | Flat tabell, Order stigende; lagret i UI og kontrollert etter reload |
+| Automasjon | Import, subissues, added/closed/reopened og PR merged på; Auto-close og PR linked av |
+| Kontosikkerhet | Eier bekrefter 2FA aktivert; ikke uavhengig verifisert, ingen credentials innhentet |
+| Kontakt | Ingen adresse avklart; ingen privat lisens-/bidragsprosess eller oppdiktet kontaktadresse |
+| Testmiljø | Ni nyere simulator-runtimes inventarført; ingen minimums-runtime eller produkttest verifisert |
 
-Konfigurasjonsgrunnlag ligger i .github/settings og .github/rulesets. Innstillinger er lest tilbake; de er ikke bare forslag i filer. GitHub kan bruke noe tid på å oppdatere prosjekttellinger etter mutasjoner; endelig kontroll krever 30 unike issue-numre og riktige feltverdier.
+## Funksjonstest av prosjektflyt
 
-## Bevis og kontroller
+[Oppsettsissue #40](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/40) ble opprettet uten eksplisitt prosjektimport. Native auto-add tok det inn med Backlog. Prosjektstatus ble satt til Done, og API viste at issue fortsatt var open. Issue ble lukket som completed, gjenåpnet, og native workflow satte Backlog. Deretter ble det lukket på nytt og native workflow satte Done. Alle fire kontroller er bestått. Ingen produktkode eller testkode ble opprettet.
 
-- Effektiv branch-policy er lest med GET /repos/BK-Teisrud/SwiftNetworkKit/rules/branches/main, ikke bare ruleset-definisjonen.
-- Repository-settings, begge rulesets, Actions-policy, sikkerhetsfunksjoner, labels og milepæler er lest tilbake.
-- Prosjektets visninger, kolonnegruppering, felt og issuekoblinger er lest tilbake via GraphQL/CLI.
-- JSON og YAML, lokale dokumentlenker og filinventar kontrolleres før siste dokumentasjons-PR.
-- Ingen Swift-filer, Package.swift, testfiler, kjørbare workflows eller releasetagger er lagt til. Ingen produktbygg/test kan hevdes bestått.
+Native sub-issue-relasjoner er opprettet, alle 45 forventede blocked-by-relasjoner for I01–I23 er lest tilbake, og API-readback viser workflows enabled. PR merged/auto-add subissues er ikke separat ende-til-ende-testet med en produkt-PR; denne avgrensningen beholdes. Item closed skiller ikke reason i gjeldende oppsett: not planned må korrigeres manuelt til Not Planned; Ferdig filtrerer completed og unngår feil leveransetelling. Priority/Scope synkroniseres manuelt ved triage.
 
-## Vedtatte valg og gjenstående verifikasjon
+## Verifikasjonsgrunnlag
 
-Lisens/rettighetshaver er vedtatt i DEC-03 / ADR-0002: Teisrud Development AS og proprietær rettighetspolicy. DEC-02 / ADR-0003 fastsetter HTTP-kjerne først, pakkenavn SwiftNetworkKit og bibliotekprodukt/modul/importnavn NetworkKit med én bibliotekmodul. V1_SCOPE.md avgrenser domenene. DEC-01 / ADR-0004 vedtar iOS/iPadOS 17, macOS 14, watchOS 10 og tvOS 17, med Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus. PLATFORM_MATRIX.md skiller vedtak fra utestående symbol-/bygg-/runtime-verifikasjon. DEC-04 / ADR-0005 fastsetter HTTP-/respons-/feilkontrakten. DEC-05 / ADR-0006 fastsetter concurrency/session-eierskap, isolerte snapshots, cancellation/shutdown og 30/60-sekunders grenser. DEC-06 / ADR-0007 fastsetter lagre av som standard, header-provider, HTTPS med loopback-utviklingsunntak og avgrensede redirects/logging/injeksjonsprofiler. DEC-07 / ADR-0008 fastsetter fire PR-plattformer på standardrunners uten betalte tillegg, konkret jobb-/testplan og egne releasebevis. Ingen workflows er opprettet; første reelle CI-PR må verifisere faktiske schemes/destinations/toolchain og gates. Sikkerhets-, minimums-OS- og øvrige runtimebevis gjenstår før release. En avgrenset SDK-deklarasjonskontroll er gjort for enkelte Foundation-symboler, uten produktbygg eller runtime-tester. Fase 0 gir ikke automatisk tillatelse til å starte kode.
+Repository-settings, effektive main-regler, alle tre rulesets, immutable-releases, Actions-token/policy/workflowantall, labels, prosjektvisninger/workflows/felt og oppgavestatus er lest tilbake. Alle 23 deloppgaver har Blocked, P1, KJERNE og korrekt numerisk Order. Arbeidskøens stigende sortering og avskrudd hierarki er lagret og kontrollert etter reload i nettleseren. JSON, YAML, lokale dokumentlenker, whitespace og filinventar kontrolleres før dokumentasjons-PR.
 
-Ingen CI-checks er påkrevd ennå, fordi biblioteket ikke finnes. Ingen ekstern reviewer er påkrevd i solo-profil. Ingen signerte commits er påkrevd før signeringsoppsett for relevante aktører er avklart. Kontosikkerhet/2FA er ikke verifisert eller endret. Ingen brukere, nøkler, secrets eller webhooks er lagt til. LICENSE inneholder en proprietær rettighetsnotis etter prosjekteierens valg. Ingen åpen kildekode-lisens eller generell tredjepartstillatelse er gitt.
+Konfigurasjonsgrunnlag: .github/settings og .github/rulesets. Filer er versjonerte snapshots, ikke automatisk synk eller et skript som skal kjøres ukritisk. Historisk planning.json er opprinnelig seed, ikke live status. Ingen aktive Actions-workflows, Swift-filer, Package.swift, prototyper, tester, tagger eller releases finnes i leveransen. Ingen produktbygg/test hevdes bestått.
 
-Oppsettet dokumenterer også begrensninger: Prosjektets interne workflow-overganger er ikke funksjonstestet; fremtidige status-/labelendringer og nye rotissues kontrolleres ved triage. Roadmap-datoer og datointervall velges først når kapasitet er avklart. Ingen automatisk kvalitetsgaranti eller universell plattformstøtte er påstått.
+## Hva som er ferdig og hva som gjenstår
 
-## F0-godkjenning og videre arbeid
+F0-planlegging og forberedende repoarbeid er fullført; OPS-01 / #30 avsluttes med dokumentasjons-PR-en og F0-milepælen avsluttes deretter. Dette er ingen produktlevering. [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41) i F1 forblir åpen til eier uttrykkelig godkjenner kodestart. I01 er første kodeoppgave etter denne godkjenningen.
 
-Prosjekteier har godkjent det samlede F0-planleggingsgrunnlaget, inkludert standarddetaljene, med svaret «Godkjenn F0-planleggingen; fortsatt ingen kode». ADR-0009 og F0_REVIEW.md registrerer utfallet: **planlegging godkjent, implementasjon ikke autorisert**. De sju DEC-oppgavene og GATE-00 utgjør de åtte fullførte beslutningsoppgavene; dette er ikke produktlevering.
+[PRE_CODE_READINESS.md](../planning/PRE_CODE_READINESS.md) viser restpunktene: faktisk API-symbolkontroll per oppgave, reell CI i I06 og minimums-OS-/enhetsbevis i I21/I22. Nyere enheter er eieroppgitt uten eksakte versjoner. Manglende minimumsmiljø blokkerer release; ingen kjøp/oppgraderinger eller endret OS-støtte er godkjent.
 
-OPS-01 / #30 holdes åpen for gjenstående repooppsett, og F0-milepælen holdes derfor åpen. Produktbygg, faktiske CI-/runtime-/minimums-OS-bevis og release er ikke utført. Arbeid med biblioteket starter først etter et eget uttrykkelig klarsignal. Dette repooppsettet inneholder ingen implementasjon.
+Ingen ekstra reviewer er påkrevd før en reell medmaintainer finnes. Ingen signerte commits er påkrevd uten avklart signeringsoppsett. Ingen tomme status-checks, Dependabot-filer uten manifest, unødvendige tredjepartsverktøy, secrets, webhooks, apper, runners, betalingsprodukter eller publisering er opprettet. Main har ingen bypass, men repo-admin kan fortsatt endre reglene; ingen garanti mot kontoeieren gis. Prosjektet holdes privat, og daterte roadmap-bars utsettes til kapasitet/datoer faktisk er vedtatt.

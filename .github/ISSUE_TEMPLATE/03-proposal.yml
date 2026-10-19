@@ -1,7 +1,7 @@
 name: Forslag eller arkitekturbeslutning
 description: Strukturert forslag eller arkitekturbeslutning uten sensitive data.
 title: "[Forslag eller arkitekturbeslutning] "
-labels: ["type: decision", "status: triage"]
+labels: ["type: decision"]
 body:
   - type: markdown
     attributes:

@@ -1,7 +1,7 @@
 name: Arbeidsoppgave
 description: Strukturert arbeidsoppgave uten sensitive data.
 title: "[Arbeidsoppgave] "
-labels: ["type: task", "status: triage"]
+labels: ["type: task"]
 body:
   - type: markdown
     attributes:

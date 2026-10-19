@@ -15,3 +15,7 @@ System trust og HTTPS som standard; ingen TLS-bypass. [ADR-0007 og sikkerhetspol
 ## Hendelser
 
 Bekreft og begrens påvirkning, roter eksponerte secrets hos utsteder, fjern dem fra aktive flater og vurder historikk separat. Ikke anta at sletting av en fil gjør en offentlig hemmelighet trygg. Registrer privat tidslinje, berørte versjoner, retting og koordinert publisering. Publiser advisory og korrigert release når relevant.
+
+## Andre fortrolige henvendelser
+
+Ingen generell privat kontaktadresse eller lisensadresse er publisert ennå. Ikke legg fortrolig forretningsinformasjon i offentlige issues. GitHubs private sårbarhetsrapportering brukes bare til sikkerhetsfunn; lisens-/bidragsprosess tilbys først når selskapet har avklart en egnet kontaktkanal.

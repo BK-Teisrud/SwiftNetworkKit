@@ -37,7 +37,7 @@ Bare et senere uttrykkelig implementasjonsklarsignal endrer kodeforbudet. Ingen 
 
 ## Kjente gjenstående forhold i GitHub-oppsettet
 
-Gjennomgangen av selve repooppsettet identifiserte prosjektvisninger/statusdobbeltføring, admin-bypass, tag-/releasebeskyttelse, web sign-off og privat kontaktkanal som videre vurderingspunkter i OPS-01 / #30. SHA-låsing for Actions er nå aktivert. De andre punktene er ikke endret gjennom DEC-beslutningene og må ikke fremstilles som ferdig utbedret.
+Gjennomgangen av selve repooppsettet identifiserte prosjektvisninger/statusdobbeltføring, admin-bypass, tag-/releasebeskyttelse, web sign-off og privat kontaktkanal som videre vurderingspunkter i OPS-01 / #30. SHA-låsing for Actions er nå aktivert. Disse punktene var ikke endret gjennom DEC-beslutningene. De er senere håndtert og verifisert i ADR-0010 og SETUP_STATUS.md; kontaktadresse er uttrykkelig utsatt.
 
 Ingen kontofakturering, abonnement, nye samarbeidspartnere, secrets eller eksterne apper er opprettet. Ingen Swift-filer, Package.swift, workflows eller releasetagger er lagt til.
 
