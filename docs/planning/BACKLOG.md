@@ -31,7 +31,7 @@ Baseline: 20 domene-epics, 7 beslutningsoppgaver og 3 styrings-/releaseoppgaver.
 | NK-18 | Personvern og databeskyttelse | core | F2 |
 | NK-19 | Apple-plattformintegrasjon | extension | F4 |
 | NK-20 | Utvikleropplevelse og API-design | core | F2 |
-| GATE-00 | Godkjenn arkitekturport og klarsignal før kode | governance | F0 |
+| GATE-00 | Godkjent F0-planlegging; implementasjon ikke autorisert (ADR-0009) | governance | F0 |
 | REL-01 | Verifiser første stabile kjernerelease | governance | F2 |
 | OPS-01 | Kontroller GitHub-oppsett og team-overgang | governance | F0 |
 

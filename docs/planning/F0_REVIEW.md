@@ -1,9 +1,9 @@
-# Samlet F0-grunnlag til prosjekteierens godkjenning
+# Samlet godkjent F0-planleggingsgrunnlag
 
-Status: Avventer prosjekteierens samlede vurdering. Ingen godkjenning til implementasjon er gitt.
+Status: Godkjent av prosjekteier 2026-10-19. **Implementasjon er ikke autorisert; fortsatt ingen kode.** Se [ADR-0009](../decisions/ADR-0009-f0-approval-no-implementation.md).
 Dato: 2026-10-19. Arkitekturport: [GATE-00 / #28](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/28).
 
-## Vedtakene som skal vurderes samlet
+## Vedtakene som er godkjent samlet
 
 | Oppgave | Vedtak | Autoritativ dokumentasjon |
 | --- | --- | --- |
@@ -15,7 +15,7 @@ Dato: 2026-10-19. Arkitekturport: [GATE-00 / #28](https://github.com/BK-Teisrud/
 | DEC-06 / #6 | Automatiske lagre av som standard; liten auth-header-provider; HTTPS med eksplisitt lokalt HTTP-unntak uten credentials; avgrensede redirects, injeksjon og sanerte logger | [ADR-0007](../decisions/ADR-0007-security-and-network-policy.md), [sikkerhetspolicy](SECURITY_AND_NETWORK_POLICY.md) |
 | DEC-07 / #7 | Standard GitHub-runners uten betalte tillegg. Fire PR-plattformfamilier og egne minimums-OS-/releasebevis. Offisielle testverktøy og SHA-låste Actions | [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md), [CI-/testplan](CI_AND_TEST_PLAN.md) |
 
-De godkjente hovedvalgene og dokumenterte standarddetaljene skal vurderes samlet. Ingen funksjoner eller tester er fremstilt som implementert. Issues er live status; denne oversikten er beslutningsgrunnlaget.
+Prosjekteier har godkjent hovedvalgene og dokumenterte standarddetaljer samlet. Ingen funksjoner eller tester er fremstilt som implementert. Issues er live status; denne oversikten er beslutningsgrunnlaget.
 
 ## Viktige konsekvenser av standarddetaljene
 
@@ -43,4 +43,4 @@ Ingen kontofakturering, abonnement, nye samarbeidspartnere, secrets eller ekster
 
 ## Godkjenning
 
-Avventer svar i chatten og registrering i GATE-00. Dokumentet skal ikke omtales som godkjent før prosjekteier har svart. Eventuelle ønskede endringer tas gjennom dokumentasjons-PR før endelig godkjenning.
+Prosjekteiers svar i chatten 2026-10-19: «Godkjenn F0-planleggingen; fortsatt ingen kode». Godkjenningen gjelder grunnlaget publisert gjennom PR #38, med standarddetaljene og begrensningene over. Utfallet registreres i GATE-00 og ADR-0009: planlegging godkjent, implementasjon ikke autorisert. Senere endringer krever dokumentert vurdering; kodearbeid krever eget uttrykkelig klarsignal.

@@ -4,7 +4,7 @@ Ingen tidsfrister er satt. Faser er porter, ikke kalenderløfter. Prosjekteier h
 
 ## F0 – Arkitektur og beslutninger
 
-Godkjent lisens, v1-scope, plattform-/verktøymatrise, API- og concurrencybeslutninger. Ingen kode før egen implementasjonsbeslutning.
+Lisens/rettigheter, v1-scope, plattform-/verktøymatrise, API-, concurrency-, sikkerhets- og CI-beslutninger er godkjent samlet 2026-10-19 i [ADR-0009](../decisions/ADR-0009-f0-approval-no-implementation.md). **Implementasjon er ikke autorisert; fortsatt ingen kode.** De åtte beslutningsoppgavene er avsluttet etter registrering av vedtaket. F0-milepælen holdes åpen for gjenstående repooppgave OPS-01 / #30. Ingen kode før et eget uttrykkelig klarsignal.
 
 ## F1 – HTTP-kjerne
 
