@@ -47,6 +47,7 @@ Kvartalsvis og ved nye maintainere: les tilbake settings/rulesets, tilgang, Acti
 
 - [Rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/creating-rulesets-for-a-repository)
 - [Tilgjengelige regler og bypass](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)
+- [GitHub Projects-visninger](https://docs.github.com/en/issues/planning-and-tracking-with-projects/customizing-views-in-your-project/managing-your-views)
 - [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
 
 Offentlige repoer støtter rulesets på GitHub Free. Privat repo ville krevd vurdering av abonnement. Funksjonsnavn og faktisk støtte kontrolleres mot GitHub-responsen for dette repoet.
