@@ -15,6 +15,7 @@ Repoet og pakken heter **SwiftNetworkKit**. Bibliotekproduktet, modulen og impor
 - [Oppsettsstatus og verifikasjon](docs/governance/SETUP_STATUS.md)
 - [Alle GitHub-innstillinger og regler](docs/governance/GITHUB_CONFIGURATION.md)
 - [Arbeidsflyt og prosjektstyring](docs/planning/PROJECT_MANAGEMENT.md)
+- [Plattform- og verktøymatrise](docs/planning/PLATFORM_MATRIX.md)
 - [Roadmap og leveranseporter](docs/planning/ROADMAP.md)
 - [Kravsporbarhet og backlog](docs/planning/BACKLOG.md)
 - [Spesifikasjonsgrunnlag](docs/planning/SPECIFICATION_BASELINE.md)
@@ -26,7 +27,7 @@ Repoet og pakken heter **SwiftNetworkKit**. Bibliotekproduktet, modulen og impor
 
 ## Plattform og lisens
 
-Mål: iOS/iPadOS, macOS, watchOS og tvOS. visionOS er en mulig utvidelse. Minimums-OS, Swift- og Xcode-versjoner er ikke vedtatt. Det finnes ingen verifisert støttematrise ennå.
+Vedtatt for v1: **iOS/iPadOS 17+, macOS 14+, watchOS 10+ og tvOS 17+**. VisionOS utsettes. Utviklingsgrunnlag: **Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus med streng samtidighetskontroll**. Se [plattformmatrisen](docs/planning/PLATFORM_MATRIX.md) og [ADR-0004](docs/decisions/ADR-0004-platforms-and-toolchain.md). Dette er vedtatte mål; ingen produktbygg eller runtime-tester er kjørt.
 
 **Rettighetshaver: Teisrud Development AS. SwiftNetworkKit er proprietært.** Tredjepartsbruk krever særskilt skriftlig tillatelse fra selskapet, med forbehold for lovbestemte rettigheter og GitHubs gjeldende vilkår. Offentlig synlighet gir adgang til visning og forking gjennom GitHub, men prosjektet gir ingen ytterligere åpen kildekode-lisens eller generell tillatelse til bruk i apper.
 

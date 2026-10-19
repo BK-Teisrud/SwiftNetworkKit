@@ -45,7 +45,6 @@
   "implementation_started": false,
   "product_ci_present": false,
   "open_decisions": [
-    "DEC-01",
     "DEC-04",
     "DEC-05",
     "DEC-06",
@@ -67,6 +66,32 @@
       "library_module_count": 1,
       "adr": "docs/decisions/ADR-0003-v1-scope-and-naming.md",
       "scope_document": "docs/planning/V1_SCOPE.md"
+    },
+    "DEC-01": {
+      "date": "2026-10-19",
+      "minimum_os": {
+        "iOS": "17.0",
+        "iPadOS": "17.0",
+        "macOS": "14.0",
+        "watchOS": "10.0",
+        "tvOS": "17.0"
+      },
+      "visionOS": "deferred",
+      "minimum_xcode": "26.3",
+      "swift_tools": "6.2",
+      "swift_language_mode": "6",
+      "strict_concurrency": true,
+      "observed_local": {
+        "xcode": "26.3",
+        "build": "17C529",
+        "swift": "6.2.4",
+        "host_macos": "15.8.1",
+        "target_sdks": "26.2",
+        "host_architecture": "x86_64"
+      },
+      "product_build_or_tests_run": false,
+      "adr": "docs/decisions/ADR-0004-platforms-and-toolchain.md",
+      "platform_matrix": "docs/planning/PLATFORM_MATRIX.md"
     }
   }
 }

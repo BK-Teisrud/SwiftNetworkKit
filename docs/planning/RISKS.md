@@ -5,7 +5,7 @@ Eier for alle åpne risikoer ved bootstrap: @BK-Teisrud. Vurderes ved ukentlig t
 | ID | Risiko / sannsynlighet / konsekvens | Tiltak og utløsende signal | Port |
 | --- | --- | --- | --- |
 | R1 | Overengineering / høy / høy | ADR-0003 og V1_SCOPE.md fastsetter HTTP-kjerne og én bibliotekmodul i v1; nye moduler krever vedtak og behov. Scope vokser uten brukerflyt → stopp og revurder. | F0 |
-| R2 | OS-forskjeller / høy / høy | Symbol-/SDK-matrise, guards og enhetstester. Simulator alene er utilstrekkelig. | F0–F4 |
+| R2 | OS-forskjeller / høy / høy | ADR-0004 og PLATFORM_MATRIX.md fastsetter OS-minimum/verktøy. Konkrete symboler, guards og runtime-/enhetstester må fortsatt verifiseres. Simulatorbygg alene er utilstrekkelig. | F0–F4 |
 | R3 | Dupliserte sideeffekter ved retry / middels / høy | Default uten usikker retry, idempotens og bounded attempts. | F3 |
 | R4 | Credentials i logger/redirect/cache / middels / kritisk | Negative redaction/isolasjons-/redirecttester, privat security review. | F2 |
 | R5 | Refresh-storm/deadlock / middels / høy | Single-flight og test av samtidighet/cancel før auth-modul. | F3 |

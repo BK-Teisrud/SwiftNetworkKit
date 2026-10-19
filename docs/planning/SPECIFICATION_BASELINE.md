@@ -10,6 +10,7 @@ Kilde: NetworkKit_Teknisk_Spesifikasjon.pdf, versjon 1.0, 19.10.2026, 15 sider. 
 - Kun repo-/GitHub-oppsett, dokumentasjon og planlegging nå. Ingen Swift-filer, Package.swift, prototyper, tester eller kjørbare workflows.
 - Produktet skal bruke native Apple-API-er og Swift-standardbibliotek uten eksterne pakkedependencies, også uten separat distribuerte Apple-pakker som SwiftNIO.
 - Foundation/URLSession som primær HTTP-transport. Ingen egen TLS/HTTP/krypto og ingen serverplattform.
+- Plattformminimum vedtatt i ADR-0004: iOS/iPadOS 17.0, macOS 14.0, watchOS 10.0 og tvOS 17.0; visionOS utsettes. Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus. Se PLATFORM_MATRIX.md for utestående verifikasjon.
 - Små testbare API-er, dependency injection, async/await, cancellation, isolert delt tilstand, privacy og secure defaults.
 
 ## Tolkning av scope
@@ -20,7 +21,7 @@ Spesifikasjonen nevner retry i målbeskrivelsen, men klassifiserer robusthet som
 
 ## Åpent før kode
 
-Minimums-OS, Swift/Xcode, public API, raw-request-støtte, headers/body-modell, auth-scope, cache/offline-policy, telemetry, Combine og visionOS. Ingen av disse fremstilles som vedtatt støtte.
+Public API, raw-request-støtte, headers/body-modell, auth-integrasjonsgrense og konkret system-cache-/nettverkspolicy avklares videre i DEC-04–DEC-06. Eksakt CI-matrise og testverktøy avklares i DEC-07 innen valgt verktøygrunnlag. VisionOS og Combine er utsatt etter v1-scope. Valgte API-symboler og runtime-kompatibilitet må verifiseres før leveranse; plattformvedtak alene er ikke testbevis.
 
 ## Sporbarhet
 
