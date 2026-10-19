@@ -17,5 +17,9 @@
 | DEC-06 | Auth, retry, cache, privacy og sikkerhetsgrenser | Vedtatt: ingen automatiske lagre, header-provider, HTTPS med loopback-unntak; ADR-0007 |
 | [ADR-0008](ADR-0008-ci-tools-and-budget.md) | CI, offisielle verktøy og kostnadsramme | Hovedvalg godkjent; gjennomføringsplan dokumentert |
 | DEC-07 | Offisielle verktøy, CI-budsjett og forsyningskjede | Vedtatt: standardrunners uten betalte tillegg, fire PR-plattformer og egne releasebevis; ADR-0008 |
+| [ADR-0009](ADR-0009-f0-approval-no-implementation.md) | Samlet F0-godkjenning og implementasjonsstatus | Godkjent planlegging; implementasjon ikke autorisert |
+| GATE-00 / #28 | Godkjenn F0-grunnlaget og avklar implementasjonsstatus | Godkjent av prosjekteier; fortsatt ingen kode |
+
+ADR-0009 registrerer at hovedvalg og dokumenterte standarddetaljer i ADR-0002–ADR-0008 er godkjent samlet. Ingen av disse vedtakene gir implementasjonsklarsignal.
 
 Bruk [malen](TEMPLATE.md). En foreslått ADR gir ikke klarsignal til implementasjon. Godkjenning krever eierens eksplisitte beslutning i tilhørende issue/PR. Endre ikke historiske beslutninger uten spor; erstatt dem med ny ADR.

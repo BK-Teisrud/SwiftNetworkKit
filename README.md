@@ -2,7 +2,7 @@
 
 Native nettverksbibliotek for Apple-plattformer, planlagt som Swift Package uten eksterne pakkedependencies.
 
-**Status: planlegging. Ingen bibliotekskode, Swift Package, tester eller produktrelease er opprettet.** Repoet inneholder prosjektgrunnlag og GitHub-oppsett. Ikke legg dette til som en fungerende dependency.
+**Status: F0-planlegging godkjent; implementasjon er ikke autorisert. Ingen bibliotekskode, Swift Package, tester eller produktrelease er opprettet.** Repoet inneholder prosjektgrunnlag og GitHub-oppsett. Ikke legg dette til som en fungerende dependency.
 
 ## Prosjektgrunnlag
 
@@ -15,7 +15,7 @@ Repoet og pakken heter **SwiftNetworkKit**. Bibliotekproduktet, modulen og impor
 - [Oppsettsstatus og verifikasjon](docs/governance/SETUP_STATUS.md)
 - [Alle GitHub-innstillinger og regler](docs/governance/GITHUB_CONFIGURATION.md)
 - [Arbeidsflyt og prosjektstyring](docs/planning/PROJECT_MANAGEMENT.md)
-- [Samlet F0-grunnlag til godkjenning](docs/planning/F0_REVIEW.md)
+- [Samlet godkjent F0-grunnlag – fortsatt ingen kode](docs/planning/F0_REVIEW.md)
 - [CI- og testplan](docs/planning/CI_AND_TEST_PLAN.md)
 - [Sikkerhets- og nettverkspolicy](docs/planning/SECURITY_AND_NETWORK_POLICY.md)
 - [Concurrency og livssyklus](docs/planning/CONCURRENCY_AND_LIFECYCLE.md)

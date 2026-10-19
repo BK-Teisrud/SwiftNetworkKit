@@ -32,7 +32,7 @@ Konfigurasjonsgrunnlag ligger i .github/settings og .github/rulesets. Innstillin
 - JSON og YAML, lokale dokumentlenker og filinventar kontrolleres før siste dokumentasjons-PR.
 - Ingen Swift-filer, Package.swift, testfiler, kjørbare workflows eller releasetagger er lagt til. Ingen produktbygg/test kan hevdes bestått.
 
-## Bevisste åpne valg
+## Vedtatte valg og gjenstående verifikasjon
 
 Lisens/rettighetshaver er vedtatt i DEC-03 / ADR-0002: Teisrud Development AS og proprietær rettighetspolicy. DEC-02 / ADR-0003 fastsetter HTTP-kjerne først, pakkenavn SwiftNetworkKit og bibliotekprodukt/modul/importnavn NetworkKit med én bibliotekmodul. V1_SCOPE.md avgrenser domenene. DEC-01 / ADR-0004 vedtar iOS/iPadOS 17, macOS 14, watchOS 10 og tvOS 17, med Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus. PLATFORM_MATRIX.md skiller vedtak fra utestående symbol-/bygg-/runtime-verifikasjon. DEC-04 / ADR-0005 fastsetter HTTP-/respons-/feilkontrakten. DEC-05 / ADR-0006 fastsetter concurrency/session-eierskap, isolerte snapshots, cancellation/shutdown og 30/60-sekunders grenser. DEC-06 / ADR-0007 fastsetter lagre av som standard, header-provider, HTTPS med loopback-utviklingsunntak og avgrensede redirects/logging/injeksjonsprofiler. DEC-07 / ADR-0008 fastsetter fire PR-plattformer på standardrunners uten betalte tillegg, konkret jobb-/testplan og egne releasebevis. Ingen workflows er opprettet; første reelle CI-PR må verifisere faktiske schemes/destinations/toolchain og gates. Sikkerhets-, minimums-OS- og øvrige runtimebevis gjenstår før release. En avgrenset SDK-deklarasjonskontroll er gjort for enkelte Foundation-symboler, uten produktbygg eller runtime-tester. Fase 0 gir ikke automatisk tillatelse til å starte kode.
 
@@ -40,6 +40,8 @@ Ingen CI-checks er påkrevd ennå, fordi biblioteket ikke finnes. Ingen ekstern 
 
 Oppsettet dokumenterer også begrensninger: Prosjektets interne workflow-overganger er ikke funksjonstestet; fremtidige status-/labelendringer og nye rotissues kontrolleres ved triage. Roadmap-datoer og datointervall velges først når kapasitet er avklart. Ingen automatisk kvalitetsgaranti eller universell plattformstøtte er påstått.
 
-## Neste arbeid
+## F0-godkjenning og videre arbeid
 
-Prosjekteier gjennomgår OPS-01 og beslutningsoppgavene i F0. Arbeid med biblioteket starter først etter eget klarsignal. Dette repooppsettet inneholder ingen implementasjon.
+Prosjekteier har godkjent det samlede F0-planleggingsgrunnlaget, inkludert standarddetaljene, med svaret «Godkjenn F0-planleggingen; fortsatt ingen kode». ADR-0009 og F0_REVIEW.md registrerer utfallet: **planlegging godkjent, implementasjon ikke autorisert**. De sju DEC-oppgavene og GATE-00 utgjør de åtte fullførte beslutningsoppgavene; dette er ikke produktlevering.
+
+OPS-01 / #30 holdes åpen for gjenstående repooppsett, og F0-milepælen holdes derfor åpen. Produktbygg, faktiske CI-/runtime-/minimums-OS-bevis og release er ikke utført. Arbeid med biblioteket starter først etter et eget uttrykkelig klarsignal. Dette repooppsettet inneholder ingen implementasjon.

@@ -11,6 +11,7 @@ Kilde: NetworkKit_Teknisk_Spesifikasjon.pdf, versjon 1.0, 19.10.2026, 15 sider. 
 - Produktet skal bruke native Apple-API-er og Swift-standardbibliotek uten eksterne pakkedependencies, også uten separat distribuerte Apple-pakker som SwiftNIO.
 - Foundation/URLSession som primær HTTP-transport. Ingen egen TLS/HTTP/krypto og ingen serverplattform.
 - Plattformminimum vedtatt i ADR-0004: iOS/iPadOS 17.0, macOS 14.0, watchOS 10.0 og tvOS 17.0; visionOS utsettes. Xcode 26.3+, Swift tools 6.2 og Swift 6-språkmodus. Se PLATFORM_MATRIX.md for utestående verifikasjon.
+- Samlet F0-grunnlag og dokumenterte standarddetaljer er godkjent i ADR-0009. Implementasjon er uttrykkelig ikke autorisert; fortsatt ingen kode.
 - Små testbare API-er, dependency injection, async/await, cancellation, isolert delt tilstand, privacy og secure defaults.
 
 ## Tolkning av scope

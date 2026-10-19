@@ -4,6 +4,8 @@
 
 ### Prosjektoppsett
 
+- GATE-00 / #28 vedtatt: samlet F0-planlegging og standarddetaljer godkjent av prosjekteier. Implementasjon er ikke autorisert; ingen kode. OPS-01 / #30 og F0-milepælen holdes åpne for gjenstående repoarbeid.
+
 - Repo, arbeidsflyt, sikkerhetspolicy, roadmap, kravsporbarhet og oppgavemaler etablert.
 - Ingen bibliotekskode eller produktrelease. Ingen SemVer-tag opprettet.
 - DEC-07 vedtatt: standard GitHub-runners uten betalte tillegg, fire PR-plattformfamilier og egen release-/minimums-OS-kontroll. SHA-pinning for Actions er aktivert; ingen workflows er opprettet.
