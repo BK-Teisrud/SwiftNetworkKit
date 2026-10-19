@@ -1,0 +1,32 @@
+name: Forslag eller arkitekturbeslutning
+description: Strukturert forslag eller arkitekturbeslutning uten sensitive data.
+title: "[Forslag eller arkitekturbeslutning] "
+labels: ["type: decision", "status: triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Repoet er offentlig. Bruk syntetiske data; rapporter sikkerhet privat."
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem og kravreferanse
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativer og avveininger
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope, sikkerhet og plattformer
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Beslutningskriterier
+    validations:
+      required: true

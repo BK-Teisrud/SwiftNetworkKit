@@ -1,0 +1,32 @@
+name: Arbeidsoppgave
+description: Strukturert arbeidsoppgave uten sensitive data.
+title: "[Arbeidsoppgave] "
+labels: ["type: task", "status: triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Repoet er offentlig. Bruk syntetiske data; rapporter sikkerhet privat."
+  - type: textarea
+    id: problem
+    attributes:
+      label: Formål og omfang
+    validations:
+      required: true
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Kravreferanse og avhengigheter
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Akseptansekriterier
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Plan for verifikasjon
+    validations:
+      required: true

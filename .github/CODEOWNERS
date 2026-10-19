@@ -1,0 +1,5 @@
+# Ansvar; review håndheves gjennom GitHub-regler når team-profil aktiveres.
+* @BK-Teisrud
+/.github/ @BK-Teisrud
+/docs/decisions/ @BK-Teisrud
+/SECURITY.md @BK-Teisrud

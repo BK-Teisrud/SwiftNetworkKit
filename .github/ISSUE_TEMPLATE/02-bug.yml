@@ -1,0 +1,32 @@
+name: Feilrapport
+description: Strukturert feilrapport uten sensitive data.
+title: "[Feilrapport] "
+labels: ["type: bug", "status: triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "Repoet er offentlig. Bruk syntetiske data; rapporter sikkerhet privat."
+  - type: textarea
+    id: problem
+    attributes:
+      label: Observerbar feil og forventet resultat
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Versjon, plattform og miljø
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduksjon med syntetiske data
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Konsekvens og mulig regresjon
+    validations:
+      required: true

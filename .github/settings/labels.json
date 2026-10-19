@@ -1,0 +1,107 @@
+[
+  {
+    "name": "type: epic",
+    "color": "5319E7",
+    "description": "Domene som krever nedbryting i delkrav"
+  },
+  {
+    "name": "type: task",
+    "color": "1D76DB",
+    "description": "Avgrenset arbeidsoppgave"
+  },
+  {
+    "name": "type: decision",
+    "color": "D4C5F9",
+    "description": "Arkitektur- eller produktbeslutning"
+  },
+  {
+    "name": "type: bug",
+    "color": "D73A4A",
+    "description": "Reproduserbar feil"
+  },
+  {
+    "name": "type: feature",
+    "color": "0E8A16",
+    "description": "Ny valgt funksjon"
+  },
+  {
+    "name": "scope: core",
+    "color": "0052CC",
+    "description": "KJERNE; delscope må vedtas"
+  },
+  {
+    "name": "scope: extension",
+    "color": "C2E0C6",
+    "description": "Valgfri senere utvidelse"
+  },
+  {
+    "name": "scope: research",
+    "color": "F9D0C4",
+    "description": "Forskning før produktvedtak"
+  },
+  {
+    "name": "scope: governance",
+    "color": "BFD4F2",
+    "description": "Repo, beslutning eller styring"
+  },
+  {
+    "name": "priority: P0",
+    "color": "B60205",
+    "description": "Hendelse eller releaseblokker"
+  },
+  {
+    "name": "priority: P1",
+    "color": "D93F0B",
+    "description": "Neste nødvendige kjernearbeid"
+  },
+  {
+    "name": "priority: P2",
+    "color": "FBCA04",
+    "description": "Planlagt tillegg"
+  },
+  {
+    "name": "priority: P3",
+    "color": "C5DEF5",
+    "description": "Lavere prioritet eller forskning"
+  },
+  {
+    "name": "status: triage",
+    "color": "EDEDED",
+    "description": "Må avklares før Ready"
+  },
+  {
+    "name": "status: ready",
+    "color": "0E8A16",
+    "description": "Klar og uten blokkerende beslutninger"
+  },
+  {
+    "name": "status: in-progress",
+    "color": "1D76DB",
+    "description": "Aktivt arbeid"
+  },
+  {
+    "name": "status: review",
+    "color": "5319E7",
+    "description": "Venter på review/egenkontroll"
+  },
+  {
+    "name": "status: blocked",
+    "color": "B60205",
+    "description": "Eksplisitt blokkert; lenk til årsak"
+  },
+  {
+    "name": "breaking-change",
+    "color": "B60205",
+    "description": "Inkompatibel endring"
+  },
+  {
+    "name": "security",
+    "color": "D73A4A",
+    "description": "Sikkerhetsarbeid; ingen private funn offentlig"
+  },
+  {
+    "name": "skip-changelog",
+    "color": "EDEDED",
+    "description": "Intern endring uten brukerrelevans"
+  }
+]
