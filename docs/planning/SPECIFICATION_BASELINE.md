@@ -4,7 +4,8 @@ Kilde: NetworkKit_Teknisk_Spesifikasjon.pdf, versjon 1.0, 19.10.2026, 15 sider. 
 
 ## Vedtatt i dette oppsettet
 
-- Repository-navn: SwiftNetworkKit, eier BK-Teisrud, offentlig synlighet, etter brukerens valg.
+- Repository-navn: SwiftNetworkKit, GitHub-kontoeier BK-Teisrud, offentlig synlighet, etter brukerens valg.
+- Rettighetshaver: Teisrud Development AS. Proprietær rettighetspolicy; tredjepartsbruk krever særskilt tillatelse, med forbehold for lov og GitHub-vilkår. Se ADR-0002 og LICENSE.
 - Kun repo-/GitHub-oppsett, dokumentasjon og planlegging nå. Ingen Swift-filer, Package.swift, prototyper, tester eller kjørbare workflows.
 - Produktet skal bruke native Apple-API-er og Swift-standardbibliotek uten eksterne pakkedependencies, også uten separat distribuerte Apple-pakker som SwiftNIO.
 - Foundation/URLSession som primær HTTP-transport. Ingen egen TLS/HTTP/krypto og ingen serverplattform.
@@ -18,7 +19,7 @@ Spesifikasjonen nevner retry i målbeskrivelsen, men klassifiserer robusthet som
 
 ## Åpent før kode
 
-Minimums-OS, Swift/Xcode, modul- og produktnavn, lisens/rettighetshaver, public API, raw-request-støtte, headers/body-modell, auth-scope, cache/offline-policy, telemetry, Combine og visionOS. Ingen av disse fremstilles som vedtatt støtte.
+Minimums-OS, Swift/Xcode, modul- og produktnavn, public API, raw-request-støtte, headers/body-modell, auth-scope, cache/offline-policy, telemetry, Combine og visionOS. Ingen av disse fremstilles som vedtatt støtte.
 
 ## Sporbarhet
 

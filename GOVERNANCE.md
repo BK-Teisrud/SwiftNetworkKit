@@ -1,6 +1,6 @@
 # Forvaltning
 
-Prosjekteier og maintainer: @BK-Teisrud. Eieren vedtar scope, prioritet, rettigheter, plattformstøtte og release. Bidragsytere foreslår endringer gjennom issues og pull requests.
+Rettighetshaver: Teisrud Development AS, etter prosjekteierens beslutning i ADR-0002. GitHub-kontoeier og maintainer: @BK-Teisrud. Tredjepartsbruk reguleres av LICENSE og eventuell særskilt skriftlig tillatelse fra selskapet. Eieren vedtar scope, prioritet, rettigheter, plattformstøtte og release. Bidragsytere foreslår endringer gjennom issues og pull requests.
 
 ## Beslutninger
 

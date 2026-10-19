@@ -34,9 +34,9 @@ Konfigurasjonsgrunnlag ligger i .github/settings og .github/rulesets. Innstillin
 
 ## Bevisste åpne valg
 
-Lisens/rettighetshaver, modul-/produktnavn, minimums-OS, Swift/Xcode, detaljert v1-scope og API-kontrakter krever eierbeslutning i DEC-01–DEC-07. Fase 0 gir ikke automatisk tillatelse til å starte kode.
+Lisens/rettighetshaver er vedtatt i DEC-03 / ADR-0002: Teisrud Development AS og proprietær rettighetspolicy. Modul-/produktnavn, minimums-OS, Swift/Xcode, detaljert v1-scope og API-kontrakter krever fortsatt beslutning i de øvrige DEC-oppgavene. Fase 0 gir ikke automatisk tillatelse til å starte kode.
 
-Ingen CI-checks er påkrevd ennå, fordi biblioteket ikke finnes. Ingen ekstern reviewer er påkrevd i solo-profil. Ingen signerte commits er påkrevd før signeringsoppsett for relevante aktører er avklart. Kontosikkerhet/2FA er ikke verifisert eller endret. Ingen brukere, nøkler, secrets eller webhooks er lagt til. Lisensfraværet er eksplisitt; det er ikke satt en vilkårlig OSS-lisens.
+Ingen CI-checks er påkrevd ennå, fordi biblioteket ikke finnes. Ingen ekstern reviewer er påkrevd i solo-profil. Ingen signerte commits er påkrevd før signeringsoppsett for relevante aktører er avklart. Kontosikkerhet/2FA er ikke verifisert eller endret. Ingen brukere, nøkler, secrets eller webhooks er lagt til. LICENSE inneholder en proprietær rettighetsnotis etter prosjekteierens valg. Ingen åpen kildekode-lisens eller generell tredjepartstillatelse er gitt.
 
 Oppsettet dokumenterer også begrensninger: Prosjektets interne workflow-overganger er ikke funksjonstestet; fremtidige status-/labelendringer og nye rotissues kontrolleres ved triage. Roadmap-datoer og datointervall velges først når kapasitet er avklart. Ingen automatisk kvalitetsgaranti eller universell plattformstøtte er påstått.
 

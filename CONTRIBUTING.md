@@ -1,6 +1,8 @@
 # Bidrag og arbeidsflyt
 
-Prosjektet er i planleggingsfasen. Ikke start implementasjon før fase 0 er godkjent og implementasjonsarbeid er uttrykkelig besluttet. Lisensvalg må avklares før eksterne kodebidrag.
+Prosjektet er i planleggingsfasen. Ikke start implementasjon før fase 0 er godkjent og implementasjonsarbeid er uttrykkelig besluttet. Teisrud Development AS er valgt rettighetshaver. Prosjektet er proprietært; se [LICENSE](LICENSE).
+
+Feilrapporter og forslag er velkomne. Eksterne bidrag som endrer repoets innhold, aksepteres først etter at en skriftlig bidragsavtale med Teisrud Development AS er avklart. En PR eller sign-off behandles ikke som en automatisk overføring av rettigheter. Ikke send eksterne kodebidrag før dette er avklart. GitHubs gjeldende vilkår gjelder fortsatt for offentlig aktivitet på tjenesten.
 
 1. Finn eller opprett et issue med kravreferanse, avgrensning og akseptansekriterier.
 2. Flytt et klart arbeid til Ready; legg inn eier, milepæl, prioritet og avhengigheter.

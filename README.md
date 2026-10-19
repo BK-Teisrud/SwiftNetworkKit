@@ -28,4 +28,6 @@ Repoet heter **SwiftNetworkKit**. Arbeidsnavnet **NetworkKit** og targetnavnene 
 
 Mål: iOS/iPadOS, macOS, watchOS og tvOS. visionOS er en mulig utvidelse. Minimums-OS, Swift- og Xcode-versjoner er ikke vedtatt. Det finnes ingen verifisert støttematrise ennå.
 
-Lisens er ikke valgt. Offentlig synlighet gir ikke i seg selv en åpen kildekode-lisens. Prosjektet gir foreløpig ingen særskilt lisens til bruk, endring eller redistribusjon. Avklar rettighetshaver og lisens før eksterne kodebidrag og første produktrelease.
+**Rettighetshaver: Teisrud Development AS. SwiftNetworkKit er proprietært.** Tredjepartsbruk krever særskilt skriftlig tillatelse fra selskapet, med forbehold for lovbestemte rettigheter og GitHubs gjeldende vilkår. Offentlig synlighet gir adgang til visning og forking gjennom GitHub, men prosjektet gir ingen ytterligere åpen kildekode-lisens eller generell tillatelse til bruk i apper.
+
+Se [rettighetsnotisen](LICENSE) og [beslutningen om eierskap og rettigheter](docs/decisions/ADR-0002-ownership-and-rights.md). Be maintainer @BK-Teisrud om en bekreftet kontaktkanal for tillatelser; ikke del fortrolige opplysninger offentlig.

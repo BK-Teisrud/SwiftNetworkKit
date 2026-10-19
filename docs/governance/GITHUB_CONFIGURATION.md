@@ -33,7 +33,7 @@ Dependency graph og Dependabot alerts ønskes aktivert. Secret scanning og push 
 
 Actions: read-only GITHUB_TOKEN, ingen tillatelse til å opprette/godkjenne PR-er, kun lokale og GitHub-eide actions tillates som forberedende restriksjon. Ingen workflows eller runner-minutter brukes av oppsettet. SHA-pinning og eventuell Apple-action må godkjennes i DEC-07. Ingen selvhostede runners, secrets, environments, deployments, webhooks eller ekstra apps er opprettet.
 
-Kontosikkerhet (2FA/passkey), private kontaktkanaler, offisiell rettighetshaver, lisens og eventuell senere flytting til organisasjon krever separat eierbeslutning. Det er ikke endret andre repoer eller organisasjonsregler.
+Rettighetshaver og rettighetspolicy er vedtatt i ADR-0002: Teisrud Development AS, proprietært, bruk etter særskilt skriftlig tillatelse. Repoet forblir offentlig under BK-Teisrud. Kontosikkerhet (2FA/passkey), private kontaktkanaler og eventuell senere flytting til organisasjon krever separat avklaring. Det er ikke endret andre repoer eller organisasjonsregler.
 
 ## Prosjekt og planlegging
 
