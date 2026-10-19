@@ -1,6 +1,6 @@
 # Roadmap
 
-Ingen tidsfrister er satt. Faser er porter, ikke kalenderløfter. F0 → F1 → F2 er foreslått vei til første stabile kjerne. F3–F6 er valgfrie senere leveranser og er ikke del av et løfte om v1.0.
+Ingen tidsfrister er satt. Faser er porter, ikke kalenderløfter. Prosjekteier har vedtatt HTTP-kjerne først: F0 → F1 → F2 er veien til første stabile versjon. F3–F6 er valgfrie senere leveranser og er ikke del av v1.0. Repo/pakke heter SwiftNetworkKit; bibliotekprodukt/modul heter NetworkKit, med én bibliotekmodul. Se [v1-scope](V1_SCOPE.md) og [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md).
 
 ## F0 – Arkitektur og beslutninger
 
@@ -12,7 +12,7 @@ Valgte endpoint-, request-, response-, feil- og konfigurasjonskontrakter oppfylt
 
 ## F2 – Produksjonsherding og v1-port
 
-Privacy/logging, cancellation, auth hooks, sikkerhetsreview, DocC og dokumentert releaseport. v1 først etter alle godkjente kjernekriterier.
+Privacy/logging, cancellation, nødvendig auth-integrasjonsgrense etter DEC-04/06, sikkerhetsreview, DocC og dokumentert releaseport. v1 først etter alle godkjente kjernekriterier.
 
 ## F3 – Resiliens og tillegg
 

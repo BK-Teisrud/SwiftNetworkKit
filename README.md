@@ -8,7 +8,7 @@ Native nettverksbibliotek for Apple-plattformer, planlagt som Swift Package uten
 
 Foundation/URLSession er primær HTTP-transport. Swift Concurrency, injiserbare tjenester, system trust og personverntrygge standardverdier er førende. Network.framework vurderes for særskilte lavnivåbehov. Ingen egen HTTP-, TLS- eller kryptografistakk og ingen backend som produkt.
 
-Repoet heter **SwiftNetworkKit**. Arbeidsnavnet **NetworkKit** og targetnavnene i spesifikasjonen er foreløpige; modulnavn besluttes separat.
+Repoet og pakken heter **SwiftNetworkKit**. Bibliotekproduktet, modulen og importnavnet blir **NetworkKit**, med én bibliotekmodul i v1. Første stabile versjon avgrenses til HTTP-kjernen; øvrige moduler kommer senere. Dette er vedtatt planlegging, ikke opprettede targets eller ferdig funksjonalitet. Se [v1-scope](docs/planning/V1_SCOPE.md) og [ADR-0003](docs/decisions/ADR-0003-v1-scope-and-naming.md).
 
 ## Dokumentasjon
 

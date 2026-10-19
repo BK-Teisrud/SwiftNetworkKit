@@ -46,7 +46,6 @@
   "product_ci_present": false,
   "open_decisions": [
     "DEC-01",
-    "DEC-02",
     "DEC-04",
     "DEC-05",
     "DEC-06",
@@ -58,6 +57,16 @@
       "rights_holder": "Teisrud Development AS",
       "rights_policy": "proprietary; separate written permission required",
       "adr": "docs/decisions/ADR-0002-ownership-and-rights.md"
+    },
+    "DEC-02": {
+      "date": "2026-10-19",
+      "scope": "HTTP core first; extensions later",
+      "package": "SwiftNetworkKit",
+      "library_product": "NetworkKit",
+      "library_module": "NetworkKit",
+      "library_module_count": 1,
+      "adr": "docs/decisions/ADR-0003-v1-scope-and-naming.md",
+      "scope_document": "docs/planning/V1_SCOPE.md"
     }
   }
 }
