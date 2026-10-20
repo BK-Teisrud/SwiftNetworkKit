@@ -278,5 +278,16 @@
     "negative_control": "call-total precedence mutation detected in isolated copy",
     "live_transport": false,
     "enforced_http_deadlines": false
+  },
+  "endpoint_url_layer": {
+    "date": "2026-10-20",
+    "issue": 45,
+    "api_review": "docs/planning/ENDPOINT_URLS.md",
+    "local_tests": 44,
+    "test_suites": 9,
+    "test_platform": "macOS 15.8.1 x86_64",
+    "negative_control": "unescaped slash mutation detected in isolated copy",
+    "network_requests_sent": false,
+    "https_redirect_execution_policy_implemented": false
   }
 }

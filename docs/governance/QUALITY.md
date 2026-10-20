@@ -1,8 +1,8 @@
 # Quality gates and future test strategy
 
-Current I03 evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](../planning/CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
+I03 foundation evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](../planning/CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
 
-These are requirements for later implementation. I01 verified package wiring. I02 adds passing local value/error contract tests; CI and HTTP-pipeline tests remain outstanding.
+These are requirements for later implementation. I01 verified package wiring. I02 adds passing local value/error contract tests; I04 adds endpoint URL construction and raw-URL validation; the full local suite passed 44 tests. See [endpoint evidence](../planning/ENDPOINT_URLS.md). CI and HTTP-pipeline tests remain outstanding.
 
 ## Before implementation
 

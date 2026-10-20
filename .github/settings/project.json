@@ -299,6 +299,6 @@
   },
   "workflow_configuration": "See docs/planning/PROJECT_MANAGEMENT.md",
   "product_workflows_present": false,
-  "shortDescription": "Approved HTTP-core implementation underway. HTTP values, errors, and configuration snapshots implemented; client/transport and CI remain outstanding.",
-  "readme": "Follow the ordered issues and https://github.com/BK-Teisrud/SwiftNetworkKit/blob/main/docs/planning/WORK_QUEUE.md. I01 established the package; I02 adds HTTP values/errors with local contract tests. I03 adds immutable configuration snapshots and internal transport/clock seams. Client, live transport, and CI follow in later tasks. See https://github.com/BK-Teisrud/SwiftNetworkKit/blob/main/docs/planning/CONFIGURATION.md. See HTTP_VALUES.md for API review and actual evidence. English GitHub content; Norwegian owner–assistant conversations."
+  "shortDescription": "Approved HTTP-core implementation underway. Values, configuration, and endpoint URL construction implemented; executing client and CI remain outstanding.",
+  "readme": "Follow the ordered issues and https://github.com/BK-Teisrud/SwiftNetworkKit/blob/main/docs/planning/WORK_QUEUE.md. I01–I04 provide the package, HTTP values/errors, isolated configuration, and endpoint URL construction. The executing client, live transport/security policy, and CI follow in later tasks. See https://github.com/BK-Teisrud/SwiftNetworkKit/blob/main/docs/planning/ENDPOINT_URLS.md for API review, actual test evidence, and limitations. English GitHub content; Norwegian owner–assistant conversations."
 }
