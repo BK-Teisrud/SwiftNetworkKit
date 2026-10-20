@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  checks:
+    name: ${{ matrix.kind }}
+    runs-on: macos-15
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        kind: ["source-integrity", "macos-core", "ios-core", "watchos-core", "tvos-core", "documentation"]
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+      CHECK_KIND: ${{ matrix.kind }}
+    steps:
+      - name: Check out source without persisted credentials
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - name: Verify environment and run the real check
+        run: python3 scripts/ci/check.py "$CHECK_KIND"
+
+  quality-gate:
+    name: quality-gate
+    if: ${{ always() }}
+    needs: [checks]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      CHECKS_RESULT: ${{ needs.checks.result }}
+    steps:
+      - name: Require every matrix check to succeed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$CHECKS_RESULT" != "success" ]; then
+            echo "Mandatory matrix result: $CHECKS_RESULT"
+            exit 1
+          fi
+          echo "Every mandatory source, platform, and documentation check succeeded."

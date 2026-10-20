@@ -21,3 +21,6 @@ tmp/
 # Local package/credential files
 /Packages/
 .netrc
+
+# CI helper bytecode
+__pycache__/
