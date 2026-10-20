@@ -57,3 +57,7 @@ The owner instructed implementation to begin and supplied a default Xcode packag
 ## I02 value-layer update — 2026-10-20
 
 HTTP methods, immutable case-insensitive headers, status codes, responses, explicit empty values, and structured errors are implemented. See [HTTP_VALUES.md](../planning/HTTP_VALUES.md) for 21 passing local tests, the isolated negative control, consumer verification, and limits. No networking, CI workflows, or release is included.
+
+## I03 configuration update — 2026-10-20
+
+Configuration snapshots and internal transport/clock boundaries are implemented. The full local suite passed 29 tests in seven suites; a public consumer and isolated precedence negative control verified the new API. See [configuration evidence](../planning/CONFIGURATION.md). Live networking, enforced budgets, and CI remain later work. I04 / #45 is next.

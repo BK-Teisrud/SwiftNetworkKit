@@ -2,7 +2,7 @@
 
 A native networking library for Apple platforms, planned as a Swift package with no external package dependencies.
 
-**Status: Implementation started; HTTP value types and structured errors implemented.** The Swift package is named SwiftNetworkKit and exposes the NetworkKit library. HTTP behavior is not implemented yet; do not treat this as a functional networking library. See [implementation authorization](docs/decisions/ADR-0012-implementation-start.md) and [package-baseline evidence](docs/planning/PACKAGE_BASELINE.md).
+**Status: Implementation started; HTTP values, structured errors, and configuration snapshots implemented.** The Swift package is named SwiftNetworkKit and exposes the NetworkKit library. HTTP behavior is not implemented yet; do not treat this as a functional networking library. See [implementation authorization](docs/decisions/ADR-0012-implementation-start.md) and [package-baseline evidence](docs/planning/PACKAGE_BASELINE.md).
 
 Open the repository-root Package.swift in Xcode. The original nested Xcode starter has been moved into the standard root package layout. The NetworkKit test target now contains contract tests for the foundational values and errors. Networking itself is not implemented.
 
@@ -14,6 +14,7 @@ The repository and package are named **SwiftNetworkKit**. The library product, m
 
 ## Documentation
 
+- [Configuration API, internal seams, and test evidence](docs/planning/CONFIGURATION.md)
 - [HTTP value API and actual test evidence](docs/planning/HTTP_VALUES.md)
 - [Readiness review before implementation](docs/planning/PRE_CODE_READINESS.md)
 - [Numbered work queue](docs/planning/WORK_QUEUE.md)

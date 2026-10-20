@@ -1,5 +1,7 @@
 # HTTP, response, and error contract for v1
 
+Current I03 evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
+
 Status: Planned contract, 2026-10-19; see [ADR-0005](../decisions/ADR-0005-http-api-contract.md). The owner selected the core choices; the rules below elaborate them. I02 implements the foundational value/error types with passing local contract tests; the client and transport pipeline remain unimplemented. See [HTTP_VALUES.md](HTTP_VALUES.md) for reviewed signatures, tests, and limitations.
 
 ## Public model and entry points

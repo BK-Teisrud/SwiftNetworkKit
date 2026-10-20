@@ -267,5 +267,16 @@
     "negative_control": "case-sensitive lookup mutation detected in isolated copy",
     "http_pipeline_implemented": false,
     "ci_workflows_present": false
+  },
+  "configuration_layer": {
+    "date": "2026-10-20",
+    "issue": 44,
+    "api_review": "docs/planning/CONFIGURATION.md",
+    "local_tests": 29,
+    "test_suites": 7,
+    "test_platform": "macOS 15.8.1 x86_64",
+    "negative_control": "call-total precedence mutation detected in isolated copy",
+    "live_transport": false,
+    "enforced_http_deadlines": false
   }
 }

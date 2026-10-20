@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Configuration foundation
+
+- Added immutable client/call settings, validated independent inactivity/total limits, and isolated per-operation snapshots.
+- Added internal transport and monotonic clock boundaries; no live transport or enforced HTTP deadlines yet.
+- Full local suite: 29 tests in seven suites passed, including concurrent snapshot isolation. Public consumer and precedence negative control verified. See docs/planning/CONFIGURATION.md.
+
 ### HTTP values and structured errors
 
 - Added immutable Sendable HTTPMethod, HTTPHeaders, HTTPStatus, NetworkResponse, EmptyResponse, and NetworkError types.
