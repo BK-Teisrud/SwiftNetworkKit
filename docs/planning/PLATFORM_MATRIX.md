@@ -1,8 +1,8 @@
 # Platform and toolchain matrix
 
-Current I03 evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
+I03 foundation evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
 
-Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). This is not verified product support; only the package baseline and I02 value/error layer are implemented; HTTP transport is not.
+Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). This is not verified product support; the package baseline, values/errors, configuration, and endpoint URL construction are implemented; HTTP transport is not.
 
 ## Approved delivery baseline
 
@@ -10,7 +10,7 @@ Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-p
 | --- | --- | --- | --- | --- | --- |
 | iOS | 17.0 | iOS 26.2 | Not run | Not run | Unverified |
 | iPadOS | 17.0 | iOS/iPadOS 26.2 | Not run | Not run | Unverified |
-| macOS | 14.0 | macOS 26.2 | I01/I02 builds passed | I02: 21 value/error tests passed on macOS 15.8.1 | Minimum OS unverified |
+| macOS | 14.0 | macOS 26.2 | I01–I04 local builds passed | I04: 44 local tests passed on macOS 15.8.1 | Minimum OS unverified |
 | watchOS | 10.0 | watchOS 26.2 | Not run | Not run | Unverified |
 | tvOS | 17.0 | tvOS 26.2 | Not run | Not run | Unverified |
 | visionOS | Deferred; no v1 support | Outside selected delivery | Outside v1 | Outside v1 | Outside v1 |
@@ -82,3 +82,7 @@ The macOS library and test target compile with Xcode 26.3 / Swift 6.2.4 on the l
 ## I02 value-layer evidence — 2026-10-20
 
 [HTTP_VALUES.md](HTTP_VALUES.md) records the API review, bounded SDK declaration check, 21 passing local contract tests, negative control, and public consumer check. These establish value/error semantics only; no HTTP transport, all-platform build, or minimum-OS runtime claim is made.
+
+## I04 endpoint evidence — 2026-10-20
+
+The full suite passed 44 tests in nine suites on macOS 15.8.1 x86_64 / Xcode 26.3 / Swift 6.2.4. This includes structural URL and encoding checks, not transport/runtime support evidence. See [endpoint review](ENDPOINT_URLS.md). Minimum-OS and other platform evidence remain outstanding.

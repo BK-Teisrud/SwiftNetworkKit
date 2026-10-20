@@ -1,2 +1,2 @@
-// NetworkKit currently provides HTTP value types and structured errors.
-// The HTTP client and transport pipeline are implemented in subsequent tasks.
+// NetworkKit currently provides HTTP values, configuration, and endpoint URL construction.
+// The executing HTTP client and transport pipeline follow in subsequent tasks.

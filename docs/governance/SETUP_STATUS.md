@@ -61,3 +61,7 @@ HTTP methods, immutable case-insensitive headers, status codes, responses, expli
 ## I03 configuration update — 2026-10-20
 
 Configuration snapshots and internal transport/clock boundaries are implemented. The full local suite passed 29 tests in seven suites; a public consumer and isolated precedence negative control verified the new API. See [configuration evidence](../planning/CONFIGURATION.md). Live networking, enforced budgets, and CI remain later work. I04 / #45 is next.
+
+## I04 endpoint update — 2026-10-20
+
+Typed endpoint/URL construction and shared structural raw-URL checks are implemented. The full local suite passed 44 tests in nine suites; a public consumer and isolated escaping negative control verified the API. See [endpoint evidence](../planning/ENDPOINT_URLS.md). No executing client, HTTPS/redirect enforcement, or CI yet. I05 / #46 is next.

@@ -2,17 +2,19 @@
 
 A native networking library for Apple platforms, planned as a Swift package with no external package dependencies.
 
-**Status: Implementation started; HTTP values, structured errors, and configuration snapshots implemented.** The Swift package is named SwiftNetworkKit and exposes the NetworkKit library. HTTP behavior is not implemented yet; do not treat this as a functional networking library. See [implementation authorization](docs/decisions/ADR-0012-implementation-start.md) and [package-baseline evidence](docs/planning/PACKAGE_BASELINE.md).
+**Status: Implementation started; HTTP values, configuration snapshots, and endpoint URL construction implemented.** The Swift package is named SwiftNetworkKit and exposes the NetworkKit library. HTTP request execution is not implemented yet; do not treat this as a functional networking library. See [implementation authorization](docs/decisions/ADR-0012-implementation-start.md) and [package-baseline evidence](docs/planning/PACKAGE_BASELINE.md).
 
-Open the repository-root Package.swift in Xcode. The original nested Xcode starter has been moved into the standard root package layout. The NetworkKit test target now contains contract tests for the foundational values and errors. Networking itself is not implemented.
+Open the repository-root Package.swift in Xcode. The original nested Xcode starter has been moved into the standard root package layout. The NetworkKit test target now contains contract tests for values, errors, configuration, and URL construction. Networking itself is not implemented.
 
 ## Project foundations
 
 Foundation/URLSession is the primary HTTP transport. Swift Concurrency, injectable services, system trust, and privacy-preserving defaults guide the design. Network.framework may be considered for specific low-level requirements. The project will not implement its own HTTP, TLS, or cryptographic stack, or provide a backend product.
 
-The repository and package are named **SwiftNetworkKit**. The library product, module, and import name will be **NetworkKit**, with one library module in v1. The first stable release is limited to the HTTP core; other modules are deferred. The package and target now exist; the HTTP behavior remains planned. See [v1 scope](docs/planning/V1_SCOPE.md) and [ADR-0003](docs/decisions/ADR-0003-v1-scope-and-naming.md).
+The repository and package are named **SwiftNetworkKit**. The library product, module, and import name will be **NetworkKit**, with one library module in v1. The first stable release is limited to the HTTP core; other modules are deferred. The package and target now exist; HTTP request execution remains planned. See [v1 scope](docs/planning/V1_SCOPE.md) and [ADR-0003](docs/decisions/ADR-0003-v1-scope-and-naming.md).
 
 ## Documentation
+
+- [Endpoint API, URL validation, and test evidence](docs/planning/ENDPOINT_URLS.md)
 
 - [Configuration API, internal seams, and test evidence](docs/planning/CONFIGURATION.md)
 - [HTTP value API and actual test evidence](docs/planning/HTTP_VALUES.md)

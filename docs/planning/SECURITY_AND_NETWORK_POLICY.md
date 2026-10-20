@@ -2,6 +2,8 @@
 
 Status: Planned contract, 2026-10-19. Core choices are accepted in [ADR-0007](../decisions/ADR-0007-security-and-network-policy.md); details elaborate secure defaults. I02 validates foundational values and their descriptions with local tests. The transport, authentication, storage, and logging policies remain unimplemented; no complete security guarantee is claimed.
 
+I04 adds structural URL validation and same-origin raw-URL checks; see [endpoint evidence](ENDPOINT_URLS.md). These do not implement the execution, TLS, loopback-permission, or redirect policies below.
+
 ## URLs, permitted origins, and local development
 
 Production defaults to HTTPS with OS system trust. Each client has an explicit base origin: scheme, normalized host, and effective port. Typed endpoints cannot change it through path/query. Raw requests to another origin require explicit client-configuration permission before execution. A permitted destination does not permit sharing credentials across origins; bind authentication to the specific origin and app account/environment.

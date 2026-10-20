@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Endpoint and URL foundation
+
+- Added typed Endpoint descriptions, explicit decoded path segments, and ordered query items with repeated/nil/empty values.
+- Added component encoding and shared typed/raw URL validation, conservative traversal/ambiguity rejection, same-origin raw checks, and safe descriptions/errors.
+- Full local suite: 44 tests in nine suites passed. Public consumer and isolated escaping negative control verified. See docs/planning/ENDPOINT_URLS.md for API rules and remaining execution/security work.
+
 ### Configuration foundation
 
 - Added immutable client/call settings, validated independent inactivity/total limits, and isolated per-operation snapshots.
