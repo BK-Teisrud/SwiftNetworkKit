@@ -65,3 +65,7 @@ Configuration snapshots and internal transport/clock boundaries are implemented.
 ## I04 endpoint update — 2026-10-20
 
 Typed endpoint/URL construction and shared structural raw-URL checks are implemented. The full local suite passed 44 tests in nine suites; a public consumer and isolated escaping negative control verified the API. See [endpoint evidence](../planning/ENDPOINT_URLS.md). No executing client, HTTPS/redirect enforcement, or CI yet. I05 / #46 is next.
+
+## I05 request encoding update — 2026-10-20
+
+Buffered JSON/Data/UTF-8 construction, header precedence/Content-Type, per-preparation encoders, and typed/raw validation are implemented. The full local suite passed 64 tests in 11 suites; a public consumer and isolated strategy negative control verified the API. See [request evidence](../planning/REQUEST_ENCODING.md), including Foundation raw-input limitations. No executing client or CI yet. I06 / #47 is next.

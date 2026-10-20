@@ -2,6 +2,8 @@
 
 I04 / #45, implemented 2026-10-20. This is URL construction and validation, not a networking client or a complete network security policy.
 
+I05 extends Endpoint with body/call options and buffered request construction; see [current request evidence](REQUEST_ENCODING.md). The API/evidence below records the I04 snapshot.
+
 ## Reviewed public API
 
 - `Endpoint: Sendable` has an associated `Response: Sendable`, `method: HTTPMethod`, `path: EndpointPath`, and ordered `query: [HTTPQueryItem]`. The defaults are GET and no query items. Body/call integration follows in I05; response strategies in I07. Response currently identifies the intended type without decoding it.

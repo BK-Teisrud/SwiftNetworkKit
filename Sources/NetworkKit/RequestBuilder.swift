@@ -1,0 +1,80 @@
+import Foundation
+
+internal struct PreparedRequest: Sendable, CustomStringConvertible, CustomDebugStringConvertible {
+    let request: URLRequest
+    let timeouts: NetworkTimeouts
+    var description: String { "PreparedRequest" }
+    var debugDescription: String { description }
+}
+
+/// Builds buffered values only. I09/I10 must apply the network security policy
+/// before executing either typed or raw requests.
+internal enum RequestBuilder {
+    private static func validateHeaders(_ headers: HTTPHeaders) throws {
+        // Let URLSession derive origin/framing. Do not accept misleading manual values.
+        for name in ["host", "content-length", "transfer-encoding"] where headers[name] != nil {
+            throw NetworkError.invalidRequest(.unsupportedRequest)
+        }
+    }
+
+    private static func validateBody(method: HTTPMethod, hasBody: Bool) throws {
+        // Foreground URLSession data requests do not support GET/HEAD bodies here.
+        if hasBody && (method == .get || method == .head) {
+            throw NetworkError.invalidRequest(.unsupportedRequest)
+        }
+    }
+
+    static func prepare<E: Endpoint>(_ endpoint: E, configuration: NetworkConfiguration) throws -> PreparedRequest {
+        try Task.checkCancellation()
+        let options = endpoint.options
+        let snapshot = try ConfigurationSnapshot(configuration: configuration, options: options)
+        try validateHeaders(snapshot.headers)
+        let method = endpoint.method
+        let body = endpoint.body
+        try validateBody(method: method, hasBody: body != nil)
+        let url = try endpoint.url(relativeTo: snapshot.baseURL)
+        var request = URLRequest(url: url)
+        request.httpMethod = method.rawValue
+        guard request.httpMethod == method.rawValue else {
+            // Foundation canonicalizes some familiar method spellings. Do not
+            // silently change a case-sensitive custom HTTPMethod into another.
+            throw NetworkError.invalidRequest(.unsupportedRequest)
+        }
+        var headers = snapshot.headers.fields
+        if let body {
+            request.httpBody = try body.encoded()
+            if headers["content-type"] == nil { headers["content-type"] = body.contentType }
+        }
+        request.allHTTPHeaderFields = headers
+        request.timeoutInterval = snapshot.timeouts.inactivity
+        try Task.checkCancellation()
+        return PreparedRequest(request: request, timeouts: snapshot.timeouts)
+    }
+
+    static func prepare(_ input: URLRequest, configuration: NetworkConfiguration,
+                        options: NetworkCallOptions = .default) throws -> PreparedRequest {
+        try Task.checkCancellation()
+        _ = try RequestURLBuilder.validatedURL(for: input, baseURL: configuration.baseURL)
+        guard input.httpBodyStream == nil else { throw NetworkError.invalidRequest(.unsupportedRequest) }
+        let method = try HTTPMethod(input.httpMethod ?? "GET")
+        try validateBody(method: method, hasBody: input.httpBody != nil)
+        let rawHeaders = try HTTPHeaders(input.allHTTPHeaderFields ?? [:])
+        try validateHeaders(configuration.headers)
+        try validateHeaders(rawHeaders)
+        try validateHeaders(options.headers)
+        // Client defaults < explicit raw fields < explicit call options.
+        let headers = try HTTPHeaders(rawHeaders.fields.merging(options.headers.fields) { _, call in call })
+        let mergedOptions = try NetworkCallOptions(headers: headers,
+            inactivityTimeout: options.inactivityTimeout, totalTimeout: options.totalTimeout)
+        let snapshot = try ConfigurationSnapshot(configuration: configuration, options: mergedOptions)
+        var request = input
+        var fields = snapshot.headers.fields
+        if request.httpBody != nil && fields["content-type"] == nil {
+            fields["content-type"] = "application/octet-stream"
+        }
+        request.allHTTPHeaderFields = fields
+        request.timeoutInterval = snapshot.timeouts.inactivity
+        try Task.checkCancellation()
+        return PreparedRequest(request: request, timeouts: snapshot.timeouts)
+    }
+}

@@ -56,6 +56,14 @@ public struct NetworkCallOptions: Sendable, CustomStringConvertible, CustomDebug
         self.totalTimeout = totalTimeout
     }
 
+    public static let `default` = NetworkCallOptions()
+
+    private init() {
+        headers = HTTPHeaders()
+        inactivityTimeout = nil
+        totalTimeout = nil
+    }
+
     public var description: String { "NetworkCallOptions(headerCount: \(headers.count))" }
     public var debugDescription: String { description }
 }

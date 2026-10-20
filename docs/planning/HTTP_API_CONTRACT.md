@@ -1,6 +1,8 @@
 # HTTP, response, and error contract for v1
 
-Current I04 evidence: endpoint URL construction and shared raw-URL validation are implemented; 44 local tests passed. See [endpoint review](ENDPOINT_URLS.md). The executing pipeline and HTTPS/loopback/redirect enforcement remain outstanding.
+Current I05 evidence: typed/raw request preparation, header precedence, buffered JSON/Data/UTF-8 bodies, and per-preparation JSON encoders are implemented; 64 local tests passed. See [request encoding review](REQUEST_ENCODING.md). Execution/security/total deadlines and CI remain outstanding.
+
+I04 evidence: endpoint URL construction and shared raw-URL validation are implemented; 44 local tests passed. See [endpoint review](ENDPOINT_URLS.md). The executing pipeline and HTTPS/loopback/redirect enforcement remain outstanding.
 
 I03 evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
 

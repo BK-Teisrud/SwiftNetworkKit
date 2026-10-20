@@ -1,16 +1,25 @@
 import Foundation
 
-/// A typed HTTP description. Body encoding and response strategies follow separately.
+/// A typed HTTP description. Body construction is local; response strategies and execution follow separately.
 public protocol Endpoint: Sendable {
     associatedtype Response: Sendable
     var method: HTTPMethod { get }
     var path: EndpointPath { get }
     var query: [HTTPQueryItem] { get }
+    var body: RequestBody? { get }
+    var options: NetworkCallOptions { get }
 }
 
 extension Endpoint {
     public var method: HTTPMethod { .get }
     public var query: [HTTPQueryItem] { [] }
+    public var body: RequestBody? { nil }
+    public var options: NetworkCallOptions { .default }
+
+    /// Constructs buffered request data, without executing or authorizing networking.
+    public func request(configuration: NetworkConfiguration) throws -> URLRequest {
+        try RequestBuilder.prepare(self, configuration: configuration).request
+    }
 
     /// Appends decoded segments to the base path without changing its origin.
     /// This constructs a URL; it does not authorize network access.

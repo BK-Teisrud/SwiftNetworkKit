@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Headers and request encoding
+
+- Added buffered JSON/Data/UTF-8 RequestBody, value-based Apple JSON encoding options, endpoint call options, and local request construction. JSONEncoder is created per preparation.
+- Added typed/raw header precedence and Content-Type defaults, safe encoding failures, separate cancellation, and local rejection of body streams, managed framing/origin fields, and unsupported GET/HEAD bodies.
+- Full local suite: 64 tests in 11 suites passed, including 100 concurrent preparations reusing JSON bodies. Public consumer and isolated strategy negative control verified. See docs/planning/REQUEST_ENCODING.md.
+
 ### Endpoint and URL foundation
 
 - Added typed Endpoint descriptions, explicit decoded path segments, and ordered query items with repeated/nil/empty values.
