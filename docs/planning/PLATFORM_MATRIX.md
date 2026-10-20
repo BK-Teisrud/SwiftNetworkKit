@@ -1,5 +1,7 @@
 # Platform and toolchain matrix
 
+Current I03 evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
+
 Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). This is not verified product support; only the package baseline and I02 value/error layer are implemented; HTTP transport is not.
 
 ## Approved delivery baseline

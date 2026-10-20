@@ -1,5 +1,7 @@
 # Readiness review before implementation
 
+Current I03 evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
+
 Updated: 2026-10-20. **The owner has instructed implementation to begin; START-00 / #41 is closed.** [ADR-0012](../decisions/ADR-0012-implementation-start.md) records the instruction in context. I01 adapts the owner's Xcode starter into the approved package baseline. F0 remains the historical planning approval.
 
 ## Ready foundations

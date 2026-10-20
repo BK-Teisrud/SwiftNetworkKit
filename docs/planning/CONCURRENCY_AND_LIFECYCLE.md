@@ -1,5 +1,7 @@
 # Concurrency, session ownership, and lifecycle in v1
 
+Current I03 evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
+
 Status: Planned contract, 2026-10-19; see [ADR-0006](../decisions/ADR-0006-concurrency-and-lifecycle.md). The package baseline exists, but no concurrency/lifecycle implementation or behavioral tests exist.
 
 ## Concurrent use and isolation
