@@ -44,7 +44,7 @@
   ],
   "blocked_by_count": 37,
   "implementation_started": true,
-  "product_ci_present": false,
+  "product_ci_present": true,
   "open_decisions": [],
   "approved_decisions": {
     "DEC-03": {
@@ -301,5 +301,46 @@
     "concurrent_preparations": 100,
     "network_requests_sent": false,
     "total_deadlines_enforced": false
+  },
+  "ci_activation": {
+    "date": "2026-10-20",
+    "issue": 47,
+    "workflow": ".github/workflows/ci.yml",
+    "runner": "standard macos-15 arm64",
+    "xcode": "26.3 (17C529)",
+    "swift": "6.2.4",
+    "sdks": "26.2",
+    "bootstrap_pr": 72,
+    "bootstrap_pr_run": 39487893701,
+    "bootstrap_main_run": 39489206787,
+    "bootstrap_main_commit": "fe47c58da9763247971c18df835cbf00176742fa",
+    "all_seven_pr_and_main_checks_passed": true,
+    "product_test_functions_per_destination": 64,
+    "test_destinations": [
+      "macOS 15.7.9 arm64",
+      "iPhone 17 / iOS 26.2",
+      "iPad (A16) / iOS 26.2",
+      "Series 11 (42mm) / watchOS 26.2",
+      "Apple TV 4K (3rd generation) / tvOS 26.2"
+    ],
+    "ci_helper_tests": 3,
+    "required_check": "quality-gate",
+    "integration_id": 15368,
+    "strict_required_status_checks_policy": true,
+    "bypass_actors": [],
+    "other_rules_preserved": true,
+    "effective_main_rule_read_back": true,
+    "artifact_uploads": false,
+    "explicit_action_cache": false,
+    "paid_or_self_hosted_runners": false,
+    "minimum_os_or_physical_device_evidence": false,
+    "evidence": "docs/planning/CI_IMPLEMENTATION.md and issue #47",
+    "enforcement_verification_pr": 73,
+    "negative_control_verified": true,
+    "negative_control_run": 39491129998,
+    "negative_control_commit": "13e4eb0b458e356c8a02c337bf1701d1a372fab9",
+    "native_failed_gate_merge_state": "BLOCKED",
+    "temporary_control_removed": true,
+    "positive_acceptance_evidence": "Required quality-gate on final PR #73 revision; final main run and completed issue #47 record acceptance"
   }
 }

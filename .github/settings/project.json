@@ -298,7 +298,7 @@
     "verified_via": "UI saved, reloaded and read back"
   },
   "workflow_configuration": "See docs/planning/PROJECT_MANAGEMENT.md",
-  "product_workflows_present": false,
-  "shortDescription": "Approved HTTP-core implementation underway. HTTP values, configuration, and buffered request construction implemented; executing client and CI remain outstanding.",
-  "readme": "Follow the ordered issues and https://github.com/BK-Teisrud/SwiftNetworkKit/blob/main/docs/planning/WORK_QUEUE.md. I01–I05 provide the package, HTTP values/errors, isolated configuration, safe endpoint URLs, and buffered request construction. The executing client, live transport/security policy, and CI follow in later tasks. See https://github.com/BK-Teisrud/SwiftNetworkKit/blob/main/docs/planning/REQUEST_ENCODING.md for API review, actual test evidence, and limitations. English GitHub content; Norwegian owner–assistant conversations."
+  "product_workflows_present": true,
+  "shortDescription": "Approved HTTP-core implementation underway. Real Apple platform CI and required quality-gate enabled; executing HTTP client and release evidence remain outstanding.",
+  "readme": "Follow https://github.com/BK-Teisrud/SwiftNetworkKit/blob/main/docs/planning/WORK_QUEUE.md. I01–I06 provide the package, values/errors, configuration, safe URLs, buffered requests, and real four-platform/source/DocC CI. The required quality-gate protects main. See https://github.com/BK-Teisrud/SwiftNetworkKit/blob/main/docs/planning/CI_IMPLEMENTATION.md and issue #47 for actual PR/main/enforcement evidence. Executing client, live transport/security/lifecycle, and release/minimum-OS evidence remain later work. English GitHub content; Norwegian owner–assistant conversations."
 }

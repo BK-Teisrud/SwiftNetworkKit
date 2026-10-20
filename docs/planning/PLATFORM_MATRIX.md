@@ -1,6 +1,6 @@
 # Platform and toolchain matrix
 
-I03 foundation evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
+I03 foundation evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The executing HTTP client, enforced deadlines, and minimum-OS/physical-device evidence remain outstanding. I06 adds actual PR CI; see [CI evidence](CI_IMPLEMENTATION.md).
 
 Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). This is not verified product support; the package baseline, values/errors, configuration, and buffered request construction are implemented; HTTP transport is not.
 
@@ -8,25 +8,25 @@ Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-p
 
 | Platform | Minimum v1 OS | Locally observed SDK | Build | Unit / integration | Tested runtime / device |
 | --- | --- | --- | --- | --- | --- |
-| iOS | 17.0 | iOS 26.2 | Not run | Not run | Unverified |
-| iPadOS | 17.0 | iOS/iPadOS 26.2 | Not run | Not run | Unverified |
-| macOS | 14.0 | macOS 26.2 | I01–I05 local builds passed | I05: 64 local tests passed on macOS 15.8.1 | Minimum OS unverified |
-| watchOS | 10.0 | watchOS 26.2 | Not run | Not run | Unverified |
-| tvOS | 17.0 | tvOS 26.2 | Not run | Not run | Unverified |
+| iOS | 17.0 | iOS 26.2 | Generic device build passed | 64 tests passed on iPhone 17 / iOS 26.2 simulator | Minimum OS and physical device unverified |
+| iPadOS | 17.0 | iOS/iPadOS 26.2 | iOS generic build passed | 64 tests passed on iPad (A16) / iOS 26.2 simulator | Minimum OS and physical device unverified |
+| macOS | 14.0 | macOS 26.2 | Generic build passed on hosted arm64; local x86_64 builds passed | 64 tests passed on hosted macOS 15.7.9 arm64 and local 15.8.1 x86_64 | Minimum OS unverified |
+| watchOS | 10.0 | watchOS 26.2 | Generic device build passed | 64 tests passed on Series 11 (42mm) / watchOS 26.2 simulator | Minimum OS and physical device unverified |
+| tvOS | 17.0 | tvOS 26.2 | Generic device build passed | 64 tests passed on Apple TV 4K (3rd generation) / tvOS 26.2 simulator | Minimum OS and physical device unverified |
 | visionOS | Deferred; no v1 support | Outside selected delivery | Outside v1 | Outside v1 | Outside v1 |
 
 A newer SDK supplies build-time APIs; it does not require the host app to run that OS version. iOS/iPadOS share SDK/deployment foundations, but relevant device/environment differences still need assessment. Mac Catalyst, Linux, Windows, and Android support are not selected.
 
 ## Tools
 
-| Setting | Approved requirement | Locally observed 2026-10-19 |
+| Setting | Approved requirement | Observed local/hosted evidence, 2026-10-20 |
 | --- | --- | --- |
 | Xcode | 26.3 or a newer stable version, verified before claiming support | 26.3, build 17C529 |
 | Swift tools | Minimum 6.2 | Apple Swift 6.2.4 |
-| Swift language mode | Swift 6, strict concurrency | No package configured yet |
+| Swift language mode | Swift 6, strict concurrency | Manifest Swift 6; all selected platform builds and tests passed |
 | Host macOS | Meets selected Xcode's system requirements | 15.8.1 |
-| Host architecture | Planned standard GitHub macos-15 arm64; no job run | Compiler reports x86_64 |
-| CI SDK / runtime / runner | ADR-0008 / CI_AND_TEST_PLAN.md baseline; actual runs must verify images, schemes, and destinations | No CI created |
+| Host architecture | Standard GitHub macos-15 arm64; assess local architectures separately | Hosted arm64 passed; local x86_64 passed |
+| CI SDK / runtime / runner | ADR-0008 / CI_AND_TEST_PLAN.md baseline; verify each run | SDKs/runtimes 26.2; macos-15 image 20260907.0337.1; actual destinations in CI_IMPLEMENTATION.md |
 
 Development-host requirements are separate from the library's macOS 14.0 minimum. Local version inspection is not a library test result.
 
@@ -40,7 +40,7 @@ For each selected API, record requirement ID, full symbol name, framework, inspe
 | URL/JSON | URLComponents / Codable / JSONEncoder / JSONDecoder | Selected overloads, parameter semantics, coding strategies |
 | Logging | OSLog | Selected logging API, privacy markers, data minimization |
 | Concurrency | Swift Concurrency | Sendable, isolation, cancellation, clock APIs; assess language and OS requirements separately |
-| Testing | Apple/official tools | ADR-0008 selects Swift Testing/XCTest; actual runtime/harness verification remains |
+| Testing | Apple/official tools | Swift Testing package harness passed on all selected PR runtimes; minimum OS/physical scenarios remain |
 
 This is a review checklist, not proof that every symbol is verified. Newer Foundation/OSLog/Concurrency APIs may require higher OS versions than the approved minimums.
 
@@ -50,7 +50,7 @@ For each check record commit SHA, date, Xcode build, Swift version, SDK, actual 
 
 Cover builds on every selected platform and relevant normal/error/cancellation/concurrency tests. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 separates PR runtimes from release tests on minimum OS versions and representative newer stable runtimes. If CI cannot run a minimum, establish an explicit alternative with real evidence before release; a newer simulator build is insufficient.
 
-Use physical devices where scenarios require them. Background transfers, Keychain groups, and local networking are deferred by v1 scope and are not established by this matrix. No build/runtime verification has passed.
+Use physical devices where scenarios require them. Background transfers, Keychain groups, and local networking are deferred by v1 scope and are not established by this matrix. I06 provides the current build/PR-runtime evidence below; minimum-OS and physical-device verification remains outstanding.
 
 ## Bounded declaration check for DEC-04
 
@@ -90,3 +90,7 @@ The full suite passed 44 tests in nine suites on macOS 15.8.1 x86_64 / Xcode 26.
 ## I05 request encoding evidence — 2026-10-20
 
 The full suite passed 64 tests in 11 suites on macOS 15.8.1 x86_64 / Xcode 26.3 / Swift 6.2.4. This covers local request construction and concurrent encoding, not transport/runtime support. See [request review](REQUEST_ENCODING.md). Other platforms, minimum OS, and CI remain outstanding.
+
+## I06 hosted CI evidence — 2026-10-20
+
+All four generic platform builds and all 64 product test functions passed on each of five destinations in [bootstrap PR run 39487893701](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/39487893701): hosted macOS 15.7.9 arm64; iPhone 17 and iPad (A16), OS 26.2 build 23C54; Series 11 watch, OS 26.2 build 23S303; Apple TV 4K, OS 26.2 build 23K51. Xcode 26.3 build 17C529 / Swift 6.2.4 / SDKs 26.2, image 20260907.0337.1. Source integrity and DocC also passed. See [CI implementation](CI_IMPLEMENTATION.md) and #47 for main/enforcement evidence. This validates current value/configuration/request behavior, not unimplemented HTTP transport or minimum runtimes.

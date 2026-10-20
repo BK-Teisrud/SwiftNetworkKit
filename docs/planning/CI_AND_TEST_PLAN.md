@@ -1,10 +1,10 @@
 # CI and test plan after implementation authorization
 
-Status: Core plan accepted 2026-10-19; see [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md). I01–I05 provide a real package and 64 local product test functions. I06 introduces the first workflow; hosted validation and required-check activation are in progress. See [CI implementation](CI_IMPLEMENTATION.md) for exact jobs, commands, and actual evidence.
+Status: Core plan accepted 2026-10-19; see [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md). I01–I05 provide a real package and 64 local product test functions. I06 introduces the real workflow and required quality-gate after verified hosted PR/main runs. See [CI implementation](CI_IMPLEMENTATION.md) for exact jobs, commands, and actual evidence.
 
-## Planned PR jobs
+## Mandatory PR jobs
 
-After real CI is introduced, run every job on pull requests and relevant pushes to main. The owner selected all four platform families on every PR, not only releases. Documentation PRs receive no hidden global bypass of this matrix.
+Real CI now runs every mandatory job on pull requests and pushes to main. The owner selected all four platform families on every PR, not only releases. Documentation PRs receive no hidden global bypass of this matrix.
 
 | Job | Runner / tools | Required real checks before success |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ Source integrity and documentation checks are supporting jobs, not product depen
 
 ## Runner and toolchain verification
 
-The planned primary runner is standard macos-15 (arm64). Set DEVELOPER_DIR to the installed Xcode 26.3 and verify its version. Do not rely on image defaults or macos-latest. Official inventory reviewed 2026-10-19 lists Xcode 26.3 build 17C529 and SDK/simulator runtimes 26.2, but an older default Xcode. The inventory's macOS host is 15.7.9, not the library minimum 14.
+The primary runner is standard macos-15 (arm64). Set DEVELOPER_DIR to the installed Xcode 26.3 and verify its version. Do not rely on image defaults or macos-latest. Official inventory reviewed 2026-10-19 lists Xcode 26.3 build 17C529 and SDK/simulator runtimes 26.2, but an older default Xcode. The inventory's macOS host is 15.7.9, not the library minimum 14.
 
 Record image version, host OS/architecture, Xcode build, Swift patch, SDK, runtime, and destinations per run. Verify Swift tools 6.2 compatibility and Swift 6 language mode. Declare platform minimums explicitly in the future manifest. Missing toolchain/runtime fails preflight; do not silently fall back or automatically raise minimums.
 
@@ -56,7 +56,7 @@ Runtime/time-limit problems fail with a concrete reason. Do not switch to paid r
 4. Only then require quality-gate, with the correct Actions integration and updated branch policy. An unrelated/malicious same-name check is not equivalent evidence.
 5. Verify enforcement on another PR. Main has no bypass; preserve that property.
 
-The I06 bootstrap workflow exists; required-check activation awaits successful PR/main evidence. No check merely confirming that code does not exist is introduced.
+I06 activates quality-gate only after successful real PR/main evidence and verifies enforcement in a separate PR; see CI_IMPLEMENTATION.md and #47. No check merely confirming that code does not exist is introduced.
 
 ## Separate release and minimum-OS checks
 

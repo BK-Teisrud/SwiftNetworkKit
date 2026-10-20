@@ -1,8 +1,8 @@
 # Quality gates and future test strategy
 
-I03 foundation evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](../planning/CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
+I03 foundation evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](../planning/CONFIGURATION.md). The executing HTTP client, enforced deadlines, and minimum-OS/physical-device verification remain outstanding.
 
-These are requirements for later implementation. I01 verified package wiring. I02 adds passing local value/error contract tests; I04 adds endpoint URL construction and raw-URL validation; I05 adds request encoding and header precedence, and the full local suite passed 64 tests. See [request evidence](../planning/REQUEST_ENCODING.md). See [endpoint evidence](../planning/ENDPOINT_URLS.md). CI and HTTP-pipeline tests remain outstanding.
+These are requirements for later implementation. I01 verified package wiring. I02 adds passing local value/error contract tests; I04 adds endpoint URL construction and raw-URL validation; I05 adds request encoding and header precedence, and the full local suite passed 64 tests. See [request evidence](../planning/REQUEST_ENCODING.md). See [endpoint evidence](../planning/ENDPOINT_URLS.md). I06 adds hosted platform/source/DocC CI with required quality-gate enforcement; see [CI evidence](../planning/CI_IMPLEMENTATION.md). HTTP-pipeline tests remain outstanding.
 
 ## Before implementation
 
@@ -24,7 +24,7 @@ Approved v1 scope, rights policy, platform/toolchain matrix, API/error model, co
 
 ## Introducing CI
 
-[CI_AND_TEST_PLAN.md](../planning/CI_AND_TEST_PLAN.md) / ADR-0008 defines source-integrity, macos-core, ios-core, watchos-core, tvos-core, documentation, and quality-gate. Standard GitHub runners without paid add-ons build all four platform families on every PR once introduced. F1 adds real build/test/DocC/dependency checks with Apple/official tools. No always-green workflow or skipped product checks for missing Package.swift. Require checks only after successful real runs on main and a PR. Avoid path filters that leave required checks pending.
+[CI_AND_TEST_PLAN.md](../planning/CI_AND_TEST_PLAN.md) / ADR-0008 defines source-integrity, macos-core, ios-core, watchos-core, tvos-core, documentation, and quality-gate. Standard GitHub runners without paid add-ons build all four platform families on every PR once introduced. I06 implements real build/test/DocC/dependency checks with Apple/official tools; CI_IMPLEMENTATION.md records actual evidence. No always-green workflow or skipped product checks for missing Package.swift. Require checks only after successful real runs on main and a PR. Avoid path filters that leave required checks pending.
 
 GITHUB_TOKEN defaults to read-only; justify write jobs individually. No pull_request_target execution of untrusted code or fork-PR secrets. Use Swift Testing primarily and XCTest for specific needs, with only necessary GitHub-owned actions pinned to full commit SHAs. Repository settings enforce SHA pinning too. No external reusable workflows. Introduce Dependabot/workflows only when actual manifests and approved tooling exist.
 

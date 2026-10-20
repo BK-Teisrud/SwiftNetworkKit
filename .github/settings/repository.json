@@ -1,5 +1,5 @@
 {
-  "description": "Native Apple networking library in Swift. HTTP values, configuration, and buffered request construction implemented; executing client not yet available.",
+  "description": "Native Apple networking library in Swift. Values/configuration/request construction with real Apple-platform CI; executing HTTP client not yet available.",
   "has_issues": true,
   "has_projects": true,
   "has_wiki": false,
