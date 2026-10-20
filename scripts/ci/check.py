@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import platform
 import re
+import shutil
 import subprocess
 import sys
 from urllib.parse import unquote, urlsplit
@@ -154,8 +155,12 @@ def documentation():
     graphs = list((ROOT / ".build").glob("*/symbolgraph/NetworkKit.symbols.json"))
     require(len(graphs) == 1, "Missing or ambiguous public NetworkKit symbol graph")
     require(json.loads(graphs[0].read_text())["symbols"], "Empty public API symbol graph")
+    public_graphs = OUTPUT / "symbols"
+    public_graphs.mkdir(exist_ok=True)
+    for graph in graphs[0].parent.glob("NetworkKit*.symbols.json"):
+        shutil.copyfile(graph, public_graphs / graph.name)
     run("xcrun", "docc", "convert", ROOT / "Sources/NetworkKit/NetworkKit.docc",
-        "--additional-symbol-graph-dir", graphs[0].parent, "--output-dir", OUTPUT / "NetworkKit.doccarchive",
+        "--additional-symbol-graph-dir", public_graphs, "--output-dir", OUTPUT / "NetworkKit.doccarchive",
         "--warnings-as-errors")
     require((OUTPUT / "NetworkKit.doccarchive/data/documentation/networkkit.json").is_file(), "Missing rendered module documentation")
 
