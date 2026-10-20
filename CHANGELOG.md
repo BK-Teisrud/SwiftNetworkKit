@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Real CI and merge enforcement
+
+- Added source integrity, macOS/iPhone/iPad/watchOS/tvOS builds/tests, public DocC, and a fail-closed quality-gate on standard runners with pinned Xcode 26.3 / Swift 6.2.4.
+- Bound main's required quality-gate to GitHub Actions, with an up-to-date base requirement and no bypass. Verified PR/main evidence and enforcement are recorded in docs/planning/CI_IMPLEMENTATION.md and #47.
+- CI exposed and fixed platform-dependent URL host representations; symbol extraction now explicitly builds generated test modules on clean runners.
+- No publishing, paid runners, artifacts, external packages, or minimum-OS/physical-device support claim introduced.
+
 ### Headers and request encoding
 
 - Added buffered JSON/Data/UTF-8 RequestBody, value-based Apple JSON encoding options, endpoint call options, and local request construction. JSONEncoder is created per preparation.

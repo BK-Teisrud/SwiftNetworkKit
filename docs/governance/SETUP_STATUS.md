@@ -69,3 +69,7 @@ Typed endpoint/URL construction and shared structural raw-URL checks are impleme
 ## I05 request encoding update — 2026-10-20
 
 Buffered JSON/Data/UTF-8 construction, header precedence/Content-Type, per-preparation encoders, and typed/raw validation are implemented. The full local suite passed 64 tests in 11 suites; a public consumer and isolated strategy negative control verified the API. See [request evidence](../planning/REQUEST_ENCODING.md), including Foundation raw-input limitations. No executing client or CI yet. I06 / #47 is next.
+
+## I06 real CI and required-check update — 2026-10-20
+
+Bootstrap PR #72 introduced all-platform source/build/test/DocC CI on standard macos-15 arm64 with pinned Xcode 26.3 / Swift 6.2.4 / SDKs 26.2. All seven checks passed on the PR, with 64 product test functions passing on each of five destinations. Main evidence preceded activation of required quality-gate from GitHub Actions (15368), strict/current-base, with no bypass and all earlier rules preserved. See [CI implementation and enforcement evidence](../planning/CI_IMPLEMENTATION.md) and #47 for actual run links and the verification PR. The prior setup/implementation paragraphs remain dated historical records. Minimum-OS/physical-device tests and the executing client remain outstanding.

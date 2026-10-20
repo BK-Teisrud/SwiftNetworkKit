@@ -14,6 +14,8 @@ The repository and package are named **SwiftNetworkKit**. The library product, m
 
 ## Documentation
 
+- [Real CI, required quality gate, and verification evidence](docs/planning/CI_IMPLEMENTATION.md)
+
 - [Request bodies, header precedence, and actual test evidence](docs/planning/REQUEST_ENCODING.md)
 
 - [Endpoint API, URL validation, and test evidence](docs/planning/ENDPOINT_URLS.md)
@@ -43,7 +45,7 @@ The repository and package are named **SwiftNetworkKit**. The library product, m
 
 ## Platforms and rights
 
-Approved v1 targets: **iOS/iPadOS 17+, macOS 14+, watchOS 10+, and tvOS 17+**. visionOS is deferred. Development baseline: **Xcode 26.3+, Swift tools 6.2, and Swift 6 language mode with strict concurrency checking**. See the [platform matrix](docs/planning/PLATFORM_MATRIX.md) and [ADR-0004](docs/decisions/ADR-0004-platforms-and-toolchain.md). These are approved platform targets. The macOS package/test-target build and a separate consumer import are verified in the package baseline; cross-platform builds and runtime behavior remain unverified.
+Approved v1 targets: **iOS/iPadOS 17+, macOS 14+, watchOS 10+, and tvOS 17+**. visionOS is deferred. Development baseline: **Xcode 26.3+, Swift tools 6.2, and Swift 6 language mode with strict concurrency checking**. See the [platform matrix](docs/planning/PLATFORM_MATRIX.md) and [ADR-0004](docs/decisions/ADR-0004-platforms-and-toolchain.md). PR CI now builds all four platform families and runs 64 product test functions on macOS plus iPhone, iPad, Apple Watch, and Apple TV simulators. The required quality-gate also covers source integrity and DocC. Minimum-OS and physical-device release evidence remains outstanding; see the CI implementation and platform matrix.
 
 **Rights holder: Teisrud Development AS. SwiftNetworkKit is proprietary.** Third-party use requires separate written permission from the company, subject to statutory rights and GitHub's applicable terms. Public visibility permits viewing and forking through GitHub; the project grants no additional open-source license or general permission to use the material in applications.
 

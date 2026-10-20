@@ -40,9 +40,11 @@ def preflight():
     print(json.dumps({"image": os.environ.get("ImageVersion", "local"),
                       "host": platform.mac_ver()[0], "architecture": platform.machine(),
                       "xcode": version, "swift": swift}), flush=True)
+    sdk_versions = {}
     for sdk in ["macosx", "iphoneos", "iphonesimulator", "watchos", "watchsimulator", "appletvos", "appletvsimulator"]:
-        require(run("xcrun", "--sdk", sdk, "--show-sdk-version", capture=True).strip() == "26.2",
-                f"Required {sdk} SDK 26.2 missing")
+        sdk_versions[sdk] = run("xcrun", "--sdk", sdk, "--show-sdk-version", capture=True).strip()
+        require(sdk_versions[sdk] == "26.2", f"Required {sdk} SDK 26.2 missing")
+    print("Verified SDK versions:", json.dumps(sdk_versions, sort_keys=True), flush=True)
 
 
 def source_integrity():
@@ -148,8 +150,9 @@ def platform_check(kind):
             phone = companions[0]
         else:
             run("xcrun", "simctl", "pair", destinations[0]["udid"], phone["udid"])
-        print("Actual watch companion:", json.dumps(phone), flush=True)
-    print("Selected runtime/destinations:", runtime, json.dumps(destinations), flush=True)
+        print("Actual watch companion:", json.dumps({k: phone[k] for k in ["name", "udid", "deviceTypeIdentifier", "state"]}), flush=True)
+    print("Selected runtime/destinations:", runtime,
+          json.dumps([{k: d[k] for k in ["name", "udid", "deviceTypeIdentifier", "state"]} for d in destinations]), flush=True)
     xcode("-destination", "generic/platform=" + platform_name, "build")
     for index, device in enumerate(destinations):
         # Xcode starts the simulator; no runtime installation or paid infrastructure.

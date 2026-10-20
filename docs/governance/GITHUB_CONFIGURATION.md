@@ -12,14 +12,14 @@ Repository: BK-Teisrud/SwiftNetworkKit. This document defines the intended confi
 | Wiki / Discussions | Disabled; Git documentation and issues provide one source of truth |
 | Merge | Squash only; PR title/body form the commit message |
 | Branch cleanup / update | Delete after merge; branch updates allowed |
-| Auto-merge | Disabled until real quality gates exist |
+| Auto-merge | Disabled; merges remain deliberate after required checks |
 | Web sign-off | Disabled with explicit owner approval; no DCO agreement selected |
 | Template repository / Pages / deployment | Not enabled; no website or distribution at this stage |
 | Topics | swift, networking, apple, swift-package-manager, urlsession, swift-concurrency |
 
 ## Main rule: main-protection-solo
 
-Active on the default branch: no deletion or force-push, linear history, required PRs, all review threads resolved, squash only. Zero mandatory approvals in the solo profile. Dismiss stale approvals if present. No bypass actors; admins also follow PR rules, while retaining authority to administer the rules themselves. No required checks before real CI exists. This documentation stage uses manual verification, not claimed automated product assurance.
+Active on the default branch: no deletion or force-push, linear history, required PRs, all review threads resolved, squash only. Zero mandatory approvals in the solo profile. Dismiss stale approvals if present. No bypass actors; admins also follow PR rules, while retaining authority to administer the rules themselves. The required quality-gate is bound to the verified GitHub Actions integration (15368), requires the current base, and aggregates every mandatory platform/source/DocC result. It was introduced only after successful real PR and main evidence; see [CI verification](../planning/CI_IMPLEMENTATION.md). Manual review and release checks remain necessary.
 
 Team transition: require another qualified write user/CODEOWNER before enabling one approval, Code Owner review, and approval of the latest push by another person. Do not lock out the sole maintainer.
 
@@ -31,7 +31,7 @@ Two active rules apply to refs/tags/v*: release-tags-authorized-creation (254327
 
 Enable dependency graph and Dependabot alerts where applicable. Enable secret scanning and push protection where supported, plus private vulnerability reporting. No Dependabot version-update file without manifests; security updates cannot meaningfully protect a product before packages/dependencies exist. Assess code scanning/CodeQL against the tool/language matrix after implementation; it is not configured now.
 
-Actions: read-only GITHUB_TOKEN, no PR creation/approval permission, and only local/GitHub-owned actions as a preparatory restriction. Setup creates no workflows or runner usage. Full commit-SHA pinning is required through sha_pinning_required=true, read back on 2026-10-19. DEC-07 / ADR-0008 defines the future CI plan; no external reusable workflows or third-party setup actions. No self-hosted runners, secrets, environments, deployments, webhooks, or additional apps have been added.
+Actions: read-only GITHUB_TOKEN, no PR creation/approval permission, and only local/GitHub-owned actions as a preparatory restriction. I06 adds one real CI workflow on standard GitHub-hosted runners; see [implementation and evidence](../planning/CI_IMPLEMENTATION.md). Full commit-SHA pinning is required through sha_pinning_required=true, read back on 2026-10-19. DEC-07 / ADR-0008 defines the CI contract; no external reusable workflows or third-party setup actions. No self-hosted runners, secrets, environments, deployments, webhooks, or additional apps have been added.
 
 ADR-0002 names Teisrud Development AS as rights holder and selects proprietary use by separate written permission. The repository remains public under BK-Teisrud. The owner attests that 2FA is enabled; no independent account audit was performed. No contact address is established; see PRE_CODE_READINESS.md. No organization transfer has been selected. Other repositories and organization policies are unchanged.
 
