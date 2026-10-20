@@ -184,16 +184,15 @@ private struct TestEndpoint: Endpoint {
         }
     }
 
-    @Test func unicodeHostAndEffectivePorts() throws {
-        let unicode = URL(string: "https://bücher.example/api")!
-        let ascii = URLRequest(url: URL(string: "https://xn--bcher-kva.example:443/other")!)
-        #expect(try RequestURLBuilder.validatedURL(for: ascii, baseURL: unicode) == ascii.url)
-        let http = URL(string: "http://example.invalid/api")!
-        let explicit = URLRequest(url: URL(string: "http://example.invalid:80/other")!)
-        #expect(try RequestURLBuilder.validatedURL(for: explicit, baseURL: http) == explicit.url)
-        let ipv6 = URL(string: "https://[::1]/api")!
-        let request = URLRequest(url: URL(string: "https://[::1]:443/other")!)
-        #expect(try RequestURLBuilder.validatedURL(for: request, baseURL: ipv6) == request.url)
+    @Test(arguments: [
+        ["https://bücher.example/api", "https://xn--bcher-kva.example:443/other"],
+        ["http://example.invalid/api", "http://example.invalid:80/other"],
+        ["https://[::1]/api", "https://[::1]:443/other"]
+    ])
+    func unicodeHostAndEffectivePorts(_ pair: [String]) throws {
+        let base = URL(string: pair[0])!
+        let request = URLRequest(url: URL(string: pair[1])!)
+        #expect(try RequestURLBuilder.validatedURL(for: request, baseURL: base) == request.url)
     }
 
     @Test func typedURLPassesRawValidation() throws {

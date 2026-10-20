@@ -76,3 +76,16 @@ cryptographic guarantee against a maintainer deliberately changing the workflow 
 Minimum iOS/iPadOS 17, macOS 14, watchOS 10, and tvOS 17 runtimes remain unverified.
 Deployment targets and 26.2 simulator tests do not replace I21/I22 minimum-OS and physical
 device release evidence. No release is published by this work.
+
+## Bootstrap compatibility finding
+
+The first complete platform attempt exposed the same URL-host test failure on iOS and
+watchOS while macOS passed. URL validation now uses Foundation URLComponents.encodedHost
+for its ASCII IDNA representation and handles IPv6 brackets explicitly, rather than
+assuming URL.host returns identical representations on every OS. The existing origin
+regression is parameterized to identify the failing host case directly. All 64 local
+product tests passed after the fix; hosted confirmation remains required.
+
+The watchOS package scheme did execute all 64 product test functions on its simulator;
+the failed host assertion was not replaced with a build-only check. Companion logging
+now reports the actual existing compatible pairing rather than an unused candidate.

@@ -140,9 +140,15 @@ def platform_check(kind):
     if family == "watchOS":
         phone = select_device(devices, "com.apple.CoreSimulator.SimRuntime.iOS-26-2", "iPhone 17")
         pairs = json.loads(run("xcrun", "simctl", "list", "pairs", "-j", capture=True))["pairs"]
-        if not any(p.get("watch", {}).get("udid") == destinations[0]["udid"] for p in pairs.values()):
+        existing = [p for p in pairs.values() if p.get("watch", {}).get("udid") == destinations[0]["udid"]]
+        if existing:
+            companions = [d for d in devices.get("com.apple.CoreSimulator.SimRuntime.iOS-26-2", [])
+                          if d.get("isAvailable") and d["udid"] == existing[0]["phone"]["udid"]]
+            require(companions, "Existing watch pairing lacks an available iOS 26.2 companion")
+            phone = companions[0]
+        else:
             run("xcrun", "simctl", "pair", destinations[0]["udid"], phone["udid"])
-        print("Watch companion:", json.dumps(phone), flush=True)
+        print("Actual watch companion:", json.dumps(phone), flush=True)
     print("Selected runtime/destinations:", runtime, json.dumps(destinations), flush=True)
     xcode("-destination", "generic/platform=" + platform_name, "build")
     for index, device in enumerate(destinations):
