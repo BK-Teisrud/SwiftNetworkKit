@@ -2,7 +2,7 @@
 
 I03 foundation evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
 
-Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). This is not verified product support; the package baseline, values/errors, configuration, and endpoint URL construction are implemented; HTTP transport is not.
+Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). This is not verified product support; the package baseline, values/errors, configuration, and buffered request construction are implemented; HTTP transport is not.
 
 ## Approved delivery baseline
 
@@ -10,7 +10,7 @@ Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-p
 | --- | --- | --- | --- | --- | --- |
 | iOS | 17.0 | iOS 26.2 | Not run | Not run | Unverified |
 | iPadOS | 17.0 | iOS/iPadOS 26.2 | Not run | Not run | Unverified |
-| macOS | 14.0 | macOS 26.2 | I01–I04 local builds passed | I04: 44 local tests passed on macOS 15.8.1 | Minimum OS unverified |
+| macOS | 14.0 | macOS 26.2 | I01–I05 local builds passed | I05: 64 local tests passed on macOS 15.8.1 | Minimum OS unverified |
 | watchOS | 10.0 | watchOS 26.2 | Not run | Not run | Unverified |
 | tvOS | 17.0 | tvOS 26.2 | Not run | Not run | Unverified |
 | visionOS | Deferred; no v1 support | Outside selected delivery | Outside v1 | Outside v1 | Outside v1 |
@@ -86,3 +86,7 @@ The macOS library and test target compile with Xcode 26.3 / Swift 6.2.4 on the l
 ## I04 endpoint evidence — 2026-10-20
 
 The full suite passed 44 tests in nine suites on macOS 15.8.1 x86_64 / Xcode 26.3 / Swift 6.2.4. This includes structural URL and encoding checks, not transport/runtime support evidence. See [endpoint review](ENDPOINT_URLS.md). Minimum-OS and other platform evidence remain outstanding.
+
+## I05 request encoding evidence — 2026-10-20
+
+The full suite passed 64 tests in 11 suites on macOS 15.8.1 x86_64 / Xcode 26.3 / Swift 6.2.4. This covers local request construction and concurrent encoding, not transport/runtime support. See [request review](REQUEST_ENCODING.md). Other platforms, minimum OS, and CI remain outstanding.

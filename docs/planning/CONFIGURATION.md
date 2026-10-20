@@ -2,6 +2,8 @@
 
 I03 / #44, implemented 2026-10-20. This is a configuration foundation, not an executing HTTP client.
 
+I05 adds endpoint call options, buffered body snapshots, and request preparation; see [current request evidence](REQUEST_ENCODING.md). The API/evidence below records the I03 foundation.
+
 ## Reviewed API
 
 - `NetworkTimeouts(inactivity:total:) throws`: immutable seconds, default 30/60; each value must be positive and finite. `NetworkTimeouts.default` needs no throwing initialization. Total may be shorter than inactivity. All finite positive values are retained without arbitrary caps; the future deadline implementation must handle representational limits without overflow.

@@ -1,8 +1,8 @@
 # Concurrency, session ownership, and lifecycle in v1
 
-Current I03 evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
+I03 foundation evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
 
-Status: Planned contract, 2026-10-19; see [ADR-0006](../decisions/ADR-0006-concurrency-and-lifecycle.md). The package baseline exists, but no concurrency/lifecycle implementation or behavioral tests exist.
+Status: Planned contract, 2026-10-19; see [ADR-0006](../decisions/ADR-0006-concurrency-and-lifecycle.md). Configuration snapshots and per-preparation JSON encoders now have local contract tests; active-operation lifecycle/shutdown and transport remain unimplemented. See [I05 request evidence](REQUEST_ENCODING.md), including 100 concurrent preparations and the 64-test full suite.
 
 ## Concurrent use and isolation
 

@@ -289,5 +289,17 @@
     "negative_control": "unescaped slash mutation detected in isolated copy",
     "network_requests_sent": false,
     "https_redirect_execution_policy_implemented": false
+  },
+  "request_encoding_layer": {
+    "date": "2026-10-20",
+    "issue": 46,
+    "api_review": "docs/planning/REQUEST_ENCODING.md",
+    "local_tests": 64,
+    "test_suites": 11,
+    "test_platform": "macOS 15.8.1 x86_64",
+    "negative_control": "snake-case strategy mutation detected in isolated copy",
+    "concurrent_preparations": 100,
+    "network_requests_sent": false,
+    "total_deadlines_enforced": false
   }
 }

@@ -1,2 +1,2 @@
-// NetworkKit currently provides HTTP values, configuration, and endpoint URL construction.
+// NetworkKit provides HTTP values, configuration, and buffered request construction.
 // The executing HTTP client and transport pipeline follow in subsequent tasks.
