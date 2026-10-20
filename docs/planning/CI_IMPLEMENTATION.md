@@ -89,3 +89,12 @@ product tests passed after the fix; hosted confirmation remains required.
 The watchOS package scheme did execute all 64 product test functions on its simulator;
 the failed host assertion was not replaced with a build-only check. Companion logging
 now reports the actual existing compatible pairing rather than an unused candidate.
+
+The next hosted run executed and passed all 64 product test functions on each of macOS,
+iPhone, iPad, watchOS, and tvOS: [run 39486374412](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/39486374412).
+Its quality-gate correctly failed because documentation failed on a clean runner:
+SwiftPM's symbol-graph command also visits its generated test runner module. The DocC
+job now builds test modules before extraction and still curates only NetworkKit graphs.
+That complete sequence passed from an isolated source copy without any existing .build
+or .swiftpm output. It is not a workaround that ignores a tool failure; hosted confirmation
+of the corrected workflow remains required before activation.

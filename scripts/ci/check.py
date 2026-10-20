@@ -157,6 +157,9 @@ def platform_check(kind):
 
 
 def documentation():
+    # SwiftPM also visits its generated test runner module during graph extraction.
+    # Build it explicitly so a clean runner has the same modules as a warm checkout.
+    run("swift", "build", "--build-tests")
     run("swift", "package", "dump-symbol-graph", "--minimum-access-level", "public")
     graphs = list((ROOT / ".build").glob("*/symbolgraph/NetworkKit.symbols.json"))
     require(len(graphs) == 1, "Missing or ambiguous public NetworkKit symbol graph")
