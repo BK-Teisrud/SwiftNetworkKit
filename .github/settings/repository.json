@@ -1,5 +1,5 @@
 {
-  "description": "Native Apple networking library in Swift. Planning and repository governance; implementation has not started.",
+  "description": "Native Apple networking library in Swift. HTTP-core implementation started; package baseline only, no release yet.",
   "has_issues": true,
   "has_projects": true,
   "has_wiki": false,

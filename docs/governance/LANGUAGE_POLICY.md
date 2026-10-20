@@ -12,4 +12,4 @@ Existing editable issues and PRs are translated without changing their numbers, 
 
 Do not rewrite Git history merely to translate old commit messages or historical document versions. Original source-document filenames are retained for provenance. Legal company names, account names, URLs, symbol names, runtime inventory, and machine identifiers are not translated. LICENSE was already in English and remains substantively unchanged.
 
-No product code, new access, paid service, release, or implementation authorization is implied. START-00 / #41 remains open. Future user conversations can stay in Norwegian while GitHub updates are written in English.
+No product code, new access, paid service, release, or implementation authorization is implied. START-00 / #41 records the separate implementation authorization; see ADR-0012. Future user conversations can stay in Norwegian while GitHub updates are written in English.

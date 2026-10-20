@@ -2,7 +2,12 @@
 
 ## Unreleased
 
-### Project setup
+### Package baseline
+
+- Implementation started under ADR-0012 on 2026-10-20. Adapted the owner's Xcode starter into a repository-root Swift package: SwiftNetworkKit / NetworkKit, tools 6.2, Swift 6, OS minimums 17/14/10/17.
+- Removed the empty example test; recorded actual macOS build and consumer-import smoke checks without claiming behavioral tests. No HTTP functionality or workflows yet.
+
+### Project setup (historical)
 
 - English is now the language of all documentation and editable GitHub project content; owner–assistant conversations remain in Norwegian. Existing decisions, identifiers, links, and implementation restrictions are preserved.
 - Preparations completed through PR #65: one project status model, a sorted work queue, 23 implementation tasks, a separate start-authorization gate, hardened main/tag rules, immutable releases, and a test environment inventory. OPS-01 / #30 and F0 are complete; START-00 / #41 remains open.

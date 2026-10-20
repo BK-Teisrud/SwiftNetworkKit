@@ -1,5 +1,7 @@
 # Approved F0 planning baseline
 
+> Historical planning/setup record from 2026-10-19. Implementation was subsequently authorized on 2026-10-20 in [ADR-0012](../decisions/ADR-0012-implementation-start.md). The package baseline is documented in [PACKAGE_BASELINE.md](PACKAGE_BASELINE.md). Earlier no-code statements describe that earlier stage.
+
 Status: Accepted by the owner on 2026-10-19. **Implementation is not authorized; still no code.** See [ADR-0009](../decisions/ADR-0009-f0-approval-no-implementation.md).
 Date: 2026-10-19. Architecture gate: [GATE-00 / #28](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/28).
 

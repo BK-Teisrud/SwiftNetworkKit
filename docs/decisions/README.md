@@ -13,7 +13,8 @@
 | [ADR-0009](ADR-0009-f0-approval-no-implementation.md) / GATE-00 #28 | Combined F0 acceptance and implementation status | Planning accepted; implementation unauthorized |
 | [ADR-0010](ADR-0010-pre-code-governance.md) | Preparation and GitHub hardening | Accepted; preparations complete, start gate remains open |
 | [ADR-0011](ADR-0011-language-policy.md) | English GitHub content; Norwegian collaboration | Accepted by explicit owner request |
+| [ADR-0012](ADR-0012-implementation-start.md) | Begin the approved HTTP-core implementation | Accepted through the owner instruction on 2026-10-20; start gate closed |
 
-ADR-0009 records combined acceptance of the core choices and documented defaults in ADR-0002–ADR-0008. None authorizes implementation.
+ADR-0009 records combined acceptance of the core choices and documented defaults in ADR-0002–ADR-0008. Those planning decisions did not authorize implementation; ADR-0012 records the later authorization.
 
 Use the [template](TEMPLATE.md). A proposed ADR does not authorize implementation. Acceptance requires the owner's explicit decision in the associated issue/PR or recorded conversation. Preserve a trace when superseding historical decisions; create a new ADR instead of silently changing their substance.

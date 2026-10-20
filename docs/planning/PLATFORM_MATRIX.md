@@ -1,6 +1,6 @@
 # Platform and toolchain matrix
 
-Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). This is not verified product support; the library is not implemented.
+Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). This is not verified product support; the HTTP library is not implemented; I01 adds only its package baseline.
 
 ## Approved delivery baseline
 
@@ -8,7 +8,7 @@ Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-p
 | --- | --- | --- | --- | --- | --- |
 | iOS | 17.0 | iOS 26.2 | Not run | Not run | Unverified |
 | iPadOS | 17.0 | iOS/iPadOS 26.2 | Not run | Not run | Unverified |
-| macOS | 14.0 | macOS 26.2 | Not run | Not run | Unverified |
+| macOS | 14.0 | macOS 26.2 | I01 package/test-target build passed | No behavioral tests | Minimum OS unverified |
 | watchOS | 10.0 | watchOS 26.2 | Not run | Not run | Unverified |
 | tvOS | 17.0 | tvOS 26.2 | Not run | Not run | Unverified |
 | visionOS | Deferred; no v1 support | Outside selected delivery | Outside v1 | Outside v1 | Outside v1 |
@@ -72,3 +72,7 @@ Foundation/Headers/NSURLSession.h confirms the distinction between wait-for-data
 ## Environment inventory before implementation
 
 [TEST_ENVIRONMENTS.md](TEST_ENVIRONMENTS.md) records installed newer runtimes, owner-reported devices, and missing minimum-OS environments. Inventory does not change the test statuses above.
+
+## I01 package-build evidence — 2026-10-20
+
+The macOS library and test target compile with Xcode 26.3 / Swift 6.2.4 on the local x86_64 macOS 15.8.1 host. A separate local consumer compiles and links the NetworkKit product. This is build/import evidence only, not a runtime contract test or a macOS 14 execution result. Other platform builds/runtimes remain unverified. See [PACKAGE_BASELINE.md](PACKAGE_BASELINE.md).

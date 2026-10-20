@@ -1,6 +1,6 @@
 # First stable release scope
 
-Status: Core scope and module choices accepted 2026-10-19; see [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md). No implementation exists.
+Status: Core scope and module choices accepted 2026-10-19; see [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md). Only the I01 package baseline exists; HTTP behavior is not implemented.
 
 Repository/package SwiftNetworkKit distributes one library product and module named NetworkKit. Consumers import NetworkKit. Later test targets are not additional library modules.
 

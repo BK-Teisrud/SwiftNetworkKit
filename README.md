@@ -2,13 +2,15 @@
 
 A native networking library for Apple platforms, planned as a Swift package with no external package dependencies.
 
-**Status: F0 planning is approved; implementation is not authorized. No library code, Swift package, tests, or product release has been created.** This repository contains project planning and GitHub configuration. Do not add it as a working dependency.
+**Status: Implementation authorized; package baseline established.** The Swift package is named SwiftNetworkKit and exposes the NetworkKit library. HTTP behavior is not implemented yet; do not treat this as a functional networking library. See [implementation authorization](docs/decisions/ADR-0012-implementation-start.md) and [package-baseline evidence](docs/planning/PACKAGE_BASELINE.md).
+
+Open the repository-root Package.swift in Xcode. The original nested Xcode starter has been moved into the standard root package layout. The NetworkKit test target currently contains no tests; meaningful tests accompany the first HTTP values.
 
 ## Project foundations
 
 Foundation/URLSession is the primary HTTP transport. Swift Concurrency, injectable services, system trust, and privacy-preserving defaults guide the design. Network.framework may be considered for specific low-level requirements. The project will not implement its own HTTP, TLS, or cryptographic stack, or provide a backend product.
 
-The repository and package are named **SwiftNetworkKit**. The library product, module, and import name will be **NetworkKit**, with one library module in v1. The first stable release is limited to the HTTP core; other modules are deferred. These are approved plans, not existing targets or delivered functionality. See [v1 scope](docs/planning/V1_SCOPE.md) and [ADR-0003](docs/decisions/ADR-0003-v1-scope-and-naming.md).
+The repository and package are named **SwiftNetworkKit**. The library product, module, and import name will be **NetworkKit**, with one library module in v1. The first stable release is limited to the HTTP core; other modules are deferred. The package and target now exist; the HTTP behavior remains planned. See [v1 scope](docs/planning/V1_SCOPE.md) and [ADR-0003](docs/decisions/ADR-0003-v1-scope-and-naming.md).
 
 ## Documentation
 
@@ -18,7 +20,7 @@ The repository and package are named **SwiftNetworkKit**. The library product, m
 - [Setup status and verification](docs/governance/SETUP_STATUS.md)
 - [GitHub settings and rules](docs/governance/GITHUB_CONFIGURATION.md)
 - [Workflow and project management](docs/planning/PROJECT_MANAGEMENT.md)
-- [Approved F0 baseline: implementation remains unauthorized](docs/planning/F0_REVIEW.md)
+- [Historical F0 planning approval](docs/planning/F0_REVIEW.md)
 - [CI and test plan](docs/planning/CI_AND_TEST_PLAN.md)
 - [Security and network policy](docs/planning/SECURITY_AND_NETWORK_POLICY.md)
 - [Concurrency and lifecycle](docs/planning/CONCURRENCY_AND_LIFECYCLE.md)
@@ -35,7 +37,7 @@ The repository and package are named **SwiftNetworkKit**. The library product, m
 
 ## Platforms and rights
 
-Approved v1 targets: **iOS/iPadOS 17+, macOS 14+, watchOS 10+, and tvOS 17+**. visionOS is deferred. Development baseline: **Xcode 26.3+, Swift tools 6.2, and Swift 6 language mode with strict concurrency checking**. See the [platform matrix](docs/planning/PLATFORM_MATRIX.md) and [ADR-0004](docs/decisions/ADR-0004-platforms-and-toolchain.md). These are approved targets; no product builds or runtime tests have run.
+Approved v1 targets: **iOS/iPadOS 17+, macOS 14+, watchOS 10+, and tvOS 17+**. visionOS is deferred. Development baseline: **Xcode 26.3+, Swift tools 6.2, and Swift 6 language mode with strict concurrency checking**. See the [platform matrix](docs/planning/PLATFORM_MATRIX.md) and [ADR-0004](docs/decisions/ADR-0004-platforms-and-toolchain.md). These are approved platform targets. The macOS package/test-target build and a separate consumer import are verified in the package baseline; cross-platform builds and runtime behavior remain unverified.
 
 **Rights holder: Teisrud Development AS. SwiftNetworkKit is proprietary.** Third-party use requires separate written permission from the company, subject to statutory rights and GitHub's applicable terms. Public visibility permits viewing and forking through GitHub; the project grants no additional open-source license or general permission to use the material in applications.
 

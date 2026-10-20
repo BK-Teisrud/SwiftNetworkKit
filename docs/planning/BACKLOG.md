@@ -45,4 +45,4 @@ Decompose feature families into testable issues with contracts, test plans, and 
 
 ## Concrete implementation queue
 
-I01–I23 are native subissues with criteria and dependencies; see [WORK_QUEUE.md](WORK_QUEUE.md). All are Blocked by START-00 / #41. Decomposition does not authorize code. planning.json is the original seed rather than live status; work-queue.json describes the concrete queue.
+I01–I23 are native subissues with criteria and dependencies; see [WORK_QUEUE.md](WORK_QUEUE.md). START-00 / #41 was closed after the owner instruction on 2026-10-20 (ADR-0012). I01 starts implementation; later tasks still require resolved dependencies and Ready checks. Decomposition itself did not authorize code. planning.json is the original seed rather than live status; work-queue.json describes the concrete queue.

@@ -1,5 +1,7 @@
 # GitHub register
 
+> Historical planning/setup record from 2026-10-19. Implementation was subsequently authorized on 2026-10-20 in [ADR-0012](../decisions/ADR-0012-implementation-start.md). The package baseline is documented in [PACKAGE_BASELINE.md](PACKAGE_BASELINE.md). Earlier no-code statements describe that earlier stage.
+
 Created 2026-10-19. This register records the initial setup and subsequent preparation; live status is in GitHub. No product requirements are implemented.
 
 - [Repository](https://github.com/BK-Teisrud/SwiftNetworkKit)

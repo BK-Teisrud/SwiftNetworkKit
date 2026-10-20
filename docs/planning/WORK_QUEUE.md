@@ -1,8 +1,8 @@
 # Work sequence before and after implementation authorization
 
-**Now: await explicit implementation authorization in [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41).** Every implementation task is Blocked. Planning approval is not permission to start.
+**Current: implementation authorized on 2026-10-20; [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41) is closed.** [ADR-0012](../decisions/ADR-0012-implementation-start.md) records the instruction. I01 establishes the package baseline; I02 is next after its acceptance.
 
-After authorization, choose the lowest Order with closed blockers and satisfied Ready criteria. This is a recommended serial sequence for one developer, not a schedule. Reordering requires dependency review rather than new product scope. See the [Work Queue](https://github.com/users/BK-Teisrud/projects/6/views/7).
+Choose the lowest Order with closed blockers and satisfied Ready criteria. This is a recommended serial sequence for one developer, not a schedule. Reordering requires dependency review rather than new scope. See the [Work Queue](https://github.com/users/BK-Teisrud/projects/6/views/7).
 
 | Order | Task | Parent epic | Dependencies in addition to #41 |
 | --- | --- | --- | --- |

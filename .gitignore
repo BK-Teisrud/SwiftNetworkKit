@@ -1,7 +1,7 @@
 # macOS
 .DS_Store
 .AppleDouble
-# Swift / Xcode – for future implementation
+# Swift / Xcode
 .build/
 .swiftpm/
 DerivedData/
@@ -17,3 +17,7 @@ xcuserdata/
 *.mobileprovision
 # Temporary output
 tmp/
+
+# Local package/credential files
+/Packages/
+.netrc
