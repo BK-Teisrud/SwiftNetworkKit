@@ -1,6 +1,6 @@
 # Quality gates and future test strategy
 
-These are requirements for later implementation. No product tests or CI have run for a library that does not yet exist.
+These are requirements for later implementation. No behavioral tests or CI have run. I01 verifies package/test-target compilation and consumer import only.
 
 ## Before implementation
 

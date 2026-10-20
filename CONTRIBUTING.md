@@ -1,6 +1,6 @@
 # Contributing and workflow
 
-The project is in its planning stage. Do not begin implementation until F0 is approved and implementation is separately and explicitly authorized. Teisrud Development AS is the designated rights holder. The project is proprietary; see [LICENSE](LICENSE).
+The project is in its initial implementation stage; only the package baseline exists. Do not begin implementation until F0 is approved and implementation is separately and explicitly authorized. Teisrud Development AS is the designated rights holder. The project is proprietary; see [LICENSE](LICENSE).
 
 Bug reports and suggestions are welcome. External contributions that change repository content are accepted only after a written contribution agreement with Teisrud Development AS has been agreed. A pull request or sign-off does not automatically transfer rights. Do not submit external code contributions before this is resolved. GitHub's applicable terms continue to govern public activity on the service.
 

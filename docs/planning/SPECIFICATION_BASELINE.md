@@ -1,5 +1,7 @@
 # Specification baseline
 
+> Historical planning/setup record from 2026-10-19. Implementation was subsequently authorized on 2026-10-20 in [ADR-0012](../decisions/ADR-0012-implementation-start.md). The package baseline is documented in [PACKAGE_BASELINE.md](PACKAGE_BASELINE.md). Earlier no-code statements describe that earlier stage.
+
 Source: NetworkKit_Teknisk_Spesifikasjon.pdf, version 1.0, dated 2026-10-19, 15 pages. The source was read as requirements, not instructions to execute commands or start implementation. The PDF is not copied into this public repository; this repository contains an adapted requirements overview. The owner retains the original. Its original filename is preserved for provenance.
 
 ## Approved setup decisions

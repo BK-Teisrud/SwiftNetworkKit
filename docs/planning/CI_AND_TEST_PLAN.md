@@ -1,6 +1,6 @@
 # CI and test plan after implementation authorization
 
-Status: Core plan accepted 2026-10-19; see [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md). No workflows, test targets, product code, or passed CI runs exist.
+Status: Core plan accepted 2026-10-19; see [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md). I01 adds the package and empty test target; no workflows or passed CI runs exist. Meaningful contract tests begin with I02.
 
 ## Planned PR jobs
 

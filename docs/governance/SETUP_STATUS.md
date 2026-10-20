@@ -1,6 +1,6 @@
 # Setup status and verification
 
-Verified 2026-10-19. [Public repository](https://github.com/BK-Teisrud/SwiftNetworkKit), [private project](https://github.com/users/BK-Teisrud/projects/6). These settings were read back from GitHub, not merely proposed in JSON. **No product code or implementation authorization.**
+Verified 2026-10-19. [Public repository](https://github.com/BK-Teisrud/SwiftNetworkKit), [private project](https://github.com/users/BK-Teisrud/projects/6). These settings were read back from GitHub, not merely proposed in JSON. This section records the 2026-10-19 setup baseline. **For current implementation status, see the update below and ADR-0012.**
 
 | Area | Result and rationale |
 | --- | --- |
@@ -49,3 +49,7 @@ No additional reviewer is required before another actual maintainer exists. No s
 ADR-0011 records the owner's explicit request for English GitHub content and Norwegian conversations. Current documentation, templates, descriptions, milestones, fields/options/views, and editable issue/PR text are translated without changing decisions or identifiers. Original Git history and source-document filenames remain intact. Translation does not approve implementation or publication.
 
 Language migration readback verified all 55 existing issues and 10 previous PR titles/bodies, seven milestones, eight views, and 16 custom label descriptions. Issue IDs/states/closure timestamps/checklists/labels/milestone associations, project option IDs/workflow enabled states, and security rules are preserved. All 23 implementation tasks remain Blocked; #41 remains open. The browser confirms English content and ascending Work Queue order. LICENSE is byte-for-byte unchanged. JSON/YAML, local links, whitespace, and the absence of product code were checked. No repository issue comments existed to translate.
+
+## Implementation update — 2026-10-20
+
+The owner instructed implementation to begin and supplied a default Xcode package. ADR-0012 records the instruction; #41 is closed explicitly. I01 / #42 adapts the starter at the repository root, with package SwiftNetworkKit, product/module NetworkKit, tools 6.2, Swift 6 mode, and minimum OS versions 17/14/10/17. See [PACKAGE_BASELINE.md](../planning/PACKAGE_BASELINE.md) for actual smoke checks and limitations. No HTTP behavior, meaningful behavioral tests, CI workflows, or releases are claimed. Earlier preparation/language verification paragraphs above remain dated historical records.

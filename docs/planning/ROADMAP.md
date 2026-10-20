@@ -4,7 +4,7 @@ No deadlines are set. Phases are gates, not calendar promises. The owner selecte
 
 ## F0 – Architecture and decisions
 
-Rights, v1 scope, platforms/toolchain, APIs, concurrency, security, and CI were accepted together on 2026-10-19 in [ADR-0009](../decisions/ADR-0009-f0-approval-no-implementation.md). **Implementation remains unauthorized; no code.** All eight decision issues are complete. ADR-0010 and PR #65 completed OPS-01 / #30; F0 is closed. START-00 / #41 in F1 preserves the restriction. Code requires separate explicit approval.
+Rights, v1 scope, platforms/toolchain, APIs, concurrency, security, and CI were accepted together on 2026-10-19 in [ADR-0009](../decisions/ADR-0009-f0-approval-no-implementation.md). At that time, implementation was not authorized. All eight decision issues are complete. ADR-0010 and PR #65 completed OPS-01 / #30; F0 is closed. The owner subsequently instructed implementation to begin on 2026-10-20; ADR-0012 and closed START-00 / #41 record this separately. I01 starts F1 with the package baseline.
 
 ## F1 – HTTP core
 

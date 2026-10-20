@@ -1,5 +1,5 @@
 {
-  "verified_on": "2026-10-19",
+  "verified_on": "2026-10-20",
   "url": "https://github.com/users/BK-Teisrud/projects/6",
   "visibility": "private",
   "fields": {
@@ -299,6 +299,6 @@
   },
   "workflow_configuration": "See docs/planning/PROJECT_MANAGEMENT.md",
   "product_workflows_present": false,
-  "shortDescription": "Planning without implementation code. Issues are the authoritative backlog; phases are delivery gates without agreed dates.",
-  "readme": "See https://github.com/BK-Teisrud/SwiftNetworkKit/blob/main/docs/planning/PROJECT_MANAGEMENT.md for scope, workflow, WIP, and phase gates. No product code is implemented. Priority does not authorize implementation. All GitHub content is in English; owner–assistant conversations remain in Norwegian."
+  "shortDescription": "Approved HTTP-core implementation started. Package baseline only; follow the ordered issues and documented delivery gates.",
+  "readme": "Implementation started under ADR-0012. Issues are the authoritative backlog; phases are delivery gates without agreed dates. Follow https://github.com/BK-Teisrud/SwiftNetworkKit/blob/main/docs/planning/PROJECT_MANAGEMENT.md and WORK_QUEUE.md. I01 establishes the package baseline; HTTP behavior and CI remain outstanding. English GitHub content; Norwegian owner–assistant conversations."
 }

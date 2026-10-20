@@ -1,6 +1,6 @@
 # Concurrency, session ownership, and lifecycle in v1
 
-Status: Planned contract, 2026-10-19; see [ADR-0006](../decisions/ADR-0006-concurrency-and-lifecycle.md). No product code or tests exist.
+Status: Planned contract, 2026-10-19; see [ADR-0006](../decisions/ADR-0006-concurrency-and-lifecycle.md). The package baseline exists, but no concurrency/lifecycle implementation or behavioral tests exist.
 
 ## Concurrent use and isolation
 
