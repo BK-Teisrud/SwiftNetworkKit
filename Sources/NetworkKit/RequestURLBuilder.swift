@@ -30,21 +30,33 @@ internal enum URLInputValidation {
         }
     }
 
+    /// URL.host representations differ across OS releases. encodedHost retains
+    /// Foundation's IDNA ASCII form and explicit IPv6 brackets consistently.
+    static func normalizedHost(_ components: URLComponents) throws -> String {
+        guard var host = components.encodedHost, !host.isEmpty else {
+            throw NetworkError.invalidRequest(.invalidURL)
+        }
+        if host.hasPrefix("[") && host.hasSuffix("]") {
+            host = String(host.dropFirst().dropLast())
+            guard host.contains(":") else { throw NetworkError.invalidRequest(.invalidURL) }
+        }
+        guard !host.isEmpty, !host.hasSuffix("."), host.utf8.allSatisfy({ byte in
+            (48...57).contains(byte) || (65...90).contains(byte) || (97...122).contains(byte)
+                || [45, 46, 58].contains(byte)
+        }) else { throw NetworkError.invalidRequest(.invalidURL) }
+        return host.lowercased()
+    }
+
     static func components(_ url: URL, isBase: Bool) throws -> URLComponents {
         guard url.baseURL == nil,
               let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
               let scheme = components.scheme?.lowercased(), ["http", "https"].contains(scheme),
-              let host = url.host(percentEncoded: true), !host.isEmpty,
-              host.utf8.allSatisfy({ byte in
-                  (48...57).contains(byte) || (65...90).contains(byte) || (97...122).contains(byte)
-                    || [45, 46, 58].contains(byte)
-              }),
-              !host.hasSuffix("."),
               components.user == nil, components.password == nil, components.fragment == nil,
               components.port.map({ (1...65535).contains($0) }) ?? true,
               !isBase || components.percentEncodedQuery == nil else {
             throw NetworkError.invalidRequest(.invalidURL)
         }
+        _ = try normalizedHost(components)
         let path = components.percentEncodedPath
         guard path.isEmpty || path.hasPrefix("/") else {
             throw NetworkError.invalidRequest(.invalidURL)
@@ -109,7 +121,7 @@ internal enum RequestURLBuilder {
             components.port ?? (components.scheme?.lowercased() == "https" ? 443 : 80)
         }
         guard base.scheme?.lowercased() == raw.scheme?.lowercased(),
-              baseURL.host(percentEncoded: true)?.lowercased() == url.host(percentEncoded: true)?.lowercased(),
+              (try URLInputValidation.normalizedHost(base)) == (try URLInputValidation.normalizedHost(raw)),
               effectivePort(base) == effectivePort(raw) else {
             throw NetworkError.invalidRequest(.invalidURL)
         }

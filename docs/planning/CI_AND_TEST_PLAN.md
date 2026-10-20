@@ -1,6 +1,6 @@
 # CI and test plan after implementation authorization
 
-Status: Core plan accepted 2026-10-19; see [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md). I01 adds the package and empty test target; no workflows or passed CI runs exist. Meaningful contract tests begin with I02.
+Status: Core plan accepted 2026-10-19; see [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md). I01–I05 provide a real package and 64 local product test functions. I06 introduces the first workflow; hosted validation and required-check activation are in progress. See [CI implementation](CI_IMPLEMENTATION.md) for exact jobs, commands, and actual evidence.
 
 ## Planned PR jobs
 
@@ -44,7 +44,7 @@ Only standard GitHub-hosted runners in the public repository are authorized. No 
 
 The first CI version has no artifact uploads or explicit Actions cache. Retain only necessary sanitized ordinary job logs within current account/repository limits. Before later uploads, agree small size/retention limits and check remaining free storage. No account-wide billing/subscription/budget settings have changed.
 
-Planned initial limits: at most two concurrent macOS matrix jobs per workflow and a 30-minute timeout per heavy job. A new push replaces/cancels obsolete runs on the same PR with clean cancellation. Do not cancel verification already serving as release evidence. These are planned limits, not configured workflows.
+Planned initial limits: at most two concurrent macOS matrix jobs per workflow and a 30-minute timeout per heavy job. A new push replaces/cancels obsolete runs on the same PR with clean cancellation. Do not cancel verification already serving as release evidence. These limits are now configured in the I06 bootstrap workflow.
 
 Runtime/time-limit problems fail with a concrete reason. Do not switch to paid runners, install unapproved tools, or skip tests without a separate decision.
 
@@ -56,7 +56,7 @@ Runtime/time-limit problems fail with a concrete reason. Do not switch to paid r
 4. Only then require quality-gate, with the correct Actions integration and updated branch policy. An unrelated/malicious same-name check is not equivalent evidence.
 5. Verify enforcement on another PR. Main has no bypass; preserve that property.
 
-No required check is added now. No check merely confirming that code does not exist is introduced.
+The I06 bootstrap workflow exists; required-check activation awaits successful PR/main evidence. No check merely confirming that code does not exist is introduced.
 
 ## Separate release and minimum-OS checks
 
