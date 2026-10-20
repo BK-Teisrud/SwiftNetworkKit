@@ -1,5 +1,7 @@
 # SwiftNetworkKit
 
+[![CI](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/workflows/ci.yml)
+
 A native networking library for Apple platforms, planned as a Swift package with no external package dependencies.
 
 **Status: Implementation started; HTTP values, configuration, and buffered request construction implemented.** The Swift package is named SwiftNetworkKit and exposes the NetworkKit library. HTTP request execution is not implemented yet; do not treat this as a functional networking library. See [implementation authorization](docs/decisions/ADR-0012-implementation-start.md) and [package-baseline evidence](docs/planning/PACKAGE_BASELINE.md).

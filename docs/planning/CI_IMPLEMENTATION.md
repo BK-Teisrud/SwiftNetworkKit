@@ -124,3 +124,27 @@ record only necessary environment/destination metadata; job output is not proof 
 minimum-OS compatibility or unimplemented transport/security behavior.
 
 The rule and effective main-branch read-back succeeded on 2026-10-20 after the main run. The enforcement PR starts with a deliberately broken local Markdown link; it is a temporary negative control, never intended for merge. Product code remains unchanged in that control.
+
+## Enforcement negative control and final acceptance
+
+[Verification PR #73](https://github.com/BK-Teisrud/SwiftNetworkKit/pull/73), revision
+13e4eb0b458e356c8a02c337bf1701d1a372fab9, deliberately introduced one missing local
+Markdown link. In [run 39491129998](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/39491129998),
+source-integrity failed for that exact fixture and quality-gate failed. All platform
+jobs and documentation passed. GitHub reported mergeable=MERGEABLE (no conflict) but
+mergeStateStatus=BLOCKED while the failed required gate came from GitHub Actions 15368.
+No bypass, merge attempt, or product-code failure was used to manufacture the result.
+
+The temporary control is removed. The final PR revision must pass every mandatory check
+before normal merge; [issue #47](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/47)
+records that positive run and the final main result before closure. The README CI badge
+links to current main status; dated snapshots are not a substitute for live results.
+
+The ruleset snapshot includes server defaults that were already active (such as the
+unattributed-change review parameter). API comparison confirmed that existing rules
+were preserved; required_status_checks is the sole new main rule. See GitHub's
+[required-status-check API](https://docs.github.com/en/rest/repos/rules#update-a-repository-ruleset)
+for strict/current-base and integration binding. The URL compatibility fix uses the
+[Foundation encodedHost declaration](https://github.com/swiftlang/swift-foundation/blob/main/Sources/FoundationEssentials/URL/URLComponents.swift),
+which is available within every selected platform minimum; minimum-runtime behavior
+still requires the separate release evidence.

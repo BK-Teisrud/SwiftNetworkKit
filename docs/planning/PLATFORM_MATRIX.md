@@ -19,14 +19,14 @@ A newer SDK supplies build-time APIs; it does not require the host app to run th
 
 ## Tools
 
-| Setting | Approved requirement | Locally observed 2026-10-19 |
+| Setting | Approved requirement | Observed local/hosted evidence, 2026-10-20 |
 | --- | --- | --- |
 | Xcode | 26.3 or a newer stable version, verified before claiming support | 26.3, build 17C529 |
 | Swift tools | Minimum 6.2 | Apple Swift 6.2.4 |
-| Swift language mode | Swift 6, strict concurrency | No package configured yet |
+| Swift language mode | Swift 6, strict concurrency | Manifest Swift 6; all selected platform builds and tests passed |
 | Host macOS | Meets selected Xcode's system requirements | 15.8.1 |
-| Host architecture | Planned standard GitHub macos-15 arm64; no job run | Compiler reports x86_64 |
-| CI SDK / runtime / runner | ADR-0008 / CI_AND_TEST_PLAN.md baseline; actual runs must verify images, schemes, and destinations | No CI created |
+| Host architecture | Standard GitHub macos-15 arm64; assess local architectures separately | Hosted arm64 passed; local x86_64 passed |
+| CI SDK / runtime / runner | ADR-0008 / CI_AND_TEST_PLAN.md baseline; verify each run | SDKs/runtimes 26.2; macos-15 image 20260907.0337.1; actual destinations in CI_IMPLEMENTATION.md |
 
 Development-host requirements are separate from the library's macOS 14.0 minimum. Local version inspection is not a library test result.
 
@@ -40,7 +40,7 @@ For each selected API, record requirement ID, full symbol name, framework, inspe
 | URL/JSON | URLComponents / Codable / JSONEncoder / JSONDecoder | Selected overloads, parameter semantics, coding strategies |
 | Logging | OSLog | Selected logging API, privacy markers, data minimization |
 | Concurrency | Swift Concurrency | Sendable, isolation, cancellation, clock APIs; assess language and OS requirements separately |
-| Testing | Apple/official tools | ADR-0008 selects Swift Testing/XCTest; actual runtime/harness verification remains |
+| Testing | Apple/official tools | Swift Testing package harness passed on all selected PR runtimes; minimum OS/physical scenarios remain |
 
 This is a review checklist, not proof that every symbol is verified. Newer Foundation/OSLog/Concurrency APIs may require higher OS versions than the approved minimums.
 
@@ -50,7 +50,7 @@ For each check record commit SHA, date, Xcode build, Swift version, SDK, actual 
 
 Cover builds on every selected platform and relevant normal/error/cancellation/concurrency tests. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 separates PR runtimes from release tests on minimum OS versions and representative newer stable runtimes. If CI cannot run a minimum, establish an explicit alternative with real evidence before release; a newer simulator build is insufficient.
 
-Use physical devices where scenarios require them. Background transfers, Keychain groups, and local networking are deferred by v1 scope and are not established by this matrix. No build/runtime verification has passed.
+Use physical devices where scenarios require them. Background transfers, Keychain groups, and local networking are deferred by v1 scope and are not established by this matrix. I06 provides the current build/PR-runtime evidence below; minimum-OS and physical-device verification remains outstanding.
 
 ## Bounded declaration check for DEC-04
 

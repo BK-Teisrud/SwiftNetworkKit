@@ -330,11 +330,17 @@
     "bypass_actors": [],
     "other_rules_preserved": true,
     "effective_main_rule_read_back": true,
-    "enforcement_verification_complete": false,
     "artifact_uploads": false,
     "explicit_action_cache": false,
     "paid_or_self_hosted_runners": false,
     "minimum_os_or_physical_device_evidence": false,
-    "evidence": "docs/planning/CI_IMPLEMENTATION.md and issue #47"
+    "evidence": "docs/planning/CI_IMPLEMENTATION.md and issue #47",
+    "enforcement_verification_pr": 73,
+    "negative_control_verified": true,
+    "negative_control_run": 39491129998,
+    "negative_control_commit": "13e4eb0b458e356c8a02c337bf1701d1a372fab9",
+    "native_failed_gate_merge_state": "BLOCKED",
+    "temporary_control_removed": true,
+    "positive_acceptance_evidence": "Required quality-gate on final PR #73 revision; final main run and completed issue #47 record acceptance"
   }
 }

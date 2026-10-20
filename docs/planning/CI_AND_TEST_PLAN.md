@@ -2,7 +2,7 @@
 
 Status: Core plan accepted 2026-10-19; see [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md). I01–I05 provide a real package and 64 local product test functions. I06 introduces the real workflow and required quality-gate after verified hosted PR/main runs. See [CI implementation](CI_IMPLEMENTATION.md) for exact jobs, commands, and actual evidence.
 
-## Planned PR jobs
+## Mandatory PR jobs
 
 Real CI now runs every mandatory job on pull requests and pushes to main. The owner selected all four platform families on every PR, not only releases. Documentation PRs receive no hidden global bypass of this matrix.
 
@@ -20,7 +20,7 @@ Source integrity and documentation checks are supporting jobs, not product depen
 
 ## Runner and toolchain verification
 
-The planned primary runner is standard macos-15 (arm64). Set DEVELOPER_DIR to the installed Xcode 26.3 and verify its version. Do not rely on image defaults or macos-latest. Official inventory reviewed 2026-10-19 lists Xcode 26.3 build 17C529 and SDK/simulator runtimes 26.2, but an older default Xcode. The inventory's macOS host is 15.7.9, not the library minimum 14.
+The primary runner is standard macos-15 (arm64). Set DEVELOPER_DIR to the installed Xcode 26.3 and verify its version. Do not rely on image defaults or macos-latest. Official inventory reviewed 2026-10-19 lists Xcode 26.3 build 17C529 and SDK/simulator runtimes 26.2, but an older default Xcode. The inventory's macOS host is 15.7.9, not the library minimum 14.
 
 Record image version, host OS/architecture, Xcode build, Swift patch, SDK, runtime, and destinations per run. Verify Swift tools 6.2 compatibility and Swift 6 language mode. Declare platform minimums explicitly in the future manifest. Missing toolchain/runtime fails preflight; do not silently fall back or automatically raise minimums.
 
