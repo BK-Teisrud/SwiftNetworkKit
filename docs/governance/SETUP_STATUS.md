@@ -53,3 +53,7 @@ Language migration readback verified all 55 existing issues and 10 previous PR t
 ## Implementation update — 2026-10-20
 
 The owner instructed implementation to begin and supplied a default Xcode package. ADR-0012 records the instruction; #41 is closed explicitly. I01 / #42 adapts the starter at the repository root, with package SwiftNetworkKit, product/module NetworkKit, tools 6.2, Swift 6 mode, and minimum OS versions 17/14/10/17. See [PACKAGE_BASELINE.md](../planning/PACKAGE_BASELINE.md) for actual smoke checks and limitations. No HTTP behavior, meaningful behavioral tests, CI workflows, or releases are claimed. Earlier preparation/language verification paragraphs above remain dated historical records.
+
+## I02 value-layer update — 2026-10-20
+
+HTTP methods, immutable case-insensitive headers, status codes, responses, explicit empty values, and structured errors are implemented. See [HTTP_VALUES.md](../planning/HTTP_VALUES.md) for 21 passing local tests, the isolated negative control, consumer verification, and limits. No networking, CI workflows, or release is included.

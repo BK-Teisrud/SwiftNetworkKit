@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### HTTP values and structured errors
+
+- Added immutable Sendable HTTPMethod, HTTPHeaders, HTTPStatus, NetworkResponse, EmptyResponse, and NetworkError types.
+- Added strict token/control validation, case-insensitive header lookup with opaque byte preservation, and sanitized default/debug/localized descriptions. CancellationError remains separate.
+- Added 21 local contract tests with a verified negative control; networking and actual timeout/cancellation remain unimplemented.
+
 ### Package baseline
 
 - Implementation started under ADR-0012 on 2026-10-20. Adapted the owner's Xcode starter into a repository-root Swift package: SwiftNetworkKit / NetworkKit, tools 6.2, Swift 6, OS minimums 17/14/10/17.

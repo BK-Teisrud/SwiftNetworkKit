@@ -1,6 +1,6 @@
 # HTTP, response, and error contract for v1
 
-Status: Planned contract, 2026-10-19; see [ADR-0005](../decisions/ADR-0005-http-api-contract.md). The owner selected the core choices; the rules below elaborate them. No implementation or passed product tests exist.
+Status: Planned contract, 2026-10-19; see [ADR-0005](../decisions/ADR-0005-http-api-contract.md). The owner selected the core choices; the rules below elaborate them. I02 implements the foundational value/error types with passing local contract tests; the client and transport pipeline remain unimplemented. See [HTTP_VALUES.md](HTTP_VALUES.md) for reviewed signatures, tests, and limitations.
 
 ## Public model and entry points
 
@@ -87,4 +87,4 @@ No category automatically authorizes retry. Default error text and diagnostics e
 - Transport failures, timeouts, encoding/decoding failures, invalidResponse, and cancellation before/during operations.
 - Errors/logs without sensitive default data; response headers respect documented system limitations.
 
-Break these into traceable tasks before Ready. No tests have run. The [platform matrix](PLATFORM_MATRIX.md), QUALITY.md, and DEC-05–DEC-07 add requirements. F0 acceptance and separate explicit implementation authorization are required before code.
+Break remaining behavior into traceable tasks before Ready. I02 value/error tests have passed locally; pipeline tests remain outstanding. The [platform matrix](PLATFORM_MATRIX.md), QUALITY.md, and DEC-05–DEC-07 add requirements. F0 acceptance and separate explicit implementation authorization are required before code.

@@ -254,5 +254,18 @@
     "package_baseline_only": true,
     "behavioral_tests_run": false,
     "product_ci_present": false
+  },
+  "http_value_layer": {
+    "date": "2026-10-20",
+    "issue": 43,
+    "api_review": "docs/planning/HTTP_VALUES.md",
+    "local_tests": 21,
+    "test_suites": 5,
+    "test_platform": "macOS 15.8.1 x86_64",
+    "swift": "6.2.4",
+    "xcode": "26.3 (17C529)",
+    "negative_control": "case-sensitive lookup mutation detected in isolated copy",
+    "http_pipeline_implemented": false,
+    "ci_workflows_present": false
   }
 }

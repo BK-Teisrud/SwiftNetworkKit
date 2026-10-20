@@ -1,6 +1,6 @@
 # Platform and toolchain matrix
 
-Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). This is not verified product support; the HTTP library is not implemented; I01 adds only its package baseline.
+Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). This is not verified product support; only the package baseline and I02 value/error layer are implemented; HTTP transport is not.
 
 ## Approved delivery baseline
 
@@ -8,7 +8,7 @@ Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-p
 | --- | --- | --- | --- | --- | --- |
 | iOS | 17.0 | iOS 26.2 | Not run | Not run | Unverified |
 | iPadOS | 17.0 | iOS/iPadOS 26.2 | Not run | Not run | Unverified |
-| macOS | 14.0 | macOS 26.2 | I01 package/test-target build passed | No behavioral tests | Minimum OS unverified |
+| macOS | 14.0 | macOS 26.2 | I01/I02 builds passed | I02: 21 value/error tests passed on macOS 15.8.1 | Minimum OS unverified |
 | watchOS | 10.0 | watchOS 26.2 | Not run | Not run | Unverified |
 | tvOS | 17.0 | tvOS 26.2 | Not run | Not run | Unverified |
 | visionOS | Deferred; no v1 support | Outside selected delivery | Outside v1 | Outside v1 | Outside v1 |
@@ -76,3 +76,7 @@ Foundation/Headers/NSURLSession.h confirms the distinction between wait-for-data
 ## I01 package-build evidence — 2026-10-20
 
 The macOS library and test target compile with Xcode 26.3 / Swift 6.2.4 on the local x86_64 macOS 15.8.1 host. A separate local consumer compiles and links the NetworkKit product. This is build/import evidence only, not a runtime contract test or a macOS 14 execution result. Other platform builds/runtimes remain unverified. See [PACKAGE_BASELINE.md](PACKAGE_BASELINE.md).
+
+## I02 value-layer evidence — 2026-10-20
+
+[HTTP_VALUES.md](HTTP_VALUES.md) records the API review, bounded SDK declaration check, 21 passing local contract tests, negative control, and public consumer check. These establish value/error semantics only; no HTTP transport, all-platform build, or minimum-OS runtime claim is made.
