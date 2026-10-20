@@ -1,2 +1,2 @@
-// The NetworkKit module is intentionally empty at the package-baseline stage.
-// HTTP types and behavior are introduced in the subsequent implementation tasks.
+// NetworkKit currently provides HTTP value types and structured errors.
+// The HTTP client and transport pipeline are implemented in subsequent tasks.

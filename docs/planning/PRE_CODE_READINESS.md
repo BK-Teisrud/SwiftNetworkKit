@@ -10,7 +10,7 @@ Updated: 2026-10-20. **The owner has instructed implementation to begin; START-0
 - I01–I23 have criteria, test requirements, parent epics, and native blocked-by links. The [work queue](WORK_QUEUE.md) gives the recommended serial order.
 - Main requires PRs without bypass. A limited creation exception permits admins to create new v* tags; update/deletion have no bypass. Immutable releases are enabled. Web sign-off is disabled with specific approval because no DCO is used.
 - The project has one status model, a sorted work queue, a completed view, and verified import/status transitions.
-- A manifest and empty library/test targets now exist; HTTP behavior and meaningful contract tests are not implemented. No workflows, tags, or releases exist.
+- The manifest, library/test targets, and I02 value/error contract tests now exist. The HTTP client and pipeline remain unimplemented. No workflows, tags, or releases exist.
 
 ## Outstanding items
 

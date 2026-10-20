@@ -1,6 +1,6 @@
 # Security, authentication, and network policy for v1
 
-Status: Planned contract, 2026-10-19. Core choices are accepted in [ADR-0007](../decisions/ADR-0007-security-and-network-policy.md); details elaborate secure defaults. No implementation or passed security tests exist.
+Status: Planned contract, 2026-10-19. Core choices are accepted in [ADR-0007](../decisions/ADR-0007-security-and-network-policy.md); details elaborate secure defaults. I02 validates foundational values and their descriptions with local tests. The transport, authentication, storage, and logging policies remain unimplemented; no complete security guarantee is claimed.
 
 ## URLs, permitted origins, and local development
 
@@ -82,4 +82,4 @@ Return status/headers according to the HTTP contract, but do not expose sensitiv
 - Token/cookie/URL/body/error-description redaction on every error/diagnostic path; no hidden telemetry, error-body capture, or 401/503 replay.
 - System connectivity/cost policy and the same 30/60 budget across permitted hooks/redirects.
 
-Break requirements into traceable tasks before Ready and execute only after implementation authorization. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 defines planned tests/runtimes. Actual execution and security evidence remain outstanding; none of these properties is implemented or functionally tested yet.
+Break requirements into traceable tasks before Ready and execute only after implementation authorization. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 defines planned tests/runtimes. Actual execution and security evidence remain outstanding; I02 tests cover only value validation and safe descriptions; actual transport/storage/authentication/logging verification remains outstanding.

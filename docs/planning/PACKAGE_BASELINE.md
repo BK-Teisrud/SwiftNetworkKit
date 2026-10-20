@@ -28,3 +28,7 @@ The temporary consumer lives outside the repository; it adds no distributed prod
 ## Next task
 
 I02 / #43 introduces the first immutable HTTP values, response metadata, and structured errors together with meaningful contract tests. Follow HTTP_API_CONTRACT.md and perform the relevant symbol/availability review before Ready. No release publication is authorized.
+
+## Subsequent I02 delivery
+
+The no-test/empty-module descriptions above record the I01 stage. I02 adds foundational value/error implementations and 21 passing tests; see [HTTP_VALUES.md](HTTP_VALUES.md) for current evidence.

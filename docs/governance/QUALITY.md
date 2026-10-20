@@ -1,6 +1,6 @@
 # Quality gates and future test strategy
 
-These are requirements for later implementation. No behavioral tests or CI have run. I01 verifies package/test-target compilation and consumer import only.
+These are requirements for later implementation. I01 verified package wiring. I02 adds passing local value/error contract tests; CI and HTTP-pipeline tests remain outstanding.
 
 ## Before implementation
 
