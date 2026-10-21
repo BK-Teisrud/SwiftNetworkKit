@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Response strategies and status policy
+
+- Added explicit JSON/Data/strict UTF-8/empty response strategies and per-operation native JSONDecoder settings.
+- Added immutable per-call status policies, shared typed/raw response validation, metadata preservation, sanitized decoding/status failures, and cancellation checkpoints.
+- Local suite: 84 test functions in 14 suites, including concurrent decoder isolation and an external public API consumer test. See docs/planning/RESPONSE_DECODING.md and #48 for hosted CI evidence.
+- No executing client, deadline arbitration, or release claim introduced.
+
 ### Real CI and merge enforcement
 
 - Added source integrity, macOS/iPhone/iPad/watchOS/tvOS builds/tests, public DocC, and a fail-closed quality-gate on standard runners with pinned Xcode 26.3 / Swift 6.2.4.

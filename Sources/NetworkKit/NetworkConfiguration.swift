@@ -43,9 +43,10 @@ public struct NetworkCallOptions: Sendable, CustomStringConvertible, CustomDebug
     public let headers: HTTPHeaders
     public let inactivityTimeout: TimeInterval?
     public let totalTimeout: TimeInterval?
+    public let acceptedStatuses: HTTPStatusPolicy
 
     public init(headers: HTTPHeaders = HTTPHeaders(), inactivityTimeout: TimeInterval? = nil,
-                totalTimeout: TimeInterval? = nil) throws {
+                totalTimeout: TimeInterval? = nil, acceptedStatuses: HTTPStatusPolicy = .successful) throws {
         for limit in [inactivityTimeout, totalTimeout].compactMap({ $0 }) {
             guard limit.isFinite, limit > 0 else {
                 throw NetworkError.invalidRequest(.invalidConfiguration)
@@ -54,6 +55,7 @@ public struct NetworkCallOptions: Sendable, CustomStringConvertible, CustomDebug
         self.headers = headers
         self.inactivityTimeout = inactivityTimeout
         self.totalTimeout = totalTimeout
+        self.acceptedStatuses = acceptedStatuses
     }
 
     public static let `default` = NetworkCallOptions()
@@ -62,6 +64,7 @@ public struct NetworkCallOptions: Sendable, CustomStringConvertible, CustomDebug
         headers = HTTPHeaders()
         inactivityTimeout = nil
         totalTimeout = nil
+        acceptedStatuses = .successful
     }
 
     public var description: String { "NetworkCallOptions(headerCount: \(headers.count))" }
@@ -73,9 +76,11 @@ internal struct ConfigurationSnapshot: Sendable {
     let baseURL: URL
     let headers: HTTPHeaders
     let timeouts: NetworkTimeouts
+    let acceptedStatuses: HTTPStatusPolicy
 
     init(configuration: NetworkConfiguration, options: NetworkCallOptions) throws {
         baseURL = configuration.baseURL
+        acceptedStatuses = options.acceptedStatuses
         headers = try HTTPHeaders(configuration.headers.fields.merging(options.headers.fields) { _, call in call })
         timeouts = try NetworkTimeouts(
             inactivity: options.inactivityTimeout ?? configuration.timeouts.inactivity,

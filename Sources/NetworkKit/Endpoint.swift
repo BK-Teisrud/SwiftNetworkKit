@@ -1,8 +1,9 @@
 import Foundation
 
-/// A typed HTTP description. Body construction is local; response strategies and execution follow separately.
+/// A typed HTTP description. Request construction and response interpretation are local; execution follows separately.
 public protocol Endpoint: Sendable {
     associatedtype Response: Sendable
+    var responseStrategy: ResponseStrategy<Response> { get }
     var method: HTTPMethod { get }
     var path: EndpointPath { get }
     var query: [HTTPQueryItem] { get }
@@ -62,4 +63,16 @@ public struct HTTPQueryItem: Sendable, CustomStringConvertible, CustomDebugStrin
 
     public var description: String { "HTTPQueryItem(hasValue: \(value != nil))" }
     public var debugDescription: String { description }
+}
+
+// Explicitly empty endpoints need no JSON model or decoder.
+extension Endpoint where Response == EmptyResponse {
+    public var responseStrategy: ResponseStrategy<EmptyResponse> { .empty }
+}
+
+extension Endpoint {
+    /// Interprets a buffered response with this endpoint's strategy and status policy.
+    public func decodeResponse(_ data: Data, response: URLResponse) throws -> NetworkResponse<Response> {
+        try responseStrategy.decode(data, response: response, acceptedStatuses: options.acceptedStatuses)
+    }
 }

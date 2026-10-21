@@ -1,5 +1,7 @@
 # HTTP, response, and error contract for v1
 
+Current I07 evidence: explicit JSON/Data/UTF-8/empty response strategies, per-call status policies, sanitized errors, and shared typed/raw response interpretation are implemented. See [response review](RESPONSE_DECODING.md). Execution remains outstanding.
+
 Current I05 evidence: typed/raw request preparation, header precedence, buffered JSON/Data/UTF-8 bodies, and per-preparation JSON encoders are implemented; 64 local tests passed. See [request encoding review](REQUEST_ENCODING.md). I06 adds actual four-platform source/build/test/DocC CI; see [CI evidence](CI_IMPLEMENTATION.md). Execution/security/total deadlines remain outstanding.
 
 I04 evidence: endpoint URL construction and shared raw-URL validation are implemented; 44 local tests passed. See [endpoint review](ENDPOINT_URLS.md). The executing pipeline and HTTPS/loopback/redirect enforcement remain outstanding.

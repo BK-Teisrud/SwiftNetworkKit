@@ -4,9 +4,9 @@
 
 A native networking library for Apple platforms, planned as a Swift package with no external package dependencies.
 
-**Status: Implementation started; HTTP values, configuration, and buffered request construction implemented.** The Swift package is named SwiftNetworkKit and exposes the NetworkKit library. HTTP request execution is not implemented yet; do not treat this as a functional networking library. See [implementation authorization](docs/decisions/ADR-0012-implementation-start.md) and [package-baseline evidence](docs/planning/PACKAGE_BASELINE.md).
+**Status: Implementation started; HTTP values, configuration, buffered request construction, and response interpretation implemented.** The Swift package is named SwiftNetworkKit and exposes the NetworkKit library. HTTP request execution is not implemented yet; do not treat this as a functional networking library. See [implementation authorization](docs/decisions/ADR-0012-implementation-start.md) and [package-baseline evidence](docs/planning/PACKAGE_BASELINE.md).
 
-Open the repository-root Package.swift in Xcode. The original nested Xcode starter has been moved into the standard root package layout. The NetworkKit test target now contains contract tests for values, errors, configuration, URLs, and JSON/Data/text request construction. Networking itself is not implemented.
+Open the repository-root Package.swift in Xcode. The original nested Xcode starter has been moved into the standard root package layout. The NetworkKit test target now contains contract tests for values, errors, configuration, URLs, JSON/Data/text request construction, and JSON/Data/text/empty response interpretation. Networking itself is not implemented.
 
 ## Project foundations
 
@@ -15,6 +15,8 @@ Foundation/URLSession is the primary HTTP transport. Swift Concurrency, injectab
 The repository and package are named **SwiftNetworkKit**. The library product, module, and import name will be **NetworkKit**, with one library module in v1. The first stable release is limited to the HTTP core; other modules are deferred. The package and target now exist; HTTP request execution remains planned. See [v1 scope](docs/planning/V1_SCOPE.md) and [ADR-0003](docs/decisions/ADR-0003-v1-scope-and-naming.md).
 
 ## Documentation
+
+- [Response strategies, status policies, and test evidence](docs/planning/RESPONSE_DECODING.md)
 
 - [Real CI, required quality gate, and verification evidence](docs/planning/CI_IMPLEMENTATION.md)
 
@@ -47,7 +49,7 @@ The repository and package are named **SwiftNetworkKit**. The library product, m
 
 ## Platforms and rights
 
-Approved v1 targets: **iOS/iPadOS 17+, macOS 14+, watchOS 10+, and tvOS 17+**. visionOS is deferred. Development baseline: **Xcode 26.3+, Swift tools 6.2, and Swift 6 language mode with strict concurrency checking**. See the [platform matrix](docs/planning/PLATFORM_MATRIX.md) and [ADR-0004](docs/decisions/ADR-0004-platforms-and-toolchain.md). PR CI now builds all four platform families and runs 64 product test functions on macOS plus iPhone, iPad, Apple Watch, and Apple TV simulators. The required quality-gate also covers source integrity and DocC. Minimum-OS and physical-device release evidence remains outstanding; see the CI implementation and platform matrix.
+Approved v1 targets: **iOS/iPadOS 17+, macOS 14+, watchOS 10+, and tvOS 17+**. visionOS is deferred. Development baseline: **Xcode 26.3+, Swift tools 6.2, and Swift 6 language mode with strict concurrency checking**. See the [platform matrix](docs/planning/PLATFORM_MATRIX.md) and [ADR-0004](docs/decisions/ADR-0004-platforms-and-toolchain.md). PR CI now builds all four platform families and runs the product contract tests on macOS plus iPhone, iPad, Apple Watch, and Apple TV simulators. The required quality-gate also covers source integrity and DocC. Minimum-OS and physical-device release evidence remains outstanding; see the CI implementation and platform matrix.
 
 **Rights holder: Teisrud Development AS. SwiftNetworkKit is proprietary.** Third-party use requires separate written permission from the company, subject to statutory rights and GitHub's applicable terms. Public visibility permits viewing and forking through GitHub; the project grants no additional open-source license or general permission to use the material in applications.
 

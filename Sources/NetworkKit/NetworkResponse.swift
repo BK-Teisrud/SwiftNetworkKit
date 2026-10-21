@@ -23,7 +23,7 @@ public struct NetworkResponse<Value: Sendable>: Sendable, CustomStringConvertibl
 extension NetworkResponse: Equatable where Value: Equatable {}
 
 /// Explicitly selects the absence of a response model; it does not decode JSON.
-/// The actual empty-response strategy is implemented in the response pipeline.
+/// ResponseStrategy.empty deliberately skips payload decoding.
 public struct EmptyResponse: Sendable, Hashable {
     public init() {}
 }
