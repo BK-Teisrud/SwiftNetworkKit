@@ -13,6 +13,9 @@ private struct ThrowingModel: Decodable, Sendable {
         throw NSError(domain: "SECRET", code: 1, userInfo: [NSLocalizedDescriptionKey: "SECRET body"])
     }
 }
+private struct MisleadingErrorModel: Decodable, Sendable {
+    init(from decoder: any Decoder) throws { throw NetworkError.invalidResponse(.unexpectedContentType) }
+}
 private struct CancellingModel: Decodable, Sendable {
     init(from decoder: any Decoder) throws { throw CancellationError() }
 }
@@ -131,6 +134,9 @@ private struct CounterModel: Decodable, Sendable {
     @Test func customDecoderFailuresAreSanitized() throws {
         #expect(throws: NetworkError.decoding) {
             try ResponseStrategy<ThrowingModel>.json().decode(Data("{}".utf8), response: http())
+        }
+        #expect(throws: NetworkError.decoding) {
+            try ResponseStrategy<MisleadingErrorModel>.json().decode(Data("{}".utf8), response: http())
         }
         #expect(throws: CancellationError.self) {
             try ResponseStrategy<CancellingModel>.json().decode(Data("{}".utf8), response: http())

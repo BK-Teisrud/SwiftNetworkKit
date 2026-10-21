@@ -3,10 +3,13 @@ import Foundation
 /// Buffered response interpretation, independent of networking. No custom decoder plugin.
 public struct ResponseStrategy<Value: Sendable>: Sendable, CustomStringConvertible, CustomDebugStringConvertible {
     private let kind: String
+    private let validate: @Sendable (HTTPHeaders) throws -> Void
     private let interpret: @Sendable (Data, HTTPHeaders) throws -> Value
 
-    private init(kind: String, interpret: @escaping @Sendable (Data, HTTPHeaders) throws -> Value) {
+    private init(kind: String, validate: @escaping @Sendable (HTTPHeaders) throws -> Void = { _ in },
+                 interpret: @escaping @Sendable (Data, HTTPHeaders) throws -> Value) {
         self.kind = kind
+        self.validate = validate
         self.interpret = interpret
     }
 
@@ -29,6 +32,7 @@ public struct ResponseStrategy<Value: Sendable>: Sendable, CustomStringConvertib
         do { headers = try HTTPHeaders(fields) }
         catch { throw NetworkError.invalidResponse(.invalidHeaders) }
         guard acceptedStatuses.accepts(status) else { throw NetworkError.httpStatus(status, headers: headers) }
+        try validate(headers)
         let value: Value
         do {
             value = try interpret(data, headers)
@@ -36,7 +40,6 @@ public struct ResponseStrategy<Value: Sendable>: Sendable, CustomStringConvertib
             throw CancellationError()
         } catch {
             try Task.checkCancellation()
-            if let error = error as? NetworkError, error == .invalidResponse(.unexpectedContentType) { throw error }
             throw NetworkError.decoding
         }
         try Task.checkCancellation()
@@ -50,14 +53,15 @@ public struct ResponseStrategy<Value: Sendable>: Sendable, CustomStringConvertib
 extension ResponseStrategy where Value: Decodable {
     public static func json(_ type: Value.Type = Value.self,
                             options: JSONDecodingOptions = JSONDecodingOptions()) -> Self {
-        Self(kind: "json") { data, headers in
+        Self(kind: "json", validate: { headers in
             if let contentType = headers["content-type"] {
                 guard let media = ResponseMediaType(contentType), (media.type == "application" && media.subtype == "json")
                         || (media.subtype.hasSuffix("+json") && media.subtype.count > 5) else {
                     throw NetworkError.invalidResponse(.unexpectedContentType)
                 }
             }
-            return try options.decode(type, from: data)
+        }) { data, _ in
+            try options.decode(type, from: data)
         }
     }
 }
