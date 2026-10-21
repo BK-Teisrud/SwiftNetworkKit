@@ -5,7 +5,7 @@ import os
 
 /// Foundation requires this inherited conformance to be restated. Instances contain no
 /// mutable state; the only shared fixture registry is protected by OSAllocatedUnfairLock.
-private final class SessionStubProtocol: URLProtocol, @unchecked Sendable {
+final class SessionStubProtocol: URLProtocol, @unchecked Sendable {
     struct Fixture: Sendable {
         let data: Data
         let status: Int

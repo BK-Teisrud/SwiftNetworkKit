@@ -1,5 +1,9 @@
 # HTTPS, origin, loopback and redirect policy
 
+I10 update: the public `APIClient` now connects both request inputs to this shared foundation.
+See [HTTP pipeline](HTTP_PIPELINE.md) for current signatures, verification boundaries and
+remaining timing/lifecycle gates. Earlier task descriptions below retain their historical scope.
+
 I09 / #50, 2026-10-21. This adds shared request policy and a per-operation URLSession
 delegate to the internal adapter. The public executing client remains I10; provider,
 terminal-cause/deadline/shutdown arbitration and comprehensive security review remain
@@ -72,7 +76,7 @@ to URLSession.data(for:delegate:); test operations must explicitly select script
 There is no production fallback to a test driver.
 
 The adapter's optional internal baseURL exists for isolated transport fixtures. I10's
-client assembly must pass its immutable baseURL and security policy; omitting the
+client assembly passes its immutable baseURL and security policy; omitting the
 internal base does not implement client-level raw-origin authorization. Public request
 construction alone does not control networking performed directly by app-owned APIs.
 

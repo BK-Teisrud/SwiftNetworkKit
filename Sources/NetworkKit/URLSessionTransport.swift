@@ -1,6 +1,6 @@
 import Foundation
 
-/// Internal transport with per-operation redirect/trust policy; public client follows in I10.
+/// Internal URLSession transport for APIClient, with per-operation redirect/trust policy.
 internal actor URLSessionTransport: NetworkTransport {
     enum StoragePolicy: Sendable { case strict, appManaged }
 

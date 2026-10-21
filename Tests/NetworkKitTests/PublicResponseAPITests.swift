@@ -3,6 +3,48 @@ import Testing
 import NetworkKit
 
 @Suite struct PublicResponseAPITests {
+    @Test func externalConsumerCanInjectAndExecuteClientBoundary() async throws {
+        struct Mock: NetworkClient {
+            func send<E: Endpoint>(_ endpoint: E) async throws -> NetworkResponse<E.Response> {
+                throw NetworkError.invalidRequest(.unsupportedRequest)
+            }
+            func send<Value: Sendable>(_ request: URLRequest, response: ResponseStrategy<Value>,
+                                      options: NetworkCallOptions) async throws -> NetworkResponse<Value> {
+                let http = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: [:])!
+                return try response.decode(Data("mock".utf8), response: http, acceptedStatuses: options.acceptedStatuses)
+            }
+        }
+        let client: any NetworkClient = Mock()
+        #expect(try await client.send(URLRequest(url: URL(string: "https://example.invalid")!), response: .text).value == "mock")
+        let configuration = NetworkConfiguration(baseURL: URL(string: "https://example.invalid")!)
+        let owned: any NetworkClient = try APIClient(configuration: configuration)
+        _ = owned
+    }
+
+    @Test func externalConsumerCanBorrowCompatibleSession() async throws {
+        let settings = URLSessionConfiguration.ephemeral
+        settings.httpCookieStorage = nil
+        settings.httpShouldSetCookies = false
+        settings.httpCookieAcceptPolicy = .never
+        settings.urlCredentialStorage = nil
+        settings.urlCache = nil
+        settings.requestCachePolicy = .reloadIgnoringLocalCacheData
+        #if !os(watchOS)
+        settings.protocolClasses = [SessionStubProtocol.self]
+        #endif
+        let session = URLSession(configuration: settings)
+        defer { session.invalidateAndCancel() }
+        let client = try APIClient(configuration: NetworkConfiguration(baseURL: URL(string: "https://example.invalid")!),
+                                   session: session)
+        #if !os(watchOS)
+        let url = SessionStubProtocol.install(.init(data: Data("public".utf8), status: 200, headers: [:]))
+        defer { SessionStubProtocol.remove(url) }
+        #expect(try await client.send(URLRequest(url: url), response: .text).value == "public")
+        #else
+        // URLProtocol interception is unsupported on watchOS; construction is still checked.
+        _ = client
+        #endif
+    }
     @Test func externalConsumerCanSelectTypedAndRawStrategies() throws {
         struct Model: Decodable, Sendable { let name: String }
         struct Call: Endpoint {
