@@ -121,7 +121,7 @@ internal actor URLSessionTransport: NetworkTransport {
         }
     }
 
-    /// Ownership primitive, not the client shutdown/operation registry planned in I13.
+    /// Called after the client has joined its own operations. Borrowed sessions remain open.
     /// Borrowed sessions and every task belonging to their other consumers are untouched.
     func invalidateOwnedSession() {
         guard ownsSession, !invalidated else { return }
@@ -129,7 +129,11 @@ internal actor URLSessionTransport: NetworkTransport {
         session.invalidateAndCancel()
     }
 
+    func shutdown() { invalidateOwnedSession() }
+
     deinit {
-        if ownsSession { session.invalidateAndCancel() }
+        if ownsSession {
+            if !invalidated { session.invalidateAndCancel() }
+        }
     }
 }

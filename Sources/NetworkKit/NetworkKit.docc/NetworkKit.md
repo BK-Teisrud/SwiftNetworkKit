@@ -6,7 +6,7 @@ Execute typed and raw buffered HTTP calls for Apple platforms.
 
 NetworkKit provides ``APIClient`` behind the injectable ``NetworkClient`` boundary.
 Typed endpoints and raw URLRequest inputs use shared request validation, secured
-URLSession transport, status checks and response interpretation. Full shutdown/authentication/privacy review and release gates remain outstanding.
+URLSession transport, status checks and response interpretation. Consolidated lifecycle/authentication/privacy review and release gates remain outstanding.
 
 Define an ``Endpoint`` with an ``EndpointPath`` and optional ``HTTPQueryItem`` values.
 Use ``NetworkConfiguration`` for client defaults and ``NetworkCallOptions`` for explicit
@@ -32,7 +32,7 @@ ResponseStrategy can interpret local buffered values; APIClient connects it to H
 An internal foreground URLSession adapter reuses one owned session or borrows an
 app-owned session. Strict defaults explicitly disable automatic cookie, credential,
 and cache stores. Borrowed sessions are never invalidated by the adapter. This is
-the transport for APIClient; per-call timing/cancellation is enforced; complete shutdown remains outstanding.
+the transport for APIClient; per-call timing/cancellation and explicit shutdown are enforced.
 See the repository session transport guide for compatibility and lifetime constraints.
 
 ## Network security policy
@@ -63,3 +63,15 @@ watchdog are joined before return. Cooperative cleanup can delay return; no hard
 latency is promised. System timeout errors use NetworkError.timeout(.system);
 NetworkError.transportFailure exposes its safe known system code without userInfo.
 CancellationError remains separate; unexplained system cancellation is a transport error.
+
+## Explicit shutdown
+
+Call `await client.shutdown()` through ``NetworkClient`` or ``APIClient`` to close
+admission, cancel only this client's active operations and await worker/watchdog cleanup.
+New calls fail with NetworkError.invalidRequest(.clientClosed). Concurrent and repeated
+shutdown callers share completion, including cancelled waiters. The client invalidates
+only its own session; an injected session remains app-owned and usable by others.
+Client doubles implement the async nonthrowing shutdown requirement explicitly.
+Shutdown is cooperative; unresponsive work can delay return. Use an owning task/service
+boundary so work being joined does not await its own shutdown. Deinit is fallback
+owned-session cleanup, not a substitute for explicit asynchronous closure.

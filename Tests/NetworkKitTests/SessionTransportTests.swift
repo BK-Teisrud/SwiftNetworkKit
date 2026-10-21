@@ -3,8 +3,37 @@ import Testing
 import os
 @testable import NetworkKit
 
+/// A test-only one-operation gate. Callbacks are always invoked outside its lock.
+final class SessionResponseGate: Sendable {
+    private struct State: Sendable {
+        var opened = false
+        var cancelled = false
+        var callback: (@Sendable () -> Void)?
+    }
+    private let state = OSAllocatedUnfairLock(initialState: State())
+    func register(_ callback: @escaping @Sendable () -> Void) {
+        let ready = state.withLock {
+            if $0.cancelled { return false }
+            if $0.opened { return true }
+            $0.callback = callback
+            return false
+        }
+        if ready { callback() }
+    }
+    func open() {
+        let callback = state.withLock {
+            $0.opened = true
+            let callback = $0.callback
+            $0.callback = nil
+            return callback
+        }
+        callback?()
+    }
+    func cancel() { state.withLock { $0.cancelled = true; $0.callback = nil } }
+}
+
 /// Foundation requires this inherited conformance to be restated. Instances contain no
-/// mutable state; the only shared fixture registry is protected by OSAllocatedUnfairLock.
+/// mutable state; shared fixtures and response gates use OSAllocatedUnfairLock.
 final class SessionStubProtocol: URLProtocol, @unchecked Sendable {
     struct Fixture: Sendable {
         let data: Data
@@ -14,6 +43,7 @@ final class SessionStubProtocol: URLProtocol, @unchecked Sendable {
         var onStart: (@Sendable () -> Void)? = nil
         var onRequest: (@Sendable (URLRequest) -> Void)? = nil
         var onStop: (@Sendable () -> Void)? = nil
+        var gate: SessionResponseGate? = nil
     }
     #if os(watchOS)
     // watchOS cannot intercept URLSession with URLProtocol. Exercise the real adapter,
@@ -46,8 +76,16 @@ final class SessionStubProtocol: URLProtocol, @unchecked Sendable {
             client?.urlProtocol(self, didFailWithError: URLError(.resourceUnavailable)); return
         }
         fixture.onRequest?(request)
+        if let gate = fixture.gate {
+            gate.register { [self] in respond(fixture, url: url) }
+            fixture.onStart?()
+            return
+        }
         fixture.onStart?()
         if fixture.hold { return }
+        respond(fixture, url: url)
+    }
+    private func respond(_ fixture: Fixture, url: URL) {
         let response = HTTPURLResponse(url: url, statusCode: fixture.status, httpVersion: "HTTP/1.1", headerFields: fixture.headers)!
         client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
         client?.urlProtocol(self, didLoad: fixture.data)
@@ -55,8 +93,9 @@ final class SessionStubProtocol: URLProtocol, @unchecked Sendable {
     }
     override func stopLoading() {
         guard let url = request.url else { return }
-        let callback = Self.fixtures.withLock { $0[url.absoluteString]?.onStop }
-        callback?()
+        let fixture = Self.fixtures.withLock { $0[url.absoluteString] }
+        fixture?.gate?.cancel()
+        fixture?.onStop?()
     }
 }
 

@@ -1,5 +1,8 @@
 # URLSession ownership and the internal transport adapter
 
+I13 update: [explicit shutdown](SHUTDOWN_AND_CONCURRENCY.md) joins client operations and
+invalidates only an owned session. Borrowed sessions and other clients' calls remain usable.
+
 I10 update: the public `APIClient` now connects both request inputs to this shared foundation.
 See [HTTP pipeline](HTTP_PIPELINE.md) for current signatures, verification boundaries and
 remaining timing/lifecycle gates. Earlier task descriptions below retain their historical scope.

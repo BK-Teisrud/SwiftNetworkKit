@@ -5,6 +5,7 @@ import os
 internal final class NetworkOperation<Value: Sendable>: Sendable {
     private struct State: Sendable {
         var result: Result<Value, any Error>?
+        var terminalWaiter: CheckedContinuation<Void, Never>?
     }
     private let state = OSAllocatedUnfairLock(initialState: State())
     private let clock: any NetworkClock
@@ -31,50 +32,79 @@ internal final class NetworkOperation<Value: Sendable>: Sendable {
     }
 
     func checkpoint() throws {
-        let error: (any Error)? = state.withLock { state in
-            if case .failure(let error) = state.result { return error }
-            guard state.result == nil, let error = interruption() else { return nil }
+        let result: ((any Error)?, CheckedContinuation<Void, Never>?) = state.withLock { state in
+            if case .failure(let error) = state.result { return (error, nil) }
+            guard state.result == nil, let error = interruption() else { return (nil, nil) }
             state.result = .failure(error)
-            return error
+            let waiter = state.terminalWaiter
+            state.terminalWaiter = nil
+            return (error, waiter)
         }
-        if let error { throw error }
+        result.1?.resume()
+        if let error = result.0 { throw error }
     }
 
     private func finish(_ result: Result<Value, any Error>) {
-        state.withLock { state in
-            guard state.result == nil else { return }
+        let waiter = state.withLock { state in
+            guard state.result == nil else { return Optional<CheckedContinuation<Void, Never>>.none }
             if let error = interruption() { state.result = .failure(error) }
             else { state.result = result }
+            let waiter = state.terminalWaiter
+            state.terminalWaiter = nil
+            return waiter
         }
+        waiter?.resume()
     }
 
     private func cancel() {
-        state.withLock { state in
-            if state.result == nil { state.result = .failure(CancellationError()) }
+        let waiter = state.withLock { state in
+            guard state.result == nil else { return Optional<CheckedContinuation<Void, Never>>.none }
+            state.result = .failure(CancellationError())
+            let waiter = state.terminalWaiter
+            state.terminalWaiter = nil
+            return waiter
+        }
+        waiter?.resume()
+    }
+
+    private func waitForTerminal() async {
+        await withCheckedContinuation { continuation in
+            let ready = state.withLock {
+                if $0.result != nil { return true }
+                $0.terminalWaiter = continuation
+                return false
+            }
+            if ready { continuation.resume() }
         }
     }
 
     private func watch() async {
         while !Task.isCancelled {
-            let deadline: ContinuousClock.Instant? = state.withLock { state in
-                guard state.result == nil else { return nil }
+            let wake: (ContinuousClock.Instant?, CheckedContinuation<Void, Never>?) = state.withLock { state in
+                guard state.result == nil else { return (nil, nil) }
                 let now = clock.now()
                 let remaining = total - elapsed(at: now)
                 if remaining <= 0 {
                     state.result = .failure(NetworkError.timeout(.totalBudget))
-                    return nil
+                    let waiter = state.terminalWaiter
+                    state.terminalWaiter = nil
+                    return (nil, waiter)
                 }
                 // Bound only the next sleep, not the selected total budget.
                 let interval = min(max(remaining, 1e-9), 86_400)
-                return now.advanced(by: .seconds(interval))
+                return (now.advanced(by: .seconds(interval)), nil)
             }
-            guard let deadline else { return }
+            wake.1?.resume()
+            guard let deadline = wake.0 else { return }
             // No arbitrary finite Double is converted into an overflowing duration.
             // Tiny waits round up to a nanosecond; each wake rechecks elapsed time.
             do {
                 try await clock.sleep(until: deadline)
             } catch is CancellationError {
-                return // Group cleanup cancels this sleeper; it is not caller cancellation.
+                if !Task.isCancelled {
+                    finish(.failure(NetworkError.invalidRequest(.invalidConfiguration)))
+                }
+                return // Group cleanup cancellation is not caller cancellation.
             } catch {
                 finish(.failure(NetworkError.invalidRequest(.invalidConfiguration)))
                 return
@@ -83,9 +113,12 @@ internal final class NetworkOperation<Value: Sendable>: Sendable {
     }
 
     static func run(clock: any NetworkClock, start: ContinuousClock.Instant, total: TimeInterval,
+                    registration: ClientOperationRegistration? = nil,
                     body: @escaping @Sendable (NetworkOperation<Value>) async throws -> Value) async throws -> Value {
         guard total.isFinite, total > 0 else { throw NetworkError.invalidRequest(.invalidConfiguration) }
         let operation = NetworkOperation(clock: clock, start: start, total: total)
+        registration?.bind { operation.cancel() }
+        defer { registration?.unbind() }
         return try await withTaskCancellationHandler {
             await withTaskGroup(of: Void.self) { group in
                 group.addTask {
@@ -96,7 +129,7 @@ internal final class NetworkOperation<Value: Sendable>: Sendable {
                     } catch { operation.finish(.failure(error)) }
                 }
                 group.addTask { await operation.watch() }
-                _ = await group.next()
+                await operation.waitForTerminal()
                 group.cancelAll()
                 // Join both children: never leave an operation or watchdog detached.
                 while await group.next() != nil {}

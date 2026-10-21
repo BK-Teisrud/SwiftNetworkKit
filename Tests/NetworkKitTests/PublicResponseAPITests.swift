@@ -3,6 +3,21 @@ import Testing
 import NetworkKit
 
 @Suite struct PublicResponseAPITests {
+    @Test func externalConsumerCanShutdownThroughClientBoundary() async throws {
+        struct Call: Endpoint {
+            typealias Response = EmptyResponse
+            let path = try! EndpointPath(segments: [])
+        }
+        let url = URL(string: "https://example.invalid")!
+        let client: any NetworkClient = try APIClient(configuration: NetworkConfiguration(baseURL: url))
+        await client.shutdown()
+        await client.shutdown()
+        await #expect(throws: NetworkError.invalidRequest(.clientClosed)) { try await client.send(Call()) }
+        await #expect(throws: NetworkError.invalidRequest(.clientClosed)) {
+            try await client.send(URLRequest(url: url), response: .empty)
+        }
+    }
+
     @Test func systemTimeoutRetainsOnlySafeTransportIdentity() {
         #expect(NetworkError.timeout(.system).transportFailure == .init(URLError(.timedOut)))
         #expect(NetworkError.transport(.init(URLError(.cancelled))).transportFailure == .init(URLError(.cancelled)))
@@ -11,6 +26,7 @@ import NetworkKit
     }
     @Test func externalConsumerCanInjectAndExecuteClientBoundary() async throws {
         struct Mock: NetworkClient {
+            func shutdown() async {}
             func send<E: Endpoint>(_ endpoint: E) async throws -> NetworkResponse<E.Response> {
                 throw NetworkError.invalidRequest(.unsupportedRequest)
             }
@@ -24,7 +40,8 @@ import NetworkKit
         #expect(try await client.send(URLRequest(url: URL(string: "https://example.invalid")!), response: .text).value == "mock")
         let configuration = NetworkConfiguration(baseURL: URL(string: "https://example.invalid")!)
         let owned: any NetworkClient = try APIClient(configuration: configuration)
-        _ = owned
+        await owned.shutdown()
+        await client.shutdown()
     }
 
     @Test func externalConsumerCanBorrowCompatibleSession() async throws {

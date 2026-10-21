@@ -3,6 +3,12 @@ import Foundation
 /// Internal seam only. URLSessionTransport supplies the foreground owned/borrowed adapter.
 internal protocol NetworkTransport: Sendable {
     func send(_ request: URLRequest) async throws -> TransportResponse
+    func shutdown() async
+}
+
+extension NetworkTransport {
+    /// Resource-free test transports need no finalization.
+    internal func shutdown() async {}
 }
 
 internal struct TransportResponse: Sendable {

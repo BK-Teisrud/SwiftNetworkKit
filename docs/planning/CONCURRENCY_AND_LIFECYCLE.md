@@ -5,8 +5,9 @@ I08 provides owned/borrowed sessions; I10 provides the public executing client. 
 [HTTP pipeline](HTTP_PIPELINE.md) and [F1 review](F1_REVIEW.md) for actual evidence.
 The contract below is approved through [ADR-0006](../decisions/ADR-0006-concurrency-and-lifecycle.md).
 I12 now implements the total-budget/watchdog and caller/timeout terminal arbitration;
-see [timing and cancellation evidence](CANCELLATION_AND_BUDGET.md). Explicit shutdown
-and its registry/races remain I13. Earlier F1 evidence does not include these I12 changes.
+see [timing and cancellation evidence](CANCELLATION_AND_BUDGET.md). I13 implements [explicit shutdown and the operation registry](SHUTDOWN_AND_CONCURRENCY.md),
+including concurrent/cancelled shutdown waiters and session ownership. Earlier F1 evidence
+does not include these I12/I13 changes; final consolidated reviews remain later work.
 
 ## Concurrent use and isolation
 
@@ -89,4 +90,4 @@ V1 has no separate drain-all-requests mode. Apps may await their calls before sh
 6. Idempotent shutdown, rejected new calls, cancelled shutdown waiters, and no cleanup deadlock.
 7. Invalid durations, raw-request precedence, stricter session resource limits, and no false hard-deadline guarantees for synchronous work.
 
-I12 timing/cancellation tests cover the relevant entries above; see the timing guide for exact assertions and native/scripted limits. The explicit shutdown/registry portions remain I13 acceptance work. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 defines infrastructure and the planned matrix; current PR-runtime CI exists, while minimum-OS/physical verification remains outstanding. F0 acceptance and separate explicit implementation authorization remain prerequisites.
+I12 timing/cancellation tests cover the relevant entries above; see the timing guide for exact assertions and native/scripted limits. I13 adds shutdown/registry coverage; see [shutdown evidence](SHUTDOWN_AND_CONCURRENCY.md) for actual assertions, cancelled waiters and owned/borrowed boundaries. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 defines infrastructure and the planned matrix; current PR-runtime CI exists, while minimum-OS/physical verification remains outstanding. F0 acceptance and separate explicit implementation authorization remain prerequisites.
