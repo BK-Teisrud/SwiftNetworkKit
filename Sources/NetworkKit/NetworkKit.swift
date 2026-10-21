@@ -1,2 +1,2 @@
-// NetworkKit provides HTTP values, configuration, and buffered request construction.
-// The executing HTTP client and transport pipeline follow in subsequent tasks.
+// NetworkKit provides HTTP values, buffered request/response handling, and an internal session adapter.
+// The public executing client and full network security/lifecycle pipeline follow separately.

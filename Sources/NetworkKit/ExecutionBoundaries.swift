@@ -1,6 +1,6 @@
 import Foundation
 
-/// Internal seam only. The URLSession adapter and its ownership rules follow in I08.
+/// Internal seam only. URLSessionTransport supplies the foreground owned/borrowed adapter.
 internal protocol NetworkTransport: Sendable {
     func send(_ request: URLRequest) async throws -> TransportResponse
 }

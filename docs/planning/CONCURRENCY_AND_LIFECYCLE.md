@@ -1,5 +1,7 @@
 # Concurrency, session ownership, and lifecycle in v1
 
+I08 evidence: the internal owned/borrowed URLSession adapter and disabled-store defaults are implemented with isolated URLProtocol tests. See [session transport review](SESSION_TRANSPORT.md), including app responsibilities and the invalidated-session limitation. Full client shutdown/operation arbitration remains I12/I13.
+
 I03 foundation evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The executing HTTP client and enforced deadlines remain outstanding. I06 adds actual hosted platform/source/DocC CI; see [CI evidence](CI_IMPLEMENTATION.md).
 
 Status: Planned contract, 2026-10-19; see [ADR-0006](../decisions/ADR-0006-concurrency-and-lifecycle.md). Configuration snapshots and per-preparation JSON encoders now have local contract tests; active-operation lifecycle/shutdown and transport remain unimplemented. See [I05 request evidence](REQUEST_ENCODING.md), including 100 concurrent preparations and the 64-test full suite.
