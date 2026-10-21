@@ -1,6 +1,6 @@
 # HTTP, response, and error contract for v1
 
-I09 applies shared URL/header security to both request builders and supplies redirect/trust policy to the internal adapter. See [security evidence](NETWORK_SECURITY.md). The public executing client remains I10.
+I09 applies shared URL/header security to both request builders and supplies redirect/trust policy to the internal adapter. See [security evidence](NETWORK_SECURITY.md). I10 now connects these policies to the public executing client; see [pipeline implementation](HTTP_PIPELINE.md).
 
 Current I07 evidence: explicit JSON/Data/UTF-8/empty response strategies, per-call status policies, sanitized errors, and shared typed/raw response interpretation are implemented. See [response review](RESPONSE_DECODING.md). Execution remains outstanding.
 
@@ -10,7 +10,7 @@ I04 evidence: endpoint URL construction and shared raw-URL validation are implem
 
 I03 evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
 
-Status: Planned contract, 2026-10-19; see [ADR-0005](../decisions/ADR-0005-http-api-contract.md). The owner selected the core choices; the rules below elaborate them. I02 implements the foundational value/error types with passing local contract tests; the client and transport pipeline remain unimplemented. See [HTTP_VALUES.md](HTTP_VALUES.md) for reviewed signatures, tests, and limitations.
+Status: Approved contract (implementation evidence above), 2026-10-19; see [ADR-0005](../decisions/ADR-0005-http-api-contract.md). The owner selected the core choices; the rules below elaborate them. I02 implements the foundational value/error types with passing local contract tests; the client and transport pipeline remain unimplemented. See [HTTP_VALUES.md](HTTP_VALUES.md) for reviewed signatures, tests, and limitations.
 
 ## Public model and entry points
 

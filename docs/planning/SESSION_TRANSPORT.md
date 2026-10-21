@@ -1,5 +1,9 @@
 # URLSession ownership and the internal transport adapter
 
+I10 update: the public `APIClient` now connects both request inputs to this shared foundation.
+See [HTTP pipeline](HTTP_PIPELINE.md) for current signatures, verification boundaries and
+remaining timing/lifecycle gates. Earlier task descriptions below retain their historical scope.
+
 I09 update: the adapter now supplies a per-operation redirect/trust delegate and shared URL/header policy. Credential stores and global session headers are incompatible; explicit app-managed cookie/cache profiles remain available for HTTPS. See [current security rules](NETWORK_SECURITY.md).
 
 I08 / #49, 2026-10-21. `URLSessionTransport` implements the internal NetworkTransport

@@ -9,7 +9,7 @@ internal struct PreparedRequest: Sendable, CustomStringConvertible, CustomDebugS
 }
 
 /// Builds buffered values and applies shared URL/header security policy.
-/// The I10 client connects these values to the secured transport.
+/// APIClient connects both preparation paths to the same secured transport and response path.
 internal enum RequestBuilder {
     private static func validateHeaders(_ headers: HTTPHeaders) throws {
         // Let URLSession derive origin/framing. Do not accept misleading manual values.

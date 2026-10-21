@@ -1,13 +1,13 @@
 # ``NetworkKit``
 
-Construct typed HTTP requests and interpret buffered responses for Apple platforms.
+Execute typed and raw buffered HTTP calls for Apple platforms.
 
 ## Overview
 
-NetworkKit currently provides HTTP values, immutable configuration, safe endpoint URLs,
-buffered JSON, Data, and UTF-8 request construction, and explicit response strategies. An internal URLSession adapter has ownership and isolated native/scripted transport tests; a public executing networking client
-is not available yet. Constructing a URLRequest does not authorize network access or
-prove TLS, redirect, session-storage, cancellation, or minimum-OS behavior.
+NetworkKit provides ``APIClient`` behind the injectable ``NetworkClient`` boundary.
+Typed endpoints and raw URLRequest inputs use shared request validation, secured
+URLSession transport, status checks and response interpretation. Total-budget enforcement,
+full shutdown/authentication/privacy review and release gates remain outstanding.
 
 Define an ``Endpoint`` with an ``EndpointPath`` and optional ``HTTPQueryItem`` values.
 Use ``NetworkConfiguration`` for client defaults and ``NetworkCallOptions`` for explicit
@@ -26,14 +26,14 @@ JSONDecoder per response. ``HTTPStatusPolicy`` defaults to 200...299 and allows 
 per-call replacements through ``NetworkCallOptions``. Status is checked before payload
 decoding; returned ``NetworkResponse`` retains status and case-insensitive headers.
 An empty JSON response fails decoding; an explicitly empty strategy skips body decoding.
-These APIs process buffered values and do not execute HTTP requests.
+ResponseStrategy can interpret local buffered values; APIClient connects it to HTTP execution.
 
 ## Session foundation
 
 An internal foreground URLSession adapter reuses one owned session or borrows an
 app-owned session. Strict defaults explicitly disable automatic cookie, credential,
 and cache stores. Borrowed sessions are never invalidated by the adapter. This is
-not yet the public client or complete redirect/trust/deadline/shutdown pipeline.
+the transport for APIClient; complete deadline/shutdown arbitration remains outstanding.
 See the repository session transport guide for compatibility and lifetime constraints.
 
 ## Network security policy
@@ -48,4 +48,15 @@ The internal adapter supplies a per-operation task delegate. It follows only val
 same-origin GET/HEAD redirects up to five hops; denied redirects remain 3xx responses.
 Loops/excess hops fail. Trust challenges use system handling; no credentials are supplied.
 See the network security guide for native versus scripted test evidence and remaining
-client, physical-device, TLS and lifecycle gates.
+physical-device, TLS and lifecycle gates.
+
+## Client execution
+
+Create ``APIClient`` with immutable ``NetworkConfiguration`` and reuse it across calls.
+Use `try await client.send(endpoint)` or `try await client.send(request, response: .text)`.
+Both return ``NetworkResponse`` with value/status/headers. No automatic retry or token
+refresh occurs. The client can own a strict session or borrow a compatible app-owned
+session, which it never invalidates. Public injection currently requires strict storage.
+Default request inactivity is 30 seconds; the planned 60-second monotonic total budget
+is not yet enforced. System timeout errors currently use NetworkError.timeout(.system).
+CancellationError remains separate; unexplained system cancellation is a transport error.

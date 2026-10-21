@@ -1,6 +1,6 @@
 import Foundation
 
-/// A typed HTTP description. Request construction and response interpretation are local; execution follows separately.
+/// A typed HTTP description. APIClient executes it through the shared secure pipeline.
 public protocol Endpoint: Sendable {
     associatedtype Response: Sendable
     var responseStrategy: ResponseStrategy<Response> { get }

@@ -1,5 +1,9 @@
 # Buffered response strategies and HTTP status validation
 
+I10 update: the public `APIClient` now connects both request inputs to this shared foundation.
+See [HTTP pipeline](HTTP_PIPELINE.md) for current signatures, verification boundaries and
+remaining timing/lifecycle gates. Earlier task descriptions below retain their historical scope.
+
 I07 / #48, 2026-10-21. This is local interpretation of an already buffered response.
 The executing client, URLSession adapter, redirect/security enforcement, total deadlines,
 and cancellation arbitration remain later work. No network request is sent by this API.

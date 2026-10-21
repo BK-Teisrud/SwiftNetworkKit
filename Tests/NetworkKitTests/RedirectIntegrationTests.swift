@@ -101,18 +101,32 @@ original.serve_forever()
         }
         #endif
         let configuration = NetworkConfiguration(baseURL: base, timeouts: try NetworkTimeouts(inactivity: 3), security: policy)
-        struct Call: Endpoint { typealias Response = EmptyResponse; let path: EndpointPath }
-        let prepared: PreparedRequest
-        if typed { prepared = try RequestBuilder.prepare(Call(path: EndpointPath(segments: ["start"])), configuration: configuration) }
-        else { prepared = try RequestBuilder.prepare(URLRequest(url: base.appendingPathComponent("start")), configuration: configuration) }
+        let acceptedRedirect = try NetworkCallOptions(acceptedStatuses: HTTPStatusPolicy(codes: [302]))
         let transport = try URLSessionTransport(dataOperation: operation, securityPolicy: policy, baseURL: base)
-        let response = try await transport.send(prepared.request)
-        #expect((response.response as? HTTPURLResponse)?.statusCode == 302)
         #if os(macOS)
-        let count = try await transport.send(URLRequest(url: base.appendingPathComponent("count")))
-        #expect(String(decoding: count.data, as: UTF8.self) == "0")
+        // Exercise the public owned-session assembly and real native redirect callbacks.
+        let client = try APIClient(configuration: configuration)
         #else
-        #expect(contacted.withLock { $0 } == [prepared.request.url!])
+        let client = try APIClient(configuration: configuration, transport: transport)
+        #endif
+        let response: NetworkResponse<EmptyResponse>
+        if typed {
+            struct RedirectCall: Endpoint {
+                typealias Response = EmptyResponse
+                let path: EndpointPath
+                let options: NetworkCallOptions
+            }
+            response = try await client.send(RedirectCall(path: EndpointPath(segments: ["start"]), options: acceptedRedirect))
+        } else {
+            response = try await client.send(URLRequest(url: base.appendingPathComponent("start")),
+                                             response: .empty, options: acceptedRedirect)
+        }
+        #expect(response.status.code == 302)
+        #if os(macOS)
+        let count = try await client.send(URLRequest(url: base.appendingPathComponent("count")), response: .text)
+        #expect(count.value == "0")
+        #else
+        #expect(contacted.withLock { $0 } == [base.appendingPathComponent("start")])
         #endif
         await transport.invalidateOwnedSession()
     }
