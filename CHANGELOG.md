@@ -6,7 +6,7 @@
 
 - Added immutable normalized NetworkOrigin/NetworkSecurityPolicy, HTTPS defaults, explicit restricted loopback HTTP, and additional raw origins without inherited default headers.
 - Bound the internal adapter to per-operation same-origin GET/HEAD redirect checks, five-hop/loop limits, and system-trust/no-credential challenge callbacks. Refined compatible sessions to prohibit credential stores/global session headers.
-- Local suite: 120 test functions in 17 suites, including real macOS loopback redirects, denied-target counters, a failing isolated origin-check mutation and explicit scripted redirect coverage on other platforms. See docs/planning/NETWORK_SECURITY.md and #50.
+- Local suite: 121 test functions in 17 suites, including real macOS loopback redirects, denied-target counters, a failing isolated origin-check mutation and explicit scripted redirect coverage on other platforms. See docs/planning/NETWORK_SECURITY.md and #50.
 - Public client, native device/TLS evidence and full deadline/authentication/shutdown work remain outstanding.
 
 ### Internal session transport and ownership

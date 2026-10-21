@@ -26,6 +26,10 @@ raw origin drops **all** client default headers (including ordinary fields) befo
 merging only explicit raw/call headers. Body Content-Type defaults remain derived when
 needed. Explicit headers must belong to the actual destination/account; origin
 permission is not credential-sharing permission. I14 must bind providers to that origin.
+An additional-origin call rejects borrowed sessions with automatic cookie stores/handling,
+which could otherwise share a domain cookie. Strict compatible sessions may make the call;
+request/delegate copies disable automatic handling. The app may use a separate origin-scoped
+client/session for an HTTPS service needing app-managed cookies.
 
 Origins expose fields explicitly for deliberate app use; default descriptions hide the
 host, URL, port, header values and credential data. Set membership is an exact normalized
@@ -95,7 +99,7 @@ whole-operation budget. Cancellation/timeout race arbitration remains I12/I13.
 
 ## Actual verification and limits
 
-The local suite passes **120 test functions in 17 suites**, including a public consumer
+The local suite passes **121 test functions in 17 suites**, including a public consumer
 without @testable. Tests cover normalized origins/ports/IDNA/IPv6, default HTTP rejection,
 loopback variants/lookalikes, forbidden HTTP headers, explicit origin permissions with
 no inherited defaults, typed/raw parity, callback completion decisions, HEAD/method/body

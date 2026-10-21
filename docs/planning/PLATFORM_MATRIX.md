@@ -97,7 +97,7 @@ All four generic platform builds and all 64 product test functions passed on eac
 
 ## I09 security-policy evidence — 2026-10-21
 
-The local suite passes 120 test functions in 17 suites on the existing macOS/Xcode/Swift
+The local suite passes 121 test functions in 17 suites on the existing macOS/Xcode/Swift
 baseline. New watchOS tests compile with warnings as errors. Real redirect integration
 uses controlled macOS loopback HTTP; iOS/watchOS/tvOS redirect tests use the actual
 policy/delegate with scripted I/O. This does not prove native redirect callbacks, ATS,

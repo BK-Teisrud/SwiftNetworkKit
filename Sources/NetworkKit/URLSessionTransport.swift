@@ -89,6 +89,13 @@ internal actor URLSessionTransport: NetworkTransport {
         guard !invalidated else { throw NetworkError.invalidRequest(.clientClosed) }
         guard input.httpBodyStream == nil else { throw NetworkError.invalidRequest(.unsupportedRequest) }
         let origin = try securityPolicy.validateRequest(input, baseURL: baseURL, allowAdditionalOrigins: true)
+        let foreignOrigin = try baseURL.map { origin != (try NetworkOrigin($0)) } ?? false
+        if foreignOrigin {
+            let config = session.configuration
+            guard config.httpCookieStorage == nil, !config.httpShouldSetCookies else {
+                throw NetworkError.invalidRequest(.unsupportedRequest)
+            }
+        }
         if origin.scheme == "http" {
             let config = session.configuration
             guard config.httpCookieStorage == nil, !config.httpShouldSetCookies, config.urlCache == nil else {
@@ -96,12 +103,12 @@ internal actor URLSessionTransport: NetworkTransport {
             }
         }
         var request = input
-        if storagePolicy == .strict || origin.scheme == "http" {
+        if storagePolicy == .strict || origin.scheme == "http" || foreignOrigin {
             request.httpShouldHandleCookies = false
             request.cachePolicy = .reloadIgnoringLocalCacheData
         }
         let delegate = try NetworkTaskDelegate(request: request, policy: securityPolicy,
-                                              disableAutomaticStorage: storagePolicy == .strict)
+                                              disableAutomaticStorage: storagePolicy == .strict || foreignOrigin)
         do {
             let result = try await dataOperation(session, request, delegate)
             try Task.checkCancellation()

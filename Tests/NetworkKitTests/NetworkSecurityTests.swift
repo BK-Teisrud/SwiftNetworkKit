@@ -253,6 +253,19 @@ private final class ChallengeSender: NSObject, URLAuthenticationChallengeSender 
         }
     }
 
+    @Test func additionalRawOriginCannotInheritAnAppManagedCookieStore() async throws {
+        let config = URLSessionConfiguration.ephemeral; config.urlCredentialStorage = nil
+        let session = URLSession(configuration: config); defer { session.invalidateAndCancel() }
+        let base = URL(string: "https://api.example.invalid")!
+        let other = URL(string: "https://other.example.invalid")!
+        let calls = OSAllocatedUnfairLock(initialState: 0)
+        let adapter = try URLSessionTransport(session: session, storagePolicy: .appManaged,
+            dataOperation: { _, _, _ in calls.withLock { $0 += 1 }; throw URLError(.unknown) },
+            securityPolicy: NetworkSecurityPolicy(additionalRawOrigins: [try NetworkOrigin(other)]), baseURL: base)
+        await #expect(throws: NetworkError.invalidRequest(.unsupportedRequest)) { try await adapter.send(URLRequest(url: other)) }
+        #expect(calls.withLock { $0 } == 0)
+    }
+
     @Test func credentialStoresAndSessionGlobalHeadersAreRejected() throws {
         for mode in 0..<2 {
             let config = URLSessionTransport.configuration()
