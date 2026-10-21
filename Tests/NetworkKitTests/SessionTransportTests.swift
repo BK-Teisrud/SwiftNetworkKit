@@ -17,7 +17,7 @@ private final class SessionStubProtocol: URLProtocol, @unchecked Sendable {
     #if os(watchOS)
     // watchOS cannot intercept URLSession with URLProtocol. Exercise the real adapter,
     // request policy and session identity with deterministic in-process I/O instead.
-    static let dataOperation: URLSessionTransport.DataOperation = { _, request in
+    static let dataOperation: URLSessionTransport.DataOperation = { _, request, _ in
         guard let url = request.url, let fixture = fixtures.withLock({ $0[url.absoluteString] }) else {
             throw URLError(.resourceUnavailable)
         }
@@ -127,6 +127,7 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
 
     @Test func defaultStoredSessionsRequireExplicitAppManagedPolicy() throws {
         let config = URLSessionConfiguration.ephemeral
+        config.urlCredentialStorage = nil
         #if !os(watchOS)
         config.protocolClasses = [SessionStubProtocol.self]
         #endif

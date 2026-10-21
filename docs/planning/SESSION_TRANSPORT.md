@@ -1,5 +1,7 @@
 # URLSession ownership and the internal transport adapter
 
+I09 update: the adapter now supplies a per-operation redirect/trust delegate and shared URL/header policy. Credential stores and global session headers are incompatible; explicit app-managed cookie/cache profiles remain available for HTTPS. See [current security rules](NETWORK_SECURITY.md).
+
 I08 / #49, 2026-10-21. `URLSessionTransport` implements the internal NetworkTransport
 boundary using one foreground URLSession. It is not a public HTTP client. The adapter
 is exercised with isolated fixtures: native URLProtocol on macOS/iOS/tvOS and a
@@ -45,8 +47,8 @@ compatibility.
 
 The default strict profile requires all disabled-store/cookie/cache settings above.
 An ordinary ephemeral/default/shared session with active stores does not qualify.
-An explicit internal appManaged policy accepts app-controlled stores/cache/cookie
-settings, while retaining foreground/no-external-delegate checks. It is an assembly
+An explicit internal appManaged policy accepts app-controlled cache/cookie
+settings (I09 additionally requires nil credential storage and empty global session headers), while retaining foreground/no-external-delegate checks. It is an assembly
 boundary for the later client API, not a public storage/cache feature added here.
 Apps retain responsibility for account isolation, deletion and limits under that policy.
 
@@ -85,9 +87,9 @@ library total budget cannot extend it. The per-request inactivity limit is alrea
 by RequestBuilder; the monotonic whole-operation budget remains I12 work. Synchronous
 hooks and OS scheduling do not gain a hard real-time guarantee.
 
-The current internal adapter uses Foundation data(for:), without the I09 redirect/trust
-policy delegate. It must not be exposed as a complete secure client before that policy
-and the shared typed/raw pipeline are connected. No automatic library retry/cache or
+I08 initially used Foundation data(for:) without a policy delegate. I09 now binds
+data(for:delegate:) to the per-operation policy. It still must not be exposed as a complete
+client before the shared typed/raw pipeline, providers and lifecycle are connected. No automatic library retry/cache or
 file/stream/background API is introduced.
 
 ## Verification and availability

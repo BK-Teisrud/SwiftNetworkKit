@@ -10,6 +10,11 @@ import NetworkKit
             let responseStrategy: ResponseStrategy<Model> = .json()
             let options = NetworkCallOptions.default
         }
+        let local = URL(string: "http://localhost:8080")!
+        let security = NetworkSecurityPolicy(allowInsecureLoopback: true, additionalRawOrigins: [try NetworkOrigin(local)])
+        #expect(try NetworkOrigin(local).port == 8080)
+        #expect(try Call(path: EndpointPath(segments: [])).request(configuration:
+            NetworkConfiguration(baseURL: local, security: security)).url == local)
         let response = HTTPURLResponse(url: URL(string: "https://example.invalid")!, statusCode: 200,
                                        httpVersion: nil, headerFields: ["Content-Type": "application/json"])!
         let call = Call(path: try EndpointPath(segments: ["items"]))

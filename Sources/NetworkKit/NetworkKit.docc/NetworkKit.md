@@ -35,3 +35,17 @@ app-owned session. Strict defaults explicitly disable automatic cookie, credenti
 and cache stores. Borrowed sessions are never invalidated by the adapter. This is
 not yet the public client or complete redirect/trust/deadline/shutdown pipeline.
 See the repository session transport guide for compatibility and lifetime constraints.
+
+## Network security policy
+
+``NetworkSecurityPolicy`` on ``NetworkConfiguration`` defaults to HTTPS and system trust.
+``NetworkOrigin`` identifies scheme, normalized host and effective port. Explicit extra
+raw origins do not inherit client default headers or authorize cross-origin redirects.
+Loopback HTTP requires an explicit development option and excludes credentials/custom
+headers and automatic storage. No ATS or trust settings are weakened.
+
+The internal adapter supplies a per-operation task delegate. It follows only validated
+same-origin GET/HEAD redirects up to five hops; denied redirects remain 3xx responses.
+Loops/excess hops fail. Trust challenges use system handling; no credentials are supplied.
+See the network security guide for native versus scripted test evidence and remaining
+client, physical-device, TLS and lifecycle gates.

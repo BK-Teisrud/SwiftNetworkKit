@@ -14,6 +14,9 @@ public enum NetworkError: Error, Sendable, Equatable, LocalizedError,
     case timeout(TimeoutReason)
 
     public enum InvalidRequestReason: String, Sendable {
+        case insecureTransport
+        case unpermittedOrigin
+        case credentialsOverHTTP
         case invalidURL
         case invalidMethod
         case invalidHeaderName

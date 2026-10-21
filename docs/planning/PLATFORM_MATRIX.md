@@ -94,3 +94,12 @@ The full suite passed 64 tests in 11 suites on macOS 15.8.1 x86_64 / Xcode 26.3 
 ## I06 hosted CI evidence — 2026-10-20
 
 All four generic platform builds and all 64 product test functions passed on each of five destinations in [bootstrap PR run 39487893701](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/39487893701): hosted macOS 15.7.9 arm64; iPhone 17 and iPad (A16), OS 26.2 build 23C54; Series 11 watch, OS 26.2 build 23S303; Apple TV 4K, OS 26.2 build 23K51. Xcode 26.3 build 17C529 / Swift 6.2.4 / SDKs 26.2, image 20260907.0337.1. Source integrity and DocC also passed. See [CI implementation](CI_IMPLEMENTATION.md) and #47 for main/enforcement evidence. This validates current value/configuration/request behavior, not unimplemented HTTP transport or minimum runtimes.
+
+## I09 security-policy evidence — 2026-10-21
+
+The local suite passes 120 test functions in 17 suites on the existing macOS/Xcode/Swift
+baseline. New watchOS tests compile with warnings as errors. Real redirect integration
+uses controlled macOS loopback HTTP; iOS/watchOS/tvOS redirect tests use the actual
+policy/delegate with scripted I/O. This does not prove native redirect callbacks, ATS,
+TLS or real watch networking on those platforms. See [security evidence](NETWORK_SECURITY.md)
+and issue #50 for hosted PR/main results. Minimum-OS and physical-device gates remain.

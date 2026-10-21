@@ -1,5 +1,7 @@
 # Security, authentication, and network policy for v1
 
+I09 implements the shared HTTPS/origin/loopback policy and per-operation redirect/trust boundary. See [security implementation and evidence](NETWORK_SECURITY.md), including precise HTTP/session restrictions and native/scripted test limits. Public client binding, providers, full lifecycle and release review remain outstanding.
+
 I08 implements strict owned-session storage defaults and bounded injection compatibility checks; see [session transport review](SESSION_TRANSPORT.md). This is not complete HTTPS/redirect/authentication/lifecycle enforcement; those remain later tasks.
 
 Status: Planned contract, 2026-10-19. Core choices are accepted in [ADR-0007](../decisions/ADR-0007-security-and-network-policy.md); details elaborate secure defaults. I02 validates foundational values and their descriptions with local tests. The transport, authentication, storage, and logging policies remain unimplemented; no complete security guarantee is claimed.

@@ -8,8 +8,8 @@ internal struct PreparedRequest: Sendable, CustomStringConvertible, CustomDebugS
     var debugDescription: String { description }
 }
 
-/// Builds buffered values only. I09/I10 must apply the network security policy
-/// before executing either typed or raw requests.
+/// Builds buffered values and applies shared URL/header security policy.
+/// The I10 client connects these values to the secured transport.
 internal enum RequestBuilder {
     private static func validateHeaders(_ headers: HTTPHeaders) throws {
         // Let URLSession derive origin/framing. Do not accept misleading manual values.
@@ -48,6 +48,7 @@ internal enum RequestBuilder {
         }
         request.allHTTPHeaderFields = headers
         request.timeoutInterval = snapshot.timeouts.inactivity
+        _ = try configuration.security.validateRequest(request, baseURL: configuration.baseURL)
         try Task.checkCancellation()
         return PreparedRequest(request: request, timeouts: snapshot.timeouts, acceptedStatuses: snapshot.acceptedStatuses)
     }
@@ -55,7 +56,9 @@ internal enum RequestBuilder {
     static func prepare(_ input: URLRequest, configuration: NetworkConfiguration,
                         options: NetworkCallOptions = .default) throws -> PreparedRequest {
         try Task.checkCancellation()
-        _ = try RequestURLBuilder.validatedURL(for: input, baseURL: configuration.baseURL)
+        _ = try URLInputValidation.components(configuration.baseURL, isBase: true)
+        let origin = try configuration.security.validateRequest(input, baseURL: configuration.baseURL, allowAdditionalOrigins: true)
+        let sameOrigin = origin == (try NetworkOrigin(configuration.baseURL))
         guard input.httpBodyStream == nil else { throw NetworkError.invalidRequest(.unsupportedRequest) }
         let method = try HTTPMethod(input.httpMethod ?? "GET")
         try validateBody(method: method, hasBody: input.httpBody != nil)
@@ -67,7 +70,9 @@ internal enum RequestBuilder {
         let headers = try HTTPHeaders(rawHeaders.fields.merging(options.headers.fields) { _, call in call })
         let mergedOptions = try NetworkCallOptions(headers: headers,
             inactivityTimeout: options.inactivityTimeout, totalTimeout: options.totalTimeout, acceptedStatuses: options.acceptedStatuses)
-        let snapshot = try ConfigurationSnapshot(configuration: configuration, options: mergedOptions)
+        let rawConfiguration = NetworkConfiguration(baseURL: configuration.baseURL,
+            headers: sameOrigin ? configuration.headers : HTTPHeaders(), timeouts: configuration.timeouts, security: configuration.security)
+        let snapshot = try ConfigurationSnapshot(configuration: rawConfiguration, options: mergedOptions)
         var request = input
         var fields = snapshot.headers.fields
         if request.httpBody != nil && fields["content-type"] == nil {
@@ -75,6 +80,7 @@ internal enum RequestBuilder {
         }
         request.allHTTPHeaderFields = fields
         request.timeoutInterval = snapshot.timeouts.inactivity
+        _ = try configuration.security.validateRequest(request, baseURL: configuration.baseURL, allowAdditionalOrigins: true)
         try Task.checkCancellation()
         return PreparedRequest(request: request, timeouts: snapshot.timeouts, acceptedStatuses: snapshot.acceptedStatuses)
     }
