@@ -1,18 +1,20 @@
 # Platform and toolchain matrix
 
-I03 foundation evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The executing HTTP client, enforced deadlines, and minimum-OS/physical-device evidence remain outstanding. I06 adds actual PR CI; see [CI evidence](CI_IMPLEMENTATION.md).
-
-Status: Support plan accepted 2026-10-19; see [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md). This is not verified product support; the package baseline, values/errors, configuration, and buffered request construction are implemented; HTTP transport is not.
+Current implementation: the initial public HTTP pipeline is delivered through I10.
+[F1 review](F1_REVIEW.md) records contract/evidence review and the I11 gate outcome source.
+The table below cites the cumulative I10 main run; I11 actual counts are recorded on #52.
+Support remains the accepted plan from [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md),
+with minimum-OS and physical verification still outstanding.
 
 ## Approved delivery baseline
 
 | Platform | Minimum v1 OS | Locally observed SDK | Build | Unit / integration | Tested runtime / device |
 | --- | --- | --- | --- | --- | --- |
-| iOS | 17.0 | iOS 26.2 | Generic device build passed | 64 tests passed on iPhone 17 / iOS 26.2 simulator | Minimum OS and physical device unverified |
-| iPadOS | 17.0 | iOS/iPadOS 26.2 | iOS generic build passed | 64 tests passed on iPad (A16) / iOS 26.2 simulator | Minimum OS and physical device unverified |
-| macOS | 14.0 | macOS 26.2 | Generic build passed on hosted arm64; local x86_64 builds passed | 64 tests passed on hosted macOS 15.7.9 arm64 and local 15.8.1 x86_64 | Minimum OS unverified |
-| watchOS | 10.0 | watchOS 26.2 | Generic device build passed | 64 tests passed on Series 11 (42mm) / watchOS 26.2 simulator | Minimum OS and physical device unverified |
-| tvOS | 17.0 | tvOS 26.2 | Generic device build passed | 64 tests passed on Apple TV 4K (3rd generation) / tvOS 26.2 simulator | Minimum OS and physical device unverified |
+| iOS | 17.0 | iOS 26.2 | Generic device build passed | 135 test functions / 18 suites passed on iPhone 17 / iOS 26.2 simulator | Minimum OS and physical device unverified |
+| iPadOS | 17.0 | iOS/iPadOS 26.2 | iOS generic build passed | 135 test functions / 18 suites passed on iPad (A16) / iOS 26.2 simulator | Minimum OS and physical device unverified |
+| macOS | 14.0 | macOS 26.2 | Generic build passed on hosted arm64; local x86_64 builds passed | 135 test functions / 18 suites passed on hosted macOS 15.7.9 arm64 and local 15.8.1 x86_64 | Minimum OS unverified |
+| watchOS | 10.0 | watchOS 26.2 | Generic device build passed | 135 test functions / 18 suites passed on Series 11 (42mm) / watchOS 26.2 simulator | Minimum OS and physical device unverified |
+| tvOS | 17.0 | tvOS 26.2 | Generic device build passed | 135 test functions / 18 suites passed on Apple TV 4K (3rd generation) / tvOS 26.2 simulator | Minimum OS and physical device unverified |
 | visionOS | Deferred; no v1 support | Outside selected delivery | Outside v1 | Outside v1 | Outside v1 |
 
 A newer SDK supplies build-time APIs; it does not require the host app to run that OS version. iOS/iPadOS share SDK/deployment foundations, but relevant device/environment differences still need assessment. Mac Catalyst, Linux, Windows, and Android support are not selected.
@@ -50,7 +52,7 @@ For each check record commit SHA, date, Xcode build, Swift version, SDK, actual 
 
 Cover builds on every selected platform and relevant normal/error/cancellation/concurrency tests. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 separates PR runtimes from release tests on minimum OS versions and representative newer stable runtimes. If CI cannot run a minimum, establish an explicit alternative with real evidence before release; a newer simulator build is insufficient.
 
-Use physical devices where scenarios require them. Background transfers, Keychain groups, and local networking are deferred by v1 scope and are not established by this matrix. I06 provides the current build/PR-runtime evidence below; minimum-OS and physical-device verification remains outstanding.
+Use physical devices where scenarios require them. Background transfers, Keychain groups, and local networking are deferred by v1 scope and are not established by this matrix. I06 introduced real CI; I10 cumulative build/PR-runtime evidence is linked below; minimum-OS and physical-device verification remains outstanding.
 
 ## Bounded declaration check for DEC-04
 
@@ -103,3 +105,13 @@ uses controlled macOS loopback HTTP; iOS/watchOS/tvOS redirect tests use the act
 policy/delegate with scripted I/O. This does not prove native redirect callbacks, ATS,
 TLS or real watch networking on those platforms. See [security evidence](NETWORK_SECURITY.md)
 and issue #50 for hosted PR/main results. Minimum-OS and physical-device gates remain.
+
+## I10 cumulative baseline and I11 gate — 2026-10-21
+
+[Main run 39652280325](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/39652280325)
+on `a09605739b92e53954b4ce4f3a6fb9b1825af8ce` passed all seven checks and 135 test
+functions / 18 suites on each table destination. Xcode 26.3 / 17C529, Swift 6.2.4,
+SDKs/simulator runtimes 26.2, macOS 15.7.9 arm64, image 20260907.0337.1. Exact UUIDs
+are recorded in the log. This supersedes the earlier table counts, not their historical
+records below. [F1 review](F1_REVIEW.md) and #52 record I11's additional gate tests and
+final PR/main evidence. Native versus scripted transport boundaries are explicit there.

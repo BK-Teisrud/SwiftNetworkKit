@@ -1,16 +1,12 @@
 # HTTP, response, and error contract for v1
 
-I09 applies shared URL/header security to both request builders and supplies redirect/trust policy to the internal adapter. See [security evidence](NETWORK_SECURITY.md). I10 now connects these policies to the public executing client; see [pipeline implementation](HTTP_PIPELINE.md).
-
-Current I07 evidence: explicit JSON/Data/UTF-8/empty response strategies, per-call status policies, sanitized errors, and shared typed/raw response interpretation are implemented. See [response review](RESPONSE_DECODING.md). Execution remains outstanding.
-
-Current I05 evidence: typed/raw request preparation, header precedence, buffered JSON/Data/UTF-8 bodies, and per-preparation JSON encoders are implemented; 64 local tests passed. See [request encoding review](REQUEST_ENCODING.md). I06 adds actual four-platform source/build/test/DocC CI; see [CI evidence](CI_IMPLEMENTATION.md). Execution/security/total deadlines remain outstanding.
-
-I04 evidence: endpoint URL construction and shared raw-URL validation are implemented; 44 local tests passed. See [endpoint review](ENDPOINT_URLS.md). The executing pipeline and HTTPS/loopback/redirect enforcement remain outstanding.
-
-I03 evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). The HTTP client, enforced deadlines, and platform-wide verification remain outstanding.
-
-Status: Approved contract (implementation evidence above), 2026-10-19; see [ADR-0005](../decisions/ADR-0005-http-api-contract.md). The owner selected the core choices; the rules below elaborate them. I02 implements the foundational value/error types with passing local contract tests; the client and transport pipeline remain unimplemented. See [HTTP_VALUES.md](HTTP_VALUES.md) for reviewed signatures, tests, and limitations.
+Current implementation: I01–I10 deliver the initial public typed/raw HTTP pipeline.
+See [API and current limits](HTTP_PIPELINE.md), [F1 verification](F1_REVIEW.md),
+[request encoding](REQUEST_ENCODING.md), [response interpretation](RESPONSE_DECODING.md)
+and [network policy](NETWORK_SECURITY.md). The approved contract below follows
+[ADR-0005](../decisions/ADR-0005-http-api-contract.md). Total-budget/cancellation/shutdown,
+authentication-provider and later release requirements remain F2 work; approved v1
+requirements are not all fulfilled merely because F1 is accepted.
 
 ## Public model and entry points
 
@@ -71,7 +67,7 @@ Success defaults to 200–299. A call may explicitly replace this with a nonempt
 
 Status refers to the final HTTP response URLSession exposes after redirect policy. Accepting a status does not control redirects. ADR-0007 permits same-origin GET/HEAD redirects up to five hops, with no automatic cross-origin, downgrade, or mutating replay.
 
-Planned order: validate input → build/validate request and encode body → apply configuration and security boundaries → execute URLSession → confirm HTTP response → validate status and any content type → apply response strategy → return NetworkResponse. Cancellation applies throughout. No library retry engine or token-refresh cycle is included.
+Implemented core order: validate input → build/validate request and encode body → apply configuration and security boundaries → execute URLSession → confirm HTTP response → validate status and any content type → apply response strategy → return NetworkResponse. Cancellation applies throughout. No library retry engine or token-refresh cycle is included.
 
 ## Error contract
 

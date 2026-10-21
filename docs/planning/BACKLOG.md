@@ -1,6 +1,6 @@
 # Requirements traceability and initial backlog
 
-Baseline: 20 domain epics, seven decision issues, and three governance/release issues. This is planned work, not implementation. See the [GitHub register](GITHUB_REGISTER.md) for live links.
+Original planning baseline: 20 domain epics, seven decision issues, and three governance/release issues. The table below preserves the original domain classification/phase allocation, not live completion. I01–I10 now implement the initial HTTP slice; [F1 review](F1_REVIEW.md) accounts for delivered work and open domain epics continuing in F2. See the [GitHub register](GITHUB_REGISTER.md) for live links.
 
 | ID | Requirement / task | Classification | Phase |
 | --- | --- | --- | --- |

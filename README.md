@@ -16,6 +16,8 @@ The repository and package are named **SwiftNetworkKit**. The library product, m
 
 ## Documentation
 
+- [F1 HTTP core verification and remaining v1 gates](docs/planning/F1_REVIEW.md)
+
 - [Public HTTP client, integration evidence and current limits](docs/planning/HTTP_PIPELINE.md)
 
 - [HTTPS, loopback, redirect/trust rules and actual evidence](docs/planning/NETWORK_SECURITY.md)

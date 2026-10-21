@@ -1,6 +1,8 @@
 # Readiness review before implementation
 
-I03 foundation evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](CONFIGURATION.md). I04 adds endpoint/URL construction; I05 adds request encoding and header precedence with 64 passing local tests. See [request review](REQUEST_ENCODING.md). I06 adds real four-platform CI and required quality-gate enforcement; see [CI evidence](CI_IMPLEMENTATION.md). The executing HTTP client, enforced deadlines, and minimum-OS/physical-device evidence remain outstanding.
+Current status: implementation is authorized and I01–I10 deliver the initial public
+HTTP pipeline. [F1 review](F1_REVIEW.md) documents the I11 gate and remaining F2/release
+requirements. This readiness document retains the earlier preparation context.
 
 Updated: 2026-10-20. **The owner has instructed implementation to begin; START-00 / #41 is closed.** [ADR-0012](../decisions/ADR-0012-implementation-start.md) records the instruction in context. I01 adapts the owner's Xcode starter into the approved package baseline. F0 remains the historical planning approval.
 
@@ -12,7 +14,7 @@ Updated: 2026-10-20. **The owner has instructed implementation to begin; START-0
 - I01–I23 have criteria, test requirements, parent epics, and native blocked-by links. The [work queue](WORK_QUEUE.md) gives the recommended serial order.
 - Main requires PRs without bypass. A limited creation exception permits admins to create new v* tags; update/deletion have no bypass. Immutable releases are enabled. Web sign-off is disabled with specific approval because no DCO is used.
 - The project has one status model, a sorted work queue, a completed view, and verified import/status transitions.
-- The manifest, library/test targets, and I02 value/error contract tests now exist. The HTTP client and pipeline remain unimplemented. One real CI workflow exists; no tags or releases exist.
+- The manifest, library/test targets, and I02 value/error contract tests now exist. The initial HTTP client/pipeline now exist; total-budget/shutdown/authentication work remains in F2. One real CI workflow exists; no tags or releases exist.
 
 ## Outstanding items
 
