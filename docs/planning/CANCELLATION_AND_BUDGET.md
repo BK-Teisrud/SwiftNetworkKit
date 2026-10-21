@@ -2,8 +2,7 @@
 
 I12 / [#53](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/53), 2026-10-21.
 The existing typed/raw public client now enforces the approved monotonic total budget
-and isolates cancellation to each call. Explicit shutdown/client operation registration
-remains I13 / #54; no provider, diagnostics or deferred module is introduced here.
+and isolates cancellation to each call. I13 / #54 adds [explicit shutdown and operation registration](SHUTDOWN_AND_CONCURRENCY.md); no provider, diagnostics or deferred module is introduced here.
 
 ## Timing and precedence
 

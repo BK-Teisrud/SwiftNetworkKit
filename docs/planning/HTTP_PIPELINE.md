@@ -57,8 +57,8 @@ session is not automatically compatible; [session rules](SESSION_TRANSPORT.md) e
 The app must lend an active session and retain control of its lifetime. Never start new
 calls after external invalidation: Foundation has no public validity query and may raise
 a native exception for an already invalidated session. Client cleanup never invalidates
-a borrowed session. Owned transport cleanup invalidates only its own session. Explicit
-client shutdown/operation registration remains I13.
+a borrowed session. Owned transport cleanup invalidates only its own session. Explicit client shutdown/operation registration is now implemented in I13;
+see [shutdown behavior](SHUTDOWN_AND_CONCURRENCY.md).
 
 ## One execution and response path
 
@@ -88,7 +88,7 @@ Status/response/decoding failures occur outside this catch boundary and keep the
 
 Request inactivity limits (default 30 seconds) reach URLSession. The total budget (default 60 seconds) now spans operation entry through final result selection,
 with per-call terminal arbitration and joined worker/watchdog cleanup in I12. See the timing
-guide for cooperative-cancellation limits. I13 still owns explicit shutdown/lifecycle registration.
+guide for cooperative-cancellation limits. I13 now implements [explicit shutdown/lifecycle registration](SHUTDOWN_AND_CONCURRENCY.md).
 The independent platform resource limit still applies to injected sessions.
 
 ## Verification and limits

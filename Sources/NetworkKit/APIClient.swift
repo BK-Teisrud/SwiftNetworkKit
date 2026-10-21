@@ -2,6 +2,8 @@ import Foundation
 
 /// Injectable boundary shared by typed endpoints and explicitly constructed requests.
 public protocol NetworkClient: Sendable {
+    /// Closes admission, cancels this client's work and awaits shared cleanup.
+    func shutdown() async
     func send<E: Endpoint>(_ endpoint: E) async throws -> NetworkResponse<E.Response>
     func send<Value: Sendable>(_ request: URLRequest, response: ResponseStrategy<Value>,
                                options: NetworkCallOptions) async throws -> NetworkResponse<Value>
@@ -23,6 +25,7 @@ public final class APIClient: NetworkClient {
     private let configuration: NetworkConfiguration
     private let transport: any NetworkTransport
     private let clock: any NetworkClock
+    private let lifecycle = ClientLifecycle()
 
     /// Creates and reuses a private session with automatic stores disabled.
     public init(configuration: NetworkConfiguration) throws {
@@ -62,10 +65,12 @@ public final class APIClient: NetworkClient {
 
     public func send<E: Endpoint>(_ endpoint: E) async throws -> NetworkResponse<E.Response> {
         let start = clock.now()
+        let registration = try lifecycle.register()
+        defer { lifecycle.finish(registration) }
         try Task.checkCancellation()
         let options = endpoint.options
         return try await NetworkOperation.run(clock: clock, start: start,
-            total: options.totalTimeout ?? configuration.timeouts.total) { operation in
+            total: options.totalTimeout ?? configuration.timeouts.total, registration: registration) { operation in
             let prepared = try RequestBuilder.prepare(endpoint, configuration: self.configuration, options: options)
             try operation.checkpoint()
             return try await self.execute(prepared, response: endpoint.responseStrategy,
@@ -76,11 +81,26 @@ public final class APIClient: NetworkClient {
     public func send<Value: Sendable>(_ request: URLRequest, response: ResponseStrategy<Value>,
                                       options: NetworkCallOptions) async throws -> NetworkResponse<Value> {
         let start = clock.now()
+        let registration = try lifecycle.register()
+        defer { lifecycle.finish(registration) }
         return try await NetworkOperation.run(clock: clock, start: start,
-            total: options.totalTimeout ?? configuration.timeouts.total) { operation in
+            total: options.totalTimeout ?? configuration.timeouts.total, registration: registration) { operation in
             let prepared = try RequestBuilder.prepare(request, configuration: self.configuration, options: options)
             try operation.checkpoint()
             return try await self.execute(prepared, response: response, checkpoint: { try operation.checkpoint() })
+        }
+    }
+
+    /// Idempotent immediate-cancel shutdown. All callers await the same cleanup,
+    /// including cancelled shutdown waiters. Borrowed sessions are never invalidated.
+    public func shutdown() async {
+        if let registrations = lifecycle.beginShutdown() {
+            for registration in registrations { registration.cancel() }
+            await lifecycle.waitUntilDrained()
+            await transport.shutdown()
+            lifecycle.completeShutdown()
+        } else {
+            await lifecycle.waitUntilClosed()
         }
     }
 
