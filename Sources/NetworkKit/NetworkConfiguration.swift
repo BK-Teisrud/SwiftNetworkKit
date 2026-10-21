@@ -25,13 +25,15 @@ public struct NetworkTimeouts: Sendable, Equatable {
 public struct NetworkConfiguration: Sendable, CustomStringConvertible, CustomDebugStringConvertible {
     public let baseURL: URL
     public let headers: HTTPHeaders
+    public let security: NetworkSecurityPolicy
     public let timeouts: NetworkTimeouts
 
     public init(baseURL: URL, headers: HTTPHeaders = HTTPHeaders(),
-                timeouts: NetworkTimeouts = .default) {
+                timeouts: NetworkTimeouts = .default, security: NetworkSecurityPolicy = .default) {
         self.baseURL = baseURL
         self.headers = headers
         self.timeouts = timeouts
+        self.security = security
     }
 
     public var description: String { "NetworkConfiguration(headerCount: \(headers.count))" }

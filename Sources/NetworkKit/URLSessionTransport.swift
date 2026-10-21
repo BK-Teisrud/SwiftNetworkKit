@@ -1,12 +1,12 @@
 import Foundation
 
-/// Internal transport only; the public client and complete security policy follow later.
+/// Internal transport with per-operation redirect/trust policy; public client follows in I10.
 internal actor URLSessionTransport: NetworkTransport {
     enum StoragePolicy: Sendable { case strict, appManaged }
 
-    typealias DataOperation = @Sendable (URLSession, URLRequest) async throws -> TransportResponse
-    static let systemDataOperation: DataOperation = { session, request in
-        let (data, response) = try await session.data(for: request)
+    typealias DataOperation = @Sendable (URLSession, URLRequest, NetworkTaskDelegate) async throws -> TransportResponse
+    static let systemDataOperation: DataOperation = { session, request, delegate in
+        let (data, response) = try await session.data(for: request, delegate: delegate)
         return TransportResponse(data: data, response: response)
     }
 
@@ -14,6 +14,8 @@ internal actor URLSessionTransport: NetworkTransport {
     let ownsSession: Bool
     private let storagePolicy: StoragePolicy
     private let dataOperation: DataOperation
+    private let securityPolicy: NetworkSecurityPolicy
+    private let baseURL: URL?
     private var invalidated = false
 
     /// Starts from ephemeral, then explicitly disables even in-memory automatic stores.
@@ -34,7 +36,8 @@ internal actor URLSessionTransport: NetworkTransport {
 
     /// Custom protocolClasses are an internal test seam, never a public plugin system.
     init(ownedConfiguration: URLSessionConfiguration = URLSessionTransport.configuration(),
-         dataOperation: @escaping DataOperation = URLSessionTransport.systemDataOperation) throws {
+         dataOperation: @escaping DataOperation = URLSessionTransport.systemDataOperation,
+         securityPolicy: NetworkSecurityPolicy = .default, baseURL: URL? = nil) throws {
         guard let copy = ownedConfiguration.copy() as? URLSessionConfiguration else {
             throw NetworkError.invalidRequest(.invalidConfiguration)
         }
@@ -43,23 +46,34 @@ internal actor URLSessionTransport: NetworkTransport {
         ownsSession = true
         storagePolicy = .strict
         self.dataOperation = dataOperation
+        self.securityPolicy = securityPolicy
+        self.baseURL = baseURL
     }
 
     init(session: URLSession, storagePolicy: StoragePolicy = .strict,
-         dataOperation: @escaping DataOperation = URLSessionTransport.systemDataOperation) throws {
+         dataOperation: @escaping DataOperation = URLSessionTransport.systemDataOperation,
+         securityPolicy: NetworkSecurityPolicy = .default, baseURL: URL? = nil) throws {
         guard session.delegate == nil else { throw NetworkError.invalidRequest(.unsupportedRequest) }
         try Self.validate(session.configuration, storagePolicy: storagePolicy)
         self.session = session
         ownsSession = false
         self.storagePolicy = storagePolicy
         self.dataOperation = dataOperation
+        self.securityPolicy = securityPolicy
+        self.baseURL = baseURL
     }
 
     private static func validate(_ configuration: URLSessionConfiguration, storagePolicy: StoragePolicy) throws {
+        guard (configuration.httpAdditionalHeaders ?? [:]).isEmpty else {
+            throw NetworkError.invalidRequest(.unsupportedRequest)
+        }
         guard configuration.identifier == nil else { throw NetworkError.invalidRequest(.unsupportedRequest) }
         guard configuration.timeoutIntervalForRequest.isFinite, configuration.timeoutIntervalForRequest > 0,
               configuration.timeoutIntervalForResource.isFinite, configuration.timeoutIntervalForResource > 0 else {
             throw NetworkError.invalidRequest(.invalidConfiguration)
+        }
+        if storagePolicy == .appManaged && configuration.urlCredentialStorage != nil {
+            throw NetworkError.invalidRequest(.unsupportedRequest)
         }
         if storagePolicy == .strict {
             guard configuration.httpCookieStorage == nil, !configuration.httpShouldSetCookies,
@@ -74,14 +88,37 @@ internal actor URLSessionTransport: NetworkTransport {
         try Task.checkCancellation()
         guard !invalidated else { throw NetworkError.invalidRequest(.clientClosed) }
         guard input.httpBodyStream == nil else { throw NetworkError.invalidRequest(.unsupportedRequest) }
+        let origin = try securityPolicy.validateRequest(input, baseURL: baseURL, allowAdditionalOrigins: true)
+        let foreignOrigin = try baseURL.map { origin != (try NetworkOrigin($0)) } ?? false
+        if foreignOrigin {
+            let config = session.configuration
+            guard config.httpCookieStorage == nil, !config.httpShouldSetCookies else {
+                throw NetworkError.invalidRequest(.unsupportedRequest)
+            }
+        }
+        if origin.scheme == "http" {
+            let config = session.configuration
+            guard config.httpCookieStorage == nil, !config.httpShouldSetCookies, config.urlCache == nil else {
+                throw NetworkError.invalidRequest(.unsupportedRequest)
+            }
+        }
         var request = input
-        if storagePolicy == .strict {
+        if storagePolicy == .strict || origin.scheme == "http" || foreignOrigin {
             request.httpShouldHandleCookies = false
             request.cachePolicy = .reloadIgnoringLocalCacheData
         }
-        let result = try await dataOperation(session, request)
-        try Task.checkCancellation()
-        return result
+        let delegate = try NetworkTaskDelegate(request: request, policy: securityPolicy,
+                                              disableAutomaticStorage: storagePolicy == .strict || foreignOrigin)
+        do {
+            let result = try await dataOperation(session, request, delegate)
+            try Task.checkCancellation()
+            if let failure = delegate.failure { throw failure }
+            return result
+        } catch {
+            try Task.checkCancellation()
+            if let failure = delegate.failure { throw failure }
+            throw error
+        }
     }
 
     /// Ownership primitive, not the client shutdown/operation registry planned in I13.
