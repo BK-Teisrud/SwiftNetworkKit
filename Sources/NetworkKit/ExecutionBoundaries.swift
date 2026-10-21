@@ -13,14 +13,14 @@ internal struct TransportResponse: Sendable {
 /// Monotonic instants, shared by the production clock and deterministic test clocks.
 /// No wall-clock dates or public scheduler/plugin API are involved.
 internal protocol NetworkClock: Sendable {
-    func now() async -> ContinuousClock.Instant
+    func now() -> ContinuousClock.Instant
     func sleep(until deadline: ContinuousClock.Instant) async throws
 }
 
 internal struct ContinuousNetworkClock: NetworkClock {
     private let clock = ContinuousClock()
 
-    func now() async -> ContinuousClock.Instant { clock.now }
+    func now() -> ContinuousClock.Instant { clock.now }
 
     func sleep(until deadline: ContinuousClock.Instant) async throws {
         try await clock.sleep(until: deadline)

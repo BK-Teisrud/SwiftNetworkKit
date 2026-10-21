@@ -6,8 +6,7 @@ Execute typed and raw buffered HTTP calls for Apple platforms.
 
 NetworkKit provides ``APIClient`` behind the injectable ``NetworkClient`` boundary.
 Typed endpoints and raw URLRequest inputs use shared request validation, secured
-URLSession transport, status checks and response interpretation. Total-budget enforcement,
-full shutdown/authentication/privacy review and release gates remain outstanding.
+URLSession transport, status checks and response interpretation. Full shutdown/authentication/privacy review and release gates remain outstanding.
 
 Define an ``Endpoint`` with an ``EndpointPath`` and optional ``HTTPQueryItem`` values.
 Use ``NetworkConfiguration`` for client defaults and ``NetworkCallOptions`` for explicit
@@ -33,7 +32,7 @@ ResponseStrategy can interpret local buffered values; APIClient connects it to H
 An internal foreground URLSession adapter reuses one owned session or borrows an
 app-owned session. Strict defaults explicitly disable automatic cookie, credential,
 and cache stores. Borrowed sessions are never invalidated by the adapter. This is
-the transport for APIClient; complete deadline/shutdown arbitration remains outstanding.
+the transport for APIClient; per-call timing/cancellation is enforced; complete shutdown remains outstanding.
 See the repository session transport guide for compatibility and lifetime constraints.
 
 ## Network security policy
@@ -57,6 +56,10 @@ Use `try await client.send(endpoint)` or `try await client.send(request, respons
 Both return ``NetworkResponse`` with value/status/headers. No automatic retry or token
 refresh occurs. The client can own a strict session or borrow a compatible app-owned
 session, which it never invalidates. Public injection currently requires strict storage.
-Default request inactivity is 30 seconds; the planned 60-second monotonic total budget
-is not yet enforced. System timeout errors currently use NetworkError.timeout(.system).
+Default request inactivity is 30 seconds; the monotonic total budget is 60 seconds.
+Explicit call options override client defaults. Preparation, transport and response handling
+share one budget. Timeout/caller cancellation cancels only that call, and both worker and
+watchdog are joined before return. Cooperative cleanup can delay return; no hard real-time
+latency is promised. System timeout errors use NetworkError.timeout(.system);
+NetworkError.transportFailure exposes its safe known system code without userInfo.
 CancellationError remains separate; unexplained system cancellation is a transport error.

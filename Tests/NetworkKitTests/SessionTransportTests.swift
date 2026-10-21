@@ -13,6 +13,7 @@ final class SessionStubProtocol: URLProtocol, @unchecked Sendable {
         var hold = false
         var onStart: (@Sendable () -> Void)? = nil
         var onRequest: (@Sendable (URLRequest) -> Void)? = nil
+        var onStop: (@Sendable () -> Void)? = nil
     }
     #if os(watchOS)
     // watchOS cannot intercept URLSession with URLProtocol. Exercise the real adapter,
@@ -52,7 +53,11 @@ final class SessionStubProtocol: URLProtocol, @unchecked Sendable {
         client?.urlProtocol(self, didLoad: fixture.data)
         client?.urlProtocolDidFinishLoading(self)
     }
-    override func stopLoading() {}
+    override func stopLoading() {
+        guard let url = request.url else { return }
+        let callback = Self.fixtures.withLock { $0[url.absoluteString]?.onStop }
+        callback?()
+    }
 }
 
 private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
