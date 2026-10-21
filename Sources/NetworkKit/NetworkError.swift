@@ -27,6 +27,7 @@ public enum NetworkError: Error, Sendable, Equatable, LocalizedError,
     public enum InvalidResponseReason: String, Sendable {
         case nonHTTPResponse
         case invalidStatusCode
+        case invalidHeaders
         case unexpectedContentType
         case redirectLimitExceeded
     }

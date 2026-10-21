@@ -3,6 +3,7 @@ import Foundation
 internal struct PreparedRequest: Sendable, CustomStringConvertible, CustomDebugStringConvertible {
     let request: URLRequest
     let timeouts: NetworkTimeouts
+    let acceptedStatuses: HTTPStatusPolicy
     var description: String { "PreparedRequest" }
     var debugDescription: String { description }
 }
@@ -48,7 +49,7 @@ internal enum RequestBuilder {
         request.allHTTPHeaderFields = headers
         request.timeoutInterval = snapshot.timeouts.inactivity
         try Task.checkCancellation()
-        return PreparedRequest(request: request, timeouts: snapshot.timeouts)
+        return PreparedRequest(request: request, timeouts: snapshot.timeouts, acceptedStatuses: snapshot.acceptedStatuses)
     }
 
     static func prepare(_ input: URLRequest, configuration: NetworkConfiguration,
@@ -65,7 +66,7 @@ internal enum RequestBuilder {
         // Client defaults < explicit raw fields < explicit call options.
         let headers = try HTTPHeaders(rawHeaders.fields.merging(options.headers.fields) { _, call in call })
         let mergedOptions = try NetworkCallOptions(headers: headers,
-            inactivityTimeout: options.inactivityTimeout, totalTimeout: options.totalTimeout)
+            inactivityTimeout: options.inactivityTimeout, totalTimeout: options.totalTimeout, acceptedStatuses: options.acceptedStatuses)
         let snapshot = try ConfigurationSnapshot(configuration: configuration, options: mergedOptions)
         var request = input
         var fields = snapshot.headers.fields
@@ -75,6 +76,6 @@ internal enum RequestBuilder {
         request.allHTTPHeaderFields = fields
         request.timeoutInterval = snapshot.timeouts.inactivity
         try Task.checkCancellation()
-        return PreparedRequest(request: request, timeouts: snapshot.timeouts)
+        return PreparedRequest(request: request, timeouts: snapshot.timeouts, acceptedStatuses: snapshot.acceptedStatuses)
     }
 }
