@@ -1,6 +1,6 @@
 # CI and test plan after implementation authorization
 
-Status: Core plan accepted 2026-10-19; see [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md). I01–I05 provide a real package and 64 local product test functions. I06 introduces the real workflow and required quality-gate after verified hosted PR/main runs. See [CI implementation](CI_IMPLEMENTATION.md) for exact jobs, commands, and actual evidence.
+Status: Core plan accepted 2026-10-19; see [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md). I01–I10 provide the executing HTTP slice. I06 introduced the real workflow and required quality-gate after verified hosted PR/main runs. The cumulative I10 suite passed 135 test functions on each of five runtimes; [F1 review](F1_REVIEW.md) records the I11 gate and further acceptance coverage. See [CI implementation](CI_IMPLEMENTATION.md) for exact jobs, commands, and actual evidence.
 
 ## Mandatory PR jobs
 

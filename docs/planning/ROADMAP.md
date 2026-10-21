@@ -8,7 +8,7 @@ Rights, v1 scope, platforms/toolchain, APIs, concurrency, security, and CI were 
 
 ## F1 – HTTP core
 
-Satisfy selected endpoint/request/response/error/configuration contracts with deterministic tests and real platform CI.
+The initial HTTP slice is delivered through I01–I10. I11 / #52 records the [F1 contract and evidence review](F1_REVIEW.md), including cumulative real platform CI, typed/raw parity, known limits and phase closure. F1 acceptance requires successful I11 PR/main checks; the issue records the actual outcome. Open domain epics retain their remaining v1 work in F2.
 
 ## F2 – Production hardening and v1 gate
 

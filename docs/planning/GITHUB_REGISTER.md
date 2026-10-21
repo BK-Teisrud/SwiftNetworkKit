@@ -62,7 +62,7 @@ OPS-01 / #30 is complete through PR #65; team review remains a future transition
 
 ## Concrete work queue after F0
 
-- [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41): explicit implementation authorization, still open.
-- [I01–I23 with all issue links](WORK_QUEUE.md): #42–64, all Blocked before authorization.
+- [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41): explicit implementation authorization, completed on 2026-10-20 (ADR-0012).
+- [I01–I23 with all issue links](WORK_QUEUE.md): #42–64; their original blocked state preceded authorization. I01–I10 are complete; I11 reviews F1. Consult the live queue and [F1 review](F1_REVIEW.md) for current phase accounting.
 - [Setup verification #40](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/40): completed without product code.
 - [Sorted Work Queue](https://github.com/users/BK-Teisrud/projects/6/views/7) and [Completed](https://github.com/users/BK-Teisrud/projects/6/views/8).
