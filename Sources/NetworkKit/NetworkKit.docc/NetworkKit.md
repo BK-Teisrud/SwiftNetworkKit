@@ -5,7 +5,7 @@ Construct typed HTTP requests and interpret buffered responses for Apple platfor
 ## Overview
 
 NetworkKit currently provides HTTP values, immutable configuration, safe endpoint URLs,
-buffered JSON, Data, and UTF-8 request construction, and explicit response strategies. An executing networking client
+buffered JSON, Data, and UTF-8 request construction, and explicit response strategies. An internal URLSession adapter has ownership and isolated native/scripted transport tests; a public executing networking client
 is not available yet. Constructing a URLRequest does not authorize network access or
 prove TLS, redirect, session-storage, cancellation, or minimum-OS behavior.
 
@@ -27,3 +27,11 @@ per-call replacements through ``NetworkCallOptions``. Status is checked before p
 decoding; returned ``NetworkResponse`` retains status and case-insensitive headers.
 An empty JSON response fails decoding; an explicitly empty strategy skips body decoding.
 These APIs process buffered values and do not execute HTTP requests.
+
+## Session foundation
+
+An internal foreground URLSession adapter reuses one owned session or borrows an
+app-owned session. Strict defaults explicitly disable automatic cookie, credential,
+and cache stores. Borrowed sessions are never invalidated by the adapter. This is
+not yet the public client or complete redirect/trust/deadline/shutdown pipeline.
+See the repository session transport guide for compatibility and lifetime constraints.

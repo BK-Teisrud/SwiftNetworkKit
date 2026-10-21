@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Internal session transport and ownership
+
+- Added one reused foreground URLSession adapter, explicit disabled-store defaults, strict/app-managed injection checks, and owned-only invalidation.
+- Added isolated native URLProtocol tests (macOS/iOS/tvOS) and scripted internal I/O tests (watchOS, where URLProtocol is unsupported) for ownership, settings, concurrency, active external invalidation, request copies and unsupported inputs. Full local suite: 98 test functions in 15 suites passed.
+- Public client, redirect/trust policy, complete cancellation/deadline/shutdown arbitration and release evidence remain later work. See docs/planning/SESSION_TRANSPORT.md and #49.
+
 ### Response strategies and status policy
 
 - Added explicit JSON/Data/strict UTF-8/empty response strategies and per-operation native JSONDecoder settings.
