@@ -18,15 +18,17 @@ extension NetworkClient {
 /// Buffered foreground HTTP client with one immutable configuration and shared pipeline.
 ///
 /// Calls do not retry or refresh credentials. The configured inactivity timeout is
-/// applied to each request; the monotonic total-budget watchdog is not implemented yet.
+/// applied to each request; a monotonic total budget covers preparation through delivery.
 public final class APIClient: NetworkClient {
     private let configuration: NetworkConfiguration
     private let transport: any NetworkTransport
+    private let clock: any NetworkClock
 
     /// Creates and reuses a private session with automatic stores disabled.
     public init(configuration: NetworkConfiguration) throws {
         try Self.validate(configuration)
         self.configuration = configuration
+        clock = ContinuousNetworkClock()
         transport = try URLSessionTransport(
             ownedConfiguration: URLSessionTransport.configuration(timeouts: configuration.timeouts),
             securityPolicy: configuration.security, baseURL: configuration.baseURL)
@@ -39,15 +41,18 @@ public final class APIClient: NetworkClient {
     public init(configuration: NetworkConfiguration, session: URLSession) throws {
         try Self.validate(configuration)
         self.configuration = configuration
+        clock = ContinuousNetworkClock()
         transport = try URLSessionTransport(session: session,
             securityPolicy: configuration.security, baseURL: configuration.baseURL)
     }
 
     /// Internal test boundary; consumers inject NetworkClient, not a transport plugin.
-    internal init(configuration: NetworkConfiguration, transport: any NetworkTransport) throws {
+    internal init(configuration: NetworkConfiguration, transport: any NetworkTransport,
+                  clock: any NetworkClock = ContinuousNetworkClock()) throws {
         try Self.validate(configuration)
         self.configuration = configuration
         self.transport = transport
+        self.clock = clock
     }
 
     private static func validate(_ configuration: NetworkConfiguration) throws {
@@ -56,19 +61,32 @@ public final class APIClient: NetworkClient {
     }
 
     public func send<E: Endpoint>(_ endpoint: E) async throws -> NetworkResponse<E.Response> {
-        let prepared = try RequestBuilder.prepare(endpoint, configuration: configuration)
-        return try await execute(prepared, response: endpoint.responseStrategy)
+        let start = clock.now()
+        try Task.checkCancellation()
+        let options = endpoint.options
+        return try await NetworkOperation.run(clock: clock, start: start,
+            total: options.totalTimeout ?? configuration.timeouts.total) { operation in
+            let prepared = try RequestBuilder.prepare(endpoint, configuration: self.configuration, options: options)
+            try operation.checkpoint()
+            return try await self.execute(prepared, response: endpoint.responseStrategy,
+                                          checkpoint: { try operation.checkpoint() })
+        }
     }
 
     public func send<Value: Sendable>(_ request: URLRequest, response: ResponseStrategy<Value>,
                                       options: NetworkCallOptions) async throws -> NetworkResponse<Value> {
-        let prepared = try RequestBuilder.prepare(request, configuration: configuration, options: options)
-        return try await execute(prepared, response: response)
+        let start = clock.now()
+        return try await NetworkOperation.run(clock: clock, start: start,
+            total: options.totalTimeout ?? configuration.timeouts.total) { operation in
+            let prepared = try RequestBuilder.prepare(request, configuration: self.configuration, options: options)
+            try operation.checkpoint()
+            return try await self.execute(prepared, response: response, checkpoint: { try operation.checkpoint() })
+        }
     }
 
-    private func execute<Value: Sendable>(_ prepared: PreparedRequest,
-                                          response: ResponseStrategy<Value>) async throws -> NetworkResponse<Value> {
-        try Task.checkCancellation()
+    private func execute<Value: Sendable>(_ prepared: PreparedRequest, response: ResponseStrategy<Value>,
+                                          checkpoint: @Sendable () throws -> Void) async throws -> NetworkResponse<Value> {
+        try checkpoint()
         let received: TransportResponse
         do {
             received = try await transport.send(prepared.request)
@@ -84,7 +102,7 @@ public final class APIClient: NetworkClient {
             }
             throw NetworkError.transport(.init(domain: underlying.domain, code: underlying.code))
         }
-        try Task.checkCancellation()
+        try checkpoint()
         return try response.decode(received.data, response: received.response,
                                    acceptedStatuses: prepared.acceptedStatuses)
     }

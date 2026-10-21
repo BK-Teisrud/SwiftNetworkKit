@@ -3,6 +3,12 @@ import Testing
 import NetworkKit
 
 @Suite struct PublicResponseAPITests {
+    @Test func systemTimeoutRetainsOnlySafeTransportIdentity() {
+        #expect(NetworkError.timeout(.system).transportFailure == .init(URLError(.timedOut)))
+        #expect(NetworkError.transport(.init(URLError(.cancelled))).transportFailure == .init(URLError(.cancelled)))
+        #expect(NetworkError.timeout(.totalBudget).transportFailure == nil)
+        #expect(NetworkError.decoding.transportFailure == nil)
+    }
     @Test func externalConsumerCanInjectAndExecuteClientBoundary() async throws {
         struct Mock: NetworkClient {
             func send<E: Endpoint>(_ endpoint: E) async throws -> NetworkResponse<E.Response> {

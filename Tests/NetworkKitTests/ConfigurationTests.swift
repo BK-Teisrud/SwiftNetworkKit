@@ -1,5 +1,6 @@
 import Foundation
 import Testing
+import os
 @testable import NetworkKit
 
 @Suite struct ConfigurationTests {
@@ -87,16 +88,22 @@ private actor StubTransport: NetworkTransport {
     }
 }
 
-/// Scripted advancement is sufficient to verify the seam; I12 adds watchdog races.
-private actor AdvancingClock: NetworkClock {
-    private var instant: ContinuousClock.Instant
-    private(set) var deadlines: [ContinuousClock.Instant] = []
-    init(start: ContinuousClock.Instant) { instant = start }
-    func now() -> ContinuousClock.Instant { instant }
-    func sleep(until deadline: ContinuousClock.Instant) throws {
+/// Small advancement fixture for the seam; OperationBudgetTests covers watchdog races.
+private final class AdvancingClock: NetworkClock {
+    private struct State: Sendable {
+        var instant: ContinuousClock.Instant
+        var deadlines: [ContinuousClock.Instant] = []
+    }
+    private let state: OSAllocatedUnfairLock<State>
+    init(start: ContinuousClock.Instant) { state = OSAllocatedUnfairLock(initialState: State(instant: start)) }
+    var deadlines: [ContinuousClock.Instant] { state.withLock { $0.deadlines } }
+    func now() -> ContinuousClock.Instant { state.withLock { $0.instant } }
+    func sleep(until deadline: ContinuousClock.Instant) async throws {
         try Task.checkCancellation()
-        deadlines.append(deadline)
-        if deadline > instant { instant = deadline }
+        state.withLock {
+            $0.deadlines.append(deadline)
+            if deadline > $0.instant { $0.instant = deadline }
+        }
     }
 }
 
@@ -116,12 +123,12 @@ private actor AdvancingClock: NetworkClock {
         let start = ContinuousClock().now
         let fake = AdvancingClock(start: start)
         let clock: any NetworkClock = fake
-        let deadline = await clock.now().advanced(by: .seconds(60))
+        let deadline = clock.now().advanced(by: .seconds(60))
         try await clock.sleep(until: deadline)
-        #expect(await clock.now() == deadline)
+        #expect(clock.now() == deadline)
         try await clock.sleep(until: start)
-        #expect(await clock.now() == deadline)
-        #expect(await fake.deadlines == [deadline, start])
+        #expect(clock.now() == deadline)
+        #expect(fake.deadlines == [deadline, start])
     }
 
     @Test func productionClockCancellation() async throws {

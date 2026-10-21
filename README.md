@@ -4,7 +4,7 @@
 
 A native networking library for Apple platforms, planned as a Swift package with no external package dependencies.
 
-**Status: Initial buffered HTTP execution is implemented through `APIClient` and the injectable `NetworkClient` boundary.** Typed endpoints and raw URLRequest inputs share secured transport, status validation and JSON/Data/UTF-8/empty response handling. This is not yet a complete v1: total-budget enforcement, full lifecycle/authentication/privacy review and release gates remain outstanding. See the [HTTP pipeline guide](docs/planning/HTTP_PIPELINE.md).
+**Status: Initial buffered HTTP execution is implemented through `APIClient` and the injectable `NetworkClient` boundary.** Typed endpoints and raw URLRequest inputs share secured transport, status validation and JSON/Data/UTF-8/empty response handling. This is not yet a complete v1: full lifecycle/authentication/privacy review and release gates remain outstanding. I12 enforces per-call cancellation and the monotonic total budget; see the [timing guide](docs/planning/CANCELLATION_AND_BUDGET.md). See the [HTTP pipeline guide](docs/planning/HTTP_PIPELINE.md).
 
 Open the repository-root Package.swift in Xcode. The package is named SwiftNetworkKit and exposes the NetworkKit library. Tests cover HTTP values, configuration, construction, response interpretation, session ownership, network policy and client integration, with platform-specific evidence described in the guides. See [implementation authorization](docs/decisions/ADR-0012-implementation-start.md).
 
@@ -15,6 +15,8 @@ Foundation/URLSession is the primary HTTP transport. Swift Concurrency, injectab
 The repository and package are named **SwiftNetworkKit**. The library product, module, and import name will be **NetworkKit**, with one library module in v1. The first stable release is limited to the HTTP core; other modules are deferred. The package and target now exist; The initial public HTTP pipeline is implemented; later v1 gates remain open. See [v1 scope](docs/planning/V1_SCOPE.md) and [ADR-0003](docs/decisions/ADR-0003-v1-scope-and-naming.md).
 
 ## Documentation
+
+- [Cancellation, total budget and cleanup evidence](docs/planning/CANCELLATION_AND_BUDGET.md)
 
 - [F1 HTTP core verification and remaining v1 gates](docs/planning/F1_REVIEW.md)
 

@@ -4,6 +4,9 @@ I10 / #51, 2026-10-21. `APIClient` connects the approved request builders, secur
 URLSession transport and response interpreter. This is an initial buffered HTTP slice,
 not a complete v1 or a release approval. See the [work queue](WORK_QUEUE.md).
 
+I12 update: [per-call cancellation and the total budget](CANCELLATION_AND_BUDGET.md) are now enforced.
+The sections below describe current behavior; the original I10 evidence remains dated.
+
 ## Public boundary
 
 `NetworkClient: Sendable` has two asynchronous throwing operations:
@@ -77,14 +80,16 @@ from adapter policy are preserved. Other transport errors retain only NSError do
 URL, payload, userInfo, localized text and underlying error objects are discarded. Default
 error descriptions omit the domain. A system NSURLErrorDomain/timedOut becomes
 `NetworkError.timeout(.system)`: this does not prove an inactivity-versus-resource cause.
-Unexplained URLError.cancelled remains `.transport`; actual task cancellation wins via
-Task.checkCancellation and uses CancellationError. Explicit CancellationError is preserved.
+Unexplained URLError.cancelled remains `.transport`; observed task cancellation normalizes
+to CancellationError. I12 arbitration preserves an already recorded total timeout or
+completion instead of overwriting it with a later cancellation. Explicit CancellationError
+remains separate.
 Status/response/decoding failures occur outside this catch boundary and keep their category.
 
-Request inactivity limits (default 30 seconds) reach URLSession. A prepared total budget
-(default 60 seconds) is **not yet enforced**. I12 adds the monotonic watchdog and terminal
-cause arbitration. I13 adds lifecycle arbitration. There is no complete deadline/shutdown
-claim in I10; the independent platform resource limit still applies to injected sessions.
+Request inactivity limits (default 30 seconds) reach URLSession. The total budget (default 60 seconds) now spans operation entry through final result selection,
+with per-call terminal arbitration and joined worker/watchdog cleanup in I12. See the timing
+guide for cooperative-cancellation limits. I13 still owns explicit shutdown/lifecycle registration.
+The independent platform resource limit still applies to injected sessions.
 
 ## Verification and limits
 

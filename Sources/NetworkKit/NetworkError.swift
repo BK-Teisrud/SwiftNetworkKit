@@ -1,8 +1,8 @@
 import Foundation
 
 /// Structured failures without raw payloads, URLs, or underlying error objects.
-/// CancellationError remains separate; transport cancellation requires later
-/// operation-context normalization rather than a category inferred here.
+/// CancellationError remains separate; the operation boundary records cancellation
+/// and total-budget causes rather than inferring them from a system cancelled code.
 public enum NetworkError: Error, Sendable, Equatable, LocalizedError,
     CustomStringConvertible, CustomDebugStringConvertible {
     case invalidRequest(InvalidRequestReason)
@@ -12,6 +12,16 @@ public enum NetworkError: Error, Sendable, Equatable, LocalizedError,
     case encoding
     case decoding
     case timeout(TimeoutReason)
+
+    /// Safe system identity for ordinary transport failures and URLSession's
+    /// known timeout code. No underlying error, URL, or userInfo is retained.
+    public var transportFailure: TransportFailure? {
+        switch self {
+        case .transport(let failure): failure
+        case .timeout(.system): TransportFailure(URLError(.timedOut))
+        default: nil
+        }
+    }
 
     public enum InvalidRequestReason: String, Sendable {
         case insecureTransport

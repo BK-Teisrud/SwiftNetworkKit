@@ -25,9 +25,10 @@ internal enum RequestBuilder {
         }
     }
 
-    static func prepare<E: Endpoint>(_ endpoint: E, configuration: NetworkConfiguration) throws -> PreparedRequest {
+    static func prepare<E: Endpoint>(_ endpoint: E, configuration: NetworkConfiguration,
+                                     options: NetworkCallOptions? = nil) throws -> PreparedRequest {
         try Task.checkCancellation()
-        let options = endpoint.options
+        let options = options ?? endpoint.options
         let snapshot = try ConfigurationSnapshot(configuration: configuration, options: options)
         try validateHeaders(snapshot.headers)
         let method = endpoint.method
