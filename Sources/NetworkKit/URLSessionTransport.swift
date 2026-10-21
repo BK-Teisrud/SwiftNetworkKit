@@ -4,9 +4,16 @@ import Foundation
 internal actor URLSessionTransport: NetworkTransport {
     enum StoragePolicy: Sendable { case strict, appManaged }
 
+    typealias DataOperation = @Sendable (URLSession, URLRequest) async throws -> TransportResponse
+    static let systemDataOperation: DataOperation = { session, request in
+        let (data, response) = try await session.data(for: request)
+        return TransportResponse(data: data, response: response)
+    }
+
     let session: URLSession
     let ownsSession: Bool
     private let storagePolicy: StoragePolicy
+    private let dataOperation: DataOperation
     private var invalidated = false
 
     /// Starts from ephemeral, then explicitly disables even in-memory automatic stores.
@@ -26,7 +33,8 @@ internal actor URLSessionTransport: NetworkTransport {
     }
 
     /// Custom protocolClasses are an internal test seam, never a public plugin system.
-    init(ownedConfiguration: URLSessionConfiguration = URLSessionTransport.configuration()) throws {
+    init(ownedConfiguration: URLSessionConfiguration = URLSessionTransport.configuration(),
+         dataOperation: @escaping DataOperation = URLSessionTransport.systemDataOperation) throws {
         guard let copy = ownedConfiguration.copy() as? URLSessionConfiguration else {
             throw NetworkError.invalidRequest(.invalidConfiguration)
         }
@@ -34,14 +42,17 @@ internal actor URLSessionTransport: NetworkTransport {
         session = URLSession(configuration: copy)
         ownsSession = true
         storagePolicy = .strict
+        self.dataOperation = dataOperation
     }
 
-    init(session: URLSession, storagePolicy: StoragePolicy = .strict) throws {
+    init(session: URLSession, storagePolicy: StoragePolicy = .strict,
+         dataOperation: @escaping DataOperation = URLSessionTransport.systemDataOperation) throws {
         guard session.delegate == nil else { throw NetworkError.invalidRequest(.unsupportedRequest) }
         try Self.validate(session.configuration, storagePolicy: storagePolicy)
         self.session = session
         ownsSession = false
         self.storagePolicy = storagePolicy
+        self.dataOperation = dataOperation
     }
 
     private static func validate(_ configuration: URLSessionConfiguration, storagePolicy: StoragePolicy) throws {
@@ -68,9 +79,9 @@ internal actor URLSessionTransport: NetworkTransport {
             request.httpShouldHandleCookies = false
             request.cachePolicy = .reloadIgnoringLocalCacheData
         }
-        let (data, response) = try await session.data(for: request)
+        let result = try await dataOperation(session, request)
         try Task.checkCancellation()
-        return TransportResponse(data: data, response: response)
+        return result
     }
 
     /// Ownership primitive, not the client shutdown/operation registry planned in I13.

@@ -14,6 +14,22 @@ private final class SessionStubProtocol: URLProtocol, @unchecked Sendable {
         var onStart: (@Sendable () -> Void)? = nil
         var onRequest: (@Sendable (URLRequest) -> Void)? = nil
     }
+    #if os(watchOS)
+    // watchOS cannot intercept URLSession with URLProtocol. Exercise the real adapter,
+    // request policy and session identity with deterministic in-process I/O instead.
+    static let dataOperation: URLSessionTransport.DataOperation = { _, request in
+        guard let url = request.url, let fixture = fixtures.withLock({ $0[url.absoluteString] }) else {
+            throw URLError(.resourceUnavailable)
+        }
+        fixture.onRequest?(request)
+        fixture.onStart?()
+        guard !fixture.hold else { throw URLError(.cancelled) }
+        return TransportResponse(data: fixture.data,
+            response: HTTPURLResponse(url: url, statusCode: fixture.status, httpVersion: "HTTP/1.1", headerFields: fixture.headers)!)
+    }
+    #else
+    static let dataOperation = URLSessionTransport.systemDataOperation
+    #endif
     static let fixtures = OSAllocatedUnfairLock(initialState: [String: Fixture]())
     static func install(_ fixture: Fixture) -> URL {
         let url = URL(string: "https://example.invalid/" + UUID().uuidString)!
@@ -44,7 +60,9 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
 @Suite struct SessionTransportTests {
     private func configuration() -> URLSessionConfiguration {
         let config = URLSessionTransport.configuration()
+        #if !os(watchOS)
         config.protocolClasses = [SessionStubProtocol.self]
+        #endif
         return config
     }
     private func fixture() -> URL {
@@ -67,7 +85,7 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
 
     @Test func ownedSessionIsReusedAndSnapshotsItsConfiguration() async throws {
         let config = configuration()
-        let transport = try URLSessionTransport(ownedConfiguration: config)
+        let transport = try URLSessionTransport(ownedConfiguration: config, dataOperation: SessionStubProtocol.dataOperation)
         let session = await transport.session
         config.httpShouldSetCookies = true
         let url = fixture(); defer { SessionStubProtocol.remove(url) }
@@ -91,23 +109,31 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
         let session = URLSession(configuration: configuration())
         defer { session.invalidateAndCancel() }
         let url = fixture(); defer { SessionStubProtocol.remove(url) }
-        var adapter: URLSessionTransport? = try URLSessionTransport(session: session)
+        var adapter: URLSessionTransport? = try URLSessionTransport(session: session, dataOperation: SessionStubProtocol.dataOperation)
         #expect(await adapter!.session === session)
         #expect(await adapter!.ownsSession == false)
         _ = try await adapter!.send(URLRequest(url: url))
         await adapter!.invalidateOwnedSession()
         adapter = nil
+        #if os(watchOS)
+        // Actual URLSession I/O remains host integration/release evidence on watchOS.
+        let otherConsumer = try URLSessionTransport(session: session, dataOperation: SessionStubProtocol.dataOperation)
+        #expect(try await otherConsumer.send(URLRequest(url: url)).data == Data("buffered".utf8))
+        #else
         let (data, _) = try await session.data(for: URLRequest(url: url))
         #expect(data == Data("buffered".utf8))
+        #endif
     }
 
     @Test func defaultStoredSessionsRequireExplicitAppManagedPolicy() throws {
         let config = URLSessionConfiguration.ephemeral
+        #if !os(watchOS)
         config.protocolClasses = [SessionStubProtocol.self]
+        #endif
         let session = URLSession(configuration: config)
         defer { session.invalidateAndCancel() }
-        #expect(throws: NetworkError.invalidRequest(.invalidConfiguration)) { try URLSessionTransport(session: session) }
-        let borrowed = try URLSessionTransport(session: session, storagePolicy: .appManaged)
+        #expect(throws: NetworkError.invalidRequest(.invalidConfiguration)) { try URLSessionTransport(session: session, dataOperation: SessionStubProtocol.dataOperation) }
+        let borrowed = try URLSessionTransport(session: session, storagePolicy: .appManaged, dataOperation: SessionStubProtocol.dataOperation)
         _ = borrowed
         #expect(session.configuration.httpCookieStorage != nil)
         #expect(session.configuration.httpShouldSetCookies)
@@ -118,7 +144,7 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
         let session = URLSession(configuration: configuration(), delegate: UnsupportedSessionDelegate(), delegateQueue: nil)
         defer { session.invalidateAndCancel() }
         #expect(throws: NetworkError.invalidRequest(.unsupportedRequest)) {
-            try URLSessionTransport(session: session, storagePolicy: .appManaged)
+            try URLSessionTransport(session: session, storagePolicy: .appManaged, dataOperation: SessionStubProtocol.dataOperation)
         }
     }
 
@@ -135,12 +161,12 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
             }
             let session = URLSession(configuration: config)
             defer { session.invalidateAndCancel() }
-            #expect(throws: NetworkError.invalidRequest(.invalidConfiguration)) { try URLSessionTransport(session: session) }
+            #expect(throws: NetworkError.invalidRequest(.invalidConfiguration)) { try URLSessionTransport(session: session, dataOperation: SessionStubProtocol.dataOperation) }
         }
     }
 
     @Test func concurrentCallsOnOneSessionRemainIndependent() async throws {
-        let transport = try URLSessionTransport(ownedConfiguration: configuration())
+        let transport = try URLSessionTransport(ownedConfiguration: configuration(), dataOperation: SessionStubProtocol.dataOperation)
         let url = fixture(); defer { SessionStubProtocol.remove(url) }
         try await withThrowingTaskGroup(of: Void.self) { group in
             for _ in 0..<20 {
@@ -155,7 +181,7 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
     }
 
     @Test func streamsAreRejectedBeforeTransport() async throws {
-        let transport = try URLSessionTransport(ownedConfiguration: configuration())
+        let transport = try URLSessionTransport(ownedConfiguration: configuration(), dataOperation: SessionStubProtocol.dataOperation)
         var request = URLRequest(url: URL(string: "https://example.invalid")!)
         request.httpBodyStream = InputStream(data: Data())
         await #expect(throws: NetworkError.invalidRequest(.unsupportedRequest)) { try await transport.send(request) }
@@ -165,7 +191,7 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
     @Test func cancellationAtEntryDoesNotStartRequest() async throws {
         try await Task {
             withUnsafeCurrentTask { $0?.cancel() }
-            let transport = try URLSessionTransport(ownedConfiguration: configuration())
+            let transport = try URLSessionTransport(ownedConfiguration: configuration(), dataOperation: SessionStubProtocol.dataOperation)
             await #expect(throws: CancellationError.self) {
                 try await transport.send(URLRequest(url: URL(string: "https://example.invalid")!))
             }
@@ -175,11 +201,17 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
 
     @Test(.timeLimit(.minutes(1))) func externalInvalidationStopsAnActiveBorrowedOperation() async throws {
         let session = URLSession(configuration: configuration())
-        let adapter = try URLSessionTransport(session: session)
+        let adapter = try URLSessionTransport(session: session, dataOperation: SessionStubProtocol.dataOperation)
         let signal = AsyncStream<Void>.makeStream()
         let url = SessionStubProtocol.install(.init(data: Data(), status: 200, headers: [:], hold: true,
                                                    onStart: { signal.continuation.yield(()) }))
         defer { SessionStubProtocol.remove(url); signal.continuation.finish() }
+        #if os(watchOS)
+        // The scripted executor reports cancellation; this does not prove watch networking.
+        await #expect(throws: URLError(.cancelled)) { try await adapter.send(URLRequest(url: url)) }
+        #expect(await adapter.session === session)
+        session.invalidateAndCancel()
+        #else
         let operation = Task { try await adapter.send(URLRequest(url: url)) }
         var iterator = signal.stream.makeAsyncIterator()
         _ = await iterator.next()
@@ -191,6 +223,7 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
             #expect(error.code == .cancelled)
         }
         #expect(await adapter.session === session)
+        #endif
     }
 
     @Test func invalidResourceLimitsAndOwnedStoresAreRejected() throws {
@@ -200,7 +233,7 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
             if index == 1 { config.timeoutIntervalForRequest = 0 }
             if index == 2 { config.urlCache = URLCache(memoryCapacity: 1024, diskCapacity: 0) }
             #expect(throws: NetworkError.invalidRequest(.invalidConfiguration)) {
-                try URLSessionTransport(ownedConfiguration: config)
+                try URLSessionTransport(ownedConfiguration: config, dataOperation: SessionStubProtocol.dataOperation)
             }
         }
     }
@@ -210,7 +243,7 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
         let url = SessionStubProtocol.install(.init(data: Data(), status: 200, headers: [:],
             onRequest: { request in observed.withLock { $0.append(request) } }))
         defer { SessionStubProtocol.remove(url) }
-        let adapter = try URLSessionTransport(ownedConfiguration: configuration())
+        let adapter = try URLSessionTransport(ownedConfiguration: configuration(), dataOperation: SessionStubProtocol.dataOperation)
         var input = URLRequest(url: url)
         input.httpShouldHandleCookies = true
         input.cachePolicy = .returnCacheDataDontLoad
@@ -228,7 +261,7 @@ private final class UnsupportedSessionDelegate: NSObject, URLSessionDelegate {}
         #if os(macOS) || os(iOS) || os(watchOS)
         let config = URLSessionConfiguration.background(withIdentifier: "NetworkKitTest-" + UUID().uuidString)
         #expect(throws: NetworkError.invalidRequest(.unsupportedRequest)) {
-            try URLSessionTransport(ownedConfiguration: config)
+            try URLSessionTransport(ownedConfiguration: config, dataOperation: SessionStubProtocol.dataOperation)
         }
         #else
         // tvOS does not offer this constructor. Its owned profile is foreground-only.

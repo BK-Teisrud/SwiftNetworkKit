@@ -2,8 +2,8 @@
 
 I08 / #49, 2026-10-21. `URLSessionTransport` implements the internal NetworkTransport
 boundary using one foreground URLSession. It is not a public HTTP client. The adapter
-is only exercised with explicit test URLProtocol fixtures in this task; no public
-network requests or production TLS/security claims are made.
+is exercised with isolated fixtures: native URLProtocol on macOS/iOS/tvOS and a
+scripted internal I/O boundary on watchOS. No production TLS/security claim is made.
 
 ## Construction and storage
 
@@ -29,10 +29,11 @@ original request remains unchanged. Explicit header fields are not automatic sto
 scoped authentication and sensitive-header rules remain I09/I14 work.
 
 An owned adapter validates and copies its configuration before constructing one session;
-all sends reuse that session. Custom protocolClasses are an internal test seam, not a
+all sends reuse that session. Custom protocolClasses on supported platforms and a Sendable DataOperation closure are internal test seams, not a
 public transport plugin. Background configurations and invalid finite/positive session
-timeouts are rejected before creating an owned session. Protocol fixtures intercept
-all requests in their selected test sessions; an unknown fixture fails locally.
+timeouts are rejected before creating an owned session. Fixtures intercept all requests in their selected test paths; an unknown fixture fails locally.
+The production DataOperation always calls URLSession.data(for:); the scripted operation
+is explicitly selected only by tests and never chosen as a fallback after network failure.
 
 ## Borrowing and compatibility
 
@@ -68,8 +69,9 @@ Borrowed sessions are untouched. Deinitialization also invalidates only owned se
 Full client shutdown, active-operation registries, borrowed-operation cancellation,
 shared completion and watchdog cleanup remain I12/I13; this primitive is not that API.
 
-External invalidation can stop a currently active borrowed operation; a test verifies
-Foundation's URLError.cancelled is preserved for later cause classification. The app
+External invalidation can stop a currently active borrowed operation; native URLProtocol tests on macOS/iOS/tvOS verify
+Foundation's URLError.cancelled is preserved for later cause classification. watchOS
+exercises the same forwarding/identity boundary with a scripted cancellation. The app
 must keep an injected session valid while lending it. In an isolated local experiment,
 starting a *new* async data task after session invalidation raised an Objective-C
 NSException rather than a catchable Swift error. Foundation exposes no reliable public
@@ -101,8 +103,8 @@ asserts the owned foreground configuration because it does not offer that constr
 The test-only URLProtocol subclass restates Foundation's inherited unchecked Sendable
 conformance. Its instances have no mutable fields; the shared per-URL fixture registry
 is protected with OSAllocatedUnfairLock. No library unchecked Sendable declaration is
-introduced. Unique fixture URLs and per-session protocolClasses prevent cross-test
-or public-network dependencies.
+introduced. Unique fixture URLs, per-session protocolClasses where supported, and explicit watchOS
+DataOperation injection prevent cross-test/public-network dependencies in the corrected suite.
 
 The inspected SDK 26.2 Foundation interface declares data(for:delegate:) from macOS 12,
 iOS 15, watchOS 8 and tvOS 15, within every selected minimum. The test lock is available
@@ -114,3 +116,21 @@ Primary references: [Apple URLSession](https://developer.apple.com/documentation
 [ephemeral configuration](https://developer.apple.com/documentation/foundation/urlsessionconfiguration/ephemeral),
 [cookie storage](https://developer.apple.com/documentation/foundation/urlsessionconfiguration/httpcookiestorage),
 and [session invalidation](https://developer.apple.com/documentation/foundation/urlsession/finishtasksandinvalidate()).
+
+## watchOS test isolation correction
+
+The initial hosted run [39625774288](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/39625774288)
+passed source integrity, macOS/iPhone/iPad/tvOS and DocC, but watchOS ignored custom
+URLProtocol handlers and attempted DNS resolution for the reserved example.invalid
+fixture host. Those tests failed; the required quality-gate correctly blocked merge.
+This was not merely a GitHub queue delay. Apple explicitly documents that custom
+[URLProtocol implementations are unsupported on watchOS](https://developer.apple.com/documentation/foundation/urlprotocol).
+
+The corrected suite never selects that handler as watchOS I/O. It injects a deterministic
+internal DataOperation while still constructing the actual adapter/session, exercising
+configuration, owned/borrowed identity, request policies, reuse, concurrency and error
+forwarding. macOS/iOS/tvOS retain real URLSession + URLProtocol integration, including
+borrowed-session usability and active external invalidation. watchOS scripted tests do
+not prove its URLSession data transfer or external-invalidation delivery; real watch
+networking is an outstanding integration/physical-device release requirement. No test
+is replaced with a skip or a swallowed failure, and production execution is unchanged.
