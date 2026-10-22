@@ -130,6 +130,39 @@ original.serve_forever()
         #endif
         await transport.invalidateOwnedSession()
     }
+    @Test(arguments: ["limit", "loop", "cross-origin"])
+    func terminalRedirectFailureCancelsOnlyItsUnderlyingTask(scenario: String) throws {
+        let base = URL(string: "https://example.invalid/start")!
+        let request = URLRequest(url: base)
+        let session = URLSession(configuration: URLSessionTransport.configuration())
+        let task = session.dataTask(with: request) // Never resumed; no networking.
+        let unrelated = session.dataTask(with: request)
+        defer { task.cancel(); unrelated.cancel(); session.invalidateAndCancel() }
+        let delegate = try NetworkTaskDelegate(request: request, policy: .default, disableAutomaticStorage: true)
+        let hops = scenario == "limit" ? 6 : 1
+        var current = request
+        for index in 1...hops {
+            var next = current
+            next.url = scenario == "loop" ? base : scenario == "cross-origin"
+                ? URL(string: "https://other.invalid/denied")! : base.deletingLastPathComponent().appendingPathComponent("step\(index)")
+            let response = HTTPURLResponse(url: current.url!, statusCode: 302, httpVersion: nil, headerFields: nil)!
+            let result = OSAllocatedUnfairLock<URLRequest?>(initialState: nil)
+            delegate.urlSession(session, task: task, willPerformHTTPRedirection: response, newRequest: next,
+                completionHandler: { approved in result.withLock { $0 = approved } })
+            if index < hops { #expect(result.withLock { $0 } != nil) }
+            else { #expect(result.withLock { $0 } == nil) }
+            current = next
+        }
+        #expect(unrelated.state == .suspended)
+        if scenario == "cross-origin" {
+            #expect(delegate.failure == nil)
+            #expect(task.state == .suspended) // Decline only: preserve the raw 302 contract.
+        } else {
+            #expect(delegate.failure == .invalidResponse(.redirectLimitExceeded))
+            try #require(task.state == .canceling || task.state == .completed)
+        }
+    }
+
     @Test(.timeLimit(.minutes(1)), arguments: ["GET", "HEAD", "limit", "loop"])
     func sameOriginRedirectsHaveABoundedLifetime(_ scenario: String) async throws {
         let method = scenario == "HEAD" ? "HEAD" : "GET"

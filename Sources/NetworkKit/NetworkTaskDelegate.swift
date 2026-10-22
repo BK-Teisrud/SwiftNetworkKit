@@ -53,7 +53,12 @@ internal final class NetworkTaskDelegate: NSObject, URLSessionTaskDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask,
                     willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest,
                     completionHandler: @escaping @Sendable (URLRequest?) -> Void) {
-        completionHandler(redirectedRequest(response: response, proposed: request))
+        let approved = redirectedRequest(response: response, proposed: request)
+        // A recorded loop/hop-limit failure is terminal. Do not depend on
+        // Foundation finishing delivery of a declined empty redirect response.
+        // Ordinary policy-denied redirects have no failure and keep their response.
+        if failure != nil { task.cancel() }
+        completionHandler(approved)
     }
 
     static func challengeDisposition(for method: String) -> URLSession.AuthChallengeDisposition {

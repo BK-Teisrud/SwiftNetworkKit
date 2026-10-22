@@ -92,7 +92,7 @@ DNS/hosts change, paid service or global cache replacement is used.
 
 ## Other runtime and compatibility evidence
 
-Local warnings-as-errors: **209 test functions / 24 suites passed**. Eight new storage-
+Local warnings-as-errors: **210 test functions / 24 suites passed**. Eight new storage-
 suite functions (with parameterized ownership/profile/settings cases) plus a public
 consumer function cover native probes, both public profiles, rejection of credential
 stores/global headers/external delegates/background sessions, explicit opt-in, HTTP and
@@ -128,3 +128,20 @@ Negative control: an isolated copied source removed app-managed credential-store
 rejection. The profile-rejection test built successfully, then failed one assertion
 because a credential-enabled appManaged session was accepted. Repository source was
 unchanged by the control.
+
+## Main verification follow-up, 2026-10-23
+
+The initial PR passed all checks, but its first main run timed out in the pre-existing
+native redirect-hop-limit test, before the new storage suite (which passed after the
+runner restarted). This failed run is retained as evidence, not treated as acceptance.
+A terminal loop/hop-limit failure now explicitly cancels its underlying URLSession task
+when declining the redirect, rather than relying on Foundation to finish an empty
+redirect response. Ordinary cross-origin denial still preserves its response. A new
+three-case callback regression checks both terminal paths and the nonterminal denial
+without starting network I/O; the original native redirect test remains unchanged.
+No timeout is increased, assertion removed or protection weakened. Final PR/main evidence
+includes this follow-up and the complete uninterrupted suite.
+
+A second isolated negative control removed terminal task cancellation. The new callback
+regression built and failed two assertions (loop/hop limit), with ordinary denial unchanged.
+The repository was unaffected by this control; local source/DocC checks passed.
