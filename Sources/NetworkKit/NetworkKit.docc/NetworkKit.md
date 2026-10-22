@@ -88,3 +88,16 @@ this binding's provider or client defaults. ``NetworkCallOptions`` can select
 ``AuthenticationPolicy/disabled`` to skip only the provider; explicit/default headers
 and security validation remain active. Provider cleanup must cooperate with cancellation
 and must not await the same client's shutdown. Native TLS/device/release gates remain open.
+
+## Optional diagnostics
+
+``NetworkConfiguration`` accepts an optional ``NetworkDiagnosticSink``, disabled by default.
+The sink receives only ``NetworkDiagnosticEvent``: random request ID, allowlisted method,
+validated status, monotonic duration and safe terminal category. No URL/header/payload,
+account, raw custom method, raw error object/text or external telemetry is exposed.
+The request ID correlates with ``AuthenticationContext`` for the same operation.
+One nonthrowing synchronous event follows joined cleanup before send returns; recording
+must be concurrency-safe, fast and nonblocking. Callback time is excluded from duration
+and cannot rewrite the selected result. An admitted send remains registered through
+recording: never block the sink waiting for this client's shutdown. Nil disables the
+sink without changing request/result semantics. Consolidated privacy/release gates remain open.

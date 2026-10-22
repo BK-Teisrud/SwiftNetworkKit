@@ -6,6 +6,7 @@ internal final class NetworkOperation<Value: Sendable>: Sendable {
     private struct State: Sendable {
         var result: Result<Value, any Error>?
         var terminalWaiter: CheckedContinuation<Void, Never>?
+        var cancellation: NetworkDiagnosticEvent.CancellationCause?
     }
     private let state = OSAllocatedUnfairLock(initialState: State())
     private let clock: any NetworkClock
@@ -36,6 +37,7 @@ internal final class NetworkOperation<Value: Sendable>: Sendable {
             if case .failure(let error) = state.result { return (error, nil) }
             guard state.result == nil, let error = interruption() else { return (nil, nil) }
             state.result = .failure(error)
+            if error is CancellationError { state.cancellation = .caller }
             let waiter = state.terminalWaiter
             state.terminalWaiter = nil
             return (error, waiter)
@@ -47,8 +49,13 @@ internal final class NetworkOperation<Value: Sendable>: Sendable {
     private func finish(_ result: Result<Value, any Error>) {
         let waiter = state.withLock { state in
             guard state.result == nil else { return Optional<CheckedContinuation<Void, Never>>.none }
-            if let error = interruption() { state.result = .failure(error) }
-            else { state.result = result }
+            if let error = interruption() {
+                state.result = .failure(error)
+                if error is CancellationError { state.cancellation = .caller }
+            } else {
+                state.result = result
+                if case .failure(let error) = result, error is CancellationError { state.cancellation = .unspecified }
+            }
             let waiter = state.terminalWaiter
             state.terminalWaiter = nil
             return waiter
@@ -56,10 +63,11 @@ internal final class NetworkOperation<Value: Sendable>: Sendable {
         waiter?.resume()
     }
 
-    private func cancel() {
+    private func cancel(cause: NetworkDiagnosticEvent.CancellationCause) {
         let waiter = state.withLock { state in
             guard state.result == nil else { return Optional<CheckedContinuation<Void, Never>>.none }
             state.result = .failure(CancellationError())
+            state.cancellation = cause
             let waiter = state.terminalWaiter
             state.terminalWaiter = nil
             return waiter
@@ -113,11 +121,11 @@ internal final class NetworkOperation<Value: Sendable>: Sendable {
     }
 
     static func run(clock: any NetworkClock, start: ContinuousClock.Instant, total: TimeInterval,
-                    registration: ClientOperationRegistration? = nil,
+                    registration: ClientOperationRegistration? = nil, diagnostic: DiagnosticObservation? = nil,
                     body: @escaping @Sendable (NetworkOperation<Value>) async throws -> Value) async throws -> Value {
         guard total.isFinite, total > 0 else { throw NetworkError.invalidRequest(.invalidConfiguration) }
         let operation = NetworkOperation(clock: clock, start: start, total: total)
-        registration?.bind { operation.cancel() }
+        registration?.bind { operation.cancel(cause: .shutdown) }
         defer { registration?.unbind() }
         return try await withTaskCancellationHandler {
             await withTaskGroup(of: Void.self) { group in
@@ -134,13 +142,12 @@ internal final class NetworkOperation<Value: Sendable>: Sendable {
                 // Join both children: never leave an operation or watchdog detached.
                 while await group.next() != nil {}
             }
-            return try operation.state.withLock { state in
-                // The worker always records a result, even after a cancelled watchdog.
-                guard let result = state.result else {
-                    throw NetworkError.invalidRequest(.invalidConfiguration)
-                }
-                return try result.get()
+            let terminal = operation.state.withLock { ($0.result, $0.cancellation) }
+            diagnostic?.cancelled(by: terminal.1)
+            guard let result = terminal.0 else {
+                throw NetworkError.invalidRequest(.invalidConfiguration)
             }
-        } onCancel: { operation.cancel() }
+            return try result.get()
+        } onCancel: { operation.cancel(cause: .caller) }
     }
 }

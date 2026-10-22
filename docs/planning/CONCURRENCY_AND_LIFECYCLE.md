@@ -1,5 +1,7 @@
 # Concurrency, session ownership, and lifecycle in v1
 
+I15 update: [sanitized terminal diagnostics](SANITIZED_DIAGNOSTICS.md) now report selected cancellation causes without exposing raw errors. Nonthrowing sink callbacks run after joined cleanup and outside locks; they must remain fast/nonblocking.
+
 Current implementation: I03/I05 provide immutable snapshots and per-call codecs;
 I08 provides owned/borrowed sessions; I10 provides the public executing client. See
 [HTTP pipeline](HTTP_PIPELINE.md) and [F1 review](F1_REVIEW.md) for actual evidence.

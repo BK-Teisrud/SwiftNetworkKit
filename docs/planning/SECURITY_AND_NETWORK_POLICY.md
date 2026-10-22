@@ -1,5 +1,7 @@
 # Security, authentication, and network policy for v1
 
+I15 current update: [sanitized optional diagnostics](SANITIZED_DIAGNOSTICS.md) are implemented, disabled by default. Earlier logging implementation-status notes below are historical; consolidated privacy/security review remains outstanding.
+
 I14 implements the [bounded authentication-header provider](AUTHENTICATION_PROVIDER.md) in the public pipeline after I10–I13. This current evidence supersedes earlier implementation-status notes below for provider/cancellation/shutdown behavior. Consolidated security/privacy/storage, minimum-OS/device and release gates remain outstanding.
 
 I09 implements the shared HTTPS/origin/loopback policy and per-operation redirect/trust boundary. See [security implementation and evidence](NETWORK_SECURITY.md), including precise HTTP/session restrictions and native/scripted test limits. Public client binding, providers, full lifecycle and release review remain outstanding.
@@ -70,6 +72,8 @@ NetworkKit performs no automatic library retry, 401 refresh, status replay, conn
 Owned sessions default waitsForConnectivity off; apps may explicitly select system waiting within the same total budget. Use actual request outcomes, not path monitoring as a preflight guarantee. Cellular/expensive/constrained access follows URLSession defaults with explicit client options where needed, without invented energy guarantees or global mutable policy. Check availability before adding newer platform properties.
 
 ## Logs, errors, and error bodies
+
+I15 implements [optional sanitized diagnostics](SANITIZED_DIAGNOSTICS.md), disabled by default. Only the five allowlisted metadata fields reach an app-owned sink; canary and lifecycle evidence is documented there. Earlier implementation-status notes retain their historical scope.
 
 No external telemetry, analytics, tracking, or SaaS sink. Default local diagnostic events use only a small allowlist: random request ID, known standard method (or “custom” without its raw string), status, measured duration, and safe error/terminal category. Do not automatically log raw URLs, hostname/path/query/fragment, bodies, headers, credentials, model descriptions, or underlying localizedDescription. Logging can be disabled.
 

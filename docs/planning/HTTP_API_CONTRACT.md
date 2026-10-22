@@ -35,6 +35,8 @@ Queries are ordered lists of names and optional values. Preserve ordering and re
 
 Build URLs from components, not unsafe string concatenation. No manual HTTP-version-negotiation guarantee is provided.
 
+I15 implements [optional sanitized diagnostics](SANITIZED_DIAGNOSTICS.md); returned errors/response data remain explicit app values, not automatic log input.
+
 ## Headers
 
 Compare header names case-insensitively. An explicit request value overrides the client default with the same name, never the reverse. Invalid names and CR/LF input cause invalidRequest before networking. Do not arbitrarily combine conflicting duplicates.

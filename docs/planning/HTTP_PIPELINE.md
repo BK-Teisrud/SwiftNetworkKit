@@ -9,6 +9,8 @@ The sections below describe current behavior; the original I10 evidence remains 
 
 I14 update: the [bounded authentication provider](AUTHENTICATION_PROVIDER.md) now runs between request preparation and transport in both call paths, sharing the operation budget/cancellation.
 
+I15 update: [optional sanitized diagnostics](SANITIZED_DIAGNOSTICS.md) emit one terminal event after joined cleanup, with no raw request/response/error hooks and no automatic logging.
+
 ## Public boundary
 
 `NetworkClient: Sendable` has two asynchronous throwing operations:

@@ -40,7 +40,7 @@ public enum AuthenticationPolicy: Sendable {
 
 internal enum RequestAuthentication {
     static func apply(_ prepared: PreparedRequest, configuration: NetworkConfiguration,
-                      policy: AuthenticationPolicy, checkpoint: @Sendable () throws -> Void) async throws -> PreparedRequest {
+                      policy: AuthenticationPolicy, requestID: UUID, checkpoint: @Sendable () throws -> Void) async throws -> PreparedRequest {
         try checkpoint()
         guard policy == .automatic, let authentication = configuration.authentication else { return prepared }
         guard let url = prepared.request.url else { throw NetworkError.invalidRequest(.invalidURL) }
@@ -48,7 +48,7 @@ internal enum RequestAuthentication {
         // Additional raw origins never inherit this client's provider or default headers.
         guard origin == (try NetworkOrigin(configuration.baseURL)) else { return prepared }
         guard origin.scheme == "https" else { throw NetworkError.invalidRequest(.credentialsOverHTTP) }
-        let context = AuthenticationContext(origin: origin, requestID: UUID(),
+        let context = AuthenticationContext(origin: origin, requestID: requestID,
             method: try HTTPMethod(prepared.request.httpMethod ?? "GET"),
             account: authentication.account, environment: authentication.environment)
         let supplied: HTTPHeaders

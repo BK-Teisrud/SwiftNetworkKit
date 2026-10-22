@@ -28,15 +28,17 @@ public struct NetworkConfiguration: Sendable, CustomStringConvertible, CustomDeb
     public let security: NetworkSecurityPolicy
     public let timeouts: NetworkTimeouts
     public let authentication: NetworkAuthentication?
+    public let diagnostics: (any NetworkDiagnosticSink)?
 
     public init(baseURL: URL, headers: HTTPHeaders = HTTPHeaders(),
                 timeouts: NetworkTimeouts = .default, security: NetworkSecurityPolicy = .default,
-                authentication: NetworkAuthentication? = nil) {
+                authentication: NetworkAuthentication? = nil, diagnostics: (any NetworkDiagnosticSink)? = nil) {
         self.baseURL = baseURL
         self.headers = headers
         self.timeouts = timeouts
         self.security = security
         self.authentication = authentication
+        self.diagnostics = diagnostics
     }
 
     public var description: String { "NetworkConfiguration(headerCount: \(headers.count))" }

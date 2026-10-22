@@ -1,8 +1,56 @@
 import Foundation
 import Testing
+import os
 import NetworkKit
 
 @Suite struct PublicResponseAPITests {
+    @Test func externalConsumerReceivesOnlySanitizedDiagnostics() async throws {
+        final class Sink: NetworkDiagnosticSink {
+            let storage = OSAllocatedUnfairLock(initialState: [NetworkDiagnosticEvent]())
+            var events: [NetworkDiagnosticEvent] { storage.withLock { $0 } }
+            func record(_ event: NetworkDiagnosticEvent) { storage.withLock { $0.append(event) } }
+        }
+        let sink = Sink()
+        #if !os(watchOS)
+        let canary = "snk-private-canary"
+        let url = SessionStubProtocol.install(.init(data: Data(canary.utf8), status: 401, headers: ["Set-Cookie": canary]))
+        defer { SessionStubProtocol.remove(url) }
+        let settings = URLSessionConfiguration.ephemeral
+        settings.httpCookieStorage = nil; settings.httpShouldSetCookies = false
+        settings.httpCookieAcceptPolicy = .never; settings.urlCredentialStorage = nil
+        settings.urlCache = nil; settings.requestCachePolicy = .reloadIgnoringLocalCacheData
+        settings.protocolClasses = [SessionStubProtocol.self]
+        let session = URLSession(configuration: settings)
+        defer { session.invalidateAndCancel() }
+        for enabled in [false, true] {
+            let client = try APIClient(configuration: NetworkConfiguration(baseURL: url,
+                diagnostics: enabled ? sink : nil), session: session)
+            do { _ = try await client.send(URLRequest(url: url), response: .data); Issue.record("Expected HTTP error") }
+            catch {
+                if case NetworkError.httpStatus(let status, _) = error { #expect(status.code == 401) }
+                else { Issue.record("Unexpected error category") }
+                #expect(!String(reflecting: error).contains(canary))
+                #expect(!error.localizedDescription.contains(canary))
+            }
+            await client.shutdown()
+        }
+        #expect(sink.events.count == 1)
+        #expect(sink.events.first?.outcome == .httpStatus)
+        #expect(sink.events.first?.method == .get)
+        #expect(sink.events.first?.status?.code == 401)
+        #expect(!String(reflecting: sink.events).contains(canary))
+        #else
+        // Public API/admission check; native URLProtocol interception is unsupported on watchOS.
+        let client = try APIClient(configuration: NetworkConfiguration(baseURL: URL(string: "https://example.invalid")!, diagnostics: sink))
+        await client.shutdown()
+        await #expect(throws: NetworkError.invalidRequest(.clientClosed)) {
+            try await client.send(URLRequest(url: URL(string: "https://example.invalid")!), response: .data)
+        }
+        #expect(sink.events.count == 1)
+        #expect(sink.events.first?.outcome == .invalidRequest(.clientClosed))
+        #endif
+    }
+
     @Test func externalConsumerCanConfigureAuthenticationProvider() async throws {
         actor Provider: AuthenticationHeaderProvider {
             private(set) var contexts: [AuthenticationContext] = []
