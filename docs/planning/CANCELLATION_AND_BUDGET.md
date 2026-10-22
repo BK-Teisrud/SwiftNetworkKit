@@ -1,5 +1,7 @@
 # Cancellation and the whole-operation budget
 
+I14 update: the [authentication provider](AUTHENTICATION_PROVIDER.md) now executes inside this operation boundary. The original I12 hook test remains historical evidence; dedicated provider cancellation/timeout/shutdown tests now supplement it.
+
 I12 / [#53](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/53), 2026-10-21.
 The existing typed/raw public client now enforces the approved monotonic total budget
 and isolates cancellation to each call. I13 / #54 adds [explicit shutdown and operation registration](SHUTDOWN_AND_CONCURRENCY.md); no provider, diagnostics or deferred module is introduced here.

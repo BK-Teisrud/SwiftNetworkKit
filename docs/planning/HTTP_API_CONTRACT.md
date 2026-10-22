@@ -6,7 +6,7 @@ See [API and current limits](HTTP_PIPELINE.md), [F1 verification](F1_REVIEW.md),
 and [network policy](NETWORK_SECURITY.md). The approved contract below follows
 [ADR-0005](../decisions/ADR-0005-http-api-contract.md). I12 now enforces the [total budget and per-call cancellation](CANCELLATION_AND_BUDGET.md).
 I13 adds [explicit shutdown and concurrent-call registration](SHUTDOWN_AND_CONCURRENCY.md).
-Authentication-provider and later release requirements remain F2 work; approved v1
+I14 implements the [bounded authentication provider](AUTHENTICATION_PROVIDER.md). Consolidated review and later release requirements remain F2 work; approved v1
 requirements are not all fulfilled merely because F1 is accepted.
 
 ## Public model and entry points

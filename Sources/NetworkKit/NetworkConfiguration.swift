@@ -27,13 +27,16 @@ public struct NetworkConfiguration: Sendable, CustomStringConvertible, CustomDeb
     public let headers: HTTPHeaders
     public let security: NetworkSecurityPolicy
     public let timeouts: NetworkTimeouts
+    public let authentication: NetworkAuthentication?
 
     public init(baseURL: URL, headers: HTTPHeaders = HTTPHeaders(),
-                timeouts: NetworkTimeouts = .default, security: NetworkSecurityPolicy = .default) {
+                timeouts: NetworkTimeouts = .default, security: NetworkSecurityPolicy = .default,
+                authentication: NetworkAuthentication? = nil) {
         self.baseURL = baseURL
         self.headers = headers
         self.timeouts = timeouts
         self.security = security
+        self.authentication = authentication
     }
 
     public var description: String { "NetworkConfiguration(headerCount: \(headers.count))" }
@@ -46,9 +49,11 @@ public struct NetworkCallOptions: Sendable, CustomStringConvertible, CustomDebug
     public let inactivityTimeout: TimeInterval?
     public let totalTimeout: TimeInterval?
     public let acceptedStatuses: HTTPStatusPolicy
+    public let authentication: AuthenticationPolicy
 
     public init(headers: HTTPHeaders = HTTPHeaders(), inactivityTimeout: TimeInterval? = nil,
-                totalTimeout: TimeInterval? = nil, acceptedStatuses: HTTPStatusPolicy = .successful) throws {
+                totalTimeout: TimeInterval? = nil, acceptedStatuses: HTTPStatusPolicy = .successful,
+                authentication: AuthenticationPolicy = .automatic) throws {
         for limit in [inactivityTimeout, totalTimeout].compactMap({ $0 }) {
             guard limit.isFinite, limit > 0 else {
                 throw NetworkError.invalidRequest(.invalidConfiguration)
@@ -58,6 +63,7 @@ public struct NetworkCallOptions: Sendable, CustomStringConvertible, CustomDebug
         self.inactivityTimeout = inactivityTimeout
         self.totalTimeout = totalTimeout
         self.acceptedStatuses = acceptedStatuses
+        self.authentication = authentication
     }
 
     public static let `default` = NetworkCallOptions()
@@ -67,6 +73,7 @@ public struct NetworkCallOptions: Sendable, CustomStringConvertible, CustomDebug
         inactivityTimeout = nil
         totalTimeout = nil
         acceptedStatuses = .successful
+        authentication = .automatic
     }
 
     public var description: String { "NetworkCallOptions(headerCount: \(headers.count))" }

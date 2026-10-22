@@ -1,5 +1,7 @@
 # HTTPS, origin, loopback and redirect policy
 
+I14 update: [provider origin/account binding and verification](AUTHENTICATION_PROVIDER.md) is now implemented; earlier I09 delivery notes below retain their historical scope. Consolidated security/release review remains outstanding.
+
 I10 update: the public `APIClient` now connects both request inputs to this shared foundation.
 See [HTTP pipeline](HTTP_PIPELINE.md) for current signatures, verification boundaries and
 remaining timing/lifecycle gates. Earlier task descriptions below retain their historical scope.

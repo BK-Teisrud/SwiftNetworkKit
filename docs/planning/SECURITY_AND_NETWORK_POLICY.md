@@ -1,5 +1,7 @@
 # Security, authentication, and network policy for v1
 
+I14 implements the [bounded authentication-header provider](AUTHENTICATION_PROVIDER.md) in the public pipeline after I10–I13. This current evidence supersedes earlier implementation-status notes below for provider/cancellation/shutdown behavior. Consolidated security/privacy/storage, minimum-OS/device and release gates remain outstanding.
+
 I09 implements the shared HTTPS/origin/loopback policy and per-operation redirect/trust boundary. See [security implementation and evidence](NETWORK_SECURITY.md), including precise HTTP/session restrictions and native/scripted test limits. Public client binding, providers, full lifecycle and release review remain outstanding.
 
 I08 implements strict owned-session storage defaults and bounded injection compatibility checks; see [session transport review](SESSION_TRANSPORT.md). This is not complete HTTPS/redirect/authentication/lifecycle enforcement; those remain later tasks.
