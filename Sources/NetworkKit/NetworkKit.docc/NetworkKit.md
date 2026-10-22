@@ -75,3 +75,16 @@ Client doubles implement the async nonthrowing shutdown requirement explicitly.
 Shutdown is cooperative; unresponsive work can delay return. Use an owning task/service
 boundary so work being joined does not await its own shutdown. Deinit is fallback
 owned-session cleanup, not a substitute for explicit asynchronous closure.
+
+## Authentication headers
+
+Supply a concurrency-safe ``AuthenticationHeaderProvider`` through
+``NetworkAuthentication`` in ``NetworkConfiguration``. It receives minimal
+``AuthenticationContext`` values for the client's HTTPS base origin and immutable
+account/environment binding. It runs once inside the operation's cancellation/total
+budget. Apps own login, token storage, logout and renewal; no refresh/replay is provided.
+Provider/header conflicts fail before transport. Additional raw origins never inherit
+this binding's provider or client defaults. ``NetworkCallOptions`` can select
+``AuthenticationPolicy/disabled`` to skip only the provider; explicit/default headers
+and security validation remain active. Provider cleanup must cooperate with cancellation
+and must not await the same client's shutdown. Native TLS/device/release gates remain open.

@@ -71,7 +71,9 @@ public final class APIClient: NetworkClient {
         let options = endpoint.options
         return try await NetworkOperation.run(clock: clock, start: start,
             total: options.totalTimeout ?? configuration.timeouts.total, registration: registration) { operation in
-            let prepared = try RequestBuilder.prepare(endpoint, configuration: self.configuration, options: options)
+            var prepared = try RequestBuilder.prepare(endpoint, configuration: self.configuration, options: options)
+            prepared = try await RequestAuthentication.apply(prepared, configuration: self.configuration,
+                policy: options.authentication, checkpoint: { try operation.checkpoint() })
             try operation.checkpoint()
             return try await self.execute(prepared, response: endpoint.responseStrategy,
                                           checkpoint: { try operation.checkpoint() })
@@ -85,7 +87,9 @@ public final class APIClient: NetworkClient {
         defer { lifecycle.finish(registration) }
         return try await NetworkOperation.run(clock: clock, start: start,
             total: options.totalTimeout ?? configuration.timeouts.total, registration: registration) { operation in
-            let prepared = try RequestBuilder.prepare(request, configuration: self.configuration, options: options)
+            var prepared = try RequestBuilder.prepare(request, configuration: self.configuration, options: options)
+            prepared = try await RequestAuthentication.apply(prepared, configuration: self.configuration,
+                policy: options.authentication, checkpoint: { try operation.checkpoint() })
             try operation.checkpoint()
             return try await self.execute(prepared, response: response, checkpoint: { try operation.checkpoint() })
         }

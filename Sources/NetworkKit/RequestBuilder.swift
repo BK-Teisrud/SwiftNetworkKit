@@ -11,7 +11,7 @@ internal struct PreparedRequest: Sendable, CustomStringConvertible, CustomDebugS
 /// Builds buffered values and applies shared URL/header security policy.
 /// APIClient connects both preparation paths to the same secured transport and response path.
 internal enum RequestBuilder {
-    private static func validateHeaders(_ headers: HTTPHeaders) throws {
+    static func validateHeaders(_ headers: HTTPHeaders) throws {
         // Let URLSession derive origin/framing. Do not accept misleading manual values.
         for name in ["host", "content-length", "transfer-encoding"] where headers[name] != nil {
             throw NetworkError.invalidRequest(.unsupportedRequest)
@@ -70,7 +70,8 @@ internal enum RequestBuilder {
         // Client defaults < explicit raw fields < explicit call options.
         let headers = try HTTPHeaders(rawHeaders.fields.merging(options.headers.fields) { _, call in call })
         let mergedOptions = try NetworkCallOptions(headers: headers,
-            inactivityTimeout: options.inactivityTimeout, totalTimeout: options.totalTimeout, acceptedStatuses: options.acceptedStatuses)
+            inactivityTimeout: options.inactivityTimeout, totalTimeout: options.totalTimeout, acceptedStatuses: options.acceptedStatuses,
+            authentication: options.authentication)
         let rawConfiguration = NetworkConfiguration(baseURL: configuration.baseURL,
             headers: sameOrigin ? configuration.headers : HTTPHeaders(), timeouts: configuration.timeouts, security: configuration.security)
         let snapshot = try ConfigurationSnapshot(configuration: rawConfiguration, options: mergedOptions)

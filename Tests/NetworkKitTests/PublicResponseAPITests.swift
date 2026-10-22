@@ -3,6 +3,48 @@ import Testing
 import NetworkKit
 
 @Suite struct PublicResponseAPITests {
+    @Test func externalConsumerCanConfigureAuthenticationProvider() async throws {
+        actor Provider: AuthenticationHeaderProvider {
+            private(set) var contexts: [AuthenticationContext] = []
+            func headers(for context: AuthenticationContext) async throws -> HTTPHeaders {
+                contexts.append(context)
+                return try HTTPHeaders(["Authorization": "Bearer public-test"])
+            }
+        }
+        let provider = Provider()
+        #if !os(watchOS)
+        let url = SessionStubProtocol.install(.init(data: Data(), status: 204, headers: [:], onRequest: { request in
+            #expect(request.value(forHTTPHeaderField: "Authorization") == "Bearer public-test")
+        }))
+        defer { SessionStubProtocol.remove(url) }
+        let settings = URLSessionConfiguration.ephemeral
+        settings.httpCookieStorage = nil; settings.httpShouldSetCookies = false
+        settings.httpCookieAcceptPolicy = .never; settings.urlCredentialStorage = nil
+        settings.urlCache = nil; settings.requestCachePolicy = .reloadIgnoringLocalCacheData
+        settings.protocolClasses = [SessionStubProtocol.self]
+        let session = URLSession(configuration: settings)
+        defer { session.invalidateAndCancel() }
+        let client = try APIClient(configuration: NetworkConfiguration(baseURL: url,
+            authentication: NetworkAuthentication(provider: provider, account: "A", environment: "test")), session: session)
+        _ = try await client.send(URLRequest(url: url), response: .empty)
+        let contexts = await provider.contexts
+        #expect(contexts.count == 1)
+        #expect(contexts.first?.account == "A")
+        #expect(contexts.first?.environment == "test")
+        #else
+        // Public construction/security check; native interception is unsupported on watchOS.
+        let url = URL(string: "http://localhost:8080")!
+        let client = try APIClient(configuration: NetworkConfiguration(baseURL: url,
+            security: NetworkSecurityPolicy(allowInsecureLoopback: true),
+            authentication: NetworkAuthentication(provider: provider, account: "A", environment: "test")))
+        await #expect(throws: NetworkError.invalidRequest(.credentialsOverHTTP)) {
+            try await client.send(URLRequest(url: url), response: .empty)
+        }
+        #expect(await provider.contexts.isEmpty)
+        #endif
+        await client.shutdown()
+    }
+
     @Test func externalConsumerCanShutdownThroughClientBoundary() async throws {
         struct Call: Endpoint {
             typealias Response = EmptyResponse

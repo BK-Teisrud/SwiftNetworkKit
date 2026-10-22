@@ -35,6 +35,7 @@ public enum NetworkError: Error, Sendable, Equatable, LocalizedError,
         case invalidConfiguration
         case unsupportedRequest
         case clientClosed
+        case authenticationProviderFailure
     }
 
     public enum InvalidResponseReason: String, Sendable {

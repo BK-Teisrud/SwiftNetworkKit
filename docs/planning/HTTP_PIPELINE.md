@@ -7,6 +7,8 @@ not a complete v1 or a release approval. See the [work queue](WORK_QUEUE.md).
 I12 update: [per-call cancellation and the total budget](CANCELLATION_AND_BUDGET.md) are now enforced.
 The sections below describe current behavior; the original I10 evidence remains dated.
 
+I14 update: the [bounded authentication provider](AUTHENTICATION_PROVIDER.md) now runs between request preparation and transport in both call paths, sharing the operation budget/cancellation.
+
 ## Public boundary
 
 `NetworkClient: Sendable` has two asynchronous throwing operations:
@@ -70,12 +72,12 @@ Raw calls cannot bypass policy. Additional raw origins drop client defaults and 
 permit cross-origin redirects. See [request rules](REQUEST_ENCODING.md),
 [response rules](RESPONSE_DECODING.md) and [network security](NETWORK_SECURITY.md).
 
-No automatic retry, authentication refresh, provider, middleware, streaming or upload
+No automatic retry, authentication refresh, middleware, streaming or upload
 system is added. Bodies/responses are buffered in memory.
 
 ## Error and timing boundaries
 
-Only transport execution is wrapped for normalization. Existing NetworkError categories
+Transport normalization wraps only transport execution. Provider failures use the separate I14 sanitizer before I/O. Existing NetworkError categories
 from adapter policy are preserved. Other transport errors retain only NSError domain/code;
 URL, payload, userInfo, localized text and underlying error objects are discarded. Default
 error descriptions omit the domain. A system NSURLErrorDomain/timedOut becomes
