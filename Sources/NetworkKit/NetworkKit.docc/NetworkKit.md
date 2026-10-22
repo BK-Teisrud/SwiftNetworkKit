@@ -101,3 +101,16 @@ must be concurrency-safe, fast and nonblocking. Callback time is excluded from d
 and cannot rewrite the selected result. An admitted send remains registered through
 recording: never block the sink waiting for this client's shutdown. Nil disables the
 sink without changing request/result semantics. Consolidated privacy/release gates remain open.
+
+## Borrowed storage profiles
+
+Owned ``APIClient`` instances always use the strict storage profile. For a borrowed
+URLSession, ``SessionStorageProfile`` defaults to strict; explicit appManaged selection
+permits app-owned HTTPS cookie/cache settings while credential stores, global headers,
+external delegates and background sessions remain incompatible. Both profiles retain
+normal security/lifecycle checks. Active stores are rejected for loopback HTTP; automatic
+cookies cannot follow additional raw-origin permission. App-managed cache reload policy
+is not a promise to suppress all writes. Apps own store isolation, disk/memory selection,
+capacity and deletion; client shutdown never clears or invalidates a borrowed session.
+Disabling the auth provider does not disable app-managed cookies/cache. Native macOS
+loopback storage tests exist; native HTTPS/device/consolidated privacy gates remain open.

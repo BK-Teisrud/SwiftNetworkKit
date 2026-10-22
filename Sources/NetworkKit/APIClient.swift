@@ -37,15 +37,17 @@ public final class APIClient: NetworkClient {
             securityPolicy: configuration.security, baseURL: configuration.baseURL)
     }
 
-    /// Borrows an active foreground session without a delegate, additional headers,
-    /// or automatic cookie, credential, or cache stores. The app retains ownership
+    /// Borrows a compatible foreground session. Strict disables automatic stores;
+    /// appManaged explicitly permits app-owned HTTPS cookie/cache storage only.
+    /// Delegates, global headers and credential stores remain unsupported. The app retains ownership
     /// and must not invalidate it while calls are running. Client cleanup never
-    /// invalidates a borrowed session. App-managed storage profiles remain internal.
-    public init(configuration: NetworkConfiguration, session: URLSession) throws {
+    /// invalidates or clears stores on a borrowed session.
+    public init(configuration: NetworkConfiguration, session: URLSession,
+                storage: SessionStorageProfile = .strict) throws {
         try Self.validate(configuration)
         self.configuration = configuration
         clock = ContinuousNetworkClock()
-        transport = try URLSessionTransport(session: session,
+        transport = try URLSessionTransport(session: session, storagePolicy: storage,
             securityPolicy: configuration.security, baseURL: configuration.baseURL)
     }
 

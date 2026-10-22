@@ -2,7 +2,7 @@ import Foundation
 
 /// Internal URLSession transport for APIClient, with per-operation redirect/trust policy.
 internal actor URLSessionTransport: NetworkTransport {
-    enum StoragePolicy: Sendable { case strict, appManaged }
+    typealias StoragePolicy = SessionStorageProfile
 
     typealias DataOperation = @Sendable (URLSession, URLRequest, NetworkTaskDelegate) async throws -> TransportResponse
     static let systemDataOperation: DataOperation = { session, request, delegate in

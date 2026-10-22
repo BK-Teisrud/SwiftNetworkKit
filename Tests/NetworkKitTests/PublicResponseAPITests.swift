@@ -4,6 +4,37 @@ import os
 import NetworkKit
 
 @Suite struct PublicResponseAPITests {
+    @Test(arguments: [SessionStorageProfile.strict, .appManaged])
+    func externalConsumerSelectsBorrowedStorageProfile(storage: SessionStorageProfile) async throws {
+        let settings = URLSessionConfiguration.ephemeral
+        settings.urlCredentialStorage = nil
+        if storage == .strict {
+            settings.httpCookieStorage = nil; settings.httpShouldSetCookies = false
+            settings.httpCookieAcceptPolicy = .never; settings.urlCache = nil
+            settings.requestCachePolicy = .reloadIgnoringLocalCacheData
+        }
+        #if !os(watchOS)
+        settings.protocolClasses = [SessionStubProtocol.self]
+        #endif
+        let session = URLSession(configuration: settings)
+        defer { session.invalidateAndCancel() }
+        let url = SessionStubProtocol.install(.init(data: Data("profile".utf8), status: 200, headers: [:]))
+        defer { SessionStubProtocol.remove(url) }
+        let client = try APIClient(configuration: NetworkConfiguration(baseURL: url), session: session, storage: storage)
+        #if !os(watchOS)
+        #expect(try await client.send(URLRequest(url: url), response: .text).value == "profile")
+        await client.shutdown()
+        let (data, _) = try await session.data(from: url)
+        #expect(data == Data("profile".utf8))
+        #else
+        // Public construction/lifecycle evidence; interception is unsupported on watchOS.
+        await client.shutdown()
+        await #expect(throws: NetworkError.invalidRequest(.clientClosed)) {
+            try await client.send(URLRequest(url: url), response: .text)
+        }
+        #endif
+    }
+
     @Test func externalConsumerReceivesOnlySanitizedDiagnostics() async throws {
         final class Sink: NetworkDiagnosticSink {
             let storage = OSAllocatedUnfairLock(initialState: [NetworkDiagnosticEvent]())

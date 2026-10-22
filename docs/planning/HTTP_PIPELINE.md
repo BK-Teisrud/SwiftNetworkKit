@@ -11,6 +11,8 @@ I14 update: the [bounded authentication provider](AUTHENTICATION_PROVIDER.md) no
 
 I15 update: [optional sanitized diagnostics](SANITIZED_DIAGNOSTICS.md) emit one terminal event after joined cleanup, with no raw request/response/error hooks and no automatic logging.
 
+I16 update: [storage verification](STORAGE_VERIFICATION.md) covers owned/borrowed strict defaults and explicit public app-managed selection, with native macOS loopback and disclosed other-runtime boundaries.
+
 ## Public boundary
 
 `NetworkClient: Sendable` has two asynchronous throwing operations:
