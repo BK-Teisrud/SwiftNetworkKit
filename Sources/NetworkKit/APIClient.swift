@@ -65,33 +65,58 @@ public final class APIClient: NetworkClient {
 
     public func send<E: Endpoint>(_ endpoint: E) async throws -> NetworkResponse<E.Response> {
         let start = clock.now()
-        let registration = try lifecycle.register()
-        defer { lifecycle.finish(registration) }
-        try Task.checkCancellation()
-        let options = endpoint.options
-        return try await NetworkOperation.run(clock: clock, start: start,
-            total: options.totalTimeout ?? configuration.timeouts.total, registration: registration) { operation in
-            var prepared = try RequestBuilder.prepare(endpoint, configuration: self.configuration, options: options)
-            prepared = try await RequestAuthentication.apply(prepared, configuration: self.configuration,
-                policy: options.authentication, checkpoint: { try operation.checkpoint() })
-            try operation.checkpoint()
-            return try await self.execute(prepared, response: endpoint.responseStrategy,
-                                          checkpoint: { try operation.checkpoint() })
+        return try await observe(start: start) { diagnostic, registration in
+            try Task.checkCancellation()
+            let options = endpoint.options
+            return try await NetworkOperation.run(clock: self.clock, start: start,
+                total: options.totalTimeout ?? self.configuration.timeouts.total,
+                registration: registration, diagnostic: diagnostic) { operation in
+                var prepared = try RequestBuilder.prepare(endpoint, configuration: self.configuration, options: options)
+                diagnostic.prepared(prepared.request)
+                prepared = try await RequestAuthentication.apply(prepared, configuration: self.configuration,
+                    policy: options.authentication, requestID: diagnostic.requestID,
+                    checkpoint: { try operation.checkpoint() })
+                try operation.checkpoint()
+                return try await self.execute(prepared, response: endpoint.responseStrategy,
+                    diagnostic: diagnostic, checkpoint: { try operation.checkpoint() })
+            }
         }
     }
 
     public func send<Value: Sendable>(_ request: URLRequest, response: ResponseStrategy<Value>,
                                       options: NetworkCallOptions) async throws -> NetworkResponse<Value> {
         let start = clock.now()
-        let registration = try lifecycle.register()
-        defer { lifecycle.finish(registration) }
-        return try await NetworkOperation.run(clock: clock, start: start,
-            total: options.totalTimeout ?? configuration.timeouts.total, registration: registration) { operation in
-            var prepared = try RequestBuilder.prepare(request, configuration: self.configuration, options: options)
-            prepared = try await RequestAuthentication.apply(prepared, configuration: self.configuration,
-                policy: options.authentication, checkpoint: { try operation.checkpoint() })
-            try operation.checkpoint()
-            return try await self.execute(prepared, response: response, checkpoint: { try operation.checkpoint() })
+        return try await observe(start: start) { diagnostic, registration in
+            try await NetworkOperation.run(clock: self.clock, start: start,
+                total: options.totalTimeout ?? self.configuration.timeouts.total,
+                registration: registration, diagnostic: diagnostic) { operation in
+                var prepared = try RequestBuilder.prepare(request, configuration: self.configuration, options: options)
+                diagnostic.prepared(prepared.request)
+                prepared = try await RequestAuthentication.apply(prepared, configuration: self.configuration,
+                    policy: options.authentication, requestID: diagnostic.requestID,
+                    checkpoint: { try operation.checkpoint() })
+                try operation.checkpoint()
+                return try await self.execute(prepared, response: response, diagnostic: diagnostic,
+                    checkpoint: { try operation.checkpoint() })
+            }
+        }
+    }
+
+    private func observe<Value: Sendable>(start: ContinuousClock.Instant,
+        body: @Sendable (DiagnosticObservation, ClientOperationRegistration) async throws -> NetworkResponse<Value>
+    ) async throws -> NetworkResponse<Value> {
+        let diagnostic = DiagnosticObservation(sink: configuration.diagnostics, clock: clock, start: start)
+        var registration: ClientOperationRegistration?
+        defer { if let registration { lifecycle.finish(registration) } }
+        do {
+            let admitted = try lifecycle.register()
+            registration = admitted
+            let result = try await body(diagnostic, admitted)
+            diagnostic.complete()
+            return result
+        } catch {
+            diagnostic.complete(error: error)
+            throw error
         }
     }
 
@@ -109,7 +134,7 @@ public final class APIClient: NetworkClient {
     }
 
     private func execute<Value: Sendable>(_ prepared: PreparedRequest, response: ResponseStrategy<Value>,
-                                          checkpoint: @Sendable () throws -> Void) async throws -> NetworkResponse<Value> {
+                                          diagnostic: DiagnosticObservation, checkpoint: @Sendable () throws -> Void) async throws -> NetworkResponse<Value> {
         try checkpoint()
         let received: TransportResponse
         do {
@@ -126,6 +151,7 @@ public final class APIClient: NetworkClient {
             }
             throw NetworkError.transport(.init(domain: underlying.domain, code: underlying.code))
         }
+        diagnostic.received(received.response)
         try checkpoint()
         return try response.decode(received.data, response: received.response,
                                    acceptedStatuses: prepared.acceptedStatuses)
