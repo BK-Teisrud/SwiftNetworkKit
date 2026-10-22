@@ -1,5 +1,7 @@
 # URLSession ownership and the internal transport adapter
 
+I16 current update: [controlled-server storage verification and public profile selection](STORAGE_VERIFICATION.md) is implemented. The owned profile remains strict; borrowed clients may explicitly select appManaged. Earlier internal-only/I08 notes are historical.
+
 I13 update: [explicit shutdown](SHUTDOWN_AND_CONCURRENCY.md) joins client operations and
 invalidates only an owned session. Borrowed sessions and other clients' calls remain usable.
 

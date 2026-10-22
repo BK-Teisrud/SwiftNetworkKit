@@ -1,5 +1,7 @@
 # Security, authentication, and network policy for v1
 
+I16 current update: [storage verification and explicit public borrowed profiles](STORAGE_VERIFICATION.md) provide native macOS loopback evidence. Earlier storage-status notes below are historical; broader HTTPS/device/privacy/release review remains open.
+
 I15 current update: [sanitized optional diagnostics](SANITIZED_DIAGNOSTICS.md) are implemented, disabled by default. Earlier logging implementation-status notes below are historical; consolidated privacy/security review remains outstanding.
 
 I14 implements the [bounded authentication-header provider](AUTHENTICATION_PROVIDER.md) in the public pipeline after I10–I13. This current evidence supersedes earlier implementation-status notes below for provider/cancellation/shutdown behavior. Consolidated security/privacy/storage, minimum-OS/device and release gates remain outstanding.
