@@ -22,8 +22,8 @@ The owner reports access to iPhone/iPad, Mac, Apple Watch, and Apple TV with cur
 
 1. I06 verifies actual runner images, Xcode, schemes, and destinations, and runs all four platform families. No paid runners or installations are preapproved.
 2. I17 consolidates deterministic contract tests and controlled URLSession integration tests. Use isolated local services/mocks, not production services or real credentials.
-3. I21 establishes documented access to minimum runtimes/hosts. First investigate official compatible runtime/Xcode combinations or available older test machines. Do not automatically downgrade updated devices. Purchases/upgrades require separate decisions.
-4. I22 tests representative newer physical devices and real network transitions where relevant. Record minimum-OS and newer-device evidence separately.
+3. PREP-01 / #85 investigates access and exact device inventory now; it may complete with documented gaps but does not satisfy release evidence. I21 establishes documented access to minimum runtimes/hosts. First investigate official compatible runtime/Xcode combinations or available older test machines. Do not automatically downgrade updated devices. Purchases/upgrades require separate decisions.
+4. After API/security review and PREP-01, I21 and I22 can execute independently; both remain required. I22 tests representative newer physical devices and real network transitions where relevant. Record minimum-OS and newer-device evidence separately.
 5. I23 and REL-01 require all selected evidence before release. Mark missing evidence blocked, not passed.
 
 Per run, record issue/test ID, commit SHA, date, Xcode build, Swift/SDK, OS build/architecture, simulator or device type, command/scenario, expectation/result, and sanitized evidence link. Assess permissions, entitlements, and privacy against actual v1 usage. Do not add irrelevant F3–F6 requirements.

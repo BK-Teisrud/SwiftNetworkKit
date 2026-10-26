@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-20",
+  "as_of": "2026-10-26",
   "implementation_authorized": true,
   "start_gate": 41,
   "tasks": [
@@ -211,6 +211,16 @@
       "parent": 25
     },
     {
+      "order": 16.5,
+      "key": "PREP-01",
+      "number": 85,
+      "title": "[PREP-01] Prepare minimum-OS and physical-device evidence access",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/85",
+      "milestone": "F2 – Production hardening and v1 gate",
+      "blocked_by": [],
+      "parent": 23
+    },
+    {
       "order": 17,
       "key": "I17",
       "number": 58,
@@ -271,7 +281,8 @@
       "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
-        "I20"
+        "I19",
+        "PREP-01"
       ],
       "parent": 23
     },
@@ -284,9 +295,26 @@
       "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
-        "I21"
+        "I19",
+        "PREP-01"
       ],
       "parent": 23
+    },
+    {
+      "order": 22.5,
+      "key": "GATE-F2",
+      "number": 86,
+      "title": "[GATE-F2] Reconcile v1 requirements, domain epics, and release evidence",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/86",
+      "milestone": "F2 – Production hardening and v1 gate",
+      "blocked_by": [
+        "I18",
+        "I19",
+        "I20",
+        "I21",
+        "I22"
+      ],
+      "parent": 29
     },
     {
       "order": 23,
@@ -297,10 +325,52 @@
       "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
-        "I22"
+        "I22",
+        "GATE-F2"
       ],
       "parent": 27
+    },
+    {
+      "order": 30,
+      "key": "PLAN-F3",
+      "number": 87,
+      "title": "[PLAN-F3] Select the first resilience increment and decompose its delivery",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/87",
+      "milestone": "F3 – Resilience and extensions",
+      "blocked_by": [],
+      "parent": 14
+    },
+    {
+      "order": 40,
+      "key": "PLAN-F4",
+      "number": 88,
+      "title": "[PLAN-F4] Establish transfer feasibility and decompose selected transfer scope",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/88",
+      "milestone": "F4 – File transfers",
+      "blocked_by": [],
+      "parent": 16
+    },
+    {
+      "order": 50,
+      "key": "PLAN-F5",
+      "number": 89,
+      "title": "[PLAN-F5] Define the WebSocket lifecycle and real-time delivery plan",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/89",
+      "milestone": "F5 – Real-time communication",
+      "blocked_by": [],
+      "parent": 17
+    },
+    {
+      "order": 60,
+      "key": "PLAN-F6",
+      "number": 90,
+      "title": "[PLAN-F6] Triage specialized security and networking research by product need",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/90",
+      "milestone": "F6 – Specialized features and research",
+      "blocked_by": [],
+      "parent": 18
     }
   ],
-  "authorization_adr": "docs/decisions/ADR-0012-implementation-start.md"
+  "authorization_adr": "docs/decisions/ADR-0012-implementation-start.md",
+  "status_source": "GitHub Issues and ProjectV2; this file records planned structure, not completion status"
 }
