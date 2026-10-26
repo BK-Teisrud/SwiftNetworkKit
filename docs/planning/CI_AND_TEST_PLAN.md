@@ -73,3 +73,5 @@ Release checks also cover representative newer stable runtimes, relevant physica
 Update [PLATFORM_MATRIX.md](PLATFORM_MATRIX.md) and REL-01 with commit, environment, test names/results, known limitations, and approved scope changes. No release checks have run.
 
 I20 adds a short standalone release-consumer probe to macos-core: compile the opt-in harness and verify native loopback reuse/cancellation through public APIs, without volatile RSS/latency thresholds. Full three-repetition resource measurements remain opt-in and recorded in [RESOURCE_BASELINE.md](RESOURCE_BASELINE.md); RES-01 / #100 owns the observed RSS trend and blocks #86. Existing required jobs, runtime tests, runner budget and no-publication policy remain unchanged.
+
+RES-01 keeps heap profiling opt-in and adds macos-core type-checking of its standalone Swift runtime control. The new --post-budget resource mode samples after the fixture's original ten-second deadlines. See [attribution and limits](REPEATED_CALL_MEMORY.md); passing CI is not target-device profiling or residual-risk acceptance.
