@@ -1,6 +1,6 @@
-# Test declaration inventory — I17
+# Test declaration inventory — I18
 
-Snapshot: 2026-10-26, unchanged production/test sources from commit `d1e9a04d1870ed7ac7c46ec270af63e325045b30`. This source index contains 210 `@Test` function declarations; parameterized cases are not additional function declarations. Runtime results must come from execution, not this count. See [contract evidence ledger](TEST_EVIDENCE.md) for coverage and limitations. Refresh this snapshot when the suite changes; historical run counts remain dated evidence.
+Snapshot: 2026-10-26, I18 candidate based on `8ed9ad573b12f4a5b710583cec4411be52fb8871` with four compiled-guide tests added. This source index contains 214 `@Test` function declarations; parameterized cases are not additional function declarations. Runtime results must come from execution, not this count. See [contract evidence ledger](TEST_EVIDENCE.md) for coverage and limitations. Refresh this snapshot when the suite changes; historical run counts remain dated evidence.
 
 ## AuthenticationTests.swift
 
@@ -68,6 +68,15 @@ Snapshot: 2026-10-26, unchanged production/test sources from commit `d1e9a04d187
 - `timeoutsRemainCategorizedWithoutPendingDiagnosticsWork`
 - `concurrentAccountsProduceOnlyIndependentSanitizedTerminalEvents`
 - `unknownErrorsAreClassifiedWithoutFormattingThem`
+
+## DocumentationExamplesTests.swift
+
+[Source](../../Tests/NetworkKitTests/DocumentationExamplesTests.swift) — 4 declarations.
+
+- `typedGuideDecodesValueAndMetadata`
+- `formatGuideHandlesBytesTextEmptyAndExplicitStatus`
+- `ownershipGuideConstructsAndClosesBothProfiles`
+- `authAndErrorGuideUsesPublicBoundariesWithoutNetworking`
 
 ## EndpointURLTests.swift
 

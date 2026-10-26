@@ -1,2 +1,2 @@
-// NetworkKit provides HTTP values, buffered request/response handling, and an internal session adapter.
-// The public executing client and full network security/lifecycle pipeline follow separately.
+// NetworkKit provides typed/raw buffered HTTP execution with shared security, timing and lifecycle policy.
+// Consolidated security/privacy, runtime/device and release acceptance remain separate gates.

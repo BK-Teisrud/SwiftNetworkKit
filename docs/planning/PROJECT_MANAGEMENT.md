@@ -8,7 +8,11 @@ The project Status field is authoritative: Backlog → Ready → In Progress →
 
 Ready requires explicit implementation authorization where relevant, resolved blockers, a clear contract/test plan, and symbol checks for actual selected APIs. Dependencies guide planning; they do not enforce merges. Reopened issues return to Backlog for triage. After not-planned closure, manually select Not Planned because Item closed sets Done regardless of reason. Completed filters on reason:completed and excludes rejected work independently of project status.
 
-Limit WIP to one active implementation task per developer and two review PRs. Pull only Ready work. P0 means incident/gate; P1 necessary core work; P2 later extensions; P3 research. Priority does not authorize code.
+The owner permits up to five concurrent work processes, including independent issue/branch/PR workstreams, as of 2026-10-26. Prepare PRs sequentially; parallelism is optional, not a target. Pull only Ready work. Before another workstream, verify native dependencies, accepted API/contracts, file overlap and capacity. Use a distinct branch and an isolated checkout/worktree for concurrent edits; never switch a dirty shared checkout between tasks. Shared contract, manifest, workflow or planning-file changes require sequencing or an explicit integration plan, followed by rebase/conflict review and fresh checks. Do not merge dependent work against an unaccepted contract.
+
+Conservatively permit at most two heavy CI workflows at once (two matrix jobs each) plus one local heavy verification process, keeping the planned heavy-work budget within five. Do not fan out five workflows that each start two matrix jobs. Respect GitHub's actual runner limits and preserve standard runners. A PR is created before preparing the next independent PR; do not launch simultaneous publication operations. Stop adding work when capacity is reached.
+
+Do not wait or repeatedly poll for GitHub. The owner may authorize continuation after a stop. Independently Ready work can continue sequentially after a PR is created when the dependency/overlap/capacity review permits it; once useful progress requires GitHub results, stop and report the pending run. No unattended monitor or automatic resumption is implied. P0 means incident/gate; P1 necessary core work; P2 later extensions; P3 research. Priority does not authorize code.
 
 ## Fields and views
 

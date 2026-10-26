@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/workflows/ci.yml)
 
-A native networking library for Apple platforms, planned as a Swift package with no external package dependencies.
+A native networking library for Apple platforms, distributed as a Swift package with no external package dependencies.
 
 **Status: Initial buffered HTTP execution is implemented through `APIClient` and the injectable `NetworkClient` boundary.** Typed endpoints and raw URLRequest inputs share secured transport, status validation and JSON/Data/UTF-8/empty response handling. This is not yet a complete v1: consolidated lifecycle/authentication/privacy review and release gates remain outstanding. I16 verifies [strict storage and explicit borrowed-session profiles](docs/planning/STORAGE_VERIFICATION.md) with controlled local-server evidence. I15 adds [optional sanitized diagnostics](docs/planning/SANITIZED_DIAGNOSTICS.md), disabled by default. I14 adds the [bounded authentication-header provider](docs/planning/AUTHENTICATION_PROVIDER.md). I13 adds [explicit shutdown and concurrent-call isolation](docs/planning/SHUTDOWN_AND_CONCURRENCY.md). I12 enforces per-call cancellation and the monotonic total budget; see the [timing guide](docs/planning/CANCELLATION_AND_BUDGET.md). See the [HTTP pipeline guide](docs/planning/HTTP_PIPELINE.md).
 
@@ -12,9 +12,13 @@ Open the repository-root Package.swift in Xcode. The package is named SwiftNetwo
 
 Foundation/URLSession is the primary HTTP transport. Swift Concurrency, injectable services, system trust, and privacy-preserving defaults guide the design. Network.framework may be considered for specific low-level requirements. The project will not implement its own HTTP, TLS, or cryptographic stack, or provide a backend product.
 
-The repository and package are named **SwiftNetworkKit**. The library product, module, and import name will be **NetworkKit**, with one library module in v1. The first stable release is limited to the HTTP core; other modules are deferred. The package and target now exist; The initial public HTTP pipeline is implemented; later v1 gates remain open. See [v1 scope](docs/planning/V1_SCOPE.md) and [ADR-0003](docs/decisions/ADR-0003-v1-scope-and-naming.md).
+The repository and package are named **SwiftNetworkKit**. The library product, module, and import name are **NetworkKit**, with one library module in v1. The first stable release is limited to the HTTP core; other modules are deferred. The package and target now exist; The initial public HTTP pipeline is implemented; later v1 gates remain open. See [v1 scope](docs/planning/V1_SCOPE.md) and [ADR-0003](docs/decisions/ADR-0003-v1-scope-and-naming.md).
 
 ## Documentation
+
+- [Compiled integration guide: installation, calls, formats, errors, authentication, ownership and testing](Sources/NetworkKit/NetworkKit.docc/IntegrationGuide.md)
+- [Public API/availability review and guide verification](docs/planning/API_REVIEW.md)
+- [Contract-to-test evidence and explicit release gaps](docs/planning/TEST_EVIDENCE.md)
 
 - [Storage profiles and controlled local-server verification](docs/planning/STORAGE_VERIFICATION.md)
 

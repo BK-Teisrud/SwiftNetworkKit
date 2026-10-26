@@ -17,6 +17,10 @@ Ordinary failures use ``NetworkError``. CancellationError remains a separate Swi
 See the repository's planning guides for exact request rules, actual test evidence,
 remaining implementation tasks, and the proprietary rights policy.
 
+## Integration guide
+
+Start with <doc:IntegrationGuide> for compiled consumer examples, installation, formats, errors, session ownership, authentication and testing.
+
 ## Response interpretation
 
 Select ``ResponseStrategy`` for JSON models, Data, strict UTF-8 text, or explicit
@@ -55,7 +59,7 @@ Create ``APIClient`` with immutable ``NetworkConfiguration`` and reuse it across
 Use `try await client.send(endpoint)` or `try await client.send(request, response: .text)`.
 Both return ``NetworkResponse`` with value/status/headers. No automatic retry or token
 refresh occurs. The client can own a strict session or borrow a compatible app-owned
-session, which it never invalidates. Public injection currently requires strict storage.
+session, which it never invalidates. Public injection defaults to strict storage; explicit appManaged selection permits only the documented app-owned HTTPS cookie/cache profile.
 Default request inactivity is 30 seconds; the monotonic total budget is 60 seconds.
 Explicit call options override client defaults. Preparation, transport and response handling
 share one budget. Timeout/caller cancellation cancels only that call, and both worker and

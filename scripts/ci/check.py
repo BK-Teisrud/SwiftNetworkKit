@@ -47,6 +47,17 @@ def preflight():
     print("Verified SDK versions:", json.dumps(sdk_versions, sort_keys=True), flush=True)
 
 
+def validate_documented_examples(source, guide):
+    """Require every published Swift example to be the exact compiled consumer source."""
+    compiled = re.findall(r"^// DOC-EXAMPLE: ([a-z]+) BEGIN\n(.*?)^// DOC-EXAMPLE: \1 END$", source, re.M | re.S)
+    published = re.findall(r"<!-- DOC-EXAMPLE: ([a-z]+) -->\n```swift\n(.*?)^```$", guide, re.M | re.S)
+    require(compiled and published, "Missing compiled or published documentation examples")
+    require(len(dict(compiled)) == len(compiled) and len(dict(published)) == len(published),
+            "Duplicate documentation example identifier")
+    require(dict(compiled) == dict(published), "Published examples differ from compiled consumer source")
+    require(len(re.findall(r"^```swift$", guide, re.M)) == len(published), "Untracked Swift documentation block")
+
+
 def source_integrity():
     manifest = json.loads(run("swift", "package", "dump-package", capture=True))
     require(manifest["name"] == "SwiftNetworkKit", "Incorrect package name")
@@ -80,6 +91,9 @@ def source_integrity():
     require(match and json.loads(match[1]) == KINDS, "Mandatory matrix entries missing/reordered")
     uses = re.findall(r"uses:\s*(\S+)", workflow)
     require(uses and all(re.fullmatch(r"actions/[\w-]+@[0-9a-f]{40}", use) for use in uses), "Actions must be GitHub-owned and SHA-pinned")
+    validate_documented_examples(
+        (ROOT / "Tests/NetworkKitTests/DocumentationExamplesTests.swift").read_text(),
+        (ROOT / "Sources/NetworkKit/NetworkKit.docc/IntegrationGuide.md").read_text())
     run("git", "diff", "--check")
     run("python3", "-m", "unittest", "discover", "-s", "scripts/ci", "-p", "test_*.py", "-v")
     print("Manifest, dependencies, source policies, JSON, local file links, workflow matrix/pins, and CI helper tests passed.")
