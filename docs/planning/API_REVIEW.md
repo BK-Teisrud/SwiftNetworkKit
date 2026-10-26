@@ -51,3 +51,7 @@ Security/privacy/native HTTPS/system-trust review remains #60; resource measurem
 No new implementation defect, feature scope, duplicate issue, milestone split or priority change is justified by this review. Documentation defects found here are fixed in this slice. I19 / #60 follows I18 acceptance; it is a real dependency, not a candidate for a competing branch from the old API baseline. Independent later work may be prepared only after checking contracts, file overlap, accepted base and capacity.
 
 The owner now permits multiple independent branches/PRs, created sequentially, with at most five concurrent work processes. [PROJECT_MANAGEMENT.md](PROJECT_MANAGEMENT.md) records isolation, shared-file handling, CI capacity and stop/resume rules. No parallel independent delivery is started by this PR, and no background polling or paid runner is introduced.
+
+## Main acceptance follow-up
+
+The first I18 main run 40382689252 failed in the pre-existing native borrowed-cache probe after PR #94 had passed. The review is not accepted from that run. [BUG-01 / #95](STORAGE_TIMEOUT_FOLLOWUP.md) blocks #59 acceptance and records bounded test-fixture/diagnostic work without asserting an unproven product root cause.

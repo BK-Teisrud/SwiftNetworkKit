@@ -31,3 +31,5 @@ R10: I17 / #58 consolidates an evidence ledger; GATE-F2 / #86 reconciles all sel
 Planning risk: broad deferred domains can hide missing contracts or create premature commitments. PLAN-F3–F6 / #87–#90 require use cases, explicit exclusions, feasibility, approved contracts and bounded issues. Retry is the first post-core planning priority; other F3 candidates are not implicitly selected.
 
 PREP-01 assessment, 2026-10-26: older runtimes are absent locally and external access is unknown; physical model/OS/build inventory is also unknown. See [environment readiness](ENVIRONMENT_READINESS.md) for evidence, owner actions and native-trust/device scenarios. #62/#63 retain these gaps; preparation does not close them. Xcode development-host requirements and macOS 14 execution must be handled separately.
+
+R10 update, 2026-10-26: I18 main run 40382689252 hit the native borrowed-cache test limit and restarted. #95 is P0 and blocks #59/#60 acceptance. See [storage probe follow-up](STORAGE_TIMEOUT_FOLLOWUP.md); no blind rerun or increased suite bound substitutes for phase/liveness evidence.

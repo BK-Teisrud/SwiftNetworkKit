@@ -6,14 +6,11 @@ import Testing
 /// Real HTTP on a kernel-assigned loopback port. No TLS bypass, host-file changes,
 /// external service, shared stores or persistent credential fixtures are used.
 private final class StorageServer {
-    let process: Process
+    private let fixture: BoundedFixtureProcess
     let base: URL
     let realm = UUID().uuidString
     init() throws {
-        process = Process()
-        let output = Pipe()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-        process.arguments = ["python3", "-u", "-c", #"""
+        fixture = try BoundedFixtureProcess(script: #"""
 import http.server, json, threading, sys
 records = []
 lock = threading.Lock()
@@ -49,22 +46,14 @@ server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), Handler)
 server.daemon_threads = True
 print(server.server_port, flush=True)
 server.serve_forever()
-"""#, realm]
-        process.standardOutput = output
-        process.standardError = Pipe()
-        try process.run()
-        var bytes = Data()
-        while let next = try output.fileHandleForReading.read(upToCount: 1), !next.isEmpty {
-            if next == Data([10]) { break }
-            bytes.append(next)
-        }
-        guard let port = Int(String(decoding: bytes, as: UTF8.self)) else {
-            process.terminate(); throw URLError(.cannotConnectToHost)
+"""#, arguments: [realm])
+        let line = try fixture.startupLine()
+        guard let port = Int(line) else {
+            _ = fixture.stop(); throw URLError(.cannotConnectToHost)
         }
         base = URL(string: "http://127.0.0.1:\(port)")!
     }
-    func stop() { if process.isRunning { process.terminate(); process.waitUntilExit() } }
-    deinit { if process.isRunning { process.terminate() } }
+    func stop() { #expect(fixture.stop(), "Storage fixture did not terminate within its bounded cleanup") }
 }
 private struct StorageReply: Decodable, Sendable { let hit: Int; let cookie: String? }
 private struct StorageRecord: Decodable, Sendable {
@@ -138,21 +127,31 @@ private final class StorageDelegate: NSObject, URLSessionDelegate {}
 
     @Test(arguments: [false, true]) func strictProfileCannotServeAnAutomaticHTTPCacheEntry(borrowed: Bool) async throws {
         #if os(macOS)
-        let server = try StorageServer(); defer { server.stop() }
+        let probe = borrowed ? "borrowed" : "owned"
+        FileHandle.standardOutput.write(Data("Storage cache \(probe): startup\n".utf8))
+        let server = try StorageServer(); defer {
+            FileHandle.standardOutput.write(Data("Storage cache \(probe): teardown\n".utf8))
+            server.stop()
+            FileHandle.standardOutput.write(Data("Storage cache \(probe): complete\n".utf8))
+        }
         let injected = borrowed ? URLSession(configuration: URLSessionTransport.configuration()) : nil
         defer { injected?.invalidateAndCancel() }
         let client = try publicClient(server.base, session: injected)
         var request = URLRequest(url: server.base.appendingPathComponent("cache"))
         request.cachePolicy = .returnCacheDataDontLoad
         for hit in 1...2 {
+            FileHandle.standardOutput.write(Data("Storage cache \(probe): strict request \(hit)\n".utf8))
             let response = try await client.send(request, response: .json(StorageReply.self))
             #expect(response.value.hit == hit)
         }
+        FileHandle.standardOutput.write(Data("Storage cache \(probe): wire records\n".utf8))
         let records = try await client.send(URLRequest(url: server.base.appendingPathComponent("records")), response: .json([StorageRecord].self)).value
         #expect(records.count == 2 && records.allSatisfy { $0.ifNoneMatch == nil })
+        FileHandle.standardOutput.write(Data("Storage cache \(probe): client shutdown\n".utf8))
         await client.shutdown()
         // Positive control: an explicitly app-owned memory cache serves a seeded
         // response using URLSession, without contacting the local server again.
+        FileHandle.standardOutput.write(Data("Storage cache \(probe): positive cache control\n".utf8))
         let cache = URLCache(memoryCapacity: 1_048_576, diskCapacity: 0)
         let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil,
             headerFields: ["Cache-Control": "max-age=3600"])!
@@ -160,10 +159,13 @@ private final class StorageDelegate: NSObject, URLSessionDelegate {}
         let config = URLSessionConfiguration.ephemeral
         config.httpCookieStorage = nil; config.httpShouldSetCookies = false
         config.urlCredentialStorage = nil; config.urlCache = cache
+        config.timeoutIntervalForRequest = 5
+        config.timeoutIntervalForResource = 10
         let session = URLSession(configuration: config)
         defer { session.invalidateAndCancel(); cache.removeAllCachedResponses() }
         let (data, _) = try await session.data(for: request)
         #expect(data == Data("seeded-cache".utf8))
+        FileHandle.standardOutput.write(Data("Storage cache \(probe): positive cache control complete\n".utf8))
         #else
         let operation: URLSessionTransport.DataOperation = { session, request, _ in
             #expect(session.configuration.urlCache == nil)

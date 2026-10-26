@@ -24,7 +24,8 @@ Choose the lowest Order with closed blockers and satisfied Ready criteria. This 
 | 16 | [[I16] Verify secure storage and injected-session profiles](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/57) | #25 | #56 |
 | 16.5 | [[PREP-01] Prepare minimum-OS and physical-device evidence access](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/85) | #23 | None; planning/inventory only |
 | 17 | [[I17] Complete the test matrix and regression suite](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/58) | #23 | #57 |
-| 18 | [[I18] Complete API review, DocC, and integration guides](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/59) | #27 | #58 |
+| 18 | [[I18] Complete API review, DocC, and integration guides](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/59) | #27 | #58, #95 |
+| 18.5 | [[BUG-01] Bound native HTTP probe liveness and diagnose main timeouts](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/95) | #23 | None; repair I18 main evidence before acceptance |
 | 19 | [[I19] Conduct the v1 security and privacy review](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/60) | #25 | #59 |
 | 20 | [[I20] Measure baseline resource use and package quality](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/61) | #27 | #60 |
 | 21 | [[I21] Obtain and document minimum-OS runtime evidence](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/62) | #23 | #60, #85 |
@@ -32,6 +33,8 @@ Choose the lowest Order with closed blockers and satisfied Ready criteria. This 
 | 22.5 | [[GATE-F2] Reconcile v1 requirements, domain epics, and release evidence](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/86) | #29 | #59, #60, #61, #62, #63 |
 | 23 | [[I23] Rehearse the v1 release without publishing](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/64) | #27 | #63, #86 |
 | 24 | [REL-01: Actual v1 release gate](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/29) | Governance | #64 and selected core epics |
+
+Current acceptance exception: I18 main run 40382689252 failed in the native borrowed-cache probe. #95 is the P0 follow-up, and #59/#60 remain blocked. See [storage timeout follow-up](STORAGE_TIMEOUT_FOLLOWUP.md).
 
 ## Why this sequence
 
