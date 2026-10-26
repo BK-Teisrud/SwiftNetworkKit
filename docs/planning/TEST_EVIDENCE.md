@@ -2,7 +2,7 @@
 
 Snapshot: 2026-10-26. Task: [I17 / #58](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/58). Contract sources: [HTTP](HTTP_API_CONTRACT.md), [lifecycle](CONCURRENCY_AND_LIFECYCLE.md), [security](SECURITY_AND_NETWORK_POLICY.md), [CI](CI_AND_TEST_PLAN.md), and [v1 scope](V1_SCOPE.md). The IDs below identify review/evidence groups, not newly approved requirements. This ledger consolidates implemented contracts and explicit release gaps; it is not full v1 acceptance.
 
-Production and test sources are unchanged from `d1e9a04d1870ed7ac7c46ec270af63e325045b30`. The [test inventory](TEST_INVENTORY.md) lists all 210 declarations. Source indexing is not execution evidence. Parameterized functions exercise multiple cases; do not inflate or equate declaration counts with coverage percentages.
+Production and test sources are unchanged from `d1e9a04d1870ed7ac7c46ec270af63e325045b30`. The I17 [test inventory](TEST_INVENTORY.md) indexed all 210 declarations at that baseline; that linked index can be refreshed by later work without changing this dated run evidence. Source indexing is not execution evidence. Parameterized functions exercise multiple cases; do not inflate or equate declaration counts with coverage percentages.
 
 ## Contract-to-test mapping
 
