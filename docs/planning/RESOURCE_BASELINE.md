@@ -10,7 +10,7 @@ The fixture binds only 127.0.0.1 on a kernel-assigned port, returns synthetic `x
 
 Each repetition launches a fresh process and fixture, warms one request, runs the stated cycles, joins all tasks, shuts down the client and samples RSS again after 100 ms. One reuse client/session spans cycles; the fresh-client control creates/shuts down one per workload call. Half of NetworkKit workload calls use typed endpoints and half raw URLRequest, with .data responses; every payload's length and contents are verified. The cancellation case waits for at least one native slow request to reach the server, cancels all eight calls and requires eight CancellationErrors with joined completion. It does not assert that all eight reached the wire before cancellation.
 
-Reported per-call p95 covers the call plus payload validation and, in the fresh-client case, shutdown; it excludes fresh-client initialization, while whole-cycle times include initialization and task scheduling. The direct URLSession control uses an ephemeral, store-disabled session without NetworkKit's validation, delegate or deadline pipeline. It supplies a useful comparison, not an identical implementation or isolated attribution experiment. All measurements include harness/runtime overhead.
+Reported per-call p95 covers the call plus payload validation and, in the fresh-client case, shutdown; it excludes fresh-client initialization, while whole-cycle times include initialization and task scheduling. The direct URLSession control uses an ephemeral, store-disabled session without NetworkKit's validation, delegate or deadline pipeline. For common setup, the direct control also retains an idle NetworkKit client object, but its workload I/O uses only the separate URLSession. It supplies a useful comparison, not an identical implementation or isolated attribution experiment. All measurements include harness/runtime overhead.
 
 Current RSS comes from mach_task_basic_info; peak process RSS comes from macOS /usr/bin/time -l, in bytes. This is neither live allocation accounting nor physical-footprint, energy or leak measurement. The client object remains in scope after shutdown, and Foundation/Swift/allocator caches may retain memory. A 100 ms sample is not proof of long-term quiescence or secure erasure. Latency/RSS are observations, not volatile CI pass thresholds.
 
@@ -25,7 +25,7 @@ Environment: macOS 15.8.1 / 24H32, x86_64; Xcode 26.3 / 17C529, Swift 6.2.4, mac
 | reuse | 8 | 64 KiB | 3 × 32 | 6 | 7.30–8.38 | 7.22–7.33 |
 | reuse | 32 | 64 KiB | 3 × 64 | 6–7 | 18.70–22.47 | 9.59–9.98 |
 | reuse | 8 | 1024 KiB | 3 × 32 | 6–7 | 28.00–30.21 | 23.40–24.09 |
-| cancel | 8 | 64 KiB | 0 × 8 | 1 | Not applicable | 6.02–6.07 |
+| cancel | 8 | 64 KiB | Eight cancelled calls | 1 | Not applicable | 6.02–6.07 |
 | reuse | 32 | 64 KiB | 100 × 64 | 16–43 | 16.48–16.81 | 15.49–16.14 |
 | direct | 32 | 64 KiB | 100 × 64 | 6–9 | 14.78–15.85 | 9.17–10.70 |
 
@@ -52,3 +52,7 @@ The baseline standalone release consumer resolves the local NetworkKit product w
 The candidate must additionally pass a fresh-checkout unit suite, package/source integrity and DocC; their actual results are recorded on #61/its PR. CI macos-core compiles and executes the short release probe on each change, without timing/RSS thresholds; the full local measured workload is opt-in. Existing full platform checks remain mandatory. A smoke success does not resolve the measured trend or certify all-platform resource behavior.
 
 Next priority after I20 acceptance is #100, ahead of serial #62/#63 execution. Environment access work can proceed independently, but unavailable minimum runtimes, exact physical inventory and controlled HTTPS access remain genuine gaps. #86 requires #100 disposition plus the existing resource/platform/security reconciliation. #64 owns final consumer/archive/privacy-report verification and #29 owns actual release authorization. No additional milestone or deferred F3–F6 scope is justified by these results.
+
+### Fresh-checkout candidate results
+
+A second fresh local clone of candidate `fa1003d3760c03969a5d215bf462d56e17cbe36c` passed the full 217-test / 27-suite macOS suite with warnings as errors, source integrity plus all four CI-helper tests, and DocC conversion with warnings as errors. The public NetworkKit symbol graph contains 319 records, unchanged from the accepted API review. The standalone release smoke passed its five-request reuse assertion and eight joined cancellations after native contact. The checkout remained clean after all four checks. This verifies candidate package/guide/harness integration; it does not resolve #100 or any native HTTPS/minimum-OS/physical-device/distribution gate. Subsequent changes in this PR only record these results and clarify current planning text.
