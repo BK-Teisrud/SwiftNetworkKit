@@ -23,3 +23,7 @@ Data flows from a typed endpoint or raw URLRequest through validated preparation
 | T9 | Supply-chain or distribution drift | No external package dependencies; pinned Actions, read-only CI permissions, required checks; bundled privacy manifest regression | Rules can be edited by the account owner. #64/#86 must verify the final archive, aggregate privacy report and exact release candidate; CI does not certify distribution |
 
 No severe implementation finding was identified in this bounded source review. This does not establish absence of vulnerabilities or owner acceptance of residual risk. Severe future findings block release; use the private reporting process in [SECURITY.md](../../SECURITY.md). Known unverified native/platform/resource/distribution behavior remains open under existing release tasks, not accepted by a passing unit test.
+
+## I20 update to T8
+
+The [resource baseline](../planning/RESOURCE_BASELINE.md) records sustained RSS growth versus a direct URLSession control. RES-01 / #100 must attribute it and resolve any established product defect before #86 acceptance. RSS alone does not identify a leak; successful cancellation/shutdown is not stable-memory evidence. Provisional app workload advice does not enforce response-size or memory limits.
