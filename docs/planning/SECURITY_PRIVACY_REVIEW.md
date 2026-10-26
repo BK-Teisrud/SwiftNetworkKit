@@ -55,3 +55,7 @@ On the observed macOS 15.8.1 / Xcode 26.3 / Swift 6.2.4 host, `swift test --para
 | Native fixture stall recurrence | #23/#86 retain the original unresolved internal stall cause and BUG-01 evidence; preserve bounded probes and investigate any recurrence |
 
 Next technical task after I19 acceptance is #61. #62/#63 may resolve access in parallel without depending on each other's runtime results. Existing issues cover every identified gap; no duplicate issue, extra milestone or change to v1/support minima is warranted. F2 remains open, retry-first F3 remains deferred, and no tag/release/publication is authorized. Severe findings must be fixed or affected scope removed through an explicit decision before release. I19 review completion must not close the evidence or residual-acceptance gates.
+
+## I20 resource follow-up
+
+The [measured resource baseline](RESOURCE_BASELINE.md) identifies sustained process-RSS growth relative to a direct URLSession control. RES-01 / #100 now owns attribution and any required fix, blocks #86, and follows I20 acceptance. This is not an attributed leak or accepted stable-memory result. The earlier #61 measurement ownership above is supplemented by this concrete follow-up; residual-risk and native-platform gates remain open.
