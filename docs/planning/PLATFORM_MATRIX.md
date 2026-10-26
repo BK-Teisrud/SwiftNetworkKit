@@ -1,6 +1,8 @@
 # Platform and toolchain matrix
 
-Current implementation: the initial public HTTP pipeline is delivered through I10.
+Current preparation: [ENVIRONMENT_READINESS.md](ENVIRONMENT_READINESS.md) records the 2026-10-26 inventory, access gaps and scenario ownership. I01–I16 are delivered; minimum-runtime and physical-device acceptance remain outstanding.
+
+Historical implementation snapshot below: the initial public HTTP pipeline was delivered through I10.
 [F1 review](F1_REVIEW.md) records contract/evidence review and the I11 gate outcome source.
 The table below cites the cumulative I10 main run; I11 actual counts are recorded on #52.
 Support remains the accepted plan from [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md),

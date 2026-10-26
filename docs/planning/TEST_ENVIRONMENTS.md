@@ -1,5 +1,7 @@
 # Test environments and evidence plan
 
+Current preparation: [PREP-01 environment readiness, 2026-10-26](ENVIRONMENT_READINESS.md). The inventory was rechecked with unchanged listed runtimes; exact physical devices and older-environment access remain unknown. This page preserves the initial inventory.
+
 Inventory inspected 2026-10-19 using xcrun simctl list runtimes --json. This proves installation, not execution: no simulator was booted and no product tests ran. Xcode/Swift/host details are in [PLATFORM_MATRIX.md](PLATFORM_MATRIX.md).
 
 | Installed runtime | Build | Available according to simctl | Architectures |

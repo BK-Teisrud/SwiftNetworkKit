@@ -29,3 +29,5 @@ R11: Admins can change rulesets even without main/update/deletion bypasses. No t
 R10: I17 / #58 consolidates an evidence ledger; GATE-F2 / #86 reconciles all selected v1 domain criteria before rehearsal. Native wire, scripted transport, minimum-runtime and physical-device evidence must remain distinct.
 
 Planning risk: broad deferred domains can hide missing contracts or create premature commitments. PLAN-F3–F6 / #87–#90 require use cases, explicit exclusions, feasibility, approved contracts and bounded issues. Retry is the first post-core planning priority; other F3 candidates are not implicitly selected.
+
+PREP-01 assessment, 2026-10-26: older runtimes are absent locally and external access is unknown; physical model/OS/build inventory is also unknown. See [environment readiness](ENVIRONMENT_READINESS.md) for evidence, owner actions and native-trust/device scenarios. #62/#63 retain these gaps; preparation does not close them. Xcode development-host requirements and macOS 14 execution must be handled separately.
