@@ -2,7 +2,7 @@
 
 No deadlines are set. Phases are gates, not calendar promises. The owner selected HTTP core first: F0 → F1 → F2 leads to the first stable release. F3–F6 are optional later deliveries, outside v1.0. Repository/package: SwiftNetworkKit; product/module: NetworkKit, with one library module. See [v1 scope](V1_SCOPE.md) and [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md).
 
-Current review: [QA-01 quality/maintainability analysis](QUALITY_REVIEW_2026-10-26.md), following the [plan audit](PLAN_REVIEW_2026-10-26.md). I01–I18, PREP-01 and BUG-01 are accepted; F2 remains open. QA-01 / #97 is accepted through PR #98 / main run 40396838559. [I19 security/privacy review](SECURITY_PRIVACY_REVIEW.md) is active. Post-v1 planning remains explicit in PLAN-F3–F6.
+Current review: [QA-01 quality/maintainability analysis](QUALITY_REVIEW_2026-10-26.md), following the [plan audit](PLAN_REVIEW_2026-10-26.md). I01–I18, PREP-01 and BUG-01 are accepted; F2 remains open. QA-01 / #97 is accepted through PR #98 / main run 40396838559. [I19 security/privacy review](SECURITY_PRIVACY_REVIEW.md) is accepted through PR #99 / main run 40402676807. [I20 resource baseline](RESOURCE_BASELINE.md) is active; RES-01 / #100 follows to investigate measured RSS growth. Post-v1 planning remains explicit in PLAN-F3–F6.
 
 ## F0 – Architecture and decisions
 
@@ -14,7 +14,7 @@ The initial HTTP slice is delivered through I01–I10. I11 / #52 records the [F1
 
 ## F2 – Production hardening and v1 gate
 
-Current review, 2026-10-26: I18 and [BUG-01 / #95](STORAGE_TIMEOUT_FOLLOWUP.md) are accepted through PR #96 / main run 40390885712; original failed evidence and stall-cause uncertainty remain recorded. The owner-requested [QA-01 / #97](QUALITY_REVIEW_2026-10-26.md) quality/maintainability review is accepted; I19 is active, with controlled HTTPS fixture access unavailable/unknown and native evidence retained in #62/#63. No extra feature or milestone is selected.
+Current review, 2026-10-26: I18 and [BUG-01 / #95](STORAGE_TIMEOUT_FOLLOWUP.md) are accepted through PR #96 / main run 40390885712; original failed evidence and stall-cause uncertainty remain recorded. The owner-requested [QA-01 / #97](QUALITY_REVIEW_2026-10-26.md) quality/maintainability review is accepted; I19 is accepted; I20 measures resources and adds RES-01 / #100 (P1, Order 20.5) for sustained RSS growth relative to a native control. #100 blocks #86 and precedes serial I21 work. Controlled HTTPS access remains unavailable/unknown with native evidence in #62/#63. No extra feature or milestone is selected.
 
 Privacy/logging, cancellation, required authentication boundaries under DEC-04/06, security review, DocC, and a documented release gate. Release v1 only after all accepted core criteria are met. PREP-01 / #85 investigates environment access early; GATE-F2 / #86 reconciles domain requirements and evidence before I23 rehearsal. Minimum-runtime and newer-device execution are independent evidence branches after API/security review, and both must pass.
 

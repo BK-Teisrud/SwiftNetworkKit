@@ -206,6 +206,10 @@ def main():
         documentation()
     else:
         platform_check(kind)
+        if kind == "macos-core":
+            # Compile/exercise the opt-in release harness without volatile timing/RSS thresholds.
+            run(sys.executable, ROOT / "scripts/benchmarks/run.py", "--output", OUTPUT / "resource-smoke.json",
+                "--repetitions", "1", "--smoke")
 
 
 if __name__ == "__main__":

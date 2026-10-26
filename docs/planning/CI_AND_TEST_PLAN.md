@@ -71,3 +71,5 @@ Access to minimum runtimes/devices remains unverified and has not been acquired.
 Release checks also cover representative newer stable runtimes, relevant physical scenarios, documented Mac-architecture assessment, security/privacy, public API/DocC, rights policy, and representative performance/memory measurements. Verify installation from the release candidate commit/tag before final publication to avoid discovering failures only after an immutable release.
 
 Update [PLATFORM_MATRIX.md](PLATFORM_MATRIX.md) and REL-01 with commit, environment, test names/results, known limitations, and approved scope changes. No release checks have run.
+
+I20 adds a short standalone release-consumer probe to macos-core: compile the opt-in harness and verify native loopback reuse/cancellation through public APIs, without volatile RSS/latency thresholds. Full three-repetition resource measurements remain opt-in and recorded in [RESOURCE_BASELINE.md](RESOURCE_BASELINE.md); RES-01 / #100 owns the observed RSS trend and blocks #86. Existing required jobs, runtime tests, runner budget and no-publication policy remain unchanged.

@@ -29,13 +29,14 @@ Choose the lowest Order with closed blockers and satisfied Ready criteria. This 
 | 18.75 | [[QA-01] Review quality and remove stale validation duplication](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/97) | #27 | #59 |
 | 19 | [[I19] Conduct the v1 security and privacy review](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/60) | #25 | #59, #97 |
 | 20 | [[I20] Measure baseline resource use and package quality](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/61) | #27 | #60 |
+| 20.5 | [[RES-01] Diagnose repeated-call RSS growth against native URLSession control](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/100) | #27 | #61 |
 | 21 | [[I21] Obtain and document minimum-OS runtime evidence](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/62) | #23 | #60, #85 |
 | 22 | [[I22] Run representative tests on physical Apple devices](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/63) | #23 | #60, #85 |
-| 22.5 | [[GATE-F2] Reconcile v1 requirements, domain epics, and release evidence](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/86) | #29 | #59, #60, #61, #62, #63 |
+| 22.5 | [[GATE-F2] Reconcile v1 requirements, domain epics, and release evidence](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/86) | #29 | #59, #60, #61, #62, #63, #100 |
 | 23 | [[I23] Rehearse the v1 release without publishing](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/64) | #27 | #63, #86 |
 | 24 | [REL-01: Actual v1 release gate](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/29) | Governance | #64 and selected core epics |
 
-Current review: QA-01 / #97 is accepted through PR #98 and main run 40396838559. [I19 security/privacy review](SECURITY_PRIVACY_REVIEW.md) is the active slice. Controlled HTTPS fixture access is unavailable/unknown; #62/#63 retain native execution gaps. #61 follows I19 acceptance; #86/#29 retain residual-risk acceptance and release gates.
+Current review: I19 / #60 is accepted through PR #99 and main run 40402676807. [I20 resource/package baseline](RESOURCE_BASELINE.md) is active. The measured RSS trend requires RES-01 / #100 (P1, Order 20.5) after I20 acceptance, ahead of serial runtime/device execution; it blocks #86. Native HTTPS/minimum/physical access gaps remain assigned to #62/#63. No release-risk acceptance is inferred.
 
 ## Why this sequence
 

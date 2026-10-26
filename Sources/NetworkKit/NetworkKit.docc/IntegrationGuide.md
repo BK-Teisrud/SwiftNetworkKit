@@ -199,6 +199,12 @@ struct GuideStubClient: NetworkClient {
 
 The guide tests exercise successful typed decoding/metadata, path/query construction, formats and explicit status, JSON body construction, owned/borrowed client closure and all documented error categories. An app can add its own scenarios without receiving the internal transport/clock seams or shipping an extra testing product.
 
+## Resource use
+
+Reuse a client per compatible account/origin context. Responses are buffered; the library has no response-size cap or task-queue limiter. Keep app concurrency, expected payload size and retained results bounded. Initial local evaluation measured up to eight calls with expected 1 MiB responses; this is provisional workload guidance, not an enforced memory ceiling or a device guarantee. An oversized response can exceed that expectation.
+
+The repository's I20 resource baseline includes a sustained RSS trend requiring RES-01 investigation before release reconciliation. No leak-free or stable long-run memory claim follows from passing tests or shutdown. Re-evaluate limits on the actual target devices and selected service.
+
 ## Delivery limits
 
 DocC and compiled examples establish current API usability on selected build/runtime destinations. They do not replace full security/privacy review, actual minimum-OS/native trust/physical-device results, resource measurements or release authorization. The repository's API review and contract-evidence ledger identify the remaining gate owners. This guide adds no retry/cache/transfer/WebSocket/advanced TLS feature.
