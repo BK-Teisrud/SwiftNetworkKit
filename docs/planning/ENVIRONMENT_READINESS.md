@@ -82,3 +82,7 @@ Keep PREP-01 ahead of I17 and keep the approved v1 scope unchanged. Once prepara
 ## I19 access update — 2026-10-26
 
 The owner reports no available/known controlled HTTPS environment with a system-trusted certificate. ENV-02 remains unexecuted and release-blocking under #62/#63. See the [reviewed fixture contract](SECURITY_PRIVACY_REVIEW.md) for distinct trust success, invalid-chain and hostname-mismatch conditions. No endpoint, root installation, certificate purchase or trust bypass has been authorized.
+
+## RES-01 handoff to ENV-07
+
+[Repeated-call attribution](REPEATED_CALL_MEMORY.md) distinguishes completed NetworkKit operations from expiry-dependent runtime sleep-helper allocations and resident pages. For native resource evidence, record request rate, concurrency, response/retained-result sizes and selected total budget, with an observation after original deadlines. Use supported target profiling/harness tools; the standalone macOS heap inspector does not establish iOS/watchOS/tvOS results. Access, exact physical inventory and system-trusted HTTPS remain unverified; no Ready execution or residual-risk acceptance is inferred. #62/#63 own native results and #86/#29 owner disposition.
