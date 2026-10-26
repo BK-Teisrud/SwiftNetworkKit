@@ -78,3 +78,7 @@ No new tracking issue is needed for these known gaps: #60/#62/#63 already own th
 ## Backlog assessment
 
 Keep PREP-01 ahead of I17 and keep the approved v1 scope unchanged. Once preparation is accepted, I17 remains the next implementation/review slice. The older-runtime access risk is confirmed, not solved; #62/#63 must stay open. Do not add duplicate issues or split milestones for missing inventory alone. Preserve standard hosted runners; the two PR #91 attempts that lost runners were infrastructure-capacity incidents, not demonstrated product defects. The successful PR checks and main run 40369219111 complete the preceding planning change; they do not resolve any environment gap above.
+
+## I19 access update — 2026-10-26
+
+The owner reports no available/known controlled HTTPS environment with a system-trusted certificate. ENV-02 remains unexecuted and release-blocking under #62/#63. See the [reviewed fixture contract](SECURITY_PRIVACY_REVIEW.md) for distinct trust success, invalid-chain and hostname-mismatch conditions. No endpoint, root installation, certificate purchase or trust bypass has been authorized.
