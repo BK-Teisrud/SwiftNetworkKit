@@ -1,4 +1,4 @@
-# Storage-probe liveness follow-up — BUG-01
+# Native HTTP-probe liveness follow-up — BUG-01
 
 Date: 2026-10-26. Task: [#95](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/95). This acceptance blocker precedes I19; I18 / #59 remains unaccepted until its failed main evidence is reconciled.
 
@@ -31,3 +31,13 @@ Local final-candidate verification passed: `swift test --parallel -Xswiftc -warn
 BUG-01 / #95 is P0 at Order 18.5 under testing epic #23 in F2. I18 #59 is explicitly blocked by #95, so I19 remains blocked transitively. #95 does not depend on #59 acceptance: this avoids a cycle while allowing repair of its main evidence. Remaining security/privacy/minimum-runtime/device/resource/release owners are unchanged.
 
 Review the original timeout disposition after successful follow-up PR/main evidence. If a distinct unresolved defect appears, keep #95 open or create a precise blocking follow-up; a green run alone does not establish an undocumented root cause. No new milestone or product-scope change is justified. No parallel independent delivery is started at this failed-main boundary.
+
+## PR #96 follow-up: redirect fixture boundary
+
+PR run 40386411123 also failed, this time in sameOriginRedirectsHaveABoundedLifetime(GET), at the unchanged one-minute test limit. The process restarted. Both storage ownership probes subsequently reached every new phase through completion; those post-restart results are diagnostic evidence, not acceptance of the complete run. The original cache stall is not thereby explained.
+
+The redirect server still duplicated the same unbounded readiness read, undrained stderr pipe and waitUntilExit pattern. Both native redirect fixtures now reuse BoundedFixtureProcess, eliminating the remaining copies of those unbounded operations in Tests. The GET/HEAD/loop/limit probe has immediate startup/native-request/session-invalidation/teardown labels and an explicit test-only ten-second resource ceiling while retaining its existing three-second request timeout and original one-minute test limit. Both denied-destination ownership paths also identify startup/teardown. All destination-count/status/hop/loop/cancellation assertions remain intact.
+
+This extends the same BUG-01 instead of inventing a separate product defect or claiming a common internal OS root cause. The helper's existing no-readiness/SIGTERM-ignore tests cover its use by both fixture families. No additional test declarations or executable product changes are needed. The PR description and issue retain both failed runs; I18/I19 stay blocked pending successful, uninterrupted candidate evidence and review.
+
+The extended local candidate passed all 216 tests / 26 suites and the separate three-function RedirectIntegrationTests suite. Every GET/HEAD/loop/limit phase reached completion. Structural checks and all four CI helper tests passed. These are local results; fresh hosted PR/main acceptance is still required.

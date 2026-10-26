@@ -6,14 +6,11 @@ import os
 #if os(macOS)
 /// Two ephemeral listeners, both bound only to 127.0.0.1. No public networking.
 private final class LocalRedirectServer {
-    let process: Process
+    private let fixture: BoundedFixtureProcess
     let base: URL
     let destination: URL
     init() throws {
-        process = Process()
-        let output = Pipe()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-        process.arguments = ["python3", "-u", "-c", #"""
+        fixture = try BoundedFixtureProcess(script: #"""
 import http.server, threading
 count = 0
 class Destination(http.server.BaseHTTPRequestHandler):
@@ -51,22 +48,13 @@ original = http.server.ThreadingHTTPServer(('127.0.0.1', 0), Original)
 threading.Thread(target=other.serve_forever, daemon=True).start()
 print('%d %d' % (original.server_port, other.server_port), flush=True)
 original.serve_forever()
-"""#]
-        process.standardOutput = output
-        process.standardError = Pipe()
-        try process.run()
-        var bytes = Data()
-        while let next = try output.fileHandleForReading.read(upToCount: 1), !next.isEmpty {
-            if next == Data([10]) { break }
-            bytes.append(next)
-        }
-        let ports = String(decoding: bytes, as: UTF8.self).split(separator: " ").compactMap { Int($0) }
-        guard ports.count == 2 else { process.terminate(); throw URLError(.cannotConnectToHost) }
+"""#)
+        let ports = try fixture.startupLine().split(separator: " ").compactMap { Int($0) }
+        guard ports.count == 2 else { _ = fixture.stop(); throw URLError(.cannotConnectToHost) }
         base = URL(string: "http://127.0.0.1:\(ports[0])")!
         destination = URL(string: "http://127.0.0.1:\(ports[1])/denied")!
     }
-    func stop() { if process.isRunning { process.terminate(); process.waitUntilExit() } }
-    deinit { if process.isRunning { process.terminate() } }
+    func stop() { #expect(fixture.stop(), "Redirect fixture did not terminate within its bounded cleanup") }
 }
 #endif
 
@@ -74,7 +62,12 @@ original.serve_forever()
     @Test(.timeLimit(.minutes(1)), arguments: [false, true])
     func deniedRedirectDestinationIsNotContacted(typed: Bool) async throws {
         #if os(macOS)
-        let server = try LocalRedirectServer(); defer { server.stop() }
+        FileHandle.standardOutput.write(Data("Redirect denied \(typed): startup\n".utf8))
+        let server = try LocalRedirectServer(); defer {
+            FileHandle.standardOutput.write(Data("Redirect denied \(typed): teardown\n".utf8))
+            server.stop()
+            FileHandle.standardOutput.write(Data("Redirect denied \(typed): complete\n".utf8))
+        }
         let base = server.base
         let destination = server.destination
         let policy = NetworkSecurityPolicy(allowInsecureLoopback: true, additionalRawOrigins: [try NetworkOrigin(destination)])
@@ -168,7 +161,12 @@ original.serve_forever()
         let method = scenario == "HEAD" ? "HEAD" : "GET"
         let path = scenario == "loop" ? "loop" : (scenario == "limit" ? "excess/0" : "chain/0")
         #if os(macOS)
-        let server = try LocalRedirectServer(); defer { server.stop() }
+        FileHandle.standardOutput.write(Data("Redirect \(scenario): startup\n".utf8))
+        let server = try LocalRedirectServer(); defer {
+            FileHandle.standardOutput.write(Data("Redirect \(scenario): teardown\n".utf8))
+            server.stop()
+            FileHandle.standardOutput.write(Data("Redirect \(scenario): complete\n".utf8))
+        }
         let base = server.base
         let policy = NetworkSecurityPolicy(allowInsecureLoopback: true)
         let operation = URLSessionTransport.systemDataOperation
@@ -191,7 +189,14 @@ original.serve_forever()
                                                                             httpVersion: nil, headerFields: nil)!)
         }
         #endif
-        let transport = try URLSessionTransport(dataOperation: operation, securityPolicy: policy, baseURL: base)
+        let settings = URLSessionTransport.configuration()
+        settings.timeoutIntervalForRequest = 3
+        settings.timeoutIntervalForResource = 10
+        let transport = try URLSessionTransport(ownedConfiguration: settings, dataOperation: operation,
+                                               securityPolicy: policy, baseURL: base)
+        #if os(macOS)
+        FileHandle.standardOutput.write(Data("Redirect \(scenario): native request\n".utf8))
+        #endif
         var request = URLRequest(url: base.appendingPathComponent(path)); request.httpMethod = method; request.timeoutInterval = 3
         if scenario == "limit" || scenario == "loop" {
             await #expect(throws: NetworkError.invalidResponse(.redirectLimitExceeded)) { try await transport.send(request) }
@@ -199,7 +204,13 @@ original.serve_forever()
             let result = try await transport.send(request)
             #expect((result.response as? HTTPURLResponse)?.statusCode == 200)
         }
+        #if os(macOS)
+        FileHandle.standardOutput.write(Data("Redirect \(scenario): invalidate session\n".utf8))
+        #endif
         await transport.invalidateOwnedSession()
+        #if os(macOS)
+        FileHandle.standardOutput.write(Data("Redirect \(scenario): session invalidated\n".utf8))
+        #endif
     }
 
 }
