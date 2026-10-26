@@ -242,9 +242,22 @@
       "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
-        "I17"
+        "I17",
+        "BUG-01"
       ],
       "parent": 27
+    },
+    {
+      "order": 18.5,
+      "key": "BUG-01",
+      "number": 95,
+      "title": "[BUG-01] Bound storage probe liveness and diagnose main cache-test timeout",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/95",
+      "milestone": "F2 – Production hardening and v1 gate",
+      "blocked_by": [
+        "START"
+      ],
+      "parent": 23
     },
     {
       "order": 19,

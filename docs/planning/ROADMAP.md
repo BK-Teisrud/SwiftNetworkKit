@@ -14,6 +14,8 @@ The initial HTTP slice is delivered through I01–I10. I11 / #52 records the [F1
 
 ## F2 – Production hardening and v1 gate
 
+Current exception, 2026-10-26: I17 is accepted, but I18 main run 40382689252 failed in a native storage probe. [BUG-01 / #95](STORAGE_TIMEOUT_FOLLOWUP.md) is P0 and blocks I18/I19 acceptance. Preserve the failed run and original assertions while bounded fixture/phase diagnostics are reviewed.
+
 Privacy/logging, cancellation, required authentication boundaries under DEC-04/06, security review, DocC, and a documented release gate. Release v1 only after all accepted core criteria are met. PREP-01 / #85 investigates environment access early; GATE-F2 / #86 reconciles domain requirements and evidence before I23 rehearsal. Minimum-runtime and newer-device execution are independent evidence branches after API/security review, and both must pass.
 
 ## F3 – Resilience and extensions
