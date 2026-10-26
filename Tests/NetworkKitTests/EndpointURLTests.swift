@@ -162,7 +162,7 @@ private struct TestEndpoint: Endpoint {
     func validSameOriginRequestPreservesURL(_ text: String) throws {
         let url = URL(string: text)!
         let request = URLRequest(url: url)
-        #expect(try RequestURLBuilder.validatedURL(for: request, baseURL: baseURL) == url)
+        #expect(try RequestBuilder.prepare(request, configuration: NetworkConfiguration(baseURL: baseURL)).request.url == url)
     }
 
     @Test(arguments: ["https://other.invalid/api", "http://example.invalid/api", "https://example.invalid:444/api",
@@ -172,33 +172,43 @@ private struct TestEndpoint: Endpoint {
                      "https://example.invalid/?q=%00", "https://example.invalid/?q=%FF", "/relative"])
     func invalidRequestsUseSameValidation(_ text: String) throws {
         let request = URLRequest(url: URL(string: text)!)
-        #expect(throws: invalid) { try RequestURLBuilder.validatedURL(for: request, baseURL: baseURL) }
+        let reason: NetworkError.InvalidRequestReason
+        switch text {
+        case "https://other.invalid/api", "https://example.invalid:444/api": reason = .unpermittedOrigin
+        case "http://example.invalid/api": reason = .insecureTransport
+        default: reason = .invalidURL
+        }
+        #expect(throws: NetworkError.invalidRequest(reason)) {
+            try RequestBuilder.prepare(request, configuration: NetworkConfiguration(baseURL: baseURL))
+        }
     }
 
     @Test func missingURLAndInvalidBaseAreRejected() throws {
         var request = URLRequest(url: baseURL)
         request.url = nil
-        #expect(throws: invalid) { try RequestURLBuilder.validatedURL(for: request, baseURL: baseURL) }
+        #expect(throws: invalid) { try RequestBuilder.prepare(request, configuration: NetworkConfiguration(baseURL: baseURL)) }
         #expect(throws: invalid) {
-            try RequestURLBuilder.validatedURL(for: URLRequest(url: baseURL), baseURL: URL(string: "file:///tmp")!)
+            try RequestBuilder.prepare(URLRequest(url: baseURL), configuration: NetworkConfiguration(baseURL: URL(string: "file:///tmp")!))
         }
     }
 
     @Test(arguments: [
         ["https://bücher.example/api", "https://xn--bcher-kva.example:443/other"],
-        ["http://example.invalid/api", "http://example.invalid:80/other"],
+        ["http://localhost/api", "http://localhost:80/other"],
         ["https://[::1]/api", "https://[::1]:443/other"]
     ])
     func unicodeHostAndEffectivePorts(_ pair: [String]) throws {
         let base = URL(string: pair[0])!
         let request = URLRequest(url: URL(string: pair[1])!)
-        #expect(try RequestURLBuilder.validatedURL(for: request, baseURL: base) == request.url)
+        let configuration = NetworkConfiguration(baseURL: base,
+            security: NetworkSecurityPolicy(allowInsecureLoopback: true))
+        #expect(try RequestBuilder.prepare(request, configuration: configuration).request.url == request.url)
     }
 
     @Test func typedURLPassesRawValidation() throws {
         let endpoint = TestEndpoint(path: try EndpointPath(segments: ["a/b", "space here", "é"]),
                                     query: try [HTTPQueryItem(name: "q", value: "a+b&c")])
         let typed = try endpoint.url(relativeTo: baseURL)
-        #expect(try RequestURLBuilder.validatedURL(for: URLRequest(url: typed), baseURL: baseURL) == typed)
+        #expect(try RequestBuilder.prepare(URLRequest(url: typed), configuration: NetworkConfiguration(baseURL: baseURL)).request.url == typed)
     }
 }

@@ -260,6 +260,19 @@
       "parent": 23
     },
     {
+      "order": 18.75,
+      "key": "QA-01",
+      "number": 97,
+      "title": "[QA-01] Review quality and remove stale validation duplication",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/97",
+      "milestone": "F2 – Production hardening and v1 gate",
+      "blocked_by": [
+        "START",
+        "I18"
+      ],
+      "parent": 27
+    },
+    {
       "order": 19,
       "key": "I19",
       "number": 60,
@@ -268,7 +281,8 @@
       "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
-        "I18"
+        "I18",
+        "QA-01"
       ],
       "parent": 25
     },

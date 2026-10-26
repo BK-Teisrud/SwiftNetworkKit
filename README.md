@@ -16,6 +16,8 @@ The repository and package are named **SwiftNetworkKit**. The library product, m
 
 ## Documentation
 
+- [Quality/maintainability review and deliberate simplification](docs/planning/QUALITY_REVIEW_2026-10-26.md)
+
 - [Compiled integration guide: installation, calls, formats, errors, authentication, ownership and testing](Sources/NetworkKit/NetworkKit.docc/IntegrationGuide.md)
 - [Public API/availability review and guide verification](docs/planning/API_REVIEW.md)
 - [Contract-to-test evidence and explicit release gaps](docs/planning/TEST_EVIDENCE.md)

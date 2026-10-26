@@ -55,7 +55,8 @@ def validate_documented_examples(source, guide):
     require(len(dict(compiled)) == len(compiled) and len(dict(published)) == len(published),
             "Duplicate documentation example identifier")
     require(dict(compiled) == dict(published), "Published examples differ from compiled consumer source")
-    require(len(re.findall(r"^```swift$", guide, re.M)) == len(published), "Untracked Swift documentation block")
+    require(len(re.findall(r"^[ \t]*(?:`{3,}|~{3,})[ \t]*swift\b[^\n]*$", guide, re.M | re.I)) == len(published),
+            "Untracked or noncanonical Swift documentation fence")
 
 
 def source_integrity():
