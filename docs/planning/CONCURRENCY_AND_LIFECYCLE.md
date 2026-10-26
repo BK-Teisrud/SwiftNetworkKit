@@ -93,3 +93,7 @@ V1 has no separate drain-all-requests mode. Apps may await their calls before sh
 7. Invalid durations, raw-request precedence, stricter session resource limits, and no false hard-deadline guarantees for synchronous work.
 
 I12 timing/cancellation tests cover the relevant entries above; see the timing guide for exact assertions and native/scripted limits. I13 adds shutdown/registry coverage; see [shutdown evidence](SHUTDOWN_AND_CONCURRENCY.md) for actual assertions, cancelled waiters and owned/borrowed boundaries. [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md) / ADR-0008 defines infrastructure and the planned matrix; current PR-runtime CI exists, while minimum-OS/physical verification remains outstanding. F0 acceptance and separate explicit implementation authorization remain prerequisites.
+
+## Consolidated evidence
+
+[I17 contract evidence](TEST_EVIDENCE.md) groups the named lifecycle tests and limitations. Shared test registries are synchronized, uniquely keyed and cleaned per test; the ledger makes this isolation boundary explicit. Controlled-clock/adapter results do not certify native timing on every OS.

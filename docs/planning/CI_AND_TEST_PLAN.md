@@ -2,6 +2,8 @@
 
 Status: Core plan accepted 2026-10-19; see [ADR-0008](../decisions/ADR-0008-ci-tools-and-budget.md). I01–I10 provide the executing HTTP slice. I06 introduced the real workflow and required quality-gate after verified hosted PR/main runs. The cumulative I10 suite passed 135 test functions on each of five runtimes; [F1 review](F1_REVIEW.md) records the I11 gate and further acceptance coverage. See [CI implementation](CI_IMPLEMENTATION.md) for exact jobs, commands, and actual evidence.
 
+Current I17 consolidation: [contract and CI evidence ledger](TEST_EVIDENCE.md) maps named tests and explicit residual release gaps. The counts above are dated I10 evidence, not the current suite inventory.
+
 ## Mandatory PR jobs
 
 Real CI now runs every mandatory job on pull requests and pushes to main. The owner selected all four platform families on every PR, not only releases. Documentation PRs receive no hidden global bypass of this matrix.
