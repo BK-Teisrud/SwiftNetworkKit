@@ -172,10 +172,12 @@ if __name__ == "__main__":
     parser.add_argument("--repetitions", type=int, choices=range(1, 6), default=3)
     parser.add_argument("--smoke", action="store_true", help="Compile and exercise only a short reuse/cancellation case; no performance thresholds")
     parser.add_argument("--post-budget", action="store_true", help="Run only long reuse/direct controls with a 12-second post-shutdown sample")
-    parser.add_argument("--cycles", type=int, choices=range(1, 1001), default=100, help="Cycle count for --post-budget only (default 100)")
+    parser.add_argument("--cycles", type=int, metavar="1..1000", default=100, help="Cycle count for --post-budget only (default 100)")
     args = parser.parse_args()
     if args.smoke and args.post_budget:
         parser.error("--smoke and --post-budget are separate workloads")
+    if not 1 <= args.cycles <= 1000:
+        parser.error("--cycles must be between 1 and 1000")
     if args.cycles != 100 and not args.post_budget:
         parser.error("--cycles requires --post-budget")
     run(args.package, args.output, args.repetitions, args.smoke, args.post_budget, args.cycles)
