@@ -69,6 +69,8 @@ def source_integrity():
             == {"ios": "17.0", "macos": "14.0", "watchos": "10.0", "tvos": "17.0"}, "Platform minimums changed")
     require([(t["name"], t["type"]) for t in manifest["targets"]]
             == [("NetworkKit", "regular"), ("NetworkKitTests", "test")], "Unexpected targets/plugins")
+    require(manifest["targets"][0].get("resources") == [{"path": "PrivacyInfo.xcprivacy", "rule": {"copy": {}}}],
+            "Reviewed privacy manifest must be bundled")
     require(manifest["products"] == [{"name": "NetworkKit", "settings": [], "targets": ["NetworkKit"], "type": {"library": ["automatic"]}}],
             "Unexpected product")
     files = [ROOT / p for p in run("git", "ls-files", capture=True).splitlines()]

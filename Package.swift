@@ -14,7 +14,7 @@ let package = Package(
         .library(name: "NetworkKit", targets: ["NetworkKit"]),
     ],
     targets: [
-        .target(name: "NetworkKit"),
+        .target(name: "NetworkKit", resources: [.copy("PrivacyInfo.xcprivacy")]),
         .testTarget(name: "NetworkKitTests", dependencies: ["NetworkKit"]),
     ],
     swiftLanguageModes: [.v6]

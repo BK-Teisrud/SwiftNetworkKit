@@ -1,6 +1,6 @@
-# Test declaration inventory — BUG-01
+# Test declaration inventory — I19
 
-Snapshot: 2026-10-26, BUG-01 candidate based on `5ea73b3f8f4045bea23dd32bd0b8b3273c2a9358`. This source index contains 216 `@Test` function declarations, including two macOS-only child-process tests; other selected runtime destinations retain 214 declarations. Parameterized cases are not additional function declarations. Runtime results must come from execution, not this count. See [contract evidence ledger](TEST_EVIDENCE.md) for coverage and limitations. Refresh this snapshot when the suite changes; historical run counts remain dated evidence.
+Snapshot: 2026-10-26, I19 candidate based on `d79cc031957a1f9690d7f5e5ec9efbdca6c6d9d1`. This source index contains 217 `@Test` function declarations, including two macOS-only child-process tests; other selected runtime destinations retain 215 declarations. Parameterized cases are not additional function declarations. Runtime results must come from execution, not this count. See [contract evidence ledger](TEST_EVIDENCE.md) for coverage and limitations. Refresh this snapshot when the suite changes; historical run counts remain dated evidence.
 
 ## AuthenticationTests.swift
 
@@ -308,3 +308,9 @@ Snapshot: 2026-10-26, BUG-01 candidate based on `5ea73b3f8f4045bea23dd32bd0b8b32
 - `additionalRawOriginWithoutCookiesCannotUseAppCachePolicy`
 - `appManagedCookieCacheProfileRequiresExplicitPublicSelection`
 
+
+## PrivacyManifestTests.swift
+
+[Source](../../Tests/NetworkKitTests/PrivacyManifestTests.swift) — 1 declaration.
+
+- `bundledManifestMatchesReviewedSDKPractices`

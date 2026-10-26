@@ -35,7 +35,7 @@ Choose the lowest Order with closed blockers and satisfied Ready criteria. This 
 | 23 | [[I23] Rehearse the v1 release without publishing](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/64) | #27 | #63, #86 |
 | 24 | [REL-01: Actual v1 release gate](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/29) | Governance | #64 and selected core epics |
 
-Current review: I18 / #59 and BUG-01 / #95 are accepted through follow-up PR #96 / main run 40390885712. Original failed runs remain in [the native fixture record](STORAGE_TIMEOUT_FOLLOWUP.md). The owner requested [QA-01 quality/maintainability review](QUALITY_REVIEW_2026-10-26.md) before I19; #60 is blocked by #97 until its acceptance.
+Current review: QA-01 / #97 is accepted through PR #98 and main run 40396838559. [I19 security/privacy review](SECURITY_PRIVACY_REVIEW.md) is the active slice. Controlled HTTPS fixture access is unavailable/unknown; #62/#63 retain native execution gaps. #61 follows I19 acceptance; #86/#29 retain residual-risk acceptance and release gates.
 
 ## Why this sequence
 
