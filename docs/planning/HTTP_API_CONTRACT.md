@@ -96,4 +96,4 @@ No category automatically authorizes retry. Default error text and diagnostics e
 - Transport failures, timeouts, encoding/decoding failures, invalidResponse, and cancellation before/during operations.
 - Errors/logs without sensitive default data; response headers respect documented system limitations.
 
-Break remaining behavior into traceable tasks before Ready. I02 value/error tests have passed locally; pipeline tests remain outstanding. The [platform matrix](PLATFORM_MATRIX.md), QUALITY.md, and DEC-05–DEC-07 add requirements. F0 acceptance and separate explicit implementation authorization are required before code.
+The [I17 evidence ledger](TEST_EVIDENCE.md) maps these criteria to current named tests and records outstanding native/runtime/device/release evidence separately. The [platform matrix](PLATFORM_MATRIX.md), QUALITY.md, and DEC-05–DEC-07 add requirements. The original I02-only verification note is superseded by the later pipeline/lifecycle evidence; completed implementation slices alone do not establish release readiness.
