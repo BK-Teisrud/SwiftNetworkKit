@@ -25,7 +25,7 @@ Work views show Status, Priority (P0–P3), Scope (CORE/EXTENSION/RESEARCH/GOVER
 | Work Queue | Open concrete tasks without epics/extensions/research; flat table sorted by ascending Order |
 | Completed | Closed issues with reason:completed |
 
-[WORK_QUEUE.md](WORK_QUEUE.md) defines the numbered order. Order 0 is the start gate; I01–I23 are 1–23; the release gate is 24. No product work is Ready before implementation authorization. Epics provide traceability, not oversized individual tasks.
+[WORK_QUEUE.md](WORK_QUEUE.md) defines the numbered order. Order 0 is the start gate; I01–I23 retain 1–23; PREP-01 is 16.5, GATE-F2 is 22.5, and the release gate is 24. Post-v1 planning tasks use 30/40/50/60; they do not authorize extension code. No product work is Ready before implementation authorization. Epics provide traceability, not oversized individual tasks.
 
 ## Built-in workflows
 
@@ -47,4 +47,15 @@ Issue #40 functionally verifies import, Done without closure, completed, and reo
 
 ## Maintenance
 
-Weekly triage checks new issues, missing fields, blockers, WIP, and next Ready work. Verify actual evidence before phase transitions. Review bugs/risks after releases. No invented sprint dates or SLA. Track blocked work, lead time, and oldest WIP; commit counts do not measure quality. All GitHub content is English; conversations with the owner remain Norwegian under LANGUAGE_POLICY.md.
+The owner requested continuous plan maintenance on 2026-10-26. Before selecting each task, after each accepted delivery, after failures/new findings, and at phase boundaries:
+
+1. Compare actual acceptance evidence with scope, open risks and all affected domain epics. Do not close an epic from subissue counts alone.
+2. Create bounded follow-up/defect/planning issues immediately when gaps appear. Give each a purpose, requirement references, exclusions, acceptance evidence, owner, milestone, labels and matching project Priority/Scope/Status; assign Order to executable or sequenced planning tasks.
+3. Recheck native blockers and parents for cycles and artificial scheduling dependencies. Mark Ready only when the contract, prerequisites and verification plan are adequate. An open epic with unfinished acceptance is not automatically Blocked.
+4. Update WORK_QUEUE.md, its structural JSON, roadmap and risks when their meaning changes. Preserve dated evidence and original seed snapshots. Record why priorities or milestones changed. Use I identifiers for selected implementation slices and PLAN/PREP/GATE identifiers for preparation and decisions.
+5. Keep the next actionable task detailed; prepare the next phase's use cases, contracts, feasibility and decomposition before code. Keep distant phases at honest decision/research detail, expanding or splitting them when evidence supports it.
+6. Read back GitHub state after mutations, including labels/fields, milestone, parents/blockers and issue closure reason. Record PR/main acceptance before Done and review next work again.
+
+Product scope, material platform/API/security deviations, spending and publication still require the owner's relevant decision. Routine evidence-based triage, issue decomposition and milestone/priority maintenance are authorized. This procedure runs during active work; no unattended scheduler or automatic field synchronization is implied.
+
+Weekly triage additionally checks new issues, missing fields, blockers, WIP, and next Ready work. Verify actual evidence before phase transitions. Review bugs/risks after releases. No invented sprint dates or SLA. Track blocked work, lead time, and oldest WIP; commit counts do not measure quality. All GitHub content is English; conversations with the owner remain Norwegian under LANGUAGE_POLICY.md.

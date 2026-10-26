@@ -1,6 +1,6 @@
 # Requirements traceability and initial backlog
 
-Original planning baseline: 20 domain epics, seven decision issues, and three governance/release issues. The table below preserves the original domain classification/phase allocation, not live completion. I01–I10 now implement the initial HTTP slice; [F1 review](F1_REVIEW.md) accounts for delivered work and open domain epics continuing in F2. See the [GitHub register](GITHUB_REGISTER.md) for live links.
+Original planning baseline: 20 domain epics, seven decision issues, and three governance/release issues. The table below preserves the original domain classification/phase allocation, not live completion. I01–I16 are delivered; I01–I10 implement the initial HTTP slice; [F1 review](F1_REVIEW.md) accounts for delivered work and open domain epics continuing in F2. See the [GitHub register](GITHUB_REGISTER.md) for live links.
 
 | ID | Requirement / task | Classification | Phase |
 | --- | --- | --- | --- |
@@ -46,3 +46,7 @@ Decompose feature families into testable issues with contracts, test plans, and 
 ## Concrete implementation queue
 
 I01–I23 are native subissues with criteria and dependencies; see [WORK_QUEUE.md](WORK_QUEUE.md). START-00 / #41 was closed after the owner instruction on 2026-10-20 (ADR-0012). I01 starts implementation; later tasks still require resolved dependencies and Ready checks. Decomposition itself did not authorize code. planning.json is the original seed rather than live status; work-queue.json describes the concrete queue.
+
+## Rolling planning review
+
+The [2026-10-26 audit](PLAN_REVIEW_2026-10-26.md) adds PREP-01 / #85, GATE-F2 / #86 and PLAN-F3–F6 / #87–#90. The owner selected retry/robustness as the first post-core planning priority. Future NK domains remain deferred; concrete extension implementation slices require selected contracts and a new scope decision. Follow PROJECT_MANAGEMENT.md at every task transition, not only weekly.

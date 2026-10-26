@@ -20,8 +20,12 @@ Accept residual risks in the relevant issue, with an ADR for lasting deviations.
 
 ## Concrete outstanding release work
 
-R2: Minimum-OS environments are unconfirmed. I21 / #62 blocks release; newer devices/runtimes are not substitutes. See TEST_ENVIRONMENTS.md.
+R2: Minimum-OS environments are unconfirmed. PREP-01 / #85 investigates access now; I21 / #62 still blocks release; newer devices/runtimes are not substitutes. See TEST_ENVIRONMENTS.md.
 
 R9: No contact address exists. Do not offer private licensing/contribution processes until an appropriate channel is established. This does not block separately authorized internal implementation.
 
 R11: Admins can change rulesets even without main/update/deletion bypasses. No technical protection against the account owner is guaranteed. The owner confirms 2FA; no independent account audit was performed.
+
+R10: I17 / #58 consolidates an evidence ledger; GATE-F2 / #86 reconciles all selected v1 domain criteria before rehearsal. Native wire, scripted transport, minimum-runtime and physical-device evidence must remain distinct.
+
+Planning risk: broad deferred domains can hide missing contracts or create premature commitments. PLAN-F3–F6 / #87–#90 require use cases, explicit exclusions, feasibility, approved contracts and bounded issues. Retry is the first post-core planning priority; other F3 candidates are not implicitly selected.

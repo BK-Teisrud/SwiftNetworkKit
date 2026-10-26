@@ -2,7 +2,7 @@
 
 > Historical planning/setup record from 2026-10-19. Implementation was subsequently authorized on 2026-10-20 in [ADR-0012](../decisions/ADR-0012-implementation-start.md). The package baseline is documented in [PACKAGE_BASELINE.md](PACKAGE_BASELINE.md). Earlier no-code statements describe that earlier stage.
 
-Created 2026-10-19. This register records the initial setup and subsequent preparation; live status is in GitHub. No product requirements are implemented.
+Created 2026-10-19. This register records the initial setup and subsequent preparation; live status is in GitHub. That statement described the initial setup; I01–I16 are now delivered. See [current plan review](PLAN_REVIEW_2026-10-26.md).
 
 - [Repository](https://github.com/BK-Teisrud/SwiftNetworkKit)
 - [Project: SwiftNetworkKit Roadmap](https://github.com/users/BK-Teisrud/projects/6) (private; owner access required)
@@ -63,6 +63,10 @@ OPS-01 / #30 is complete through PR #65; team review remains a future transition
 ## Concrete work queue after F0
 
 - [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41): explicit implementation authorization, completed on 2026-10-20 (ADR-0012).
-- [I01–I23 with all issue links](WORK_QUEUE.md): #42–64; their original blocked state preceded authorization. I01–I10 are complete; I11 reviews F1. Consult the live queue and [F1 review](F1_REVIEW.md) for current phase accounting.
+- [I01–I23 with all issue links](WORK_QUEUE.md): #42–64; their original blocked state preceded authorization. I01–I16 are complete; I11 closed F1. Consult the live queue and [F1 review](F1_REVIEW.md) for current phase accounting.
 - [Setup verification #40](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/40): completed without product code.
 - [Sorted Work Queue](https://github.com/users/BK-Teisrud/projects/6/views/7) and [Completed](https://github.com/users/BK-Teisrud/projects/6/views/8).
+
+## Rolling planning additions — 2026-10-26
+
+[PREP-01 #85](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/85) prepares evidence access; [GATE-F2 #86](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/86) reconciles v1 acceptance before rehearsal. [PLAN-F3 #87](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/87), [PLAN-F4 #88](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/88), [PLAN-F5 #89](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/89) and [PLAN-F6 #90](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/90) make later scope/feasibility/decomposition explicit. Dependency counts above are historical; the live graph and WORK_QUEUE.md define the revised plan.
