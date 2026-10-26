@@ -12,6 +12,9 @@ class CheckContracts(unittest.TestCase):
                         guide + "```swift\nlet hidden = 3\n```\n"]:
             with self.subTest(guide=changed), self.assertRaises(RuntimeError):
                 validate_documented_examples(source, changed)
+        for fence in ["```swift title=extra", "~~~swift", "````swift", "  ```swift", "```Swift"]:
+            with self.subTest(fence=fence), self.assertRaises(RuntimeError):
+                validate_documented_examples(source, guide + fence + "\nlet unchecked = 2\n```\n")
         with self.assertRaises(RuntimeError):
             validate_documented_examples(source + source, guide)
 

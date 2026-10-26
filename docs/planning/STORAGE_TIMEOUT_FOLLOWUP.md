@@ -41,3 +41,7 @@ The redirect server still duplicated the same unbounded readiness read, undraine
 This extends the same BUG-01 instead of inventing a separate product defect or claiming a common internal OS root cause. The helper's existing no-readiness/SIGTERM-ignore tests cover its use by both fixture families. No additional test declarations or executable product changes are needed. The PR description and issue retain both failed runs; I18/I19 stay blocked pending successful, uninterrupted candidate evidence and review.
 
 The extended local candidate passed all 216 tests / 26 suites and the separate three-function RedirectIntegrationTests suite. Every GET/HEAD/loop/limit phase reached completion. Structural checks and all four CI helper tests passed. These are local results; fresh hosted PR/main acceptance is still required.
+
+## Accepted follow-up evidence
+
+PR #96 latest head 23678d761a632f50b69c4a4e9322be83e7864324 passed all seven checks in run 40389390363 and merged as 21a204191eaa82a60ec88bf9f60ef57f5f054920. Main run 40390885712 passed all five runtime results (macOS 216/26; four other destinations 214/25), with all native phases complete and no timeout or process restart. #95 and I18 #59 are accepted for their bounded criteria; exact original internal stall cause is still unproven and R10 remains monitored by #23/#86. The failed original runs are preserved; no security/runtime/device/release gate is waived. QA-01 #97 is the next owner-requested review before I19.

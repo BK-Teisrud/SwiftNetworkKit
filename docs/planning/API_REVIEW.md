@@ -55,3 +55,7 @@ The owner now permits multiple independent branches/PRs, created sequentially, w
 ## Main acceptance follow-up
 
 The first I18 main run 40382689252 failed in the pre-existing native borrowed-cache probe after PR #94 had passed. The review is not accepted from that run. [BUG-01 / #95](STORAGE_TIMEOUT_FOLLOWUP.md) blocks #59 acceptance and records bounded test-fixture/diagnostic work without asserting an unproven product root cause.
+
+## Accepted follow-up evidence
+
+PR #96 latest head 23678d761a632f50b69c4a4e9322be83e7864324 passed all seven checks in run 40389390363 and merged as 21a204191eaa82a60ec88bf9f60ef57f5f054920. Main run 40390885712 passed all five runtime results (macOS 216/26; four other destinations 214/25), with all native phases complete and no timeout or process restart. #95 and I18 #59 are accepted for their bounded criteria; exact original internal stall cause is still unproven and R10 remains monitored by #23/#86. The failed original runs are preserved; no security/runtime/device/release gate is waived. QA-01 #97 is the next owner-requested review before I19.

@@ -4,6 +4,8 @@ I04 / #45, implemented 2026-10-20. This is URL construction and validation, not 
 
 I05 extends Endpoint with body/call options and buffered request construction; see [current request evidence](REQUEST_ENCODING.md). The API/evidence below records the I04 snapshot.
 
+Current QA-01 / #97 removes the historical internal raw-URL seam described below: it had no production callers. Raw URL tests now exercise actual RequestBuilder preparation and current security reasons. See [quality review](QUALITY_REVIEW_2026-10-26.md); this does not rewrite the original I04 evidence.
+
 ## Reviewed public API
 
 - `Endpoint: Sendable` has an associated `Response: Sendable`, `method: HTTPMethod`, `path: EndpointPath`, and ordered `query: [HTTPQueryItem]`. The defaults are GET and no query items. Body/call integration follows in I05; response strategies in I07. Response currently identifies the intended type without decoding it.

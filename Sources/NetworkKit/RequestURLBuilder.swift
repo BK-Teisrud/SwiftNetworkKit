@@ -1,6 +1,6 @@
 import Foundation
 
-/// Structural validation only. HTTPS/loopback permissions and redirects follow in I09.
+/// Structural URL checks shared by construction and the active network security policy.
 internal enum URLInputValidation {
     static func hasNoControls(_ text: String) -> Bool {
         // Preserve format scalars such as the joiner in compound emoji. C0/C1
@@ -108,23 +108,6 @@ internal enum RequestURLBuilder {
         }
         guard let url = components.url else { throw NetworkError.invalidRequest(.invalidURL) }
         _ = try URLInputValidation.components(url, isBase: false)
-        return url
-    }
-
-    /// Shared URL checks for the future raw-request pipeline. Other origins are
-    /// denied until explicit permission/scoped credentials are implemented in I09.
-    static func validatedURL(for request: URLRequest, baseURL: URL) throws -> URL {
-        guard let url = request.url else { throw NetworkError.invalidRequest(.invalidURL) }
-        let base = try URLInputValidation.components(baseURL, isBase: true)
-        let raw = try URLInputValidation.components(url, isBase: false)
-        func effectivePort(_ components: URLComponents) -> Int {
-            components.port ?? (components.scheme?.lowercased() == "https" ? 443 : 80)
-        }
-        guard base.scheme?.lowercased() == raw.scheme?.lowercased(),
-              (try URLInputValidation.normalizedHost(base)) == (try URLInputValidation.normalizedHost(raw)),
-              effectivePort(base) == effectivePort(raw) else {
-            throw NetworkError.invalidRequest(.invalidURL)
-        }
         return url
     }
 }

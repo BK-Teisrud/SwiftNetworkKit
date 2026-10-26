@@ -1,4 +1,10 @@
-# Quality gates and future test strategy
+# Quality gates and test strategy
+
+Current baseline: I18 and BUG-01 follow-up were accepted through PR #96 / main run 40390885712. The executing HTTP client, timing/lifecycle, auth-provider, diagnostics and storage policies are implemented; full security/privacy, resource, minimum-runtime/device and release gates remain open. [QA-01 quality review](../planning/QUALITY_REVIEW_2026-10-26.md) records the current analysis and concrete corrections. [Project management](../planning/PROJECT_MANAGEMENT.md) defines continuous quality/debt assessment at each task transition.
+
+## Historical foundation snapshots (I03–I09)
+
+The following two paragraphs preserve the evidence available at those earlier slices; their outstanding-implementation statements do not describe the current client.
 
 I03 foundation evidence: immutable configuration snapshots and internal transport/monotonic clock seams are implemented; 29 local tests passed. See [configuration review](../planning/CONFIGURATION.md). The executing HTTP client, enforced deadlines, and minimum-OS/physical-device verification remain outstanding.
 
