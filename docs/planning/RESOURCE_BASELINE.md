@@ -1,6 +1,6 @@
 # I20 — resource and package-quality baseline
 
-Date: 2026-10-26. Product commit: `4d6d84b29c5b453adaefb644da98d320e9e6193a`, the accepted I19 merge. The measured product came from a clean local clone with no tracked modifications. I20 adds opt-in measurement tooling, CI smoke coverage and evidence; no production behavior, public API, dependency or support minimum changes. Acceptance still requires exact candidate PR/main checks on [#61](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/61).
+Date: 2026-10-26. Product commit: `4d6d84b29c5b453adaefb644da98d320e9e6193a`, the accepted I19 merge. The measured product came from a clean local clone with no tracked modifications. I20 adds opt-in measurement tooling, CI smoke coverage and evidence; no production behavior, public API, dependency or support minimum changes. I20 was accepted through PR #101 and main run 40408266400 on [#61](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/61). Later attribution is recorded in [RES-01](REPEATED_CALL_MEMORY.md); the original adverse measurements below remain historical evidence.
 
 ## Reproduction and measurement boundaries
 
@@ -56,3 +56,7 @@ Next priority after I20 acceptance is #100, ahead of serial #62/#63 execution. E
 ### Fresh-checkout candidate results
 
 A second fresh local clone of candidate `fa1003d3760c03969a5d215bf462d56e17cbe36c` passed the full 217-test / 27-suite macOS suite with warnings as errors, source integrity plus all four CI-helper tests, and DocC conversion with warnings as errors. The public NetworkKit symbol graph contains 319 records, unchanged from the accepted API review. The standalone release smoke passed its five-request reuse assertion and eight joined cancellations after native contact. The checkout remained clean after all four checks. This verifies candidate package/guide/harness integration; it does not resolve #100 or any native HTTPS/minimum-OS/physical-device/distribution gate. Subsequent changes in this PR only record these results and clarify current planning text.
+
+## RES-01 attribution update
+
+[Repeated-call attribution](REPEATED_CALL_MEMORY.md) identifies expiry-dependent Swift sleep-helper/dispatch retention on this macOS runtime, reproduced without NetworkKit/networking and corroborated by native heap snapshots. Live allocations fall after original deadlines; RSS need not immediately fall. The new --post-budget mode adds this distinction without rewriting I20 raw data/hashes. The risk still needs target-device assessment and explicit #86/#29 owner disposition; default timeouts and public behavior are unchanged.

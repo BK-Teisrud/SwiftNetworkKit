@@ -27,3 +27,7 @@ No severe implementation finding was identified in this bounded source review. T
 ## I20 update to T8
 
 The [resource baseline](../planning/RESOURCE_BASELINE.md) records sustained RSS growth versus a direct URLSession control. RES-01 / #100 must attribute it and resolve any established product defect before #86 acceptance. RSS alone does not identify a leak; successful cancellation/shutdown is not stable-memory evidence. Provisional app workload advice does not enforce response-size or memory limits.
+
+## RES-01 attribution
+
+The [repeated-call controls](../planning/REPEATED_CALL_MEMORY.md) identify expiry-dependent Swift sleep-helper/dispatch retention on the observed macOS runtime. No retained library operation graph requiring a product fix was established. Logical cancellation and runtime allocation lifetime remain distinct. Target resource assessment and explicit owner disposition remain #62/#63/#86/#29 work; local attribution does not waive them or change v1 clocks, timeouts or support.

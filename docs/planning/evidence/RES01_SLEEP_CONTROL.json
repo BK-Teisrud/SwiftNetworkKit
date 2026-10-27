@@ -1,0 +1,49 @@
+{
+  "environment": {
+    "os": "ProductName:\t\tmacOS\nProductVersion:\t\t15.8.1\nBuildVersion:\t\t24H32",
+    "architecture": "x86_64",
+    "xcode": "Xcode 26.3\nBuild version 17C529",
+    "swift": "Apple Swift version 6.2.4 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)\nTarget: x86_64-apple-macosx15.0",
+    "probe_sha256": "39c3be2e4c282ab2a2bc16b1121a0e012d7329872c0194da268990f54471bfa9",
+    "runner_sha256": "8a33d1e297caf940238369ad40e3705fa7e211608c2e952c33f0e02d5f7cd67c",
+    "malloc_stack_logging": true
+  },
+  "results": [
+    {
+      "mode": "clock",
+      "cancelled_and_joined": 6400,
+      "sleep_seconds": 10,
+      "post_join_wait_seconds": 12,
+      "joined": {
+        "live_nodes": 32920,
+        "live_malloc_bytes": 3992208,
+        "task_stack_nodes": 6403,
+        "task_stack_bytes": 1844816
+      },
+      "expired": {
+        "live_nodes": 918,
+        "live_malloc_bytes": 101584,
+        "task_stack_nodes": 2,
+        "task_stack_bytes": 1328
+      }
+    },
+    {
+      "mode": "nanos",
+      "cancelled_and_joined": 6400,
+      "sleep_seconds": 10,
+      "post_join_wait_seconds": 12,
+      "joined": {
+        "live_nodes": 32920,
+        "live_malloc_bytes": 3992208,
+        "task_stack_nodes": 6403,
+        "task_stack_bytes": 1844816
+      },
+      "expired": {
+        "live_nodes": 921,
+        "live_malloc_bytes": 101712,
+        "task_stack_nodes": 2,
+        "task_stack_bytes": 1328
+      }
+    }
+  ]
+}

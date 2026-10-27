@@ -203,7 +203,7 @@ The guide tests exercise successful typed decoding/metadata, path/query construc
 
 Reuse a client per compatible account/origin context. Responses are buffered; the library has no response-size cap or task-queue limiter. Keep app concurrency, expected payload size and retained results bounded. Initial local evaluation measured up to eight calls with expected 1 MiB responses; this is provisional workload guidance, not an enforced memory ceiling or a device guarantee. An oversized response can exceed that expectation.
 
-The repository's I20 resource baseline includes a sustained RSS trend requiring RES-01 investigation before release reconciliation. No leak-free or stable long-run memory claim follows from passing tests or shutdown. Re-evaluate limits on the actual target devices and selected service.
+RES-01 attributes the observed local trend to runtime sleep-helper/dispatch retention that outlives logical cancellation until original deadlines pass. RSS can remain high after live allocations are released; no leak-free or stable long-run memory claim follows from tests or shutdown. Consider request rate and total budget as well as concurrency, and avoid unnecessarily large timeout overrides. Re-evaluate actual resource behavior on target devices before release acceptance.
 
 ## Delivery limits
 

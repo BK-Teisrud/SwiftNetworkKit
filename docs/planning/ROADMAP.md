@@ -2,7 +2,7 @@
 
 No deadlines are set. Phases are gates, not calendar promises. The owner selected HTTP core first: F0 → F1 → F2 leads to the first stable release. F3–F6 are optional later deliveries, outside v1.0. Repository/package: SwiftNetworkKit; product/module: NetworkKit, with one library module. See [v1 scope](V1_SCOPE.md) and [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md).
 
-Current review: [I20 resource/package baseline](RESOURCE_BASELINE.md). I01–I19, PREP-01, BUG-01 and QA-01 are accepted; F2 remains open. I19 acceptance is recorded in PR #99 / main run 40402676807. RES-01 / #100 (P1, Order 20.5) follows I20 to investigate measured RSS growth and blocks #86. The earlier [quality review](QUALITY_REVIEW_2026-10-26.md) and [plan audit](PLAN_REVIEW_2026-10-26.md) retain their dated findings. Post-v1 planning remains explicit in PLAN-F3–F6.
+Current review: [RES-01 repeated-call memory attribution](REPEATED_CALL_MEMORY.md). I01–I20, PREP-01, BUG-01 and QA-01 are accepted; F2 remains open. I20 acceptance is recorded in PR #101 / main run 40408266400. RES-01 / #100 (P1, Order 20.5) is active; local evidence identifies expiry-dependent runtime sleep-helper retention, while target-device and owner-risk disposition remain release gates. Earlier [quality review](QUALITY_REVIEW_2026-10-26.md), [plan audit](PLAN_REVIEW_2026-10-26.md) and I20 measurements retain their dated evidence. Post-v1 planning remains explicit in PLAN-F3–F6.
 
 ## F0 – Architecture and decisions
 

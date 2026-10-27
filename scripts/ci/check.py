@@ -210,6 +210,9 @@ def main():
             # Compile/exercise the opt-in release harness without volatile timing/RSS thresholds.
             run(sys.executable, ROOT / "scripts/benchmarks/run.py", "--output", OUTPUT / "resource-smoke.json",
                 "--repetitions", "1", "--smoke")
+            # The allocation inspector remains opt-in; keep its Swift control compiling.
+            run("swiftc", "-typecheck", "-parse-as-library", "-swift-version", "6", "-warnings-as-errors",
+                ROOT / "scripts/benchmarks/SleepRetentionProbe.swift")
 
 
 if __name__ == "__main__":

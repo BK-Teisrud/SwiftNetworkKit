@@ -92,7 +92,7 @@ def command(*args, **kwargs):
         raise RuntimeError(f"Command failed: {args[0]}\n{error.stdout}\n{error.stderr}") from error
 
 
-def run(package, output, repetitions, smoke):
+def run(package, output, repetitions, smoke, post_budget, post_budget_cycles):
     if platform.system() != "Darwin":
         raise SystemExit("This opt-in resource probe requires macOS; no other platform result is implied.")
     package = package.resolve()
@@ -116,6 +116,8 @@ let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
                  ("reuse", 32, 65536, 64, 100), ("direct", 32, 65536, 64, 100)]
         if smoke:
             cases = [("reuse", 1, 65536, 4, 1), ("cancel", 8, 65536, 8, 0)]
+        if post_budget:
+            cases = [("reuse", 32, 65536, 64, post_budget_cycles), ("direct", 32, 65536, 64, post_budget_cycles)]
         for mode, concurrency, size, calls, cycles in cases:
             for repetition in range(repetitions):
                 server = Fixture()
@@ -124,7 +126,7 @@ let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
                 try:
                     timing = root / "time.txt"
                     raw = command("/usr/bin/time", "-l", "-o", str(timing), str(binary),
-                                  f"http://127.0.0.1:{server.server_port}", mode, str(concurrency), str(size), str(calls), str(cycles), timeout=45)
+                                  f"http://127.0.0.1:{server.server_port}", mode, str(concurrency), str(size), str(calls), str(cycles), "post-budget" if post_budget else "default", timeout=120 if cycles > 100 else 45)
                     result = json.loads(raw)
                     peak = re.search(r"(\d+)\s+maximum resident set size", timing.read_text())
                     if not peak:
@@ -157,7 +159,8 @@ let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
                 "xcode": command("xcodebuild", "-version"), "swift": command("xcrun", "swift", "--version"),
                 "sdk": command("xcrun", "--sdk", "macosx", "--show-sdk-version"),
                 "python": platform.python_version(), "build": "release; Swift 6; warnings-as-errors",
-                "repetitions": repetitions, "smoke": smoke, "sampling": "fresh process per repetition; RSS in bytes; 100ms post-shutdown sample"}
+                "repetitions": repetitions, "smoke": smoke, "post_budget": post_budget,
+                "sampling": "fresh process per repetition; RSS in bytes; " + ("12s" if post_budget else "100ms") + " post-shutdown sample"}
     output.write_text(json.dumps({"environment": metadata, "results": results}, indent=2) + "\n")
     print(f"Wrote {output}", flush=True)
 
@@ -168,5 +171,13 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--repetitions", type=int, choices=range(1, 6), default=3)
     parser.add_argument("--smoke", action="store_true", help="Compile and exercise only a short reuse/cancellation case; no performance thresholds")
+    parser.add_argument("--post-budget", action="store_true", help="Run only long reuse/direct controls with a 12-second post-shutdown sample")
+    parser.add_argument("--cycles", type=int, metavar="1..1000", default=100, help="Cycle count for --post-budget only (default 100)")
     args = parser.parse_args()
-    run(args.package, args.output, args.repetitions, args.smoke)
+    if args.smoke and args.post_budget:
+        parser.error("--smoke and --post-budget are separate workloads")
+    if not 1 <= args.cycles <= 1000:
+        parser.error("--cycles must be between 1 and 1000")
+    if args.cycles != 100 and not args.post_budget:
+        parser.error("--cycles requires --post-budget")
+    run(args.package, args.output, args.repetitions, args.smoke, args.post_budget, args.cycles)

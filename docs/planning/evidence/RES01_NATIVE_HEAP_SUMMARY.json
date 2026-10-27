@@ -1,0 +1,42 @@
+{
+  "product_commit": "98f23d32834ec5991ba0446cfd36c9966625fa3f",
+  "production_source_changes": false,
+  "instrumentation": "macOS heap -s; MallocStackLogging=1; allocation tree from malloc_history of synthetic-process memory graph",
+  "workload": {
+    "task_concurrency": 32,
+    "response_bytes": 65536,
+    "cycles": 100,
+    "calls_per_cycle": 64,
+    "total_budget_seconds": 10
+  },
+  "profile_probe_change": "I20 Probe.swift: replace 100ms post-shutdown sleep with PROFILE_READY marker and 25-second wait; snapshot after marker and after a further 11 seconds, with profiler-command overhead. No product changes. Direct snapshot is an independent earlier repetition.",
+  "allocation_path_observed": [
+    "Task._sleep(until:_:tolerance:clock:)",
+    "dispatch_after_f",
+    "dispatch_source_create"
+  ],
+  "results": [
+    {
+      "phase": "networkkit_joined",
+      "live_nodes": 22641,
+      "live_malloc_bytes": 2948016,
+      "task_stack_nodes": 3975,
+      "task_stack_bytes": 1150032
+    },
+    {
+      "phase": "networkkit_after_deadlines",
+      "live_nodes": 2600,
+      "live_malloc_bytes": 499504,
+      "task_stack_nodes": 7,
+      "task_stack_bytes": 7248
+    },
+    {
+      "phase": "direct_joined",
+      "live_nodes": 2799,
+      "live_malloc_bytes": 527360,
+      "task_stack_nodes": 6,
+      "task_stack_bytes": 6224
+    }
+  ],
+  "limitations": "One native profiled repetition per mode, same macOS 15.8.1 x86_64 / Xcode 26.3 / Swift 6.2.4 environment as I20. Profiler overhead changes timings/RSS; use allocation counts for attribution. Raw address/stack graphs stay local."
+}

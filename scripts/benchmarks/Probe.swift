@@ -132,7 +132,9 @@ enum ProbeFailure: Error { case measurement, invalidResult, noNativeRequest, une
         direct?.invalidateAndCancel()
         let shutdownSeconds = seconds(shutdownStart.duration(to: clock.now))
         let shutdownRSS = try residentBytes()
-        try await Task.sleep(for: .milliseconds(100))
+        // Optional attribution sample after every configured ten-second deadline.
+        if args.count > 7 && args[7] == "post-budget" { try await Task.sleep(for: .seconds(12)) }
+        else { try await Task.sleep(for: .milliseconds(100)) }
         let settledRSS = try residentBytes()
         latency.sort()
         func percentile(_ value: Double) -> Double {

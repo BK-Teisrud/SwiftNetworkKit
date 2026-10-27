@@ -59,3 +59,7 @@ Next technical task after I19 acceptance is #61. #62/#63 may resolve access in p
 ## I20 resource follow-up
 
 The [measured resource baseline](RESOURCE_BASELINE.md) identifies sustained process-RSS growth relative to a direct URLSession control. RES-01 / #100 now owns attribution and any required fix, blocks #86, and follows I20 acceptance. This is not an attributed leak or accepted stable-memory result. The earlier #61 measurement ownership above is supplemented by this concrete follow-up; residual-risk and native-platform gates remain open.
+
+## RES-01 attribution
+
+The [repeated-call controls](REPEATED_CALL_MEMORY.md) identify expiry-dependent Swift sleep-helper/dispatch retention on the observed macOS runtime. No retained library operation graph requiring a product fix was established. Logical cancellation and runtime allocation lifetime remain distinct. Target resource assessment and explicit owner disposition remain #62/#63/#86/#29 work; local attribution does not waive them or change v1 clocks, timeouts or support.
