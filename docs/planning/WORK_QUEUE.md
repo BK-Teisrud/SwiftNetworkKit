@@ -36,7 +36,7 @@ Choose the lowest Order with closed blockers and satisfied Ready criteria. This 
 | 23 | [[I23] Rehearse the v1 release without publishing](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/64) | #27 | #63, #86 |
 | 24 | [REL-01: Actual v1 release gate](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/29) | Governance | #64 and selected core epics |
 
-Current review: I20 / #61 is accepted through PR #101 and main run 40408266400. [RES-01 / #100](REPEATED_CALL_MEMORY.md) attributes the observed local RSS trend before serial I21 work. It remains open until its own PR/main checks pass. Expiry-dependent runtime retention still requires target resource evidence and explicit #86/#29 owner disposition. #62/#63 retain minimum/physical/native HTTPS access gaps.
+Current review: RES-01 / #100 is accepted through PR #102 and main run 40459485079. [I21/I22 access preparation refresh](ENVIRONMENT_ACCESS_2026-10-27.md) records newly observed device details; the owner deferred connecting a device now. #62/#63 remain Blocked for actual execution because minimum environments, usable physical connections and controlled HTTPS are unverified. Their native resource evidence and explicit #86/#29 owner-risk disposition remain required. No additional issue/milestone or feature is selected.
 
 ## Why this sequence
 

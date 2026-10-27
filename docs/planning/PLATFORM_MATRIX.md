@@ -1,6 +1,6 @@
 # Platform and toolchain matrix
 
-Current preparation: [ENVIRONMENT_READINESS.md](ENVIRONMENT_READINESS.md) records the 2026-10-26 inventory, access gaps and scenario ownership. I01–I16 are delivered; minimum-runtime and physical-device acceptance remain outstanding.
+Current preparation: [2026-10-27 access refresh](ENVIRONMENT_ACCESS_2026-10-27.md) records newly observed device metadata and readiness gaps. [PREP-01](ENVIRONMENT_READINESS.md) preserves the earlier inventory and scenario ownership. I01–I20 and RES-01 are accepted; minimum-runtime and physical-device acceptance remain outstanding.
 
 Historical implementation snapshot below: the initial public HTTP pipeline was delivered through I10.
 [F1 review](F1_REVIEW.md) records contract/evidence review and the I11 gate outcome source.
