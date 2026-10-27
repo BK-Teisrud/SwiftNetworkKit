@@ -1,5 +1,7 @@
 # HTTPS, origin, loopback and redirect policy
 
+Current evidence, 2026-10-27: [I19 security/privacy review](SECURITY_PRIVACY_REVIEW.md) is accepted. [TLS-01 native macOS rejection](NATIVE_TLS_REJECTION.md) adds a candidate untrusted-certificate regression; its PR/main acceptance remains required. Trusted positive HTTPS, independent hostname mismatch and complete minimum/physical/runtime evidence remain open. Earlier delivery/status notes below preserve their historical scope and are superseded by the linked current evidence.
+
 I14 update: [provider origin/account binding and verification](AUTHENTICATION_PROVIDER.md) is now implemented; earlier I09 delivery notes below retain their historical scope. Consolidated security/release review remains outstanding.
 
 I10 update: the public `APIClient` now connects both request inputs to this shared foundation.

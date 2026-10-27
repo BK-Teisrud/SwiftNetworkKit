@@ -1,6 +1,6 @@
-# Test declaration inventory — I19
+# Test declaration inventory — TLS-01
 
-Snapshot: 2026-10-26, I19 candidate based on `d79cc031957a1f9690d7f5e5ec9efbdca6c6d9d1`. This source index contains 217 `@Test` function declarations, including two macOS-only child-process tests; other selected runtime destinations retain 215 declarations. Parameterized cases are not additional function declarations. Runtime results must come from execution, not this count. See [contract evidence ledger](TEST_EVIDENCE.md) for coverage and limitations. Refresh this snapshot when the suite changes; historical run counts remain dated evidence.
+Snapshot: 2026-10-27, TLS-01 candidate based on `dcf0a1b57c43ea5d96e06ee1d328e2d3d86a1a76`. This source index contains 218 `@Test` function declarations, including two macOS-only child-process tests and one macOS-only native TLS test; other selected runtime destinations retain 215 declarations. Parameterized cases are not additional function declarations. Runtime results must come from execution, not this count. See [contract evidence ledger](TEST_EVIDENCE.md) for coverage and limitations. Refresh this snapshot when the suite changes; historical run counts remain dated evidence.
 
 ## AuthenticationTests.swift
 
@@ -314,3 +314,9 @@ Snapshot: 2026-10-26, I19 candidate based on `d79cc031957a1f9690d7f5e5ec9efbdca6
 [Source](../../Tests/NetworkKitTests/PrivacyManifestTests.swift) — 1 declaration.
 
 - `bundledManifestMatchesReviewedSDKPractices`
+
+## NativeTLSTests.swift
+
+[Source](../../Tests/NetworkKitTests/NativeTLSTests.swift) — 1 macOS-only declaration.
+
+- `untrustedCertificateIsRejectedThroughBothPublicInputs`

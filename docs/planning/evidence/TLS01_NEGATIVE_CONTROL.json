@@ -1,0 +1,13 @@
+{
+  "as_of": "2026-10-27",
+  "baseline_product_commit": "dcf0a1b57c43ea5d96e06ee1d328e2d3d86a1a76",
+  "mutation": "Isolated copy only: route both public inputs to https://127.0.0.1:1 instead of the active synthetic TLS listener. No trust bypass or production mutation.",
+  "command": "swift test --filter NativeTLSTests -Xswiftc -warnings-as-errors",
+  "build_succeeded": true,
+  "exit_code": 1,
+  "certificate_specific_assertion_failures": 2,
+  "fixture_cleanup_phase_completed": true,
+  "repository_test_source_unchanged": true,
+  "test_source_sha256": "f67439eea22f73121030b9daa3a80efec27ab9fa5aa3e6eb870fb71d4e350d57",
+  "meaning": "Generic connection rejection is not accepted as untrusted-certificate evidence."
+}
