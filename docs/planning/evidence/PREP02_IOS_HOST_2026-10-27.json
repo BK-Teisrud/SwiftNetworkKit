@@ -1,0 +1,105 @@
+{
+  "recorded_on": "2026-10-27",
+  "task": "PREP-02 #113",
+  "production_baseline": "4ed54dc5bff1f4beeac51d5d2f88da7b29b1eb9b",
+  "production_source_changed": false,
+  "host_toolchain": {
+    "macOS": "15.8.1",
+    "macOS_build": "24H32",
+    "architecture": "x86_64",
+    "Xcode": "26.3",
+    "Xcode_build": "17C529",
+    "Swift": "6.2.4",
+    "SDK": "26.2"
+  },
+  "simulator": {
+    "family": "iPhone 17 Pro",
+    "OS": "26.2",
+    "build": "23C54",
+    "architecture": "x86_64",
+    "summary": {
+      "result": "Passed",
+      "totalTestCount": 215,
+      "passedTests": 215,
+      "failedTests": 0,
+      "skippedTests": 0,
+      "expectedFailures": 0
+    },
+    "suites": 26,
+    "unexpected_restarts": false,
+    "test_time_limit_failures": false,
+    "preparation_failures": [
+      "Initial Debug architecture mismatch corrected with ONLY_ACTIVE_ARCH=YES.",
+      "Subsequent build passed but automatic launch preparation failed with Invalid connectionUUID.",
+      "Explicit bounded bootstatus succeeded; following test run passed."
+    ]
+  },
+  "physical": {
+    "model": "iPhone 17 Pro",
+    "OS": "27.2",
+    "build": "24B119",
+    "architecture": "arm64",
+    "transport": "wired",
+    "summary": {
+      "result": "Passed",
+      "totalTestCount": 215,
+      "passedTests": 215,
+      "failedTests": 0,
+      "skippedTests": 0,
+      "expectedFailures": 0
+    },
+    "suites": 26,
+    "existing_identity_and_profile_only": true,
+    "new_certificates_profiles_or_account_changes": false,
+    "signing_selection": "Existing Xcode-managed profile; local Automatic override, no provisioning-update or device-registration flags.",
+    "embedded_profile_matches_existing_prevalidated_profile": true,
+    "app_and_embedded_test_signatures_verified": true,
+    "initial_manual_signing_attempt": "Rejected because existing profile is Xcode-managed; no physical tests in that attempt.",
+    "test_plan_format": 1,
+    "app_hosted": true,
+    "unexpected_restarts": false,
+    "test_time_limit_failures": false,
+    "temporary_host_uninstall_exit_code": 0
+  },
+  "shared_source_file_count": 22,
+  "macOS_only_declarations_excluded_at_compile_time": 3,
+  "source_hashes_sha256": {
+    "Tools/DeviceTestHost/AppDelegate.swift": "af2c1199744e3a5fc0b652d51c29a78c18041679b17616b0298dbcadafaea847",
+    "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj/project.pbxproj": "80c877d7111ba06e2fe98248752a6e14a027410a90c24107916d3ea368a1b56e",
+    "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj/xcshareddata/xcschemes/NetworkKitDeviceHost.xcscheme": "5a3323b38d30c13f81e590c98cfe4e7d6360c535dede993b37c6336d5b3ceabf",
+    "Tests/NetworkKitTests/AuthenticationTests.swift": "13c0c103ac46ea3d8636cc248f607f6f5ddd1acaed1f01dae26528cb386c8ec0",
+    "Tests/NetworkKitTests/BoundedFixtureProcess.swift": "6c97f5ed443c88c19f0d9d680439105803828cc84d28516b60eebba5d0bf36cd",
+    "Tests/NetworkKitTests/BudgetTestSupport.swift": "2f39314b993824ae28ef6122d025618136136a654cad745c83903510b72bf484",
+    "Tests/NetworkKitTests/ClientLifecycleTests.swift": "c64f3264625800cb6c1c4778a32d57e7b05ff9e4a44c5bf6f092d638bb6006bc",
+    "Tests/NetworkKitTests/ConfigurationTests.swift": "77c7a94fd1350527b72f3740b0705580123ca5198f20511fb0ac775d0409825f",
+    "Tests/NetworkKitTests/DiagnosticsTests.swift": "73768d7344ed5bf2cf291dd68807a875f6731e8a826336abb70bb5dc7d40e634",
+    "Tests/NetworkKitTests/DocumentationExamplesTests.swift": "3f0c55428498f12a604344fb0d5819f0813675cb8f6f6dcb4df563acd610ce41",
+    "Tests/NetworkKitTests/EndpointURLTests.swift": "83086000f8eef9a0c8086394b1f3fadd5e63df35069951470fb67e01d3e78d40",
+    "Tests/NetworkKitTests/F1AcceptanceTests.swift": "90a43f468a0be141e2d005a218301ecc6890bce2aaa25c5f40b82d5edbb79956",
+    "Tests/NetworkKitTests/FixtureProcessTests.swift": "02125dba6516dd2e4b52efa038ab423582f2727974e0b8c48565565f7cc5651f",
+    "Tests/NetworkKitTests/HTTPPipelineTests.swift": "9aca0c9816cc1f66f293867bce1915d6ed537552bc3b4448a1161e6ef2b0ae58",
+    "Tests/NetworkKitTests/NativeTLSTests.swift": "f67439eea22f73121030b9daa3a80efec27ab9fa5aa3e6eb870fb71d4e350d57",
+    "Tests/NetworkKitTests/NetworkKitTests.swift": "d5b5ae44ebf7dce1a4bc00e3aae7a9ad7b953907c15ec2e40ca8f734d73fb5c2",
+    "Tests/NetworkKitTests/NetworkSecurityTests.swift": "47afae3b5a9535d5b4bda23bb62a4780e1ca39238c207f89b9e3ea2a83335d52",
+    "Tests/NetworkKitTests/OperationBudgetTests.swift": "37aaf2437725ccae29828b885116739c4069426c00f90e6544648263078be3e9",
+    "Tests/NetworkKitTests/PrivacyManifestTests.swift": "2a53faf8231e942e18e7dbdc2d24cc7bf6d03d94e7060307b02869c90b7171a0",
+    "Tests/NetworkKitTests/PublicResponseAPITests.swift": "d31bfa319995fde23d6cc5ffd2af80f2e2bf1926e9ff34258b318d838d3351e4",
+    "Tests/NetworkKitTests/RedirectIntegrationTests.swift": "ee5feafb964508230b38e71592e71050e4e8a8d3073f81c8be3eba3d908c856a",
+    "Tests/NetworkKitTests/RequestEncodingTests.swift": "2b716f321edd736b2d74d917287c8fbead84a339824d8c76af3d49638e79319d",
+    "Tests/NetworkKitTests/ResponseDecodingTests.swift": "6b61be9f1650ad95c5f73e3af7874aabd4600232845c7e394b99875c14bb320b",
+    "Tests/NetworkKitTests/SessionTransportTests.swift": "89f91162d836068cae511c3d0c8d964538354a2162ddd60e2dde15b3faad0d67",
+    "Tests/NetworkKitTests/StorageIntegrationTests.swift": "192612de09b2271f8ee7eee5594accea30428d0e0ab88468004364fc28838de2"
+  },
+  "limitations": [
+    "Current iPhone only; no minimum iOS 17 or other physical-family evidence.",
+    "Existing scripted/configuration iOS branches retain those evidence types.",
+    "No controlled trusted HTTPS, independent hostname mismatch or complete ENV-01\u201307/native/resource claim.",
+    "No aggregate privacy archive report or release acceptance."
+  ],
+  "raw_logs_and_xcresults": "Private local temporary files; no device/account/profile/certificate identifiers published.",
+  "final_unsigned_generic_build": {
+    "exit_code": 0,
+    "signing_allowed": false,
+    "matches_new_ios_core_command": true
+  }
+}
