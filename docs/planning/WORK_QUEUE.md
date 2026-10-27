@@ -57,3 +57,15 @@ I21 may investigate access to older test environments as preparation without cod
 | 60 | [PLAN-F6 / #90](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/90) | #13/#18 | Backlog; research need/stop-go criteria pending |
 
 These are governance/planning tasks, not authorized extension implementation. F2 retains delivery priority. Future epics have no Order and require new scope decisions; only selected implementation slices receive I identifiers. Parent epics may span phases; individual subtasks' milestones define delivery requirements. Reassess phase boundaries after selection and sizing, without inventing dates.
+
+## Proposed first retry increment — 2026-10-27
+
+[PLAN-F3 #87](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/87) is planning only; [ADR-0013](../decisions/ADR-0013-opt-in-retry-proposal.md) and [the proposed contract](RETRY_INCREMENT_PLAN.md) await owner selection. All candidates below remain Backlog/P2/EXTENSION under #14; no I identifiers, code authorization or publication decision. Technical candidates require F3-DEC and GATE-F2, plus the preceding technical slice. F2 actual evidence remains the delivery priority.
+
+| Order | Candidate | Purpose |
+| --- | --- | --- |
+| 30.1 | [F3-DEC / #106](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/106) | Approve the bounded opt-in retry contract |
+| 30.2 | [F3-C01 / #107](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/107) | Specify and verify retry eligibility and delay decisions |
+| 30.3 | [F3-C02 / #108](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/108) | Integrate retries inside one admitted operation and deadline |
+| 30.4 | [F3-V01 / #109](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/109) | Verify native retry integration and resource behavior |
+| 30.5 | [F3-GATE / #110](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/110) | Review retry API, diagnostics, evidence and delivery readiness |

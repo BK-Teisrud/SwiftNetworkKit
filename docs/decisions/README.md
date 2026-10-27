@@ -15,6 +15,8 @@
 | [ADR-0011](ADR-0011-language-policy.md) | English GitHub content; Norwegian collaboration | Accepted by explicit owner request |
 | [ADR-0012](ADR-0012-implementation-start.md) | Begin the approved HTTP-core implementation | Accepted through the owner instruction on 2026-10-20; start gate closed |
 
+| [ADR-0013](ADR-0013-opt-in-retry-proposal.md) | Bounded per-call retry extension | Proposed; owner decision and F2 evidence pending |
+
 ADR-0009 records combined acceptance of the core choices and documented defaults in ADR-0002–ADR-0008. Those planning decisions did not authorize implementation; ADR-0012 records the later authorization.
 
 Use the [template](TEMPLATE.md). A proposed ADR does not authorize implementation. Acceptance requires the owner's explicit decision in the associated issue/PR or recorded conversation. Preserve a trace when superseding historical decisions; create a new ADR instead of silently changing their substance.

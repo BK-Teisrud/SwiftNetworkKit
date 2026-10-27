@@ -2,7 +2,7 @@
 
 No deadlines are set. Phases are gates, not calendar promises. The owner selected HTTP core first: F0 → F1 → F2 leads to the first stable release. F3–F6 are optional later deliveries, outside v1.0. Repository/package: SwiftNetworkKit; product/module: NetworkKit, with one library module. See [v1 scope](V1_SCOPE.md) and [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md).
 
-Current review: [TLS-01 native macOS rejection](NATIVE_TLS_REJECTION.md), a bounded P1 regression at Order 20.75 under #25. Preparation PR #103 is accepted through main run 40550211780; #62/#63 execution remains blocked by readiness/access. TLS-01 supplies local native negative evidence without selecting a new TLS product feature. F2 remains open for complete native/platform/resource and explicit owner-risk gates; no new milestone or support/tool change is selected.
+TLS-01 #104 is accepted through PR #105 and main run 40556606300. Current review: [TLS-01 native macOS rejection](NATIVE_TLS_REJECTION.md), a bounded P1 regression at Order 20.75 under #25. Preparation PR #103 is accepted through main run 40550211780; #62/#63 execution remains blocked by readiness/access. TLS-01 supplies local native negative evidence without selecting a new TLS product feature. F2 remains open for complete native/platform/resource and explicit owner-risk gates; no new milestone or support/tool change is selected.
 
 ## F0 – Architecture and decisions
 
@@ -21,6 +21,8 @@ Privacy/logging, cancellation, required authentication boundaries under DEC-04/0
 ## F3 – Resilience and extensions
 
 Deferred beyond v1. The owner selected retry/robustness as the first post-core planning priority on 2026-10-26. PLAN-F3 / #87 must select a small opt-in increment and approve its changed contract before implementation. Cache/authentication/monitoring/performance remain separate candidates; split delivery milestones if sizing warrants it.
+
+Proposed decomposition: [retry increment plan](RETRY_INCREMENT_PLAN.md) and [ADR-0013](../decisions/ADR-0013-opt-in-retry-proposal.md). Five bounded decision/contract/integration/evidence/gate candidates remain Backlog pending owner selection and accepted F2 evidence. No extension implementation is authorized.
 
 ## F4 – File transfers
 

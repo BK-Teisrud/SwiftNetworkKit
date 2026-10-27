@@ -47,3 +47,7 @@ Environment refresh, 2026-10-27: [local device records](ENVIRONMENT_ACCESS_2026-
 ## TLS-01 native negative evidence
 
 The [macOS rejection regression](NATIVE_TLS_REJECTION.md) exercises typed/raw public calls through real system-trust handling against a disposable untrusted certificate with a matching loopback SAN. Local results are certificate-specific; no trust root or verification bypass is installed. This is owned-session macOS evidence only. #62/#63 still require trusted success, independent hostname mismatch and actual minimum/physical environments; #86/#29 retain resource/risk/release gates. #104 acceptance requires its own PR/main checks.
+
+## Proposed resilience increment — 2026-10-27
+
+[ADR-0013](../decisions/ADR-0013-opt-in-retry-proposal.md) and [retry plan](RETRY_INCREMENT_PLAN.md) propose bounded per-call bodyless reads only. #106 owns scope/use-case approval; #107–#110 remain Backlog behind that decision and #86. A GET may still have server side effects, Retry-After dates depend on clock accuracy, and retry waits may amplify existing runtime helper retention/request rate. Require explicit replay semantics, original-budget enforcement, native/resource evidence and privacy-safe diagnostics. No defaults or v1 scope change from planning.
