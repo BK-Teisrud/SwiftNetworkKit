@@ -101,3 +101,7 @@ Known gaps already have bounded owners; create no duplicate issue. A newly found
 ## Completion boundary and plan assessment
 
 I17 consolidates the ledger, verifies fresh regressions and the negative control, and retains explicit assignments for later evidence. It must not depend on #60/#62/#63 finishing, which would create a cycle through I18/I19; those gates still block F2/release through #86. I18 is next only after I17 PR/main acceptance. No production/test change, support-minimum change, duplicate gap issue, milestone split or priority change is justified by this review. Keep #60/#62/#63 open and retain the owner's retry-first post-core planning direction. At later task transitions, update this mapping/index or retain them as clearly dated evidence; never silently present an old count as current.
+
+## TLS-01 candidate update — 2026-10-27
+
+[TLS-01](NATIVE_TLS_REJECTION.md) adds real native macOS owned-session untrusted-certificate rejection through typed/raw public calls, mapped to T3 / ENV-02. Local certificate-specific errors pass; an isolated generic-connection fault fails both assertions and still cleans the fixture. The new source snapshot is 218 declarations (three macOS-only), with required candidate PR/main evidence on #104. Earlier I17 counts remain historical; trusted success, independent hostname mismatch and actual other/minimum/physical targets remain release gaps under #62/#63.

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-26",
+  "as_of": "2026-10-27",
   "implementation_authorized": true,
   "start_gate": 41,
   "tasks": [
@@ -313,6 +313,19 @@
       "parent": 27
     },
     {
+      "order": 20.75,
+      "key": "TLS-01",
+      "number": 104,
+      "title": "[TLS-01] Verify native macOS rejection of an untrusted HTTPS certificate",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/104",
+      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "blocked_by": [
+        "START",
+        "I19"
+      ],
+      "parent": 25
+    },
+    {
       "order": 21,
       "key": "I21",
       "number": 62,
@@ -353,7 +366,8 @@
         "I20",
         "I21",
         "I22",
-        "RES-01"
+        "RES-01",
+        "TLS-01"
       ],
       "parent": 29
     },

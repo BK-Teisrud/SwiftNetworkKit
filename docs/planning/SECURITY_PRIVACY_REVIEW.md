@@ -63,3 +63,7 @@ The [measured resource baseline](RESOURCE_BASELINE.md) identifies sustained proc
 ## RES-01 attribution
 
 The [repeated-call controls](REPEATED_CALL_MEMORY.md) identify expiry-dependent Swift sleep-helper/dispatch retention on the observed macOS runtime. No retained library operation graph requiring a product fix was established. Logical cancellation and runtime allocation lifetime remain distinct. Target resource assessment and explicit owner disposition remain #62/#63/#86/#29 work; local attribution does not waive them or change v1 clocks, timeouts or support.
+
+## TLS-01 native negative evidence
+
+The [macOS rejection regression](NATIVE_TLS_REJECTION.md) exercises typed/raw public calls through real system-trust handling against a disposable untrusted certificate with a matching loopback SAN. Local results are certificate-specific; no trust root or verification bypass is installed. This is owned-session macOS evidence only. #62/#63 still require trusted success, independent hostname mismatch and actual minimum/physical environments; #86/#29 retain resource/risk/release gates. #104 acceptance requires its own PR/main checks.

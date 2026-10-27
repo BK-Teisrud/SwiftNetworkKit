@@ -1,5 +1,7 @@
 # Security, authentication, and network policy for v1
 
+Current evidence, 2026-10-27: [I19 security/privacy review](SECURITY_PRIVACY_REVIEW.md) is accepted. [TLS-01 native macOS rejection](NATIVE_TLS_REJECTION.md) adds a candidate untrusted-certificate regression; its PR/main acceptance remains required. Trusted positive HTTPS, independent hostname mismatch and complete minimum/physical/runtime evidence remain open. Earlier delivery/status notes below preserve their historical scope and are superseded by the linked current evidence.
+
 I16 current update: [storage verification and explicit public borrowed profiles](STORAGE_VERIFICATION.md) provide native macOS loopback evidence. Earlier storage-status notes below are historical; broader HTTPS/device/privacy/release review remains open.
 
 I15 current update: [sanitized optional diagnostics](SANITIZED_DIAGNOSTICS.md) are implemented, disabled by default. Earlier logging implementation-status notes below are historical; consolidated privacy/security review remains outstanding.

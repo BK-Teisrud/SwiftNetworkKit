@@ -2,7 +2,7 @@
 
 No deadlines are set. Phases are gates, not calendar promises. The owner selected HTTP core first: F0 → F1 → F2 leads to the first stable release. F3–F6 are optional later deliveries, outside v1.0. Repository/package: SwiftNetworkKit; product/module: NetworkKit, with one library module. See [v1 scope](V1_SCOPE.md) and [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md).
 
-Current review: [I21/I22 environment-access preparation](ENVIRONMENT_ACCESS_2026-10-27.md). I01–I20, PREP-01, BUG-01, QA-01 and RES-01 are accepted; F2 remains open. RES-01 acceptance is recorded in PR #102 / main run 40459485079. Native minimum/physical/HTTPS/resource evidence remains blocked by actual readiness, not waived by local CI or allocation attribution. The owner deferred connecting a device now. Existing #62/#63 own access/execution; #86/#29 retain evidence/risk and publication gates. No new issue, milestone, tool upgrade or feature is selected.
+Current review: [TLS-01 native macOS rejection](NATIVE_TLS_REJECTION.md), a bounded P1 regression at Order 20.75 under #25. Preparation PR #103 is accepted through main run 40550211780; #62/#63 execution remains blocked by readiness/access. TLS-01 supplies local native negative evidence without selecting a new TLS product feature. F2 remains open for complete native/platform/resource and explicit owner-risk gates; no new milestone or support/tool change is selected.
 
 ## F0 – Architecture and decisions
 
@@ -14,7 +14,7 @@ The initial HTTP slice is delivered through I01–I10. I11 / #52 records the [F1
 
 ## F2 – Production hardening and v1 gate
 
-Current review, 2026-10-27: I20 and RES-01 are accepted through PR #102 / main run 40459485079. [Local allocation attribution](REPEATED_CALL_MEMORY.md) leaves target resource and explicit owner disposition open. Earlier native fixture failures and the original opaque PR #102 iOS timeout retain their recorded uncertainty. [Environment preparation](ENVIRONMENT_ACCESS_2026-10-27.md) supplies model/OS records without claiming live connection or execution. Controlled HTTPS and minimum-version access remain unavailable/unverified; #62/#63 are Blocked for execution. No extra feature or milestone is selected.
+Current review, 2026-10-27: I20, RES-01 and preparation PR #103 are accepted; main run 40550211780 confirms the preparation baseline. TLS-01 / #104 is a selected P1 regression at Order 20.75, adding independently executable native macOS untrusted-certificate rejection. The original fixture/opaque iOS incident uncertainties remain recorded. #62/#63 execution remains Blocked by actual minimum/physical/controlled-HTTPS readiness. #86 requires #104 plus native/resource evidence, with explicit owner disposition before #29. No new milestone or product feature is selected.
 
 Privacy/logging, cancellation, required authentication boundaries under DEC-04/06, security review, DocC, and a documented release gate. Release v1 only after all accepted core criteria are met. PREP-01 / #85 investigates environment access early; GATE-F2 / #86 reconciles domain requirements and evidence before I23 rehearsal. Minimum-runtime and newer-device execution are independent evidence branches after API/security review, and both must pass.
 

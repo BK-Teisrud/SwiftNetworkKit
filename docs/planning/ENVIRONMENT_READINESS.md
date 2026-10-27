@@ -88,3 +88,7 @@ The owner reports no available/known controlled HTTPS environment with a system-
 ## RES-01 handoff to ENV-07
 
 [Repeated-call attribution](REPEATED_CALL_MEMORY.md) distinguishes completed NetworkKit operations from expiry-dependent runtime sleep-helper allocations and resident pages. For native resource evidence, record request rate, concurrency, response/retained-result sizes and selected total budget, with an observation after original deadlines. Use supported target profiling/harness tools; the standalone macOS heap inspector does not establish iOS/watchOS/tvOS results. Access, exact physical inventory and system-trusted HTTPS remain unverified; no Ready execution or residual-risk acceptance is inferred. #62/#63 own native results and #86/#29 owner disposition.
+
+## TLS-01 native negative evidence
+
+The [macOS rejection regression](NATIVE_TLS_REJECTION.md) exercises typed/raw public calls through real system-trust handling against a disposable untrusted certificate with a matching loopback SAN. Local results are certificate-specific; no trust root or verification bypass is installed. This is owned-session macOS evidence only. #62/#63 still require trusted success, independent hostname mismatch and actual minimum/physical environments; #86/#29 retain resource/risk/release gates. #104 acceptance requires its own PR/main checks.
