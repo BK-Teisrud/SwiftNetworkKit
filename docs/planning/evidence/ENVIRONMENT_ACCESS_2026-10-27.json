@@ -1,0 +1,131 @@
+{
+  "as_of": "2026-10-27",
+  "source": "Read-only simctl runtime inventory; CoreDevice device records and preferredDDI. Stored/discovered records are not current device communication or execution proof. Raw names, device identifiers, serials and paths are omitted.",
+  "host": {
+    "hardware_model": "MacBookPro15,2",
+    "os_version": "15.8.1",
+    "os_build": "24H32",
+    "architecture": "x86_64",
+    "xcode": "26.3",
+    "xcode_build": "17C529",
+    "core_device_version": "506.7"
+  },
+  "runtime_inventory": [
+    {
+      "name": "iOS 18.2",
+      "version": "18.2",
+      "buildversion": "22C150",
+      "isAvailable": true
+    },
+    {
+      "name": "iOS 18.5",
+      "version": "18.5",
+      "buildversion": "22F77",
+      "isAvailable": true
+    },
+    {
+      "name": "iOS 26.2",
+      "version": "26.2",
+      "buildversion": "23C54",
+      "isAvailable": true
+    },
+    {
+      "name": "tvOS 18.2",
+      "version": "18.2",
+      "buildversion": "22K154",
+      "isAvailable": true
+    },
+    {
+      "name": "tvOS 18.5",
+      "version": "18.5",
+      "buildversion": "22L572",
+      "isAvailable": true
+    },
+    {
+      "name": "tvOS 26.2",
+      "version": "26.2",
+      "buildversion": "23K51",
+      "isAvailable": true
+    },
+    {
+      "name": "watchOS 11.2",
+      "version": "11.2",
+      "buildversion": "22S99",
+      "isAvailable": true
+    },
+    {
+      "name": "watchOS 11.5",
+      "version": "11.5",
+      "buildversion": "22T572",
+      "isAvailable": true
+    },
+    {
+      "name": "watchOS 26.2",
+      "version": "26.2",
+      "buildversion": "23S303",
+      "isAvailable": true
+    }
+  ],
+  "device_records": [
+    {
+      "platform": "watchOS",
+      "model": "Apple Watch Ultra 2",
+      "os_version_record": "26.6",
+      "os_build_record": "23U67",
+      "developer_mode_record": "disabled",
+      "ddi_services_available_record": false,
+      "pairing_record": "paired",
+      "transport_record": "localNetwork",
+      "tunnel_record": "disconnected",
+      "execution_verified": false
+    },
+    {
+      "platform": "iOS",
+      "model": "iPad Pro (11-inch) (3rd generation)",
+      "os_version_record": "27.0.1",
+      "os_build_record": "24A446",
+      "developer_mode_record": "disabled",
+      "ddi_services_available_record": false,
+      "pairing_record": "paired",
+      "transport_record": null,
+      "tunnel_record": "unavailable",
+      "execution_verified": false
+    },
+    {
+      "platform": "iOS",
+      "model": "iPhone 17 Pro",
+      "os_version_record": "27.2",
+      "os_build_record": "24B119",
+      "developer_mode_record": "enabled",
+      "ddi_services_available_record": false,
+      "pairing_record": "paired",
+      "transport_record": "localNetwork",
+      "tunnel_record": "disconnected",
+      "execution_verified": false
+    }
+  ],
+  "preferred_ddi_host_metadata": [
+    {
+      "platform": "iOS",
+      "buildUpdate": "17C529",
+      "contentIsCompatible": true,
+      "isUsable": true
+    },
+    {
+      "platform": "tvOS",
+      "buildUpdate": "17C529",
+      "contentIsCompatible": true,
+      "isUsable": true
+    },
+    {
+      "platform": "watchOS",
+      "buildUpdate": "17C529",
+      "contentIsCompatible": true,
+      "isUsable": true
+    }
+  ],
+  "minimum_runtime_execution_verified": false,
+  "device_connection_deferred_by_owner": true,
+  "https_availability_note": "Owner reported unavailable/unknown; no endpoint selected.",
+  "controlled_system_trusted_https_access": "unavailable_or_unknown"
+}
