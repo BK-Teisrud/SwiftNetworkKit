@@ -60,6 +60,7 @@ def validate_documented_examples(source, guide):
 
 
 def source_integrity():
+    run(sys.executable, ROOT / "scripts/ci/device_host.py")
     manifest = json.loads(run("swift", "package", "dump-package", capture=True))
     require(manifest["name"] == "SwiftNetworkKit", "Incorrect package name")
     require(manifest["toolsVersion"]["_version"] == "6.2.0", "Incorrect Swift tools baseline")
@@ -156,6 +157,11 @@ def platform_check(kind):
     require(any(r["identifier"] == runtime and r.get("isAvailable") for r in runtimes), f"Required {runtime} unavailable")
     devices = json.loads(run("xcrun", "simctl", "list", "devices", "available", "-j", capture=True))["devices"]
     destinations = [select_device(devices, runtime, prefix) for prefix in prefixes]
+    if family == "iOS":
+        # Compile the physical app-host route without credentials or device deployment.
+        run("xcodebuild", "-project", ROOT / "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj",
+            "-scheme", "NetworkKitDeviceHost", "-destination", "generic/platform=iOS",
+            "-derivedDataPath", OUTPUT / "DeviceHost", "CODE_SIGNING_ALLOWED=NO", "build-for-testing")
     if family == "watchOS":
         phone = select_device(devices, "com.apple.CoreSimulator.SimRuntime.iOS-26-2", "iPhone 17")
         pairs = json.loads(run("xcrun", "simctl", "list", "pairs", "-j", capture=True))["pairs"]

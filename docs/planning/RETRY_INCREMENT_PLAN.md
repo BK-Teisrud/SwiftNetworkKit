@@ -1,6 +1,6 @@
 # First resilience increment proposal
 
-Date: 2026-10-27. PLAN-F3 / #87; parent NK-07 / #14. Status: proposed, planning only. [ADR-0013](../decisions/ADR-0013-opt-in-retry-proposal.md) requires an explicit owner decision. No extension code, new dependency, support change, release date or version is selected. F2 remains the delivery priority; #62/#63 and #86 retain their actual evidence gates. TLS-01 #104 is accepted through PR #105 and main run 40556606300 at d64ef1ff09985dc2d6e30603fefd3e39ed1d6a3e.
+Date: 2026-10-27. PLAN-F3 / #87; parent NK-07 / #14. Status: proposed, planning only. [ADR-0013](../decisions/ADR-0013-opt-in-retry-proposal.md) requires an explicit owner decision. Initial boundary selected by the owner on 2026-10-27: bodyless GET/HEAD, at most one retry, selected connection failures or HTTP 429/503; full ADR disposition remains pending. No extension code, new dependency, support change, release date or version is selected. F2 remains the delivery priority; #62/#63 and #86 retain their actual evidence gates. TLS-01 #104 is accepted through PR #105 and main run 40556606300 at d64ef1ff09985dc2d6e30603fefd3e39ed1d6a3e.
 
 ## Source and use cases
 
@@ -22,7 +22,7 @@ No source requirement is rejected permanently; deferred means unselected and unv
 
 ## Proposed behavior for owner decision
 
-All details here are recommendations, not accepted contracts or implemented APIs.
+The initial bodyless GET/HEAD/one-retry/status-family boundary was selected by the owner. The remaining details below are recommendations, not an accepted complete contract or implemented API.
 
 - Disabled by default; explicit per-call opt-in in NetworkCallOptions, shared by typed/raw input. No client-wide automatic activation. Preserve existing initializers/default behavior through an additive design; final names/signatures require API review before Ready.
 - At most two library transport invocations in one logical call: initial attempt and one retry. This deliberately avoids repeatedly retrying an already failed automatic retry. URLSession/OS connection attempts and redirects are not counted as separate library invocations; do not promise exactly two wire requests.
@@ -59,3 +59,7 @@ Current planning verification is source/specification/standards review and repos
 ## Standards consulted
 
 [RFC 9110 §9.2.2](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2) informs replay restrictions; [§10.2.3](https://www.rfc-editor.org/rfc/rfc9110.html#section-10.2.3) and [§5.6.7](https://www.rfc-editor.org/rfc/rfc9110.html#section-5.6.7) define Retry-After/date syntax. [RFC 6585 §4](https://www.rfc-editor.org/rfc/rfc6585.html#section-4) defines 429 and optional Retry-After. The exact allowlist, numerical bounds and fail-closed choices above are proposed project policy, not mandates of these standards.
+
+## Accepted-base refresh — 2026-10-27
+
+This proposal now integrates accepted main 0aaee219b7ec9f6a81c943ae7f4d4c87a2d9b7f5, verified through run 40571879754. PREP-02 #113 is Done; its real physical iPhone 215/215 regression evidence and iOS app-host/CI controls are preserved. #62/#63/#86 still require their complete evidence. Merge resolution preserves both F2 and retry queue sections, all task/dependency entries and the original production/test sources. PR #111 remains Draft; fresh required checks are necessary on the updated head. No approval of extension code or full ADR is inferred.

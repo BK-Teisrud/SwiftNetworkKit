@@ -1,13 +1,13 @@
 # ADR-0013: Propose a bounded per-call retry increment
 
 Date: 2026-10-27
-Status: Proposed; owner decision pending
+Status: Proposed; initial bodyless-read/one-retry boundary selected, complete decision pending
 Owner: @BK-Teisrud
 Issue / requirement: PLAN-F3 #87, NK-07 #14 / specification §4.7
 
 ## Context and problem
 
-The owner selected retry/robustness as the first post-core planning priority. The accepted v1 contract prohibits library retries; F2 still lacks required minimum/physical/native/resource evidence. Planning an extension does not change that contract. No consuming-app endpoint/server replay contract has yet been confirmed.
+The owner selected retry/robustness as the first post-core planning priority. The accepted v1 contract prohibits library retries; F2 still lacks required minimum/physical/native/resource evidence. Planning an extension does not change that contract. On 2026-10-27 the owner selected the recommended first boundary: bodyless GET/HEAD, at most one retry, selected connection failures or HTTP 429/503. No specific consuming-app endpoint/server replay contract has been supplied. This selects a planning direction, not all technical details or implementation.
 
 ## Alternatives
 
@@ -27,7 +27,7 @@ A retry can duplicate server side effects even on an incorrectly designed GET. T
 
 ## Approval and verification
 
-Owner must explicitly accept/modify/reject this contract and confirm the actual app need. A general request to continue planning, a merged documentation PR or passing CI is not that decision. #87 stays open pending disposition. Even approval requires accepted #86 core evidence and task Ready review before extension code; #29 publication is a separate decision. Required planning PR/main checks are recorded in #87, not assumed here.
+The owner selected the recommended initial boundary in the Norwegian conversation (“Vi tar det du anbefaler”), recorded on #106/#111. Complete contract disposition still requires explicit acceptance/modification/rejection: exact transport identities, timing/jitter, Retry-After bounds/parsing, authentication/diagnostic/API and compatibility behavior remain proposed. Confirm endpoint replay semantics when selecting actual consuming-app calls. A general request to continue planning, a merged documentation PR or passing CI is not that decision. #87 stays open pending disposition. Even approval requires accepted #86 core evidence and task Ready review before extension code; #29 publication is a separate decision. Required planning PR/main checks are recorded in #87, not assumed here.
 
 ## Supersedes / superseded by
 
