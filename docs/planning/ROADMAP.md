@@ -14,7 +14,7 @@ The initial HTTP slice is delivered through I01–I10. I11 / #52 records the [F1
 
 ## F2 – Production hardening and v1 gate
 
-[Preliminary F2 requirement reconciliation](F2_REVIEW.md) maps 79 source bullets across the ten core epics to accepted scope, evidence and explicit deferrals. TLS-01 #104 is accepted through main run 40556606300. This preparation closes no phase/epic; #62/#63 actual target/HTTPS/resource evidence still precedes #86, #64 and the separate #29 release decision.
+[Preliminary F2 requirement reconciliation](F2_REVIEW.md) maps 79 source bullets across the ten core epics to accepted scope, evidence and explicit deferrals. TLS-01 #104 is accepted through main run 40556606300. The connected iPhone builds/signs successfully, but tool-hosted device testing is unsupported; PREP-02 #113 adds the required app-host route before #63 execution. This preparation closes no phase/epic; #62/#63 actual target/HTTPS/resource evidence still precedes #86, #64 and the separate #29 release decision.
 
 Current review, 2026-10-27: I20, RES-01 and preparation PR #103 are accepted; main run 40550211780 confirms the preparation baseline. TLS-01 / #104 is a selected P1 regression at Order 20.75, adding independently executable native macOS untrusted-certificate rejection. The original fixture/opaque iOS incident uncertainties remain recorded. #62/#63 execution remains Blocked by actual minimum/physical/controlled-HTTPS readiness. #86 requires #104 plus native/resource evidence, with explicit owner disposition before #29. No new milestone or product feature is selected.
 
