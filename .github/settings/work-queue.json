@@ -326,6 +326,19 @@
       "parent": 25
     },
     {
+      "order": 20.9,
+      "key": "PREP-02",
+      "number": 113,
+      "title": "[PREP-02] Provide an app-hosted iOS physical-device test route",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/113",
+      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "blocked_by": [
+        "START",
+        "I18"
+      ],
+      "parent": 23
+    },
+    {
       "order": 21,
       "key": "I21",
       "number": 62,
@@ -349,7 +362,8 @@
       "blocked_by": [
         "START",
         "I19",
-        "PREP-01"
+        "PREP-01",
+        "PREP-02"
       ],
       "parent": 23
     },

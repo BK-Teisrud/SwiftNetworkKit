@@ -1,0 +1,43 @@
+{
+  "recorded_on": "2026-10-27",
+  "source_commit": "d64ef1ff09985dc2d6e30603fefd3e39ed1d6a3e",
+  "device": {
+    "model": "iPhone 17 Pro",
+    "os": "27.2",
+    "build": "24B119",
+    "connection": "wired",
+    "developer_mode": "enabled",
+    "ddi_services_available": true,
+    "passcode_required": false,
+    "unlocked_since_boot": true
+  },
+  "toolchain": {
+    "xcode": "26.3",
+    "build": "17C529",
+    "swift": "6.2.4",
+    "iphoneos_sdk": "26.2"
+  },
+  "unsigned_build_for_testing": {
+    "exit_code": 0,
+    "code_signing_allowed": false
+  },
+  "signed_build_for_testing": {
+    "exit_code": 0,
+    "existing_identity_only": true,
+    "manual_signing": true,
+    "provisioning_updates_requested": false,
+    "signature_verification_exit_code": 0
+  },
+  "test_without_building": {
+    "exit_code": 70,
+    "tests_executed": false,
+    "failure": "Tool-hosted testing is unavailable on device destinations; select a host application for the test target.",
+    "test_host": "system xctest"
+  },
+  "built_privacy_resource_present": true,
+  "aggregate_archive_privacy_report_verified": false,
+  "follow_up_issue": 113,
+  "minimum_runtime_evidence": false,
+  "complete_ENV_evidence": false,
+  "raw_logs": "Private local temporary files; not published."
+}
