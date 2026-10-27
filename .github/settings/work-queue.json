@@ -410,6 +410,71 @@
       "parent": 14
     },
     {
+      "order": 30.1,
+      "key": "F3-DEC",
+      "number": 106,
+      "title": "[F3-DEC] Approve the bounded opt-in retry contract",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/106",
+      "milestone": "F3 \u2013 Resilience and extensions",
+      "blocked_by": [],
+      "parent": 14
+    },
+    {
+      "order": 30.2,
+      "key": "F3-C01",
+      "number": 107,
+      "title": "[F3-C01] Specify and verify retry eligibility and delay decisions",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/107",
+      "milestone": "F3 \u2013 Resilience and extensions",
+      "blocked_by": [
+        "F3-DEC",
+        "GATE-F2"
+      ],
+      "parent": 14
+    },
+    {
+      "order": 30.3,
+      "key": "F3-C02",
+      "number": 108,
+      "title": "[F3-C02] Integrate retries inside one admitted operation and deadline",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/108",
+      "milestone": "F3 \u2013 Resilience and extensions",
+      "blocked_by": [
+        "F3-DEC",
+        "GATE-F2",
+        "F3-C01"
+      ],
+      "parent": 14
+    },
+    {
+      "order": 30.4,
+      "key": "F3-V01",
+      "number": 109,
+      "title": "[F3-V01] Verify native retry integration and resource behavior",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/109",
+      "milestone": "F3 \u2013 Resilience and extensions",
+      "blocked_by": [
+        "F3-DEC",
+        "GATE-F2",
+        "F3-C02"
+      ],
+      "parent": 14
+    },
+    {
+      "order": 30.5,
+      "key": "F3-GATE",
+      "number": 110,
+      "title": "[F3-GATE] Review retry API, diagnostics, evidence and delivery readiness",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/110",
+      "milestone": "F3 \u2013 Resilience and extensions",
+      "blocked_by": [
+        "F3-DEC",
+        "GATE-F2",
+        "F3-V01"
+      ],
+      "parent": 14
+    },
+    {
       "order": 40,
       "key": "PLAN-F4",
       "number": 88,

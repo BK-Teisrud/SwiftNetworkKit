@@ -60,8 +60,22 @@ These are governance/planning tasks, not authorized extension implementation. F2
 
 ## F2 closure preparation — 2026-10-27
 
-[Preliminary F2 review](F2_REVIEW.md) indexes the ten core epics and 79 original source bullets without changing approved scope. #104 is accepted through main run 40556606300; #62/#63 actual access/execution and complete HTTPS/resource evidence remain Blocked. Both precede #86; #64 and #27 rehearsal follow, and #29 retains separate release authorization. Preparation does not satisfy those gates. F3 candidate work in other branches remains outside this F2 baseline.
+[Preliminary F2 review](F2_REVIEW.md) indexes the ten core epics and 79 original source bullets without changing approved scope. #104 is accepted through main run 40556606300; #62/#63 actual access/execution and complete HTTPS/resource evidence remain Blocked. Both precede #86; #64 and #27 rehearsal follow, and #29 retains separate release authorization. Preparation does not satisfy those gates. F3 candidates are planning-only additions outside the accepted v1 product scope.
 
 Physical iPhone follow-up: [PREP-02 / #113](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/113) is Ready/P1/CORE/Order 20.9 under #23, blocked by accepted START/I18 and blocking I22. Unsigned/signed builds succeeded, but actual device execution failed before tests because package tool-hosted tests need an app host. See [sanitized evidence](evidence/F2_IPHONE_ATTEMPT_2026-10-27.json). This is the next bounded F2 preparation task; no physical test pass or new host installation is claimed.
 
 PREP-02 implementation: [app-hosted iOS route](IOS_DEVICE_TEST_HOST.md) reuses all shared test files with drift guards and an unsigned device build in ios-core. Its 215-test app-hosted simulator and physical iPhone 17 Pro/iOS 27.2 runs passed; the temporary host was removed. Required PR/main checks remain on #113. Keep #63/#86 open for their complete evidence.
+
+## Proposed first retry increment — 2026-10-27
+
+[PLAN-F3 #87](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/87) is planning only; [ADR-0013](../decisions/ADR-0013-opt-in-retry-proposal.md) and [the proposed contract](RETRY_INCREMENT_PLAN.md) record the owner-selected bodyless GET/HEAD/one-retry initial boundary; full ADR disposition remains pending. All candidates below remain Backlog/P2/EXTENSION under #14; no I identifiers, code authorization or publication decision. Technical candidates require F3-DEC and GATE-F2, plus the preceding technical slice. F2 actual evidence remains the delivery priority.
+
+| Order | Candidate | Purpose |
+| --- | --- | --- |
+| 30.1 | [F3-DEC / #106](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/106) | Approve the bounded opt-in retry contract |
+| 30.2 | [F3-C01 / #107](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/107) | Specify and verify retry eligibility and delay decisions |
+| 30.3 | [F3-C02 / #108](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/108) | Integrate retries inside one admitted operation and deadline |
+| 30.4 | [F3-V01 / #109](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/109) | Verify native retry integration and resource behavior |
+| 30.5 | [F3-GATE / #110](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/110) | Review retry API, diagnostics, evidence and delivery readiness |
+
+PREP-02 acceptance: PR #114 and exact merged-main run 40571879754 passed all seven required checks. #113 is Done for the iOS host route; #62/#63/#86 remain open for complete target/native/resource evidence. The F3 proposal below is planning only and adds no retry to the accepted product.
