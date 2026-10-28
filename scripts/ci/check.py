@@ -162,6 +162,9 @@ def platform_check(kind):
         run("xcodebuild", "-project", ROOT / "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj",
             "-scheme", "NetworkKitDeviceHost", "-destination", "generic/platform=iOS",
             "-derivedDataPath", OUTPUT / "DeviceHost", "CODE_SIGNING_ALLOWED=NO", "build-for-testing")
+        run("xcodebuild", "-project", ROOT / "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj",
+            "-scheme", "PublicHTTPSChecks", "-destination", "generic/platform=iOS",
+            "-derivedDataPath", OUTPUT / "DeviceHost", "CODE_SIGNING_ALLOWED=NO", "build-for-testing")
     if family == "watchOS":
         phone = select_device(devices, "com.apple.CoreSimulator.SimRuntime.iOS-26-2", "iPhone 17")
         pairs = json.loads(run("xcrun", "simctl", "list", "pairs", "-j", capture=True))["pairs"]
@@ -213,6 +216,9 @@ def main():
     else:
         platform_check(kind)
         if kind == "macos-core":
+            # Compile opt-in public-service checks, never execute them in CI.
+            run("swift", "build", "--package-path", ROOT / "Tools/PublicHTTPSChecks",
+                "--build-tests", "-Xswiftc", "-warnings-as-errors")
             # Compile/exercise the opt-in release harness without volatile timing/RSS thresholds.
             run(sys.executable, ROOT / "scripts/benchmarks/run.py", "--output", OUTPUT / "resource-smoke.json",
                 "--repetitions", "1", "--smoke")

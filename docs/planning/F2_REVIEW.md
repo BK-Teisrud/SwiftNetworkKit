@@ -1,5 +1,7 @@
 # F2 selected-requirement reconciliation — preliminary
 
+Current public-fixture decision, 2026-10-27: the owner selected [HTTPBingo/BadSSL verification](PUBLIC_HTTPS_VERIFICATION.md), NET-01 #115, instead of provisioning a paid/private HTTPS server. Public native observations are allowed for claims they actually support. Earlier controlled-fixture requirements still apply to server-counter/zero-contact claims; minimum/physical/resource/archive/privacy and owner release gates remain. Earlier no-endpoint statements below preserve their historical context.
+
 Date: 2026-10-27. Owner/task: @BK-Teisrud / GATE-F2 #86. Status: INCOMPLETE; this is preparatory reconciliation, not F2 acceptance or release authorization.
 
 Baseline: accepted main `d64ef1ff09985dc2d6e30603fefd3e39ed1d6a3e` (PR #105). [Main run 40556606300](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/40556606300) passed all seven jobs, including macOS 218 tests/28 suites and four simulator targets 215 tests/26 suites each. Full logs verified typed/raw certificate-specific rejection and cleanup, release smoke and control typechecking, without unexpected restarts/time-limit failures. This is inherited accepted evidence, not a new run and not minimum/physical execution. PR #111's proposed retry work is excluded from this baseline and from v1.

@@ -282,6 +282,7 @@
 "children" = (
 "BD026055D8F0C154471ACA47",
 "A56472E961F58FFFAE622D5B",
+"EE0C749971F0425980B12E21",
 );
 "name" = "Products";
 "sourceTree" = "<group>";
@@ -292,6 +293,7 @@
 "4F53394E01EEEE36AB337402",
 "781CAA6738A604344AE86EE3",
 "0A3E27B8CA818264D75C8D81",
+"FE6D6DE247593CA01AD79DDB",
 );
 "sourceTree" = "<group>";
 };
@@ -554,6 +556,9 @@
 "BuildIndependentTargetsInParallel" = "YES";
 "LastUpgradeCheck" = "2630";
 "TargetAttributes" = {
+"FF9A71C6EB7D7624C8C5C58E" = {
+"TestTargetID" = "A172CEDCAE47474B615C54D5";
+};
 "9F86D081884C7D659A2FEAA0" = {
 "TestTargetID" = "A172CEDCAE47474B615C54D5";
 };
@@ -574,11 +579,126 @@
 "targets" = (
 "A172CEDCAE47474B615C54D5",
 "9F86D081884C7D659A2FEAA0",
+"FF9A71C6EB7D7624C8C5C58E",
 );
 "packageReferences" = (
 "BC4A71180870F7945155FBB0",
 );
 };
+"B94DC23340841A2483485201" = {
+"isa" = "XCBuildConfiguration";
+"name" = "Debug";
+"buildSettings" = {
+"GENERATE_INFOPLIST_FILE" = "YES";
+"ONLY_ACTIVE_ARCH" = "YES";
+"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/NetworkKitDeviceHost.app/NetworkKitDeviceHost";
+"PROVISIONING_PROFILE_SPECIFIER" = "$(NETWORKKIT_DEVICE_PROFILE)";
+"PRODUCT_BUNDLE_IDENTIFIER" = "no.teisruddevelopment.NetworkKitPublicHTTPSChecks";
+"TEST_TARGET_NAME" = "NetworkKitDeviceHost";
+"BUNDLE_LOADER" = "$(TEST_HOST)";
+"PRODUCT_NAME" = "$(TARGET_NAME)";
+};
+};
+"E9BBDB15EA98B6D6599E7786" = {
+"isa" = "PBXTargetDependency";
+"target" = "A172CEDCAE47474B615C54D5";
+"targetProxy" = "2CE0160832EDF460EFC90A26";
+};
+"838E1460885EB86E9790A613" = {
+"isa" = "PBXBuildFile";
+"productRef" = "A8792157CB4F27FB949C035F";
+};
+"EE0C749971F0425980B12E21" = {
+"path" = "NetworkKitPublicHTTPSChecks.xctest";
+"isa" = "PBXFileReference";
+"explicitFileType" = "wrapper.cfbundle";
+"sourceTree" = "BUILT_PRODUCTS_DIR";
+};
+"FF9A71C6EB7D7624C8C5C58E" = {
+"productType" = "com.apple.product-type.bundle.unit-test";
+"productReference" = "EE0C749971F0425980B12E21";
+"buildConfigurationList" = "82271A22D33EFB4820FDE28A";
+"packageProductDependencies" = (
+"A8792157CB4F27FB949C035F",
+);
+"productName" = "NetworkKitPublicHTTPSChecks";
+"isa" = "PBXNativeTarget";
+"buildPhases" = (
+"9EA92AE1BAA67D7DFCBBB768",
+"143F2DC6B012075DF94A0829",
+"FF921D46DE80DACA207647CF",
+);
+"dependencies" = (
+"E9BBDB15EA98B6D6599E7786",
+);
+"name" = "NetworkKitPublicHTTPSChecks";
+"buildRules" = (
+);
+};
+"82271A22D33EFB4820FDE28A" = {
+"isa" = "XCConfigurationList";
+"defaultConfigurationIsVisible" = "0";
+"defaultConfigurationName" = "Debug";
+"buildConfigurations" = (
+"B94DC23340841A2483485201",
+"2A1267EF0B0B0766F7CFF673",
+);
+};
+"2A1267EF0B0B0766F7CFF673" = {
+"isa" = "XCBuildConfiguration";
+"name" = "Release";
+"buildSettings" = {
+"GENERATE_INFOPLIST_FILE" = "YES";
+"ONLY_ACTIVE_ARCH" = "NO";
+"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/NetworkKitDeviceHost.app/NetworkKitDeviceHost";
+"PROVISIONING_PROFILE_SPECIFIER" = "$(NETWORKKIT_DEVICE_PROFILE)";
+"PRODUCT_BUNDLE_IDENTIFIER" = "no.teisruddevelopment.NetworkKitPublicHTTPSChecks";
+"TEST_TARGET_NAME" = "NetworkKitDeviceHost";
+"BUNDLE_LOADER" = "$(TEST_HOST)";
+"PRODUCT_NAME" = "$(TARGET_NAME)";
+};
+};
+"FE6D6DE247593CA01AD79DDB" = {
+"path" = "../PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicHTTPSTests.swift";
+"isa" = "PBXFileReference";
+"lastKnownFileType" = "sourcecode.swift";
+"sourceTree" = "<group>";
+};
+"5D0019F1FE4BC167030E1EC3" = {
+"isa" = "PBXBuildFile";
+"fileRef" = "FE6D6DE247593CA01AD79DDB";
+};
+"9EA92AE1BAA67D7DFCBBB768" = {
+"isa" = "PBXSourcesBuildPhase";
+"buildActionMask" = "2147483647";
+"files" = (
+"5D0019F1FE4BC167030E1EC3",
+);
+"runOnlyForDeploymentPostprocessing" = "0";
+};
+"FF921D46DE80DACA207647CF" = {
+"isa" = "PBXResourcesBuildPhase";
+"buildActionMask" = "2147483647";
+"files" = (
+);
+"runOnlyForDeploymentPostprocessing" = "0";
+};
+"143F2DC6B012075DF94A0829" = {
+"isa" = "PBXFrameworksBuildPhase";
+"buildActionMask" = "2147483647";
+"files" = (
+"838E1460885EB86E9790A613",
+);
+"runOnlyForDeploymentPostprocessing" = "0";
+};
+"2CE0160832EDF460EFC90A26" = {
+"isa" = "PBXContainerItemProxy";
+"containerPortal" = "244210E48437B6556980A702";
+"remoteGlobalIDString" = "A172CEDCAE47474B615C54D5";
+"remoteInfo" = "NetworkKitDeviceHost";
+"proxyType" = "1";
+};
+
 };
 "rootObject" = "244210E48437B6556980A702";
 }

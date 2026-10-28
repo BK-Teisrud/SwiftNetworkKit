@@ -1,5 +1,7 @@
 # Test-environment readiness — PREP-01
 
+Current public-fixture decision, 2026-10-27: the owner selected [HTTPBingo/BadSSL verification](PUBLIC_HTTPS_VERIFICATION.md), NET-01 #115, instead of provisioning a paid/private HTTPS server. Public native observations are allowed for claims they actually support. Earlier controlled-fixture requirements still apply to server-counter/zero-contact claims; minimum/physical/resource/archive/privacy and owner release gates remain. Earlier no-endpoint statements below preserve their historical context.
+
 Current access refresh: [2026-10-27 read-only records and next steps](ENVIRONMENT_ACCESS_2026-10-27.md). Three stored/discovered device records now supply model/OS details, but live device execution remains deferred and minimum runtimes/HTTPS access remain missing. The 2026-10-26 tables below preserve the earlier inventory and owner reports.
 
 Inventory date: 2026-10-26. Owner: @BK-Teisrud. Preparation task: [#85](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/85). This is an access/scenario assessment, not product execution or compatibility certification. Actual release evidence remains in [I21 / #62](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/62) and [I22 / #63](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/63); security/trust review belongs to [I19 / #60](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/60).

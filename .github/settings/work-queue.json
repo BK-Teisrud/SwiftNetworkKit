@@ -339,6 +339,19 @@
       "parent": 23
     },
     {
+      "order": 20.95,
+      "key": "NET-01",
+      "number": 115,
+      "title": "[NET-01] Verify opt-in native public HTTPS scenarios",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/115",
+      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "blocked_by": [
+        "I19",
+        "PREP-02"
+      ],
+      "parent": 23
+    },
+    {
       "order": 21,
       "key": "I21",
       "number": 62,
@@ -363,7 +376,8 @@
         "START",
         "I19",
         "PREP-01",
-        "PREP-02"
+        "PREP-02",
+        "NET-01"
       ],
       "parent": 23
     },
