@@ -1,0 +1,136 @@
+{
+  "recorded_on": "2026-10-28",
+  "task": "NET-02 #117",
+  "production_baseline": "46dd1d2c1298866c2818f0b9a7ca1c992c37f6ee",
+  "production_source_changed": false,
+  "toolchain": {
+    "macOS": "15.8.1",
+    "build": "24H32",
+    "architecture": "x86_64",
+    "Xcode": "26.3/17C529",
+    "Swift": "6.2.4",
+    "SDK": "26.2"
+  },
+  "manual_suite": {
+    "declarations": 12,
+    "suites": 1,
+    "parameter_cases": 26,
+    "new_lifecycle_declarations": 4,
+    "new_parameter_cases": 10,
+    "serialized": true,
+    "normal_CI_execution": false
+  },
+  "macOS_run": {
+    "exit_code": 0,
+    "all_declarations_passed": 12,
+    "new_case_markers": 10,
+    "unexpected_restart": false,
+    "test_time_limit_failure": false
+  },
+  "iPhone_run": {
+    "model": "iPhone 17 Pro",
+    "OS": "27.2",
+    "build": "24B119",
+    "debug_link": "wired",
+    "Internet_interface": "not recorded",
+    "final_summary": {
+      "result": "Passed",
+      "totalTestCount": 12,
+      "passedTests": 12,
+      "failedTests": 0,
+      "skippedTests": 0,
+      "expectedFailures": 0
+    },
+    "new_case_markers": 10,
+    "existing_identity_and_profile_only": true,
+    "embedded_profile_matched": true,
+    "signatures_verified": true,
+    "new_profile_certificate_account_or_device_setting_change": false,
+    "temporary_host_cleanup_exit_code": 0,
+    "unexpected_restart": false,
+    "test_time_limit_failure": false
+  },
+  "initial_iPhone_preparation": {
+    "result": "No tests started; Xcode waiting for unlock",
+    "outer_timeout_seconds": 240,
+    "disposition": "Phone unlocked by owner; same signed artefact then tested, no rebuild/setting change required.",
+    "product_failure_inferred": false
+  },
+  "observed_cases": [
+    {
+      "input": "typed",
+      "caller_cancel": "CancellationError, joined, same client later returned 204",
+      "owned_shutdown": "CancellationError, joined, later call clientClosed",
+      "borrowed_shutdown": "CancellationError, joined, same app-owned session later returned 204"
+    },
+    {
+      "input": "raw",
+      "caller_cancel": "CancellationError, joined, same client later returned 204",
+      "owned_shutdown": "CancellationError, joined, later call clientClosed",
+      "borrowed_shutdown": "CancellationError, joined, same app-owned session later returned 204"
+    },
+    {
+      "input": "typed",
+      "ownership": "owned",
+      "isolated_appManaged_control": "synthetic marker echoed/stored, app deletion, marker absent",
+      "strict_profile": "marker absent at seed redirect and follow-up"
+    },
+    {
+      "input": "typed",
+      "ownership": "borrowed",
+      "isolated_appManaged_control": "synthetic marker echoed/stored, app deletion, marker absent",
+      "strict_profile": "marker absent at seed redirect and follow-up"
+    },
+    {
+      "input": "raw",
+      "ownership": "owned",
+      "isolated_appManaged_control": "synthetic marker echoed/stored, app deletion, marker absent",
+      "strict_profile": "marker absent at seed redirect and follow-up"
+    },
+    {
+      "input": "raw",
+      "ownership": "borrowed",
+      "isolated_appManaged_control": "synthetic marker echoed/stored, app deletion, marker absent",
+      "strict_profile": "marker absent at seed redirect and follow-up"
+    }
+  ],
+  "negative_controls": [
+    {
+      "mode": "cancel",
+      "isolated_source_mutation": "                // Negative control: omit caller cancellation.\n                try requireCancellation(await pending.result)",
+      "selected_test": "nativeLifecycleCallerCancellation",
+      "compiled": true,
+      "exit_code": 1,
+      "expected_assertion_failures": 2,
+      "source_unchanged": true,
+      "source_sha256": "82a59bd9f39a08416fea999401becc037441ce1d1122ed61b49bc44a92a5769d",
+      "public_traffic": "Only the selected small synthetic cases; no automatic retry or load test."
+    },
+    {
+      "mode": "cookie",
+      "isolated_source_mutation": "settings.httpCookieAcceptPolicy = .always; settings.httpShouldSetCookies = false",
+      "selected_test": "nativeLifecycleStrictCookies",
+      "compiled": true,
+      "exit_code": 1,
+      "expected_assertion_failures": 4,
+      "source_unchanged": true,
+      "source_sha256": "82a59bd9f39a08416fea999401becc037441ce1d1122ed61b49bc44a92a5769d",
+      "public_traffic": "Only the selected small synthetic cases; no automatic retry or load test."
+    }
+  ],
+  "source_sha256": {
+    "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicHTTPSTests.swift": "82a59bd9f39a08416fea999401becc037441ce1d1122ed61b49bc44a92a5769d",
+    "Tools/PublicHTTPSChecks/Package.swift": "57ea65e6920f13f89773a0edf4e25c4f28606bfed9b46c08b4c53a91f5c98f69",
+    "Tools/DeviceTestHost/AppDelegate.swift": "af2c1199744e3a5fc0b652d51c29a78c18041679b17616b0298dbcadafaea847",
+    "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj/project.pbxproj": "11a50da918e1d3137d40862117946f0fc5771d249a1f11e00f23ffb83427a54b",
+    "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj/xcshareddata/xcschemes/PublicHTTPSChecks.xcscheme": "952c0c45a2090c3ba7108a42f3652926c481780c5b381827510748a702b18849"
+  },
+  "remaining_limits": [
+    "No server receipt/zero-contact counter or hard deadline claim.",
+    "No cache/auth-challenge/foreground-background/network-interface transition evidence from these tests.",
+    "No quantitative resource/RSS/live-allocation/energy assessment.",
+    "No minimum/runtime installation/other physical targets/archive/privacy/release acceptance.",
+    "Strict cookie echo absence is not a forensic proof of absence from all OS stores."
+  ],
+  "private_evidence": "Raw logs/xcresults and identifiers retained locally; no bodies/cookies/IP/profile/account/device IDs published."
+}

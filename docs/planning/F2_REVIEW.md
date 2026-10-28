@@ -198,3 +198,7 @@ The main reconciliation gap was traceability: generic epic checkboxes did not en
 ## PREP-02 implementation follow-up
 
 [The app-hosted iOS route](IOS_DEVICE_TEST_HOST.md) and [host runbook](../../Tools/DeviceTestHost/README.md) now provide a minimal local host/test project using all 22 shared test/helper files. App-hosted iOS 26.2 simulator execution passed 215/215 tests, zero skipped/failed/expected failures. This supersedes the earlier no-host preparation state only; no minimum/native-complete/F2 acceptance follows. Existing-profile app-hosted execution on iPhone 17 Pro/iOS 27.2 passed 215/215 tests with zero skipped/failed/expected failures, and the temporary host was removed. Required PR/main acceptance remains on #113; #63 retains ENV-01–07 and actual resource/HTTPS evidence. No product-source change or new milestone is selected.
+
+## NET-01 acceptance / NET-02 follow-up — 2026-10-28
+
+NET-01 #115 is accepted through PR #116 and main 40644612904. [NET-02 #117](NATIVE_LIFECYCLE_STORAGE.md) adds bounded native cancellation/shutdown/cookie observations; #63 retains complete target/ENV/resource evidence. [Three exact minimum-runtime candidates](MINIMUM_RUNTIME_ACCESS_2026-10-28.md) are catalogued and installation is owner-authorized, but anonymous archive HEAD requests return unauthorized HTML; access/architecture/import/boot/tests and macOS 14 remain unproved. No F2 or release criterion is waived.

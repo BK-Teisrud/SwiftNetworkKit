@@ -352,6 +352,19 @@
       "parent": 23
     },
     {
+      "order": 20.96,
+      "key": "NET-02",
+      "number": 117,
+      "title": "[NET-02] Verify native cancellation, shutdown and isolated cookie profiles",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/117",
+      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "blocked_by": [
+        "NET-01",
+        "PREP-02"
+      ],
+      "parent": 23
+    },
+    {
       "order": 21,
       "key": "I21",
       "number": 62,
@@ -377,7 +390,8 @@
         "I19",
         "PREP-01",
         "PREP-02",
-        "NET-01"
+        "NET-01",
+        "NET-02"
       ],
       "parent": 23
     },
