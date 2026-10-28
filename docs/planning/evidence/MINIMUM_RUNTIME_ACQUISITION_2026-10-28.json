@@ -1,0 +1,124 @@
+{
+  "date": "2026-10-28",
+  "issue": 62,
+  "reviewed_source": "c0ec62cd3d64b2708df31c6ab34a794229a9c2be",
+  "host": {
+    "macOS": "15.8.1",
+    "build": "24H32",
+    "architecture": "x86_64",
+    "xcode": "26.3",
+    "xcode_build": "17C529"
+  },
+  "authorization": "Owner approved exact iOS 17.0, watchOS 10.0 and tvOS 17.0 archive download/install sequentially; no host OS, support/tool, account/terms or trust changes selected.",
+  "source": "https://developer.apple.com/download/all/?q=Simulator",
+  "installed_runtimes": [
+    {
+      "name": "iOS 17.0",
+      "version": "17.0",
+      "buildversion": "21A328",
+      "identifier": "com.apple.CoreSimulator.SimRuntime.iOS-17-0",
+      "isAvailable": true,
+      "supportedArchitectures": [
+        "x86_64",
+        "arm64"
+      ]
+    },
+    {
+      "name": "tvOS 17.0",
+      "version": "17.0",
+      "buildversion": "21J353",
+      "identifier": "com.apple.CoreSimulator.SimRuntime.tvOS-17-0",
+      "isAvailable": true,
+      "supportedArchitectures": [
+        "x86_64",
+        "arm64"
+      ]
+    },
+    {
+      "name": "watchOS 10.0",
+      "version": "10.0",
+      "buildversion": "21R355",
+      "identifier": "com.apple.CoreSimulator.SimRuntime.watchOS-10-0",
+      "isAvailable": true,
+      "supportedArchitectures": [
+        "x86_64",
+        "arm64"
+      ]
+    }
+  ],
+  "archives": [
+    {
+      "platform": "iOS",
+      "version": "17.0",
+      "bytes": 7559529352,
+      "hdiutil_verify_exit": 0,
+      "simctl_runtime_add_exit": 0,
+      "import_state": "Ready"
+    },
+    {
+      "platform": "watchOS",
+      "version": "10.0",
+      "bytes": 4023631243,
+      "hdiutil_verify_exit": 0,
+      "simctl_runtime_add_exit": 0,
+      "import_state": "Ready"
+    },
+    {
+      "platform": "tvOS",
+      "version": "17.0",
+      "bytes": 3745733256,
+      "hdiutil_verify_exit": 0,
+      "simctl_runtime_add_exit": 0,
+      "import_state": "Ready"
+    }
+  ],
+  "download_observations": [
+    "Authenticated stable archive entries match public catalogue sources.",
+    "Browser file-result/event timeouts occurred. First iOS partial archive disappeared without accessible completed file and was not accepted.",
+    "Complete subsequent iOS, watchOS and tvOS transfers were retained from open local download handles; expected byte counts and hdiutil verification passed before each sequential import.",
+    "tvOS direct navigation reported ERR_BLOCKED_BY_CLIENT; a delayed browser transfer subsequently became visible. No bypass or credential extraction was used."
+  ],
+  "iOS_boot": {
+    "model": "iPhone 14 Pro",
+    "version": "17.0",
+    "build": "21A328",
+    "first_bootstatus_timeout_seconds": 180,
+    "followup_bootstatus_timeout_seconds": 55,
+    "last_observed_stage": "LaunchServices data migration",
+    "inventory_state_before_shutdown": "Booted",
+    "boot_readiness_verified": false,
+    "product_tests_started": false,
+    "task_owned_simulator_shutdown_exit": 0,
+    "data_erased": false,
+    "cause": "Not established; a bounded boot-status timeout is not proof of unsupported runtime or a NetworkKit defect."
+  },
+  "other_destinations": {
+    "iPad": "Compatible iPad (10th generation) destination created; not booted/tested.",
+    "watchOS": "Imported only; compatible destination/pair/boot/test route still to verify.",
+    "tvOS": "Imported only; compatible destination/boot/test route still to verify.",
+    "macOS14": "Separate access/execution route remains unverified."
+  },
+  "limits": [
+    "No minimum destination test pass.",
+    "No F2, physical-target, resource, archive/privacy or release acceptance.",
+    "No credentials, account data, serial numbers, UDIDs or signing identities included."
+  ],
+  "signature_observations": {
+    "inventory_before_explicit_reverify": {
+      "iOS_21A328": "Verified",
+      "watchOS_21R355": "Verified"
+    },
+    "explicit_simctl_runtime_verify": {
+      "iOS_21A328": "Timed out after 45 seconds without output",
+      "watchOS_21R355": "Timed out after 45 seconds without output"
+    },
+    "limit": "Do not report the explicit re-verification commands as passed. Successful signed import and previously reported Verified inventory remain distinct observations."
+  },
+  "commands": {
+    "disk_image_integrity": "hdiutil verify <complete exact Apple archive>",
+    "official_import": "xcrun simctl runtime add <verified exact Apple archive>",
+    "installed_inventory": "xcrun simctl list runtimes -j",
+    "boot_readiness": "xcrun simctl bootstatus <task-owned iPhone simulator> -b",
+    "explicit_signature_reverification": "xcrun simctl runtime verify <imported runtime image identifier>"
+  }
+}
