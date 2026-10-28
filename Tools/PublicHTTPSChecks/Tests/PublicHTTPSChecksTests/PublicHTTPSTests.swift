@@ -5,11 +5,15 @@ import Security
 import os
 
 enum Input: String, CaseIterable, Sendable { case typed, raw }
+enum Ownership: String, CaseIterable, Sendable { case owned, borrowed }
+
+private struct CookieReply: Decodable, Sendable { let cookies: [String: String] }
 
 private struct PublicEndpoint<Value: Sendable>: Endpoint {
     let path: EndpointPath
     let responseStrategy: ResponseStrategy<Value>
     let options: NetworkCallOptions
+    let query: [HTTPQueryItem]
 }
 
 private struct SlideShow: Decodable, Sendable {
@@ -57,7 +61,7 @@ private final class TrustObservation: NSObject, URLSessionTaskDelegate {
 /// Only this separate, manually invoked package contacts public services.
 /// No credentials, arbitrary URL, trust delegate, TLS override or library retry.
 @Suite(.serialized, .timeLimit(.minutes(1)))
-struct PublicHTTPSTests {
+struct PublicHTTPSTests: Sendable {
     private func run(base: String = "https://httpbingo.org",
                      body: (APIClient, URL) async throws -> Void) async throws {
         let url = try #require(URL(string: base))
@@ -74,13 +78,16 @@ struct PublicHTTPSTests {
 
     private func send<Value: Sendable>(_ input: Input, client: APIClient, base: URL,
         path: [String], response: ResponseStrategy<Value>,
-        options: NetworkCallOptions = .default) async throws -> NetworkResponse<Value> {
+        options: NetworkCallOptions = .default, query: [HTTPQueryItem] = []) async throws -> NetworkResponse<Value> {
         switch input {
         case .typed:
             return try await client.send(PublicEndpoint(path: .init(segments: path),
-                responseStrategy: response, options: options))
+                responseStrategy: response, options: options, query: query))
         case .raw:
-            let url = path.reduce(base) { $0.appendingPathComponent($1) }
+            let pathURL = path.reduce(base) { $0.appendingPathComponent($1) }
+            var components = try #require(URLComponents(url: pathURL, resolvingAgainstBaseURL: false))
+            if !query.isEmpty { components.queryItems = query.map { URLQueryItem(name: $0.name, value: $0.value) } }
+            let url = try #require(components.url)
             return try await client.send(URLRequest(url: url), response: response, options: options)
         }
     }
@@ -186,4 +193,138 @@ struct PublicHTTPSTests {
             }
         }
     }
+    private func requireCancellation<Value: Sendable>(_ result: Result<Value, any Error>) throws {
+        let cancelled = switch result {
+        case .success: false
+        case .failure(let error): error is CancellationError
+        }
+        try #require(cancelled, "Expected CancellationError from the joined delayed operation")
+    }
+
+    private func runBorrowed(_ body: (APIClient, URL, URLSession) async throws -> Void) async throws {
+        let base = try #require(URL(string: "https://httpbingo.org"))
+        let settings = URLSessionConfiguration.ephemeral
+        settings.httpCookieStorage = nil; settings.httpShouldSetCookies = false
+        settings.httpCookieAcceptPolicy = .never; settings.urlCredentialStorage = nil; settings.urlCache = nil
+        settings.requestCachePolicy = .reloadIgnoringLocalCacheData
+        settings.timeoutIntervalForRequest = 5; settings.timeoutIntervalForResource = 10
+        let session = URLSession(configuration: settings)
+        defer { session.invalidateAndCancel() } // App-owned cleanup, after the client joins.
+        let client = try APIClient(configuration: .init(baseURL: base,
+            timeouts: .init(inactivity: 5, total: 10)), session: session)
+        do { try await body(client, base, session); await client.shutdown() }
+        catch { await client.shutdown(); throw error }
+    }
+
+    @Test(arguments: Input.allCases)
+    func nativeLifecycleCallerCancellation(input: Input) async throws {
+        try await run { client, base in
+            let pending = Task { try await send(input, client: client, base: base, path: ["delay", "3"], response: .data) }
+            do {
+                try await Task.sleep(for: .milliseconds(150))
+                pending.cancel()
+                try requireCancellation(await pending.result)
+                let next = try await send(input, client: client, base: base, path: ["status", "204"], response: .empty)
+                try #require(next.status.code == 204)
+                print("NativeLifecycle cancel \(input.rawValue): cancelled-and-reused")
+            } catch {
+                pending.cancel(); _ = await pending.result
+                throw error
+            }
+        }
+    }
+
+    @Test(arguments: Input.allCases)
+    func nativeLifecycleOwnedShutdown(input: Input) async throws {
+        try await run { client, base in
+            let pending = Task { try await send(input, client: client, base: base, path: ["delay", "3"], response: .data) }
+            do {
+                try await Task.sleep(for: .milliseconds(150))
+                await client.shutdown()
+                try requireCancellation(await pending.result)
+                do {
+                    _ = try await send(input, client: client, base: base, path: ["status", "204"], response: .empty)
+                    Issue.record("Closed client admitted a new call")
+                } catch NetworkError.invalidRequest(.clientClosed) {
+                    print("NativeLifecycle shutdown \(input.rawValue): cancelled-and-closed")
+                }
+            } catch {
+                pending.cancel(); _ = await pending.result
+                throw error
+            }
+        }
+    }
+
+    @Test(arguments: Input.allCases)
+    func nativeLifecycleBorrowedShutdown(input: Input) async throws {
+        try await runBorrowed { client, base, session in
+            let before = try await send(input, client: client, base: base, path: ["status", "204"], response: .empty)
+            try #require(before.status.code == 204)
+            let pending = Task { try await send(input, client: client, base: base, path: ["delay", "3"], response: .data) }
+            do {
+                try await Task.sleep(for: .milliseconds(150))
+                await client.shutdown()
+                try requireCancellation(await pending.result)
+                let (_, response) = try await session.data(for: URLRequest(url: base.appendingPathComponent("status").appendingPathComponent("204")))
+                try #require((response as? HTTPURLResponse)?.statusCode == 204)
+                print("NativeLifecycle borrowed \(input.rawValue): cancelled-and-session-alive")
+            } catch {
+                pending.cancel(); _ = await pending.result
+                throw error
+            }
+        }
+    }
+
+    private func cookieFixtureControl(input: Input, base: URL) async throws {
+        let settings = URLSessionConfiguration.ephemeral
+        settings.urlCredentialStorage = nil; settings.urlCache = nil
+        settings.httpCookieAcceptPolicy = .always; settings.httpShouldSetCookies = true
+        settings.requestCachePolicy = .reloadIgnoringLocalCacheData
+        settings.timeoutIntervalForRequest = 5; settings.timeoutIntervalForResource = 10
+        let store = try #require(settings.httpCookieStorage)
+        let privateStore = store !== HTTPCookieStorage.shared
+        try #require(privateStore)
+        let session = URLSession(configuration: settings)
+        defer {
+            for cookie in store.cookies ?? [] { store.deleteCookie(cookie) }
+            session.invalidateAndCancel()
+        }
+        let client = try APIClient(configuration: .init(baseURL: base,
+            timeouts: .init(inactivity: 5, total: 10)), session: session, storage: .appManaged)
+        do {
+            let seed = try await send(input, client: client, base: base, path: ["cookies", "set"],
+                response: .json(CookieReply.self), query: [.init(name: "networkkit_fixture", value: "synthetic")])
+            let receivedMarker = seed.value.cookies["networkkit_fixture"] == "synthetic"
+            try #require(receivedMarker)
+            let retainedMarker = store.cookies(for: base.appendingPathComponent("cookies"))?.contains {
+                $0.name == "networkkit_fixture" && $0.value == "synthetic"
+            } == true
+            try #require(retainedMarker)
+            for cookie in store.cookies ?? [] { store.deleteCookie(cookie) }
+            let after = try await send(input, client: client, base: base, path: ["cookies"], response: .json(CookieReply.self))
+            let removedMarker = after.value.cookies["networkkit_fixture"] == nil
+            try #require(removedMarker)
+            await client.shutdown()
+        } catch { await client.shutdown(); throw error }
+    }
+
+    @Test(arguments: Input.allCases, Ownership.allCases)
+    func nativeLifecycleStrictCookies(input: Input, ownership: Ownership) async throws {
+        let check: @Sendable (APIClient, URL) async throws -> Void = { client, base in
+            try await cookieFixtureControl(input: input, base: base)
+            let seed = try await send(input, client: client, base: base, path: ["cookies", "set"],
+                response: .json(CookieReply.self), query: [.init(name: "networkkit_fixture", value: "synthetic")])
+            let seedAbsent = seed.value.cookies["networkkit_fixture"] == nil
+            try #require(seedAbsent)
+            let after = try await send(input, client: client, base: base, path: ["cookies"], response: .json(CookieReply.self))
+            let remainsAbsent = after.value.cookies["networkkit_fixture"] == nil
+            try #require(remainsAbsent)
+            print("NativeLifecycle cookies \(input.rawValue) \(ownership.rawValue): isolated-control-and-strict-absence")
+        }
+        switch ownership {
+        case .owned: try await run(body: check)
+        case .borrowed: try await runBorrowed { client, base, _ in try await check(client, base) }
+        }
+    }
+
 }

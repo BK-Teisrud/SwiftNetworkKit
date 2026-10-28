@@ -1,0 +1,95 @@
+{
+  "checked_on": "2026-10-28",
+  "catalog": "https://devimages-cdn.apple.com/downloads/xcode/simulators/index2.dvtdownloadableindex",
+  "catalog_version": "2",
+  "downloaded_or_installed": false,
+  "architecture_boot_and_test_compatibility": "unverified",
+  "runtimes": [
+    {
+      "name": "iOS 17.0 Simulator Runtime",
+      "identifier": "com.apple.dmg.iPhoneSimulatorSDK17_0",
+      "fileSize": 7559529352,
+      "simulatorVersion": {
+        "buildUpdate": "21A328",
+        "version": "17.0"
+      },
+      "source": "https://download.developer.apple.com/Developer_Tools/iOS_17_Simulator_Runtime/iOS_17_Simulator_Runtime.dmg",
+      "head_status": 200,
+      "content_length": null,
+      "content_type": "text/html; charset=UTF-8",
+      "final_response_host": "developer.apple.com",
+      "final_response_path": "/unauthorized/",
+      "archive_access_confirmed": false
+    },
+    {
+      "name": "watchOS 10.0 Simulator Runtime",
+      "identifier": "com.apple.dmg.WatchSimulatorSDK10_0",
+      "fileSize": 4023631243,
+      "simulatorVersion": {
+        "buildUpdate": "21R355",
+        "version": "10.0"
+      },
+      "source": "https://download.developer.apple.com/Developer_Tools/watchOS_10_Simulator_Runtime/watchOS_10_Simulator_Runtime.dmg",
+      "head_status": 200,
+      "content_length": null,
+      "content_type": "text/html; charset=UTF-8",
+      "final_response_host": "developer.apple.com",
+      "final_response_path": "/unauthorized/",
+      "archive_access_confirmed": false
+    },
+    {
+      "name": "tvOS 17.0 Simulator Runtime",
+      "identifier": "com.apple.dmg.AppleTVSimulatorSDK17_0",
+      "fileSize": 3745733256,
+      "simulatorVersion": {
+        "buildUpdate": "21J353",
+        "version": "17.0"
+      },
+      "source": "https://download.developer.apple.com/Developer_Tools/tvOS_17_Simulator_Runtime/tvOS_17_Simulator_Runtime.dmg",
+      "head_status": 200,
+      "content_length": null,
+      "content_type": "text/html; charset=UTF-8",
+      "final_response_host": "developer.apple.com",
+      "final_response_path": "/unauthorized/",
+      "archive_access_confirmed": false
+    }
+  ],
+  "owner_authorized_on": "2026-10-28",
+  "owner_authorization": "Download and install all three exact stable runtimes sequentially; no macOS install or support-minimum change authorized.",
+  "planned_sequence": [
+    "iOS 17.0",
+    "watchOS 10.0",
+    "tvOS 17.0"
+  ],
+  "access_disposition": "Catalogue entries found, but HEAD follows to HTML rather than runtime bytes; HTTP 200 does not establish archive availability. Official Xcode/authenticated download route still needs verification.",
+  "official_Xcode_download_attempts": [
+    {
+      "platform": "iOS",
+      "requested_version": "17.0",
+      "architecture_variant": "universal",
+      "exit_code": 70,
+      "exported_files": [],
+      "diagnosis": "Exact universal runtime reported not available for download by installed Xcode 26.3",
+      "installed": false
+    },
+    {
+      "platform": "watchOS",
+      "requested_version": "10.0",
+      "architecture_variant": "universal",
+      "exit_code": 70,
+      "exported_files": [],
+      "diagnosis": "Exact universal runtime reported not available for download by installed Xcode 26.3",
+      "installed": false
+    },
+    {
+      "platform": "tvOS",
+      "requested_version": "17.0",
+      "architecture_variant": "universal",
+      "exit_code": 70,
+      "exported_files": [],
+      "diagnosis": "Exact universal runtime reported not available for download by installed Xcode 26.3",
+      "installed": false
+    }
+  ],
+  "next_access_step": "Establish an authenticated official Apple archive route or compatible official tool route; no version substitution or account/OS change assumed."
+}

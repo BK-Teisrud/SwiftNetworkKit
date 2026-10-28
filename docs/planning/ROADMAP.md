@@ -45,3 +45,7 @@ Break domain epics into separate testable tasks before Ready. F0 acceptance cove
 ## Public HTTPS route — 2026-10-27
 
 [NET-01 #115](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/115), Order 20.95, uses owner-selected [public native HTTPS checks](PUBLIC_HTTPS_VERIFICATION.md) through the existing client/host. No paid/private test environment is provisioned. Public observations, independent certificate conditions and platform-specific error mapping remain distinct from controlled server counters, minimum/other-device/resource and final release evidence. #62/#63/#86 stay open for their remaining criteria.
+
+## Native lifecycle/storage follow-up — 2026-10-28
+
+NET-01 #115 is accepted on main 40644612904. [NET-02 #117](NATIVE_LIFECYCLE_STORAGE.md) adds actual Mac/iPhone cancellation, shutdown/session ownership and isolated cookie observations; local full suite 12/12 passed, PR/main acceptance pending. [Minimum-runtime candidates and authorization](MINIMUM_RUNTIME_ACCESS_2026-10-28.md) remain a separate #62 route: no installed/runtime result from metadata or unauthorized HTML. All unproved F2/native/resource/archive/release criteria remain open.
