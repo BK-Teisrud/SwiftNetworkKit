@@ -1,5 +1,6 @@
 # Test-environment readiness — PREP-01
 
+Current minimum-runtime update, 2026-10-28: [authenticated archive follow-up](MINIMUM_RUNTIME_ACCESS_2026-10-28.md) verifies iOS 17.0, watchOS 10.0 and tvOS 17.0 imports. iOS first-boot migration timed out; all actual minimum results remain open. macOS 14 remains separate. Older inventory statements below retain their dates.
 Current public-fixture decision, 2026-10-27: the owner selected [HTTPBingo/BadSSL verification](PUBLIC_HTTPS_VERIFICATION.md), NET-01 #115, instead of provisioning a paid/private HTTPS server. Public native observations are allowed for claims they actually support. Earlier controlled-fixture requirements still apply to server-counter/zero-contact claims; minimum/physical/resource/archive/privacy and owner release gates remain. Earlier no-endpoint statements below preserve their historical context.
 
 Current access refresh: [2026-10-27 read-only records and next steps](ENVIRONMENT_ACCESS_2026-10-27.md). Three stored/discovered device records now supply model/OS details, but live device execution remains deferred and minimum runtimes/HTTPS access remain missing. The 2026-10-26 tables below preserve the earlier inventory and owner reports.

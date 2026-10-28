@@ -169,7 +169,7 @@ Contract: [API_REVIEW.md](API_REVIEW.md).
 
 | Gate | Required outcome | Current disposition |
 | --- | --- | --- |
-| #62 / ENV-01–05 and applicable resource scenarios | Execute iPhone/iOS 17, iPad/iPadOS 17, macOS 14, watchOS 10 and tvOS 17 with exact candidate/OS/build/fixture | Blocked: no local minimum runtime or macOS 14 route verified. Newer CI/deployment-target compilation is insufficient |
+| #62 / ENV-01–05 and applicable resource scenarios | Execute iPhone/iOS 17, iPad/iPadOS 17, macOS 14, watchOS 10 and tvOS 17 with exact candidate/OS/build/fixture | Blocked: iOS 17.0/watchOS 10.0/tvOS 17.0 imports verified; iOS first-boot migration timed out, all actual minimum results remain open. No macOS 14 route verified. Newer CI/deployment-target compilation is insufficient |
 | #63 / ENV-01–07 | Representative physical iPhone/iPad/Mac/Watch/TV; native networking, transitions, cancellation, storage, safe diagnostics and resource suitability | Blocked: device records do not establish current communication/deployment; connection and any signing/install route need concrete selection |
 | #62/#63 / ENV-02 | Controlled system-trusted success; separate invalid chain and hostname mismatch, typed/raw, plus native redirect/challenge evidence | Partial only: #104 proves owned-session untrusted-chain rejection on observed macOS. Controlled trusted fixture and independent hostname mismatch remain missing |
 | #62/#63 / ENV-07 | Actual target call rate/concurrency/payload/budget, cleanup and post-original-deadline resource observation | Local I20/RES-01 evidence exists; target suitability and owner disposition still missing |
@@ -201,4 +201,4 @@ The main reconciliation gap was traceability: generic epic checkboxes did not en
 
 ## NET-01 acceptance / NET-02 follow-up — 2026-10-28
 
-NET-01 #115 is accepted through PR #116 and main 40644612904. [NET-02 #117](NATIVE_LIFECYCLE_STORAGE.md) adds bounded native cancellation/shutdown/cookie observations; #63 retains complete target/ENV/resource evidence. [Three exact minimum-runtime candidates](MINIMUM_RUNTIME_ACCESS_2026-10-28.md) are catalogued and installation is owner-authorized, but anonymous archive HEAD requests return unauthorized HTML; access/architecture/import/boot/tests and macOS 14 remain unproved. No F2 or release criterion is waived.
+NET-01 #115 is accepted through PR #116 and main 40644612904. [NET-02 #117](NATIVE_LIFECYCLE_STORAGE.md) adds bounded native cancellation/shutdown/cookie observations; #63 retains complete target/ENV/resource evidence. [Three exact minimum-runtime candidates](MINIMUM_RUNTIME_ACCESS_2026-10-28.md) were initially catalogued with anonymous unauthorized HTML responses. The authenticated follow-up verifies all three imports and architecture inventory; iOS boot readiness/tests, Watch/TV destination/boot/tests and macOS 14 remain open. NET-02 is accepted through PR #118/main 40745209513. No F2 or release criterion is waived.
