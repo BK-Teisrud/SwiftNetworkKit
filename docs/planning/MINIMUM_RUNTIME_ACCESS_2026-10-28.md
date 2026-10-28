@@ -1,5 +1,6 @@
 # Minimum-runtime access leads — 2026-10-28
 
+Current execution follow-up: [four exact minimum simulator regression results](MINIMUM_RUNTIME_EXECUTION_2026-10-28.md) each passed 215/215 tests after successful boot readiness. The earlier observations below preserve their history. macOS 14 and separate native/resource/release criteria remain open.
 Owner: @BK-Teisrud; #62. The initial catalogue/CLI investigation below is historical. The authenticated archive follow-up now confirms successful iOS 17.0, watchOS 10.0 and tvOS 17.0 imports. Actual minimum-version execution remains open. The host OS, physical-device settings, support minimums and toolchain were not changed.
 
 ## Official route and observed catalogue
