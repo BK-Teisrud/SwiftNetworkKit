@@ -1,0 +1,50 @@
+name: Opt-in macOS 14 runtime verification
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: macos14-verification-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - name: Build exact-source Intel consumer with approved toolchain
+        run: |
+          python3 scripts/ci/macos14.py build --payload .build/macos14-transfer
+          tar -czf .build/macos14-consumer.tgz -C .build/macos14-transfer .
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: macos14-consumer
+          path: .build/macos14-consumer.tgz
+          if-no-files-found: error
+          retention-days: 1
+
+  execute:
+    needs: build
+    runs-on: macos-14
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: macos14-consumer
+          path: .build
+      - name: Verify source provenance and execute on actual macOS 14
+        run: |
+          mkdir .build/macos14-transfer
+          tar -xzf .build/macos14-consumer.tgz -C .build/macos14-transfer
+          python3 scripts/ci/macos14.py run --payload .build/macos14-transfer --output .build/macos14-results

@@ -93,8 +93,10 @@ def source_integrity():
     workflow = (ROOT / ".github/workflows/ci.yml").read_text()
     match = re.search(r"^        kind: (.+)$", workflow, re.M)
     require(match and json.loads(match[1]) == KINDS, "Mandatory matrix entries missing/reordered")
-    uses = re.findall(r"uses:\s*(\S+)", workflow)
-    require(uses and all(re.fullmatch(r"actions/[\w-]+@[0-9a-f]{40}", use) for use in uses), "Actions must be GitHub-owned and SHA-pinned")
+    for workflow_path in (ROOT / ".github/workflows").glob("*.yml"):
+        uses = re.findall(r"uses:\s*(\S+)", workflow_path.read_text())
+        require(uses and all(re.fullmatch(r"actions/[\w-]+@[0-9a-f]{40}", use) for use in uses),
+                f"Actions must be GitHub-owned and SHA-pinned: {workflow_path.name}")
     validate_documented_examples(
         (ROOT / "Tests/NetworkKitTests/DocumentationExamplesTests.swift").read_text(),
         (ROOT / "Sources/NetworkKit/NetworkKit.docc/IntegrationGuide.md").read_text())
