@@ -202,3 +202,7 @@ The main reconciliation gap was traceability: generic epic checkboxes did not en
 ## NET-01 acceptance / NET-02 follow-up — 2026-10-28
 
 NET-01 #115 is accepted through PR #116 and main 40644612904. [NET-02 #117](NATIVE_LIFECYCLE_STORAGE.md) adds bounded native cancellation/shutdown/cookie observations; #63 retains complete target/ENV/resource evidence. [Three exact minimum-runtime candidates](MINIMUM_RUNTIME_ACCESS_2026-10-28.md) were initially catalogued with anonymous unauthorized HTML responses. The authenticated follow-up verifies all three imports and architecture inventory; [four actual minimum simulator root regressions](MINIMUM_RUNTIME_EXECUTION_2026-10-28.md) subsequently passed locally, 215/215 each. macOS 14 and separate native/resource scenarios remain open; new evidence awaits PR/main acceptance. NET-02 is accepted through PR #118/main 40745209513. No F2 or release criterion is waived.
+
+## Minimum macOS access route — 2026-10-29
+
+PR #120 minimum simulator regression evidence is accepted through main run 40765690271. The owner has no second Mac. The [temporary standard GitHub macOS 14 route](MACOS14_EXECUTION_ROUTE_2026-10-29.md) builds a public consumer with Xcode 26.3 and runs the unchanged executable on the older OS; it is not an older-toolchain build or a support change. Actual execution and its exact patch/build remain pending, as do the other selected native/resource/physical/archive/release gates.

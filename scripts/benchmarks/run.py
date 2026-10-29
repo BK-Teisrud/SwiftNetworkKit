@@ -92,7 +92,7 @@ def command(*args, **kwargs):
         raise RuntimeError(f"Command failed: {args[0]}\n{error.stdout}\n{error.stderr}") from error
 
 
-def run(package, output, repetitions, smoke, post_budget, post_budget_cycles):
+def run(package, output, repetitions, smoke, post_budget, post_budget_cycles, executable=None):
     if platform.system() != "Darwin":
         raise SystemExit("This opt-in resource probe requires macOS; no other platform result is implied.")
     package = package.resolve()
@@ -107,9 +107,14 @@ let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
     dependencies: [.package(path: %s)], targets: [.executableTarget(name: "ResourceProbe",
     dependencies: [.product(name: "NetworkKit", package: %s)])], swiftLanguageModes: [.v6])
 ''' % (json.dumps(str(package)), json.dumps(package.name.lower())))
-        print("Building standalone public consumer in release mode…", flush=True)
-        command("swift", "build", "--package-path", str(root), "-c", "release", "-Xswiftc", "-warnings-as-errors", timeout=300)
-        binary = Path(command("swift", "build", "--package-path", str(root), "-c", "release", "--show-bin-path")) / "ResourceProbe"
+        if executable is None:
+            print("Building standalone public consumer in release mode…", flush=True)
+            command("swift", "build", "--package-path", str(root), "-c", "release", "-Xswiftc", "-warnings-as-errors", timeout=300)
+            binary = Path(command("swift", "build", "--package-path", str(root), "-c", "release", "--show-bin-path")) / "ResourceProbe"
+        else:
+            binary = executable.resolve(strict=True)
+            if not binary.is_file():
+                raise RuntimeError("Prebuilt consumer is not a regular file")
         cases = [("reuse", 1, 65536, 32, 3), ("fresh", 1, 65536, 32, 3),
                  ("reuse", 8, 65536, 32, 3), ("reuse", 32, 65536, 64, 3),
                  ("reuse", 8, 1048576, 32, 3), ("cancel", 8, 65536, 8, 0),
@@ -158,7 +163,7 @@ let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
                 "os": command("sw_vers"), "architecture": platform.machine(),
                 "xcode": command("xcodebuild", "-version"), "swift": command("xcrun", "swift", "--version"),
                 "sdk": command("xcrun", "--sdk", "macosx", "--show-sdk-version"),
-                "python": platform.python_version(), "build": "release; Swift 6; warnings-as-errors",
+                "python": platform.python_version(), "build": "prebuilt; see verified builder manifest" if executable else "release; Swift 6; warnings-as-errors",
                 "repetitions": repetitions, "smoke": smoke, "post_budget": post_budget,
                 "sampling": "fresh process per repetition; RSS in bytes; " + ("12s" if post_budget else "100ms") + " post-shutdown sample"}
     output.write_text(json.dumps({"environment": metadata, "results": results}, indent=2) + "\n")
@@ -173,6 +178,7 @@ if __name__ == "__main__":
     parser.add_argument("--smoke", action="store_true", help="Compile and exercise only a short reuse/cancellation case; no performance thresholds")
     parser.add_argument("--post-budget", action="store_true", help="Run only long reuse/direct controls with a 12-second post-shutdown sample")
     parser.add_argument("--cycles", type=int, metavar="1..1000", default=100, help="Cycle count for --post-budget only (default 100)")
+    parser.add_argument("--executable", type=Path, help="Run an explicitly selected prebuilt consumer; caller must verify its provenance and target")
     args = parser.parse_args()
     if args.smoke and args.post_budget:
         parser.error("--smoke and --post-budget are separate workloads")
@@ -180,4 +186,4 @@ if __name__ == "__main__":
         parser.error("--cycles must be between 1 and 1000")
     if args.cycles != 100 and not args.post_budget:
         parser.error("--cycles requires --post-budget")
-    run(args.package, args.output, args.repetitions, args.smoke, args.post_budget, args.cycles)
+    run(args.package, args.output, args.repetitions, args.smoke, args.post_budget, args.cycles, args.executable)
