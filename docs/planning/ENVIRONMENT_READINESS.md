@@ -52,16 +52,18 @@ Apple's [Xcode system-requirements table](https://developer.apple.com/xcode/syst
 
 The same Apple table lists Swift 6.2.3 for the general Xcode 26.3 row, while the installed toolchain reports 6.2.4. Record actual build/compiler identities rather than silently changing the repository's verified 6.2.4 CI baseline. This preparation does not certify arbitrary Xcode 26.3 installations or newer device OS versions.
 
-## Owner-reported physical inventory
+## Physical inventory and verified observations — 2026-10-31
 
-| Device family | Availability report | Exact model | Exact OS/build | Xcode connection/execution compatibility |
-| --- | --- | --- | --- | --- |
-| iPhone | Previously reported accessible with current updates | Unknown | Unknown | Unverified |
-| iPad | Previously reported accessible with current updates | Unknown | Unknown | Unverified |
-| Apple Watch | Previously reported accessible with current updates | Unknown | Unknown | Unverified, including pairing needs |
-| Apple TV | Previously reported accessible with current updates | Unknown | Unknown | Unverified |
-| Mac | Current local host directly observed | Hardware model not collected; x86_64 observed | 15.8.1 / 24H32 observed | Xcode version command works; no physical acceptance scenarios executed here |
-| Additional macOS 14 host / older devices | Unknown | Unknown | Unknown | Unverified |
+| Device family | Exact model | Observed OS/build | Compatibility and execution boundary |
+| --- | --- | --- | --- |
+| iPhone | iPhone 17 Pro | iOS 27.2 / 24B119 | Accepted app-hosted regression and bounded native evidence; current readiness must be rechecked before later deployment |
+| iPad | iPad Pro 11-inch, 3rd generation | iPadOS 27.2 / 24B119 | Candidate 215 regression / 20 of 21 native declarations, with supplemental strict typed/raw TLS diagnostic passed; temporary host removed |
+| Apple Watch | Apple Watch Ultra 2 | watchOS 27.2 / 24S118 | Owner enabled Developer Mode; Xcode still reports unavailable readiness/development-tunnel timeout. Signed generic builds verified; no physical tests started |
+| Apple TV | Apple TV 4K, 3rd generation | tvOS 27.2 / 24K122 | Owner completed pairing; Developer Mode/DDI verified; candidate 215 regression and 21 native declarations passed; temporary host removed |
+| Mac | Current Intel host; owner reports MacBook Pro | macOS 15.8.1 / 24H32, x86_64 | Xcode 26.3 / Swift 6.2.4; accepted bounded local/native evidence and final 21-case suite. No universal workload-suitability claim |
+| macOS 14 route | Standard GitHub ARM64 host | macOS 14.8.9 / 23J631 | Accepted prebuilt consumer, cancellation/reuse and finite resource controls. Additional HTTPS route prepared; no full-suite/exact-14.0/Intel result claimed |
+
+Watch and TV registration/profiles/signing were specifically authorized for the existing three test IDs and existing certificate. No new certificate or optional service was added. The owner's Watch mode confirmation and tool-reported readiness disagree; repeated mode-toggle instructions or an assumption of compatibility do not resolve that discrepancy. See [Watch preparation](evidence/F2_WATCH_PHYSICAL_PREPARATION_2026-10-31.json), [TV execution](evidence/F2_TV_PHYSICAL_EXECUTION_2026-10-31.json) and [iPad diagnostic](evidence/F2_IPAD_TLS_DIAGNOSTIC_2026-10-31.json). Candidate follow-up evidence still requires PR/main acceptance.
 
 Before #63 execution, obtain the minimum necessary model/OS/build and connection details, or explicitly record inaccessible targets as gaps. Never collect/publish serial numbers, UDIDs, account identifiers or pairing records. “Current updates” is not a concrete OS version. Do not assume Xcode 26.3 can debug an unknown newer OS. Apple distinguishes [simulator testing from actual physical-device verification](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices); neither substitutes for the other.
 

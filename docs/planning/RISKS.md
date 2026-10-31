@@ -1,5 +1,12 @@
 # Risk register
 
+## Current F2 execution update — 2026-10-31
+
+NET-04 #126 is accepted through PR #127/main 41199040706. Candidate iPad TLS diagnostics and physical TV regression/native/resource evidence advance existing #62/#63; earlier failed observations remain recorded. Watch registration, six scoped Watch/TV profiles and signed generic hosts are prepared, but Watch's development tunnel/readiness remains unresolved despite owner confirmation. No new certificate, support minimum, trust exception or paid service was introduced.
+
+The aggregate privacy-report placement control now succeeds in a disposable unsigned archive; it does not prove full binary API analysis or actual consumer data practices. The remaining macOS 14 native HTTPS route is prepared and time-limited by the official November 2 runner retirement; local success/cross-build is not older-host execution. ENV-06, remaining resources, #86 reconciliation, formal #64 and #29 owner risk/publication decisions remain open. Existing owners cover these needs; no duplicate issue, speculative SDK refactor or extra milestone is justified.
+
+
 Owner of initial open risks: @BK-Teisrud. Review weekly during triage and at phase gates.
 
 | ID | Risk / likelihood / impact | Mitigation and trigger | Gate |

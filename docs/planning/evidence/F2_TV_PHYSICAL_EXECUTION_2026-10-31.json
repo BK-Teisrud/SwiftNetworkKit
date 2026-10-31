@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-31",
+  "source_commit": "6cba25603ddd0bd8893306972c67b505ee3ddda0",
+  "device": "Apple TV 4K (3rd generation)",
+  "os": "tvOS 27.2",
+  "os_build": "24K122",
+  "developer_mode_verified": true,
+  "pairing_completed_by_owner": true,
+  "signing": {
+    "existing_certificate_only": true,
+    "three_exact_test_ids": true,
+    "one_approved_tv_per_profile": true,
+    "embedded_profiles_and_actual_signer_verified": true,
+    "new_certificates": false,
+    "optional_capabilities_added": false
+  },
+  "runs": [
+    {
+      "suite": "NetworkKitDeviceHost",
+      "exit_code": 0,
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 215,
+        "passedTests": 215,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "log_sha256": "d9ab84acdcbdd0d89331e7c23b76b7cbc6148797fde0a8dd45f81cc1f9895560"
+    },
+    {
+      "suite": "PublicHTTPSChecks",
+      "exit_code": 0,
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 21,
+        "passedTests": 21,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "log_sha256": "3b5ccbc2624182c934c5a46cd881b8857515ed789acef73332d2d187d1bce857"
+    }
+  ],
+  "native_parameter_cases": 44,
+  "cookie_controls": {
+    "foundation_echo_and_retention": true,
+    "sdk_echo_and_retention": true,
+    "deletion": true,
+    "typed_raw": true
+  },
+  "resources": [
+    {
+      "mode": "networkkit",
+      "bytes": 65536,
+      "concurrency": 4,
+      "calls": 65,
+      "rssInitial": 87425024,
+      "rssWarm": 87490560,
+      "rssCompleted": 88522752,
+      "rssAfterOriginalBudget": 88309760,
+      "settleSeconds": 6
+    },
+    {
+      "mode": "foundation",
+      "bytes": 65536,
+      "concurrency": 4,
+      "calls": 65,
+      "rssInitial": 88309760,
+      "rssWarm": 88309760,
+      "rssCompleted": 88850432,
+      "rssAfterOriginalBudget": 88768512,
+      "settleSeconds": 6
+    },
+    {
+      "mode": "foundation",
+      "bytes": 1048576,
+      "concurrency": 8,
+      "calls": 33,
+      "rssInitial": 88768512,
+      "rssWarm": 90832896,
+      "rssCompleted": 91963392,
+      "rssAfterOriginalBudget": 91701248,
+      "settleSeconds": 6
+    },
+    {
+      "mode": "networkkit",
+      "bytes": 1048576,
+      "concurrency": 8,
+      "calls": 33,
+      "rssInitial": 91701248,
+      "rssWarm": 91717632,
+      "rssCompleted": 91996160,
+      "rssAfterOriginalBudget": 91865088,
+      "settleSeconds": 6
+    }
+  ],
+  "cleanup_exit_code": 0,
+  "limits": [
+    "Finite whole-process RSS observations do not establish a universal bound or workload suitability.",
+    "Foreground/background and network transition evidence remain separate."
+  ],
+  "source_hashes": {
+    "Tools/DeviceTestHost/AppDelegate.swift": "ae9cf4cc90bc1c1eb4ccbd738a161aa4eac3e1c00dbb780821df16536af44f05",
+    "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicHTTPSTests.swift": "9cf689601a53b7cd10851227a976948d1b411f01e4ed1ba8f4a15a3371929a20",
+    "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/NativeLoopbackTests.swift": "d8799944fa242a15548c8b5f298722062ee126d03eb23b6fbc2586080d2e5019",
+    "scripts/ci/prepare_device_host.py": "f8189fdd38cb82bcb5dadc0f1b06542ccb4019ee38ad7c42ecf363f2c98c926e"
+  }
+}

@@ -14,7 +14,7 @@ The private Foundation credential store contained the synthetic credential, but 
 
 Certificate acceptance/rejection semantics now use the approved production defaults: 30 seconds of inactivity and 60 seconds total, with a two-minute outer test guard. Other ordinary public probes retain 5/10-second limits; deliberately short deadline assertions are unchanged. This validates the selected production operating context. It does not convert the earlier 5/10-second failures into passes or explain their cause. Independent default-budget Foundation and SDK self-signed checks both rejected the certificate in less than five seconds, which does not establish that the earlier timeout was caused by the shorter budget. System trust handling and exact certificate-error assertions remain intact.
 
-With these working-tree sources, watchOS 10.0 and tvOS 17.0 each passed all 21 declarations / 44 parameter cases, with no failures, skips or expected failures. Task-owned simulators were shut down successfully. Exact source hashes and environment details are in the [sanitized evidence record](evidence/NET04_NATIVE_CONTROLS_2026-10-31.json). These results still require normal PR/main acceptance.
+With these working-tree sources, watchOS 10.0 and tvOS 17.0 each passed all 21 declarations / 44 parameter cases, with no failures, skips or expected failures. Task-owned simulators were shut down successfully. Exact source hashes and environment details are in the [sanitized evidence record](evidence/NET04_NATIVE_CONTROLS_2026-10-31.json). PR #127 merged as 6cba25603ddd0bd8893306972c67b505ee3ddda0; main run 41199040706 passed all seven checks. Full-log review confirmed 218 Mac tests, four simulator runs of 215 each, six unsigned host builds and no failure/restart markers. NET-04 #126 is accepted and completed.
 
 ## Physical Watch applicability
 
@@ -27,3 +27,11 @@ No F2 gate, minimum platform, publication requirement or owner risk decision is 
 The owner-authorized iPad Pro (11-inch, 3rd generation), iPadOS 27.2 / 24B119, passed all 215 app-hosted regression declarations. Native execution passed 20 of 21 declarations with zero skips or expected failures. The raw self-signed case observed SDK NSURLErrorDomain/-1200; its independent Foundation control also returned -1200 but received no server-trust challenge. The strict certificate oracle therefore correctly failed. This is inconclusive certificate-rejection evidence, not an accepted trust result or proven SDK defect. No automatic rerun occurred, and the temporary test host was removed successfully. See [iPad execution](evidence/F2_IPAD_NATIVE_EXECUTION_2026-10-31.json).
 
 Both unsigned schemes also built successfully for generic physical watchOS and tvOS destinations. These builds establish compilation only. Device pairing, compatible profiles, signing permission and actual execution remain separate prerequisites.
+
+## Supplemental iPad TLS evidence
+
+On the same iPad, a disposable diagnostic added a fresh Foundation preflight before the unchanged strict SDK rejection oracle. Both typed/raw cases passed (one declaration, two cases): SDK transport -1200 plus independently observed server-trust challenge, OSStatus -67843 and Foundation transport -1200. The test retained system default handling and introduced no retry, timeout increase or assertion relaxation. The temporary host was removed. This provides supplemental certificate evidence; the earlier 20/21 suite and its unexplained missing challenge are retained. See [diagnostic record](evidence/F2_IPAD_TLS_DIAGNOSTIC_2026-10-31.json).
+
+## Physical TV evidence
+
+Apple TV 4K (3rd generation), tvOS 27.2 / 24K122, passed all 215 regression declarations and all 21 native declarations / 44 cases with zero failures, skips or expected failures. Typed/raw certificate rejection, automatic cookie reference/parity/deletion, strict absence and four finite resource controls passed. The temporary test host was removed. Exact resource observations and limits are in [physical TV evidence](evidence/F2_TV_PHYSICAL_EXECUTION_2026-10-31.json). Transitions and long-term/workload suitability remain separate.

@@ -109,7 +109,7 @@
     "ordinary_physical_watch_local_server_supported": false,
     "reference": "https://developer.apple.com/documentation/technotes/tn3135-low-level-networking-on-watchos"
   },
-  "acceptance": "Working-tree verification only; normal PR/main review and physical evidence remain required.",
+  "acceptance": "Accepted through PR #127, merge 6cba25603ddd0bd8893306972c67b505ee3ddda0 and main run 41199040706 after full-log review; #126 completed. Physical follow-up retains separate evidence owners.",
   "negative_controls": [
     {
       "compiled": true,

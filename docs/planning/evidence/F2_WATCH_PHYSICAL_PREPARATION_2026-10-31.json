@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-31",
+  "source_commit": "6cba25603ddd0bd8893306972c67b505ee3ddda0",
+  "device": "Apple Watch Ultra 2",
+  "reported_os": "watchOS 27.2 / 24S118",
+  "owner_reported_developer_mode_enabled": true,
+  "account_preparation": {
+    "only_approved_watch_registered": true,
+    "three_existing_test_ids_reused": true,
+    "three_single_watch_profiles": true,
+    "existing_certificate_only": true,
+    "new_certificates": false,
+    "optional_capabilities_added": false
+  },
+  "unsigned_and_signed_generic_builds": {
+    "NetworkKitDeviceHost": "passed",
+    "PublicHTTPSChecks": "passed",
+    "all_exact_embedded_profiles_verified": true,
+    "actual_existing_signer_verified": true
+  },
+  "concrete_destination_build": {
+    "exit_code": 70,
+    "before_test_start": true,
+    "reason": "Developer Mode reported disabled by Xcode; no test failure inferred"
+  },
+  "connection_followup": {
+    "xcode_error": "Timed out while attempting to negotiate tunnel parameters",
+    "pair_refresh_exit_code": 0,
+    "after_pair_live_details_exit_code": 2,
+    "owner_usb_refresh_completed": true,
+    "after_usb_details_exit_code": 0,
+    "after_usb_tool_reported_developer_mode": "disabled",
+    "after_usb_tool_reported_ddi_available": false,
+    "after_usb_tool_reported_tunnel": "connected",
+    "mode_independently_confirmed": false
+  },
+  "physical_tests_started": false,
+  "limits": [
+    "Owner report and tool-reported readiness disagree; no further enable/disable loop or bypass performed.",
+    "Generic signed builds do not prove deployment or runtime compatibility.",
+    "Ordinary Watch physical selection remains root regression plus 14 public HTTPS declarations; seven local NWListener declarations are not claimed supported."
+  ],
+  "source_hashes": {
+    "Tools/DeviceTestHost/AppDelegate.swift": "ae9cf4cc90bc1c1eb4ccbd738a161aa4eac3e1c00dbb780821df16536af44f05",
+    "scripts/ci/prepare_device_host.py": "f8189fdd38cb82bcb5dadc0f1b06542ccb4019ee38ad7c42ecf363f2c98c926e"
+  }
+}
