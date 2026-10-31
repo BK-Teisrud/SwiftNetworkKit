@@ -56,12 +56,12 @@ The same Apple table lists Swift 6.2.3 for the general Xcode 26.3 row, while the
 
 | Device family | Exact model | Observed OS/build | Compatibility and execution boundary |
 | --- | --- | --- | --- |
-| iPhone | iPhone 17 Pro | iOS 27.2 / 24B119 | Accepted app-hosted regression and bounded native evidence; current readiness must be rechecked before later deployment |
-| iPad | iPad Pro 11-inch, 3rd generation | iPadOS 27.2 / 24B119 | Candidate 215 regression / 20 of 21 native declarations, with supplemental strict typed/raw TLS diagnostic passed; temporary host removed |
+| iPhone | iPhone 17 Pro | iOS 27.2 / 24B119 | Accepted app-hosted regression/native evidence; candidate actual background/outage/recovery and post-budget report now verified, temporary host removed |
+| iPad | iPad Pro 11-inch, 3rd generation | iPadOS 27.2 / 24B119 | 215 regression / 20 of 21 native declarations with supplemental strict TLS evidence; candidate actual background/outage/recovery and post-budget report verified; temporary host removed |
 | Apple Watch | Apple Watch Ultra 2 | watchOS 27.2 / 24S118 | Owner enabled Developer Mode; Xcode still reports unavailable readiness/development-tunnel timeout. Signed generic builds verified; no physical tests started |
 | Apple TV | Apple TV 4K, 3rd generation | tvOS 27.2 / 24K122 | Owner completed pairing; Developer Mode/DDI verified; candidate 215 regression and 21 native declarations passed; temporary host removed |
 | Mac | Current Intel host; owner reports MacBook Pro | macOS 15.8.1 / 24H32, x86_64 | Xcode 26.3 / Swift 6.2.4; accepted bounded local/native evidence and final 21-case suite. No universal workload-suitability claim |
-| macOS 14 route | Standard GitHub ARM64 host | macOS 14.8.9 / 23J631 | Accepted prebuilt consumer, cancellation/reuse and finite resource controls. Additional HTTPS route prepared; no full-suite/exact-14.0/Intel result claimed |
+| macOS 14 route | Standard GitHub ARM64 host | macOS 14.8.9 / 23J631 | Accepted prebuilt consumer, cancellation/reuse and finite resource controls; actual run 41204068268 passed ten HTTPS cases. No full-suite/exact-14.0/Intel result claimed |
 
 Watch and TV registration/profiles/signing were specifically authorized for the existing three test IDs and existing certificate. No new certificate or optional service was added. The owner's Watch mode confirmation and tool-reported readiness disagree; repeated mode-toggle instructions or an assumption of compatibility do not resolve that discrepancy. See [Watch preparation](evidence/F2_WATCH_PHYSICAL_PREPARATION_2026-10-31.json), [TV execution](evidence/F2_TV_PHYSICAL_EXECUTION_2026-10-31.json) and [iPad diagnostic](evidence/F2_IPAD_TLS_DIAGNOSTIC_2026-10-31.json). Candidate follow-up evidence still requires PR/main acceptance.
 

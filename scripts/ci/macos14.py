@@ -25,7 +25,8 @@ def sources():
     paths = [ROOT / 'Package.swift', ROOT / 'scripts/benchmarks/Probe.swift',
              ROOT / 'scripts/benchmarks/run.py', ROOT / 'scripts/ci/macos14.py',
              ROOT / 'scripts/verification/NativeHTTPSProbe.swift']
-    paths += sorted(p for p in (ROOT / 'Sources').rglob('*') if p.is_file())
+    # Finder metadata is not compiled or bundled; all other source-tree files stay in custody.
+    paths += sorted(p for p in (ROOT / 'Sources').rglob('*') if p.is_file() and p.name != '.DS_Store')
     return {str(p.relative_to(ROOT)): digest(p) for p in paths}
 
 

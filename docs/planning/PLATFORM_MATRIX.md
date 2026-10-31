@@ -1,14 +1,22 @@
 # Platform and toolchain matrix
 
-Current preparation: [2026-10-27 access refresh](ENVIRONMENT_ACCESS_2026-10-27.md) records newly observed device metadata and readiness gaps. [PREP-01](ENVIRONMENT_READINESS.md) preserves the earlier inventory and scenario ownership. I01–I20 and RES-01 are accepted; minimum-runtime and physical-device acceptance remain outstanding.
+## Current verified evidence — 2026-10-31
 
-Historical implementation snapshot below: the initial public HTTP pipeline was delivered through I10.
-[F1 review](F1_REVIEW.md) records contract/evidence review and the I11 gate outcome source.
-The table below cites the cumulative I10 main run; I11 actual counts are recorded on #52.
-Support remains the accepted plan from [ADR-0004](../decisions/ADR-0004-platforms-and-toolchain.md),
-with minimum-OS and physical verification still outstanding.
+Latest accepted standard CI: PR #128 / main b8f2758530cca68ec819068ff3ac7748868e26dd, run 41203171039. All seven checks passed, with 218 Mac tests, four simulator runs of 215 each, six unsigned test-host builds and 17 helper controls. These PR runtimes remain distinct from minimum-family and physical execution.
 
-## Approved delivery baseline
+| Family / declared minimum | Actual minimum-family execution | Native scope and evidence | Physical follow-up |
+| --- | --- | --- | --- |
+| iOS 17.0 | iOS 17.0 simulator; 215 regression tests | Accepted native loopback/public suite at its recorded 19-declaration / 40-case source; [minimum records](MINIMUM_RUNTIME_EXECUTION_2026-10-28.md), [NET-03](NET03_NATIVE_LOOPBACK.md) | iPhone 17 Pro / iOS 27.2 regression/native accepted; candidate actual background/outage/recovery report verified, pending PR/main |
+| iPadOS 17.0 | iPadOS 17.0 simulator; 215 regression tests | Same separately recorded minimum iPad run and native scope | iPad Pro 11-inch 3rd generation / 27.2: 215 regression, native 20/21 plus supplemental strict TLS; candidate actual transition report verified, earlier failure retained |
+| macOS 14.0 | ARM64 macOS 14.8.9 / 23J631 | Native consumer/reuse/cancellation/finite resource controls plus ten HTTPS cases in [run 41204068268](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41204068268); [custody](evidence/MACOS14_HTTPS_EXECUTION_2026-10-31.json) | Local Intel macOS 15.8.1 native evidence is separate. No exact 14.0, Intel macOS 14 or full macOS 14 suite claim |
+| watchOS 10.0 | watchOS 10.0 simulator; 215 regression tests | Accepted revised 21-declaration / 44-case native suite; [NET-04](NET04_NATIVE_CONTROLS.md) | Watch Ultra 2 / 27.2: signed generic artefacts ready, physical development-tunnel/readiness unresolved; no runtime pass |
+| tvOS 17.0 | tvOS 17.0 simulator; 215 regression tests | Accepted revised 21-declaration / 44-case native suite | Apple TV 4K 3rd generation / 27.2: accepted 215 regression + 21 native declarations / 44 cases and finite resources; transitions remain |
+
+Product minimums and the Xcode 26.3 / Swift tools 6.2 / Swift 6 baseline are unchanged. An actual 14.8.9 run is evidence on the macOS 14 family, not proof of every patch or architecture. #62 minimum-family evidence reconciliation still requires its result-documentation PR/main acceptance. #63 physical transitions/Watch/resources and #86/#64/#29 remain separate gates. Manual transition tooling compiles for all four families; compilation alone is not device/transition acceptance.
+
+The historical implementation snapshots below preserve their original counts and limits; they are superseded by the current evidence above where applicable.
+
+## Historical I10 build/test baseline
 
 | Platform | Minimum v1 OS | Locally observed SDK | Build | Unit / integration | Tested runtime / device |
 | --- | --- | --- | --- | --- | --- |

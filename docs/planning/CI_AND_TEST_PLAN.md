@@ -66,12 +66,15 @@ PR runtimes 26.2 and macOS hosts 15.x do not test minimum iOS/iPadOS 17, macOS 1
 
 Before the first release, record evidence for the approved minimums using compatible available official simulators/runtimes or existing devices/Macs with suitable test hosts. macOS minimum support needs actual runtime evidence, not a deployment target on a newer host. Do not assume an older runner supports Xcode 26.3 merely because its host OS matches.
 
-Access to minimum runtimes/devices remains unverified and has not been acquired. No equipment purchases, paid services, or self-hosted GitHub runners are authorized. If evidence cannot be obtained within approved constraints, block release or explicitly revise the support decision. Never mark assumed compatibility as passed.
+Current minimum-family results are recorded in [the platform matrix](PLATFORM_MATRIX.md), including actual ARM64 macOS 14.8.9 consumer and HTTPS execution. Exact patch/architecture/suite limits remain explicit. No equipment purchases, paid services or self-hosted GitHub runners are authorized. Remaining physical/transition gaps stay open; never mark assumed compatibility as passed.
 
 Release checks also cover representative newer stable runtimes, relevant physical scenarios, documented Mac-architecture assessment, security/privacy, public API/DocC, rights policy, and representative performance/memory measurements. Verify installation from the release candidate commit/tag before final publication to avoid discovering failures only after an immutable release.
 
-Update [PLATFORM_MATRIX.md](PLATFORM_MATRIX.md) and REL-01 with commit, environment, test names/results, known limitations, and approved scope changes. No release checks have run.
+Update [PLATFORM_MATRIX.md](PLATFORM_MATRIX.md) and REL-01 with commit, environment, test names/results, known limitations, and approved scope changes. Formal non-publishing rehearsal remains under #64 after #86/#63; existing preparation and partial checks do not close that gate.
 
 I20 adds a short standalone release-consumer probe to macos-core: compile the opt-in harness and verify native loopback reuse/cancellation through public APIs, without volatile RSS/latency thresholds. Full three-repetition resource measurements remain opt-in and recorded in [RESOURCE_BASELINE.md](RESOURCE_BASELINE.md); RES-01 / #100 owns the observed RSS trend and blocks #86. Existing required jobs, runtime tests, runner budget and no-publication policy remain unchanged.
 
 RES-01 keeps heap profiling opt-in and adds macos-core type-checking of its standalone Swift runtime control. The new --post-budget resource mode samples after the fixture's original ten-second deadlines. See [attribution and limits](REPEATED_CALL_MEMORY.md); passing CI is not target-device profiling or residual-risk acceptance.
+
+
+The explicit manual transition app is compiled unsigned once per platform-family job, with source/commit/platform identity verified in the actual built Info.plist. CI never launches it, changes connectivity or contacts its public fixtures. Its owner-driven execution and report acceptance follow [the manual procedure](MANUAL_TRANSITION_CHECKS.md). Existing regression suites and six unsigned XCTest-host builds remain unchanged.

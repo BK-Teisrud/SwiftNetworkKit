@@ -1,0 +1,255 @@
+{
+  "date": "2026-10-31",
+  "sdk_baseline_commit": "b8f2758530cca68ec819068ff3ac7748868e26dd",
+  "manual_tool_working_tree_changes": true,
+  "unsigned_builds": [
+    {
+      "platform": "macOS",
+      "exit_code": 0,
+      "log_sha256": "4d5e54f4689683a411bcaaaf96c1fa9ee58ab4a441c2ef641ac0bbaf0d5fde77"
+    },
+    {
+      "platform": "iOS",
+      "exit_code": 0,
+      "log_sha256": "80375cf474ee5028151ee4e4e671926a301f40d0bf3eca95d6813cb65fa61197"
+    },
+    {
+      "platform": "watchOS",
+      "exit_code": 0,
+      "log_sha256": "cd9914e1f1418557a34f33d46d5f2a886379adf0182c87ad8a814e9e369719c1"
+    },
+    {
+      "platform": "tvOS",
+      "exit_code": 0,
+      "log_sha256": "cdd17dd380735e9d95b665df2da0ea2ce6b3a11e59ebbf30d5c839e4f5e34292"
+    }
+  ],
+  "built_platform_commit_and_source_metadata_verified_all_four": true,
+  "controls": {
+    "no_requests_on_launch": true,
+    "early_post_budget_sample_rejected": true,
+    "macos_scene_background_during_pending_call": true,
+    "returned_to_active": true,
+    "normal_delayed_calls_status_200": true,
+    "two_concurrent_recovery_statuses": [
+      204,
+      204
+    ],
+    "same_client_used": true,
+    "shutdown_joined": true,
+    "terminal_diagnostics_before_and_after_settle": 4,
+    "post_completion_sample_seconds": 116.002082137,
+    "actual_network_interruption_performed": false,
+    "full_ENV06_accepted": false
+  },
+  "preparation_findings": [
+    {
+      "kind": "Xcode metadata group cycle",
+      "corrected": true,
+      "guard_before_project_write": true
+    },
+    {
+      "kind": "Initial delay/15 returned HTTP 400",
+      "corrected_to": "delay/8",
+      "original_attempt_retained_privately": true
+    },
+    {
+      "kind": "Generated Info.plist omitted custom provenance keys",
+      "corrected_with": "explicit ignored Info.plist plus runtime/CI source identity checks"
+    }
+  ],
+  "report_sha256": "26cd41839cc41f246a7842e1aeb7e38f90c558c71e2478fc69be14c6892099f4",
+  "report": {
+    "diagnostics": [
+      {
+        "duration": "8.32120904",
+        "outcome": "success",
+        "status": "200"
+      },
+      {
+        "duration": "8.167939502",
+        "outcome": "success",
+        "status": "200"
+      },
+      {
+        "duration": "0.321728758",
+        "outcome": "success",
+        "status": "204"
+      },
+      {
+        "duration": "0.321757419",
+        "outcome": "success",
+        "status": "204"
+      }
+    ],
+    "events": [
+      {
+        "elapsed": 0.001473641,
+        "fields": {
+          "rss": "11399168"
+        },
+        "kind": "host-started"
+      },
+      {
+        "elapsed": 0.232465863,
+        "fields": {
+          "check": "none",
+          "during-call": "false",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 0.281244816,
+        "fields": {
+          "check": "none",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 10.664647955,
+        "fields": {
+          "check": "background",
+          "path": "satisfied",
+          "rss": "43044864"
+        },
+        "kind": "call-start"
+      },
+      {
+        "elapsed": 11.322857586,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "background"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 19.01116158,
+        "fields": {
+          "bytes": "786",
+          "calls": "1",
+          "check": "background",
+          "outcome": "success",
+          "statuses": "200"
+        },
+        "kind": "call-terminal"
+      },
+      {
+        "elapsed": 19.012905532,
+        "fields": {
+          "check": "background",
+          "diagnostic-count": "1",
+          "rss": "55840768"
+        },
+        "kind": "call-joined"
+      },
+      {
+        "elapsed": 22.79079441,
+        "fields": {
+          "check": "background",
+          "during-call": "false",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 37.050366738,
+        "fields": {
+          "check": "network-loss",
+          "path": "satisfied",
+          "rss": "62427136"
+        },
+        "kind": "call-start"
+      },
+      {
+        "elapsed": 45.236126391,
+        "fields": {
+          "bytes": "786",
+          "calls": "1",
+          "check": "network-loss",
+          "outcome": "success",
+          "statuses": "200"
+        },
+        "kind": "call-terminal"
+      },
+      {
+        "elapsed": 45.238830111,
+        "fields": {
+          "check": "network-loss",
+          "diagnostic-count": "2",
+          "rss": "62468096"
+        },
+        "kind": "call-joined"
+      },
+      {
+        "elapsed": 132.839481647,
+        "fields": {
+          "check": "recovery",
+          "path": "satisfied",
+          "rss": "62681088"
+        },
+        "kind": "call-start"
+      },
+      {
+        "elapsed": 133.207684136,
+        "fields": {
+          "bytes": "0",
+          "calls": "2",
+          "check": "recovery",
+          "outcome": "success",
+          "statuses": "204,204"
+        },
+        "kind": "call-terminal"
+      },
+      {
+        "elapsed": 133.209391952,
+        "fields": {
+          "diagnostic-count": "4"
+        },
+        "kind": "shutdown-joined"
+      },
+      {
+        "elapsed": 133.210651902,
+        "fields": {
+          "check": "recovery",
+          "diagnostic-count": "4",
+          "rss": "62832640"
+        },
+        "kind": "call-joined"
+      },
+      {
+        "elapsed": 249.212662863,
+        "fields": {
+          "diagnostic-count": "4",
+          "rss": "62787584",
+          "seconds-after-recovery-completion": "116.002082137"
+        },
+        "kind": "post-original-budget"
+      }
+    ],
+    "hostSourceSHA256": "ee2ffcaee9fa23d5d79c01d41479180ab6607dfeee273dd0b709aab76db63707",
+    "inactivitySeconds": 30,
+    "platform": "macOS",
+    "runID": "11EB0D49-5807-46AE-8B65-B63C575363F9",
+    "runtime": "Version 15.8.1 (Build 24H32)",
+    "schema": 1,
+    "sdkCommit": "b8f2758530cca68ec819068ff3ac7748868e26dd",
+    "totalSeconds": 60,
+    "truncated": false
+  },
+  "source_hashes": {
+    "Tools/DeviceTestHost/ManualTransitionHost.swift": "ee2ffcaee9fa23d5d79c01d41479180ab6607dfeee273dd0b709aab76db63707",
+    "scripts/ci/prepare_manual_host.py": "758e916e8698bf149157cb88f8d1dd3fa8526805cde654801787505ee201fb63"
+  },
+  "limits": [
+    "Mac GUI flow/control only; no physical iPhone/iPad/Watch/TV transition execution.",
+    "Network-loss button was exercised with connectivity intact; no outage acceptance inferred.",
+    "Four small calls and whole-process RSS do not establish load capacity, isolated SDK ownership or a universal memory bound.",
+    "Normal PR/main acceptance and remaining #63 evidence still required."
+  ],
+  "run_id_is_random_test_nonce": true
+}

@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-31",
+  "run_id": 41204068268,
+  "run_url": "https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41204068268",
+  "source_commit": "b8f2758530cca68ec819068ff3ac7748868e26dd",
+  "custody": {
+    "all_source_hashes_verified_against_immutable_git_blobs": true,
+    "standalone_result_matches_aggregate_record": true,
+    "full_log_failure_markers": 0,
+    "downloaded_evidence_sha256": "3726452534bc31da869f5e5d6343897c554df819187acb50f7c2cca85d3c201d",
+    "full_log_sha256": "3d3f35d3d428f792de18bdecacf43ceac99fd4ce1fc8ea3154c0c152ed48ce79"
+  },
+  "record": {
+    "manifest": {
+      "source_commit": "b8f2758530cca68ec819068ff3ac7748868e26dd",
+      "source_hashes": {
+        "Package.swift": "f345ef3bc7f89ca9a934ce09f4d68da5829363f82d3ce72d04f368ba626745ad",
+        "scripts/benchmarks/Probe.swift": "347d46a297d1a42476968e65e355dd0367dadb2ef1de2204b950a76b19b3731b",
+        "scripts/benchmarks/run.py": "4cfaf8f983b5924fbdc6f4e8b883660814a67b304710b92ede8cd0e2059154ba",
+        "scripts/ci/macos14.py": "d9b2c8cdd923ae87dceae99f199a157b920542437e8b4acf56a910f82e1ebef6",
+        "scripts/verification/NativeHTTPSProbe.swift": "3cf5763d31ff246f800aa6eb90350935926896906f92add40753baa49c0c0e08",
+        "Sources/NetworkKit/APIClient.swift": "4128d68707c6353cfcc60139acca0f92b4123c5c0f6f1a9ede298bd7de6c4888",
+        "Sources/NetworkKit/Authentication.swift": "46b8cdfd416b178e092d1dfbe70c97f10e0b31e027a114b7e41264e8c56768bf",
+        "Sources/NetworkKit/ClientLifecycle.swift": "ba7d243eb266b79c7157c66341d48896f8693354d9aa369aba8d93abbacc25ae",
+        "Sources/NetworkKit/Diagnostics.swift": "019b95d3992a4bd44d471a37f8d5f59631425d9cbceb97eb8e66595d0d12290f",
+        "Sources/NetworkKit/Endpoint.swift": "7b196e8ede8a9c031595e3ecdd72bfc3aaeecdc6610d055f383a787b976dec31",
+        "Sources/NetworkKit/ExecutionBoundaries.swift": "7431f0fa2688e11be5649b687b81c4bbd313c78bc613bb8d68bf1248daef494c",
+        "Sources/NetworkKit/HTTPHeaders.swift": "45bfe1c8779e3f39c048fc1a299bd6ee8a75fe28d71ea797ce704c7eccc4b4f4",
+        "Sources/NetworkKit/HTTPMethod.swift": "98bde648d1db468b7b29a1856ace61a7301f6daf057eb99cd6e5114a31456bdb",
+        "Sources/NetworkKit/HTTPStatus.swift": "84bde1bf4b8a3c92e66f9c8bacdf079b56de7fc92a851134723e54017257ca71",
+        "Sources/NetworkKit/HTTPStatusPolicy.swift": "f28eb6564f87d7988aa281683bd6c398f340eaa32434ee3d5245021355954722",
+        "Sources/NetworkKit/HTTPToken.swift": "d9053f6ff580b333c643e0209d8e001e008506a95f41581f9b60bc46402bb13b",
+        "Sources/NetworkKit/JSONDecodingOptions.swift": "d11a252a75f1a4cfb814d2ed0fbb3e4dbcb85200d5e9b978a1e1f83f3ca50904",
+        "Sources/NetworkKit/NetworkConfiguration.swift": "bb8163d62a7db2bcb39f0c87e95b3038142749f834821ded680b0d0d8a7eb9af",
+        "Sources/NetworkKit/NetworkError.swift": "bd9133325b2af1255af713b7d9557c476dac5483448f8c565eb961f4016eede4",
+        "Sources/NetworkKit/NetworkKit.docc/IntegrationGuide.md": "904e863b8ee179cd636be631242751866b3921dec08e458c4bc525049bacd7f1",
+        "Sources/NetworkKit/NetworkKit.docc/NetworkKit.md": "22591cef466b8c123749995ee128f794de3fdcc190e0cd5e9b4cdba45eb49c1a",
+        "Sources/NetworkKit/NetworkKit.swift": "7af95bcc95f8e800d953b02b1751b05bce237bc7d5107e58eaf042c22a1285d9",
+        "Sources/NetworkKit/NetworkOperation.swift": "a1e6a31c7f1d650dbbec50c2c175af94b80a4b3ef090c594379c5984d3b821e0",
+        "Sources/NetworkKit/NetworkResponse.swift": "2267de5fe325f2c310dfb875a2e1b3b230713d2397a423e53ba303a72674067d",
+        "Sources/NetworkKit/NetworkSecurityPolicy.swift": "cc85f6f2ab60f79731207d81e80f30bf5e032b0f2351ae42177e2ab62f29f3d9",
+        "Sources/NetworkKit/NetworkTaskDelegate.swift": "d9a97411a31d322a971685604d39de115112e606d7bb8e6837ea0005305f0bd8",
+        "Sources/NetworkKit/PrivacyInfo.xcprivacy": "528ab3fca910d2ac2f3ef256d5ea4c2327303a7a4a5efb9236987f3018e311f3",
+        "Sources/NetworkKit/RequestBody.swift": "914d27be0edb4fa36fc91e57787bf6d9c0311acbeb0a2d8334e24f2bf2cbbcdb",
+        "Sources/NetworkKit/RequestBuilder.swift": "bbe0ac5e6d4e8ec3c0474126b9db3588799c631ad1e73caa07fac859faab8259",
+        "Sources/NetworkKit/RequestURLBuilder.swift": "404943fa36c0fe5e7df5c078412ad6da30e82882bc097c29c3c0c0af896fef1b",
+        "Sources/NetworkKit/ResponseStrategy.swift": "e5150fc6affd759d6ed6d622b40b5a027c2ad7164130ddb9aeee746dfa0fbbab",
+        "Sources/NetworkKit/SessionStorageProfile.swift": "83ca939758de16bab5df13d94c280065ad46c89ba0c0335863870a8b81e59c66",
+        "Sources/NetworkKit/URLSessionTransport.swift": "1c1c5b7afdba3eb32905a0e4c54aabfb3efed7b8354375f11868f0beeaecc14d"
+      },
+      "target": "arm64-apple-macosx14.0",
+      "builder_xcode": "Xcode 26.3\nBuild version 17C529",
+      "builder_swift": "Apple Swift version 6.2.4 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)\nTarget: arm64-apple-macosx15.0",
+      "builder_os": "ProductName:\t\tmacOS\nProductVersion:\t\t15.8.2\nBuildVersion:\t\t24H232",
+      "builder_architecture": "arm64",
+      "sdk": "26.2",
+      "public_https_prepared": true,
+      "files": {
+        "NativeHTTPSProbe": "fc32d13bb0b92e9fa873617b5088acf0aad67c445507d2b0edbd346dcc5d7689",
+        "ResourceProbe": "094e17a31eb77007e3021b1d90dba07d0e80d10356d4b2ae1ea4072294f4df15",
+        "SwiftNetworkKit_NetworkKit.bundle/PrivacyInfo.xcprivacy": "528ab3fca910d2ac2f3ef256d5ea4c2327303a7a4a5efb9236987f3018e311f3"
+      }
+    },
+    "execution_os": "ProductName:\t\tmacOS\nProductVersion:\t\t14.8.9\nBuildVersion:\t\t23J631",
+    "execution_architecture": "arm64",
+    "results": {},
+    "limits": [
+      "Not the 218-test regression suite; ten explicit native HTTPS consumer cases are recorded separately.",
+      "Actual macOS 14 patch/build is recorded; no claim of macOS 14.0 execution.",
+      "No universal memory cap or owner release-risk acceptance.",
+      "HTTPS-only execution does not repeat or replace the previously recorded resource measurements."
+    ],
+    "public_https": {
+      "cases": [
+        {
+          "case": "typed-json",
+          "result": "passed"
+        },
+        {
+          "case": "typed-empty",
+          "result": "passed"
+        },
+        {
+          "case": "typed-valid-certificate",
+          "result": "passed"
+        },
+        {
+          "case": "typed-self-signed",
+          "foundation_exact_trust_code": "-67843",
+          "result": "passed",
+          "transport_code": "-1202"
+        },
+        {
+          "case": "typed-wrong-host",
+          "foundation_exact_trust_code": "-67602",
+          "result": "passed",
+          "transport_code": "-1202"
+        },
+        {
+          "case": "raw-json",
+          "result": "passed"
+        },
+        {
+          "case": "raw-empty",
+          "result": "passed"
+        },
+        {
+          "case": "raw-valid-certificate",
+          "result": "passed"
+        },
+        {
+          "case": "raw-self-signed",
+          "foundation_exact_trust_code": "-67843",
+          "result": "passed",
+          "transport_code": "-1202"
+        },
+        {
+          "case": "raw-wrong-host",
+          "foundation_exact_trust_code": "-67602",
+          "result": "passed",
+          "transport_code": "-1202"
+        }
+      ],
+      "result": "passed"
+    }
+  }
+}
