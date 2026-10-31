@@ -32,7 +32,7 @@ def verify_payload(folder):
     manifest = json.loads((folder / 'manifest.json').read_text())
     if manifest['source_commit'] != command('git', 'rev-parse', 'HEAD') or manifest['source_hashes'] != sources():
         raise ValueError('Prebuilt consumer does not match the exact checked-out source')
-    if manifest['target'] != 'x86_64-apple-macosx14.0':
+    if manifest['target'] != 'arm64-apple-macosx14.0':
         raise ValueError('Unexpected consumer deployment target')
     if not manifest['files'] or 'ResourceProbe' not in manifest['files']:
         raise ValueError('Missing consumer')
@@ -64,15 +64,15 @@ let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
  dependencies: [.package(path: %s)], targets: [.executableTarget(name: "ResourceProbe",
  dependencies: [.product(name: "NetworkKit", package: "SwiftNetworkKit")])], swiftLanguageModes: [.v6])
 ''' % json.dumps(str(ROOT)))
-        args = ['swift', 'build', '--package-path', package, '-c', 'release', '--triple', 'x86_64-apple-macosx14.0']
+        args = ['swift', 'build', '--package-path', package, '-c', 'release', '--triple', 'arm64-apple-macosx14.0']
         command(*args, '-Xswiftc', '-warnings-as-errors')
         products = Path(command(*args, '--show-bin-path'))
         shutil.copy2(products / 'ResourceProbe', folder / 'ResourceProbe')
         for bundle in products.glob('*.bundle'):
             shutil.copytree(bundle, folder / bundle.name)
     binary = folder / 'ResourceProbe'
-    if 'x86_64' not in command('lipo', '-archs', binary):
-        raise RuntimeError('Missing Intel consumer slice')
+    if 'arm64' not in command('lipo', '-archs', binary):
+        raise RuntimeError('Missing ARM64 consumer slice')
     load = command('vtool', '-show-build', binary)
     if 'minos 14.0' not in load:
         raise RuntimeError('Consumer does not declare macOS 14.0 minimum')
@@ -80,18 +80,18 @@ let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
     if sum(p.stat().st_size for p in folder.rglob('*') if p.is_file()) > 20 * 1024 * 1024:
         raise RuntimeError('Unexpectedly large transfer payload')
     manifest = {'source_commit': command('git', 'rev-parse', 'HEAD'), 'source_hashes': sources(),
-                'target': 'x86_64-apple-macosx14.0', 'builder_xcode': version,
+                'target': 'arm64-apple-macosx14.0', 'builder_xcode': version,
                 'builder_swift': command('xcrun', 'swift', '--version'),
                 'builder_os': command('sw_vers'), 'builder_architecture': platform.machine(),
                 'sdk': command('xcrun', '--sdk', 'macosx', '--show-sdk-version'), 'files': files}
     (folder / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
     verify_payload(folder)
-    print('Built and verified exact-source Intel/macOS 14.0 consumer; no test framework or toolchain is transferred.')
+    print('Built and verified exact-source ARM64/macOS 14.0 consumer; no test framework or toolchain is transferred.')
 
 
 def run(folder, output):
-    if platform.system() != 'Darwin' or platform.mac_ver()[0].split('.')[0] != '14' or platform.machine() != 'x86_64':
-        raise RuntimeError('Actual Intel macOS 14 execution host required')
+    if platform.system() != 'Darwin' or platform.mac_ver()[0].split('.')[0] != '14' or platform.machine() != 'arm64':
+        raise RuntimeError('Actual ARM64 macOS 14 execution host required')
     manifest = verify_payload(folder)
     output.mkdir(parents=True, exist_ok=False)
     for name, flags in [('smoke', ['--smoke']), ('post-budget', ['--post-budget', '--cycles', '100'])]:

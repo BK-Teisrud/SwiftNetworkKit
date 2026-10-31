@@ -25,3 +25,11 @@ Actual macOS 14 execution is pending. This route exercises a real public SDK con
 ## Remaining F2 work
 
 Use actual results to update #62 and the [F2 reconciliation](F2_REVIEW.md). Minimum native HTTPS/lifecycle/storage and suitable target resources, missing physical-family/transition evidence under #63, reconciliation #86, non-publishing consumer/archive/privacy rehearsal #64 and owner risk/release disposition retain their requirements. This execution-access slice does not justify a new milestone, generic duplicate environment issue or speculative SDK refactor. No release/tag or support-minimum change is authorized by preparing this route.
+
+## Architecture correction — 2026-10-31
+
+[Run 41178401513](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41178401513), source db1e4100d3d8303cb90e9f39fdd46553f3a67b8b, built the Intel consumer successfully but rejected the execution host before any probe ran. Actual runner images were macos-15-arm64 (builder, macOS 15.8.2) and macos-14-arm64 (execution, macOS 14.8.9). The earlier assumption that the standard macos-14 label selected Intel was incorrect. No macOS 14 behavior result was obtained.
+
+The corrected route targets arm64-apple-macosx14.0 and requires actual native ARM64 execution on macOS 14. Source/commit/checksum, deployment minimum, toolchain and OS gates remain enforced; an Intel execution host now fails before probe admission. This supersedes the Intel architecture choice above, not the dated local Intel observations or evidence limits. GitHub's [runner reference](https://docs.github.com/en/actions/reference/runners/github-hosted-runners) documents the ARM64 standard label. No Rosetta, larger runner, paid service, support-minimum change or test-framework transfer is introduced. A native ARM64 result will not establish Intel or exact macOS 14.0 behavior. The November 2 retirement deadline still applies.
+
+The corrected ARM64 consumer cross-built successfully on the local Intel Mac with warnings as errors; Mach-O architecture, minos 14.0 and source/payload integrity checks passed. It was not executed on that Intel host. Four helper tests passed, including wrong-OS and wrong-architecture rejection before probe admission. The failed run and correction are preserved in [the attempt record](evidence/MACOS14_ARCHITECTURE_ATTEMPT_2026-10-31.json).
