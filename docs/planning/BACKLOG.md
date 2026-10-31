@@ -51,6 +51,6 @@ I01–I23 are native subissues with criteria and dependencies; see [WORK_QUEUE.m
 
 The [2026-10-26 audit](PLAN_REVIEW_2026-10-26.md) adds PREP-01 / #85, GATE-F2 / #86 and PLAN-F3–F6 / #87–#90. The owner selected retry/robustness as the first post-core planning priority. Future NK domains remain deferred; concrete extension implementation slices require selected contracts and a new scope decision. Follow PROJECT_MANAGEMENT.md at every task transition, not only weekly.
 
-## First retry candidate decomposition — 2026-10-27
+## Current retry planning — 2026-10-31
 
-PLAN-F3 #87 now proposes [a bounded retry increment](RETRY_INCREMENT_PLAN.md) and [ADR-0013](../decisions/ADR-0013-opt-in-retry-proposal.md). #106–#110 define decision, eligibility/delay, shared operation integration, native/resource verification and final API/evidence review. Candidate tasks remain Backlog/P2/EXTENSION; no implementation IDs until selection. #106 requires actual owner approval/use-case confirmation; technical candidates also require #86. F2 minimum/physical/native evidence remains the delivery priority.
+F2 is closed; #87/#106 review Proposed [ADR-0014](../decisions/ADR-0014-opt-in-retry-proposal.md) and the [bounded retry plan](RETRY_INCREMENT_PLAN.md). Existing #107–#110 remain Backlog without I identifiers or implementation authorization. Owner selections: general safe app-data reads, per-call bodyless GET/HEAD one retry for exact allowlist, 250–500 ms jitter/30-second cap, auth preparation once and diagnostic attempt count only. Full contract/code start remain separate decisions. Preserve all core/host/native rows and #132/#29 publication gates; no duplicate task or new milestone.

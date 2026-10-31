@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-31",
+  "sdk_source": "5d2ae116ec685c483b1dcc31db9e41a850c4e2ac",
+  "archive": "Unsigned generic iOS Release consumer from a clean git archive; no installation/export/distribution",
+  "SDK_symbol_provenance": {
+    "matching_binary_dSYM_UUID": true,
+    "SDK_symbols_in_matching_dSYM": 1868,
+    "APIClient_symbols_in_matching_dSYM": 114,
+    "note": "The installed Release binary is stripped; provenance is from its matching archive dSYM."
+  },
+  "manifest": {
+    "relative_path": "SwiftNetworkKit_NetworkKit.bundle/PrivacyInfo.xcprivacy",
+    "sha256": "528ab3fca910d2ac2f3ef256d5ea4c2327303a7a4a5efb9236987f3018e311f3",
+    "content": {
+      "NSPrivacyTracking": false,
+      "NSPrivacyTrackingDomains": [],
+      "NSPrivacyCollectedDataTypes": [],
+      "NSPrivacyAccessedAPITypes": []
+    }
+  },
+  "consumer_source_hashes": {
+    "Tools/ReleaseConsumer/AppDelegate.swift": "37337040dc1762c73a7de05019476e074e66f5571d6ff2d3aa7ffb210b8abb17",
+    "Tools/ReleaseConsumer/NetworkKitReleaseConsumer.xcodeproj/project.pbxproj": "16aabfce20d95175c373b4f735a37e550114ef6b7bcbe5e3030f623544b45616",
+    "Tools/ReleaseConsumer/NetworkKitReleaseConsumer.xcodeproj/xcshareddata/xcschemes/NetworkKitReleaseConsumer.xcscheme": "ab9e28b857e496913b875cb0139206cc8511bd1cd32320d723f033aabf79d357"
+  },
+  "privacy_report": {
+    "generated_by": "Xcode Organizer, exported locally by owner after automated UI export did not complete",
+    "sha256": "77e553648d29b057cb196975be4865cf325403899c6930974718da16f751a2a8",
+    "bytes": 807,
+    "pages": 1,
+    "text_characters": 0,
+    "visual_inspection": "Blank white page",
+    "disposition": "Reviewed empty report, consistent with verified empty collected-data declarations. A separate nonshipping positive control confirmed Xcode reads the SDK manifest at the same bundle placement."
+  },
+  "limits": [
+    "Independent preparation only; #64 formal acceptance remains after #86/#63.",
+    "No physical consumer execution, archive distribution, release or owner risk acceptance."
+  ],
+  "aggregation_positive_control": {
+    "source_commit": "6cba25603ddd0bd8893306972c67b505ee3ddda0",
+    "unsigned": true,
+    "nonshipping_control_only": true,
+    "modified_only_disposable_sdk_manifest": true,
+    "repository_manifest_unchanged": true,
+    "bundled_synthetic_crash_data_declaration": true,
+    "archive_exit_code": 0,
+    "manifest_sha256": "af901a480b01bc527f4088bd81e72966dac1702cb6938f2be4c02ab94dbd133f",
+    "report": {
+      "sha256": "918b6c1e6201aa1b0775d14aedc35c50b858c61770eb5599663046547f57a906",
+      "bytes": 19131,
+      "pages": 1,
+      "visually_verified": true,
+      "observed_collected_type": "Crash Data",
+      "observed_purpose": "App Functionality",
+      "tracking": "NO",
+      "linked": "NO",
+      "origin": "NetworkKitReleaseConsumer.app/SwiftNetworkKit_NetworkKit.bundle/PrivacyInfo.xcprivacy"
+    }
+  },
+  "aggregation_limits": [
+    "The real archive and control use identical production SDK sources; the control changes only its disposable manifest and test app identifier/display metadata.",
+    "Synthetic Crash Data declaration exists only in the disposable control; it does not describe production SDK behavior or actual collection.",
+    "Aggregate report parsing does not establish complete binary API analysis, App Store acceptance or all consumer data practices."
+  ]
+}

@@ -1,8 +1,20 @@
 # Roadmap
 
-No deadlines are set. Phases are gates, not calendar promises. The owner selected HTTP core first: F0 → F1 → F2 leads to the first stable release. F3–F6 are optional later deliveries, outside v1.0. Repository/package: SwiftNetworkKit; product/module: NetworkKit, with one library module. See [v1 scope](V1_SCOPE.md) and [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md).
+Current phase status, 2026-10-31: F2 is CLOSED through PR #135/main 41242130528; #64/#27 are Done and open item connections are empty. [Final closeout](F2_CLOSEOUT_2026-10-31.md) records accepted evidence and counter discrepancy. #87 is Ready for retry planning only; physical Watch #132 and publication/workload/security #29 remain separate blockers. No F3 code or release authorization. Dated progress below preserves history.
 
-TLS-01 #104 is accepted through PR #105 and main run 40556606300. Current review: [TLS-01 native macOS rejection](NATIVE_TLS_REJECTION.md), a bounded P1 regression at Order 20.75 under #25. Preparation PR #103 is accepted through main run 40550211780; #62/#63 execution remains blocked by readiness/access. TLS-01 supplies local native negative evidence without selecting a new TLS product feature. F2 remains open for complete native/platform/resource and explicit owner-risk gates; no new milestone or support/tool change is selected.
+
+Current rehearsal, 2026-10-31: #86 and nine selected-core epics are Done through PR #134/main 41238957032. [Formal rehearsal](RELEASE_REHEARSAL_2026-10-31.md) is executed and awaits its PR/main acceptance; only #64/#27 remain open in F2. #132/#29 remain a separate mandatory publication lane. No release/tag, production acceptance or F3 implementation is authorized. Earlier dated progress retains its original context.
+
+
+Current reconciliation, 2026-10-31: #62 and revised #63 are Done. [GATE-F2 review](F2_REVIEW.md) reconciles the 79 stable core IDs and recorded owner F2-only resource disposition; its PR/main acceptance precedes eligible core epic closures. #27 remains open for formal #64, then F2 closure. #132/#29 remain separate publication blockers; #87/draft PR #111 is planning, not F3 implementation authorization. Dated progress notes below preserve their original state.
+
+
+Current owner decision, 2026-10-31: [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md) moves only missing physical Watch verification to #132/#29 in the separate “v1.0 – Publication gate” milestone. watchOS 10 support is unchanged. F2 remains open for revised #63, #86 and formal #64/#27; publication and F3 implementation remain unauthorized. [Applicability matrix](F2_PHYSICAL_APPLICABILITY.md) and [work queue](WORK_QUEUE.md) supersede dated access notes below.
+
+
+No deadlines are set. Phases are gates, not calendar promises. The owner selected HTTP core first: F0 → F1 → F2 completes non-publishing core hardening/rehearsal; a separate publication gate precedes the first stable release. F3–F6 are optional later deliveries, outside v1.0. Repository/package: SwiftNetworkKit; product/module: NetworkKit, with one library module. See [v1 scope](V1_SCOPE.md) and [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md).
+
+Current review: [TLS-01 native macOS rejection](NATIVE_TLS_REJECTION.md), a bounded P1 regression at Order 20.75 under #25. Preparation PR #103 is accepted through main run 40550211780; #62/#63 execution remains blocked by readiness/access. TLS-01 supplies local native negative evidence without selecting a new TLS product feature. F2 remains open for complete native/platform/resource and explicit owner-risk gates; no new milestone or support/tool change is selected.
 
 ## F0 – Architecture and decisions
 
@@ -24,8 +36,6 @@ Privacy/logging, cancellation, required authentication boundaries under DEC-04/0
 
 Deferred beyond v1. The owner selected retry/robustness as the first post-core planning priority on 2026-10-26. PLAN-F3 / #87 must select a small opt-in increment and approve its changed contract before implementation. Cache/authentication/monitoring/performance remain separate candidates; split delivery milestones if sizing warrants it.
 
-Proposed decomposition: [retry increment plan](RETRY_INCREMENT_PLAN.md) and [ADR-0013](../decisions/ADR-0013-opt-in-retry-proposal.md). Five bounded decision/contract/integration/evidence/gate candidates remain Backlog pending owner selection and accepted F2 evidence. No extension implementation is authorized.
-
 ## F4 – File transfers
 
 Deferred beyond v1. PLAN-F4 / #88 selects use cases and verifies file ownership, cleanup, server support and platform feasibility. Foreground and background deliveries may need separate milestones; neither the entire transfer catalog nor universal background support is promised.
@@ -43,3 +53,15 @@ Research candidates only. PLAN-F6 / #90 ranks actual product needs and sets boun
 Endpoint contracts precede interceptors/authentication/retry. Error taxonomy and response wrappers precede API stabilization. Cancellation/clocks precede retry/refresh. Redaction precedes detailed diagnostics. OS matrices/entitlements precede background/Bonjour/multicast. Security review precedes pinning/mTLS/OIDC.
 
 Break domain epics into separate testable tasks before Ready. F0 acceptance covers included/deferred CORE subrequirements. Extensions cannot enter v1 without updated scope and impact assessment. Close phase gates only with links to actual evidence.
+
+## Public HTTPS route — 2026-10-27
+
+[NET-01 #115](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/115), Order 20.95, uses owner-selected [public native HTTPS checks](PUBLIC_HTTPS_VERIFICATION.md) through the existing client/host. No paid/private test environment is provisioned. Public observations, independent certificate conditions and platform-specific error mapping remain distinct from controlled server counters, minimum/other-device/resource and final release evidence. #62/#63/#86 stay open for their remaining criteria.
+
+## Native lifecycle/storage follow-up — 2026-10-28
+
+NET-01 #115 is accepted on main 40644612904. [NET-02 #117](NATIVE_LIFECYCLE_STORAGE.md) adds actual Mac/iPhone cancellation, shutdown/session ownership and isolated cookie observations; local full suite 12/12 passed and PR #118/main 40745209513 are accepted. [Minimum-runtime candidates and authorization](MINIMUM_RUNTIME_ACCESS_2026-10-28.md) remain a separate #62 route: authenticated imports and [four minimum simulator regression results](MINIMUM_RUNTIME_EXECUTION_2026-10-28.md) passed locally at 215/215 each; PR/main acceptance remains pending. Earlier iOS migration timeouts are retained. macOS 14 and separate native/resource scenarios remain open. All unproved F2/native/resource/archive/release criteria remain open.
+
+## First F3 increment refresh — 2026-10-31
+
+With F2 closed and main run 41244932962 accepted, #87/#106 now refine [the existing retry proposal](RETRY_INCREMENT_PLAN.md). Proposed ADR-0014 replaces only the draft's colliding identifier; accepted ADR-0013 remains the Watch decision. Owner choices narrow the initial increment and keep reason metadata/advanced resilience products deferred. #107–#110 remain Backlog until complete scope and explicit code-start approval. No new milestone, version/date or implicit dependency on publishing #29.

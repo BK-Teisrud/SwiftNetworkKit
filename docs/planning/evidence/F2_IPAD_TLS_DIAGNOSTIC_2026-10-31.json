@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-31",
+  "source_commit": "6cba25603ddd0bd8893306972c67b505ee3ddda0",
+  "purpose": "Independent same-device TLS diagnostic after missing Foundation challenge",
+  "device": "iPad Pro (11-inch, 3rd generation)",
+  "os": "iPadOS 27.2 / 24B119",
+  "diagnostic_source_sha256": "9be58c18462fd721282adc565e2d2e1753d6986f54ec4e7d09fa87157cf1b885",
+  "sdk_production_source_changed": false,
+  "oracle_relaxed": false,
+  "fresh_foundation_preflight": true,
+  "summary": {
+    "result": "Passed",
+    "totalTestCount": 1,
+    "passedTests": 1,
+    "failedTests": 0,
+    "skippedTests": 0,
+    "expectedFailures": 0
+  },
+  "parameter_cases": 2,
+  "observations": {
+    "typed": {
+      "sdk_transport_domain": "NSURLErrorDomain",
+      "sdk_transport_code": -1200,
+      "foundation_preflight_challenge": true,
+      "foundation_corroboration_challenge": true,
+      "trust_domain": "kCFErrorDomainOSStatus",
+      "trust_code": -67843,
+      "foundation_transport_code": -1200
+    },
+    "raw": {
+      "sdk_transport_domain": "NSURLErrorDomain",
+      "sdk_transport_code": -1200,
+      "foundation_preflight_challenge": true,
+      "foundation_corroboration_challenge": true,
+      "trust_domain": "kCFErrorDomainOSStatus",
+      "trust_code": -67843,
+      "foundation_transport_code": -1200
+    }
+  },
+  "duration_seconds": 3.53,
+  "cleanup_exit_code": 0,
+  "log_sha256": "1818950ed18e294086da8e75f7c3baa9e065f4e51e18cfdbb14431c90013ceda",
+  "limitations": [
+    "Supplemental isolated evidence, not a replacement full-suite pass.",
+    "Earlier native suite remains 20/21; cause of missing corroborating challenge remains unproven.",
+    "No automatic retry, trust override, production SDK change or timeout increase."
+  ]
+}

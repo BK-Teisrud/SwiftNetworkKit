@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-10-27",
+  "as_of": "2026-10-31",
   "implementation_authorized": true,
   "start_gate": 41,
   "tasks": [
@@ -9,7 +9,7 @@
       "number": 42,
       "title": "[I01] Create the Swift package and test target after authorization",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/42",
-      "milestone": "F1 \u2013 HTTP core",
+      "milestone": "F1 – HTTP core",
       "blocked_by": [
         "START"
       ],
@@ -21,7 +21,7 @@
       "number": 43,
       "title": "[I02] Define immutable HTTP values, responses, and error taxonomy",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/43",
-      "milestone": "F1 \u2013 HTTP core",
+      "milestone": "F1 – HTTP core",
       "blocked_by": [
         "START",
         "I01"
@@ -34,7 +34,7 @@
       "number": 44,
       "title": "[I03] Implement configuration snapshots and internal test boundaries",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/44",
-      "milestone": "F1 \u2013 HTTP core",
+      "milestone": "F1 – HTTP core",
       "blocked_by": [
         "START",
         "I02"
@@ -47,7 +47,7 @@
       "number": 45,
       "title": "[I04] Implement safe endpoint and URL construction",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/45",
-      "milestone": "F1 \u2013 HTTP core",
+      "milestone": "F1 – HTTP core",
       "blocked_by": [
         "START",
         "I03"
@@ -60,7 +60,7 @@
       "number": 46,
       "title": "[I05] Implement headers and request encoding",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/46",
-      "milestone": "F1 \u2013 HTTP core",
+      "milestone": "F1 – HTTP core",
       "blocked_by": [
         "START",
         "I04"
@@ -73,7 +73,7 @@
       "number": 47,
       "title": "[I06] Enable real PR CI for all four platform families",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/47",
-      "milestone": "F1 \u2013 HTTP core",
+      "milestone": "F1 – HTTP core",
       "blocked_by": [
         "START",
         "I05"
@@ -86,7 +86,7 @@
       "number": 48,
       "title": "[I07] Implement response strategies and HTTP status validation",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/48",
-      "milestone": "F1 \u2013 HTTP core",
+      "milestone": "F1 – HTTP core",
       "blocked_by": [
         "START",
         "I06"
@@ -99,7 +99,7 @@
       "number": 49,
       "title": "[I08] Implement URLSession ownership and the transport adapter",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/49",
-      "milestone": "F1 \u2013 HTTP core",
+      "milestone": "F1 – HTTP core",
       "blocked_by": [
         "START",
         "I07"
@@ -112,7 +112,7 @@
       "number": 50,
       "title": "[I09] Implement HTTPS, loopback, and redirect policies",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/50",
-      "milestone": "F1 \u2013 HTTP core",
+      "milestone": "F1 – HTTP core",
       "blocked_by": [
         "START",
         "I08"
@@ -125,7 +125,7 @@
       "number": 51,
       "title": "[I10] Connect typed and raw calls to one secure HTTP pipeline",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/51",
-      "milestone": "F1 \u2013 HTTP core",
+      "milestone": "F1 – HTTP core",
       "blocked_by": [
         "START",
         "I09"
@@ -138,7 +138,7 @@
       "number": 52,
       "title": "[I11] Verify the initial HTTP core and F1 gate",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/52",
-      "milestone": "F1 \u2013 HTTP core",
+      "milestone": "F1 – HTTP core",
       "blocked_by": [
         "START",
         "I10"
@@ -151,7 +151,7 @@
       "number": 53,
       "title": "[I12] Implement cancellation and the total time budget",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/53",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I11"
@@ -164,7 +164,7 @@
       "number": 54,
       "title": "[I13] Implement shutdown and concurrency isolation",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/54",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I12"
@@ -177,7 +177,7 @@
       "number": 55,
       "title": "[I14] Implement the bounded authentication-header provider",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/55",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I13"
@@ -190,7 +190,7 @@
       "number": 56,
       "title": "[I15] Implement sanitized optional diagnostics",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/56",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I14"
@@ -203,7 +203,7 @@
       "number": 57,
       "title": "[I16] Verify secure storage and injected-session profiles",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/57",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I15"
@@ -216,7 +216,7 @@
       "number": 85,
       "title": "[PREP-01] Prepare minimum-OS and physical-device evidence access",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/85",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [],
       "parent": 23
     },
@@ -226,7 +226,7 @@
       "number": 58,
       "title": "[I17] Complete the test matrix and regression suite",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/58",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I16"
@@ -239,7 +239,7 @@
       "number": 59,
       "title": "[I18] Complete API review, DocC, and integration guides",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/59",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I17",
@@ -253,7 +253,7 @@
       "number": 95,
       "title": "[BUG-01] Bound native HTTP probe liveness and diagnose main timeouts",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/95",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START"
       ],
@@ -265,7 +265,7 @@
       "number": 97,
       "title": "[QA-01] Review quality and remove stale validation duplication",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/97",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I18"
@@ -278,7 +278,7 @@
       "number": 60,
       "title": "[I19] Conduct the v1 security and privacy review",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/60",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I18",
@@ -292,7 +292,7 @@
       "number": 61,
       "title": "[I20] Measure baseline resource use and package quality",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/61",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I19"
@@ -305,7 +305,7 @@
       "number": 100,
       "title": "[RES-01] Diagnose repeated-call RSS growth against native URLSession control",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/100",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I20"
@@ -318,7 +318,7 @@
       "number": 104,
       "title": "[TLS-01] Verify native macOS rejection of an untrusted HTTPS certificate",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/104",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I19"
@@ -331,10 +331,62 @@
       "number": 113,
       "title": "[PREP-02] Provide an app-hosted iOS physical-device test route",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/113",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I18"
+      ],
+      "parent": 23
+    },
+    {
+      "order": 20.95,
+      "key": "NET-01",
+      "number": 115,
+      "title": "[NET-01] Verify opt-in native public HTTPS scenarios",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/115",
+      "milestone": "F2 – Production hardening and v1 gate",
+      "blocked_by": [
+        "I19",
+        "PREP-02"
+      ],
+      "parent": 23
+    },
+    {
+      "order": 20.96,
+      "key": "NET-02",
+      "number": 117,
+      "title": "[NET-02] Verify native cancellation, shutdown and isolated cookie profiles",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/117",
+      "milestone": "F2 – Production hardening and v1 gate",
+      "blocked_by": [
+        "NET-01",
+        "PREP-02"
+      ],
+      "parent": 23
+    },
+    {
+      "order": 20.98,
+      "key": "NET-03",
+      "number": 122,
+      "title": "[NET-03] Verify portable native loopback and resource observations",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/122",
+      "milestone": "F2 – Production hardening and v1 gate",
+      "blocked_by": [
+        "PREP-02",
+        "NET-01",
+        "NET-02"
+      ],
+      "parent": 23
+    },
+    {
+      "order": 20.99,
+      "key": "NET-04",
+      "number": 126,
+      "title": "[NET-04] Investigate watchOS native cookie and credential controls",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/126",
+      "milestone": "F2 – Production hardening and v1 gate",
+      "blocked_by": [
+        "NET-03"
       ],
       "parent": 23
     },
@@ -344,11 +396,13 @@
       "number": 62,
       "title": "[I21] Obtain and document minimum-OS runtime evidence",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/62",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I19",
-        "PREP-01"
+        "PREP-01",
+        "NET-03",
+        "NET-04"
       ],
       "parent": 23
     },
@@ -358,12 +412,16 @@
       "number": 63,
       "title": "[I22] Run representative tests on physical Apple devices",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/63",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I19",
         "PREP-01",
-        "PREP-02"
+        "PREP-02",
+        "NET-01",
+        "NET-02",
+        "NET-03",
+        "NET-04"
       ],
       "parent": 23
     },
@@ -373,7 +431,7 @@
       "number": 86,
       "title": "[GATE-F2] Reconcile v1 requirements, domain epics, and release evidence",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/86",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "I18",
         "I19",
@@ -391,7 +449,7 @@
       "number": 64,
       "title": "[I23] Rehearse the v1 release without publishing",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/64",
-      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "milestone": "F2 – Production hardening and v1 gate",
       "blocked_by": [
         "START",
         "I22",
@@ -400,12 +458,48 @@
       "parent": 27
     },
     {
+      "order": 23.75,
+      "key": "WATCH-01",
+      "number": 132,
+      "title": "[WATCH-01] Complete physical Watch verification before publication",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/132",
+      "milestone": "v1.0 – Publication gate",
+      "blocked_by": [],
+      "parent": 29,
+      "authorization_scope": "publication evidence only; no release or paid/tool/account changes authorized",
+      "readiness_note": "Supported physical Watch developer-image mounting/execution route remains blocked; no physical pass."
+    },
+    {
+      "order": 24,
+      "key": "REL-01",
+      "number": 29,
+      "title": "[REL-01] Verify the first stable core release",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/29",
+      "milestone": "v1.0 – Publication gate",
+      "blocked_by": [
+        8,
+        9,
+        10,
+        11,
+        20,
+        21,
+        22,
+        23,
+        25,
+        27,
+        41,
+        64,
+        132
+      ],
+      "authorization_scope": "publication evidence only; no release or paid/tool/account changes authorized"
+    },
+    {
       "order": 30,
       "key": "PLAN-F3",
       "number": 87,
       "title": "[PLAN-F3] Select the first resilience increment and decompose its delivery",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/87",
-      "milestone": "F3 \u2013 Resilience and extensions",
+      "milestone": "F3 – Resilience and extensions",
       "blocked_by": [],
       "parent": 14
     },
@@ -415,9 +509,11 @@
       "number": 106,
       "title": "[F3-DEC] Approve the bounded opt-in retry contract",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/106",
-      "milestone": "F3 \u2013 Resilience and extensions",
+      "milestone": "F3 – Resilience and extensions",
       "blocked_by": [],
-      "parent": 14
+      "parent": 14,
+      "implementation_authorized": false,
+      "authorization_scope": "planning candidate only; complete contract and explicit code start required"
     },
     {
       "order": 30.2,
@@ -425,12 +521,15 @@
       "number": 107,
       "title": "[F3-C01] Specify and verify retry eligibility and delay decisions",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/107",
-      "milestone": "F3 \u2013 Resilience and extensions",
+      "milestone": "F3 – Resilience and extensions",
       "blocked_by": [
         "F3-DEC",
         "GATE-F2"
       ],
-      "parent": 14
+      "parent": 14,
+      "implementation_authorized": false,
+      "authorization_scope": "planning candidate only; complete contract and explicit code start required",
+      "decision_gate": 106
     },
     {
       "order": 30.3,
@@ -438,13 +537,16 @@
       "number": 108,
       "title": "[F3-C02] Integrate retries inside one admitted operation and deadline",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/108",
-      "milestone": "F3 \u2013 Resilience and extensions",
+      "milestone": "F3 – Resilience and extensions",
       "blocked_by": [
         "F3-DEC",
         "GATE-F2",
         "F3-C01"
       ],
-      "parent": 14
+      "parent": 14,
+      "implementation_authorized": false,
+      "authorization_scope": "planning candidate only; complete contract and explicit code start required",
+      "decision_gate": 106
     },
     {
       "order": 30.4,
@@ -452,13 +554,16 @@
       "number": 109,
       "title": "[F3-V01] Verify native retry integration and resource behavior",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/109",
-      "milestone": "F3 \u2013 Resilience and extensions",
+      "milestone": "F3 – Resilience and extensions",
       "blocked_by": [
         "F3-DEC",
         "GATE-F2",
         "F3-C02"
       ],
-      "parent": 14
+      "parent": 14,
+      "implementation_authorized": false,
+      "authorization_scope": "planning candidate only; complete contract and explicit code start required",
+      "decision_gate": 106
     },
     {
       "order": 30.5,
@@ -466,13 +571,16 @@
       "number": 110,
       "title": "[F3-GATE] Review retry API, diagnostics, evidence and delivery readiness",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/110",
-      "milestone": "F3 \u2013 Resilience and extensions",
+      "milestone": "F3 – Resilience and extensions",
       "blocked_by": [
         "F3-DEC",
         "GATE-F2",
         "F3-V01"
       ],
-      "parent": 14
+      "parent": 14,
+      "implementation_authorized": false,
+      "authorization_scope": "planning candidate only; complete contract and explicit code start required",
+      "decision_gate": 106
     },
     {
       "order": 40,
@@ -480,7 +588,7 @@
       "number": 88,
       "title": "[PLAN-F4] Establish transfer feasibility and decompose selected transfer scope",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/88",
-      "milestone": "F4 \u2013 File transfers",
+      "milestone": "F4 – File transfers",
       "blocked_by": [],
       "parent": 16
     },
@@ -490,7 +598,7 @@
       "number": 89,
       "title": "[PLAN-F5] Define the WebSocket lifecycle and real-time delivery plan",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/89",
-      "milestone": "F5 \u2013 Real-time communication",
+      "milestone": "F5 – Real-time communication",
       "blocked_by": [],
       "parent": 17
     },
@@ -500,11 +608,12 @@
       "number": 90,
       "title": "[PLAN-F6] Triage specialized security and networking research by product need",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/90",
-      "milestone": "F6 \u2013 Specialized features and research",
+      "milestone": "F6 – Specialized features and research",
       "blocked_by": [],
       "parent": 18
     }
   ],
   "authorization_adr": "docs/decisions/ADR-0012-implementation-start.md",
-  "status_source": "GitHub Issues and ProjectV2; this file records planned structure, not completion status"
+  "status_source": "GitHub Issues and ProjectV2; this file records planned structure, not completion status",
+  "authorization_scope": "ADR-0012 implementation_authorized applies to the selected v1/core only; F3 candidates need complete owner scope/code-start approval."
 }

@@ -1,6 +1,31 @@
 # Test-environment readiness — PREP-01
 
-Current access refresh: [2026-10-27 read-only records and next steps](ENVIRONMENT_ACCESS_2026-10-27.md). Three stored/discovered device records now supply model/OS details, but live device execution remains deferred and minimum runtimes/HTTPS access remain missing. The 2026-10-26 tables below preserve the earlier inventory and owner reports.
+## Accepted F2 closeout — 2026-10-31
+
+F2 is CLOSED after PR #135/main `cc654ab5faadc0fc7fe00d7ad238b2e3ed5a997c`, [run 41242130528](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41242130528), with full-log verification of 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. #64/#27 are Done; direct item lists and GraphQL verify no open F2 issues/PRs. [Closeout evidence](F2_CLOSEOUT_2026-10-31.md) records the milestone summary-counter disagreement and actual verified states.
+
+Original candidate evidence files retain their submission-time pending flags and exact executed SDK/platform/failure limits. The owner resource approval is F2-only. #132 physical Watch and #29 actual workload/device-memory/security/publication decisions remain mandatory in their separate milestone, with support unchanged. No release/tag, production suitability or F3 implementation is authorized.
+
+PLAN-F3 #87 is Ready for planning only: review draft PR #111 and obtain a separate approved feature scope/start decision before code. Closed F2 is not publication or extension authorization.
+
+## Earlier disposition — 2026-10-31 (superseded by current acceptance above)
+
+Accepted implementation/verification baseline: main 5d2ae116ec685c483b1dcc31db9e41a850c4e2ac, PR #125, [main run 41182672027](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41182672027). Full logs confirmed 218 macOS root tests, four simulator results of 215 each, two unsigned host builds, 16 helpers and the required native TLS/smoke/control checks without unexpected restart or test time-limit failure. Root-CI targets are newer configured runtimes; they are not the minimum results below.
+
+| Environment / scenario | Accepted evidence | Remaining requirement / next action |
+| --- | --- | --- |
+| iPhone/iOS 17.0 and iPad/iPadOS 17.0 simulators | Root 215 each; expanded opt-in native suites 19 declarations/40 parameter cases each, zero failures/skips/expected failures | Applicable remaining ENV claims and physical-family evidence are separate; no blanket minimum acceptance |
+| Watch/watchOS 10.0 and TV/tvOS 17.0 simulators | Root 215 each in PR #120/main 40765690271 | Fresh expanded native suites executed on accepted source: TV 17/19 and Watch 16/19 declarations passed, zero skips; failed controls/timeouts remain unresolved. See MINIMUM_NATIVE_EXECUTION_2026-10-31.md. NET-04 #126 is the next bounded storage investigation; #62 retains timeout diagnosis. |
+| macOS 14.8.9/23J631 ARM64 | Bounded public consumer/reuse/cancellation/100-cycle resource route passed in run 41179430976, preserved through PR #124 | Not full root regression, HTTPS, exact 14.0 or Intel behavior; preserve these claim limits under #62/#86 |
+| Physical iPhone 17 Pro/iOS 27.2 | Accepted NET-01/02 public/lifecycle observations and NET-03 seven local declarations/14 cases; host removed after run | Background/network-loss/recovery and other applicable ENV scenarios remain under #63 |
+| Physical iPad/Watch/TV | Owner reports available; older stored inventory is not fresh execution evidence | Fresh connection/model/OS/build, compatible supported test host/profile and concrete deployment approval where needed; #63 |
+| Resources / distribution | Finite local/minimum/iPhone and bounded macOS 14 observations; root resource tests | Workload suitability/owner residual-risk disposition and #64 clean-consumer/archive/aggregate privacy report remain; no publication authorization |
+
+Evidence: [minimum root regressions](MINIMUM_RUNTIME_EXECUTION_2026-10-28.md), [macOS 14 route](MACOS14_EXECUTION_ROUTE_2026-10-29.md), [NET-03 native results](NET03_NATIVE_LOOPBACK.md), [public HTTPS decision](PUBLIC_HTTPS_VERIFICATION.md), [NET-02 lifecycle/storage](NATIVE_LIFECYCLE_STORAGE.md). The owner selected public HTTPBingo/BadSSL rather than a paid/private server. Counted-contact claims use the local controlled fixture; public observations cannot supply maintainer-owned wire counters. No new generic environment issue is needed: #62/#63/#86/#64 retain their existing responsibilities.
+
+## Historical preparation inventory and decisions
+
+The following dated inventory/access tables describe the initial preparation, not today's missing-access claims. Later evidence above supersedes only its actual assertions; earlier timeouts, failures and uncertainty remain recorded.
 
 Inventory date: 2026-10-26. Owner: @BK-Teisrud. Preparation task: [#85](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/85). This is an access/scenario assessment, not product execution or compatibility certification. Actual release evidence remains in [I21 / #62](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/62) and [I22 / #63](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/63); security/trust review belongs to [I19 / #60](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/60).
 
@@ -35,16 +60,18 @@ Apple's [Xcode system-requirements table](https://developer.apple.com/xcode/syst
 
 The same Apple table lists Swift 6.2.3 for the general Xcode 26.3 row, while the installed toolchain reports 6.2.4. Record actual build/compiler identities rather than silently changing the repository's verified 6.2.4 CI baseline. This preparation does not certify arbitrary Xcode 26.3 installations or newer device OS versions.
 
-## Owner-reported physical inventory
+## Physical inventory and verified observations — 2026-10-31
 
-| Device family | Availability report | Exact model | Exact OS/build | Xcode connection/execution compatibility |
-| --- | --- | --- | --- | --- |
-| iPhone | Previously reported accessible with current updates | Unknown | Unknown | Unverified |
-| iPad | Previously reported accessible with current updates | Unknown | Unknown | Unverified |
-| Apple Watch | Previously reported accessible with current updates | Unknown | Unknown | Unverified, including pairing needs |
-| Apple TV | Previously reported accessible with current updates | Unknown | Unknown | Unverified |
-| Mac | Current local host directly observed | Hardware model not collected; x86_64 observed | 15.8.1 / 24H32 observed | Xcode version command works; no physical acceptance scenarios executed here |
-| Additional macOS 14 host / older devices | Unknown | Unknown | Unknown | Unverified |
+| Device family | Exact model | Observed OS/build | Compatibility and execution boundary |
+| --- | --- | --- | --- |
+| iPhone | iPhone 17 Pro | iOS 27.2 / 24B119 | Accepted app-hosted regression/native evidence; actual background/outage/recovery and post-budget report accepted through PR #129, temporary host removed |
+| iPad | iPad Pro 11-inch, 3rd generation | iPadOS 27.2 / 24B119 | 215 regression / 20 of 21 native declarations with supplemental strict TLS evidence; actual background/outage/recovery and post-budget report accepted through PR #129; temporary host removed |
+| Apple Watch | Apple Watch Ultra 2 | watchOS 27.2 / 24S118 | Developer Mode verified enabled; post-restart developer-image mounting fails with CoreDevice 12040 / MobileDevice 0xe8000076. Rebuilt signed root host verified; no physical tests started |
+| Apple TV | Apple TV 4K, 3rd generation | tvOS 27.2 / 24K122 | Owner completed pairing; Developer Mode/DDI verified; candidate 215 regression and 21 native declarations passed; temporary host removed |
+| Mac | Current Intel host; owner reports MacBook Pro | macOS 15.8.1 / 24H32, x86_64 | Xcode 26.3 / Swift 6.2.4; accepted bounded local/native evidence and final 21-case suite. No universal workload-suitability claim |
+| macOS 14 route | Standard GitHub ARM64 host | macOS 14.8.9 / 23J631 | Accepted prebuilt consumer, cancellation/reuse and finite resource controls; actual run 41204068268 passed ten HTTPS cases. No full-suite/exact-14.0/Intel result claimed |
+
+Watch and TV registration/profiles/signing were specifically authorized for the existing three test IDs and existing certificate. No new certificate or optional service was added. The earlier Watch mode discrepancy is resolved. Developer-image mounting now blocks execution; host-usable image metadata does not establish successful device mounting. See [Watch preparation](evidence/F2_WATCH_PHYSICAL_PREPARATION_2026-10-31.json), [TV execution](evidence/F2_TV_PHYSICAL_EXECUTION_2026-10-31.json) and [iPad diagnostic](evidence/F2_IPAD_TLS_DIAGNOSTIC_2026-10-31.json). Candidate follow-up evidence still requires PR/main acceptance.
 
 Before #63 execution, obtain the minimum necessary model/OS/build and connection details, or explicitly record inaccessible targets as gaps. Never collect/publish serial numbers, UDIDs, account identifiers or pairing records. “Current updates” is not a concrete OS version. Do not assume Xcode 26.3 can debug an unknown newer OS. Apple distinguishes [simulator testing from actual physical-device verification](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices); neither substitutes for the other.
 

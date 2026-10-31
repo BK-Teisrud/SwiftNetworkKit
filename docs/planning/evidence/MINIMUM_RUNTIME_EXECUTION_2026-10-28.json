@@ -1,0 +1,278 @@
+{
+  "date": "2026-10-28",
+  "issue": 62,
+  "source_commit": "5a5cfb2eed49065f0721e34c253292eacab0dd9c",
+  "source_hashes": {
+    "Package.swift": "f345ef3bc7f89ca9a934ce09f4d68da5829363f82d3ce72d04f368ba626745ad",
+    "Sources/.DS_Store": "4c3ab9ed7bc4613116dfa64eff5d31d5bf3492481d2a13e686400db38ee31ffc",
+    "Sources/NetworkKit/APIClient.swift": "4128d68707c6353cfcc60139acca0f92b4123c5c0f6f1a9ede298bd7de6c4888",
+    "Sources/NetworkKit/Authentication.swift": "46b8cdfd416b178e092d1dfbe70c97f10e0b31e027a114b7e41264e8c56768bf",
+    "Sources/NetworkKit/ClientLifecycle.swift": "ba7d243eb266b79c7157c66341d48896f8693354d9aa369aba8d93abbacc25ae",
+    "Sources/NetworkKit/Diagnostics.swift": "019b95d3992a4bd44d471a37f8d5f59631425d9cbceb97eb8e66595d0d12290f",
+    "Sources/NetworkKit/Endpoint.swift": "7b196e8ede8a9c031595e3ecdd72bfc3aaeecdc6610d055f383a787b976dec31",
+    "Sources/NetworkKit/ExecutionBoundaries.swift": "7431f0fa2688e11be5649b687b81c4bbd313c78bc613bb8d68bf1248daef494c",
+    "Sources/NetworkKit/HTTPHeaders.swift": "45bfe1c8779e3f39c048fc1a299bd6ee8a75fe28d71ea797ce704c7eccc4b4f4",
+    "Sources/NetworkKit/HTTPMethod.swift": "98bde648d1db468b7b29a1856ace61a7301f6daf057eb99cd6e5114a31456bdb",
+    "Sources/NetworkKit/HTTPStatus.swift": "84bde1bf4b8a3c92e66f9c8bacdf079b56de7fc92a851134723e54017257ca71",
+    "Sources/NetworkKit/HTTPStatusPolicy.swift": "f28eb6564f87d7988aa281683bd6c398f340eaa32434ee3d5245021355954722",
+    "Sources/NetworkKit/HTTPToken.swift": "d9053f6ff580b333c643e0209d8e001e008506a95f41581f9b60bc46402bb13b",
+    "Sources/NetworkKit/JSONDecodingOptions.swift": "d11a252a75f1a4cfb814d2ed0fbb3e4dbcb85200d5e9b978a1e1f83f3ca50904",
+    "Sources/NetworkKit/NetworkConfiguration.swift": "bb8163d62a7db2bcb39f0c87e95b3038142749f834821ded680b0d0d8a7eb9af",
+    "Sources/NetworkKit/NetworkError.swift": "bd9133325b2af1255af713b7d9557c476dac5483448f8c565eb961f4016eede4",
+    "Sources/NetworkKit/NetworkKit.docc/IntegrationGuide.md": "904e863b8ee179cd636be631242751866b3921dec08e458c4bc525049bacd7f1",
+    "Sources/NetworkKit/NetworkKit.docc/NetworkKit.md": "22591cef466b8c123749995ee128f794de3fdcc190e0cd5e9b4cdba45eb49c1a",
+    "Sources/NetworkKit/NetworkKit.swift": "7af95bcc95f8e800d953b02b1751b05bce237bc7d5107e58eaf042c22a1285d9",
+    "Sources/NetworkKit/NetworkOperation.swift": "a1e6a31c7f1d650dbbec50c2c175af94b80a4b3ef090c594379c5984d3b821e0",
+    "Sources/NetworkKit/NetworkResponse.swift": "2267de5fe325f2c310dfb875a2e1b3b230713d2397a423e53ba303a72674067d",
+    "Sources/NetworkKit/NetworkSecurityPolicy.swift": "cc85f6f2ab60f79731207d81e80f30bf5e032b0f2351ae42177e2ab62f29f3d9",
+    "Sources/NetworkKit/NetworkTaskDelegate.swift": "d9a97411a31d322a971685604d39de115112e606d7bb8e6837ea0005305f0bd8",
+    "Sources/NetworkKit/PrivacyInfo.xcprivacy": "528ab3fca910d2ac2f3ef256d5ea4c2327303a7a4a5efb9236987f3018e311f3",
+    "Sources/NetworkKit/RequestBody.swift": "914d27be0edb4fa36fc91e57787bf6d9c0311acbeb0a2d8334e24f2bf2cbbcdb",
+    "Sources/NetworkKit/RequestBuilder.swift": "bbe0ac5e6d4e8ec3c0474126b9db3588799c631ad1e73caa07fac859faab8259",
+    "Sources/NetworkKit/RequestURLBuilder.swift": "404943fa36c0fe5e7df5c078412ad6da30e82882bc097c29c3c0c0af896fef1b",
+    "Sources/NetworkKit/ResponseStrategy.swift": "e5150fc6affd759d6ed6d622b40b5a027c2ad7164130ddb9aeee746dfa0fbbab",
+    "Sources/NetworkKit/SessionStorageProfile.swift": "83ca939758de16bab5df13d94c280065ad46c89ba0c0335863870a8b81e59c66",
+    "Sources/NetworkKit/URLSessionTransport.swift": "1c1c5b7afdba3eb32905a0e4c54aabfb3efed7b8354375f11868f0beeaecc14d",
+    "Tests/NetworkKitTests/AuthenticationTests.swift": "13c0c103ac46ea3d8636cc248f607f6f5ddd1acaed1f01dae26528cb386c8ec0",
+    "Tests/NetworkKitTests/BoundedFixtureProcess.swift": "6c97f5ed443c88c19f0d9d680439105803828cc84d28516b60eebba5d0bf36cd",
+    "Tests/NetworkKitTests/BudgetTestSupport.swift": "2f39314b993824ae28ef6122d025618136136a654cad745c83903510b72bf484",
+    "Tests/NetworkKitTests/ClientLifecycleTests.swift": "c64f3264625800cb6c1c4778a32d57e7b05ff9e4a44c5bf6f092d638bb6006bc",
+    "Tests/NetworkKitTests/ConfigurationTests.swift": "77c7a94fd1350527b72f3740b0705580123ca5198f20511fb0ac775d0409825f",
+    "Tests/NetworkKitTests/DiagnosticsTests.swift": "73768d7344ed5bf2cf291dd68807a875f6731e8a826336abb70bb5dc7d40e634",
+    "Tests/NetworkKitTests/DocumentationExamplesTests.swift": "3f0c55428498f12a604344fb0d5819f0813675cb8f6f6dcb4df563acd610ce41",
+    "Tests/NetworkKitTests/EndpointURLTests.swift": "83086000f8eef9a0c8086394b1f3fadd5e63df35069951470fb67e01d3e78d40",
+    "Tests/NetworkKitTests/F1AcceptanceTests.swift": "90a43f468a0be141e2d005a218301ecc6890bce2aaa25c5f40b82d5edbb79956",
+    "Tests/NetworkKitTests/FixtureProcessTests.swift": "02125dba6516dd2e4b52efa038ab423582f2727974e0b8c48565565f7cc5651f",
+    "Tests/NetworkKitTests/HTTPPipelineTests.swift": "9aca0c9816cc1f66f293867bce1915d6ed537552bc3b4448a1161e6ef2b0ae58",
+    "Tests/NetworkKitTests/NativeTLSTests.swift": "f67439eea22f73121030b9daa3a80efec27ab9fa5aa3e6eb870fb71d4e350d57",
+    "Tests/NetworkKitTests/NetworkKitTests.swift": "d5b5ae44ebf7dce1a4bc00e3aae7a9ad7b953907c15ec2e40ca8f734d73fb5c2",
+    "Tests/NetworkKitTests/NetworkSecurityTests.swift": "47afae3b5a9535d5b4bda23bb62a4780e1ca39238c207f89b9e3ea2a83335d52",
+    "Tests/NetworkKitTests/OperationBudgetTests.swift": "37aaf2437725ccae29828b885116739c4069426c00f90e6544648263078be3e9",
+    "Tests/NetworkKitTests/PrivacyManifestTests.swift": "2a53faf8231e942e18e7dbdc2d24cc7bf6d03d94e7060307b02869c90b7171a0",
+    "Tests/NetworkKitTests/PublicResponseAPITests.swift": "d31bfa319995fde23d6cc5ffd2af80f2e2bf1926e9ff34258b318d838d3351e4",
+    "Tests/NetworkKitTests/RedirectIntegrationTests.swift": "ee5feafb964508230b38e71592e71050e4e8a8d3073f81c8be3eba3d908c856a",
+    "Tests/NetworkKitTests/RequestEncodingTests.swift": "2b716f321edd736b2d74d917287c8fbead84a339824d8c76af3d49638e79319d",
+    "Tests/NetworkKitTests/ResponseDecodingTests.swift": "6b61be9f1650ad95c5f73e3af7874aabd4600232845c7e394b99875c14bb320b",
+    "Tests/NetworkKitTests/SessionTransportTests.swift": "89f91162d836068cae511c3d0c8d964538354a2162ddd60e2dde15b3faad0d67",
+    "Tests/NetworkKitTests/StorageIntegrationTests.swift": "192612de09b2271f8ee7eee5594accea30428d0e0ab88468004364fc28838de2"
+  },
+  "main_acceptance_run": 40757232306,
+  "host": {
+    "macOS": "15.8.1",
+    "build": "24H32",
+    "architecture": "x86_64",
+    "xcode": "26.3",
+    "xcode_build": "17C529",
+    "swift": "6.2.4"
+  },
+  "iPhone_fresh_boot": {
+    "bootstatus_exit": 0,
+    "timed_out": false
+  },
+  "regressions": [
+    {
+      "target": "iphone17",
+      "runtime_build": "21A328",
+      "command": "xcodebuild -workspace .swiftpm/xcode/package.xcworkspace -scheme SwiftNetworkKit -destination <exact discovered minimum simulator> -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO SWIFT_TREAT_WARNINGS_AS_ERRORS=YES test",
+      "command_exit": 0,
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 215,
+        "passedTests": 215,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "devices": [
+        {
+          "device": {
+            "architecture": "x86_64",
+            "deviceName": "NetworkKit Minimum iPhone 17.0",
+            "modelName": "iPhone 14 Pro",
+            "osVersion": "17.0",
+            "platform": "iOS Simulator"
+          },
+          "passedTests": 435
+        }
+      ],
+      "full_log_no_restart_or_time_limit": true
+    },
+    {
+      "target": "ipad17",
+      "runtime_build": "21A328",
+      "command": "xcodebuild -workspace .swiftpm/xcode/package.xcworkspace -scheme SwiftNetworkKit -destination <exact discovered minimum simulator> -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO SWIFT_TREAT_WARNINGS_AS_ERRORS=YES test",
+      "command_exit": 0,
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 215,
+        "passedTests": 215,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "devices": [
+        {
+          "device": {
+            "architecture": "x86_64",
+            "deviceName": "NetworkKit Minimum iPad 17.0",
+            "modelName": "iPad (10th generation)",
+            "osVersion": "17.0",
+            "platform": "iOS Simulator"
+          },
+          "passedTests": 435
+        }
+      ],
+      "full_log_no_restart_or_time_limit": true
+    },
+    {
+      "target": "watch10",
+      "runtime_build": "21R355",
+      "command": "xcodebuild -workspace .swiftpm/xcode/package.xcworkspace -scheme SwiftNetworkKit -destination <exact discovered minimum simulator> -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO SWIFT_TREAT_WARNINGS_AS_ERRORS=YES test",
+      "command_exit": 0,
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 215,
+        "passedTests": 215,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "devices": [
+        {
+          "device": {
+            "architecture": "x86_64",
+            "deviceName": "NetworkKit Minimum Watch 10.0",
+            "modelName": "Apple Watch Series 9 (45mm)",
+            "osVersion": "10.0",
+            "platform": "watchOS Simulator"
+          },
+          "passedTests": 435
+        }
+      ],
+      "full_log_no_restart_or_time_limit": true
+    },
+    {
+      "target": "tv17",
+      "runtime_build": "21J353",
+      "command": "xcodebuild -workspace .swiftpm/xcode/package.xcworkspace -scheme SwiftNetworkKit -destination <exact discovered minimum simulator> -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO SWIFT_TREAT_WARNINGS_AS_ERRORS=YES test",
+      "command_exit": 0,
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 215,
+        "passedTests": 215,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "devices": [
+        {
+          "device": {
+            "architecture": "x86_64",
+            "deviceName": "NetworkKit Minimum TV 17.0",
+            "modelName": "Apple TV 4K (3rd generation)",
+            "osVersion": "17.0",
+            "platform": "tvOS Simulator"
+          },
+          "passedTests": 435
+        }
+      ],
+      "full_log_no_restart_or_time_limit": true
+    }
+  ],
+  "limits": [
+    "Root deterministic/configuration regression evidence; separate opt-in public HTTPS/native suite not executed in this record.",
+    "No macOS 14 execution route verified.",
+    "No physical Watch/iPad/TV, minimum-target resource, controlled server-counter, aggregate archive/privacy or release acceptance.",
+    "Earlier acquisition/boot/signature command timeouts remain in the acquisition record; no causal claim from later success."
+  ],
+  "production_changes": false,
+  "sequential_followup": [
+    {
+      "target": "iPad (10th generation)",
+      "os": "17.0",
+      "build": "21A328",
+      "boot": {
+        "exit": 0,
+        "timed_out": false
+      },
+      "regression": {
+        "exit": 0,
+        "timed_out": false,
+        "summary": {
+          "result": "Passed",
+          "totalTestCount": 215,
+          "passedTests": 215,
+          "failedTests": 0,
+          "skippedTests": 0,
+          "expectedFailures": 0
+        },
+        "complete_pass": true
+      },
+      "cleanup": {
+        "exit": 0,
+        "timed_out": false
+      }
+    },
+    {
+      "target": "Apple Watch Series 9 (45mm)",
+      "os": "10.0",
+      "build": "21R355",
+      "companion_os": "iOS 17.0",
+      "companion_boot": {
+        "exit": 0,
+        "timed_out": false
+      },
+      "boot": {
+        "exit": 0,
+        "timed_out": false
+      },
+      "regression": {
+        "exit": 0,
+        "timed_out": false,
+        "summary": {
+          "result": "Passed",
+          "totalTestCount": 215,
+          "passedTests": 215,
+          "failedTests": 0,
+          "skippedTests": 0,
+          "expectedFailures": 0
+        },
+        "complete_pass": true
+      },
+      "cleanup": {
+        "exit": 0,
+        "timed_out": false
+      },
+      "companion_cleanup": {
+        "exit": 0,
+        "timed_out": false
+      }
+    },
+    {
+      "target": "Apple TV 4K (3rd generation)",
+      "os": "17.0",
+      "build": "21J353",
+      "boot": {
+        "exit": 0,
+        "timed_out": false
+      },
+      "regression": {
+        "exit": 0,
+        "timed_out": false,
+        "summary": {
+          "result": "Passed",
+          "totalTestCount": 215,
+          "passedTests": 215,
+          "failedTests": 0,
+          "skippedTests": 0,
+          "expectedFailures": 0
+        },
+        "complete_pass": true
+      },
+      "cleanup": {
+        "exit": 0,
+        "timed_out": false
+      }
+    }
+  ]
+}

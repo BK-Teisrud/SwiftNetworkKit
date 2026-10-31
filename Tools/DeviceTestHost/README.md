@@ -1,5 +1,7 @@
 # NetworkKit iOS device test host
 
+Optional public checks: [NET-01](../PublicHTTPSChecks/README.md) adds the separate PublicHTTPSChecks target/scheme using this same host. The default scheme still executes only the shared regression suite. Public checks are manually selected; CI compiles the optional route without executing external-service tests.
+
 PREP-02 / [#113](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/113) supplies an app-hosted test route after the package's system-xctest host was rejected on a physical destination. This is local verification infrastructure, not a distributed app or another library product. The package, public APIs and support minima remain unchanged.
 
 ## Structure and permissions
@@ -41,3 +43,22 @@ CI source integrity checks complete membership, local-package-only dependency an
 All existing Swift test/helper files are referenced directly, including PrivacyManifestTests; its Bundle.module access resolves the package resource, not a separate copied manifest. See [the inventory](../../docs/planning/TEST_INVENTORY.md) for every test declaration. The three excluded macOS-only test declarations are FixtureProcessTests.missingReadinessFailsAndStopsTheChild, FixtureProcessTests.childIgnoringTerminationIsForceStoppedWithinTheBound and NativeTLSTests.untrustedCertificateIsRejectedThroughBothPublicInputs; exact current source names are authoritative. These are compile-time platform exclusions, not skipped iOS tests. Other guarded branches preserve their documented scripted/configuration evidence instead of asserting macOS network behavior.
 
 F2 ENV-01–07, real minimum runtimes, iPad/Watch/TV execution, trusted HTTPS/hostname mismatch, transitions, target resources, aggregate archive/privacy report and owner release decisions retain their existing task owners. No new app-host feature closes #63/#86 automatically.
+
+## Unsigned Watch and TV preparation
+
+Generate an ignored platform variant from the validated shared project:
+
+```sh
+python3 scripts/ci/prepare_device_host.py --platform watchOS
+python3 scripts/ci/prepare_device_host.py --platform tvOS
+```
+
+The generated projects are under `.build/device-host-watchos` and `.build/device-host-tvos`. They reuse every shared regression and native source, use minimum watchOS 10 / tvOS 17, and disable signing by default. CI compiles both schemes for generic physical destinations; it does not install them or run public-service tests. The generator records its source hashes and validates the original host before deriving a variant. There is one shared source of test membership, rather than three independently maintained project files.
+
+The Watch host uses a minimal SwiftUI lifecycle; the iOS/TV host uses UIKit. This affects the verification app only. Physical Watch execution explicitly selects the 14 public HTTPS declarations; its ordinary app context cannot be assumed to support the seven NWListener local declarations. See [NET-04 applicability](../../docs/planning/NET04_NATIVE_CONTROLS.md).
+
+On 2026-10-31 the owner authorized registering exactly the three existing test bundle IDs and this iPad, generating three iPad-only development profiles with the existing certificate, and signing/installing/running the test packages. Apple's locked default In-App Purchase selection was explicitly approved; no purchase feature, optional capability, new certificate or distribution agreement was added. Profile identifiers, device identifiers and signing details stay private. This authorization does not cover registering or changing Watch/TV devices or profiles.
+
+## Explicit manual transition app
+
+[Manual transition procedure](../../docs/planning/MANUAL_TRANSITION_CHECKS.md) provides a separate unsigned generated app for iOS/iPadOS, macOS, Watch and TV. It uses the existing host ID/profile boundary and starts no request until an owner selects a check. The app records scene/path observations, four finite public calls, shutdown and a sample after original budgets. It never changes connectivity settings or declares acceptance. Required CI compiles all four variants; actual signed deployment, owner-driven transitions and report review remain explicit #63 work. No XCTest suite is replaced or filtered by this preparation.

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Dependency-free CI driver. Missing tools, destinations, tests, or docs fail closed."""
 import json
+import hashlib
 import os
 from pathlib import Path
 import platform
+import plistlib
 import re
 import shutil
 import subprocess
@@ -93,8 +95,10 @@ def source_integrity():
     workflow = (ROOT / ".github/workflows/ci.yml").read_text()
     match = re.search(r"^        kind: (.+)$", workflow, re.M)
     require(match and json.loads(match[1]) == KINDS, "Mandatory matrix entries missing/reordered")
-    uses = re.findall(r"uses:\s*(\S+)", workflow)
-    require(uses and all(re.fullmatch(r"actions/[\w-]+@[0-9a-f]{40}", use) for use in uses), "Actions must be GitHub-owned and SHA-pinned")
+    for workflow_path in (ROOT / ".github/workflows").glob("*.yml"):
+        uses = re.findall(r"uses:\s*(\S+)", workflow_path.read_text())
+        require(uses and all(re.fullmatch(r"actions/[\w-]+@[0-9a-f]{40}", use) for use in uses),
+                f"Actions must be GitHub-owned and SHA-pinned: {workflow_path.name}")
     validate_documented_examples(
         (ROOT / "Tests/NetworkKitTests/DocumentationExamplesTests.swift").read_text(),
         (ROOT / "Sources/NetworkKit/NetworkKit.docc/IntegrationGuide.md").read_text())
@@ -140,9 +144,31 @@ def test_destination(destination, label):
     validate_summary(summary)
 
 
+def manual_host_build(family):
+    from prepare_manual_host import prepare
+    project = prepare(family)
+    run("xcodebuild", "-project", project, "-scheme", "NetworkKitManualChecks",
+        "-configuration", "Debug",
+        "-destination", "generic/platform=" + family, "-derivedDataPath", OUTPUT / "ManualHost",
+        "CODE_SIGNING_ALLOWED=NO", "SWIFT_TREAT_WARNINGS_AS_ERRORS=YES", "SWIFT_SUPPRESS_WARNINGS=NO", "build")
+    from prepare_manual_host import PLATFORMS
+    products = OUTPUT / "ManualHost/Build/Products"
+    directory = "Debug" if family == "macOS" else "Debug-" + PLATFORMS[family][0]
+    relative = "Contents/Info.plist" if family == "macOS" else "Info.plist"
+    info = plistlib.loads((products / directory / "NetworkKitDeviceHost.app" / relative).read_bytes())
+    require(info.get("NetworkKitManualPlatform") == family, "Manual host lacks actual platform metadata")
+    require(info.get("NetworkKitVerificationCommit") == run("git", "rev-parse", "HEAD", capture=True).strip(),
+            "Manual host lacks the reviewed checkout identity")
+    require(info.get("NetworkKitManualSourceSHA256") == hashlib.sha256(
+        (ROOT / "Tools/DeviceTestHost/ManualTransitionHost.swift").read_bytes()).hexdigest(),
+            "Manual host source identity missing from actual built Info.plist")
+    print("Manual host " + family + ": actual built platform/commit/source identity verified", flush=True)
+
+
 def platform_check(kind):
     workspace()
     if kind == "macos-core":
+        manual_host_build("macOS")
         xcode("-destination", "generic/platform=macOS", "build")
         test_destination("platform=macOS,arch=arm64" if platform.machine() == "arm64" else "platform=macOS,arch=x86_64", "macos")
         return
@@ -157,11 +183,16 @@ def platform_check(kind):
     require(any(r["identifier"] == runtime and r.get("isAvailable") for r in runtimes), f"Required {runtime} unavailable")
     devices = json.loads(run("xcrun", "simctl", "list", "devices", "available", "-j", capture=True))["devices"]
     destinations = [select_device(devices, runtime, prefix) for prefix in prefixes]
-    if family == "iOS":
-        # Compile the physical app-host route without credentials or device deployment.
-        run("xcodebuild", "-project", ROOT / "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj",
-            "-scheme", "NetworkKitDeviceHost", "-destination", "generic/platform=iOS",
+    # Compile physical app-host routes without credentials, deployment or public traffic.
+    host_project = ROOT / "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj"
+    if family != "iOS":
+        from prepare_device_host import prepare
+        host_project = prepare(family)
+    for scheme in ["NetworkKitDeviceHost", "PublicHTTPSChecks"]:
+        run("xcodebuild", "-project", host_project, "-scheme", scheme,
+            "-destination", "generic/platform=" + family,
             "-derivedDataPath", OUTPUT / "DeviceHost", "CODE_SIGNING_ALLOWED=NO", "build-for-testing")
+    manual_host_build(family)
     if family == "watchOS":
         phone = select_device(devices, "com.apple.CoreSimulator.SimRuntime.iOS-26-2", "iPhone 17")
         pairs = json.loads(run("xcrun", "simctl", "list", "pairs", "-j", capture=True))["pairs"]
@@ -213,6 +244,9 @@ def main():
     else:
         platform_check(kind)
         if kind == "macos-core":
+            # Compile opt-in public-service checks, never execute them in CI.
+            run("swift", "build", "--package-path", ROOT / "Tools/PublicHTTPSChecks",
+                "--build-tests", "-Xswiftc", "-warnings-as-errors")
             # Compile/exercise the opt-in release harness without volatile timing/RSS thresholds.
             run(sys.executable, ROOT / "scripts/benchmarks/run.py", "--output", OUTPUT / "resource-smoke.json",
                 "--repetitions", "1", "--smoke")

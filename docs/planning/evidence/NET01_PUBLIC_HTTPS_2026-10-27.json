@@ -1,0 +1,133 @@
+{
+  "recorded_on": "2026-10-27",
+  "task": "NET-01 #115",
+  "accepted_production_baseline": "0aaee219b7ec9f6a81c943ae7f4d4c87a2d9b7f5",
+  "production_source_changed": false,
+  "owner_decision": "Use public HTTPBingo and BadSSL; no paid/private environment provisioning.",
+  "execution": "Explicit opt-in, serialized, synthetic values, no credentials; external tests never run in normal CI.",
+  "macOS": {
+    "OS": "15.8.1",
+    "build": "24H32",
+    "architecture": "x86_64",
+    "Xcode": "26.3/17C529",
+    "Swift": "6.2.4",
+    "SDK": "26.2",
+    "test_declarations": 8,
+    "suites": 1,
+    "typed_raw_cases": 16,
+    "exit_code": 0,
+    "unexpected_restart": false,
+    "time_limit_failure": false,
+    "certificate_transport_code": -1202
+  },
+  "physical_iPhone": {
+    "model": "iPhone 17 Pro",
+    "OS": "27.2",
+    "build": "24B119",
+    "architecture": "arm64",
+    "debug_link": "wired",
+    "Internet_interface": "not recorded",
+    "final_summary": {
+      "result": "Passed",
+      "totalTestCount": 8,
+      "passedTests": 8,
+      "failedTests": 0,
+      "skippedTests": 0,
+      "expectedFailures": 0
+    },
+    "typed_raw_cases": 16,
+    "certificate_transport_code": -1200,
+    "same_device_SecTrust_evidence": {
+      "domain": "kCFErrorDomainOSStatus",
+      "self_signed": "errSecNotTrusted / -67843",
+      "wrong_hostname": "errSecHostNameMismatch / -67602",
+      "server_trust_callback_observed": true,
+      "Foundation_transport_matches_client": true,
+      "handling": "performDefaultHandling; no credential or trust override"
+    },
+    "existing_signing_identity_and_profile_only": true,
+    "embedded_profile_matched": true,
+    "signatures_verified": true,
+    "new_certificates_profiles_or_account_updates": false,
+    "temporary_host_cleanup_exit_code": 0,
+    "unexpected_restart": false,
+    "time_limit_failure": false
+  },
+  "preserved_initial_iPhone_attempts": [
+    {
+      "stage": "Original strict transport-code assertion",
+      "summary": {
+        "result": "Failed",
+        "totalTestCount": 8,
+        "passedTests": 6,
+        "failedTests": 2,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "certificate_assertion_issues": 4
+    },
+    {
+      "stage": "Diagnostic Foundation corroboration; original assertion retained",
+      "summary": {
+        "result": "Failed",
+        "totalTestCount": 8,
+        "passedTests": 6,
+        "failedTests": 2,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "certificate_assertion_issues": 4
+    }
+  ],
+  "certificate_witness_on_Mac": {
+    "method": "Public certificate capture without HTTP payload; local Apple SSL-policy evaluation. No client trust/root changes.",
+    "independent_hostname_witness_complete": true,
+    "hosts": {
+      "sha256.badssl.com": {
+        "chain_capture_available": true,
+        "leaf_sha256": "101154813e8fdab6ba4fab575185c1a13944bcec1d849ae2cd94a073494997e3",
+        "chain_length": 3,
+        "apple_ssl_policy_exit": 0
+      },
+      "wrong.host.badssl.com": {
+        "chain_capture_available": true,
+        "leaf_sha256": "101154813e8fdab6ba4fab575185c1a13944bcec1d849ae2cd94a073494997e3",
+        "chain_length": 3,
+        "apple_ssl_policy_exit": 1,
+        "hostname_mismatch_reported": true,
+        "same_captured_chain_matching_hostname_exit": 0
+      },
+      "self-signed.badssl.com": {
+        "chain_capture_available": true,
+        "leaf_sha256": "977587271aaa818b96e332814ab0850e71059ab9961c787afd6c552a852c6606",
+        "chain_length": 1,
+        "apple_ssl_policy_exit": 1
+      }
+    }
+  },
+  "generic_connection_negative_control": {
+    "control": "Replace self-signed fixture with a closed loopback HTTPS port in an isolated package copy; no production/source mutation.",
+    "compiled": true,
+    "exit_code": 1,
+    "expected_certificate_assertion_failures": 2,
+    "selected_test": "untrustedCertificate / typed and raw",
+    "root_source_unchanged": true,
+    "source_sha256": "a3f4748f1d9f702a3a28b83d327d7fb2920b95beeaf8c012b7cdd45481bf7287",
+    "scope": "Generic connection failure cannot pass certificate-rejection checks."
+  },
+  "source_sha256": {
+    "Tools/PublicHTTPSChecks/Package.swift": "57ea65e6920f13f89773a0edf4e25c4f28606bfed9b46c08b4c53a91f5c98f69",
+    "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicHTTPSTests.swift": "a3f4748f1d9f702a3a28b83d327d7fb2920b95beeaf8c012b7cdd45481bf7287",
+    "Tools/PublicHTTPSChecks/certificate_witness.py": "de2c120f9ca113d06ec42d6e8d0a0839db4b042550706a01a03dd9239a35ae88",
+    "Tools/DeviceTestHost/AppDelegate.swift": "af2c1199744e3a5fc0b652d51c29a78c18041679b17616b0298dbcadafaea847",
+    "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj/project.pbxproj": "11a50da918e1d3137d40862117946f0fc5771d249a1f11e00f23ffb83427a54b",
+    "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj/xcshareddata/xcschemes/PublicHTTPSChecks.xcscheme": "952c0c45a2090c3ba7108a42f3652926c481780c5b381827510748a702b18849"
+  },
+  "remaining_limits": [
+    "No maintainer-controlled server request counters/denied-destination zero-contact proof.",
+    "Budget case does not establish server receipt or exact response timing.",
+    "Mac certificate-chain witness is not an iPhone peer fingerprint trace.",
+    "No minimum-runtime, other physical targets, full ENV-01\u201307, quantitative resource, archive/privacy-report or owner release acceptance."
+  ],
+  "raw_logs_xcresults": "Retained privately; bodies, IPs, device/account/profile IDs and full native errors not published."
+}

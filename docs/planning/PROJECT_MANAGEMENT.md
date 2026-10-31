@@ -12,7 +12,7 @@ The owner permits up to five concurrent work processes, including independent is
 
 Conservatively permit at most two heavy CI workflows at once (two matrix jobs each) plus one local heavy verification process, keeping the planned heavy-work budget within five. Do not fan out five workflows that each start two matrix jobs. Respect GitHub's actual runner limits and preserve standard runners. A PR is created before preparing the next independent PR; do not launch simultaneous publication operations. Stop adding work when capacity is reached.
 
-Do not wait or repeatedly poll for GitHub. The owner may authorize continuation after a stop. Independently Ready work can continue sequentially after a PR is created when the dependency/overlap/capacity review permits it; once useful progress requires GitHub results, stop and report the pending run. No unattended monitor or automatic resumption is implied. P0 means incident/gate; P1 necessary core work; P2 later extensions; P3 research. Priority does not authorize code.
+The owner explicitly reconfirmed on 2026-10-31: stop whenever a GitHub run is pending and await the owner's instruction to continue. Do not poll or continue independent work across that stop. Independent Ready work may be prepared only while this stop condition does not apply, after dependency/overlap/capacity review. No unattended monitor or automatic resumption is implied. P0 means incident/gate; P1 necessary core work; P2 later extensions; P3 research. Priority does not authorize code.
 
 ## Fields and views
 
@@ -48,6 +48,14 @@ These are Projects features, not GitHub Actions workflows.
 | Auto-archive / review approved / changes requested | Off; retain history and avoid misleading solo-review transitions |
 
 Issue #40 functionally verifies import, Done without closure, completed, and reopening. Results/limitations are in [setup status](../governance/SETUP_STATUS.md). PR/subissue rules are configured and read back; do not claim separate end-to-end tests without evidence.
+
+## Verification-gated issue closure
+
+For issues that require both PR and main verification, use neutral references such as `Tracking: #123` in PR bodies. Do not place a GitHub closing keyword followed by an issue reference anywhere in the body, including future-tense instructions, quotations or a statement that closing should happen later. GitHub can interpret those references at merge regardless of the intended timing.
+
+Check a prepared body for unintended closing syntax, and inspect `gh pr view NUMBER --json closingIssuesReferences` when finishing the PR metadata. For verification-gated work the list must be empty. Record main acceptance before manually marking the relevant issue completed/Done. A merge-triggered automatic closure is not evidence that main passed; preserve its event and record actual later acceptance separately.
+
+PR #135 exposed this issue: its narrative instruction created a closing reference to #64. The main run later passed and the formal acceptance was recorded then; #27 and F2 remained open until their final verification. This process correction does not change product scope, branch protection or required checks.
 
 ## Maintenance
 

@@ -1,14 +1,18 @@
-# F2 selected-requirement reconciliation — preliminary
+# F2 selected-requirement reconciliation — GATE-F2 review
 
-Date: 2026-10-27. Owner/task: @BK-Teisrud / GATE-F2 #86. Status: INCOMPLETE; this is preparatory reconciliation, not F2 acceptance or release authorization.
+## Accepted F2 closeout — 2026-10-31
 
-Baseline: accepted main `d64ef1ff09985dc2d6e30603fefd3e39ed1d6a3e` (PR #105). [Main run 40556606300](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/40556606300) passed all seven jobs, including macOS 218 tests/28 suites and four simulator targets 215 tests/26 suites each. Full logs verified typed/raw certificate-specific rejection and cleanup, release smoke and control typechecking, without unexpected restarts/time-limit failures. This is inherited accepted evidence, not a new run and not minimum/physical execution. PR #111's proposed retry work is excluded from this baseline and from v1.
+F2 is CLOSED after PR #135/main `cc654ab5faadc0fc7fe00d7ad238b2e3ed5a997c`, [run 41242130528](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41242130528), with full-log verification of 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. #64/#27 are Done; direct item lists and GraphQL verify no open F2 issues/PRs. [Closeout evidence](F2_CLOSEOUT_2026-10-31.md) records the milestone summary-counter disagreement and actual verified states.
+
+Original candidate evidence files retain their submission-time pending flags and exact executed SDK/platform/failure limits. The owner resource approval is F2-only. #132 physical Watch and #29 actual workload/device-memory/security/publication decisions remain mandatory in their separate milestone, with support unchanged. No release/tag, production suitability or F3 implementation is authorized.
+
+PLAN-F3 #87 is Ready for planning only: review draft PR #111 and obtain a separate approved feature scope/start decision before code. Closed F2 is not publication or extension authorization.
 
 ## Source, IDs and claim boundary
 
 Re-read original specification v1.0 §4.1–4.4, §4.13–4.16, §4.18 and §4.20. Stable NK-domain subrequirement IDs below follow original bullet order, including bullets continued across pages. These IDs add traceability, not scope. Selected/partial/deferred dispositions interpret already accepted [v1 scope](V1_SCOPE.md) and ADR-0003/0005/0006/0007; they do not override them. A mismatch must receive an explicit impact decision, never be silently declared delivered.
 
-Evidence IDs refer to exact named tests in [the contract ledger](TEST_EVIDENCE.md) and [current inventory](TEST_INVENTORY.md). Each row inherits the accepted baseline/run above; issue IDs identify original slices, with their PR/main history on GitHub. Tests prove the bounded assertions under the ledger's scripted/native platform limitations, not universal target behavior. Every selected/partial row remains subject to applicable ENV evidence and final acceptance; none closes its epic by table membership. Keep historical run counts unchanged.
+Evidence IDs refer to exact named tests in [the contract ledger](TEST_EVIDENCE.md) and [current inventory](TEST_INVENTORY.md). Each row inherits the accepted baseline/run above; issue IDs identify original slices, with their PR/main history on GitHub. Tests prove the bounded assertions under the ledger's scripted/native platform limitations, not universal target behavior. Selected/partial rows are reconciled against the accepted F2 evidence and explicit phase deferrals below; none closes its epic by table membership. The original ledger remains a dated snapshot; this review supplies its current gate disposition without changing historical counts. Keep historical run counts unchanged.
 
 ## NK-01 / #8
 
@@ -67,7 +71,7 @@ Contract: [HTTP_API_CONTRACT.md](HTTP_API_CONTRACT.md).
 | NK-04-02 | HTTP failure | Partial: status/headers; no captured error body | H09/H12/H14; I07/I10 |
 | NK-04-03 | Encoding versus decoding | Selected | H08/H09/H12; I05/I07/I10 |
 | NK-04-04 | Timeout versus cancellation | Selected; CancellationError remains separate | H13/L05–L08; I12 |
-| NK-04-05 | Security errors | Selected safe structured failure; native trust evidence incomplete | S01–S04/TLS-01; I09/#104 |
+| NK-04-05 | Security errors | Selected safe structured failure; recorded native trust evidence, physical Watch before publication | S01–S04/TLS-01; I09/#104 |
 | NK-04-06 | Retry classification | Deferred | V1_SCOPE.md |
 | NK-04-07 | Safe diagnostic context | Selected fixed metadata, no payload | S11–S13; I15 |
 
@@ -126,8 +130,8 @@ Contract: [CI_AND_TEST_PLAN.md](CI_AND_TEST_PLAN.md).
 | NK-16-05 | Auth concurrency | Partial: provider/account isolation; refresh deferred | S08–S10; I14 |
 | NK-16-06 | Cancellation cleanup | Selected | L06/L08–L11; I12/I13 |
 | NK-16-07 | Cache test engine | Deferred; core storage-profile probes retained | S05–S07; I16 |
-| NK-16-08 | Controlled integration server | Selected; native HTTPS/required target gaps remain | S03/S06/#104/ENV-01–07; #62/#63 |
-| NK-16-09 | Performance evidence | Partial: measured baseline and attribution; actual target suitability outstanding | RESOURCE_BASELINE.md/REPEATED_CALL_MEMORY.md; I20/RES-01/#62/#63 |
+| NK-16-08 | Controlled integration server | Selected controlled local/public fixture scope; physical Watch deferred only by ADR-0013 | S03/S06/#104/ENV-01–07; #62/#63 |
+| NK-16-09 | Performance evidence | Partial: measured baseline/attribution and bounded target observations; owner workload/publication disposition remains | RESOURCE_BASELINE.md/REPEATED_CALL_MEMORY.md; I20/RES-01/#62/#63 |
 
 ## NK-18 / #25
 
@@ -163,21 +167,52 @@ Contract: [API_REVIEW.md](API_REVIEW.md).
 
 #12 / NK-05: only once-per-call headers, explicit opt-out and account/origin binding are selected (S08–S10, I14). Login, Keychain, OAuth/OIDC and refresh remain deferred. #13 / NK-06: HTTPS/system trust, safe redirects and credentials are core foundations (S01–S04, I09/I19/TLS-01); pinning/mTLS/HMAC/custom trust remain deferred. #24 / NK-17: session reuse, baseline and attribution support core quality (L04, I20/RES-01); coalescing, streaming and optimization products remain deferred. #26 / NK-19: declared platforms and availability support core (C01/C02, I18); background transfers, local discovery, app groups and visionOS remain deferred. Keep these extension epics open: foundations do not deliver their future catalog.
 
-## Remaining evidence and exact closure sequence
+## Accepted epic scope and retained obligations
 
-| Gate | Required outcome | Current disposition |
+| Epic | Reviewed stable IDs | Selected delivery and explicit exclusions | Disposition after this review PR/main acceptance |
+| --- | --- | --- | --- |
+| #8 HTTP | NK-01-01–11 | Methods/headers/body, storage profile, bounded safe redirects, timeout/cancellation and raw requests; no priority API/interceptors | Accepted/closed through #86 and PR #134/main 41238957032; Watch execution remains #132/#29 |
+| #9 endpoints | NK-02-01–07 | Safe typed/raw URLs, ordered query and per-call core policy; no automatic API versioning or retry/cache product | Accepted/closed through #86 and PR #134/main 41238957032 |
+| #10 responses | NK-03-01–08 | Buffered JSON/Data/text/empty/status/metadata and value strategies; no streaming/custom decoder framework | Accepted/closed through #86 and PR #134/main 41238957032 |
+| #11 errors | NK-04-01–07 | Structured safe categories, separate cancellation and metadata; no retry classification/error-body capture | Accepted/closed through #86 and PR #134/main 41238957032 |
+| #20 diagnostics | NK-13-01–07 | Disabled-by-default fixed terminal sink, request identity and exclusion of sensitive fields; no metrics/signposts/levels/sampling product | Accepted/closed through #86 and PR #134/main 41238957032 |
+| #21 concurrency | NK-14-01–08 | Swift 6 isolation, per-call cancellation, explicit joined shutdown and session ownership; no batch/stream/deduplication product | Accepted/closed through #86 and PR #134/main 41238957032 |
+| #22 configuration | NK-15-01–06 | Immutable values, explicit ownership/storage/auth/timeout/status and headers; no mutable singleton/network-cost API | Accepted/closed through #86 and PR #134/main 41238957032 |
+| #23 testability | NK-16-01–09 | Injectable client examples, scoped fixtures, timing/auth/cleanup tests, local/public native and bounded resource records; no custom cache test engine | Accepted/closed through #86 and PR #134/main 41238957032 with exact native/applicability limits and physical Watch #132 retained |
+| #25 privacy | NK-18-01–07 | No default sensitive diagnostics/telemetry or owned stores; app owns opted-in stores/deletion; no SDK payload-file or custom-cache deletion feature | Eligible for selected product/F2 scope closure; actual distribution report is #64, app practice/workload/security publication decision remains #29 |
+| #27 developer experience | NK-20-01–09 | Reviewed public API, compiled DocC/examples, platform/CI and policy | Closed/Done after #64 acceptance through PR #135/main 41242130528; separate publication #29 remains open |
+
+The nine selected-core closures are now recorded against accepted PR #134/main 41238957032. No future catalog item is implemented or waived by closing its selected core domain. [Cross-cutting extension foundations](#cross-cutting-extension-foundations) keep #12/#13/#24/#26 open under their future planning owners.
+
+## Current disposition of original evidence gaps
+
+| Ledger gap | Reconciled phase evidence | Remaining boundary and owner |
 | --- | --- | --- |
-| #62 / ENV-01–05 and applicable resource scenarios | Execute iPhone/iOS 17, iPad/iPadOS 17, macOS 14, watchOS 10 and tvOS 17 with exact candidate/OS/build/fixture | Blocked: no local minimum runtime or macOS 14 route verified. Newer CI/deployment-target compilation is insufficient |
-| #63 / ENV-01–07 | Representative physical iPhone/iPad/Mac/Watch/TV; native networking, transitions, cancellation, storage, safe diagnostics and resource suitability | Blocked: device records do not establish current communication/deployment; connection and any signing/install route need concrete selection |
-| #62/#63 / ENV-02 | Controlled system-trusted success; separate invalid chain and hostname mismatch, typed/raw, plus native redirect/challenge evidence | Partial only: #104 proves owned-session untrusted-chain rejection on observed macOS. Controlled trusted fixture and independent hostname mismatch remain missing |
-| #62/#63 / ENV-07 | Actual target call rate/concurrency/payload/budget, cleanup and post-original-deadline resource observation | Local I20/RES-01 evidence exists; target suitability and owner disposition still missing |
-| #86 | Complete all selected rows, applicable target results and explicit deferrals; review/close eligible core epics with evidence | Remains Blocked/open. This preliminary matrix does not satisfy the gate. Do not create a dependency on #64 or #29 |
-| #64 then #27 | Clean-consumer rehearsal, all build/test gates, rights/DocC/changelog; actual archive manifest inclusion and aggregate privacy report | Pending #86/#63. #27 stays open for this rehearsal; no circular blocker from #86 to #27 closure |
-| #29 | Explicit owner release/risk decision and actual authorized release/tag/install verification | Pending. Preparing release evidence is authorized; tag/publication remains a separate decision |
+| G01 native trust | NET-01/02/03/04, #104, actual macOS 14 and non-Watch target records; independent invalid-chain/hostname witnesses | Physical Watch #132/#29; public responses are not controlled-contact counters; preserve iPad original failure and supplemental result |
+| G02 native lifecycle/network behavior | Local native counters/timeout/cancellation/storage and four accepted physical transition reports | Document selected applicability; no automatic retry, background-transfer or arbitrary network-cost promise; physical Watch #132 |
+| G03 minimum and physical access | #62 accepted five minimum-family destinations within exact patch/architecture/suite limits; revised #63 non-Watch scope accepted | No exact macOS 14.0/Intel14/full older-host suite claim. Physical Watch is explicitly deferred only by ADR-0013, not passed |
+| G04 privacy/storage/manifest | #60 review, strict profiles, isolated app-managed cookie deletion and Foundation controls; payloads are not persisted by the SDK | Foundation cache/challenge positives do not prove an SDK app-managed HTTPS feature beyond the selected contract. Source review confirms appManaged retains the supplied session/cache behavior while rejecting credential stores; strict mode overrides automatic storage. Controlled local policy/counter tests and native public TLS observations are separate evidence, not a claimed exhaustive combined HTTPS fixture. Actual archive/aggregate manifest rehearsal #64; app practice and release owner decision #29 |
+| G05 API/availability/examples | #59 accepted, external consumer tests and byte-matched compiled DocC examples; actual selected builds/minimum-family scope | Preserve public/private seam, rights and runtime limits; final package/installation rehearsal #64 |
+| G06 resources | #61/#100 attribution, controlled local/native comparisons and bounded per-target post-budget reports | Owner explicitly approved only the non-publishing F2 rehearsal with the stated limitations. No universal RSS cap or workload suitability; #29 still requires actual workload/rate/payload/budget/device-memory assessment; physical Watch #132 |
+| G07 governance/rehearsal/release | This #86 review and accepted ADR-0013/non-Watch matrix | This review PR/main, then #64/#27 and F2. Separate #29/#132 publication milestone remains open; no tag/release/F3 start |
 
-[Environment readiness](ENVIRONMENT_READINESS.md) defines precise ENV scenarios and sanitized record fields. [Security/privacy review](SECURITY_PRIVACY_REVIEW.md) defines independent trust cases and final app/archive responsibilities. [Repeated-call attribution](REPEATED_CALL_MEMORY.md) preserves uncertainty about runtime helper retention and resident pages; no scheduler rewrite or universal memory cap is justified. Preserve the original unexplained fixture/iOS timeout incidents even after passing follow-ups.
+## Resource disposition for this gate
 
-## Current access refresh and next actions
+Technical assessment: existing evidence attributes a substantial transient component to runtime sleep-helper/dispatch storage surviving logical cancellation until original deadlines on measured runtimes. Remaining resident-page ownership is not exhaustively attributed. No retained NetworkKit operation graph requiring a small product fix was established. A new scheduler/clock rewrite, arbitrary performance threshold, unsupported device guarantee or generic refactoring ticket is not justified by these results.
+
+Owner decision, 2026-10-31: explicitly APPROVED for the non-publishing F2 rehearsal only. Translated owner reply: “Approve only the F2 rehearsal with these limitations.” The original approval remains in the conversation. The concrete question explains call-rate, payload/budget and process-memory limits, including that the provisional eight-active-call / expected 1 MiB guidance is not an enforced cap or validated production fit. #29 must still obtain the actual app workload and a separate suitability/security/publication decision; no production risk acceptance is inferred. This bounded phase disposition is recorded; no production suitability, publication or universal memory guarantee is approved.
+
+## Completed phase sequence and remaining gates
+
+1. #62, revised #63, #86 and the nine selected-core epic closures are accepted under their recorded PR/main evidence and approved F2-only resource disposition.
+2. #64's executed non-publishing rehearsal is accepted through PR #135/main 41242130528; #27 then completed. F2 is CLOSED with empty open-issue/open-PR connections; the summary-counter disagreement is recorded in the closeout evidence.
+3. #132 physical Watch and #29 actual workload/security/publication decisions remain mandatory. Support is unchanged, no release/tag exists, and F3 implementation still requires its own scope/start decision. #87 is Ready for planning only; #12/#13/#24/#26 remain deferred extension epics.
+
+## Forward quality and backlog assessment
+
+The remaining problem was outdated current-state reporting and incomplete evidence-to-epic disposition, not a newly established SDK defect. Refresh current gate rows and issue acceptance while preserving historical snapshots. Existing tests, native fixtures and review tasks cover the selected scope; no extra product dependency, feature, refactor, duplicate issue or milestone is selected. WATCH-01 remains the concrete infrastructure follow-up already approved. Retry-first #87 / draft PR #111 does not satisfy an F2 requirement.
+
+## Historical access refresh and next actions — 2026-10-27
 
 Read-only CoreDevice/simulator inventory on 2026-10-27 again found no iOS 17/tvOS 17/watchOS 10 runtime. Stored/discovered iPhone 17 Pro (27.2/24B119) and Watch Ultra 2 (26.6/23U67) have disconnected network tunnels; iPad Pro 11-inch third generation (27.0.1/24A446) has unavailable tunnel. Per-device DDI services are unavailable; iPhone Developer Mode is enabled, iPad/Watch disabled. TV is not listed, which does not establish absence. These were the initial records, not execution proof. The following owner/connection update supersedes only the iPhone connectivity observation. No settings, pairing, signing, deployment, runtime install or root change occurred. Private identifiers/raw inventory remain outside the repository.
 
@@ -196,3 +231,21 @@ The main reconciliation gap was traceability: generic epic checkboxes did not en
 ## PREP-02 implementation follow-up
 
 [The app-hosted iOS route](IOS_DEVICE_TEST_HOST.md) and [host runbook](../../Tools/DeviceTestHost/README.md) now provide a minimal local host/test project using all 22 shared test/helper files. App-hosted iOS 26.2 simulator execution passed 215/215 tests, zero skipped/failed/expected failures. This supersedes the earlier no-host preparation state only; no minimum/native-complete/F2 acceptance follows. Existing-profile app-hosted execution on iPhone 17 Pro/iOS 27.2 passed 215/215 tests with zero skipped/failed/expected failures, and the temporary host was removed. Required PR/main acceptance remains on #113; #63 retains ENV-01–07 and actual resource/HTTPS evidence. No product-source change or new milestone is selected.
+
+## NET-01 acceptance / NET-02 follow-up — 2026-10-28
+
+NET-01 #115 is accepted through PR #116 and main 40644612904. [NET-02 #117](NATIVE_LIFECYCLE_STORAGE.md) adds bounded native cancellation/shutdown/cookie observations; #63 retains complete target/ENV/resource evidence. [Three exact minimum-runtime candidates](MINIMUM_RUNTIME_ACCESS_2026-10-28.md) were initially catalogued with anonymous unauthorized HTML responses. The authenticated follow-up verifies all three imports and architecture inventory; [four actual minimum simulator root regressions](MINIMUM_RUNTIME_EXECUTION_2026-10-28.md) subsequently passed locally, 215/215 each. macOS 14 and separate native/resource scenarios remain open; new evidence awaits PR/main acceptance. NET-02 is accepted through PR #118/main 40745209513. No F2 or release criterion is waived.
+
+## Minimum macOS access route — 2026-10-29
+
+PR #120 minimum simulator regression evidence is accepted through main run 40765690271. The owner has no second Mac. The [temporary standard GitHub macOS 14 route](MACOS14_EXECUTION_ROUTE_2026-10-29.md) builds a public consumer with Xcode 26.3 and runs the unchanged executable on the older OS; it is not an older-toolchain build or a support change. Actual execution and its exact patch/build remain pending, as do the other selected native/resource/physical/archive/release gates.
+
+## Current priority refresh — 2026-10-31
+
+Main 0ab623fe67e1be161f2ef1f3ac2fc67107cebb70 is accepted through run 41179384664. The prepared macOS 14 consumer route has completed, with [preserved results](evidence/MACOS14_RUNTIME_2026-10-31.json); its one-off workflow is retired. The earlier access statements above are historical, not the current claim that no macOS 14 route exists.
+
+Continue NET-03 #122: review/negative controls and expanded minimum/physical loopback results, then remaining #63 device-family and foreground/background/network-loss evidence. Previous temporary NET-03 device/simulator records were unavailable on resumption and are not accepted for that candidate. Resource measurements remain observations requiring workload suitability and owner risk disposition. Keep #62/#63 open and reconcile #86 only after their applicable requirements are satisfied; #64 consumer/archive/privacy rehearsal follows its acceptance dependencies. No duplicate environment issue, scope expansion, retry implementation or support-minimum change is warranted by this access result.
+
+NET-03 candidate update (2026-10-31, review pending): the fresh iOS/iPadOS 17.0 simulator runs each passed the expanded opt-in suite, 19 declarations / 40 parameter cases. Physical iPhone 17 Pro/iOS 27.2 passed seven selected loopback declarations / 14 cases. Zero failures/skips/expected failures; cleanup succeeded. [NET-03](NET03_NATIVE_LOOPBACK.md) preserves isolated negative controls, source hashes and limits. These candidate results do not establish accepted main, physical iPad/Watch/TV, minimum Watch/TV native scenarios, physical transitions, SDK app-managed HTTPS cache/credential behavior or archive/privacy acceptance. No gate is closed from these results.
+
+Minimum-native follow-up, 2026-10-31: [Watch/TV execution](MINIMUM_NATIVE_EXECUTION_2026-10-31.md) on accepted 5d2ae116 completed with TV 17/19 and Watch 16/19 declarations passed. Zero skips/expected failures; failed public timeouts and Watch Foundation-challenge/app-managed cookie controls remain failures. A later plain Foundation TV control passed but does not explain the SDK timeouts. NET-04 #126 is P1 CORE and blocks affected #62/#63 claims; no F2 acceptance, skipped assertion or support change. Owner workload remains unknown, so no app-specific resource suitability is accepted.

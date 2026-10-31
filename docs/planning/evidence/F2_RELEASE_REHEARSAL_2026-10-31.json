@@ -1,0 +1,255 @@
+{
+  "date": "2026-10-31",
+  "task": 64,
+  "candidate_source_commit": "966599844ba59a35347e0f215f122fdebf084df3",
+  "status": "executed; evidence PR/main acceptance pending",
+  "accepted_ci": {
+    "run": 41238957032,
+    "all_seven_checks_passed": true,
+    "full_log_reviewed": true,
+    "mac_tests": 218,
+    "simulator_runs": {
+      "iPhone": 215,
+      "iPad": 215,
+      "Watch": 215,
+      "TV": 215
+    },
+    "helper_tests": 19,
+    "manual_host_identity_checks": 4,
+    "failure_or_restart_markers": false
+  },
+  "fresh_checkout": {
+    "source": "local immutable Git clone of the fetched accepted commit",
+    "detached_head_verified": true,
+    "clean_before_and_after": true,
+    "local_regression_tests": 218,
+    "local_regression_suites": 28,
+    "warnings_as_errors": true
+  },
+  "revision_installation": {
+    "commit": "966599844ba59a35347e0f215f122fdebf084df3",
+    "dependency_url": "https://github.com/BK-Teisrud/SwiftNetworkKit.git",
+    "pin_count": 1,
+    "resolved_revision_verified": true,
+    "dependency_checkout_clean": true,
+    "release_warnings_as_errors_build_exit": 0,
+    "public_import_only": true,
+    "probe_source_sha256": "347d46a297d1a42476968e65e355dd0367dadb2ef1de2204b950a76b19b3731b",
+    "package_resolved": {
+      "originHash": "92283af8770ff24780c882091f2f2f23848732f9a22af7703ead11321fd4003d",
+      "pins": [
+        {
+          "identity": "swiftnetworkkit",
+          "kind": "remoteSourceControl",
+          "location": "https://github.com/BK-Teisrud/SwiftNetworkKit.git",
+          "state": {
+            "revision": "966599844ba59a35347e0f215f122fdebf084df3"
+          }
+        }
+      ],
+      "version": 3
+    },
+    "loopback_smoke_record": "snk-f2-revision-native-smoke.json",
+    "no_tag_or_release_created": true
+  },
+  "native_public_consumer_smoke": {
+    "environment": {
+      "product_commit": "966599844ba59a35347e0f215f122fdebf084df3",
+      "tracked_checkout_clean": true,
+      "probe_sha256": "347d46a297d1a42476968e65e355dd0367dadb2ef1de2204b950a76b19b3731b",
+      "runner_sha256": "4cfaf8f983b5924fbdc6f4e8b883660814a67b304710b92ede8cd0e2059154ba",
+      "os": "ProductName:\t\tmacOS\nProductVersion:\t\t15.8.1\nBuildVersion:\t\t24H32",
+      "architecture": "x86_64",
+      "xcode": "Xcode 26.3\nBuild version 17C529",
+      "swift": "Apple Swift version 6.2.4 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)\nTarget: x86_64-apple-macosx15.0",
+      "sdk": "26.2",
+      "python": "3.13.5",
+      "build": "prebuilt; see verified builder manifest",
+      "repetitions": 1,
+      "smoke": true,
+      "post_budget": false,
+      "sampling": "fresh process per repetition; RSS in bytes; 100ms post-shutdown sample"
+    },
+    "results": [
+      {
+        "call_p50_seconds": 0.001827469,
+        "call_p95_seconds": 0.003593128,
+        "calls_per_cycle": 4,
+        "cancellation_join_seconds": 0,
+        "cancelled_calls": 0,
+        "concurrency": 1,
+        "cycle_seconds": [
+          0.010110277
+        ],
+        "cycles": 1,
+        "mode": "reuse",
+        "payload_bytes": 65536,
+        "rss_cycle_bytes": [
+          5718016
+        ],
+        "rss_initial_bytes": 1912832,
+        "rss_settled_bytes": 5746688,
+        "rss_shutdown_bytes": 5726208,
+        "rss_warm_bytes": 5599232,
+        "shutdown_seconds": 5.1624e-05,
+        "payload_requests": 5,
+        "payload_connections": 1,
+        "slow_started": 0,
+        "repetition": 1,
+        "peak_rss_bytes": 5828608
+      },
+      {
+        "call_p50_seconds": 0,
+        "call_p95_seconds": 0,
+        "calls_per_cycle": 8,
+        "cancellation_join_seconds": 0.004282239,
+        "cancelled_calls": 8,
+        "concurrency": 8,
+        "cycle_seconds": [],
+        "cycles": 0,
+        "mode": "cancel",
+        "payload_bytes": 65536,
+        "rss_cycle_bytes": [
+          6266880
+        ],
+        "rss_initial_bytes": 1843200,
+        "rss_settled_bytes": 6295552,
+        "rss_shutdown_bytes": 6275072,
+        "rss_warm_bytes": 5537792,
+        "shutdown_seconds": 5.6557e-05,
+        "payload_requests": 1,
+        "payload_connections": 1,
+        "slow_started": 6,
+        "repetition": 1,
+        "peak_rss_bytes": 6381568
+      }
+    ]
+  },
+  "clean_unsigned_consumer_archive": {
+    "accepted_source_commit": "966599844ba59a35347e0f215f122fdebf084df3",
+    "archive_build_exit": 0,
+    "clean_checkout_before_and_after": true,
+    "unsigned": true,
+    "physical_install_or_distribution": false,
+    "binary_architecture": "arm64",
+    "binary_and_dsym_uuid_match": true,
+    "sdk_symbol_records_in_matching_dsym": 1818,
+    "api_client_symbol_records_in_matching_dsym": 110,
+    "sdk_manifest_count": 1,
+    "sdk_manifest_relative_path": "SwiftNetworkKit_NetworkKit.bundle/PrivacyInfo.xcprivacy",
+    "sdk_manifest_sha256": "528ab3fca910d2ac2f3ef256d5ea4c2327303a7a4a5efb9236987f3018e311f3",
+    "sdk_manifest_content": {
+      "NSPrivacyTracking": false,
+      "NSPrivacyTrackingDomains": [],
+      "NSPrivacyCollectedDataTypes": [],
+      "NSPrivacyAccessedAPITypes": []
+    },
+    "product_minimum_ios": "17.0",
+    "new_report_exported": false,
+    "existing_reports_reused_because_all_executable_manifest_and_consumer_inputs_identical": true,
+    "complete_binary_api_or_app_store_acceptance": false
+  },
+  "archive_input_provenance": {
+    "commit": "966599844ba59a35347e0f215f122fdebf084df3",
+    "checkout_clean_at_start": true,
+    "preparation_source": "5d2ae116ec685c483b1dcc31db9e41a850c4e2ac",
+    "consumer_inputs_verified_against_accepted_preparation_hashes": true,
+    "initial_comparison_stopped_before_build_because_consumer_was_added_after_sdk_baseline": true,
+    "changed_binary_manifest_inputs": [],
+    "hashes": {
+      "Package.swift": "f345ef3bc7f89ca9a934ce09f4d68da5829363f82d3ce72d04f368ba626745ad",
+      "Sources/NetworkKit/APIClient.swift": "4128d68707c6353cfcc60139acca0f92b4123c5c0f6f1a9ede298bd7de6c4888",
+      "Sources/NetworkKit/Authentication.swift": "46b8cdfd416b178e092d1dfbe70c97f10e0b31e027a114b7e41264e8c56768bf",
+      "Sources/NetworkKit/ClientLifecycle.swift": "ba7d243eb266b79c7157c66341d48896f8693354d9aa369aba8d93abbacc25ae",
+      "Sources/NetworkKit/Diagnostics.swift": "019b95d3992a4bd44d471a37f8d5f59631425d9cbceb97eb8e66595d0d12290f",
+      "Sources/NetworkKit/Endpoint.swift": "7b196e8ede8a9c031595e3ecdd72bfc3aaeecdc6610d055f383a787b976dec31",
+      "Sources/NetworkKit/ExecutionBoundaries.swift": "7431f0fa2688e11be5649b687b81c4bbd313c78bc613bb8d68bf1248daef494c",
+      "Sources/NetworkKit/HTTPHeaders.swift": "45bfe1c8779e3f39c048fc1a299bd6ee8a75fe28d71ea797ce704c7eccc4b4f4",
+      "Sources/NetworkKit/HTTPMethod.swift": "98bde648d1db468b7b29a1856ace61a7301f6daf057eb99cd6e5114a31456bdb",
+      "Sources/NetworkKit/HTTPStatus.swift": "84bde1bf4b8a3c92e66f9c8bacdf079b56de7fc92a851134723e54017257ca71",
+      "Sources/NetworkKit/HTTPStatusPolicy.swift": "f28eb6564f87d7988aa281683bd6c398f340eaa32434ee3d5245021355954722",
+      "Sources/NetworkKit/HTTPToken.swift": "d9053f6ff580b333c643e0209d8e001e008506a95f41581f9b60bc46402bb13b",
+      "Sources/NetworkKit/JSONDecodingOptions.swift": "d11a252a75f1a4cfb814d2ed0fbb3e4dbcb85200d5e9b978a1e1f83f3ca50904",
+      "Sources/NetworkKit/NetworkConfiguration.swift": "bb8163d62a7db2bcb39f0c87e95b3038142749f834821ded680b0d0d8a7eb9af",
+      "Sources/NetworkKit/NetworkError.swift": "bd9133325b2af1255af713b7d9557c476dac5483448f8c565eb961f4016eede4",
+      "Sources/NetworkKit/NetworkKit.swift": "7af95bcc95f8e800d953b02b1751b05bce237bc7d5107e58eaf042c22a1285d9",
+      "Sources/NetworkKit/NetworkOperation.swift": "a1e6a31c7f1d650dbbec50c2c175af94b80a4b3ef090c594379c5984d3b821e0",
+      "Sources/NetworkKit/NetworkResponse.swift": "2267de5fe325f2c310dfb875a2e1b3b230713d2397a423e53ba303a72674067d",
+      "Sources/NetworkKit/NetworkSecurityPolicy.swift": "cc85f6f2ab60f79731207d81e80f30bf5e032b0f2351ae42177e2ab62f29f3d9",
+      "Sources/NetworkKit/NetworkTaskDelegate.swift": "d9a97411a31d322a971685604d39de115112e606d7bb8e6837ea0005305f0bd8",
+      "Sources/NetworkKit/PrivacyInfo.xcprivacy": "528ab3fca910d2ac2f3ef256d5ea4c2327303a7a4a5efb9236987f3018e311f3",
+      "Sources/NetworkKit/RequestBody.swift": "914d27be0edb4fa36fc91e57787bf6d9c0311acbeb0a2d8334e24f2bf2cbbcdb",
+      "Sources/NetworkKit/RequestBuilder.swift": "bbe0ac5e6d4e8ec3c0474126b9db3588799c631ad1e73caa07fac859faab8259",
+      "Sources/NetworkKit/RequestURLBuilder.swift": "404943fa36c0fe5e7df5c078412ad6da30e82882bc097c29c3c0c0af896fef1b",
+      "Sources/NetworkKit/ResponseStrategy.swift": "e5150fc6affd759d6ed6d622b40b5a027c2ad7164130ddb9aeee746dfa0fbbab",
+      "Sources/NetworkKit/SessionStorageProfile.swift": "83ca939758de16bab5df13d94c280065ad46c89ba0c0335863870a8b81e59c66",
+      "Sources/NetworkKit/URLSessionTransport.swift": "1c1c5b7afdba3eb32905a0e4c54aabfb3efed7b8354375f11868f0beeaecc14d",
+      "Tools/ReleaseConsumer/AppDelegate.swift": "37337040dc1762c73a7de05019476e074e66f5571d6ff2d3aa7ffb210b8abb17",
+      "Tools/ReleaseConsumer/NetworkKitReleaseConsumer.xcodeproj/project.pbxproj": "16aabfce20d95175c373b4f735a37e550114ef6b7bcbe5e3030f623544b45616",
+      "Tools/ReleaseConsumer/NetworkKitReleaseConsumer.xcodeproj/xcshareddata/xcschemes/NetworkKitReleaseConsumer.xcscheme": "ab9e28b857e496913b875cb0139206cc8511bd1cd32320d723f033aabf79d357"
+    }
+  },
+  "privacy_reports": [
+    {
+      "role": "real report",
+      "sha256": "77e553648d29b057cb196975be4865cf325403899c6930974718da16f751a2a8",
+      "bytes": 807,
+      "pages": 1,
+      "text_characters": 0,
+      "visually_rechecked": true,
+      "visual_result": "blank white page consistent with empty collected-data declarations",
+      "expected_hash_verified": true,
+      "historical_report_reused_only_with_identical_archive_inputs": true
+    },
+    {
+      "role": "nonshipping aggregation positive control",
+      "sha256": "918b6c1e6201aa1b0775d14aedc35c50b858c61770eb5599663046547f57a906",
+      "bytes": 19131,
+      "pages": 1,
+      "text_characters": 188,
+      "visually_rechecked": true,
+      "visual_result": "SDK bundle Crash Data/App Functionality, tracking NO, linked NO",
+      "expected_hash_verified": true,
+      "historical_report_reused_only_with_identical_archive_inputs": true
+    }
+  ],
+  "privacy_report_scope": "Existing owner-exported Xcode report and nonshipping positive control re-reviewed after all executable/manifest/consumer inputs were proven identical. No new report export, binary API scan, app-practice certification or App Store acceptance.",
+  "documentation": {
+    "docc_warnings_as_errors_passed": true,
+    "public_symbol_records": 319,
+    "rendered_updated_integration_article_verified": true,
+    "compiled_example_blocks_unchanged": true,
+    "stale_readme_security_changelog_status_corrected": true
+  },
+  "semver_rights_security": {
+    "changelog_stays_unreleased": true,
+    "no_version_selected_or_tag_created": true,
+    "no_previous_release_migration_invented": true,
+    "license_holder": "Teisrud Development AS",
+    "license_sha256": "db2042bf2141d730bc9595b00e32ee116f576bb21191a9329403aa8dd7529759",
+    "opensource_permission_granted": false,
+    "private_vulnerability_reporting_verified_enabled": true,
+    "existing_tag_count": 0,
+    "existing_release_count": 0
+  },
+  "preparation_notes": [
+    "Initial source comparison stopped before building because consumer tooling postdated the old SDK baseline; executable/manifest inputs were then compared to immutable SDK blobs and consumer inputs to accepted recorded hashes.",
+    "PDF extraction used bundled pypdf; extracted bundle-name line wraps were normalized and both rendered pages were visually inspected. Reports were unchanged."
+  ],
+  "remaining_gates": {
+    "issue64_and_epic27_open_until_evidence_acceptance": true,
+    "f2_not_closed_by_this_record": true,
+    "watch_physical_before_publication": 132,
+    "actual_workload_security_and_publication_decision": 29,
+    "owner_f2_only_resource_disposition_is_not_production_acceptance": true,
+    "f3_implementation_authorized": false,
+    "release_tag_upload_distribution_or_installation_of_consumer": false
+  },
+  "private_log_hashes": {
+    "snk-main134-ci.log": "a8b3e8bd7802b54dea98ff044017f905d318aba4a886ca51c57853edbcc988a4",
+    "snk-f2-clean-regression.log": "7a39780f26bdf592d982c43c5bfaba9744dccba35cc88a76dd347b64c6991863",
+    "snk-f2-clean-archive.log": "de28f64a7215d98e82422218d9599ee8c1def6082fe7d9552a7a78f01f60b857",
+    "snk-f2-revision-consumer-build.log": "2171b814f755c62fe27c3e6c37c869e832433e3a0a57af702774fc1deb837ba1",
+    "snk-f2-rehearsal-docc.log": "0282eabf6b4d3d379e8e0c24046d0393dfdf04b74052c744e2fb455c796245d0"
+  }
+}

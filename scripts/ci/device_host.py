@@ -21,7 +21,7 @@ def validate(root, project):
 
     objects = project["objects"]
     targets = {o["name"]: o for o in objects.values() if o["isa"] == "PBXNativeTarget"}
-    require(set(targets) == {"NetworkKitDeviceHost", "NetworkKitDeviceTests"}, "Unexpected host targets")
+    require(set(targets) == {"NetworkKitDeviceHost", "NetworkKitDeviceTests", "NetworkKitPublicHTTPSChecks"}, "Unexpected host targets")
     host, tests = targets["NetworkKitDeviceHost"], targets["NetworkKitDeviceTests"]
     require(host["productType"] == "com.apple.product-type.application", "Missing app host")
     require(tests["productType"] == "com.apple.product-type.bundle.unit-test", "Missing unit-test bundle")
@@ -65,6 +65,23 @@ def validate(root, project):
             "Scheme does not test the shared test target")
     require(not any(scheme.findall(".//" + tag) for tag in ["SkippedTests", "SelectedTests", "TestPlans"]),
             "Host scheme must not silently filter shared tests")
+    public = targets["NetworkKitPublicHTTPSChecks"]
+    public_sources = [objects[p] for p in public["buildPhases"] if objects[p]["isa"] == "PBXSourcesBuildPhase"]
+    require(len(public_sources) == 1, "Unexpected public probe source phases")
+    public_paths = [objects[objects[item]["fileRef"]]["path"] for item in public_sources[0]["files"]]
+    source_root = root / "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests"
+    expected_public = sorted("../PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/" + str(p.relative_to(source_root))
+                             for p in source_root.rglob("*.swift"))
+    require(sorted(public_paths) == expected_public and len(set(public_paths)) == len(public_paths),
+            "Opt-in probe omits or duplicates shared native sources")
+    public_scheme = ET.parse(root / "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj/xcshareddata/xcschemes/PublicHTTPSChecks.xcscheme")
+    refs = public_scheme.findall("./TestAction/Testables/TestableReference")
+    require(len(refs) == 1 and refs[0].get("skipped") == "NO"
+            and objects.get(refs[0].find("BuildableReference").get("BlueprintIdentifier")) is public,
+            "Public probe must use its own explicit scheme")
+    for c in objects[public["buildConfigurationList"]]["buildConfigurations"]:
+        require(objects[c]["buildSettings"].get("TEST_HOST") == "$(BUILT_PRODUCTS_DIR)/NetworkKitDeviceHost.app/NetworkKitDeviceHost",
+                "Public probe is not app-hosted")
     print(f"Device host: {len(actual)} shared test/helper files; local package and app-host wiring verified")
 
 

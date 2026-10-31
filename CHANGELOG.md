@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- F2 non-publishing hardening/rehearsal is accepted through PR #135/main 41242130528; no version/tag/release is created. Physical Watch and owner publication/workload decisions remain separate gates.
+
+### Selected buffered HTTP core
+
+- Implemented the shared typed-endpoint/raw-URLRequest client, buffered JSON/Data/UTF-8/empty responses and status/headers, safe structured errors and separate Swift cancellation.
+- Added independent inactivity/total budgets, operation-owned cancellation, joined shutdown and owned/compatible borrowed-session profiles.
+- Added the bounded authentication-header provider and disabled-by-default sanitized terminal diagnostics; no token storage/refresh, retry, streaming or advanced modules.
+- Verified the selected contract/API/security scope and accepted minimum-family/non-Watch physical observations under their recorded limits. The owner-approved physical Watch phase deferral remains a mandatory pre-publication blocker, not a test pass or support reduction.
+- Rehearsed installation from an immutable accepted Git revision, public native loopback reuse/cancellation and an unsigned clean iOS consumer archive. No version tag, release, distribution or production-readiness approval is created by the rehearsal.
+- Resource measurements remain bounded observations; the owner's F2-only approval does not establish production workload fit or a universal memory cap.
+
+### Historical implementation snapshots
+
+The following entries record earlier task-local counts and the work remaining at those times. Current cumulative status is above; later accepted evidence does not rewrite historical test outcomes.
+
 ### HTTPS, loopback and redirect policy
 
 - Added immutable normalized NetworkOrigin/NetworkSecurityPolicy, HTTPS defaults, explicit restricted loopback HTTP, and additional raw origins without inherited default headers.

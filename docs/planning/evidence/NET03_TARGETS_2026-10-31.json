@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-31",
+  "accepted_base": "86119dae802769bcffc709b164f08aaf9c28c6e7",
+  "candidate": "NET-03 uncommitted verification infrastructure",
+  "source_hashes": {
+    "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/NativeLoopbackTests.swift": "5eec22ab7ac5e61b392f73864afdd7836b832fb811b9474d7e3efc1b4019266f",
+    "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicHTTPSTests.swift": "82a59bd9f39a08416fea999401becc037441ce1d1122ed61b49bc44a92a5769d",
+    "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj/project.pbxproj": "a70809f7296119709b8698fbe6ad89066e3371017ffa8eb3c122d4c65841fd76"
+  },
+  "results": [
+    {
+      "target": "iPhone minimum simulator",
+      "environment": {
+        "architecture": "x86_64",
+        "modelName": "iPhone 14 Pro",
+        "osBuildNumber": "21A328",
+        "osVersion": "17.0",
+        "platform": "iOS Simulator"
+      },
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 19,
+        "passedTests": 19,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "parameter_cases_passed": 40,
+      "log_sha256": "dde65c6d2629d26ad6eb3b62354e7f4402ca763079b553808b3337fd8e775f56",
+      "resources": [
+        "NativeLoopback resource mode=networkkit bytes=65536 concurrency=4 calls=65 rssInitial=107941888 rssWarm=107974656 rssCompleted=108888064 rssAfterOriginalBudget=104456192 settleSeconds=6",
+        "NativeLoopback resource mode=foundation bytes=65536 concurrency=4 calls=65 rssInitial=104673280 rssWarm=104820736 rssCompleted=105304064 rssAfterOriginalBudget=95830016 settleSeconds=6",
+        "NativeLoopback resource mode=foundation bytes=1048576 concurrency=8 calls=33 rssInitial=95850496 rssWarm=95858688 rssCompleted=96088064 rssAfterOriginalBudget=95096832 settleSeconds=6",
+        "NativeLoopback resource mode=networkkit bytes=1048576 concurrency=8 calls=33 rssInitial=95125504 rssWarm=95219712 rssCompleted=95608832 rssAfterOriginalBudget=95059968 settleSeconds=6"
+      ],
+      "limits": "Simulator result, not physical execution; fixed public HTTPS fixtures plus local loopback. Whole-process RSS, not isolated SDK allocation.",
+      "simulator_shutdown_exit_code": 0
+    },
+    {
+      "target": "Physical iPhone, seven loopback declarations only",
+      "environment": {
+        "architecture": "arm64e",
+        "modelName": "iPhone 17 Pro",
+        "osBuildNumber": "24B119",
+        "osVersion": "27.2",
+        "platform": "iOS"
+      },
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 7,
+        "passedTests": 7,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "parameter_cases_passed": 14,
+      "log_sha256": "daa2f2c4f428056d3c990e5e113e384e5810bb7854fd1bc85b991771b20517b7",
+      "resources": [
+        "NativeLoopback resource mode=networkkit bytes=65536 concurrency=4 calls=65 rssInitial=93126656 rssWarm=93192192 rssCompleted=93896704 rssAfterOriginalBudget=93732864 settleSeconds=6",
+        "NativeLoopback resource mode=foundation bytes=65536 concurrency=4 calls=65 rssInitial=93732864 rssWarm=93732864 rssCompleted=94208000 rssAfterOriginalBudget=94126080 settleSeconds=6",
+        "NativeLoopback resource mode=foundation bytes=1048576 concurrency=8 calls=33 rssInitial=94126080 rssWarm=94781440 rssCompleted=103628800 rssAfterOriginalBudget=103333888 settleSeconds=6",
+        "NativeLoopback resource mode=networkkit bytes=1048576 concurrency=8 calls=33 rssInitial=103333888 rssWarm=103333888 rssCompleted=105725952 rssAfterOriginalBudget=105545728 settleSeconds=6"
+      ],
+      "signing": "Pre-existing compatible profile UUID matched embedded profile; actual signing certificate matched an existing valid identity; deep strict signature verification passed; no provisioning-update/registration flags",
+      "attempts_before_execution": [
+        "CoreDevice reference rejected as Xcode destination; no tests started",
+        "Corrected destination reached build but hash identity conflicted with automatic signing; no tests started",
+        "Apple Development selector built successfully; certificate extraction syntax corrected before execution"
+      ],
+      "limits": "Selected local synthetic loopback only; no public HTTPS rerun, physical transitions or other device-family evidence.",
+      "host_uninstall_exit_code": 0
+    },
+    {
+      "target": "iPad minimum simulator",
+      "environment": {
+        "architecture": "x86_64",
+        "modelName": "iPad (10th generation)",
+        "osBuildNumber": "21A328",
+        "osVersion": "17.0",
+        "platform": "iOS Simulator"
+      },
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 19,
+        "passedTests": 19,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "parameter_cases_passed": 40,
+      "log_sha256": "0121617a9e00da055afd55781c26db14056d6bc48b22fb416c2736b54c1984fa",
+      "resources": [
+        "NativeLoopback resource mode=networkkit bytes=65536 concurrency=4 calls=65 rssInitial=107409408 rssWarm=107442176 rssCompleted=108294144 rssAfterOriginalBudget=107651072 settleSeconds=6",
+        "NativeLoopback resource mode=foundation bytes=65536 concurrency=4 calls=65 rssInitial=107687936 rssWarm=107687936 rssCompleted=108072960 rssAfterOriginalBudget=106295296 settleSeconds=6",
+        "NativeLoopback resource mode=foundation bytes=1048576 concurrency=8 calls=33 rssInitial=106295296 rssWarm=106295296 rssCompleted=106606592 rssAfterOriginalBudget=90644480 settleSeconds=6",
+        "NativeLoopback resource mode=networkkit bytes=1048576 concurrency=8 calls=33 rssInitial=90660864 rssWarm=90681344 rssCompleted=90857472 rssAfterOriginalBudget=90206208 settleSeconds=6"
+      ],
+      "limits": "Simulator result, not physical iPad; fixed public HTTPS fixtures plus local loopback. Whole-process RSS, not isolated SDK allocation.",
+      "simulator_shutdown_exit_code": 0
+    }
+  ]
+}

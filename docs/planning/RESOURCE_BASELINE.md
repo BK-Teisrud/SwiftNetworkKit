@@ -1,5 +1,8 @@
 # I20 — resource and package-quality baseline
 
+Current gate disposition, 2026-10-31: the owner explicitly approved **only the non-publishing F2 rehearsal** with the documented runtime-retention, call-rate/payload/budget and finite-RSS limitations; see [GATE-F2 resource disposition](F2_REVIEW.md#resource-disposition-for-this-gate). The provisional eight-active-call / expected 1 MiB guidance is not an enforced cap or validated app fit. #29 still requires actual workload/device-memory suitability, security and publication authorization; #132 retains physical Watch evidence. No production suitability or release is approved. Earlier dated statements below preserve their original evidence limits.
+
+
 Date: 2026-10-26. Product commit: `4d6d84b29c5b453adaefb644da98d320e9e6193a`, the accepted I19 merge. The measured product came from a clean local clone with no tracked modifications. I20 adds opt-in measurement tooling, CI smoke coverage and evidence; no production behavior, public API, dependency or support minimum changes. I20 was accepted through PR #101 and main run 40408266400 on [#61](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/61). Later attribution is recorded in [RES-01](REPEATED_CALL_MEMORY.md); the original adverse measurements below remain historical evidence.
 
 ## Reproduction and measurement boundaries

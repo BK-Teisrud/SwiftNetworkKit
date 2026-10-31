@@ -14,7 +14,8 @@
 | [ADR-0010](ADR-0010-pre-code-governance.md) | Preparation and GitHub hardening | Accepted; preparations complete, start gate remains open |
 | [ADR-0011](ADR-0011-language-policy.md) | English GitHub content; Norwegian collaboration | Accepted by explicit owner request |
 | [ADR-0012](ADR-0012-implementation-start.md) | Begin the approved HTTP-core implementation | Accepted through the owner instruction on 2026-10-20; start gate closed |
-| [ADR-0013](ADR-0013-opt-in-retry-proposal.md) | Bounded per-call retry extension | Proposed; initial read-only/one-retry boundary selected, full decision and F2 evidence pending |
+| [ADR-0013](ADR-0013-watch-publication-gate.md) | Physical Watch timing and separate publication milestone | Accepted: mandatory WATCH-01 publication blocker; no physical pass or support change |
+| [ADR-0014](ADR-0014-opt-in-retry-proposal.md) | First bounded per-call retry increment | Proposed complete contract; owner use-case/eligibility/timing/auth/count selections recorded; no code start |
 
 ADR-0009 records combined acceptance of the core choices and documented defaults in ADR-0002–ADR-0008. Those planning decisions did not authorize implementation; ADR-0012 records the later authorization.
 
