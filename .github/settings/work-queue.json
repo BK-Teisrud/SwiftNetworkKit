@@ -379,6 +379,18 @@
       "parent": 23
     },
     {
+      "order": 20.99,
+      "key": "NET-04",
+      "number": 126,
+      "title": "[NET-04] Investigate watchOS native cookie and credential controls",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/126",
+      "milestone": "F2 \u2013 Production hardening and v1 gate",
+      "blocked_by": [
+        "NET-03"
+      ],
+      "parent": 23
+    },
+    {
       "order": 21,
       "key": "I21",
       "number": 62,
@@ -389,7 +401,8 @@
         "START",
         "I19",
         "PREP-01",
-        "NET-03"
+        "NET-03",
+        "NET-04"
       ],
       "parent": 23
     },
@@ -407,7 +420,8 @@
         "PREP-02",
         "NET-01",
         "NET-02",
-        "NET-03"
+        "NET-03",
+        "NET-04"
       ],
       "parent": 23
     },
