@@ -1,5 +1,8 @@
 # Non-publishing release rehearsal — I23 / #64
 
+Accepted follow-up: PR #135/main cc654ab5faadc0fc7fe00d7ad238b2e3ed5a997c and run 41242130528 passed full-log verification. #64/#27 and F2 are closed; see [final closeout](F2_CLOSEOUT_2026-10-31.md). The original executed-at-submission text and JSON below retain their historical pending status, not the current gate state. Publication and F3 implementation remain unauthorized.
+
+
 Date: 2026-10-31. Status: executed; this evidence PR/main acceptance is pending. #64 and #27 remain open. No tag, release, upload, consumer installation, distribution or production-readiness approval.
 
 ## Accepted baseline and prerequisites

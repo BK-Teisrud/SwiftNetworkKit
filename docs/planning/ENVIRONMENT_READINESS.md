@@ -1,12 +1,12 @@
 # Test-environment readiness — PREP-01
 
-## Current F2 rehearsal — 2026-10-31
+## Accepted F2 closeout — 2026-10-31
 
-#86 and nine selected-core epics are accepted/Done through PR #134/main `966599844ba59a35347e0f215f122fdebf084df3`, run 41238957032. #62 and revised #63 remain Done. Exact selected/deferred requirements and platform/source limits are in [F2 review](F2_REVIEW.md) and [physical applicability](F2_PHYSICAL_APPLICABILITY.md).
+F2 is CLOSED after PR #135/main `cc654ab5faadc0fc7fe00d7ad238b2e3ed5a997c`, [run 41242130528](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41242130528), with full-log verification of 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. #64/#27 are Done; direct item lists and GraphQL verify no open F2 issues/PRs. [Closeout evidence](F2_CLOSEOUT_2026-10-31.md) records the milestone summary-counter disagreement and actual verified states.
 
-The [formal non-publishing rehearsal](RELEASE_REHEARSAL_2026-10-31.md) executed a clean 218-test regression, real remote-revision SwiftPM install, public native reuse/cancellation smoke, unsigned iOS consumer archive and DocC/privacy checks. This evidence PR/main acceptance is pending. #64/#27 are the only open F2 issues; F2 remains open. The owner resource approval covers only this rehearsal, not production fit.
+Original candidate evidence files retain their submission-time pending flags and exact executed SDK/platform/failure limits. The owner resource approval is F2-only. #132 physical Watch and #29 actual workload/device-memory/security/publication decisions remain mandatory in their separate milestone, with support unchanged. No release/tag, production suitability or F3 implementation is authorized.
 
-#132 physical Watch and #29 workload/security/publication acceptance remain separate mandatory gates under ADR-0013. No tag, release, paid environment, support change or F3 implementation is authorized. Keep deferred extension epics open.
+PLAN-F3 #87 is Ready for planning only: review draft PR #111 and obtain a separate approved feature scope/start decision before code. Closed F2 is not publication or extension authorization.
 
 ## Earlier disposition — 2026-10-31 (superseded by current acceptance above)
 

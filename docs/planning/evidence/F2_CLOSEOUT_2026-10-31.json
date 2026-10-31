@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-31",
+  "accepted_commit": "cc654ab5faadc0fc7fe00d7ad238b2e3ed5a997c",
+  "accepted_pr": 135,
+  "main_run": 41242130528,
+  "full_main_log_verified": true,
+  "mac_tests": 218,
+  "four_simulator_runs_of_tests": 215,
+  "helper_tests": 19,
+  "manual_host_provenance_checks": 4,
+  "failure_restart_markers": false,
+  "issue64_state": "closed",
+  "epic27_state": "closed",
+  "f2_milestone": {
+    "number": 3,
+    "state": "closed",
+    "verified_open_issues_and_prs": 0,
+    "reported_summary_open_count": 1,
+    "independent_graphql_empty_connections_verified": true
+  },
+  "project_states": {
+    "64": "Done",
+    "27": "Done",
+    "87": "Ready",
+    "132": "Blocked",
+    "29": "Blocked"
+  },
+  "watch132_open_native_publication_blocker_and_subissue": true,
+  "release29_open": true,
+  "next87_is_planning_only": true,
+  "f3_implementation_authorized": false,
+  "publication_authorized": false,
+  "issue64_automatic_merge_closure_not_used_as_acceptance": true,
+  "native_issue27_prerequisites_closed": true,
+  "all_github_states_read_back": true,
+  "automatic_closing_issue_numbers_in_prior_pr": [
+    64
+  ],
+  "final_graphql_readback": {
+    "state": "CLOSED",
+    "issues": {
+      "totalCount": 0
+    },
+    "pullRequests": {
+      "totalCount": 0
+    }
+  },
+  "summary_counter_discrepancy_observed": true,
+  "historical_submission_evidence_files_unchanged": true,
+  "remaining_release_scope": "Physical Watch #132, actual workload/device-memory/security and explicit publication decision #29; no support reduction."
+}
