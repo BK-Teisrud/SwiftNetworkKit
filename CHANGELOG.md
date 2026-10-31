@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- F2 non-publishing hardening/rehearsal is accepted through PR #135/main 41242130528; no version/tag/release is created. Physical Watch and owner publication/workload decisions remain separate gates.
+
 ### Selected buffered HTTP core
 
 - Implemented the shared typed-endpoint/raw-URLRequest client, buffered JSON/Data/UTF-8/empty responses and status/headers, safe structured errors and separate Swift cancellation.

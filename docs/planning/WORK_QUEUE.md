@@ -1,19 +1,18 @@
 # Work sequence before and after implementation authorization
 
-## Current F2 rehearsal — 2026-10-31
+## Accepted F2 closeout — 2026-10-31
 
-#86 and nine selected-core epics are accepted/Done through PR #134/main `966599844ba59a35347e0f215f122fdebf084df3`, run 41238957032. #62 and revised #63 remain Done. Exact selected/deferred requirements and platform/source limits are in [F2 review](F2_REVIEW.md) and [physical applicability](F2_PHYSICAL_APPLICABILITY.md).
+F2 is CLOSED after PR #135/main `cc654ab5faadc0fc7fe00d7ad238b2e3ed5a997c`, [run 41242130528](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41242130528), with full-log verification of 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. #64/#27 are Done; direct item lists and GraphQL verify no open F2 issues/PRs. [Closeout evidence](F2_CLOSEOUT_2026-10-31.md) records the milestone summary-counter disagreement and actual verified states.
 
-The [formal non-publishing rehearsal](RELEASE_REHEARSAL_2026-10-31.md) executed a clean 218-test regression, real remote-revision SwiftPM install, public native reuse/cancellation smoke, unsigned iOS consumer archive and DocC/privacy checks. This evidence PR/main acceptance is pending. #64/#27 are the only open F2 issues; F2 remains open. The owner resource approval covers only this rehearsal, not production fit.
+Original candidate evidence files retain their submission-time pending flags and exact executed SDK/platform/failure limits. The owner resource approval is F2-only. #132 physical Watch and #29 actual workload/device-memory/security/publication decisions remain mandatory in their separate milestone, with support unchanged. No release/tag, production suitability or F3 implementation is authorized.
 
-#132 physical Watch and #29 workload/security/publication acceptance remain separate mandatory gates under ADR-0013. No tag, release, paid environment, support change or F3 implementation is authorized. Keep deferred extension epics open.
+PLAN-F3 #87 is Ready for planning only: review draft PR #111 and obtain a separate approved feature scope/start decision before code. Closed F2 is not publication or extension authorization.
 
-## Current F2 execution priority — 2026-10-31
+## Next planning and publication lanes
 
-1. Accept the executed #64 rehearsal through PR/main verification, then close #64 and #27. #86, its nine eligible core epics and #62/#63 are Done.
-2. Verify no remaining selected open F2 issues, then close the F2 milestone. Rehearsal does not create a version/tag/release.
-3. Separate publication lane: #132 stays Blocked before #29, with physical Watch and actual workload/device-memory/security/publication decisions outstanding.
-4. Review retry-first #87 / draft PR #111 after F2; obtain its own approved scope/start decision before F3 code.
+1. #87 is Ready for planning only. Review bounded retry/draft PR #111 against accepted F2, answer contract questions and prepare its delivery backlog. Obtain explicit scope/start approval before F3 code.
+2. #132 stays Blocked before #29 publication; actual physical Watch and owner workload/device-memory/security/publication decisions remain mandatory. Do not reopen F2 or mark Watch passed merely to publish.
+3. Preserve closed-phase evidence and historical failure limits. No new milestone, dependency, paid service, support change or production feature is selected by closeout.
 
 Stop whenever a GitHub run is pending and await the owner's instruction to continue. Do not poll CI or continue independent work across that stop, as reconfirmed on 2026-10-31. Conversation stays Norwegian; repository and project content stay English.
 

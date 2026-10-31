@@ -1,14 +1,12 @@
 # F2 selected-requirement reconciliation — GATE-F2 review
 
-## Accepted reconciliation and rehearsal status — 2026-10-31
+## Accepted F2 closeout — 2026-10-31
 
-#86 and nine selected-core epics (#8/#9/#10/#11/#20/#21/#22/#23/#25) are closed/Done after PR #134/main `966599844ba59a35347e0f215f122fdebf084df3`, [run 41238957032](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41238957032). Full logs verified 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. All 79 unique core source-bullet IDs, 47 evidence groups and 153 exact named Swift tests are reconciled in the [record](evidence/F2_REQUIREMENT_RECONCILIATION_2026-10-31.json); indexing is not a fresh runtime or coverage percentage.
+F2 is CLOSED after PR #135/main `cc654ab5faadc0fc7fe00d7ad238b2e3ed5a997c`, [run 41242130528](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41242130528), with full-log verification of 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. #64/#27 are Done; direct item lists and GraphQL verify no open F2 issues/PRs. [Closeout evidence](F2_CLOSEOUT_2026-10-31.md) records the milestone summary-counter disagreement and actual verified states.
 
-The machine-readable requirement record remains the original pre-acceptance snapshot; its pending flags describe submission time. Current #86 closure is recorded against PR #134/main above, and the #64 rehearsal has its own separate pending evidence record.
+Original candidate evidence files retain their submission-time pending flags and exact executed SDK/platform/failure limits. The owner resource approval is F2-only. #132 physical Watch and #29 actual workload/device-memory/security/publication decisions remain mandatory in their separate milestone, with support unchanged. No release/tag, production suitability or F3 implementation is authorized.
 
-#62 and revised #63 remain Done. Exact executed source/OS/fixture and failed-control boundaries remain in [physical applicability](F2_PHYSICAL_APPLICABILITY.md). The owner approved only the non-publishing F2 rehearsal with recorded resource limitations; no production suitability or publication is approved. [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md) retains physical Watch #132 before #29 with support unchanged.
-
-The [formal #64 rehearsal](RELEASE_REHEARSAL_2026-10-31.md) has now executed clean-checkout regression, remote revision installation, public native smoke, unsigned consumer archive and documentation/privacy checks. Its evidence PR/main acceptance is pending. #64 and #27 are the only open F2 issues; keep F2 open until they pass. #132/#29 remain in the separate publication milestone, and F3 implementation is not authorized.
+PLAN-F3 #87 is Ready for planning only: review draft PR #111 and obtain a separate approved feature scope/start decision before code. Closed F2 is not publication or extension authorization.
 
 ## Source, IDs and claim boundary
 
@@ -182,7 +180,7 @@ Contract: [API_REVIEW.md](API_REVIEW.md).
 | #22 configuration | NK-15-01–06 | Immutable values, explicit ownership/storage/auth/timeout/status and headers; no mutable singleton/network-cost API | Accepted/closed through #86 and PR #134/main 41238957032 |
 | #23 testability | NK-16-01–09 | Injectable client examples, scoped fixtures, timing/auth/cleanup tests, local/public native and bounded resource records; no custom cache test engine | Accepted/closed through #86 and PR #134/main 41238957032 with exact native/applicability limits and physical Watch #132 retained |
 | #25 privacy | NK-18-01–07 | No default sensitive diagnostics/telemetry or owned stores; app owns opted-in stores/deletion; no SDK payload-file or custom-cache deletion feature | Eligible for selected product/F2 scope closure; actual distribution report is #64, app practice/workload/security publication decision remains #29 |
-| #27 developer experience | NK-20-01–09 | Reviewed public API, compiled DocC/examples, platform/CI and policy | Keep open until #64 clean-consumer/archive/privacy/release rehearsal acceptance. #86 does not depend on #27 closure |
+| #27 developer experience | NK-20-01–09 | Reviewed public API, compiled DocC/examples, platform/CI and policy | Closed/Done after #64 acceptance through PR #135/main 41242130528; separate publication #29 remains open |
 
 The nine selected-core closures are now recorded against accepted PR #134/main 41238957032. No future catalog item is implemented or waived by closing its selected core domain. [Cross-cutting extension foundations](#cross-cutting-extension-foundations) keep #12/#13/#24/#26 open under their future planning owners.
 
@@ -204,11 +202,11 @@ Technical assessment: existing evidence attributes a substantial transient compo
 
 Owner decision, 2026-10-31: explicitly APPROVED for the non-publishing F2 rehearsal only. Translated owner reply: “Approve only the F2 rehearsal with these limitations.” The original approval remains in the conversation. The concrete question explains call-rate, payload/budget and process-memory limits, including that the provisional eight-active-call / expected 1 MiB guidance is not an enforced cap or validated production fit. #29 must still obtain the actual app workload and a separate suitability/security/publication decision; no production risk acceptance is inferred. This bounded phase disposition is recorded; no production suitability, publication or universal memory guarantee is approved.
 
-## Remaining completion sequence
+## Completed phase sequence and remaining gates
 
-1. #86 and its nine eligible selected-core epic closures are accepted through PR #134/main 41238957032. The owner F2-only resource disposition is recorded; all native #86 prerequisites remain closed.
-2. Accept the executed #64 rehearsal through its evidence PR/main, then close #64 and #27. The native #27 → #64 dependency is verified; no reverse #64/#86 dependency on #27 exists.
-3. Close F2 only when its remaining selected open issues are closed. Publication still requires #132/#29 and separate owner authorization. F3 implementation requires its own scope/start decision; #12/#13/#24/#26 remain deferred extension epics.
+1. #62, revised #63, #86 and the nine selected-core epic closures are accepted under their recorded PR/main evidence and approved F2-only resource disposition.
+2. #64's executed non-publishing rehearsal is accepted through PR #135/main 41242130528; #27 then completed. F2 is CLOSED with empty open-issue/open-PR connections; the summary-counter disagreement is recorded in the closeout evidence.
+3. #132 physical Watch and #29 actual workload/security/publication decisions remain mandatory. Support is unchanged, no release/tag exists, and F3 implementation still requires its own scope/start decision. #87 is Ready for planning only; #12/#13/#24/#26 remain deferred extension epics.
 
 ## Forward quality and backlog assessment
 
