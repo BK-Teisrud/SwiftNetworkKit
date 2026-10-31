@@ -59,3 +59,11 @@ python3 scripts/ci/macos14.py run --payload .build/macos14-https-payload --outpu
 ```
 
 Ten consumer cases do not establish the full 218-test suite, exact 14.0 behavior, Intel macOS 14 behavior, every storage/lifecycle scenario or an owner's release-risk acceptance. Reconcile the actual result against #62/#86; preserve any failure without automatic rerun or assertion relaxation.
+
+## Completed native HTTPS result — 2026-10-31
+
+[Manual run 41204068268](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41204068268) passed on accepted source b8f2758530cca68ec819068ff3ac7748868e26dd. Actual execution was ARM64 macOS 14.8.9 / 23J631. All ten named typed/raw JSON, empty, trusted-certificate, self-signed and hostname-mismatch cases passed. SDK rejection codes were NSURLErrorDomain/-1202; independent Foundation controls confirmed exact OSStatus -67843 and -67602 for the respective invalid fixtures. No generic connection failure was accepted.
+
+All recorded source hashes were independently verified against immutable blobs in that exact accepted Git commit; the standalone result matches the aggregate record. The full workflow log contains no failure marker. [Permanent sanitized evidence](evidence/MACOS14_HTTPS_EXECUTION_2026-10-31.json) retains the complete manifest, compiler/SDK, environment, case results and custody hashes before the one-day artifact expires. A local Finder `.DS_Store` was observed during verification; it is metadata, not an SDK source change. The snapshot helper now excludes only that filename, with a control proving real source edits still change custody hashes.
+
+The completed temporary workflow is removed. Do not dispatch another run or keep an expired workflow after November 2. Together with the earlier native consumer/cancellation/resource result and four minimum simulator results, this completes the prepared minimum-family access/execution evidence for #62, subject to the evidence PR/main acceptance. It does not turn the macOS 14 consumer into the full regression suite, prove exact 14.0 or Intel macOS 14 execution, or complete physical transitions/Watch, #86/#64 or publication-risk acceptance.

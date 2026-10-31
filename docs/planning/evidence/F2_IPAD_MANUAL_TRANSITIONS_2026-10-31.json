@@ -1,0 +1,642 @@
+{
+  "date": "2026-10-31",
+  "sdk_baseline_commit": "b8f2758530cca68ec819068ff3ac7748868e26dd",
+  "manual_tool_working_tree_changes": true,
+  "device": "iPad Pro 11-inch (3rd generation)",
+  "os": "iPadOS 27.2 / 24B119",
+  "signing": {
+    "existing_approved_host_id": true,
+    "exact_single_device_profile_verified": true,
+    "actual_existing_signer_verified": true,
+    "source_metadata_verified": true,
+    "account_changes": false
+  },
+  "owner_method": "Background/home/return, then airplane mode plus Wi-Fi disabled on this iPad, restored to original settings before explicit recovery.",
+  "verified": {
+    "background_during_pending_call": true,
+    "return_to_active": true,
+    "actual_path_loss_during_pending_call": true,
+    "loss_transport_code": -1009,
+    "restored_path_before_recovery": true,
+    "same_client_two_concurrent_recovery_statuses": [
+      204,
+      204
+    ],
+    "joined_shutdown": true,
+    "four_terminal_events_stable_after_original_budget": true,
+    "post_completion_sample_seconds": 64.758639417,
+    "no_caller_cancel": true,
+    "no_truncation": true
+  },
+  "run_id_is_random_test_nonce": true,
+  "report_sha256": "11f55e65ec76d0536641d3a57ebe09dccf9034e68124ceebb785fffd20b05948",
+  "report": {
+    "diagnostics": [
+      {
+        "duration": "42.039480167",
+        "outcome": "success",
+        "status": "200"
+      },
+      {
+        "duration": "4.757390917",
+        "outcome": "transport",
+        "status": "none"
+      },
+      {
+        "duration": "0.240837458",
+        "outcome": "success",
+        "status": "204"
+      },
+      {
+        "duration": "0.2407915",
+        "outcome": "success",
+        "status": "204"
+      }
+    ],
+    "events": [
+      {
+        "elapsed": 0.001184292,
+        "fields": {
+          "rss": "21479424"
+        },
+        "kind": "host-started"
+      },
+      {
+        "elapsed": 0.093841708,
+        "fields": {
+          "check": "none",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 0.416515083,
+        "fields": {
+          "check": "none",
+          "during-call": "false",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 3.2511375,
+        "fields": {
+          "check": "none",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 8.261620375,
+        "fields": {
+          "check": "none",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 14.868755208,
+        "fields": {
+          "check": "background",
+          "path": "satisfied",
+          "rss": "43024384"
+        },
+        "kind": "call-start"
+      },
+      {
+        "elapsed": 20.238645167,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "inactive"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 21.100995917,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "background"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 36.9781615,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "inactive"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 36.982240667,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 37.097982042,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 37.266176667,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 39.790081167,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "inactive"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 40.790723625,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "background"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 48.666385042,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "inactive"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 48.670526083,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 48.784906542,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 48.953887042,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 56.920816833,
+        "fields": {
+          "bytes": "819",
+          "calls": "1",
+          "check": "background",
+          "outcome": "success",
+          "statuses": "200"
+        },
+        "kind": "call-terminal"
+      },
+      {
+        "elapsed": 56.92601525,
+        "fields": {
+          "check": "background",
+          "diagnostic-count": "1",
+          "rss": "68665344"
+        },
+        "kind": "call-joined"
+      },
+      {
+        "elapsed": 58.285327125,
+        "fields": {
+          "check": "background",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 153.048740333,
+        "fields": {
+          "check": "network-loss",
+          "path": "satisfied",
+          "rss": "68632576"
+        },
+        "kind": "call-start"
+      },
+      {
+        "elapsed": 153.358374125,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "true",
+          "interfaces": "wifi,cellular",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 154.777359958,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "true",
+          "phase": "inactive"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 156.909268042,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "true",
+          "interfaces": "wifi,cellular",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 157.072407917,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "true",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 157.549236292,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "true",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 157.695237708,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "true",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 157.808079583,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "true",
+          "interfaces": "",
+          "status": "unsatisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 157.816012667,
+        "fields": {
+          "check": "network-loss",
+          "code": "-1009",
+          "known-system-domain": "true",
+          "outcome": "transport"
+        },
+        "kind": "call-terminal"
+      },
+      {
+        "elapsed": 157.8198005,
+        "fields": {
+          "check": "network-loss",
+          "diagnostic-count": "2",
+          "rss": "68960256"
+        },
+        "kind": "call-joined"
+      },
+      {
+        "elapsed": 158.891268125,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 164.826436167,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "phase": "inactive"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 168.562547042,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 189.83413325,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "phase": "inactive"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 191.583301958,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "cellular",
+          "status": "requires-connection"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 191.685109833,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "",
+          "status": "unsatisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 191.829968833,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 192.027197583,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 192.061939917,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 192.153106125,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 192.324600792,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 192.967910042,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi,cellular",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 196.581787375,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 201.781301167,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 203.571020958,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 206.555255375,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi,cellular",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 211.615682792,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 221.576961583,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 227.568193958,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 236.597278083,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 252.605514042,
+        "fields": {
+          "check": "recovery",
+          "path": "satisfied",
+          "rss": "68681728"
+        },
+        "kind": "call-start"
+      },
+      {
+        "elapsed": 252.85424725,
+        "fields": {
+          "bytes": "0",
+          "calls": "2",
+          "check": "recovery",
+          "outcome": "success",
+          "statuses": "204,204"
+        },
+        "kind": "call-terminal"
+      },
+      {
+        "elapsed": 252.859922708,
+        "fields": {
+          "diagnostic-count": "4"
+        },
+        "kind": "shutdown-joined"
+      },
+      {
+        "elapsed": 252.864044083,
+        "fields": {
+          "check": "recovery",
+          "diagnostic-count": "4",
+          "rss": "69124096"
+        },
+        "kind": "call-joined"
+      },
+      {
+        "elapsed": 276.620973375,
+        "fields": {
+          "check": "recovery",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 296.576698333,
+        "fields": {
+          "check": "recovery",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 301.587244625,
+        "fields": {
+          "check": "recovery",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 317.622558583,
+        "fields": {
+          "diagnostic-count": "4",
+          "rss": "68812800",
+          "seconds-after-recovery-completion": "64.758639417"
+        },
+        "kind": "post-original-budget"
+      }
+    ],
+    "hostSourceSHA256": "ee2ffcaee9fa23d5d79c01d41479180ab6607dfeee273dd0b709aab76db63707",
+    "inactivitySeconds": 30,
+    "platform": "iOS",
+    "runID": "5740B2F8-8665-4C14-9022-00208C885BFC",
+    "runtime": "Version 27.2 (Build 24B119)",
+    "schema": 1,
+    "sdkCommit": "b8f2758530cca68ec819068ff3ac7748868e26dd",
+    "totalSeconds": 60,
+    "truncated": false
+  },
+  "cleanup": {
+    "temporary_host_uninstall_exit_code": 0,
+    "sanitized_report_preserved": true
+  },
+  "limits": [
+    "Candidate evidence requires PR/main acceptance.",
+    "App/path callback observations are not exact server-contact or packet timing.",
+    "Four small calls and whole-process RSS do not establish a universal memory bound or owner workload suitability.",
+    "No physical Watch, iPhone, TV or macOS outage result is inferred from this iPad run."
+  ]
+}

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Dependency-free CI driver. Missing tools, destinations, tests, or docs fail closed."""
 import json
+import hashlib
 import os
 from pathlib import Path
 import platform
+import plistlib
 import re
 import shutil
 import subprocess
@@ -142,9 +144,31 @@ def test_destination(destination, label):
     validate_summary(summary)
 
 
+def manual_host_build(family):
+    from prepare_manual_host import prepare
+    project = prepare(family)
+    run("xcodebuild", "-project", project, "-scheme", "NetworkKitManualChecks",
+        "-configuration", "Debug",
+        "-destination", "generic/platform=" + family, "-derivedDataPath", OUTPUT / "ManualHost",
+        "CODE_SIGNING_ALLOWED=NO", "SWIFT_TREAT_WARNINGS_AS_ERRORS=YES", "SWIFT_SUPPRESS_WARNINGS=NO", "build")
+    from prepare_manual_host import PLATFORMS
+    products = OUTPUT / "ManualHost/Build/Products"
+    directory = "Debug" if family == "macOS" else "Debug-" + PLATFORMS[family][0]
+    relative = "Contents/Info.plist" if family == "macOS" else "Info.plist"
+    info = plistlib.loads((products / directory / "NetworkKitDeviceHost.app" / relative).read_bytes())
+    require(info.get("NetworkKitManualPlatform") == family, "Manual host lacks actual platform metadata")
+    require(info.get("NetworkKitVerificationCommit") == run("git", "rev-parse", "HEAD", capture=True).strip(),
+            "Manual host lacks the reviewed checkout identity")
+    require(info.get("NetworkKitManualSourceSHA256") == hashlib.sha256(
+        (ROOT / "Tools/DeviceTestHost/ManualTransitionHost.swift").read_bytes()).hexdigest(),
+            "Manual host source identity missing from actual built Info.plist")
+    print("Manual host " + family + ": actual built platform/commit/source identity verified", flush=True)
+
+
 def platform_check(kind):
     workspace()
     if kind == "macos-core":
+        manual_host_build("macOS")
         xcode("-destination", "generic/platform=macOS", "build")
         test_destination("platform=macOS,arch=arm64" if platform.machine() == "arm64" else "platform=macOS,arch=x86_64", "macos")
         return
@@ -168,6 +192,7 @@ def platform_check(kind):
         run("xcodebuild", "-project", host_project, "-scheme", scheme,
             "-destination", "generic/platform=" + family,
             "-derivedDataPath", OUTPUT / "DeviceHost", "CODE_SIGNING_ALLOWED=NO", "build-for-testing")
+    manual_host_build(family)
     if family == "watchOS":
         phone = select_device(devices, "com.apple.CoreSimulator.SimRuntime.iOS-26-2", "iPhone 17")
         pairs = json.loads(run("xcrun", "simctl", "list", "pairs", "-j", capture=True))["pairs"]

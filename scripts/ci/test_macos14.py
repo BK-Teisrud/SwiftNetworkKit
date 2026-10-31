@@ -9,6 +9,23 @@ import macos14
 
 
 class PrebuiltConsumerContracts(unittest.TestCase):
+    def test_finder_metadata_does_not_hide_real_source_changes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            names = ['Package.swift', 'scripts/benchmarks/Probe.swift', 'scripts/benchmarks/run.py',
+                     'scripts/ci/macos14.py', 'scripts/verification/NativeHTTPSProbe.swift',
+                     'Sources/NetworkKit/Client.swift']
+            for name in names:
+                path = root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text('reviewed source')
+            with patch.object(macos14, 'ROOT', root):
+                baseline = macos14.sources()
+                (root / 'Sources/.DS_Store').write_bytes(b'Finder metadata')
+                self.assertEqual(macos14.sources(), baseline)
+                (root / names[-1]).write_text('changed source')
+                self.assertNotEqual(macos14.sources(), baseline)
+
     def payload(self, folder):
         (folder / 'ResourceProbe').write_bytes(b'synthetic executable control')
         manifest = {'source_commit': 'a' * 40, 'source_hashes': {'source': 'reviewed'},

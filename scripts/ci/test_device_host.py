@@ -6,6 +6,15 @@ from device_host import load_project, validate
 
 
 class DeviceHostContracts(unittest.TestCase):
+    def test_manual_group_cycle_is_rejected_before_xcode(self):
+        from prepare_manual_host import validate_groups
+        objects = {'root': {'isa': 'PBXGroup', 'children': ['source']},
+                   'source': {'isa': 'PBXFileReference'}}
+        validate_groups(objects, 'root')
+        objects['root']['children'] = ['root']
+        with self.assertRaisesRegex(RuntimeError, 'group cycle'):
+            validate_groups(objects, 'root')
+
     @classmethod
     def setUpClass(cls):
         cls.root = Path(__file__).resolve().parents[2]
