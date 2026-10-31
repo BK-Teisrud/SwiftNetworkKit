@@ -1,14 +1,23 @@
 # Work sequence before and after implementation authorization
 
+## Current acceptance and remaining work — 2026-10-31
+
+PR #129 is accepted on main `425360b919106478ac05392a2aaaec91e6e01d10`, [run 41221803657](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41221803657). Full logs verified 218 Mac tests, four simulator runs of 215, 19 helper tests and all four manual-host provenance checks, with no failure/restart markers. #62 is closed and project Done; minimum-family evidence and physical iPhone/iPad transition reports are accepted under their recorded limits.
+
+The new [Mac transition report](evidence/F2_MAC_MANUAL_TRANSITIONS_2026-10-31.json) verifies actual background/foreground, HTTP 200, owner-driven Wi-Fi loss with transport -1009, restored same-client concurrent 204/204, joined shutdown and four diagnostics unchanged 71.493 seconds after recovery. NWPathMonitor delivered unsatisfied 0.080 seconds after transport completion; an unsatisfied callback during the call is not claimed. Finite whole-process RSS is observational, not a universal cap. This new result awaits its PR/main acceptance.
+
+[Watch follow-up](evidence/F2_WATCH_MOUNT_DIAGNOSIS_2026-10-31.json) positively verifies Developer Mode enabled. After the owner restarted Watch/Xcode and Mac, Xcode reached preparation but failed mounting the developer image: CoreDevice 12040 / MobileDevice 0xe8000076, preceded by personalization-manifest 0xe8003ffe. Refreshing existing Apple candidates retained build 17C529. Root artefacts were rebuilt and existing profiles/signatures verified; no physical Watch tests started. A supported working developer-image route remains required; the underlying cause is not conclusively attributed.
+
+Remaining execution under #63: owner-deferred TV transitions and physical Watch execution/applicability/resources. Accept the Mac result, finish #63, reconcile #86, then formal #64 and #27. #29 remains separate publication/workload-risk authorization. No additional issue, milestone, product change, paid service or support change is justified by these observations.
+
+
 ## Current F2 execution priority — 2026-10-31
 
-This priority list supersedes the dated progress notes below; those notes retain their historical evidence boundaries.
-
-1. Preserve and accept #62 minimum-family completion evidence: PR #128/main 41203171039 is accepted, and actual ARM64 macOS 14.8.9 HTTPS run 41204068268 passed all ten cases. Exact source blobs, compiler, payload/environment and independent trust checks are verified. The completed temporary workflow is removed in the result PR. No exact 14.0, Intel macOS 14 or full older-host suite result is invented. #62 closure follows the evidence PR/main acceptance.
-2. Finish physical Watch access and execution under #63. The two specifically authorized devices are registered and all six profiles use single devices, existing test IDs and the existing certificate. TV passed 215 regression plus 21 native declarations; iPad passed 215 regression plus 20/21 native declarations and a supplemental strict typed/raw TLS diagnostic. Both temporary hosts were removed. Watch packages are signed/verified, but the owner-confirmed Developer Mode and Xcode readiness disagree; the development tunnel has timed out. No physical Watch tests have started.
-3. Complete applicable ENV-06 foreground/background and network-loss/recovery observations and remaining physical resource evidence. The explicit unsigned manual transition app now builds for all four families with actual embedded source/commit checks. Local Mac GUI controls verified background/active, four finite calls, two concurrent recovery 204s, joined shutdown and a post-budget sample; actual outage was deliberately not performed in that control. Owner-driven iPad and iPhone background/outage/recovery runs are now verified: -1009 on actual path loss, two concurrent recovery 204s, joined shutdown and stable four-event diagnostics after original budgets. Hosts removed. Candidate results require PR/main acceptance. Mac outage, TV transitions (owner deferred) and Watch access/execution remain under #63. Preserve the ordinary Watch local-server boundary. No automatic public-test rerun, paid environment, support change or generic quality issue.
-4. Reconcile #86, then formal #64 consumer/archive/privacy rehearsal. The archive contains the SDK and verified manifest. A separate nonshipping positive control confirmed that Organizer reads that SDK bundle; the real empty report matches its empty collected-data declarations. This is not full binary API analysis or App Store acceptance. Keep #27 open until rehearsal acceptance; #29 retains the separate publication/risk decision.
-5. Review bounded retry planning #87 / draft PR #111 after F2; no F3 implementation is authorized by these preparations.
+1. Accept the new Mac manual transition result; #62 and prior iPhone/iPad reports are already accepted through PR #129/main 41221803657.
+2. Resume TV manual transitions when the owner has the remote/device available. Existing regression/native evidence remains accepted.
+3. Resolve the concrete Watch developer-image mount blocker before physical regression/public/native applicability and resource observations. Do not repeat tests while developer services are unavailable.
+4. Finish #63 applicability/resource reconciliation, then #86 and formal #64. Keep #27 open until rehearsal acceptance; #29 retains separate publication and owner risk disposition.
+5. Review bounded retry planning #87 / draft PR #111 after F2; no extension implementation is authorized by this evidence work.
 
 Stop whenever a GitHub run is pending and await the owner's instruction to continue. Do not poll CI or continue independent work across that stop, as reconfirmed on 2026-10-31. Conversation stays Norwegian; repository and project content stay English.
 
