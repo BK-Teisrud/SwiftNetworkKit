@@ -1,0 +1,368 @@
+{
+  "date": "2026-10-31",
+  "source_commit": "9807c0cdd12df82296846da8c5e28880ad478562",
+  "device": "Apple TV 4K (3rd generation)",
+  "os": "tvOS 27.2 / 24K122",
+  "owner_performed_ethernet_interruption_and_restoration": true,
+  "owner_reported_no_known_wifi_fallback": true,
+  "observed_wifi_after_outage_call_completed": true,
+  "report_sha256": "f998f9d11dbc2be89ff1ed237693e9d992217a10b159bb75ef792771a9143ea5",
+  "signing": {
+    "existing_host_profile_verified": true,
+    "existing_signer_verified": true,
+    "new_profiles_or_certificates": false,
+    "built_platform_commit_source_verified": true
+  },
+  "verified": {
+    "background_http_status": 200,
+    "actual_background_and_foreground_while_pending": true,
+    "path_unsatisfied_while_pending": true,
+    "network_loss_transport_code": -1009,
+    "same_client_recovery_statuses": [
+      204,
+      204
+    ],
+    "ethernet_restored_before_recovery": true,
+    "shutdown_joined": true,
+    "post_budget_seconds": 70.752555042,
+    "stable_terminal_diagnostic_count": 4,
+    "post_budget_process_rss_bytes": 49610752,
+    "caller_cancel": false,
+    "truncated": false
+  },
+  "limits": [
+    "A Wi-Fi path became satisfied after the outage call completed and before Ethernet restoration; no continuous offline interval until replugging is claimed.",
+    "Public observations supply no maintainer-owned server counters.",
+    "Finite whole-process RSS does not establish a universal SDK bound or owner workload suitability.",
+    "This candidate awaits its own PR/main acceptance; Watch and formal F2 gates remain open."
+  ],
+  "report": {
+    "diagnostics": [
+      {
+        "duration": "19.121021166",
+        "outcome": "success",
+        "status": "200"
+      },
+      {
+        "duration": "6.309521541",
+        "outcome": "transport",
+        "status": "none"
+      },
+      {
+        "duration": "0.211686959",
+        "outcome": "success",
+        "status": "204"
+      },
+      {
+        "duration": "0.221096917",
+        "outcome": "success",
+        "status": "204"
+      }
+    ],
+    "events": [
+      {
+        "elapsed": 0.00067075,
+        "fields": {
+          "rss": "32194560"
+        },
+        "kind": "host-started"
+      },
+      {
+        "elapsed": 0.057314042,
+        "fields": {
+          "check": "none",
+          "during-call": "false",
+          "interfaces": "wired",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 1.042574375,
+        "fields": {
+          "check": "none",
+          "during-call": "false",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 15.894064708,
+        "fields": {
+          "check": "background",
+          "path": "satisfied",
+          "rss": "46530560"
+        },
+        "kind": "call-start"
+      },
+      {
+        "elapsed": 16.59736175,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "inactive"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 17.703321958,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "background"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 26.842165125,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "inactive"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 26.8545065,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 35.035511,
+        "fields": {
+          "bytes": "819",
+          "calls": "1",
+          "check": "background",
+          "outcome": "success",
+          "statuses": "200"
+        },
+        "kind": "call-terminal"
+      },
+      {
+        "elapsed": 35.039762542,
+        "fields": {
+          "check": "background",
+          "diagnostic-count": "1",
+          "rss": "49070080"
+        },
+        "kind": "call-joined"
+      },
+      {
+        "elapsed": 39.4768825,
+        "fields": {
+          "check": "background",
+          "during-call": "false",
+          "phase": "inactive"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 40.490066958,
+        "fields": {
+          "check": "background",
+          "during-call": "false",
+          "phase": "background"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 41.587162958,
+        "fields": {
+          "check": "background",
+          "during-call": "false",
+          "phase": "inactive"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 41.598682208,
+        "fields": {
+          "check": "background",
+          "during-call": "false",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 112.346307625,
+        "fields": {
+          "check": "network-loss",
+          "path": "satisfied",
+          "rss": "48906240"
+        },
+        "kind": "call-start"
+      },
+      {
+        "elapsed": 118.542613958,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "true",
+          "interfaces": "wired",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 118.66053975,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "true",
+          "interfaces": "",
+          "status": "unsatisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 118.667792042,
+        "fields": {
+          "check": "network-loss",
+          "code": "-1009",
+          "known-system-domain": "true",
+          "outcome": "transport"
+        },
+        "kind": "call-terminal"
+      },
+      {
+        "elapsed": 118.668898708,
+        "fields": {
+          "check": "network-loss",
+          "diagnostic-count": "2",
+          "rss": "49283072"
+        },
+        "kind": "call-joined"
+      },
+      {
+        "elapsed": 155.423077667,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 155.707204542,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 156.716004083,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 161.754053083,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 179.522269542,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wired",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 179.6808225,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wired",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 179.830269583,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wired",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 193.98079175,
+        "fields": {
+          "check": "recovery",
+          "path": "satisfied",
+          "rss": "49479680"
+        },
+        "kind": "call-start"
+      },
+      {
+        "elapsed": 194.213449542,
+        "fields": {
+          "bytes": "0",
+          "calls": "2",
+          "check": "recovery",
+          "outcome": "success",
+          "statuses": "204,204"
+        },
+        "kind": "call-terminal"
+      },
+      {
+        "elapsed": 194.219416667,
+        "fields": {
+          "diagnostic-count": "4"
+        },
+        "kind": "shutdown-joined"
+      },
+      {
+        "elapsed": 194.223476833,
+        "fields": {
+          "check": "recovery",
+          "diagnostic-count": "4",
+          "rss": "49807360"
+        },
+        "kind": "call-joined"
+      },
+      {
+        "elapsed": 264.975911625,
+        "fields": {
+          "diagnostic-count": "4",
+          "rss": "49610752",
+          "seconds-after-recovery-completion": "70.752555042"
+        },
+        "kind": "post-original-budget"
+      }
+    ],
+    "hostSourceSHA256": "ee2ffcaee9fa23d5d79c01d41479180ab6607dfeee273dd0b709aab76db63707",
+    "inactivitySeconds": 30,
+    "platform": "tvOS",
+    "runID": "A2EEB1FC-C594-49A0-B0EA-D31BA894028D",
+    "runtime": "Version 27.2 (Build 24K122)",
+    "schema": 1,
+    "sdkCommit": "9807c0cdd12df82296846da8c5e28880ad478562",
+    "totalSeconds": 60,
+    "truncated": false
+  },
+  "cleanup": {
+    "dedicated_host_uninstall_exit_code": 0,
+    "report_preserved_before_uninstall": true
+  }
+}

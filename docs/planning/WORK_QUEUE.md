@@ -2,22 +2,20 @@
 
 ## Current acceptance and remaining work — 2026-10-31
 
-PR #129 is accepted on main `425360b919106478ac05392a2aaaec91e6e01d10`, [run 41221803657](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41221803657). Full logs verified 218 Mac tests, four simulator runs of 215, 19 helper tests and all four manual-host provenance checks, with no failure/restart markers. #62 is closed and project Done; minimum-family evidence and physical iPhone/iPad transition reports are accepted under their recorded limits.
+PR #130 is accepted on main `9807c0cdd12df82296846da8c5e28880ad478562`, [run 41231362170](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41231362170). Full logs verified 218 Mac tests, four simulator runs of 215, 19 helper tests and four manual-host provenance checks without failure/restart markers. Actual Mac transition evidence is accepted. #62 and earlier iPhone/iPad transitions remain accepted through PR #129/main 41221803657; #62 is closed/project Done.
 
-The new [Mac transition report](evidence/F2_MAC_MANUAL_TRANSITIONS_2026-10-31.json) verifies actual background/foreground, HTTP 200, owner-driven Wi-Fi loss with transport -1009, restored same-client concurrent 204/204, joined shutdown and four diagnostics unchanged 71.493 seconds after recovery. NWPathMonitor delivered unsatisfied 0.080 seconds after transport completion; an unsatisfied callback during the call is not claimed. Finite whole-process RSS is observational, not a universal cap. This new result awaits its PR/main acceptance.
+The new [TV transition report](evidence/F2_TV_MANUAL_TRANSITIONS_2026-10-31.json) verifies actual background/foreground while pending, HTTP 200, Ethernet loss with unsatisfied path during the call and transport -1009, restored wired connectivity, same-client concurrent 204/204, joined shutdown and four diagnostics unchanged 70.753 seconds after recovery. A satisfied Wi-Fi path appeared after the failed outage call and before Ethernet restoration; no continuous offline interval until replugging is claimed. Finite whole-process RSS remains observational. This TV result awaits its own PR/main acceptance.
 
-[Watch follow-up](evidence/F2_WATCH_MOUNT_DIAGNOSIS_2026-10-31.json) positively verifies Developer Mode enabled. After the owner restarted Watch/Xcode and Mac, Xcode reached preparation but failed mounting the developer image: CoreDevice 12040 / MobileDevice 0xe8000076, preceded by personalization-manifest 0xe8003ffe. Refreshing existing Apple candidates retained build 17C529. Root artefacts were rebuilt and existing profiles/signatures verified; no physical Watch tests started. A supported working developer-image route remains required; the underlying cause is not conclusively attributed.
+[Watch diagnosis](evidence/F2_WATCH_MOUNT_DIAGNOSIS_2026-10-31.json) verifies Developer Mode enabled but developer-image mounting fails: CoreDevice 12040 / MobileDevice 0xe8000076, preceded by personalization-manifest 0xe8003ffe. Existing Apple candidates retain build 17C529. Signed root artefacts have verified existing profiles/signers; no physical Watch tests started. A supported working mounting/execution route and per-target applicability/resource disposition remain under #63; the underlying mount cause is not conclusively attributed.
 
-Remaining execution under #63: owner-deferred TV transitions and physical Watch execution/applicability/resources. Accept the Mac result, finish #63, reconcile #86, then formal #64 and #27. #29 remains separate publication/workload-risk authorization. No additional issue, milestone, product change, paid service or support change is justified by these observations.
-
+Next: accept TV evidence, resolve supported physical Watch execution and finish #63 applicability/resource reconciliation, then #86 and formal #64/#27. #29 retains separate publication/workload-risk authorization. No new issue/milestone, product refactor, paid environment, support change or security bypass is justified by these results.
 
 ## Current F2 execution priority — 2026-10-31
 
-1. Accept the new Mac manual transition result; #62 and prior iPhone/iPad reports are already accepted through PR #129/main 41221803657.
-2. Resume TV manual transitions when the owner has the remote/device available. Existing regression/native evidence remains accepted.
-3. Resolve the concrete Watch developer-image mount blocker before physical regression/public/native applicability and resource observations. Do not repeat tests while developer services are unavailable.
-4. Finish #63 applicability/resource reconciliation, then #86 and formal #64. Keep #27 open until rehearsal acceptance; #29 retains separate publication and owner risk disposition.
-5. Review bounded retry planning #87 / draft PR #111 after F2; no extension implementation is authorized by this evidence work.
+1. Accept the new TV manual transition report; Mac, iPhone/iPad and #62 minimum-family evidence are already accepted.
+2. Resolve the Watch developer-image mount blocker, then execute physical regression/public/native applicability and resource checks through the supported route. Do not repeat tests while developer services are unavailable.
+3. Finish #63 applicability/resource reconciliation, then #86 and formal #64. Keep #27 open until rehearsal acceptance; #29 retains publication/workload-risk authorization.
+4. Review bounded retry planning #87 / draft PR #111 after F2; no extension implementation is authorized by this evidence work.
 
 Stop whenever a GitHub run is pending and await the owner's instruction to continue. Do not poll CI or continue independent work across that stop, as reconfirmed on 2026-10-31. Conversation stays Norwegian; repository and project content stay English.
 
