@@ -1,6 +1,6 @@
 # F2 physical-device applicability and remaining release evidence
 
-Date: 2026-10-31. Task: #63; reconciliation: #86. Status: candidate scope/evidence reconciliation pending its PR/main acceptance. No publication or F2 closure.
+Date: 2026-10-31. Task: #63; reconciliation: #86. Status: accepted through PR #133/main e1af71d60961b52b451416ea40fd1a4d644d802f and run 41236473629; revised #63 closed/Done. No publication or F2 closure.
 
 ## Approved scope boundary
 
@@ -32,6 +32,6 @@ The non-Watch evidence below was accepted through PR #125/main 41182672027 (NET-
 
 ## Acceptance disposition
 
-The revised #63 scope has traceable non-Watch execution and explicit applicability limits for review. Close it only after this scope/matrix PR and main acceptance. #86 must still assess the selected domain criteria and decide whether any actual non-Watch product/security gap needs its own bounded task; this matrix does not waive a gap or close an epic automatically.
+The revised #63 scope has traceable non-Watch execution and explicit applicability limits for review. Its PR/main acceptance is recorded above and revised #63 is closed. #86 must still assess the selected domain criteria and decide whether any actual non-Watch product/security gap needs its own bounded task; this matrix does not waive a gap or close an epic automatically.
 
 Owner app workload is unknown. Existing advisory workload boundaries and retention attribution remain provisional; no device-independent memory cap, stress-test equivalence, comprehensive leak proof or workload-risk acceptance is inferred. #29 retains explicit security/workload/publication disposition, and WATCH-01 retains physical Watch execution. F2/#86/#64 cannot claim those release requirements passed. No further environment issue, production refactor, dependency or feature is selected by this reconciliation.

@@ -1,19 +1,19 @@
 # Work sequence before and after implementation authorization
 
-## Current acceptance and approved phase boundary — 2026-10-31
+## Current F2 reconciliation — 2026-10-31
 
-TV transitions are accepted through PR #131/main `c9e36d88e1402f3ac9d9a5ed44b7edcb01621b6c`, [run 41234106849](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41234106849), with full-log verification of 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks. Mac/iPhone/iPad and #62 retain their recorded accepted boundaries.
+PR #133/main `e1af71d60961b52b451416ea40fd1a4d644d802f`, [run 41236473629](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41236473629), is accepted after full-log verification: 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. #63 is closed/Done for its accepted revised non-Watch scope; #62 remains Done. Exact executed SDK identities and platform limits remain in [physical applicability](F2_PHYSICAL_APPLICABILITY.md).
 
-The owner explicitly approved [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md): only missing physical Watch verification moves to [WATCH-01 / #132](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/132), a native blocker/sub-issue of #29. watchOS support and product/toolchain minima are unchanged; no Watch test is passed. #29/WATCH-01 are tracked separately in “v1.0 – Publication gate”. The mount failure remains unresolved; no repeated install loop or unsupported fix is selected.
+[Formal #86 review](F2_REVIEW.md) reconciles all 79 unique core source-bullet IDs, their existing contract/test groups and accepted platform evidence. The owner explicitly approved only the non-publishing F2 rehearsal with runtime-retention and resource limitations; #29 still requires a separate actual workload/security/publication decision. This review's PR/main acceptance is pending; no epic is closed from draft findings.
 
-[Non-Watch applicability reconciliation](F2_PHYSICAL_APPLICABILITY.md) preserves exact per-target provenance, failed iPad corroboration plus separate strict diagnostic, Mac callback lag, TV later Wi-Fi fallback and bounded resource limits. This revised #63 scope/matrix requires its own PR/main acceptance. Then finish #86, formal #64 and #27 before F2 closure. #29 retains separate owner security/workload/publication decisions; F3 implementation is not authorized.
+Next: accept #86 and close its nine eligible selected-core epics, keep #27 open, then perform formal #64 before #27/F2 closure. #12/#13/#24/#26 remain deferred extension epics. #132 is still Blocked and mandatory before #29 publication under ADR-0013. Watch support is unchanged; no physical Watch pass, release or F3 implementation is authorized.
 
 ## Current F2 execution priority — 2026-10-31
 
-1. Accept the revised #63 non-Watch applicability matrix and approved Watch phase decision. Completed non-Watch/minimum results remain accepted.
-2. Complete #86 domain/evidence reconciliation, then formal #64 and #27. Keep F2 open until the selected remaining criteria pass.
-3. Separate publication lane: #132 remains Blocked on a supported physical Watch route and blocks #29. Both belong to “v1.0 – Publication gate”; no publication is authorized by F2 closure.
-4. Review #87 / draft PR #111 after F2; F3 implementation still requires its own approved scope/start decision.
+1. Accept the formal #86 reconciliation, then close #86 and its nine eligible selected-core epics with exact PR/main evidence. #62/#63 are Done; the F2-only owner resource disposition is recorded.
+2. Execute formal #64 from the accepted clean baseline; keep #27 and F2 open until rehearsal acceptance. No tag/release/publication.
+3. Separate publication lane: #132 remains Blocked before #29, with actual physical Watch evidence and owner workload/security/publication decisions outstanding.
+4. Review #87 / draft PR #111 after F2; F3 implementation needs its own approved scope/start decision.
 
 Stop whenever a GitHub run is pending and await the owner's instruction to continue. Do not poll CI or continue independent work across that stop, as reconfirmed on 2026-10-31. Conversation stays Norwegian; repository and project content stay English.
 

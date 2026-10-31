@@ -1,0 +1,2215 @@
+{
+  "date": "2026-10-31",
+  "accepted_review_baseline": "e1af71d60961b52b451416ea40fd1a4d644d802f",
+  "accepted_main_run": 41236473629,
+  "review_task": 86,
+  "review_pr_main_acceptance_pending": true,
+  "requirement_rows": 79,
+  "unique_requirement_ids": 79,
+  "evidence_group_count": 47,
+  "exact_named_swift_tests_resolved": 153,
+  "root_test_declarations": 218,
+  "indexing_is_not_execution_or_coverage_percentage": true,
+  "eligible_epics_after_review_main_acceptance": [
+    8,
+    9,
+    10,
+    11,
+    20,
+    21,
+    22,
+    23,
+    25
+  ],
+  "epic27_remains_open_for": 64,
+  "cross_cutting_extension_epics_retained": [
+    12,
+    13,
+    24,
+    26
+  ],
+  "watch_physical_publication_blocker": 132,
+  "publication_gate": 29,
+  "owner_resource_disposition": {
+    "explicitly_approved": "Non-publishing F2 rehearsal only, with stated limitations",
+    "runtime_allocations_can_outlive_cancellation_until_original_deadlines": true,
+    "finite_rss_is_not_a_universal_bound": true,
+    "eight_active_calls_expected_1MiB_is_guidance_only": true,
+    "production_workload_fit_approved": false,
+    "actual_workload_rate_payload_budget_device_memory_review_before_publication": true,
+    "publication_authorized": false
+  },
+  "requirements": [
+    {
+      "id": "NK-01-01",
+      "domain_issue": 8,
+      "source_bullet": "HTTP methods",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H01",
+        "H07",
+        "H14"
+      ],
+      "implementation_issues": [
+        43,
+        46,
+        51
+      ],
+      "other_evidence_references": "H01/H07/H14; I02/I05/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-01-02",
+      "domain_issue": 8,
+      "source_bullet": "System-negotiated HTTP versions",
+      "selected_boundary": "Foundation-owned; no protocol-version guarantee",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [],
+      "implementation_issues": [
+        49
+      ],
+      "other_evidence_references": "SESSION_TRANSPORT.md; I08",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-01-03",
+      "domain_issue": 8,
+      "source_bullet": "Buffered body types",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H06",
+        "H14"
+      ],
+      "implementation_issues": [
+        46,
+        51
+      ],
+      "other_evidence_references": "H06/H14; I05/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-01-04",
+      "domain_issue": 8,
+      "source_bullet": "Default and call headers",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H02",
+        "H07"
+      ],
+      "implementation_issues": [
+        43,
+        46
+      ],
+      "other_evidence_references": "H02/H07; I02/I05",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-01-05",
+      "domain_issue": 8,
+      "source_bullet": "Cookie storage",
+      "selected_boundary": "Partial: strict default; explicit compatible app-managed borrowed stores",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "S05",
+        "S06",
+        "S07"
+      ],
+      "implementation_issues": [
+        57
+      ],
+      "other_evidence_references": "S05\u2013S07; I16",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-01-06",
+      "domain_issue": 8,
+      "source_bullet": "Redirects",
+      "selected_boundary": "Partial: bounded same-origin GET/HEAD; unsafe replay refused",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "S02",
+        "S03"
+      ],
+      "implementation_issues": [
+        50,
+        57
+      ],
+      "other_evidence_references": "S02/S03; I09/I16/BUG-01",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-01-07",
+      "domain_issue": 8,
+      "source_bullet": "Timeouts",
+      "selected_boundary": "Selected with defined inactivity/total/resource distinctions",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "L05",
+        "L07",
+        "L08",
+        "L12"
+      ],
+      "implementation_issues": [
+        53
+      ],
+      "other_evidence_references": "L05/L07/L08/L12; I12",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-01-08",
+      "domain_issue": 8,
+      "source_bullet": "Cancellation",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "L06",
+        "L08",
+        "L09"
+      ],
+      "implementation_issues": [
+        53,
+        54
+      ],
+      "other_evidence_references": "L06/L08/L09; I12/I13",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-01-09",
+      "domain_issue": 8,
+      "source_bullet": "Task priority control",
+      "selected_boundary": "Deferred: no public transport priority promise",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "V1_SCOPE.md",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-01-10",
+      "domain_issue": 8,
+      "source_bullet": "Raw URLRequest",
+      "selected_boundary": "Selected within shared validation/security",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H05",
+        "H08",
+        "H12"
+      ],
+      "implementation_issues": [
+        45,
+        51
+      ],
+      "other_evidence_references": "H05/H08/H12; I04/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-01-11",
+      "domain_issue": 8,
+      "source_bullet": "Interceptors",
+      "selected_boundary": "Deferred",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "V1_SCOPE.md",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-02-01",
+      "domain_issue": 9,
+      "source_bullet": "Typed endpoint",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H03",
+        "H12",
+        "P01"
+      ],
+      "implementation_issues": [
+        45,
+        51
+      ],
+      "other_evidence_references": "H03/H12/P01; I04/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-02-02",
+      "domain_issue": 9,
+      "source_bullet": "Injected base URL",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H03",
+        "H05",
+        "L01"
+      ],
+      "implementation_issues": [
+        44,
+        45
+      ],
+      "other_evidence_references": "H03/H05/L01; I03/I04",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-02-03",
+      "domain_issue": 9,
+      "source_bullet": "Path components",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H03"
+      ],
+      "implementation_issues": [
+        45
+      ],
+      "other_evidence_references": "H03; I04",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-02-04",
+      "domain_issue": 9,
+      "source_bullet": "Query encoding",
+      "selected_boundary": "Partial: ordered repeated/nil/empty decoded items; no arbitrary encoder",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H04"
+      ],
+      "implementation_issues": [
+        45
+      ],
+      "other_evidence_references": "H04; I04",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-02-05",
+      "domain_issue": 9,
+      "source_bullet": "URL validation",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H03",
+        "H05",
+        "S01"
+      ],
+      "implementation_issues": [
+        45,
+        50
+      ],
+      "other_evidence_references": "H03/H05/S01; I04/I09",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-02-06",
+      "domain_issue": 9,
+      "source_bullet": "Automatic API versioning",
+      "selected_boundary": "Deferred; app may explicitly choose path/header",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "V1_SCOPE.md",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-02-07",
+      "domain_issue": 9,
+      "source_bullet": "Per-endpoint policy",
+      "selected_boundary": "Partial: auth/timeouts/response/status; cache/retry products deferred",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H11",
+        "L05",
+        "S08"
+      ],
+      "implementation_issues": [
+        48,
+        53,
+        55
+      ],
+      "other_evidence_references": "H11/L05/S08; I07/I12/I14",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-03-01",
+      "domain_issue": 10,
+      "source_bullet": "Generic JSON decoding",
+      "selected_boundary": "Partial: native value-configured codec; no injected arbitrary decoder",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H09",
+        "H12"
+      ],
+      "implementation_issues": [
+        48,
+        51
+      ],
+      "other_evidence_references": "H09/H12; I07/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-03-02",
+      "domain_issue": 10,
+      "source_bullet": "Codec strategies",
+      "selected_boundary": "Partial: documented native value strategies; no arbitrary converter callback",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H06",
+        "H09",
+        "L02",
+        "L03"
+      ],
+      "implementation_issues": [
+        46,
+        48
+      ],
+      "other_evidence_references": "H06/H09/L02/L03; I05/I07",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-03-03",
+      "domain_issue": 10,
+      "source_bullet": "Raw Data/text/metadata",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H10",
+        "H12"
+      ],
+      "implementation_issues": [
+        48,
+        51
+      ],
+      "other_evidence_references": "H10/H12; I07/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-03-04",
+      "domain_issue": 10,
+      "source_bullet": "Explicit empty responses",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H10",
+        "H12"
+      ],
+      "implementation_issues": [
+        48,
+        51
+      ],
+      "other_evidence_references": "H10/H12; I07/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-03-05",
+      "domain_issue": 10,
+      "source_bullet": "Status and headers",
+      "selected_boundary": "Selected as NetworkResponse wrapper",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H11",
+        "H12",
+        "P01"
+      ],
+      "implementation_issues": [
+        48,
+        51
+      ],
+      "other_evidence_references": "H11/H12/P01; I07/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-03-06",
+      "domain_issue": 10,
+      "source_bullet": "Content-Type",
+      "selected_boundary": "Partial: defined JSON/text validation; Data does not impose content type",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H09",
+        "H10"
+      ],
+      "implementation_issues": [
+        48
+      ],
+      "other_evidence_references": "H09/H10; I07",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-03-07",
+      "domain_issue": 10,
+      "source_bullet": "Streaming",
+      "selected_boundary": "Deferred",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "V1_SCOPE.md",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-03-08",
+      "domain_issue": 10,
+      "source_bullet": "Custom decoder formats",
+      "selected_boundary": "Deferred",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "V1_SCOPE.md",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-04-01",
+      "domain_issue": 11,
+      "source_bullet": "Transport identity",
+      "selected_boundary": "Partial: safe domain/code; no arbitrary underlying error retention",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H13"
+      ],
+      "implementation_issues": [
+        43,
+        51
+      ],
+      "other_evidence_references": "H13; I02/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-04-02",
+      "domain_issue": 11,
+      "source_bullet": "HTTP failure",
+      "selected_boundary": "Partial: status/headers; no captured error body",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H09",
+        "H12",
+        "H14"
+      ],
+      "implementation_issues": [
+        48,
+        51
+      ],
+      "other_evidence_references": "H09/H12/H14; I07/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-04-03",
+      "domain_issue": 11,
+      "source_bullet": "Encoding versus decoding",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H08",
+        "H09",
+        "H12"
+      ],
+      "implementation_issues": [
+        46,
+        48,
+        51
+      ],
+      "other_evidence_references": "H08/H09/H12; I05/I07/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-04-04",
+      "domain_issue": 11,
+      "source_bullet": "Timeout versus cancellation",
+      "selected_boundary": "Selected; CancellationError remains separate",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "H13",
+        "L05",
+        "L06",
+        "L07",
+        "L08"
+      ],
+      "implementation_issues": [
+        53
+      ],
+      "other_evidence_references": "H13/L05\u2013L08; I12",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-04-05",
+      "domain_issue": 11,
+      "source_bullet": "Security errors",
+      "selected_boundary": "Selected safe structured failure; recorded native trust evidence, physical Watch before publication",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "S01",
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "implementation_issues": [
+        50
+      ],
+      "other_evidence_references": "S01\u2013S04/TLS-01; I09/#104",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-04-06",
+      "domain_issue": 11,
+      "source_bullet": "Retry classification",
+      "selected_boundary": "Deferred",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "V1_SCOPE.md",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-04-07",
+      "domain_issue": 11,
+      "source_bullet": "Safe diagnostic context",
+      "selected_boundary": "Selected fixed metadata, no payload",
+      "contract": "docs/planning/HTTP_API_CONTRACT.md",
+      "evidence_groups": [
+        "S11",
+        "S12",
+        "S13"
+      ],
+      "implementation_issues": [
+        56
+      ],
+      "other_evidence_references": "S11\u2013S13; I15",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-13-01",
+      "domain_issue": 20,
+      "source_bullet": "Structured logging",
+      "selected_boundary": "Partial: one terminal event with elapsed/outcome/status; no start-event stream",
+      "contract": "docs/planning/SANITIZED_DIAGNOSTICS.md",
+      "evidence_groups": [
+        "S11",
+        "S12"
+      ],
+      "implementation_issues": [
+        56
+      ],
+      "other_evidence_references": "S11/S12; I15",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-13-02",
+      "domain_issue": 20,
+      "source_bullet": "Redaction",
+      "selected_boundary": "Selected by allowlist/exclusion, not arbitrary string scrubbing",
+      "contract": "docs/planning/SANITIZED_DIAGNOSTICS.md",
+      "evidence_groups": [
+        "S11",
+        "S13"
+      ],
+      "implementation_issues": [
+        56
+      ],
+      "other_evidence_references": "S11/S13; I15",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-13-03",
+      "domain_issue": 20,
+      "source_bullet": "Request identifiers",
+      "selected_boundary": "Selected per-call random ID; not a mathematical no-collision claim",
+      "contract": "docs/planning/SANITIZED_DIAGNOSTICS.md",
+      "evidence_groups": [
+        "S08",
+        "S10",
+        "S13"
+      ],
+      "implementation_issues": [
+        55,
+        56
+      ],
+      "other_evidence_references": "S08/S10/S13; I14/I15",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-13-04",
+      "domain_issue": 20,
+      "source_bullet": "Task metrics",
+      "selected_boundary": "Deferred",
+      "contract": "docs/planning/SANITIZED_DIAGNOSTICS.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "V1_SCOPE.md",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-13-05",
+      "domain_issue": 20,
+      "source_bullet": "Signposts",
+      "selected_boundary": "Deferred",
+      "contract": "docs/planning/SANITIZED_DIAGNOSTICS.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "V1_SCOPE.md",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-13-06",
+      "domain_issue": 20,
+      "source_bullet": "Logging configuration",
+      "selected_boundary": "Partial: optional sink off by default; no levels/sampling product",
+      "contract": "docs/planning/SANITIZED_DIAGNOSTICS.md",
+      "evidence_groups": [
+        "S11"
+      ],
+      "implementation_issues": [
+        56
+      ],
+      "other_evidence_references": "S11; I15",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-13-07",
+      "domain_issue": 20,
+      "source_bullet": "Injectable diagnostics sink",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/SANITIZED_DIAGNOSTICS.md",
+      "evidence_groups": [
+        "P01",
+        "S11",
+        "S12",
+        "S13"
+      ],
+      "implementation_issues": [
+        56
+      ],
+      "other_evidence_references": "S11\u2013S13/P01; I15",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-14-01",
+      "domain_issue": 21,
+      "source_bullet": "async/await",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/CONCURRENCY_AND_LIFECYCLE.md",
+      "evidence_groups": [
+        "H12",
+        "P01"
+      ],
+      "implementation_issues": [
+        51
+      ],
+      "other_evidence_references": "H12/P01; I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-14-02",
+      "domain_issue": 21,
+      "source_bullet": "Sendable",
+      "selected_boundary": "Selected Swift 6 strict checking",
+      "contract": "docs/planning/CONCURRENCY_AND_LIFECYCLE.md",
+      "evidence_groups": [
+        "C01",
+        "C02"
+      ],
+      "implementation_issues": [
+        42,
+        47
+      ],
+      "other_evidence_references": "C01/C02; I01/I06",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-14-03",
+      "domain_issue": 21,
+      "source_bullet": "Shared-state isolation",
+      "selected_boundary": "Selected via bounded synchronization/operation ownership; actors where appropriate, not actor-only",
+      "contract": "docs/planning/CONCURRENCY_AND_LIFECYCLE.md",
+      "evidence_groups": [
+        "L01",
+        "L02",
+        "L03",
+        "L04",
+        "L09",
+        "L10"
+      ],
+      "implementation_issues": [
+        44,
+        49,
+        54
+      ],
+      "other_evidence_references": "L01\u2013L04/L09/L10; I03/I08/I13",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-14-04",
+      "domain_issue": 21,
+      "source_bullet": "Cancellation propagation",
+      "selected_boundary": "Partial: core/auth-provider work; retry/refresh/transfers deferred",
+      "contract": "docs/planning/CONCURRENCY_AND_LIFECYCLE.md",
+      "evidence_groups": [
+        "L06",
+        "L08",
+        "S09"
+      ],
+      "implementation_issues": [
+        53,
+        55
+      ],
+      "other_evidence_references": "L06/L08/S09; I12/I14",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-14-05",
+      "domain_issue": 21,
+      "source_bullet": "Batch task groups",
+      "selected_boundary": "Deferred public batch API; internal joined tasks are implementation",
+      "contract": "docs/planning/CONCURRENCY_AND_LIFECYCLE.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "V1_SCOPE.md",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-14-06",
+      "domain_issue": 21,
+      "source_bullet": "AsyncSequence",
+      "selected_boundary": "Deferred",
+      "contract": "docs/planning/CONCURRENCY_AND_LIFECYCLE.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "V1_SCOPE.md",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-14-07",
+      "domain_issue": 21,
+      "source_bullet": "Deduplication",
+      "selected_boundary": "Deferred",
+      "contract": "docs/planning/CONCURRENCY_AND_LIFECYCLE.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "V1_SCOPE.md",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-14-08",
+      "domain_issue": 21,
+      "source_bullet": "Shutdown/session ownership",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/CONCURRENCY_AND_LIFECYCLE.md",
+      "evidence_groups": [
+        "L04",
+        "L09",
+        "L10",
+        "L11"
+      ],
+      "implementation_issues": [
+        49,
+        54
+      ],
+      "other_evidence_references": "L04/L09\u2013L11; I08/I13",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-15-01",
+      "domain_issue": 22,
+      "source_bullet": "Environment selection",
+      "selected_boundary": "Selected immutable base URL per client",
+      "contract": "docs/planning/CONFIGURATION.md",
+      "evidence_groups": [
+        "H03",
+        "L01"
+      ],
+      "implementation_issues": [
+        44,
+        45
+      ],
+      "other_evidence_references": "H03/L01; I03/I04",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-15-02",
+      "domain_issue": 22,
+      "source_bullet": "Session injection",
+      "selected_boundary": "Partial: compatible foreground URLSession and explicit ownership/profile",
+      "contract": "docs/planning/CONFIGURATION.md",
+      "evidence_groups": [
+        "L04",
+        "S05"
+      ],
+      "implementation_issues": [
+        49,
+        57
+      ],
+      "other_evidence_references": "L04/S05; I08/I16",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-15-03",
+      "domain_issue": 22,
+      "source_bullet": "Policy values",
+      "selected_boundary": "Partial: accepted security/auth/timeout/status; retry/cache deferred",
+      "contract": "docs/planning/CONFIGURATION.md",
+      "evidence_groups": [
+        "L01",
+        "S01",
+        "S02",
+        "S08"
+      ],
+      "implementation_issues": [
+        44,
+        50,
+        55
+      ],
+      "other_evidence_references": "L01/S01/S02/S08; I03/I09/I14",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-15-04",
+      "domain_issue": 22,
+      "source_bullet": "Default/override headers",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/CONFIGURATION.md",
+      "evidence_groups": [
+        "H02",
+        "H07"
+      ],
+      "implementation_issues": [
+        46
+      ],
+      "other_evidence_references": "H02/H07; I05",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-15-05",
+      "domain_issue": 22,
+      "source_bullet": "Network cost controls",
+      "selected_boundary": "Deferred public control; document current native defaults and applicability",
+      "contract": "docs/planning/CONFIGURATION.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "V1_SCOPE.md; ENV-06",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-15-06",
+      "domain_issue": 22,
+      "source_bullet": "Immutable snapshots",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/CONFIGURATION.md",
+      "evidence_groups": [
+        "H02",
+        "L01",
+        "L02",
+        "L10"
+      ],
+      "implementation_issues": [
+        44,
+        46,
+        54
+      ],
+      "other_evidence_references": "H02/L01/L02/L10; I03/I05/I13",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-16-01",
+      "domain_issue": 23,
+      "source_bullet": "Mock consumer client",
+      "selected_boundary": "Selected app injection examples, not separate testing product",
+      "contract": "docs/planning/CI_AND_TEST_PLAN.md",
+      "evidence_groups": [
+        "P01"
+      ],
+      "implementation_issues": [
+        59
+      ],
+      "other_evidence_references": "P01; I18",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-16-02",
+      "domain_issue": 23,
+      "source_bullet": "URLProtocol stubs",
+      "selected_boundary": "Selected scoped fixtures; scripted results distinct from native",
+      "contract": "docs/planning/CI_AND_TEST_PLAN.md",
+      "evidence_groups": [
+        "H12",
+        "L04"
+      ],
+      "implementation_issues": [
+        49,
+        51
+      ],
+      "other_evidence_references": "H12/L04; I08/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-16-03",
+      "domain_issue": 23,
+      "source_bullet": "Request assertions",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/CI_AND_TEST_PLAN.md",
+      "evidence_groups": [
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H07",
+        "H08",
+        "H14"
+      ],
+      "implementation_issues": [
+        45,
+        46,
+        51
+      ],
+      "other_evidence_references": "H03\u2013H08/H14; I04/I05/I10",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-16-04",
+      "domain_issue": 23,
+      "source_bullet": "Clock/timeout tests",
+      "selected_boundary": "Partial: core deadline/cancellation; retry deferred",
+      "contract": "docs/planning/CI_AND_TEST_PLAN.md",
+      "evidence_groups": [
+        "L05",
+        "L06",
+        "L07",
+        "L08"
+      ],
+      "implementation_issues": [
+        53
+      ],
+      "other_evidence_references": "L05\u2013L08; I12",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-16-05",
+      "domain_issue": 23,
+      "source_bullet": "Auth concurrency",
+      "selected_boundary": "Partial: provider/account isolation; refresh deferred",
+      "contract": "docs/planning/CI_AND_TEST_PLAN.md",
+      "evidence_groups": [
+        "S08",
+        "S09",
+        "S10"
+      ],
+      "implementation_issues": [
+        55
+      ],
+      "other_evidence_references": "S08\u2013S10; I14",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-16-06",
+      "domain_issue": 23,
+      "source_bullet": "Cancellation cleanup",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/CI_AND_TEST_PLAN.md",
+      "evidence_groups": [
+        "L06",
+        "L08",
+        "L09",
+        "L10",
+        "L11"
+      ],
+      "implementation_issues": [
+        53,
+        54
+      ],
+      "other_evidence_references": "L06/L08\u2013L11; I12/I13",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-16-07",
+      "domain_issue": 23,
+      "source_bullet": "Cache test engine",
+      "selected_boundary": "Deferred; core storage-profile probes retained",
+      "contract": "docs/planning/CI_AND_TEST_PLAN.md",
+      "evidence_groups": [
+        "S05",
+        "S06",
+        "S07"
+      ],
+      "implementation_issues": [
+        57
+      ],
+      "other_evidence_references": "S05\u2013S07; I16",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-16-08",
+      "domain_issue": 23,
+      "source_bullet": "Controlled integration server",
+      "selected_boundary": "Selected controlled local/public fixture scope; physical Watch deferred only by ADR-0013",
+      "contract": "docs/planning/CI_AND_TEST_PLAN.md",
+      "evidence_groups": [
+        "S03",
+        "S06"
+      ],
+      "implementation_issues": [],
+      "other_evidence_references": "S03/S06/#104/ENV-01\u201307; #62/#63",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-16-09",
+      "domain_issue": 23,
+      "source_bullet": "Performance evidence",
+      "selected_boundary": "Partial: measured baseline/attribution and bounded target observations; owner workload/publication disposition remains",
+      "contract": "docs/planning/CI_AND_TEST_PLAN.md",
+      "evidence_groups": [],
+      "implementation_issues": [
+        61
+      ],
+      "other_evidence_references": "RESOURCE_BASELINE.md/REPEATED_CALL_MEMORY.md; I20/RES-01/#62/#63",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-18-01",
+      "domain_issue": 25,
+      "source_bullet": "No sensitive default logs",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/SECURITY_PRIVACY_REVIEW.md",
+      "evidence_groups": [
+        "S11",
+        "S12",
+        "S13"
+      ],
+      "implementation_issues": [
+        56,
+        60
+      ],
+      "other_evidence_references": "S11\u2013S13; I15/I19",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-18-02",
+      "domain_issue": 25,
+      "source_bullet": "Ephemeral/strict storage",
+      "selected_boundary": "Selected no automatic owned stores; compatible borrowed profiles explicit",
+      "contract": "docs/planning/SECURITY_PRIVACY_REVIEW.md",
+      "evidence_groups": [
+        "S05",
+        "S06",
+        "S07"
+      ],
+      "implementation_issues": [
+        57
+      ],
+      "other_evidence_references": "S05\u2013S07; I16",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-18-03",
+      "domain_issue": 25,
+      "source_bullet": "Credential isolation",
+      "selected_boundary": "Selected core provider/account/origin binding; app owns persistence",
+      "contract": "docs/planning/SECURITY_PRIVACY_REVIEW.md",
+      "evidence_groups": [
+        "S08",
+        "S09",
+        "S10"
+      ],
+      "implementation_issues": [
+        55
+      ],
+      "other_evidence_references": "S08\u2013S10; I14",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-18-04",
+      "domain_issue": 25,
+      "source_bullet": "Protected payload files",
+      "selected_boundary": "Deferred SDK payload-file feature; no such persistence selected",
+      "contract": "docs/planning/SECURITY_PRIVACY_REVIEW.md",
+      "evidence_groups": [],
+      "implementation_issues": [
+        60
+      ],
+      "other_evidence_references": "V1_SCOPE.md; I19",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-18-05",
+      "domain_issue": 25,
+      "source_bullet": "Cache deletion API",
+      "selected_boundary": "Deferred custom cache feature; app owns opted-in stores/deletion",
+      "contract": "docs/planning/SECURITY_PRIVACY_REVIEW.md",
+      "evidence_groups": [],
+      "implementation_issues": [
+        57,
+        60
+      ],
+      "other_evidence_references": "STORAGE_VERIFICATION.md; I16/I19",
+      "phase_disposition": "deferred product catalog"
+    },
+    {
+      "id": "NK-18-06",
+      "domain_issue": 25,
+      "source_bullet": "No external telemetry",
+      "selected_boundary": "Selected no SDK external service/sink default",
+      "contract": "docs/planning/SECURITY_PRIVACY_REVIEW.md",
+      "evidence_groups": [
+        "S11",
+        "S12",
+        "S13"
+      ],
+      "implementation_issues": [
+        56,
+        60
+      ],
+      "other_evidence_references": "S11\u2013S13; I15/I19",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-18-07",
+      "domain_issue": 25,
+      "source_bullet": "Data minimization",
+      "selected_boundary": "Selected fixed diagnostics and safe errors; returned headers remain caller responsibility",
+      "contract": "docs/planning/SECURITY_PRIVACY_REVIEW.md",
+      "evidence_groups": [
+        "H13",
+        "S11",
+        "S12",
+        "S13"
+      ],
+      "implementation_issues": [
+        51,
+        56,
+        60
+      ],
+      "other_evidence_references": "H13/S11\u2013S13; I10/I15/I19",
+      "phase_disposition": "selected F2 scope reconciled; review PR/main pending"
+    },
+    {
+      "id": "NK-20-01",
+      "domain_issue": 27,
+      "source_bullet": "Client creation/injection",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/API_REVIEW.md",
+      "evidence_groups": [
+        "P01"
+      ],
+      "implementation_issues": [
+        59
+      ],
+      "other_evidence_references": "P01/DocumentationExamplesTests; I18",
+      "phase_disposition": "#64 rehearsal remains"
+    },
+    {
+      "id": "NK-20-02",
+      "domain_issue": 27,
+      "source_bullet": "Typed endpoints",
+      "selected_boundary": "Selected",
+      "contract": "docs/planning/API_REVIEW.md",
+      "evidence_groups": [
+        "H03",
+        "H12",
+        "P01"
+      ],
+      "implementation_issues": [
+        45,
+        51,
+        59
+      ],
+      "other_evidence_references": "H03/H12/P01; I04/I10/I18",
+      "phase_disposition": "#64 rehearsal remains"
+    },
+    {
+      "id": "NK-20-03",
+      "domain_issue": 27,
+      "source_bullet": "Small protocols",
+      "selected_boundary": "Selected reviewed NetworkClient/Endpoint/provider/sink boundaries",
+      "contract": "docs/planning/API_REVIEW.md",
+      "evidence_groups": [],
+      "implementation_issues": [
+        59
+      ],
+      "other_evidence_references": "API_REVIEW.md; I18",
+      "phase_disposition": "#64 rehearsal remains"
+    },
+    {
+      "id": "NK-20-04",
+      "domain_issue": 27,
+      "source_bullet": "Escape hatches",
+      "selected_boundary": "Partial: raw URLRequest/compatible URLSession, no policy bypass",
+      "contract": "docs/planning/API_REVIEW.md",
+      "evidence_groups": [
+        "H05",
+        "H08",
+        "P01",
+        "S05"
+      ],
+      "implementation_issues": [
+        45,
+        49,
+        57
+      ],
+      "other_evidence_references": "H05/H08/S05/P01; I04/I08/I16",
+      "phase_disposition": "#64 rehearsal remains"
+    },
+    {
+      "id": "NK-20-05",
+      "domain_issue": 27,
+      "source_bullet": "DocC",
+      "selected_boundary": "Selected build/compiled examples; final rehearsal remains",
+      "contract": "docs/planning/API_REVIEW.md",
+      "evidence_groups": [
+        "C04",
+        "P01"
+      ],
+      "implementation_issues": [
+        59
+      ],
+      "other_evidence_references": "C04/P01; I18/#64",
+      "phase_disposition": "#64 rehearsal remains"
+    },
+    {
+      "id": "NK-20-06",
+      "domain_issue": 27,
+      "source_bullet": "Examples",
+      "selected_boundary": "Partial: HTTP/auth-provider/testing; upload/WebSocket deferred",
+      "contract": "docs/planning/API_REVIEW.md",
+      "evidence_groups": [],
+      "implementation_issues": [
+        59
+      ],
+      "other_evidence_references": "DocumentationExamplesTests; I18",
+      "phase_disposition": "#64 rehearsal remains"
+    },
+    {
+      "id": "NK-20-07",
+      "domain_issue": 27,
+      "source_bullet": "SemVer",
+      "selected_boundary": "Selected documented policy; actual release decision pending",
+      "contract": "docs/planning/API_REVIEW.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "../governance/RELEASE_POLICY.md; #64/#29",
+      "phase_disposition": "#64 rehearsal remains"
+    },
+    {
+      "id": "NK-20-08",
+      "domain_issue": 27,
+      "source_bullet": "Migration",
+      "selected_boundary": "Selected policy; no invented prior release migration",
+      "contract": "docs/planning/API_REVIEW.md",
+      "evidence_groups": [],
+      "implementation_issues": [],
+      "other_evidence_references": "../governance/RELEASE_POLICY.md; #64",
+      "phase_disposition": "#64 rehearsal remains"
+    },
+    {
+      "id": "NK-20-09",
+      "domain_issue": 27,
+      "source_bullet": "CI platform matrix",
+      "selected_boundary": "Selected four families/five runtime results; minimum/physical separate",
+      "contract": "docs/planning/API_REVIEW.md",
+      "evidence_groups": [
+        "C01",
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06",
+        "C07"
+      ],
+      "implementation_issues": [
+        47
+      ],
+      "other_evidence_references": "C01\u2013C07; I06/#62/#63",
+      "phase_disposition": "#64 rehearsal remains"
+    }
+  ],
+  "evidence_groups": {
+    "H01": {
+      "bounded_claim": "HTTP public model: standard/custom methods and invalid tokens",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/NetworkKitTests.swift",
+          "function": "standardMethodsAndCaseSensitivity"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkKitTests.swift",
+          "function": "invalidMethodsFailWithoutEchoingInput"
+        }
+      ]
+    },
+    "H02": {
+      "bounded_claim": "HTTP headers: case-insensitive names, conflict rejection, opaque values and immutable snapshots",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/NetworkKitTests.swift",
+          "function": "caseInsensitiveLookupPreservesOpaqueValues"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkKitTests.swift",
+          "function": "equalDuplicatesCollapseButConflictsFail"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkKitTests.swift",
+          "function": "controlsAreRejectedExceptHorizontalTab"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkKitTests.swift",
+          "function": "snapshotsDoNotChangeWithInputOrExportedDictionary"
+        }
+      ]
+    },
+    "H03": {
+      "bounded_claim": "HTTP URLs: base path, reserved/unicode segments, traversal, invalid schemes/userinfo/fragments and encoding",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/EndpointURLTests.swift",
+          "function": "typedEndpointAndBasePath"
+        },
+        {
+          "source": "Tests/NetworkKitTests/EndpointURLTests.swift",
+          "function": "reservedAndUnicodeSegmentsAreData"
+        },
+        {
+          "source": "Tests/NetworkKitTests/EndpointURLTests.swift",
+          "function": "invalidSegments"
+        },
+        {
+          "source": "Tests/NetworkKitTests/EndpointURLTests.swift",
+          "function": "invalidBaseURLs"
+        },
+        {
+          "source": "Tests/NetworkKitTests/EndpointURLTests.swift",
+          "function": "existingEscapesStayEncodedOnce"
+        }
+      ]
+    },
+    "H04": {
+      "bounded_claim": "HTTP queries: ordered/repeated names and absent/nil/empty values",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/EndpointURLTests.swift",
+          "function": "queryOrderingRepetitionsAndOptionalValues"
+        },
+        {
+          "source": "Tests/NetworkKitTests/EndpointURLTests.swift",
+          "function": "snapshotsKeepTheirOwnPathAndQuery"
+        }
+      ]
+    },
+    "H05": {
+      "bounded_claim": "HTTP raw input: same validation/origin/effective ports and typed parity",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/EndpointURLTests.swift",
+          "function": "validSameOriginRequestPreservesURL"
+        },
+        {
+          "source": "Tests/NetworkKitTests/EndpointURLTests.swift",
+          "function": "invalidRequestsUseSameValidation"
+        },
+        {
+          "source": "Tests/NetworkKitTests/EndpointURLTests.swift",
+          "function": "unicodeHostAndEffectivePorts"
+        },
+        {
+          "source": "Tests/NetworkKitTests/EndpointURLTests.swift",
+          "function": "typedURLPassesRawValidation"
+        }
+      ]
+    },
+    "H06": {
+      "bounded_claim": "HTTP body: none versus empty Data, UTF-8, JSON strategies/null/float/formatting",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "defaultEndpointHasNoBodyOrInventedContentType"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "dataAndEmptyDataAreExplicitBodies"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "textUsesExactUTF8"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "jsonDefaultsAndNull"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "jsonOptionsUseNativeStrategies"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "jsonFloatAndOutputFormatting"
+        }
+      ]
+    },
+    "H07": {
+      "bounded_claim": "HTTP request policy: header/Content-Type precedence, method preservation, GET/HEAD bodies and managed fields",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "explicitHeadersAndContentTypeWinWithoutChangingBytes"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "methodsArePreserved"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "bodylessMethodsRejectBodies"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "rawBodyHeadersAndCallPrecedence"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "managedHeadersAreRejected"
+        }
+      ]
+    },
+    "H08": {
+      "bounded_claim": "HTTP rejection: streams/malformed input rejected; safe failure does not poison later requests",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "rawStreamsAndMalformedMethodsFailLocally"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "rawHeadersUseExistingValidation"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "encodingFailureIsSanitizedAndDoesNotPoisonNextCall"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "foundationDiscardedCRLFIsNotReintroduced"
+        }
+      ]
+    },
+    "H09": {
+      "bounded_claim": "HTTP response: JSON/media types, status-first interpretation, no invented empty JSON model",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "jsonAndMetadata"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "acceptedJSONMediaTypes"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "missingContentTypeIsAllowed"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "rejectsIncorrectOrAmbiguousJSONMediaType"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "statusWinsOverCodingAndContentType"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "malformedOrEmptyJSONFails"
+        }
+      ]
+    },
+    "H10": {
+      "bounded_claim": "HTTP response: explicit 204/HEAD empty; raw Data; strict UTF-8/charset; invalid/non-HTTP response",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "explicitEmpty204AndHEADSemantics"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "dataIsUnchangedAndDoesNotImposeContentType"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "textWithoutContentTypeAndInvalidBytes"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "unsupportedOrInvalidTextDeclarationFails"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "rejectsNonHTTPAndInvalidStatus"
+        }
+      ]
+    },
+    "H11": {
+      "bounded_claim": "HTTP status: 2xx and explicit nonempty valid exceptions; typed/raw strategy parity",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "defaultsAndBoundaries"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "rejectsEmptyOrInvalidPolicies"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "typedAndRawStrategiesShareStatusRules"
+        }
+      ]
+    },
+    "H12": {
+      "bounded_claim": "HTTP pipeline: typed/raw JSON/Data/text/empty, status/content-type ordering and structured errors",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/HTTPPipelineTests.swift",
+          "function": "jsonThroughSession"
+        },
+        {
+          "source": "Tests/NetworkKitTests/HTTPPipelineTests.swift",
+          "function": "dataTextAndEmptyThroughSession"
+        },
+        {
+          "source": "Tests/NetworkKitTests/HTTPPipelineTests.swift",
+          "function": "statusPrecedesDecodingAndExplicitPolicyWorks"
+        },
+        {
+          "source": "Tests/NetworkKitTests/HTTPPipelineTests.swift",
+          "function": "invalidJSONAndContentTypeRemainStructured"
+        },
+        {
+          "source": "Tests/NetworkKitTests/HTTPPipelineTests.swift",
+          "function": "nonHTTPResponseIsRejectedAfterTransport"
+        }
+      ]
+    },
+    "H13": {
+      "bounded_claim": "HTTP failures: no retry/error payload disclosure; safe transport identity; timeout distinct from unexplained cancellation",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/HTTPPipelineTests.swift",
+          "function": "transportErrorsAreSanitizedAndNeverRetried"
+        },
+        {
+          "source": "Tests/NetworkKitTests/HTTPPipelineTests.swift",
+          "function": "systemTimeoutAndUnexplainedCancellationAreDistinct"
+        },
+        {
+          "source": "Tests/NetworkKitTests/HTTPPipelineTests.swift",
+          "function": "sessionFailureUsesSharedNormalization"
+        }
+      ]
+    },
+    "H14": {
+      "bounded_claim": "HTTP acceptance: public POST parity, encoding failure/no send, bad UTF-8, no HTTP replay and origin/credential boundaries",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/F1AcceptanceTests.swift",
+          "function": "typedAndRawPOSTHaveRequestAndResponseParity"
+        },
+        {
+          "source": "Tests/NetworkKitTests/F1AcceptanceTests.swift",
+          "function": "encodingFailureDoesNotSendOrPoisonClient"
+        },
+        {
+          "source": "Tests/NetworkKitTests/F1AcceptanceTests.swift",
+          "function": "HTTPFailurePrecedesDecoderWithoutRetry"
+        },
+        {
+          "source": "Tests/NetworkKitTests/F1AcceptanceTests.swift",
+          "function": "invalidUTF8IsDecodingFailureForBothInputs"
+        },
+        {
+          "source": "Tests/NetworkKitTests/F1AcceptanceTests.swift",
+          "function": "extraRawOriginDropsDefaultsAndDeniedOriginDoesNotSend"
+        },
+        {
+          "source": "Tests/NetworkKitTests/F1AcceptanceTests.swift",
+          "function": "loopbackCredentialsFailBeforeTransport"
+        }
+      ]
+    },
+    "L01": {
+      "bounded_claim": "Lifecycle snapshots: defaults/overrides, finite positive limits and concurrent immutable snapshots",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/ConfigurationTests.swift",
+          "function": "defaultsAndIndependentOverrides"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ConfigurationTests.swift",
+          "function": "invalidLimits"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ConfigurationTests.swift",
+          "function": "positiveFiniteLimits"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ConfigurationTests.swift",
+          "function": "concurrentSnapshotsAreIndependent"
+        }
+      ]
+    },
+    "L02": {
+      "bounded_claim": "Lifecycle codecs: per-operation encoding and decoding without shared policy/payload",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/RequestEncodingTests.swift",
+          "function": "concurrentEncodersHaveIndependentStrategiesAndPayloads"
+        }
+      ]
+    },
+    "L03": {
+      "bounded_claim": "Lifecycle codecs: independent decoders and cancellation around synchronous decoding",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "parallelDecodersDoNotShareStrategyOrPayload"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ResponseDecodingTests.swift",
+          "function": "cancellationBeforeAndAfterSynchronousDecoding"
+        }
+      ]
+    },
+    "L04": {
+      "bounded_claim": "Lifecycle ownership: session reuse/snapshot, compatible injection and per-session concurrent work",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/SessionTransportTests.swift",
+          "function": "ownedSessionIsReusedAndSnapshotsItsConfiguration"
+        },
+        {
+          "source": "Tests/NetworkKitTests/SessionTransportTests.swift",
+          "function": "injectedSessionSurvivesAdapterCleanupAndDeinit"
+        },
+        {
+          "source": "Tests/NetworkKitTests/SessionTransportTests.swift",
+          "function": "concurrentCallsOnOneSessionRemainIndependent"
+        },
+        {
+          "source": "Tests/NetworkKitTests/SessionTransportTests.swift",
+          "function": "externalInvalidationStopsAnActiveBorrowedOperation"
+        }
+      ]
+    },
+    "L05": {
+      "bounded_claim": "Lifecycle budget: 30/60 defaults, raw/typed overrides and joined watchdog cleanup",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "defaultBudgetExpiresAndJoinsBothChildren"
+        },
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "callOverridesClientLimits"
+        },
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "clientLimitsOverrideLibraryDefaults"
+        }
+      ]
+    },
+    "L06": {
+      "bounded_claim": "Lifecycle cancellation: before/during I/O and per-call isolation",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "preCancelledCallerDoesNotStartTransport"
+        },
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "cancellationDuringIOStopsAndJoinsWork"
+        },
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "cancellationIsScopedToOneCall"
+        },
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "borrowedSessionStopsOnlyThisOperation"
+        }
+      ]
+    },
+    "L07": {
+      "bounded_claim": "Lifecycle elapsed time: budget covers options/encoding/awaited hooks/decoding; no late success",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "encodingTimeCannotSendAfterExpiration"
+        },
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "optionsAndSchedulingTimeBelongToBudget"
+        },
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "decodingTimeCannotProduceLateSuccess"
+        },
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "futureSuspendingHookIsInsideOperationBudget"
+        }
+      ]
+    },
+    "L08": {
+      "bounded_claim": "Lifecycle terminal arbitration: system/total timeout identity, first interruption, selected completion, bounded long sleeps",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "systemTimeoutIsDistinctFromTotalTimeout"
+        },
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "firstRecordedInterruptionSurvivesCleanupRace"
+        },
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "selectedCompletionSurvivesCancellationWhileWatchdogJoins"
+        },
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "extremePositiveBudgetsDoNotOverflowOrLeaveSleepers"
+        },
+        {
+          "source": "Tests/NetworkKitTests/OperationBudgetTests.swift",
+          "function": "longBudgetContinuesAcrossBoundedSleeps"
+        }
+      ]
+    },
+    "L09": {
+      "bounded_claim": "Lifecycle shutdown: idempotence/admission, joined finalization, shutdown waiters retain cleanup ownership",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/ClientLifecycleTests.swift",
+          "function": "shutdownWithoutActiveWorkIsIdempotent"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ClientLifecycleTests.swift",
+          "function": "closingRejectsBothInputsBeforeReadingOptionsAndJoinsCleanup"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ClientLifecycleTests.swift",
+          "function": "concurrentShutdownRetainsCleanupOwnership"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ClientLifecycleTests.swift",
+          "function": "shutdownWaitsForTransportFinalization"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ClientLifecycleTests.swift",
+          "function": "admissionRemembersShutdownBeforeOperationBinding"
+        }
+      ]
+    },
+    "L10": {
+      "bounded_claim": "Lifecycle concurrency: first cause/result retained, independent snapshots/codecs and cleanup on failures",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/ClientLifecycleTests.swift",
+          "function": "firstTimeoutOrShutdownCauseIsPreserved"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ClientLifecycleTests.swift",
+          "function": "selectedCompletionSurvivesShutdown"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ClientLifecycleTests.swift",
+          "function": "concurrentClientCallsKeepSnapshotsAndCodecsIndependent"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ClientLifecycleTests.swift",
+          "function": "failedCallsReleaseAdmissionBeforeShutdown"
+        }
+      ]
+    },
+    "L11": {
+      "bounded_claim": "Lifecycle ownership: owned closure and unrelated borrowed-session activity survives",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/ClientLifecycleTests.swift",
+          "function": "ownedSessionIsClosedAfterItsOperationsJoin"
+        },
+        {
+          "source": "Tests/NetworkKitTests/ClientLifecycleTests.swift",
+          "function": "borrowedSessionKeepsAnotherClientsActiveWorkAlive"
+        }
+      ]
+    },
+    "L12": {
+      "bounded_claim": "Lifecycle system limits: resource timeout separate; strict storage/connectivity defaults",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/SessionTransportTests.swift",
+          "function": "resourceLimitRemainsSeparateFromRequestedTotalBudget"
+        },
+        {
+          "source": "Tests/NetworkKitTests/SessionTransportTests.swift",
+          "function": "invalidResourceLimitsAndOwnedStoresAreRejected"
+        },
+        {
+          "source": "Tests/NetworkKitTests/SessionTransportTests.swift",
+          "function": "strictConfigurationDisablesAutomaticStorage"
+        }
+      ]
+    },
+    "S01": {
+      "bounded_claim": "Security origins: HTTPS default, canonical loopback permission, lookalike/LAN rejection and no HTTP secrets",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/NetworkSecurityTests.swift",
+          "function": "HTTPIsDeniedByDefault"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkSecurityTests.swift",
+          "function": "explicitLoopbackPermission"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkSecurityTests.swift",
+          "function": "loopbackLookalikesAndNoncanonicalAddressesFail"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkSecurityTests.swift",
+          "function": "HTTPDoesNotAcceptCredentialOrCustomHeaders"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkSecurityTests.swift",
+          "function": "HTTPMetadataAndTypedRawParity"
+        }
+      ]
+    },
+    "S02": {
+      "bounded_claim": "Security redirects: GET/HEAD, same effective origin, at most five hops, no mutation/downgrade/cross-origin replay",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/NetworkSecurityTests.swift",
+          "function": "approvedRedirectsAndEffectivePorts"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkSecurityTests.swift",
+          "function": "unsafeRedirectsAreRefusedEvenWithExtraOriginPermission"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkSecurityTests.swift",
+          "function": "mutatingAndNonSelectedMethodsAreNeverReplayed"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkSecurityTests.swift",
+          "function": "HEADPreservesMethodAndRejectsBodyOrChangedMethod"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkSecurityTests.swift",
+          "function": "sixthHopAndLoopsBecomeStructuredErrors"
+        }
+      ]
+    },
+    "S03": {
+      "bounded_claim": "Security native redirect: denied destination receives no request; bounded success/loop/hop failure; task-only terminal cancellation",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/RedirectIntegrationTests.swift",
+          "function": "deniedRedirectDestinationIsNotContacted"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RedirectIntegrationTests.swift",
+          "function": "sameOriginRedirectsHaveABoundedLifetime"
+        },
+        {
+          "source": "Tests/NetworkKitTests/RedirectIntegrationTests.swift",
+          "function": "terminalRedirectFailureCancelsOnlyItsUnderlyingTask"
+        }
+      ]
+    },
+    "S04": {
+      "bounded_claim": "Security challenge policy: system-handling disposition, no fallback or proposed credentials; native TLS acceptance still OPEN",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/NetworkSecurityTests.swift",
+          "function": "trustUsesSystemAndOtherChallengesNeverSupplyCredentials"
+        },
+        {
+          "source": "Tests/NetworkKitTests/NetworkSecurityTests.swift",
+          "function": "challengeCallbacksDiscardEvenProposedCredentials"
+        }
+      ]
+    },
+    "S05": {
+      "bounded_claim": "Security injection: strict/app-managed storage compatibility, background/delegate/global-header rejection",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/StorageIntegrationTests.swift",
+          "function": "publicProfilesRejectCredentialsGlobalHeadersDelegatesAndBackgrounds"
+        },
+        {
+          "source": "Tests/NetworkKitTests/StorageIntegrationTests.swift",
+          "function": "appManagedCookieCacheProfileRequiresExplicitPublicSelection"
+        }
+      ]
+    },
+    "S06": {
+      "bounded_claim": "Security strict storage: owned/borrowed cookie/cache wire probes and owned Basic challenge control",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/StorageIntegrationTests.swift",
+          "function": "strictProfileDoesNotRetainOrSendCookies"
+        },
+        {
+          "source": "Tests/NetworkKitTests/StorageIntegrationTests.swift",
+          "function": "strictProfileCannotServeAnAutomaticHTTPCacheEntry"
+        },
+        {
+          "source": "Tests/NetworkKitTests/StorageIntegrationTests.swift",
+          "function": "ownedStrictProfileNeverSuppliesBasicChallengeCredentials"
+        }
+      ]
+    },
+    "S07": {
+      "bounded_claim": "Security app-managed scope: no active stores on HTTP, no foreign cookies/cache policy inheritance",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/StorageIntegrationTests.swift",
+          "function": "appManagedActiveStoresCannotRunOverLoopbackHTTP"
+        },
+        {
+          "source": "Tests/NetworkKitTests/StorageIntegrationTests.swift",
+          "function": "appManagedCookiesCannotFollowAdditionalRawOriginPermission"
+        },
+        {
+          "source": "Tests/NetworkKitTests/StorageIntegrationTests.swift",
+          "function": "additionalRawOriginWithoutCookiesCannotUseAppCachePolicy"
+        }
+      ]
+    },
+    "S08": {
+      "bounded_claim": "Security provider: minimal context, validation/conflicts/explicit precedence and opt-out",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/AuthenticationTests.swift",
+          "function": "bothInputsReceiveMinimalContextAndHeaders"
+        },
+        {
+          "source": "Tests/NetworkKitTests/AuthenticationTests.swift",
+          "function": "credentialConflictsAreNeverSilentlyOverwritten"
+        },
+        {
+          "source": "Tests/NetworkKitTests/AuthenticationTests.swift",
+          "function": "providerFieldsCannotBypassValidation"
+        },
+        {
+          "source": "Tests/NetworkKitTests/AuthenticationTests.swift",
+          "function": "optOutSkipsOnlyProviderAndRetainsExplicitPrecedence"
+        }
+      ]
+    },
+    "S09": {
+      "bounded_claim": "Security provider boundaries: HTTP/foreign origins never inherit auth; cancellation/timeout/cleanup; no refresh/replay",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/AuthenticationTests.swift",
+          "function": "httpNeverInvokesProvider"
+        },
+        {
+          "source": "Tests/NetworkKitTests/AuthenticationTests.swift",
+          "function": "additionalOriginsNeverInheritProviderOrDefaults"
+        },
+        {
+          "source": "Tests/NetworkKitTests/AuthenticationTests.swift",
+          "function": "providerFailuresAreSafeAndNeverReachTransport"
+        },
+        {
+          "source": "Tests/NetworkKitTests/AuthenticationTests.swift",
+          "function": "providerSharesCancellationBudgetAndJoinedCleanup"
+        },
+        {
+          "source": "Tests/NetworkKitTests/AuthenticationTests.swift",
+          "function": "responsesDoNotRefreshOrReplay"
+        },
+        {
+          "source": "Tests/NetworkKitTests/AuthenticationTests.swift",
+          "function": "redirectCannotMoveProviderCredentialsToAnotherOrigin"
+        }
+      ]
+    },
+    "S10": {
+      "bounded_claim": "Security account isolation: independent bindings and cancellation",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/AuthenticationTests.swift",
+          "function": "concurrentAccountsUseIndependentBindingsAndRequestIdentifiers"
+        },
+        {
+          "source": "Tests/NetworkKitTests/AuthenticationTests.swift",
+          "function": "cancellingOneAccountLeavesOtherProviderWorkAlive"
+        }
+      ]
+    },
+    "S11": {
+      "bounded_claim": "Security diagnostics: canaries across boundaries; fixed method allowlist; on/off preserves results; do not re-read user values",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/DiagnosticsTests.swift",
+          "function": "canariesInEveryBoundaryStayOutOfEventsAndErrorDescriptions"
+        },
+        {
+          "source": "Tests/NetworkKitTests/DiagnosticsTests.swift",
+          "function": "onlyExactAllowlistedMethodNamesAreRetained"
+        },
+        {
+          "source": "Tests/NetworkKitTests/DiagnosticsTests.swift",
+          "function": "enablingAndDisablingPreservesResultsAndRequests"
+        },
+        {
+          "source": "Tests/NetworkKitTests/DiagnosticsTests.swift",
+          "function": "loggingDoesNotReadEndpointPropertiesOrDescriptionsAgain"
+        }
+      ]
+    },
+    "S12": {
+      "bounded_claim": "Security diagnostic lifecycle: one safe event, joined cleanup, sink latency and selected terminal cause",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/DiagnosticsTests.swift",
+          "function": "rejectedAdmissionAndPreCancellationEmitOneSafeEvent"
+        },
+        {
+          "source": "Tests/NetworkKitTests/DiagnosticsTests.swift",
+          "function": "eventWaitsForJoinedCleanupAndIncludesItsDuration"
+        },
+        {
+          "source": "Tests/NetworkKitTests/DiagnosticsTests.swift",
+          "function": "sinkLatencyCannotRewriteSelectedResultOrMeasuredDuration"
+        },
+        {
+          "source": "Tests/NetworkKitTests/DiagnosticsTests.swift",
+          "function": "cancellationCategoriesFollowTheSelectedCause"
+        },
+        {
+          "source": "Tests/NetworkKitTests/DiagnosticsTests.swift",
+          "function": "firstCancellationCauseSurvivesTheLaterCause"
+        },
+        {
+          "source": "Tests/NetworkKitTests/DiagnosticsTests.swift",
+          "function": "timeoutsRemainCategorizedWithoutPendingDiagnosticsWork"
+        }
+      ]
+    },
+    "S13": {
+      "bounded_claim": "Security diagnostic concurrency: account canaries and unknown errors never formatted",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/DiagnosticsTests.swift",
+          "function": "concurrentAccountsProduceOnlyIndependentSanitizedTerminalEvents"
+        },
+        {
+          "source": "Tests/NetworkKitTests/DiagnosticsTests.swift",
+          "function": "unknownErrorsAreClassifiedWithoutFormattingThem"
+        }
+      ]
+    },
+    "P01": {
+      "bounded_claim": "Public boundary: external import without @testable, consumer injection, formats, auth, diagnostics, profile and shutdown",
+      "named_swift_tests": [
+        {
+          "source": "Tests/NetworkKitTests/PublicResponseAPITests.swift",
+          "function": "externalConsumerSelectsBorrowedStorageProfile"
+        },
+        {
+          "source": "Tests/NetworkKitTests/PublicResponseAPITests.swift",
+          "function": "externalConsumerReceivesOnlySanitizedDiagnostics"
+        },
+        {
+          "source": "Tests/NetworkKitTests/PublicResponseAPITests.swift",
+          "function": "externalConsumerCanConfigureAuthenticationProvider"
+        },
+        {
+          "source": "Tests/NetworkKitTests/PublicResponseAPITests.swift",
+          "function": "externalConsumerCanShutdownThroughClientBoundary"
+        },
+        {
+          "source": "Tests/NetworkKitTests/PublicResponseAPITests.swift",
+          "function": "externalConsumerCanSelectTypedAndRawStrategies"
+        }
+      ]
+    },
+    "C01": {
+      "bounded_claim": "Manifest/name/product/platform minima, Swift mode and no external dependencies",
+      "named_swift_tests": []
+    },
+    "C02": {
+      "bounded_claim": "All four builds and five runtime results, exact tools/destinations",
+      "named_swift_tests": []
+    },
+    "C03": {
+      "bounded_claim": "No success for empty/failed/skipped/expected-failure or missing runtime results",
+      "named_swift_tests": []
+    },
+    "C04": {
+      "bounded_claim": "Real DocC/source controls and mandatory aggregate, no dummy green path",
+      "named_swift_tests": []
+    },
+    "C05": {
+      "bounded_claim": "Least privilege and standard-runner cost/resource bounds",
+      "named_swift_tests": []
+    },
+    "C06": {
+      "bounded_claim": "Isolation, concurrency and negative controls",
+      "named_swift_tests": []
+    },
+    "C07": {
+      "bounded_claim": "Minimum OS, physical devices, native trust and release quality",
+      "named_swift_tests": []
+    }
+  },
+  "selected_source_hashes": {
+    "Package.swift": "f345ef3bc7f89ca9a934ce09f4d68da5829363f82d3ce72d04f368ba626745ad",
+    "Sources/NetworkKit/APIClient.swift": "4128d68707c6353cfcc60139acca0f92b4123c5c0f6f1a9ede298bd7de6c4888",
+    "Sources/NetworkKit/Authentication.swift": "46b8cdfd416b178e092d1dfbe70c97f10e0b31e027a114b7e41264e8c56768bf",
+    "Sources/NetworkKit/ClientLifecycle.swift": "ba7d243eb266b79c7157c66341d48896f8693354d9aa369aba8d93abbacc25ae",
+    "Sources/NetworkKit/Diagnostics.swift": "019b95d3992a4bd44d471a37f8d5f59631425d9cbceb97eb8e66595d0d12290f",
+    "Sources/NetworkKit/Endpoint.swift": "7b196e8ede8a9c031595e3ecdd72bfc3aaeecdc6610d055f383a787b976dec31",
+    "Sources/NetworkKit/ExecutionBoundaries.swift": "7431f0fa2688e11be5649b687b81c4bbd313c78bc613bb8d68bf1248daef494c",
+    "Sources/NetworkKit/HTTPHeaders.swift": "45bfe1c8779e3f39c048fc1a299bd6ee8a75fe28d71ea797ce704c7eccc4b4f4",
+    "Sources/NetworkKit/HTTPMethod.swift": "98bde648d1db468b7b29a1856ace61a7301f6daf057eb99cd6e5114a31456bdb",
+    "Sources/NetworkKit/HTTPStatus.swift": "84bde1bf4b8a3c92e66f9c8bacdf079b56de7fc92a851134723e54017257ca71",
+    "Sources/NetworkKit/HTTPStatusPolicy.swift": "f28eb6564f87d7988aa281683bd6c398f340eaa32434ee3d5245021355954722",
+    "Sources/NetworkKit/HTTPToken.swift": "d9053f6ff580b333c643e0209d8e001e008506a95f41581f9b60bc46402bb13b",
+    "Sources/NetworkKit/JSONDecodingOptions.swift": "d11a252a75f1a4cfb814d2ed0fbb3e4dbcb85200d5e9b978a1e1f83f3ca50904",
+    "Sources/NetworkKit/NetworkConfiguration.swift": "bb8163d62a7db2bcb39f0c87e95b3038142749f834821ded680b0d0d8a7eb9af",
+    "Sources/NetworkKit/NetworkError.swift": "bd9133325b2af1255af713b7d9557c476dac5483448f8c565eb961f4016eede4",
+    "Sources/NetworkKit/NetworkKit.swift": "7af95bcc95f8e800d953b02b1751b05bce237bc7d5107e58eaf042c22a1285d9",
+    "Sources/NetworkKit/NetworkOperation.swift": "a1e6a31c7f1d650dbbec50c2c175af94b80a4b3ef090c594379c5984d3b821e0",
+    "Sources/NetworkKit/NetworkResponse.swift": "2267de5fe325f2c310dfb875a2e1b3b230713d2397a423e53ba303a72674067d",
+    "Sources/NetworkKit/NetworkSecurityPolicy.swift": "cc85f6f2ab60f79731207d81e80f30bf5e032b0f2351ae42177e2ab62f29f3d9",
+    "Sources/NetworkKit/NetworkTaskDelegate.swift": "d9a97411a31d322a971685604d39de115112e606d7bb8e6837ea0005305f0bd8",
+    "Sources/NetworkKit/RequestBody.swift": "914d27be0edb4fa36fc91e57787bf6d9c0311acbeb0a2d8334e24f2bf2cbbcdb",
+    "Sources/NetworkKit/RequestBuilder.swift": "bbe0ac5e6d4e8ec3c0474126b9db3588799c631ad1e73caa07fac859faab8259",
+    "Sources/NetworkKit/RequestURLBuilder.swift": "404943fa36c0fe5e7df5c078412ad6da30e82882bc097c29c3c0c0af896fef1b",
+    "Sources/NetworkKit/ResponseStrategy.swift": "e5150fc6affd759d6ed6d622b40b5a027c2ad7164130ddb9aeee746dfa0fbbab",
+    "Sources/NetworkKit/SessionStorageProfile.swift": "83ca939758de16bab5df13d94c280065ad46c89ba0c0335863870a8b81e59c66",
+    "Sources/NetworkKit/URLSessionTransport.swift": "1c1c5b7afdba3eb32905a0e4c54aabfb3efed7b8354375f11868f0beeaecc14d"
+  },
+  "quality_disposition": "No newly established product defect or justified generic refactor; retain exact native/platform and residual-risk limits.",
+  "project_and_dependency_readback": {
+    "statuses": {
+      "8": "In Review",
+      "9": "In Review",
+      "10": "In Review",
+      "11": "In Review",
+      "20": "In Review",
+      "21": "In Review",
+      "22": "In Review",
+      "23": "In Review",
+      "25": "In Review",
+      "86": "In Review",
+      "27": "Blocked",
+      "64": "Blocked",
+      "63": "Done",
+      "132": "Blocked"
+    },
+    "native27_blocked_by64": true,
+    "native86_prerequisites_closed": true,
+    "no_dependency27_on86_cycle": true,
+    "project_readme_verified": true,
+    "f2_milestone_description_updated": true
+  },
+  "revised_issue63_closed_and_done": true,
+  "review_task86_and_nine_epics_still_open": true
+}

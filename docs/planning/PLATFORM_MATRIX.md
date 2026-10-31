@@ -1,12 +1,12 @@
 # Platform and toolchain matrix
 
-## Current acceptance and approved phase boundary — 2026-10-31
+## Current F2 reconciliation — 2026-10-31
 
-TV transitions are accepted through PR #131/main `c9e36d88e1402f3ac9d9a5ed44b7edcb01621b6c`, [run 41234106849](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41234106849), with full-log verification of 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks. Mac/iPhone/iPad and #62 retain their recorded accepted boundaries.
+PR #133/main `e1af71d60961b52b451416ea40fd1a4d644d802f`, [run 41236473629](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41236473629), is accepted after full-log verification: 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. #63 is closed/Done for its accepted revised non-Watch scope; #62 remains Done. Exact executed SDK identities and platform limits remain in [physical applicability](F2_PHYSICAL_APPLICABILITY.md).
 
-The owner explicitly approved [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md): only missing physical Watch verification moves to [WATCH-01 / #132](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/132), a native blocker/sub-issue of #29. watchOS support and product/toolchain minima are unchanged; no Watch test is passed. #29/WATCH-01 are tracked separately in “v1.0 – Publication gate”. The mount failure remains unresolved; no repeated install loop or unsupported fix is selected.
+[Formal #86 review](F2_REVIEW.md) reconciles all 79 unique core source-bullet IDs, their existing contract/test groups and accepted platform evidence. The owner explicitly approved only the non-publishing F2 rehearsal with runtime-retention and resource limitations; #29 still requires a separate actual workload/security/publication decision. This review's PR/main acceptance is pending; no epic is closed from draft findings.
 
-[Non-Watch applicability reconciliation](F2_PHYSICAL_APPLICABILITY.md) preserves exact per-target provenance, failed iPad corroboration plus separate strict diagnostic, Mac callback lag, TV later Wi-Fi fallback and bounded resource limits. This revised #63 scope/matrix requires its own PR/main acceptance. Then finish #86, formal #64 and #27 before F2 closure. #29 retains separate owner security/workload/publication decisions; F3 implementation is not authorized.
+Next: accept #86 and close its nine eligible selected-core epics, keep #27 open, then perform formal #64 before #27/F2 closure. #12/#13/#24/#26 remain deferred extension epics. #132 is still Blocked and mandatory before #29 publication under ADR-0013. Watch support is unchanged; no physical Watch pass, release or F3 implementation is authorized.
 
 ## Current verified evidence — 2026-10-31
 

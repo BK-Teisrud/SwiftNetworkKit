@@ -1,5 +1,8 @@
 # Roadmap
 
+Current reconciliation, 2026-10-31: #62 and revised #63 are Done. [GATE-F2 review](F2_REVIEW.md) reconciles the 79 stable core IDs and recorded owner F2-only resource disposition; its PR/main acceptance precedes eligible core epic closures. #27 remains open for formal #64, then F2 closure. #132/#29 remain separate publication blockers; #87/draft PR #111 is planning, not F3 implementation authorization. Dated progress notes below preserve their original state.
+
+
 Current owner decision, 2026-10-31: [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md) moves only missing physical Watch verification to #132/#29 in the separate “v1.0 – Publication gate” milestone. watchOS 10 support is unchanged. F2 remains open for revised #63, #86 and formal #64/#27; publication and F3 implementation remain unauthorized. [Applicability matrix](F2_PHYSICAL_APPLICABILITY.md) and [work queue](WORK_QUEUE.md) supersede dated access notes below.
 
 
