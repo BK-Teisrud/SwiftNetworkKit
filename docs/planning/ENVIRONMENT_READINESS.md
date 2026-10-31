@@ -1,14 +1,12 @@
 # Test-environment readiness — PREP-01
 
-## Current acceptance and remaining work — 2026-10-31
+## Current acceptance and approved phase boundary — 2026-10-31
 
-PR #130 is accepted on main `9807c0cdd12df82296846da8c5e28880ad478562`, [run 41231362170](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41231362170). Full logs verified 218 Mac tests, four simulator runs of 215, 19 helper tests and four manual-host provenance checks without failure/restart markers. Actual Mac transition evidence is accepted. #62 and earlier iPhone/iPad transitions remain accepted through PR #129/main 41221803657; #62 is closed/project Done.
+TV transitions are accepted through PR #131/main `c9e36d88e1402f3ac9d9a5ed44b7edcb01621b6c`, [run 41234106849](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41234106849), with full-log verification of 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks. Mac/iPhone/iPad and #62 retain their recorded accepted boundaries.
 
-The new [TV transition report](evidence/F2_TV_MANUAL_TRANSITIONS_2026-10-31.json) verifies actual background/foreground while pending, HTTP 200, Ethernet loss with unsatisfied path during the call and transport -1009, restored wired connectivity, same-client concurrent 204/204, joined shutdown and four diagnostics unchanged 70.753 seconds after recovery. A satisfied Wi-Fi path appeared after the failed outage call and before Ethernet restoration; no continuous offline interval until replugging is claimed. Finite whole-process RSS remains observational. This TV result awaits its own PR/main acceptance.
+The owner explicitly approved [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md): only missing physical Watch verification moves to [WATCH-01 / #132](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/132), a native blocker/sub-issue of #29. watchOS support and product/toolchain minima are unchanged; no Watch test is passed. #29/WATCH-01 are tracked separately in “v1.0 – Publication gate”. The mount failure remains unresolved; no repeated install loop or unsupported fix is selected.
 
-[Watch diagnosis](evidence/F2_WATCH_MOUNT_DIAGNOSIS_2026-10-31.json) verifies Developer Mode enabled but developer-image mounting fails: CoreDevice 12040 / MobileDevice 0xe8000076, preceded by personalization-manifest 0xe8003ffe. Existing Apple candidates retain build 17C529. Signed root artefacts have verified existing profiles/signers; no physical Watch tests started. A supported working mounting/execution route and per-target applicability/resource disposition remain under #63; the underlying mount cause is not conclusively attributed.
-
-Next: accept TV evidence, resolve supported physical Watch execution and finish #63 applicability/resource reconciliation, then #86 and formal #64/#27. #29 retains separate publication/workload-risk authorization. No new issue/milestone, product refactor, paid environment, support change or security bypass is justified by these results.
+[Non-Watch applicability reconciliation](F2_PHYSICAL_APPLICABILITY.md) preserves exact per-target provenance, failed iPad corroboration plus separate strict diagnostic, Mac callback lag, TV later Wi-Fi fallback and bounded resource limits. This revised #63 scope/matrix requires its own PR/main acceptance. Then finish #86, formal #64 and #27 before F2 closure. #29 retains separate owner security/workload/publication decisions; F3 implementation is not authorized.
 
 ## Earlier disposition — 2026-10-31 (superseded by current acceptance above)
 

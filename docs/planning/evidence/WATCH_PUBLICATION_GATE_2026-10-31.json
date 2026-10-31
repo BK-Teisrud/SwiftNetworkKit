@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-31",
+  "accepted_baseline": "c9e36d88e1402f3ac9d9a5ed44b7edcb01621b6c",
+  "owner_approved_only_physical_watch_phase_deferral": true,
+  "adr": "ADR-0013",
+  "watch_issue": 132,
+  "release_issue": 29,
+  "publication_milestone": {
+    "number": 8,
+    "title": "v1.0 \u2013 Publication gate",
+    "open": true,
+    "due_date": null
+  },
+  "watch_is_native_subissue_of_29": true,
+  "native_blocked_by_readback": {
+    "29": [
+      8,
+      9,
+      10,
+      11,
+      20,
+      21,
+      22,
+      23,
+      25,
+      27,
+      41,
+      64,
+      132
+    ],
+    "86": [
+      59,
+      60,
+      61,
+      62,
+      63,
+      100,
+      104
+    ],
+    "64": [
+      41,
+      63,
+      86
+    ]
+  },
+  "watch_has_no_issue_blockers": true,
+  "project_readback": {
+    "watch_issue": 132,
+    "watch_status": "Blocked",
+    "priority": "P1",
+    "scope": "CORE",
+    "order": 23.75,
+    "publication_milestone": "v1.0 \u2013 Publication gate",
+    "issue29_same_milestone": true,
+    "issue63_in_review": true,
+    "readme_verified": true
+  },
+  "issues_63_86_64_29_revised_and_read_back": true,
+  "gate_scope_change_pr_main_acceptance_pending": true,
+  "issue63_closed": false,
+  "f2_closed": false,
+  "physical_watch_passed": false,
+  "support_or_product_change": false,
+  "publication_or_f3_implementation_authorized": false
+}

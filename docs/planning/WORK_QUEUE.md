@@ -1,21 +1,19 @@
 # Work sequence before and after implementation authorization
 
-## Current acceptance and remaining work — 2026-10-31
+## Current acceptance and approved phase boundary — 2026-10-31
 
-PR #130 is accepted on main `9807c0cdd12df82296846da8c5e28880ad478562`, [run 41231362170](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41231362170). Full logs verified 218 Mac tests, four simulator runs of 215, 19 helper tests and four manual-host provenance checks without failure/restart markers. Actual Mac transition evidence is accepted. #62 and earlier iPhone/iPad transitions remain accepted through PR #129/main 41221803657; #62 is closed/project Done.
+TV transitions are accepted through PR #131/main `c9e36d88e1402f3ac9d9a5ed44b7edcb01621b6c`, [run 41234106849](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41234106849), with full-log verification of 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks. Mac/iPhone/iPad and #62 retain their recorded accepted boundaries.
 
-The new [TV transition report](evidence/F2_TV_MANUAL_TRANSITIONS_2026-10-31.json) verifies actual background/foreground while pending, HTTP 200, Ethernet loss with unsatisfied path during the call and transport -1009, restored wired connectivity, same-client concurrent 204/204, joined shutdown and four diagnostics unchanged 70.753 seconds after recovery. A satisfied Wi-Fi path appeared after the failed outage call and before Ethernet restoration; no continuous offline interval until replugging is claimed. Finite whole-process RSS remains observational. This TV result awaits its own PR/main acceptance.
+The owner explicitly approved [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md): only missing physical Watch verification moves to [WATCH-01 / #132](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/132), a native blocker/sub-issue of #29. watchOS support and product/toolchain minima are unchanged; no Watch test is passed. #29/WATCH-01 are tracked separately in “v1.0 – Publication gate”. The mount failure remains unresolved; no repeated install loop or unsupported fix is selected.
 
-[Watch diagnosis](evidence/F2_WATCH_MOUNT_DIAGNOSIS_2026-10-31.json) verifies Developer Mode enabled but developer-image mounting fails: CoreDevice 12040 / MobileDevice 0xe8000076, preceded by personalization-manifest 0xe8003ffe. Existing Apple candidates retain build 17C529. Signed root artefacts have verified existing profiles/signers; no physical Watch tests started. A supported working mounting/execution route and per-target applicability/resource disposition remain under #63; the underlying mount cause is not conclusively attributed.
-
-Next: accept TV evidence, resolve supported physical Watch execution and finish #63 applicability/resource reconciliation, then #86 and formal #64/#27. #29 retains separate publication/workload-risk authorization. No new issue/milestone, product refactor, paid environment, support change or security bypass is justified by these results.
+[Non-Watch applicability reconciliation](F2_PHYSICAL_APPLICABILITY.md) preserves exact per-target provenance, failed iPad corroboration plus separate strict diagnostic, Mac callback lag, TV later Wi-Fi fallback and bounded resource limits. This revised #63 scope/matrix requires its own PR/main acceptance. Then finish #86, formal #64 and #27 before F2 closure. #29 retains separate owner security/workload/publication decisions; F3 implementation is not authorized.
 
 ## Current F2 execution priority — 2026-10-31
 
-1. Accept the new TV manual transition report; Mac, iPhone/iPad and #62 minimum-family evidence are already accepted.
-2. Resolve the Watch developer-image mount blocker, then execute physical regression/public/native applicability and resource checks through the supported route. Do not repeat tests while developer services are unavailable.
-3. Finish #63 applicability/resource reconciliation, then #86 and formal #64. Keep #27 open until rehearsal acceptance; #29 retains publication/workload-risk authorization.
-4. Review bounded retry planning #87 / draft PR #111 after F2; no extension implementation is authorized by this evidence work.
+1. Accept the revised #63 non-Watch applicability matrix and approved Watch phase decision. Completed non-Watch/minimum results remain accepted.
+2. Complete #86 domain/evidence reconciliation, then formal #64 and #27. Keep F2 open until the selected remaining criteria pass.
+3. Separate publication lane: #132 remains Blocked on a supported physical Watch route and blocks #29. Both belong to “v1.0 – Publication gate”; no publication is authorized by F2 closure.
+4. Review #87 / draft PR #111 after F2; F3 implementation still requires its own approved scope/start decision.
 
 Stop whenever a GitHub run is pending and await the owner's instruction to continue. Do not poll CI or continue independent work across that stop, as reconfirmed on 2026-10-31. Conversation stays Norwegian; repository and project content stay English.
 
@@ -54,6 +52,7 @@ Choose the lowest Order with closed blockers and satisfied Ready criteria. This 
 | 22 | [[I22] Run representative tests on physical Apple devices](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/63) | #23 | #60, #85 |
 | 22.5 | [[GATE-F2] Reconcile v1 requirements, domain epics, and release evidence](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/86) | #29 | #59, #60, #61, #62, #63, #100, #104 |
 | 23 | [[I23] Rehearse the v1 release without publishing](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/64) | #27 | #63, #86 |
+| 23.75 | [WATCH-01: physical Watch publication evidence](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/132) | #29; publication milestone | Supported Watch development route; ADR-0013 |
 | 24 | [REL-01: Actual v1 release gate](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/29) | Governance | #64 and selected core epics |
 
 Current review: preparation PR #103 is accepted through main run 40550211780. [TLS-01 / #104](NATIVE_TLS_REJECTION.md), Order 20.75, adds independently executable native macOS untrusted-certificate rejection coverage. It blocks #86 while #62/#63 remain Blocked for actual minimum/physical execution. System-trusted positive HTTPS and independent hostname-mismatch evidence are still missing. No support/tool change or owner-risk acceptance is inferred.

@@ -1,5 +1,8 @@
 # First stable release scope
 
+Phase timing update, 2026-10-31: [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md) moves unexecuted physical Watch evidence to mandatory #132/#29 pre-publication verification. This changes only phase timing; four platform families, watchOS 10 support, public API and toolchain minima remain unchanged. No F2 closure, support reduction, publication or F3 implementation is authorized.
+
+
 Status: Core scope and module choices accepted 2026-10-19; see [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md). The initial public HTTP pipeline is implemented through I10. [F1 review](F1_REVIEW.md) records I11 verification and the remaining F2/release requirements; this is not complete v1 readiness.
 
 Repository/package SwiftNetworkKit distributes one library product and module named NetworkKit. Consumers import NetworkKit. Later test targets are not additional library modules.

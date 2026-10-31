@@ -49,3 +49,7 @@ PR #129/main 41221803657 accepted the iPhone/iPad reports and manual tooling. Th
 The owner completed the TV round through the rebuilt host, with existing profile/signer and embedded accepted-source identity verified. [TV evidence](evidence/F2_TV_MANUAL_TRANSITIONS_2026-10-31.json) records actual background/active transitions, HTTP 200, unsatisfied path during Ethernet loss and transport -1009, restored wired connectivity, concurrent recovery 204/204, joined shutdown and four stable terminal diagnostics at 70.753 seconds. A brief Wi-Fi fallback occurred after the outage call completed and before Ethernet returned. This new result awaits its PR/main acceptance; no uninterrupted offline interval or SDK memory cap is inferred.
 
 Watch Developer Mode is enabled, but the [image mount failure](evidence/F2_WATCH_MOUNT_DIAGNOSIS_2026-10-31.json) blocks physical execution. Existing #63 retains Watch and final applicability/resource disposition. No cross-device pass or automatic F2 acceptance is inferred.
+
+## Approved Watch phase timing
+
+[ADR-0013](../decisions/ADR-0013-watch-publication-gate.md) moves only missing physical Watch verification to #132/#29 before publication. TV transitions are accepted through PR #131/main 41234106849; Mac/iPhone/iPad reports retain their accepted boundaries. [Non-Watch applicability](F2_PHYSICAL_APPLICABILITY.md) is the revised #63 review artifact. No Watch pass or support change is inferred; F2 and publication remain distinct.
