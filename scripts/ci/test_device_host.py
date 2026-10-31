@@ -23,6 +23,15 @@ class DeviceHostContracts(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "omits or duplicates"):
             validate(self.root, project)
 
+    def test_omitted_optional_native_source_fails(self):
+        project = copy.deepcopy(self.project)
+        objects = project["objects"]
+        target = next(o for o in objects.values() if o.get("name") == "NetworkKitPublicHTTPSChecks")
+        phase = next(objects[p] for p in target["buildPhases"] if objects[p]["isa"] == "PBXSourcesBuildPhase")
+        phase["files"].pop()
+        with self.assertRaisesRegex(RuntimeError, "omits or duplicates"):
+            validate(self.root, project)
+
     def test_tool_host_substitution_fails(self):
         project = copy.deepcopy(self.project)
         for o in project["objects"].values():

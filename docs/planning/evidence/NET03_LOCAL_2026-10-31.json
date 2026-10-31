@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-31",
+  "base_commit": "db1e4100d3d8303cb90e9f39fdd46553f3a67b8b",
+  "candidate": "uncommitted NET-03 verification infrastructure",
+  "source_sha256": "5eec22ab7ac5e61b392f73864afdd7836b832fb811b9474d7e3efc1b4019266f",
+  "log_sha256": "82ba61e93fb8d61d7956efce7237cb335c72ef8fbb0a46a2cd06173fe2f448ad",
+  "command": "swift test --package-path Tools/PublicHTTPSChecks --filter nativeLoopback",
+  "exit_code": 0,
+  "scope": "Seven local native loopback declarations only; excludes the twelve public HTTPS declarations",
+  "physical_result": "Fresh physical iPhone run passed seven selected loopback declarations; see NET03_TARGETS_2026-10-31.json. Prior unavailable temporary results remain unverified.",
+  "minimum_simulator_result": "Fresh iPhone/iOS 17 full opt-in suite passed; see NET03_TARGETS_2026-10-31.json. Other results are separately recorded only when complete.",
+  "resource_observations": [
+    "NativeLoopback resource mode=networkkit bytes=65536 concurrency=4 calls=65 rssInitial=11100160 rssWarm=11157504 rssCompleted=12775424 rssAfterOriginalBudget=12783616 settleSeconds=6",
+    "NativeLoopback resource mode=foundation bytes=65536 concurrency=4 calls=65 rssInitial=12812288 rssWarm=12820480 rssCompleted=13484032 rssAfterOriginalBudget=13221888 settleSeconds=6",
+    "NativeLoopback resource mode=foundation bytes=1048576 concurrency=8 calls=33 rssInitial=13221888 rssWarm=16384000 rssCompleted=30375936 rssAfterOriginalBudget=30175232 settleSeconds=6",
+    "NativeLoopback resource mode=networkkit bytes=1048576 concurrency=8 calls=33 rssInitial=30175232 rssWarm=30175232 rssCompleted=30396416 rssAfterOriginalBudget=30277632 settleSeconds=6"
+  ],
+  "negative_controls": [
+    {
+      "control": "cache",
+      "exit_code": 1,
+      "compiled": true,
+      "detected": true,
+      "log_sha256": "9313ff4a59bee2238ab55a7142d78a79967eee67760d17ecdfcf92277589479e",
+      "assertion": "Expected private cached response absent after deliberate no-store mutation",
+      "harness_note": "Initial classification script expected different Swift Testing wording; full log showed the correct assertion failure. Cache control was not rerun."
+    },
+    {
+      "control": "cancel",
+      "exit_code": 1,
+      "compiled": true,
+      "detected": true,
+      "log_sha256": "7d8ff87ac2f36e996542ea4438d72a83c9beecac020621d130b7cf596c92a866"
+    }
+  ],
+  "helper_tests_current_candidate": 16,
+  "accepted_base_main": {
+    "commit": "86119dae802769bcffc709b164f08aaf9c28c6e7",
+    "run": 41180726691,
+    "full_log_review": "218 macOS tests, four x 215 simulator tests, two unsigned builds, 15 helper tests; no unexpected restart/time-limit failure"
+  }
+}

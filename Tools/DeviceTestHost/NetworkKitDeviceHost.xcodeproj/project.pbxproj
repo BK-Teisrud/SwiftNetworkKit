@@ -5,6 +5,16 @@
 };
 "objectVersion" = 56;
 "objects" = {
+"78D3DEB74F0A5361069702B9" = {
+"isa" = "PBXFileReference";
+"lastKnownFileType" = "sourcecode.swift";
+"path" = "../PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/NativeLoopbackTests.swift";
+"sourceTree" = "<group>";
+};
+"4BD3D581EC13B8C9659F406C" = {
+"isa" = "PBXBuildFile";
+"fileRef" = "78D3DEB74F0A5361069702B9";
+};
 "BD026055D8F0C154471ACA47" = {
 "isa" = "PBXFileReference";
 "explicitFileType" = "wrapper.application";
@@ -292,6 +302,7 @@
 "children" = (
 "4F53394E01EEEE36AB337402",
 "781CAA6738A604344AE86EE3",
+"78D3DEB74F0A5361069702B9",
 "0A3E27B8CA818264D75C8D81",
 "FE6D6DE247593CA01AD79DDB",
 );
@@ -673,6 +684,7 @@
 "buildActionMask" = "2147483647";
 "files" = (
 "5D0019F1FE4BC167030E1EC3",
+"4BD3D581EC13B8C9659F406C",
 );
 "runOnlyForDeploymentPostprocessing" = "0";
 };

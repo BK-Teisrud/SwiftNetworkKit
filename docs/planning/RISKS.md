@@ -20,7 +20,7 @@ Accept residual risks in the relevant issue, with an ADR for lasting deviations.
 
 ## Concrete outstanding release work
 
-R2: Minimum-OS environments are unconfirmed. PREP-01 / #85 investigates access now; I21 / #62 still blocks release; newer devices/runtimes are not substitutes. See TEST_ENVIRONMENTS.md.
+R2 current disposition (2026-10-31): four minimum simulator root regressions are accepted (215 each), and native ARM64 macOS 14.8.9 consumer/reuse/cancellation/resource observations are recorded in MACOS14_EXECUTION_ROUTE_2026-10-29.md. These bounded results do not complete I21 / #62: full applicable minimum/native scenarios, exact macOS 14.0 and other recorded limits remain. Physical-family/transition evidence remains under #63. Earlier missing-access statements below are dated history, not the current inventory.
 
 R9: No contact address exists. Do not offer private licensing/contribution processes until an appropriate channel is established. This does not block separately authorized internal implementation.
 
@@ -47,3 +47,9 @@ Environment refresh, 2026-10-27: [local device records](ENVIRONMENT_ACCESS_2026-
 ## TLS-01 native negative evidence
 
 The [macOS rejection regression](NATIVE_TLS_REJECTION.md) exercises typed/raw public calls through real system-trust handling against a disposable untrusted certificate with a matching loopback SAN. Local results are certificate-specific; no trust root or verification bypass is installed. This is owned-session macOS evidence only. #62/#63 still require trusted success, independent hostname mismatch and actual minimum/physical environments; #86/#29 retain resource/risk/release gates. #104 acceptance requires its own PR/main checks.
+
+## NET-03 verification custody and resource limits — 2026-10-31
+
+The new in-process loopback fixture advances existing #62/#63 ENV claims without creating a production transport or a shipped module. Current candidate evidence is tracked in [NET03_NATIVE_LOOPBACK.md](NET03_NATIVE_LOOPBACK.md). Local success is not accepted-main, minimum or physical success. Previous temporary device/simulator logs were unavailable after resumption; those candidate outcomes remain unverified. Preserve sanitized source hashes, summaries, failures and cleanup in checked-in evidence before promoting claims; raw device/account logs stay private.
+
+The macOS 14 100-cycle NetworkKit RSS observation remained above warm baseline and higher than its direct Foundation control after 12 seconds. Local NET-03 RSS also includes its in-process server, test framework and allocator. Neither measurement identifies retained SDK objects or proves a universal bound. Continue bounded target/workload observations and explicit owner risk disposition under #62/#63/#86/#29; do not hide the delta, infer release acceptance or introduce a speculative scheduler/framework rewrite. No new generic risk issue is needed because the existing gates already own these requirements.

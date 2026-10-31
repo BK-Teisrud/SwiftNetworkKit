@@ -67,10 +67,13 @@ def validate(root, project):
             "Host scheme must not silently filter shared tests")
     public = targets["NetworkKitPublicHTTPSChecks"]
     public_sources = [objects[p] for p in public["buildPhases"] if objects[p]["isa"] == "PBXSourcesBuildPhase"]
-    require(len(public_sources) == 1 and len(public_sources[0]["files"]) == 1, "Unexpected public probe sources")
-    ref = objects[objects[public_sources[0]["files"][0]]["fileRef"]]
-    require(ref["path"] == "../PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicHTTPSTests.swift",
-            "Public probe must share the opt-in source")
+    require(len(public_sources) == 1, "Unexpected public probe source phases")
+    public_paths = [objects[objects[item]["fileRef"]]["path"] for item in public_sources[0]["files"]]
+    source_root = root / "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests"
+    expected_public = sorted("../PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/" + str(p.relative_to(source_root))
+                             for p in source_root.rglob("*.swift"))
+    require(sorted(public_paths) == expected_public and len(set(public_paths)) == len(public_paths),
+            "Opt-in probe omits or duplicates shared native sources")
     public_scheme = ET.parse(root / "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj/xcshareddata/xcschemes/PublicHTTPSChecks.xcscheme")
     refs = public_scheme.findall("./TestAction/Testables/TestableReference")
     require(len(refs) == 1 and refs[0].get("skipped") == "NO"
