@@ -1,12 +1,17 @@
 # Work sequence before and after implementation authorization
 
+## Complete retry contract approval — 2026-10-31
+
+The owner approves the complete [ADR-0014 contract](../decisions/ADR-0014-opt-in-retry-proposal.md) and expressly withholds code. #87/#106 await planning PR/main acceptance; [START-F3 #137](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/137) separately blocks selected I24–I27 (#107–#110). Existing F3 is now “F3 – Bounded read retries”; open unselected domain catalogs #12/#14/#15/#19/#24 stay outside this delivery milestone. No product code, default behavior, dependency, release/version/date or publication authorization. #132/#29 and accepted F2 remain unchanged.
+
+
 ## Accepted F2 closeout — 2026-10-31
 
 F2 is CLOSED after PR #135/main `cc654ab5faadc0fc7fe00d7ad238b2e3ed5a997c`, [run 41242130528](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41242130528), with full-log verification of 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. #64/#27 are Done; direct item lists and GraphQL verify no open F2 issues/PRs. [Closeout evidence](F2_CLOSEOUT_2026-10-31.md) records the milestone summary-counter disagreement and actual verified states.
 
 Original candidate evidence files retain their submission-time pending flags and exact executed SDK/platform/failure limits. The owner resource approval is F2-only. #132 physical Watch and #29 actual workload/device-memory/security/publication decisions remain mandatory in their separate milestone, with support unchanged. No release/tag, production suitability or F3 implementation is authorized.
 
-PLAN-F3 #87 is Ready for planning only: review draft PR #111 and obtain a separate approved feature scope/start decision before code. Closed F2 is not publication or extension authorization.
+PLAN-F3 #87/#106 are In Review; the complete contract is owner-approved, but START-F3 #137 withholds implementation. I24–I27 are Blocked. Planning PR/main acceptance and a separate explicit code-start instruction remain required. Closed F2 is not publication or extension authorization.
 
 ## Next planning and publication lanes
 
@@ -89,6 +94,6 @@ NET-01 #115 accepted through PR #116/main 40644612904. NET-02 #117 accepted thro
 
 Minimum macOS follow-up, 2026-10-29: [temporary standard GitHub macOS 14 execution route](MACOS14_EXECUTION_ROUTE_2026-10-29.md) prepares an exact-source prebuilt public consumer with the approved builder. Actual macOS 14 results are pending; observe brownout/retirement and stop at CI-dependent points. PR #120 minimum simulator evidence is accepted through main run 40765690271. Remaining native/physical/resource/rehearsal requirements are unchanged.
 
-## Active retry planning — 2026-10-31
+## Historical planning before complete approval — 2026-10-31
 
 #87 and F3-DEC #106 are planning work. [Proposed ADR-0014](../decisions/ADR-0014-opt-in-retry-proposal.md) and [contract/decomposition](RETRY_INCREMENT_PLAN.md) record owner selections; complete acceptance/code start remain pending. Existing candidates #107/#108/#109/#110 stay Backlog, no I identifiers. Planned order is decision → eligibility/delay contracts → one-operation integration → native/resource verification → increment gate. Preserve the accepted F2 rows and separate #132/#29 publication lane. A documentation PR or generic continue instruction does not authorize retry code.

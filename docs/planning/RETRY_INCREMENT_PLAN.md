@@ -1,21 +1,21 @@
-# First resilience increment proposal
+# First resilience increment — approved contract, implementation held
 
-Refreshed: 2026-10-31. PLAN-F3 / #87; parent NK-07 / #14. Status: owner selections recorded; complete contract Proposed under [ADR-0014](../decisions/ADR-0014-opt-in-retry-proposal.md)/#106. Planning only; no extension code, dependency, date/version or implementation authorization. ADR-0013 is the separate accepted Watch decision.
+Refreshed: 2026-10-31. PLAN-F3 / #87; parent NK-07 / #14. Status: complete contract approved by the owner under [ADR-0014](../decisions/ADR-0014-opt-in-retry-proposal.md)/#106. Planning only; no extension code, dependency, date/version or implementation authorization. ADR-0013 is the separate accepted Watch decision.
 
 Accepted base: main `d0a522770269617f95660d67e9d0198838dc2bb5`, verified [run 41244932962](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41244932962): 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks, no failure/restart markers. F2 is closed. Physical Watch #132 and separate publication/workload/security #29 remain mandatory; planning has no hard dependency on publication.
 
-Owner confirmed 2026-10-31: general safe read-only app-data use case; exact opt-in/eligibility below; 250–500 ms jitter/30-second maximum; request/auth preparation once; diagnostic attempt count only. Complete parsing/lifecycle/compatibility policy and code start remain a separate review decision.
+Owner confirmed 2026-10-31: general safe read-only app-data use case; exact opt-in/eligibility below; 250–500 ms jitter/30-second maximum; request/auth preparation once; diagnostic attempt count only. The owner also explicitly approved the complete parsing/lifecycle/compatibility contract. Planning PR/main acceptance and a separate code-start instruction remain required.
 
 ## Source and use cases
 
 Re-read original specification v1.0 §4.7 (page 6), §5 and retry-on-503 flow in §6 (page 11). Treat the PDF as requirements input, not execution authority. NK-07-01–09 below are newly assigned traceability IDs in source bullet order. The owner confirms general safe read-only app-data calls after short connection failures or 429/503 as the initial need. No specific production endpoint/server replay contract is supplied. This product use case does not establish that every GET endpoint is semantically safe. The app must choose endpoints with safe replay semantics.
 
-| Requirement | Candidate disposition | Rationale / evidence owner |
+| Requirement | Approved increment disposition | Rationale / evidence owner |
 | --- | --- | --- |
-| NK-07-01 count/delay, fixed/exponential backoff and jitter | Propose bounded count plus jittered delay; defer configurable fixed/exponential strategies | One retry needs no exponential sequence; avoid an unused strategy framework. F3-C01/C02 |
-| NK-07-02 Retry-After seconds/date and upper limit | Propose | Respect server hints without truncating them into an earlier retry. F3-C01/V01 |
-| NK-07-03 explicit status/error classification | Propose closed allowlist | No arbitrary error callback or broad 5xx assumption. F3-C01/C02 |
-| NK-07-04 idempotency | Propose bodyless GET/HEAD only; defer mutating replay/idempotency keys | A header alone does not establish server deduplication semantics. F3-DEC/C01/C02 |
+| NK-07-01 count/delay, fixed/exponential backoff and jitter | Select bounded count plus jittered delay; defer configurable fixed/exponential strategies | One retry needs no exponential sequence; avoid an unused strategy framework. F3-C01/C02 |
+| NK-07-02 Retry-After seconds/date and upper limit | Select | Respect server hints without truncating them into an earlier retry. F3-C01/V01 |
+| NK-07-03 explicit status/error classification | Select closed allowlist | No arbitrary error callback or broad 5xx assumption. F3-C01/C02 |
+| NK-07-04 idempotency | Select bodyless GET/HEAD only; defer mutating replay/idempotency keys | A header alone does not establish server deduplication semantics. F3-DEC/C01/C02 |
 | NK-07-05 circuit breaker | Defer | Requires service partitioning, recovery contract and independent use case |
 | NK-07-06 rate limiting | Defer | One bounded call is not a host/service-wide rate limiter |
 | NK-07-07 concurrency limits/fair queues | Defer | Requires admission/fairness/backpressure design, not an incidental retry dependency |
@@ -24,9 +24,9 @@ Re-read original specification v1.0 §4.7 (page 6), §5 and retry-on-503 flow in
 
 No source requirement is rejected permanently; deferred means unselected and unverified. NK-05 header-provider/account binding, NK-08 app-managed Foundation cookie/cache stores, NK-12 system connectivity and NK-17 resource controls are existing foundations or later domains, not delivered refresh/cache/monitoring/performance products. No automatic 401 refresh, credential persistence, coalescing or fallback is selected.
 
-## Proposed behavior for owner decision
+## Owner-approved behavior (not implemented)
 
-The owner selected use case, exact eligibility, timing cap, auth-once and count-only diagnostics on 2026-10-31. The complete detailed contract below is prepared for final owner review, not implemented API or code-start authorization.
+The owner selected use case, exact eligibility, timing cap, auth-once and count-only diagnostics on 2026-10-31. The complete detailed contract below is explicitly owner-approved for planning. It is not implemented API or code-start authorization.
 
 - Disabled by default; explicit per-call opt-in in NetworkCallOptions, shared by typed/raw input. No client-wide automatic activation. Preserve existing initializers/default behavior through an additive design; final names/signatures require API review before Ready.
 - At most two library transport invocations in one logical call: initial attempt and one retry. This deliberately avoids repeatedly retrying an already failed automatic retry. URLSession/OS connection attempts and redirects are not counted as separate library invocations; do not promise exactly two wire requests.
@@ -48,21 +48,31 @@ Existing NetworkClock provides monotonic reads/sleeps; a narrow internal wall-ti
 
 RES-01 found expiry-dependent runtime sleep-helper retention. Retry adds waiting and may amplify request rate/resource use. Reuse current joined task ownership; measure post-original-deadline live allocation/RSS behavior rather than rewriting the timer framework or claiming no debt/leaks. No production defect or broad refactor is established by this planning review.
 
-## Proposed delivery sequence
+## Selected delivery sequence and separate start hold
 
-The F3-DEC #106, F3-C01 #107, F3-C02 #108, F3-V01 #109 and F3-GATE #110 candidate issues form a five-slice plan under #14. They remain Backlog, P2 EXTENSION, F3; no I identifiers are assigned before scope selection. F3-DEC records the confirmed general app-data need and owner selections, then requires final complete-contract disposition and separate code-start authorization. Technical slices depend on that decision and accepted #86 core evidence. C01 → C02 → V01 → GATE is the proposed critical path; classify/parser unit tests accompany C01, lifecycle regressions accompany C02, native/resource evidence accompanies V01. This is not a requirement to publish v1 before planning, nor a dependency on #29 publication.
+| Order | Existing/new task | Selected scope and readiness |
+| --- | --- | --- |
+| 30 | PLAN-F3 #87 | Planning decomposition and phase assessment; review PR/main required |
+| 30.1 | F3-DEC #106 | Complete owner contract decision recorded; review PR/main required |
+| 30.15 | [START-F3 / #137](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/137) | New explicit implementation instruction required; blocked by #87/#106 |
+| 30.2 | I24 / #107 (formerly F3-C01) | Eligibility/delay/API contracts with deterministic/parser/negative tests; Blocked by start gate and decision/core prerequisites |
+| 30.3 | I25 / #108 (formerly F3-C02) | One admitted operation/deadline integration and lifecycle regressions; Blocked by I24/start gate |
+| 30.4 | I26 / #109 (formerly F3-V01) | Controlled native/resource verification and target applicability; Blocked by I25/start gate |
+| 30.5 | I27 / #110 (formerly F3-GATE) | API/DocC/count-only diagnostics, evidence and increment gate; Blocked by I26/start gate |
 
-Five cohesive slices fit an initial retry increment. Keep existing F3 as an umbrella until owner selection/sizing; do not create a misleading completed milestone or split unrelated delivery milestones without a selected contract. Auth/cache/status/performance remain separately scoped future candidates, never implicit requirements of retry. After approval, assign implementation IDs and a narrowly named delivery milestone if needed, with the owner's compatibility policy; no date or version number is invented here.
+The five existing decision/delivery slices remain; one distinct start gate is added because the owner expressly separates approved contract from withheld code. This is not a duplicate contract issue. All four I tasks keep implementation_authorized=false. Native direction is #87/#106 → START-F3 → I24 → I25 → I26 → I27, with accepted #86 evidence retained; neither planning prerequisite depends on START-F3. Publication #29 is not a planning dependency.
+
+The selected slices form one coherent “F3 – Bounded read retries” delivery in existing milestone 4. Unselected domain catalogs #12/#14/#15/#19/#24 remain open outside it; completing this increment does not complete #14's breakers/rate limits/queues or other deferred features. No extra delivery milestone or version/date promise. The v1 core publication candidate remains separately scoped under #29; retry cannot silently expand that source release or erase #132.
 
 ## Evidence and completion boundaries
 
 F3-C01: exact allowlist/method/body/default/status-precedence matrix; date formats/overflow/duplicate/past/oversized hint, budget boundary and jitter extrema; classifier fault control. F3-C02: typed/raw parity, unchanged auth bytes/provider count, original-target redirect security, cancellation at each wait/send boundary, shutdown races, joined attempts, concurrency isolation; budget-reset/forbidden-send fault controls. F3-V01: bounded native 429/503→success/terminal fixtures, TLS rejection never retried, resource measurements including original deadline expiry; applicable actual minimum/physical evidence remains explicit. F3-GATE: compiled DocC, symbol/availability review, fixed diagnostic allowlist with only the selected attempt-count addition, accepted PR/main commits and requirement ledger. Missing access cannot become a passing skip.
 
-Current planning verification is source/specification/standards review and repository integrity checks; it proves no retry behavior. Required PR/main CI must pass before accepting the planning artifact; even then #87 remains open until owner scope disposition and final decomposition. No feature candidate becomes Ready from a passing documentation PR.
+Current planning verification is source/specification/standards review and repository integrity checks; it proves no retry behavior. Required PR/main CI must pass before accepting the planning artifact; owner contract disposition and final decomposition are now recorded, but #87/#106 remain open until planning PR/main acceptance. No I task becomes Ready without START-F3 authorization.
 
 ## Standards consulted
 
-[RFC 9110 §9.2.2](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2) informs replay restrictions; [§10.2.3](https://www.rfc-editor.org/rfc/rfc9110.html#section-10.2.3) and [§5.6.7](https://www.rfc-editor.org/rfc/rfc9110.html#section-5.6.7) define Retry-After/date syntax. [RFC 6585 §4](https://www.rfc-editor.org/rfc/rfc6585.html#section-4) defines 429 and optional Retry-After. The exact allowlist, numerical bounds and fail-closed choices above are proposed project policy, not mandates of these standards.
+[RFC 9110 §9.2.2](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2) informs replay restrictions; [§10.2.3](https://www.rfc-editor.org/rfc/rfc9110.html#section-10.2.3) and [§5.6.7](https://www.rfc-editor.org/rfc/rfc9110.html#section-5.6.7) define Retry-After/date syntax. [RFC 6585 §4](https://www.rfc-editor.org/rfc/rfc6585.html#section-4) defines 429 and optional Retry-After. The exact allowlist, numerical bounds and fail-closed choices above are approved project policy, not mandates of these standards.
 
 ## Historical accepted-base refresh — 2026-10-27
 
@@ -70,8 +80,12 @@ This proposal now integrates accepted main 0aaee219b7ec9f6a81c943ae7f4d4c87a2d9b
 
 ## Current integration and phase assessment — 2026-10-31
 
-Refresh existing Draft PR #111 against accepted main, preserve every closed-F2 source/evidence/runbook item, and rename the colliding retry ADR to Proposed ADR-0014. The original specification pages 6 and 11 were reread; their nine NK-07 bullets remain requirements input rather than execution authority. Cause diagnostics, configurable backoff, mutating replay, breakers/queues/rate limits/connectivity policy and other advanced domains remain unselected.
+Refresh existing Draft PR #111 against accepted main, preserve every closed-F2 source/evidence/runbook item, and rename the colliding retry ADR to ADR-0014. The original specification pages 6 and 11 were reread; their nine NK-07 bullets remain requirements input rather than execution authority. Cause diagnostics, configurable backoff, mutating replay, breakers/queues/rate limits/connectivity policy and other advanced domains remain unselected.
 
-Five existing slices #106–#110 still form one coherent small increment; do not create duplicate tasks or an extra milestone. Existing F3 stays an umbrella until full owner scope disposition and sizing. Assign I identifiers only after complete selection; keep code tasks Backlog until explicit implementation authorization. No release/version/date promise. The first stable core release still needs its separately approved F2 source under #29; retry planning cannot silently expand that release or erase #132.
+The five existing slices #106–#110 form one coherent increment, with the separate START-F3 gate #137. Existing milestone F3 is narrowed to bounded read retries; unselected domain catalogs remain open outside the delivery milestone. Selected implementation tasks I24–I27 remain Blocked until explicit implementation authorization. No release/version/date promise. The first stable core release still needs its separately approved F2 source under #29; retry planning cannot silently expand that release or erase #132.
 
-The machine-readable queue now preserves all accepted-main task rows, adds the five existing retry candidates and restores the separate WATCH-01/REL-01 publication rows. Its global implementation flag applies only to the already authorized core; extension candidates explicitly retain implementation_authorized=false. Project states remain authoritative. No product refactor is performed: only the future narrow receive/classify/decode integration seam is identified for #108 after approval.
+The machine-readable queue now preserves all accepted-main task rows, includes the five existing retry slices and START-F3, and restores the separate WATCH-01/REL-01 publication rows. Its global implementation flag applies only to the already authorized core; selected extension tasks explicitly retain implementation_authorized=false. Project states remain authoritative. No product refactor is performed: only the future narrow receive/classify/decode integration seam is identified for #108 after approval.
+
+## Final owner decision — 2026-10-31
+
+Translated approval: “Approve the complete contract; still no code.” This approves the entire detailed contract and selected/deferred scope above, including the concrete strict parsing and invalid-policy defaults. Planning CI/main acceptance remains pending. No retry behavior, production readiness, implementation start, publication or automatic merge is approved by this decision.

@@ -477,6 +477,11 @@
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/29",
       "milestone": "v1.0 – Publication gate",
       "blocked_by": [
+        "WATCH-01",
+        "I23"
+      ],
+      "authorization_scope": "publication evidence only; no release or paid/tool/account changes authorized",
+      "native_blocked_by": [
         8,
         9,
         10,
@@ -491,7 +496,7 @@
         64,
         132
       ],
-      "authorization_scope": "publication evidence only; no release or paid/tool/account changes authorized"
+      "external_domain_blockers_retained_in_native_graph": true
     },
     {
       "order": 30,
@@ -499,7 +504,7 @@
       "number": 87,
       "title": "[PLAN-F3] Select the first resilience increment and decompose its delivery",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/87",
-      "milestone": "F3 – Resilience and extensions",
+      "milestone": "F3 – Bounded read retries",
       "blocked_by": [],
       "parent": 14
     },
@@ -509,78 +514,105 @@
       "number": 106,
       "title": "[F3-DEC] Approve the bounded opt-in retry contract",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/106",
-      "milestone": "F3 – Resilience and extensions",
+      "milestone": "F3 – Bounded read retries",
       "blocked_by": [],
       "parent": 14,
       "implementation_authorized": false,
-      "authorization_scope": "planning candidate only; complete contract and explicit code start required"
+      "authorization_scope": "owner-approved contract only; planning PR/main pending, no code start"
+    },
+    {
+      "order": 30.15,
+      "key": "START-F3",
+      "number": 137,
+      "title": "[START-F3] Authorize implementation of the approved read-retry contract",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/137",
+      "milestone": "F3 – Bounded read retries",
+      "blocked_by": [
+        "PLAN-F3",
+        "F3-DEC"
+      ],
+      "parent": 14,
+      "implementation_authorized": false,
+      "authorization_scope": "explicit owner code-start instruction withheld; no implementation"
     },
     {
       "order": 30.2,
-      "key": "F3-C01",
+      "key": "I24",
       "number": 107,
-      "title": "[F3-C01] Specify and verify retry eligibility and delay decisions",
+      "title": "[I24] Specify and verify retry eligibility and delay decisions",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/107",
-      "milestone": "F3 – Resilience and extensions",
+      "milestone": "F3 – Bounded read retries",
       "blocked_by": [
         "F3-DEC",
-        "GATE-F2"
+        "GATE-F2",
+        "START-F3"
       ],
       "parent": 14,
       "implementation_authorized": false,
-      "authorization_scope": "planning candidate only; complete contract and explicit code start required",
-      "decision_gate": 106
+      "authorization_scope": "owner-approved contract only; explicit START-F3 code instruction and readiness required",
+      "decision_gate": 106,
+      "planning_key": "F3-C01",
+      "start_gate": 137
     },
     {
       "order": 30.3,
-      "key": "F3-C02",
+      "key": "I25",
       "number": 108,
-      "title": "[F3-C02] Integrate retries inside one admitted operation and deadline",
+      "title": "[I25] Integrate retries inside one admitted operation and deadline",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/108",
-      "milestone": "F3 – Resilience and extensions",
+      "milestone": "F3 – Bounded read retries",
       "blocked_by": [
         "F3-DEC",
         "GATE-F2",
-        "F3-C01"
+        "I24",
+        "START-F3"
       ],
       "parent": 14,
       "implementation_authorized": false,
-      "authorization_scope": "planning candidate only; complete contract and explicit code start required",
-      "decision_gate": 106
+      "authorization_scope": "owner-approved contract only; explicit START-F3 code instruction and readiness required",
+      "decision_gate": 106,
+      "planning_key": "F3-C02",
+      "start_gate": 137
     },
     {
       "order": 30.4,
-      "key": "F3-V01",
+      "key": "I26",
       "number": 109,
-      "title": "[F3-V01] Verify native retry integration and resource behavior",
+      "title": "[I26] Verify native retry integration and resource behavior",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/109",
-      "milestone": "F3 – Resilience and extensions",
+      "milestone": "F3 – Bounded read retries",
       "blocked_by": [
         "F3-DEC",
         "GATE-F2",
-        "F3-C02"
+        "I25",
+        "START-F3"
       ],
       "parent": 14,
       "implementation_authorized": false,
-      "authorization_scope": "planning candidate only; complete contract and explicit code start required",
-      "decision_gate": 106
+      "authorization_scope": "owner-approved contract only; explicit START-F3 code instruction and readiness required",
+      "decision_gate": 106,
+      "planning_key": "F3-V01",
+      "start_gate": 137
     },
     {
       "order": 30.5,
-      "key": "F3-GATE",
+      "key": "I27",
       "number": 110,
-      "title": "[F3-GATE] Review retry API, diagnostics, evidence and delivery readiness",
+      "title": "[I27] Review retry API, diagnostics, evidence and delivery readiness",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/110",
-      "milestone": "F3 – Resilience and extensions",
+      "milestone": "F3 – Bounded read retries",
       "blocked_by": [
         "F3-DEC",
         "GATE-F2",
-        "F3-V01"
+        "I26",
+        "START-F3"
       ],
       "parent": 14,
       "implementation_authorized": false,
-      "authorization_scope": "planning candidate only; complete contract and explicit code start required",
-      "decision_gate": 106
+      "authorization_scope": "owner-approved contract only; explicit START-F3 code instruction and readiness required",
+      "decision_gate": 106,
+      "planning_key": "F3-GATE",
+      "start_gate": 137
     },
     {
       "order": 40,
@@ -615,5 +647,6 @@
   ],
   "authorization_adr": "docs/decisions/ADR-0012-implementation-start.md",
   "status_source": "GitHub Issues and ProjectV2; this file records planned structure, not completion status",
-  "authorization_scope": "ADR-0012 implementation_authorized applies to the selected v1/core only; F3 candidates need complete owner scope/code-start approval."
+  "authorization_scope": "ADR-0012 authorizes the selected v1/core only. ADR-0014 approves the retry contract, not code. START-F3 must receive explicit implementation authorization.",
+  "extension_start_gate": 137
 }
