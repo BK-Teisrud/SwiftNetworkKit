@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-31",
+  "device": "iPad Pro (11-inch, 3rd generation)",
+  "os": "iPadOS 27.2",
+  "os_build": "24B119",
+  "baseline_commit": "d45ab0b8da342e63cafeaa3dd4bef1745a28e008",
+  "working_tree_changes": true,
+  "signing": {
+    "three_exact_test_ids": true,
+    "one_approved_ipad": true,
+    "existing_certificate_only": true,
+    "all_embedded_profiles_verified": true,
+    "actual_signer_verified": true,
+    "new_certificates": false
+  },
+  "runs": [
+    {
+      "suite": "NetworkKitDeviceHost",
+      "exit_code": 0,
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 215,
+        "passedTests": 215,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      }
+    },
+    {
+      "suite": "PublicHTTPSChecks",
+      "exit_code": 65,
+      "summary": {
+        "result": "Failed",
+        "totalTestCount": 21,
+        "passedTests": 20,
+        "failedTests": 1,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      }
+    }
+  ],
+  "failure": {
+    "declaration": "untrustedCertificate(input:)",
+    "input": "raw",
+    "sdk_transport_domain": "NSURLErrorDomain",
+    "sdk_transport_code": -1200,
+    "foundation_control_challenge_observed": false,
+    "foundation_transport_code": -1200,
+    "accepted_certificate_rejection_evidence": false,
+    "cause": "inconclusive; the corroborating request did not observe a server-trust challenge",
+    "automatic_rerun": false
+  },
+  "cleanup_exit_code": 0,
+  "source_hashes": {
+    "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicHTTPSTests.swift": "9cf689601a53b7cd10851227a976948d1b411f01e4ed1ba8f4a15a3371929a20",
+    "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/NativeLoopbackTests.swift": "d8799944fa242a15548c8b5f298722062ee126d03eb23b6fbc2586080d2e5019",
+    "Tools/DeviceTestHost/AppDelegate.swift": "ae9cf4cc90bc1c1eb4ccbd738a161aa4eac3e1c00dbb780821df16536af44f05"
+  },
+  "limits": [
+    "Physical transitions and workload suitability remain separate.",
+    "No F2 waiver or publication approval."
+  ]
+}

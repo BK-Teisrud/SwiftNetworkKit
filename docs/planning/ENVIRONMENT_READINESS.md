@@ -1,9 +1,23 @@
 # Test-environment readiness — PREP-01
 
-Current minimum-runtime update, 2026-10-28: [four minimum simulator regression runs](MINIMUM_RUNTIME_EXECUTION_2026-10-28.md) passed 215/215 each on separate iPhone/iPad iOS 17.0, watchOS 10.0 and tvOS 17.0 destinations. Earlier migration timeouts and acquisition observations remain in the dated evidence. macOS 14, separate native/resource scenarios and physical-family/release criteria remain open; root regressions alone do not close #62/#63/#86.
-Current public-fixture decision, 2026-10-27: the owner selected [HTTPBingo/BadSSL verification](PUBLIC_HTTPS_VERIFICATION.md), NET-01 #115, instead of provisioning a paid/private HTTPS server. Public native observations are allowed for claims they actually support. Earlier controlled-fixture requirements still apply to server-counter/zero-contact claims; minimum/physical/resource/archive/privacy and owner release gates remain. Earlier no-endpoint statements below preserve their historical context.
+## Current disposition — 2026-10-31
 
-Initial access refresh: [2026-10-27 read-only records](ENVIRONMENT_ACCESS_2026-10-27.md) preserves the earlier disconnected/stored device inventory. Later accepted [Mac/iPhone public and lifecycle observations](NATIVE_LIFECYCLE_STORAGE.md) and the minimum-runtime follow-up above supersede only their actual access/execution claims. Physical iPad/Watch/TV and remaining native/resource evidence remain open. The older tables below retain their dated inventory and owner reports.
+Accepted implementation/verification baseline: main 5d2ae116ec685c483b1dcc31db9e41a850c4e2ac, PR #125, [main run 41182672027](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41182672027). Full logs confirmed 218 macOS root tests, four simulator results of 215 each, two unsigned host builds, 16 helpers and the required native TLS/smoke/control checks without unexpected restart or test time-limit failure. Root-CI targets are newer configured runtimes; they are not the minimum results below.
+
+| Environment / scenario | Accepted evidence | Remaining requirement / next action |
+| --- | --- | --- |
+| iPhone/iOS 17.0 and iPad/iPadOS 17.0 simulators | Root 215 each; expanded opt-in native suites 19 declarations/40 parameter cases each, zero failures/skips/expected failures | Applicable remaining ENV claims and physical-family evidence are separate; no blanket minimum acceptance |
+| Watch/watchOS 10.0 and TV/tvOS 17.0 simulators | Root 215 each in PR #120/main 40765690271 | Fresh expanded native suites executed on accepted source: TV 17/19 and Watch 16/19 declarations passed, zero skips; failed controls/timeouts remain unresolved. See MINIMUM_NATIVE_EXECUTION_2026-10-31.md. NET-04 #126 is the next bounded storage investigation; #62 retains timeout diagnosis. |
+| macOS 14.8.9/23J631 ARM64 | Bounded public consumer/reuse/cancellation/100-cycle resource route passed in run 41179430976, preserved through PR #124 | Not full root regression, HTTPS, exact 14.0 or Intel behavior; preserve these claim limits under #62/#86 |
+| Physical iPhone 17 Pro/iOS 27.2 | Accepted NET-01/02 public/lifecycle observations and NET-03 seven local declarations/14 cases; host removed after run | Background/network-loss/recovery and other applicable ENV scenarios remain under #63 |
+| Physical iPad/Watch/TV | Owner reports available; older stored inventory is not fresh execution evidence | Fresh connection/model/OS/build, compatible supported test host/profile and concrete deployment approval where needed; #63 |
+| Resources / distribution | Finite local/minimum/iPhone and bounded macOS 14 observations; root resource tests | Workload suitability/owner residual-risk disposition and #64 clean-consumer/archive/aggregate privacy report remain; no publication authorization |
+
+Evidence: [minimum root regressions](MINIMUM_RUNTIME_EXECUTION_2026-10-28.md), [macOS 14 route](MACOS14_EXECUTION_ROUTE_2026-10-29.md), [NET-03 native results](NET03_NATIVE_LOOPBACK.md), [public HTTPS decision](PUBLIC_HTTPS_VERIFICATION.md), [NET-02 lifecycle/storage](NATIVE_LIFECYCLE_STORAGE.md). The owner selected public HTTPBingo/BadSSL rather than a paid/private server. Counted-contact claims use the local controlled fixture; public observations cannot supply maintainer-owned wire counters. No new generic environment issue is needed: #62/#63/#86/#64 retain their existing responsibilities.
+
+## Historical preparation inventory and decisions
+
+The following dated inventory/access tables describe the initial preparation, not today's missing-access claims. Later evidence above supersedes only its actual assertions; earlier timeouts, failures and uncertainty remain recorded.
 
 Inventory date: 2026-10-26. Owner: @BK-Teisrud. Preparation task: [#85](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/85). This is an access/scenario assessment, not product execution or compatibility certification. Actual release evidence remains in [I21 / #62](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/62) and [I22 / #63](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/63); security/trust review belongs to [I19 / #60](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/60).
 

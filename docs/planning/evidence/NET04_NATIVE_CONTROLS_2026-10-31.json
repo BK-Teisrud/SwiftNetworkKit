@@ -1,0 +1,145 @@
+{
+  "date": "2026-10-31",
+  "purpose": "NET-04 native storage controls and production-default TLS semantics",
+  "production_sdk_changed": false,
+  "results": [
+    {
+      "target": "watch",
+      "exit_code": 0,
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 21,
+        "passedTests": 21,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "environment": {
+        "architecture": "x86_64",
+        "modelName": "Apple Watch Series 9 (45mm)",
+        "osBuildNumber": "21R355",
+        "osVersion": "10.0",
+        "platform": "watchOS Simulator"
+      },
+      "parameter_cases_passed": 44,
+      "cleanup_exit_codes": [
+        0,
+        0
+      ],
+      "log_sha256": "de2d17d8e62b2142548f7a1b752d03cb4a0d2d2fcb2c3243d42df8cdd59b3c7c",
+      "source_hashes": {
+        "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/NativeLoopbackTests.swift": "d8799944fa242a15548c8b5f298722062ee126d03eb23b6fbc2586080d2e5019",
+        "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicHTTPSTests.swift": "9cf689601a53b7cd10851227a976948d1b411f01e4ed1ba8f4a15a3371929a20"
+      },
+      "baseline_commit": "d45ab0b8da342e63cafeaa3dd4bef1745a28e008",
+      "working_tree_changes": true
+    },
+    {
+      "target": "tv",
+      "exit_code": 0,
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 21,
+        "passedTests": 21,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "environment": {
+        "architecture": "x86_64",
+        "modelName": "Apple TV 4K (3rd generation)",
+        "osBuildNumber": "21J353",
+        "osVersion": "17.0",
+        "platform": "tvOS Simulator"
+      },
+      "parameter_cases_passed": 44,
+      "cleanup_exit_codes": [
+        0
+      ],
+      "log_sha256": "718bf4a198e844a7a3bfab10d146970c44cac39b0837f44d01ca6fa09a29e736",
+      "source_hashes": {
+        "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/NativeLoopbackTests.swift": "d8799944fa242a15548c8b5f298722062ee126d03eb23b6fbc2586080d2e5019",
+        "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicHTTPSTests.swift": "9cf689601a53b7cd10851227a976948d1b411f01e4ed1ba8f4a15a3371929a20"
+      },
+      "baseline_commit": "d45ab0b8da342e63cafeaa3dd4bef1745a28e008",
+      "working_tree_changes": true
+    }
+  ],
+  "previous_short_budget_results": {
+    "watchOS10": {
+      "declarations": 19,
+      "passed": 16,
+      "failed": 3
+    },
+    "tvOS17": {
+      "declarations": 19,
+      "passed": 17,
+      "failed": 2
+    },
+    "retained_in": "docs/planning/MINIMUM_NATIVE_EXECUTION_2026-10-31.json"
+  },
+  "cookie_diagnostics": {
+    "watch_foundation_automatic_echo": false,
+    "watch_foundation_automatic_retention": false,
+    "watch_networkkit_automatic_echo": false,
+    "watch_networkkit_automatic_retention": false,
+    "explicit_cookie_header_echo_both": true,
+    "direct_200_seed_did_not_restore_storage": true
+  },
+  "credential_diagnostics": {
+    "watch_foundation_automatic_status": 401,
+    "watch_foundation_automatic_header_count": 0,
+    "explicit_synthetic_foundation_status": 200,
+    "explicit_header_count": 1
+  },
+  "tls_context": {
+    "semantic_fixture_inactivity_seconds": 30,
+    "semantic_fixture_total_seconds": 60,
+    "outer_test_guard_seconds": 120,
+    "other_public_calls_inactivity_seconds": 5,
+    "other_public_calls_total_seconds": 10,
+    "short_explicit_deadline_assertions_unchanged": true,
+    "previous_short_budget_timeout_cause": "unproven",
+    "default_tls_diagnostic_durations_below_5_seconds": true
+  },
+  "physical_watch_applicability": {
+    "root_regression_declarations": 215,
+    "public_https_declarations": 14,
+    "local_nwlistener_declarations": 7,
+    "ordinary_physical_watch_local_server_supported": false,
+    "reference": "https://developer.apple.com/documentation/technotes/tn3135-low-level-networking-on-watchos"
+  },
+  "acceptance": "Working-tree verification only; normal PR/main review and physical evidence remain required.",
+  "negative_controls": [
+    {
+      "compiled": true,
+      "exit_code": 1,
+      "rejected_wrong_synthetic_credential": true,
+      "source_sha256": "d8799944fa242a15548c8b5f298722062ee126d03eb23b6fbc2586080d2e5019",
+      "log_sha256": "3690ffc0fbddb81db7c63ffe252fd5aab22fe4bf3ea5e179da04dbc09a90348e"
+    },
+    {
+      "compiled": true,
+      "exit_code": 1,
+      "cookie_parity_mutation_rejected": true,
+      "source_sha256": "9cf689601a53b7cd10851227a976948d1b411f01e4ed1ba8f4a15a3371929a20",
+      "log_sha256": "53f2045e17f6bd751de00a80b975ccbd83ebaf9d85efb6e10ca7b4e8e3849d13"
+    }
+  ],
+  "mac_final": {
+    "declarations": 21,
+    "passed": 21,
+    "duration_seconds": 49.898,
+    "log_sha256": "348059522612ed23e2f04b56ccba214286d84d84f1a754bd8510bb3e4a4312af"
+  },
+  "unsigned_host_builds": {
+    "watchOS": {
+      "NetworkKitDeviceHost": 0,
+      "PublicHTTPSChecks": 0
+    },
+    "tvOS": {
+      "NetworkKitDeviceHost": 0,
+      "PublicHTTPSChecks": 0
+    }
+  }
+}

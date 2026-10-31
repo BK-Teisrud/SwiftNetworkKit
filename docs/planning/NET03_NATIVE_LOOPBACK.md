@@ -47,3 +47,7 @@ Before that successful execution, local command preparation hit an incorrect Xco
 [Sanitized target evidence](evidence/NET03_TARGETS_2026-10-31.json) retains exact source hashes, summaries, scalar resources and cleanup. These results do not supply physical iPad/Watch/TV, background/network-loss transitions, full minimum-family native coverage or archive/privacy rehearsal. The current source-integrity run and 16 helper tests passed. F2 remains open.
 
 The fresh iPad (10th generation) / iPadOS 17.0 (21A328) simulator run also passed 19 declarations / 40 parameter cases with zero failures/skips/expected failures. Both minimum simulator logs showed all four resource-control observations without unexpected restart or test time-limit failure. Both task-owned simulators were shut down successfully (exit 0); no data erasure or runtime/settings change occurred. These are candidate observations pending PR/main acceptance, not automatic completion of I21/I22.
+
+## Accepted slice
+
+PR #125 merged as 5d2ae116ec685c483b1dcc31db9e41a850c4e2ac; main run 41182672027 passed all seven checks after full-log/source review. NET-03 #122 is Done. Earlier candidate/review-pending descriptions above retain their execution chronology. Acceptance covers this bounded slice and its recorded assertions; I21/I22/F2 and owner workload/risk gates retain all remaining requirements.

@@ -1,0 +1,19 @@
+# Unsigned release consumer rehearsal
+
+This minimal iOS app links the public NetworkKit product into its application target. It starts no network requests and contains no credentials, optional capabilities or publication automation. It is verification tooling, not an additional library product or sample application promised for distribution.
+
+The project uses the repository package, Swift 6 and iOS 17 minimum. Signing is disabled by default. The bundle identifier is unregistered; checking in this project does not authorize registration, installation, signing or distribution.
+
+```sh
+xcodebuild -project Tools/ReleaseConsumer/NetworkKitReleaseConsumer.xcodeproj \
+  -scheme NetworkKitReleaseConsumer -configuration Release \
+  -destination 'generic/platform=iOS' \
+  -archivePath /private/tmp/NetworkKitReleaseConsumer.xcarchive \
+  CODE_SIGNING_ALLOWED=NO archive
+```
+
+For reproducible evidence, build from a clean source snapshot and record its commit and tooling hashes. Inspect the archive's SDK resource bundle and privacy manifest, and verify that the archived binary and dSYM UUIDs match. A stripped binary need not expose SDK symbols through `nm`; inspect the matching dSYM instead.
+
+Generate the aggregate privacy report through Xcode Organizer. A successful file export alone is insufficient: render and review the actual PDF. The 2026-10-31 export was a blank one-page PDF and remains inconclusive as aggregation evidence. The manifest was independently verified as bundled with tracking disabled and empty collected-data/API-reason arrays. See [archive preparation evidence](../../docs/planning/evidence/F2_CONSUMER_ARCHIVE_PREPARATION_2026-10-31.json).
+
+Formal #64 acceptance retains its #63/#86 dependencies. This preparation does not authorize a tag, release, App Store upload or owner risk acceptance.

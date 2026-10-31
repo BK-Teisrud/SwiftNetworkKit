@@ -8,6 +8,11 @@ enum Input: String, CaseIterable, Sendable { case typed, raw }
 enum Ownership: String, CaseIterable, Sendable { case owned, borrowed }
 
 private struct CookieReply: Decodable, Sendable { let cookies: [String: String] }
+private struct CookieObservation: Equatable, Sendable {
+    let echoed: Bool
+    let retained: Bool
+    let deleted: Bool
+}
 
 private struct PublicEndpoint<Value: Sendable>: Endpoint {
     let path: EndpointPath
@@ -44,7 +49,8 @@ private final class TrustObservation: NSObject, URLSessionTaskDelegate {
     func corroborate(base: URL, name: String, input: Input, expectedTrustError: Int) async -> Bool {
         let settings = URLSessionConfiguration.ephemeral
         settings.httpCookieStorage = nil; settings.urlCredentialStorage = nil; settings.urlCache = nil
-        settings.timeoutIntervalForRequest = 5; settings.timeoutIntervalForResource = 10
+        settings.timeoutIntervalForRequest = NetworkTimeouts.default.inactivity
+        settings.timeoutIntervalForResource = NetworkTimeouts.default.total
         let session = URLSession(configuration: settings)
         defer { session.invalidateAndCancel() }
         var code: Int?
@@ -58,15 +64,18 @@ private final class TrustObservation: NSObject, URLSessionTaskDelegate {
     }
 }
 
-/// Only this separate, manually invoked package contacts public services.
-/// No credentials, arbitrary URL, trust delegate, TLS override or library retry.
-@Suite(.serialized, .timeLimit(.minutes(1)))
+/// Fixed public fixtures and synthetic headers; system trust is never overridden.
+/// The outer guard leaves cleanup time beyond the production 60-second total budget.
+@Suite(.serialized, .timeLimit(.minutes(2)))
 struct PublicHTTPSTests: Sendable {
     private func run(base: String = "https://httpbingo.org",
+                     timeouts: NetworkTimeouts? = nil,
                      body: (APIClient, URL) async throws -> Void) async throws {
         let url = try #require(URL(string: base))
-        let client = try APIClient(configuration: .init(baseURL: url,
-            timeouts: .init(inactivity: 5, total: 10)))
+        let limits: NetworkTimeouts
+        if let timeouts { limits = timeouts }
+        else { limits = try .init(inactivity: 5, total: 10) }
+        let client = try APIClient(configuration: .init(baseURL: url, timeouts: limits))
         do {
             try await body(client, url)
             await client.shutdown()
@@ -144,7 +153,7 @@ struct PublicHTTPSTests: Sendable {
 
     @Test(arguments: Input.allCases)
     func validBadsslControl(input: Input) async throws {
-        try await run(base: "https://sha256.badssl.com") { client, base in
+        try await run(base: "https://sha256.badssl.com", timeouts: .default) { client, base in
             let response = try await send(input, client: client, base: base, path: [], response: .data)
             try #require(response.status.code == 200)
             let valid = !response.value.isEmpty
@@ -164,7 +173,7 @@ struct PublicHTTPSTests: Sendable {
     }
 
     private func rejection(_ input: Input, base: String, name: String, expectedTrustError: Int) async throws {
-        try await run(base: base) { client, base in
+        try await run(base: base, timeouts: .default) { client, base in
             do {
                 _ = try await send(input, client: client, base: base, path: [], response: .data)
                 Issue.record("Invalid public certificate was accepted")
@@ -275,43 +284,88 @@ struct PublicHTTPSTests: Sendable {
         }
     }
 
-    private func cookieFixtureControl(input: Input, base: URL) async throws {
+    private func cookieObservation(input: Input?, base: URL) async throws -> CookieObservation {
         let settings = URLSessionConfiguration.ephemeral
         settings.urlCredentialStorage = nil; settings.urlCache = nil
         settings.httpCookieAcceptPolicy = .always; settings.httpShouldSetCookies = true
         settings.requestCachePolicy = .reloadIgnoringLocalCacheData
         settings.timeoutIntervalForRequest = 5; settings.timeoutIntervalForResource = 10
         let store = try #require(settings.httpCookieStorage)
-        let privateStore = store !== HTTPCookieStorage.shared
-        try #require(privateStore)
+        try #require(store !== HTTPCookieStorage.shared)
+        settings.httpCookieStorage = store
         let session = URLSession(configuration: settings)
         defer {
             for cookie in store.cookies ?? [] { store.deleteCookie(cookie) }
             session.invalidateAndCancel()
         }
-        let client = try APIClient(configuration: .init(baseURL: base,
-            timeouts: .init(inactivity: 5, total: 10)), session: session, storage: .appManaged)
+        let client: APIClient?
+        if input != nil {
+            client = try APIClient(configuration: .init(baseURL: base,
+                timeouts: .init(inactivity: 5, total: 10)), session: session, storage: .appManaged)
+        } else { client = nil }
+        func fetch(_ path: [String], query: [HTTPQueryItem] = []) async throws -> CookieReply {
+            if let input, let client {
+                let response = try await send(input, client: client, base: base, path: path,
+                    response: .json(CookieReply.self), query: query)
+                try #require(response.status.code == 200)
+                return response.value
+            }
+            let pathURL = path.reduce(base) { $0.appendingPathComponent($1) }
+            var components = try #require(URLComponents(url: pathURL, resolvingAgainstBaseURL: false))
+            if !query.isEmpty { components.queryItems = query.map { .init(name: $0.name, value: $0.value) } }
+            let (data, response) = try await session.data(from: #require(components.url))
+            try #require((response as? HTTPURLResponse)?.statusCode == 200)
+            return try JSONDecoder().decode(CookieReply.self, from: data)
+        }
         do {
-            let seed = try await send(input, client: client, base: base, path: ["cookies", "set"],
-                response: .json(CookieReply.self), query: [.init(name: "networkkit_fixture", value: "synthetic")])
-            let receivedMarker = seed.value.cookies["networkkit_fixture"] == "synthetic"
-            try #require(receivedMarker)
-            let retainedMarker = store.cookies(for: base.appendingPathComponent("cookies"))?.contains {
+            let seed = try await fetch(["cookies", "set"], query: [.init(name: "networkkit_fixture", value: "synthetic")])
+            let echoed = seed.cookies["networkkit_fixture"] == "synthetic"
+            let retained = store.cookies(for: base.appendingPathComponent("cookies"))?.contains {
                 $0.name == "networkkit_fixture" && $0.value == "synthetic"
             } == true
-            try #require(retainedMarker)
             for cookie in store.cookies ?? [] { store.deleteCookie(cookie) }
-            let after = try await send(input, client: client, base: base, path: ["cookies"], response: .json(CookieReply.self))
-            let removedMarker = after.value.cookies["networkkit_fixture"] == nil
-            try #require(removedMarker)
-            await client.shutdown()
-        } catch { await client.shutdown(); throw error }
+            let after = try await fetch(["cookies"])
+            let deleted = after.cookies["networkkit_fixture"] == nil
+            await client?.shutdown()
+            return .init(echoed: echoed, retained: retained, deleted: deleted)
+        } catch { await client?.shutdown(); throw error }
+    }
+
+    @Test(arguments: Input.allCases)
+    func nativeAppManagedCookieMatchesFoundation(input: Input) async throws {
+        let base = try #require(URL(string: "https://httpbingo.org"))
+        let reference = try await cookieObservation(input: nil, base: base)
+        let observed = try await cookieObservation(input: input, base: base)
+        #expect(reference.deleted && observed.deleted)
+        #expect(observed == reference)
+        print("NativeLifecycle appManaged \(input.rawValue): Foundation echo=\(reference.echoed) retained=\(reference.retained); SDK echo=\(observed.echoed) retained=\(observed.retained); deletion=\(observed.deleted)")
+    }
+
+    @Test(arguments: Input.allCases)
+    func nativeCookieFixtureAcceptsExplicitHeader(input: Input) async throws {
+        try await run { client, base in
+            let settings = URLSessionConfiguration.ephemeral
+            settings.httpCookieStorage = nil; settings.httpShouldSetCookies = false
+            settings.urlCredentialStorage = nil; settings.urlCache = nil
+            settings.timeoutIntervalForRequest = 5; settings.timeoutIntervalForResource = 10
+            let session = URLSession(configuration: settings)
+            defer { session.invalidateAndCancel() }
+            var request = URLRequest(url: base.appendingPathComponent("cookies"))
+            request.setValue("networkkit_fixture=synthetic", forHTTPHeaderField: "Cookie")
+            let (data, response) = try await session.data(for: request)
+            try #require((response as? HTTPURLResponse)?.statusCode == 200)
+            let reference = try JSONDecoder().decode(CookieReply.self, from: data)
+            try #require(reference.cookies["networkkit_fixture"] == "synthetic")
+            let observed = try await send(input, client: client, base: base, path: ["cookies"],
+                response: .json(CookieReply.self), options: .init(headers: .init(["Cookie": "networkkit_fixture=synthetic"])))
+            try #require(observed.value.cookies["networkkit_fixture"] == "synthetic")
+            print("NativeLifecycle explicit-cookie \(input.rawValue): fixture and SDK header observed")
+        }
     }
 
     @Test(arguments: Input.allCases, Ownership.allCases)
     func nativeLifecycleStrictCookies(input: Input, ownership: Ownership) async throws {
         let check: @Sendable (APIClient, URL) async throws -> Void = { client, base in
-            try await cookieFixtureControl(input: input, base: base)
             let seed = try await send(input, client: client, base: base, path: ["cookies", "set"],
                 response: .json(CookieReply.self), query: [.init(name: "networkkit_fixture", value: "synthetic")])
             let seedAbsent = seed.value.cookies["networkkit_fixture"] == nil
@@ -319,7 +373,7 @@ struct PublicHTTPSTests: Sendable {
             let after = try await send(input, client: client, base: base, path: ["cookies"], response: .json(CookieReply.self))
             let remainsAbsent = after.value.cookies["networkkit_fixture"] == nil
             try #require(remainsAbsent)
-            print("NativeLifecycle cookies \(input.rawValue) \(ownership.rawValue): isolated-control-and-strict-absence")
+            print("NativeLifecycle cookies \(input.rawValue) \(ownership.rawValue): strict-absence")
         }
         switch ownership {
         case .owned: try await run(body: check)

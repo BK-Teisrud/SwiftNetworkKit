@@ -1,0 +1,124 @@
+{
+  "date": "2026-10-31",
+  "accepted_source": "5d2ae116ec685c483b1dcc31db9e41a850c4e2ac",
+  "accepted_main_ci": 41182672027,
+  "route": "Existing opt-in Swift package scheme NetworkKitPublicHTTPSChecks-Package; installed minimum simulator; unsigned; warnings as errors; parallel testing disabled",
+  "results": [
+    {
+      "target": "tv",
+      "source_commit": "5d2ae116ec685c483b1dcc31db9e41a850c4e2ac",
+      "exit_code": 65,
+      "summary": {
+        "result": "Failed",
+        "totalTestCount": 19,
+        "passedTests": 17,
+        "failedTests": 2,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "environment": {
+        "architecture": "x86_64",
+        "modelName": "Apple TV 4K (3rd generation)",
+        "osBuildNumber": "21J353",
+        "osVersion": "17.0",
+        "platform": "tvOS Simulator"
+      },
+      "parameter_cases_passed": 38,
+      "cleanup_exit_codes": [
+        0
+      ],
+      "log_sha256": "bae3b3299d525156d43533d581d507d7128670b5098241bf3657b14edf4e825f",
+      "source_hashes": {
+        "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/NativeLoopbackTests.swift": "5eec22ab7ac5e61b392f73864afdd7836b832fb811b9474d7e3efc1b4019266f",
+        "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicHTTPSTests.swift": "82a59bd9f39a08416fea999401becc037441ce1d1122ed61b49bc44a92a5769d"
+      },
+      "resources": [
+        "NativeLoopback resource mode=networkkit bytes=65536 concurrency=4 calls=65 rssInitial=74465280 rssWarm=74526720 rssCompleted=75624448 rssAfterOriginalBudget=75558912 settleSeconds=6",
+        "NativeLoopback resource mode=foundation bytes=65536 concurrency=4 calls=65 rssInitial=75595776 rssWarm=75595776 rssCompleted=76013568 rssAfterOriginalBudget=75911168 settleSeconds=6",
+        "NativeLoopback resource mode=foundation bytes=1048576 concurrency=8 calls=33 rssInitial=75911168 rssWarm=75911168 rssCompleted=76161024 rssAfterOriginalBudget=75980800 settleSeconds=6",
+        "NativeLoopback resource mode=networkkit bytes=1048576 concurrency=8 calls=33 rssInitial=75988992 rssWarm=75997184 rssCompleted=76320768 rssAfterOriginalBudget=76271616 settleSeconds=6"
+      ],
+      "unexpected_restart": false,
+      "test_time_limit_failure": false,
+      "failure_disposition": {
+        "failed_declarations": [
+          "validBadsslControl(input:)",
+          "untrustedCertificate(input:)"
+        ],
+        "observed_failure": "NetworkKit timeout (system)",
+        "cause": "unproven",
+        "no_waiver": "Not certificate-rejection evidence or a successful full suite; no automatic rerun/timeout increase."
+      }
+    },
+    {
+      "target": "watch",
+      "source_commit": "5d2ae116ec685c483b1dcc31db9e41a850c4e2ac",
+      "exit_code": 65,
+      "summary": {
+        "result": "Failed",
+        "totalTestCount": 19,
+        "passedTests": 16,
+        "failedTests": 3,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "environment": {
+        "architecture": "x86_64",
+        "modelName": "Apple Watch Series 9 (45mm)",
+        "osBuildNumber": "21R355",
+        "osVersion": "10.0",
+        "platform": "watchOS Simulator"
+      },
+      "parameter_cases_passed": 34,
+      "cleanup_exit_codes": [
+        0,
+        0
+      ],
+      "log_sha256": "2263937aec94a8eec71f3b4060c1d9496d1a1625e80d424d4dfe27e6014f93bd",
+      "source_hashes": {
+        "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/NativeLoopbackTests.swift": "5eec22ab7ac5e61b392f73864afdd7836b832fb811b9474d7e3efc1b4019266f",
+        "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicHTTPSTests.swift": "82a59bd9f39a08416fea999401becc037441ce1d1122ed61b49bc44a92a5769d"
+      },
+      "resources": [
+        "NativeLoopback resource mode=networkkit bytes=65536 concurrency=4 calls=65 rssInitial=77561856 rssWarm=77672448 rssCompleted=80146432 rssAfterOriginalBudget=74547200 settleSeconds=6",
+        "NativeLoopback resource mode=foundation bytes=65536 concurrency=4 calls=65 rssInitial=74616832 rssWarm=74723328 rssCompleted=74891264 rssAfterOriginalBudget=72921088 settleSeconds=6",
+        "NativeLoopback resource mode=foundation bytes=1048576 concurrency=8 calls=33 rssInitial=72921088 rssWarm=73969664 rssCompleted=74342400 rssAfterOriginalBudget=72105984 settleSeconds=6",
+        "NativeLoopback resource mode=networkkit bytes=1048576 concurrency=8 calls=33 rssInitial=72110080 rssWarm=73179136 rssCompleted=72667136 rssAfterOriginalBudget=72470528 settleSeconds=6"
+      ],
+      "unexpected_restart": false,
+      "test_time_limit_failure": false,
+      "failure_disposition": {
+        "failed_declarations": [
+          "nativeLoopbackPrivateAppStoreControls()",
+          "operatorDesignatedHostnameMismatch(input:)",
+          "nativeLifecycleStrictCookies(input:ownership:)"
+        ],
+        "issues": {
+          "private_Foundation_challenge_expected_200": 1,
+          "hostname_system_timeout": 1,
+          "appManaged_cookie_positive_marker_absent": 4
+        },
+        "cause": "unproven; separate Foundation-only challenge control from SDK cookie path and public fixture timeout",
+        "follow_up": "NET-04 #126 and I21 #62",
+        "no_waiver": "No skipping, removal of assertions, raised timeout or platform exclusion."
+      }
+    }
+  ],
+  "limits": [
+    "Simulator results are not physical-device evidence.",
+    "Whole-process RSS is not isolated SDK allocation or a universal cap.",
+    "A failed public fixture timeout has no inferred cause and cannot be relabelled as trust rejection."
+  ],
+  "independent_tv_foundation_control": {
+    "exit_code": 0,
+    "observations": [
+      "FoundationFixtureDiagnostic name=valid status=200 elapsed=1.348642973 seconds",
+      "FoundationFixtureDiagnostic name=self-signed domain=NSURLErrorDomain code=-1202 elapsed=4.500371041 seconds"
+    ],
+    "log_sha256": "5d5a84089b59538f24260e8496f7ebb30068a516a629fe321e7f37b0d55053b7",
+    "scope": "One plain ephemeral Foundation request per affected fixed fixture, same 5-second request/10-second resource timeout, no SDK or trust override",
+    "interpretation": "Later reachability and certificate-specific Foundation rejection observed; does not establish cause of earlier SDK timeouts or replace failed suite",
+    "cleanup": "Task-started TV simulator shutdown command completed; no data erase"
+  },
+  "owner_workload": "Use case, payload sizes and concurrency unknown per owner 2026-10-31; no app-specific suitability or residual-risk acceptance."
+}

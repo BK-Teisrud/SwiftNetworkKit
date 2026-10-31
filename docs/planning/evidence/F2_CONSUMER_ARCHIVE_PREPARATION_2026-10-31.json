@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-31",
+  "sdk_source": "5d2ae116ec685c483b1dcc31db9e41a850c4e2ac",
+  "archive": "Unsigned generic iOS Release consumer from a clean git archive; no installation/export/distribution",
+  "SDK_symbol_provenance": {
+    "matching_binary_dSYM_UUID": true,
+    "SDK_symbols_in_matching_dSYM": 1868,
+    "APIClient_symbols_in_matching_dSYM": 114,
+    "note": "The installed Release binary is stripped; provenance is from its matching archive dSYM."
+  },
+  "manifest": {
+    "relative_path": "SwiftNetworkKit_NetworkKit.bundle/PrivacyInfo.xcprivacy",
+    "sha256": "528ab3fca910d2ac2f3ef256d5ea4c2327303a7a4a5efb9236987f3018e311f3",
+    "content": {
+      "NSPrivacyTracking": false,
+      "NSPrivacyTrackingDomains": [],
+      "NSPrivacyCollectedDataTypes": [],
+      "NSPrivacyAccessedAPITypes": []
+    }
+  },
+  "consumer_source_hashes": {
+    "Tools/ReleaseConsumer/AppDelegate.swift": "37337040dc1762c73a7de05019476e074e66f5571d6ff2d3aa7ffb210b8abb17",
+    "Tools/ReleaseConsumer/NetworkKitReleaseConsumer.xcodeproj/project.pbxproj": "16aabfce20d95175c373b4f735a37e550114ef6b7bcbe5e3030f623544b45616",
+    "Tools/ReleaseConsumer/NetworkKitReleaseConsumer.xcodeproj/xcshareddata/xcschemes/NetworkKitReleaseConsumer.xcscheme": "ab9e28b857e496913b875cb0139206cc8511bd1cd32320d723f033aabf79d357"
+  },
+  "privacy_report": {
+    "generated_by": "Xcode Organizer, exported locally by owner after automated UI export did not complete",
+    "sha256": "77e553648d29b057cb196975be4865cf325403899c6930974718da16f751a2a8",
+    "bytes": 807,
+    "pages": 1,
+    "text_characters": 0,
+    "visual_inspection": "Blank white page",
+    "disposition": "Inconclusive for aggregate-manifest parsing; not a successful aggregate privacy review."
+  },
+  "limits": [
+    "Independent preparation only; #64 formal acceptance remains after #86/#63.",
+    "No physical consumer execution, archive distribution, release or owner risk acceptance."
+  ]
+}
