@@ -1,6 +1,9 @@
 # Roadmap
 
-No deadlines are set. Phases are gates, not calendar promises. The owner selected HTTP core first: F0 → F1 → F2 leads to the first stable release. F3–F6 are optional later deliveries, outside v1.0. Repository/package: SwiftNetworkKit; product/module: NetworkKit, with one library module. See [v1 scope](V1_SCOPE.md) and [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md).
+Current owner decision, 2026-10-31: [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md) moves only missing physical Watch verification to #132/#29 in the separate “v1.0 – Publication gate” milestone. watchOS 10 support is unchanged. F2 remains open for revised #63, #86 and formal #64/#27; publication and F3 implementation remain unauthorized. [Applicability matrix](F2_PHYSICAL_APPLICABILITY.md) and [work queue](WORK_QUEUE.md) supersede dated access notes below.
+
+
+No deadlines are set. Phases are gates, not calendar promises. The owner selected HTTP core first: F0 → F1 → F2 completes non-publishing core hardening/rehearsal; a separate publication gate precedes the first stable release. F3–F6 are optional later deliveries, outside v1.0. Repository/package: SwiftNetworkKit; product/module: NetworkKit, with one library module. See [v1 scope](V1_SCOPE.md) and [ADR-0003](../decisions/ADR-0003-v1-scope-and-naming.md).
 
 Current review: [TLS-01 native macOS rejection](NATIVE_TLS_REJECTION.md), a bounded P1 regression at Order 20.75 under #25. Preparation PR #103 is accepted through main run 40550211780; #62/#63 execution remains blocked by readiness/access. TLS-01 supplies local native negative evidence without selecting a new TLS product feature. F2 remains open for complete native/platform/resource and explicit owner-risk gates; no new milestone or support/tool change is selected.
 

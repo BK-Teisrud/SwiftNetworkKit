@@ -1,5 +1,8 @@
 # Risk register
 
+Approved phase update, 2026-10-31: [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md) moves only physical Watch evidence to mandatory #132/#29 publication tracking. It does not waive product support, remaining non-Watch evidence or owner resource/security risk decisions. Non-Watch transition evidence is accepted through PR #131/main 41234106849; the [applicability matrix](F2_PHYSICAL_APPLICABILITY.md) awaits its scope-review PR/main. Historical claims below remain dated observations.
+
+
 Current update, 2026-10-31: #62 is closed/project Done after PR #129/main 41221803657. Mac actual transitions are accepted through PR #130/main 41231362170. The new [TV transition report](evidence/F2_TV_MANUAL_TRANSITIONS_2026-10-31.json) verifies actual outage/recovery/post-budget observations, including later Wi-Fi fallback; candidate acceptance remains pending. Watch Developer Mode is enabled but the [developer-image mount blocker](evidence/F2_WATCH_MOUNT_DIAGNOSIS_2026-10-31.json) prevents physical tests. #63 applicability/resources, #86/#64 and #29 owner/publication decisions remain. The dated notes below retain historical limits and do not reopen accepted #62 or Mac/iPhone/iPad work.
 
 

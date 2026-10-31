@@ -1,0 +1,37 @@
+# F2 physical-device applicability and remaining release evidence
+
+Date: 2026-10-31. Task: #63; reconciliation: #86. Status: candidate scope/evidence reconciliation pending its PR/main acceptance. No publication or F2 closure.
+
+## Approved scope boundary
+
+[ADR-0013](../decisions/ADR-0013-watch-publication-gate.md) records the owner's explicit decision to move only missing physical Watch verification to [WATCH-01 / #132](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/132), a native blocker/sub-issue of #29. watchOS 10 support is unchanged. Watch simulator evidence remains separate; no physical Watch case passed. Other F2 criteria are unchanged.
+
+The non-Watch evidence below was accepted through PR #125/main 41182672027 (NET-03), PR #127/main 41199040706 (NET-04), PR #128/main 41203171039 (iPad strict TLS diagnostic and TV native results), PR #129/main 41221803657 (minimum-family and iPhone/iPad transitions), PR #130/main 41231362170 (Mac transitions) and PR #131/main 41234106849 (TV transitions). Exact SDK commits, fixture/source hashes and earlier failed observations remain in the linked records; an accepted later documentation commit does not relabel the executed SDK source.
+
+## Target evidence and boundaries
+
+| Physical target | Accepted execution and transitions | Resource/cleanup observation and limit |
+| --- | --- | --- |
+| Intel Mac / macOS 15.8.1 (24H32) | Root 218, native TLS/public/lifecycle controls and real background/foreground, Wi-Fi loss/-1009, same-client concurrent recovery 204/204; [manual report](evidence/F2_MAC_MANUAL_TRANSITIONS_2026-10-31.json) | Full local controlled baseline/attribution in [resource baseline](RESOURCE_BASELINE.md) and [retention investigation](REPEATED_CALL_MEMORY.md); four-event manual diagnostic count unchanged after 71.493 seconds, joined shutdown. Unsatisfied path callback was delivered 0.080 seconds after outage completion; no pending-call callback is claimed |
+| iPhone 17 Pro / iOS 27.2 (24B119) | Root 215 through accepted app host; public HTTPS/lifecycle and seven local declarations/14 cases; [NET-03 target record](evidence/NET03_TARGETS_2026-10-31.json), [actual transitions](evidence/F2_IPHONE_MANUAL_TRANSITIONS_2026-10-31.json) | Recorded controlled payload/concurrency/RSS comparisons in NET-03; four finite manual calls, concurrent recovery, joined shutdown and four diagnostics unchanged after 81.452 seconds. Temporary host removed |
+| iPad Pro 11-inch (3rd generation) / iPadOS 27.2 (24B119) | Root 215; earlier native suite 20/21 remains failed, not relabelled 21/21. [Original record](evidence/F2_IPAD_NATIVE_EXECUTION_2026-10-31.json) plus separate [strict TLS diagnostic](evidence/F2_IPAD_TLS_DIAGNOSTIC_2026-10-31.json) establish the independently corroborated typed/raw rejection observation. [Actual transitions](evidence/F2_IPAD_MANUAL_TRANSITIONS_2026-10-31.json) record background, actual path loss/-1009 and recovery | Manual workload: one background and one outage call plus two concurrent empty recovery calls, 30/60-second budgets, joined shutdown, four diagnostics unchanged after 64.759 seconds and recorded whole-process RSS. This is a bounded four-call observation, not the Mac 6,400-call benchmark. Temporary host removed |
+| Apple TV 4K (3rd generation) / tvOS 27.2 (24K122) | Root 215 and native 21 declarations/44 cases; [native record](evidence/F2_TV_PHYSICAL_EXECUTION_2026-10-31.json). [Actual transitions](evidence/F2_TV_MANUAL_TRANSITIONS_2026-10-31.json) record background, unsatisfied path while pending/-1009 and restored wired recovery | Native controlled payloads/concurrency and post-budget RSS recorded; manual four-call/shutdown diagnostics unchanged after 70.753 seconds. Wi-Fi became satisfied after outage completion and before Ethernet returned. No continuous offline interval is claimed. Temporary host removed |
+| Apple Watch Ultra 2 / watchOS 27.2 (24S118) | No physical test started. [Mount failure](evidence/F2_WATCH_MOUNT_DIAGNOSIS_2026-10-31.json), enabled Developer Mode and signed preparation only | All missing physical execution, supported scenario applicability and resources remain mandatory under #132/#29. Simulator Watch results do not supply this row |
+
+## ENV-01–07 reconciliation for the selected non-Watch phase scope
+
+| Scenario | Supporting evidence and exact boundary |
+| --- | --- |
+| ENV-01 public-client inputs/responses | Root shared regression, typed/raw native public and local cases; [NET-03](NET03_NATIVE_LOOPBACK.md) and target records. Counts and fixture/platform boundaries remain distinct |
+| ENV-02 HTTPS/trust | Public native success and certificate-specific independent Foundation witnesses; preserve the iPad failed raw corroboration and supplemental strict result separately. [Public verification](PUBLIC_HTTPS_VERIFICATION.md), [iPad diagnostic](evidence/F2_IPAD_TLS_DIAGNOSTIC_2026-10-31.json). Public fixtures supply no maintainer-owned contact counters |
+| ENV-03 redirects/origin policy | Shared deterministic origin/credential rules and controlled local same-origin, cross-port zero-contact and loop controls, plus public status observations. A local HTTP fixture does not prove arbitrary authenticated cross-origin HTTPS traffic; the security review retains that distinction |
+| ENV-04 cancellation/budgets/shutdown | [NET-02](NATIVE_LIFECYCLE_STORAGE.md), local native observed-contact lifecycle/budget probes, shared deterministic timing/ownership and physical transitions. Caller cancellation is separate from actual network loss. Borrowed sessions remain app-owned |
+| ENV-05 storage/challenges | Strict owned/borrowed absence controls and isolated app-managed cookie echo/deletion; local Foundation cache/challenge controls and shared SDK policy tests. Foundation positives are not SDK app-managed HTTPS cache/credential acceptance. No shared store or real credential was mutated; [storage verification](STORAGE_VERIFICATION.md) retains the selected contract |
+| ENV-06 transitions/loss/recovery | Four separately accepted physical reports linked above. No promise of background transfer, automatic retry, hard callback order or continuous offline state. Mac path callback lag and TV later fallback are explicitly retained |
+| ENV-07 concurrency/diagnostics/resources | Native controlled comparisons where recorded, four finite manual calls with two concurrent recovery calls, joined shutdown and post-original-budget samples. Process RSS includes fixture/framework/allocator costs; observed completion is not proof that every native allocation is freed |
+
+## Acceptance disposition
+
+The revised #63 scope has traceable non-Watch execution and explicit applicability limits for review. Close it only after this scope/matrix PR and main acceptance. #86 must still assess the selected domain criteria and decide whether any actual non-Watch product/security gap needs its own bounded task; this matrix does not waive a gap or close an epic automatically.
+
+Owner app workload is unknown. Existing advisory workload boundaries and retention attribution remain provisional; no device-independent memory cap, stress-test equivalence, comprehensive leak proof or workload-risk acceptance is inferred. #29 retains explicit security/workload/publication disposition, and WATCH-01 retains physical Watch execution. F2/#86/#64 cannot claim those release requirements passed. No further environment issue, production refactor, dependency or feature is selected by this reconciliation.
