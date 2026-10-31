@@ -1,12 +1,12 @@
 # Test-environment readiness — PREP-01
 
-## Current F2 reconciliation — 2026-10-31
+## Current F2 rehearsal — 2026-10-31
 
-PR #133/main `e1af71d60961b52b451416ea40fd1a4d644d802f`, [run 41236473629](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41236473629), is accepted after full-log verification: 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. #63 is closed/Done for its accepted revised non-Watch scope; #62 remains Done. Exact executed SDK identities and platform limits remain in [physical applicability](F2_PHYSICAL_APPLICABILITY.md).
+#86 and nine selected-core epics are accepted/Done through PR #134/main `966599844ba59a35347e0f215f122fdebf084df3`, run 41238957032. #62 and revised #63 remain Done. Exact selected/deferred requirements and platform/source limits are in [F2 review](F2_REVIEW.md) and [physical applicability](F2_PHYSICAL_APPLICABILITY.md).
 
-[Formal #86 review](F2_REVIEW.md) reconciles all 79 unique core source-bullet IDs, their existing contract/test groups and accepted platform evidence. The owner explicitly approved only the non-publishing F2 rehearsal with runtime-retention and resource limitations; #29 still requires a separate actual workload/security/publication decision. This review's PR/main acceptance is pending; no epic is closed from draft findings.
+The [formal non-publishing rehearsal](RELEASE_REHEARSAL_2026-10-31.md) executed a clean 218-test regression, real remote-revision SwiftPM install, public native reuse/cancellation smoke, unsigned iOS consumer archive and DocC/privacy checks. This evidence PR/main acceptance is pending. #64/#27 are the only open F2 issues; F2 remains open. The owner resource approval covers only this rehearsal, not production fit.
 
-Next: accept #86 and close its nine eligible selected-core epics, keep #27 open, then perform formal #64 before #27/F2 closure. #12/#13/#24/#26 remain deferred extension epics. #132 is still Blocked and mandatory before #29 publication under ADR-0013. Watch support is unchanged; no physical Watch pass, release or F3 implementation is authorized.
+#132 physical Watch and #29 workload/security/publication acceptance remain separate mandatory gates under ADR-0013. No tag, release, paid environment, support change or F3 implementation is authorized. Keep deferred extension epics open.
 
 ## Earlier disposition — 2026-10-31 (superseded by current acceptance above)
 

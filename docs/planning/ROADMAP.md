@@ -1,5 +1,8 @@
 # Roadmap
 
+Current rehearsal, 2026-10-31: #86 and nine selected-core epics are Done through PR #134/main 41238957032. [Formal rehearsal](RELEASE_REHEARSAL_2026-10-31.md) is executed and awaits its PR/main acceptance; only #64/#27 remain open in F2. #132/#29 remain a separate mandatory publication lane. No release/tag, production acceptance or F3 implementation is authorized. Earlier dated progress retains its original context.
+
+
 Current reconciliation, 2026-10-31: #62 and revised #63 are Done. [GATE-F2 review](F2_REVIEW.md) reconciles the 79 stable core IDs and recorded owner F2-only resource disposition; its PR/main acceptance precedes eligible core epic closures. #27 remains open for formal #64, then F2 closure. #132/#29 remain separate publication blockers; #87/draft PR #111 is planning, not F3 implementation authorization. Dated progress notes below preserve their original state.
 
 

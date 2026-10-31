@@ -1,19 +1,19 @@
 # Work sequence before and after implementation authorization
 
-## Current F2 reconciliation — 2026-10-31
+## Current F2 rehearsal — 2026-10-31
 
-PR #133/main `e1af71d60961b52b451416ea40fd1a4d644d802f`, [run 41236473629](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41236473629), is accepted after full-log verification: 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. #63 is closed/Done for its accepted revised non-Watch scope; #62 remains Done. Exact executed SDK identities and platform limits remain in [physical applicability](F2_PHYSICAL_APPLICABILITY.md).
+#86 and nine selected-core epics are accepted/Done through PR #134/main `966599844ba59a35347e0f215f122fdebf084df3`, run 41238957032. #62 and revised #63 remain Done. Exact selected/deferred requirements and platform/source limits are in [F2 review](F2_REVIEW.md) and [physical applicability](F2_PHYSICAL_APPLICABILITY.md).
 
-[Formal #86 review](F2_REVIEW.md) reconciles all 79 unique core source-bullet IDs, their existing contract/test groups and accepted platform evidence. The owner explicitly approved only the non-publishing F2 rehearsal with runtime-retention and resource limitations; #29 still requires a separate actual workload/security/publication decision. This review's PR/main acceptance is pending; no epic is closed from draft findings.
+The [formal non-publishing rehearsal](RELEASE_REHEARSAL_2026-10-31.md) executed a clean 218-test regression, real remote-revision SwiftPM install, public native reuse/cancellation smoke, unsigned iOS consumer archive and DocC/privacy checks. This evidence PR/main acceptance is pending. #64/#27 are the only open F2 issues; F2 remains open. The owner resource approval covers only this rehearsal, not production fit.
 
-Next: accept #86 and close its nine eligible selected-core epics, keep #27 open, then perform formal #64 before #27/F2 closure. #12/#13/#24/#26 remain deferred extension epics. #132 is still Blocked and mandatory before #29 publication under ADR-0013. Watch support is unchanged; no physical Watch pass, release or F3 implementation is authorized.
+#132 physical Watch and #29 workload/security/publication acceptance remain separate mandatory gates under ADR-0013. No tag, release, paid environment, support change or F3 implementation is authorized. Keep deferred extension epics open.
 
 ## Current F2 execution priority — 2026-10-31
 
-1. Accept the formal #86 reconciliation, then close #86 and its nine eligible selected-core epics with exact PR/main evidence. #62/#63 are Done; the F2-only owner resource disposition is recorded.
-2. Execute formal #64 from the accepted clean baseline; keep #27 and F2 open until rehearsal acceptance. No tag/release/publication.
-3. Separate publication lane: #132 remains Blocked before #29, with actual physical Watch evidence and owner workload/security/publication decisions outstanding.
-4. Review #87 / draft PR #111 after F2; F3 implementation needs its own approved scope/start decision.
+1. Accept the executed #64 rehearsal through PR/main verification, then close #64 and #27. #86, its nine eligible core epics and #62/#63 are Done.
+2. Verify no remaining selected open F2 issues, then close the F2 milestone. Rehearsal does not create a version/tag/release.
+3. Separate publication lane: #132 stays Blocked before #29, with physical Watch and actual workload/device-memory/security/publication decisions outstanding.
+4. Review retry-first #87 / draft PR #111 after F2; obtain its own approved scope/start decision before F3 code.
 
 Stop whenever a GitHub run is pending and await the owner's instruction to continue. Do not poll CI or continue independent work across that stop, as reconfirmed on 2026-10-31. Conversation stays Norwegian; repository and project content stay English.
 
