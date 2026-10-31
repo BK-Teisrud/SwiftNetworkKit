@@ -1,3 +1,14 @@
+#if os(watchOS)
+import SwiftUI
+
+/// Static verification host; the library itself has no SwiftUI dependency.
+@main
+struct NetworkKitWatchTestHost: App {
+    var body: some Scene {
+        WindowGroup { Text("NetworkKit device tests") }
+    }
+}
+#else
 import UIKit
 
 /// Local verification host only. It never creates a client or sends requests.
@@ -21,8 +32,13 @@ final class DeviceTestScene: UIResponder, UIWindowSceneDelegate {
                options: UIScene.ConnectionOptions) {
         guard let scene = scene as? UIWindowScene else { return }
         let controller = UIViewController()
-        controller.view.backgroundColor = .systemBackground
         let label = UILabel()
+        #if os(tvOS)
+        controller.view.backgroundColor = .black
+        label.textColor = .white
+        #else
+        controller.view.backgroundColor = .systemBackground
+        #endif
         label.text = "NetworkKit device tests"
         label.translatesAutoresizingMaskIntoConstraints = false
         controller.view.addSubview(label)
@@ -36,3 +52,4 @@ final class DeviceTestScene: UIResponder, UIWindowSceneDelegate {
         self.window = window
     }
 }
+#endif

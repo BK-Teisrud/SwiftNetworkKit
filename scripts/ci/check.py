@@ -159,13 +159,14 @@ def platform_check(kind):
     require(any(r["identifier"] == runtime and r.get("isAvailable") for r in runtimes), f"Required {runtime} unavailable")
     devices = json.loads(run("xcrun", "simctl", "list", "devices", "available", "-j", capture=True))["devices"]
     destinations = [select_device(devices, runtime, prefix) for prefix in prefixes]
-    if family == "iOS":
-        # Compile the physical app-host route without credentials or device deployment.
-        run("xcodebuild", "-project", ROOT / "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj",
-            "-scheme", "NetworkKitDeviceHost", "-destination", "generic/platform=iOS",
-            "-derivedDataPath", OUTPUT / "DeviceHost", "CODE_SIGNING_ALLOWED=NO", "build-for-testing")
-        run("xcodebuild", "-project", ROOT / "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj",
-            "-scheme", "PublicHTTPSChecks", "-destination", "generic/platform=iOS",
+    # Compile physical app-host routes without credentials, deployment or public traffic.
+    host_project = ROOT / "Tools/DeviceTestHost/NetworkKitDeviceHost.xcodeproj"
+    if family != "iOS":
+        from prepare_device_host import prepare
+        host_project = prepare(family)
+    for scheme in ["NetworkKitDeviceHost", "PublicHTTPSChecks"]:
+        run("xcodebuild", "-project", host_project, "-scheme", scheme,
+            "-destination", "generic/platform=" + family,
             "-derivedDataPath", OUTPUT / "DeviceHost", "CODE_SIGNING_ALLOWED=NO", "build-for-testing")
     if family == "watchOS":
         phone = select_device(devices, "com.apple.CoreSimulator.SimRuntime.iOS-26-2", "iPhone 17")
