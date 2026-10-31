@@ -1,6 +1,6 @@
 # Contributing and workflow
 
-The project is in its initial implementation stage; only the package baseline exists. Do not begin implementation until F0 is approved and implementation is separately and explicitly authorized. Teisrud Development AS is the designated rights holder. The project is proprietary; see [LICENSE](LICENSE).
+The HTTP core has completed F2. The bounded read-retry increment I24–I27 is explicitly authorized under ADR-0014 and START-F3 #137. Other extensions and publication require separate decisions. Teisrud Development AS is the designated rights holder. The project is proprietary; see [LICENSE](LICENSE).
 
 Bug reports and suggestions are welcome. External contributions that change repository content are accepted only after a written contribution agreement with Teisrud Development AS has been agreed. A pull request or sign-off does not automatically transfer rights. Do not submit external code contributions before this is resolved. GitHub's applicable terms continue to govern public activity on the service.
 
@@ -15,7 +15,7 @@ No direct pushes to main after bootstrap. No develop branch; create a release br
 
 ## Definition of Ready
 
-The problem, scope and exclusions, requirement IDs, testable criteria, dependencies, and estimate are understood. No blocking architecture decision remains open. Security and platform implications have been assessed. Implementation also requires the separate authorization recorded in START-00 / #41.
+The problem, scope and exclusions, requirement IDs, testable criteria, dependencies, and estimate are understood. No blocking architecture decision remains open. Security and platform implications have been assessed. Implementation requires the applicable explicit authorization: START-00 / #41 for the core, START-F3 / #137 for the selected bounded retry increment.
 
 ## Definition of Done
 

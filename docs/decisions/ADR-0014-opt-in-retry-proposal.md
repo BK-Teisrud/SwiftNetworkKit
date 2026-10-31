@@ -44,3 +44,7 @@ Existing F3 is narrowed to “F3 – Bounded read retries” for the coherent se
 ## Supersedes / superseded by
 
 Amends the future post-core planning boundary of ADR-0007 only for this explicitly selected opt-in increment. The delivered v1/F2 core still has no library retry and is unchanged; implementation remains blocked. Preserve ADR-0003/0005/0006/0007 history and update affected contracts in the selected implementation slices.
+
+## Subsequent explicit implementation instruction — 2026-10-31
+
+After accepted PR #111/main run 41248255517, the owner explicitly authorized code start for I24–I27 under this unchanged contract. START-F3 #137 is completed. Earlier no-code statements above record the prior decision and are superseded only for these four slices. No publication or other extension is authorized.
