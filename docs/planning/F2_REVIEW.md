@@ -1,15 +1,14 @@
 # F2 selected-requirement reconciliation — GATE-F2 review
 
-## Current review baseline — 2026-10-31
+## Accepted reconciliation and rehearsal status — 2026-10-31
 
-Status: technical reconciliation complete and owner F2-only resource disposition recorded; this PR/main acceptance remains required before closure. This is not #64 rehearsal, F2 closure or publication authorization.
+#86 and nine selected-core epics (#8/#9/#10/#11/#20/#21/#22/#23/#25) are closed/Done after PR #134/main `966599844ba59a35347e0f215f122fdebf084df3`, [run 41238957032](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41238957032). Full logs verified 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. All 79 unique core source-bullet IDs, 47 evidence groups and 153 exact named Swift tests are reconciled in the [record](evidence/F2_REQUIREMENT_RECONCILIATION_2026-10-31.json); indexing is not a fresh runtime or coverage percentage.
 
-Accepted baseline: main `e1af71d60961b52b451416ea40fd1a4d644d802f`, PR #133, [main run 41236473629](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41236473629). Full logs verified 218 Mac tests, four simulator runs of 215, 19 helpers and four manual-host provenance checks without failure/restart markers. No production source change is proposed by this reconciliation.
+The machine-readable requirement record remains the original pre-acceptance snapshot; its pending flags describe submission time. Current #86 closure is recorded against PR #134/main above, and the #64 rehearsal has its own separate pending evidence record.
 
-#62 and revised #63 are closed/Done. [Physical applicability](F2_PHYSICAL_APPLICABILITY.md) and [platform matrix](PLATFORM_MATRIX.md) retain exact executed SDK sources, accepted minimum/non-Watch observations, iPad failed corroboration plus separate strict diagnostic, Mac callback lag, TV later Wi-Fi fallback and resource limits. [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md) is accepted: only missing physical Watch evidence remains mandatory under #132/#29, in the separate publication milestone. No physical Watch pass or support reduction is inferred.
+#62 and revised #63 remain Done. Exact executed source/OS/fixture and failed-control boundaries remain in [physical applicability](F2_PHYSICAL_APPLICABILITY.md). The owner approved only the non-publishing F2 rehearsal with recorded resource limitations; no production suitability or publication is approved. [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md) retains physical Watch #132 before #29 with support unchanged.
 
-This review validates 79 unique source-bullet IDs across ten core domains and their existing evidence groups. All 153 exact Swift test names cited by the ledger resolve to source declarations. Test indexing is not fresh execution or a coverage percentage; actual run counts and platform boundaries remain separate. The [machine-readable reconciliation](evidence/F2_REQUIREMENT_RECONCILIATION_2026-10-31.json) records each requirement, contract, selected/deferred boundary, implementation slice, evidence group and verified named source.
-
+The [formal #64 rehearsal](RELEASE_REHEARSAL_2026-10-31.md) has now executed clean-checkout regression, remote revision installation, public native smoke, unsigned consumer archive and documentation/privacy checks. Its evidence PR/main acceptance is pending. #64 and #27 are the only open F2 issues; keep F2 open until they pass. #132/#29 remain in the separate publication milestone, and F3 implementation is not authorized.
 
 ## Source, IDs and claim boundary
 
@@ -170,22 +169,22 @@ Contract: [API_REVIEW.md](API_REVIEW.md).
 
 #12 / NK-05: only once-per-call headers, explicit opt-out and account/origin binding are selected (S08–S10, I14). Login, Keychain, OAuth/OIDC and refresh remain deferred. #13 / NK-06: HTTPS/system trust, safe redirects and credentials are core foundations (S01–S04, I09/I19/TLS-01); pinning/mTLS/HMAC/custom trust remain deferred. #24 / NK-17: session reuse, baseline and attribution support core quality (L04, I20/RES-01); coalescing, streaming and optimization products remain deferred. #26 / NK-19: declared platforms and availability support core (C01/C02, I18); background transfers, local discovery, app groups and visionOS remain deferred. Keep these extension epics open: foundations do not deliver their future catalog.
 
-## Epic acceptance and retained scope
+## Accepted epic scope and retained obligations
 
 | Epic | Reviewed stable IDs | Selected delivery and explicit exclusions | Disposition after this review PR/main acceptance |
 | --- | --- | --- | --- |
-| #8 HTTP | NK-01-01–11 | Methods/headers/body, storage profile, bounded safe redirects, timeout/cancellation and raw requests; no priority API/interceptors | Eligible for selected F2 scope closure; Watch execution remains #132/#29 |
-| #9 endpoints | NK-02-01–07 | Safe typed/raw URLs, ordered query and per-call core policy; no automatic API versioning or retry/cache product | Eligible for selected F2 scope closure |
-| #10 responses | NK-03-01–08 | Buffered JSON/Data/text/empty/status/metadata and value strategies; no streaming/custom decoder framework | Eligible for selected F2 scope closure |
-| #11 errors | NK-04-01–07 | Structured safe categories, separate cancellation and metadata; no retry classification/error-body capture | Eligible for selected F2 scope closure |
-| #20 diagnostics | NK-13-01–07 | Disabled-by-default fixed terminal sink, request identity and exclusion of sensitive fields; no metrics/signposts/levels/sampling product | Eligible for selected F2 scope closure |
-| #21 concurrency | NK-14-01–08 | Swift 6 isolation, per-call cancellation, explicit joined shutdown and session ownership; no batch/stream/deduplication product | Eligible for selected F2 scope closure |
-| #22 configuration | NK-15-01–06 | Immutable values, explicit ownership/storage/auth/timeout/status and headers; no mutable singleton/network-cost API | Eligible for selected F2 scope closure |
-| #23 testability | NK-16-01–09 | Injectable client examples, scoped fixtures, timing/auth/cleanup tests, local/public native and bounded resource records; no custom cache test engine | Eligible for selected F2 scope closure with exact native/applicability limits and physical Watch #132 retained |
+| #8 HTTP | NK-01-01–11 | Methods/headers/body, storage profile, bounded safe redirects, timeout/cancellation and raw requests; no priority API/interceptors | Accepted/closed through #86 and PR #134/main 41238957032; Watch execution remains #132/#29 |
+| #9 endpoints | NK-02-01–07 | Safe typed/raw URLs, ordered query and per-call core policy; no automatic API versioning or retry/cache product | Accepted/closed through #86 and PR #134/main 41238957032 |
+| #10 responses | NK-03-01–08 | Buffered JSON/Data/text/empty/status/metadata and value strategies; no streaming/custom decoder framework | Accepted/closed through #86 and PR #134/main 41238957032 |
+| #11 errors | NK-04-01–07 | Structured safe categories, separate cancellation and metadata; no retry classification/error-body capture | Accepted/closed through #86 and PR #134/main 41238957032 |
+| #20 diagnostics | NK-13-01–07 | Disabled-by-default fixed terminal sink, request identity and exclusion of sensitive fields; no metrics/signposts/levels/sampling product | Accepted/closed through #86 and PR #134/main 41238957032 |
+| #21 concurrency | NK-14-01–08 | Swift 6 isolation, per-call cancellation, explicit joined shutdown and session ownership; no batch/stream/deduplication product | Accepted/closed through #86 and PR #134/main 41238957032 |
+| #22 configuration | NK-15-01–06 | Immutable values, explicit ownership/storage/auth/timeout/status and headers; no mutable singleton/network-cost API | Accepted/closed through #86 and PR #134/main 41238957032 |
+| #23 testability | NK-16-01–09 | Injectable client examples, scoped fixtures, timing/auth/cleanup tests, local/public native and bounded resource records; no custom cache test engine | Accepted/closed through #86 and PR #134/main 41238957032 with exact native/applicability limits and physical Watch #132 retained |
 | #25 privacy | NK-18-01–07 | No default sensitive diagnostics/telemetry or owned stores; app owns opted-in stores/deletion; no SDK payload-file or custom-cache deletion feature | Eligible for selected product/F2 scope closure; actual distribution report is #64, app practice/workload/security publication decision remains #29 |
 | #27 developer experience | NK-20-01–09 | Reviewed public API, compiled DocC/examples, platform/CI and policy | Keep open until #64 clean-consumer/archive/privacy/release rehearsal acceptance. #86 does not depend on #27 closure |
 
-Eligible is not closed: record this review's PR, actual checks and main commit before performing those nine epic closures. No future catalog item is implemented or waived by closing its selected core domain. [Cross-cutting extension foundations](#cross-cutting-extension-foundations) keep #12/#13/#24/#26 open under their future planning owners.
+The nine selected-core closures are now recorded against accepted PR #134/main 41238957032. No future catalog item is implemented or waived by closing its selected core domain. [Cross-cutting extension foundations](#cross-cutting-extension-foundations) keep #12/#13/#24/#26 open under their future planning owners.
 
 ## Current disposition of original evidence gaps
 
@@ -205,12 +204,11 @@ Technical assessment: existing evidence attributes a substantial transient compo
 
 Owner decision, 2026-10-31: explicitly APPROVED for the non-publishing F2 rehearsal only. Translated owner reply: “Approve only the F2 rehearsal with these limitations.” The original approval remains in the conversation. The concrete question explains call-rate, payload/budget and process-memory limits, including that the provisional eight-active-call / expected 1 MiB guidance is not an enforced cap or validated production fit. #29 must still obtain the actual app workload and a separate suitability/security/publication decision; no production risk acceptance is inferred. This bounded phase disposition is recorded; no production suitability, publication or universal memory guarantee is approved.
 
-## Exact completion sequence
+## Remaining completion sequence
 
-1. Owner F2-only resource disposition is recorded; obtain this #86 reconciliation PR/main acceptance. #86's native prerequisites #59/#60/#61/#62/#63/#100/#104 are closed.
-2. Record final review commit/checks; close #86 and only the nine eligible selected-core epics above. Preserve original failures and deferred catalog scope. Keep #27/#12/#13/#24/#26/#132/#29 open.
-3. Execute formal #64 from the accepted clean baseline, including SemVer/changelog, rights/security/DocC/consumer and archive/aggregate privacy evidence. Keep #27 open until that acceptance. The previously text-only #27 → #64 prerequisite is now a native GitHub dependency; #64/#86 have no reverse dependency on #27. No circular dependency on #64/#29 is added to #86.
-4. Close F2 only after its remaining selected issue criteria pass. Publication still requires #132/#29 and separate owner authorization; F3 implementation still requires its own scope/start decision.
+1. #86 and its nine eligible selected-core epic closures are accepted through PR #134/main 41238957032. The owner F2-only resource disposition is recorded; all native #86 prerequisites remain closed.
+2. Accept the executed #64 rehearsal through its evidence PR/main, then close #64 and #27. The native #27 → #64 dependency is verified; no reverse #64/#86 dependency on #27 exists.
+3. Close F2 only when its remaining selected open issues are closed. Publication still requires #132/#29 and separate owner authorization. F3 implementation requires its own scope/start decision; #12/#13/#24/#26 remain deferred extension epics.
 
 ## Forward quality and backlog assessment
 

@@ -8,9 +8,9 @@ Maintainer: @BK-Teisrud. Targets: an initial response within three business days
 
 No product versions have been released. After 1.0, the latest stable minor of the current major receives maintenance; exceptions are documented in the release policy. Prereleases carry no production-readiness guarantee.
 
-## Requirements for future implementation
+## Implemented security baseline and remaining gates
 
-System trust and HTTPS by default; no TLS bypass. [ADR-0007 and the security policy](docs/planning/SECURITY_AND_NETWORK_POLICY.md) specify an explicit development-only HTTP exception for localhost/loopback, no automatic cookie/credential/cache storage, a small authentication-header provider, and bounded redirect and diagnostic policies. These are planned requirements, not implemented or successfully tested security properties. No sensitive logging or external telemetry by default. Isolate credentials by account, host, and environment. Security review covers redirects, idempotency, cancellation, caching, and concurrency. Pinning, mTLS, and OIDC require separate decisions and review.
+System trust and HTTPS by default; no TLS bypass. [ADR-0007 and the security policy](docs/planning/SECURITY_AND_NETWORK_POLICY.md) specify an explicit development-only HTTP exception for localhost/loopback, no automatic cookie/credential/cache storage, a small authentication-header provider, and bounded redirect and diagnostic policies. The selected rules are implemented and linked to the [contract/native evidence](docs/planning/F2_REVIEW.md); those records retain their exact test/platform limitations. No general security guarantee or publication acceptance follows. Physical Watch verification remains #132, the non-publishing archive/privacy rehearsal is #64, and app-specific security/workload and publication decisions remain #29. No sensitive logging or external telemetry by default. Isolate credentials by account, host, and environment. Security review covers redirects, idempotency, cancellation, caching, and concurrency. Pinning, mTLS, and OIDC require separate decisions and review.
 
 ## Incidents
 
