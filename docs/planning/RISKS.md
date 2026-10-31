@@ -1,5 +1,8 @@
 # Risk register
 
+Current update, 2026-10-31: #62 is closed/project Done after PR #129/main 41221803657. Mac actual transitions are accepted through PR #130/main 41231362170. The new [TV transition report](evidence/F2_TV_MANUAL_TRANSITIONS_2026-10-31.json) verifies actual outage/recovery/post-budget observations, including later Wi-Fi fallback; candidate acceptance remains pending. Watch Developer Mode is enabled but the [developer-image mount blocker](evidence/F2_WATCH_MOUNT_DIAGNOSIS_2026-10-31.json) prevents physical tests. #63 applicability/resources, #86/#64 and #29 owner/publication decisions remain. The dated notes below retain historical limits and do not reopen accepted #62 or Mac/iPhone/iPad work.
+
+
 ## Current F2 execution update — 2026-10-31
 
 NET-04 #126 is accepted through PR #127/main 41199040706. Candidate iPad TLS diagnostics and physical TV regression/native/resource evidence advance existing #62/#63; earlier failed observations remain recorded. Watch registration, six scoped Watch/TV profiles and signed generic hosts are prepared, but Watch's development tunnel/readiness remains unresolved despite owner confirmation. No new certificate, support minimum, trust exception or paid service was introduced.
