@@ -169,7 +169,7 @@ Contract: [API_REVIEW.md](API_REVIEW.md).
 
 | Gate | Required outcome | Current disposition |
 | --- | --- | --- |
-| #62 / ENV-01–05 and applicable resource scenarios | Execute iPhone/iOS 17, iPad/iPadOS 17, macOS 14, watchOS 10 and tvOS 17 with exact candidate/OS/build/fixture | Blocked: four exact minimum simulator root regressions passed locally, 215/215 each; PR/main acceptance pending. macOS 14 access and separate native/resource scenarios remain open. Newer CI/deployment-target compilation is insufficient |
+| #62 / ENV-01–05 and applicable resource scenarios | Execute iPhone/iOS 17, iPad/iPadOS 17, macOS 14, watchOS 10 and tvOS 17 with exact candidate/OS/build/fixture | Partial: four exact minimum simulator root regressions (215/215 each) accepted through PR #120/main 40765690271. Native ARM64 macOS 14.8.9 consumer/reuse/cancellation/100-cycle controls passed in run 41179430976; see MACOS14_EXECUTION_ROUTE_2026-10-29.md. Exact macOS 14.0, full macOS 14 regressions, minimum HTTPS and other applicable native scenarios remain unverified. NET-03 #122 is in progress; no gate waiver. |
 | #63 / ENV-01–07 | Representative physical iPhone/iPad/Mac/Watch/TV; native networking, transitions, cancellation, storage, safe diagnostics and resource suitability | Blocked: accepted Mac/iPhone NET-01/02 observations cover their recorded claims; physical iPad/Watch/TV, remaining ENV transitions/storage/challenge/resource evidence and actual per-target readiness remain open |
 | #62/#63 / ENV-02 | Controlled system-trusted success; separate invalid chain and hostname mismatch, typed/raw, plus native redirect/challenge evidence | Partial only: #104 proves owned-session untrusted-chain rejection on observed macOS. Controlled trusted fixture and independent hostname mismatch remain missing |
 | #62/#63 / ENV-07 | Actual target call rate/concurrency/payload/budget, cleanup and post-original-deadline resource observation | Local I20/RES-01 evidence exists; target suitability and owner disposition still missing |
@@ -206,3 +206,9 @@ NET-01 #115 is accepted through PR #116 and main 40644612904. [NET-02 #117](NATI
 ## Minimum macOS access route — 2026-10-29
 
 PR #120 minimum simulator regression evidence is accepted through main run 40765690271. The owner has no second Mac. The [temporary standard GitHub macOS 14 route](MACOS14_EXECUTION_ROUTE_2026-10-29.md) builds a public consumer with Xcode 26.3 and runs the unchanged executable on the older OS; it is not an older-toolchain build or a support change. Actual execution and its exact patch/build remain pending, as do the other selected native/resource/physical/archive/release gates.
+
+## Current priority refresh — 2026-10-31
+
+Main 0ab623fe67e1be161f2ef1f3ac2fc67107cebb70 is accepted through run 41179384664. The prepared macOS 14 consumer route has completed, with [preserved results](evidence/MACOS14_RUNTIME_2026-10-31.json); its one-off workflow is retired. The earlier access statements above are historical, not the current claim that no macOS 14 route exists.
+
+Continue NET-03 #122: review/negative controls and expanded minimum/physical loopback results, then remaining #63 device-family and foreground/background/network-loss evidence. Previous temporary NET-03 device/simulator records were unavailable on resumption and are not accepted for that candidate. Resource measurements remain observations requiring workload suitability and owner risk disposition. Keep #62/#63 open and reconcile #86 only after their applicable requirements are satisfied; #64 consumer/archive/privacy rehearsal follows its acceptance dependencies. No duplicate environment issue, scope expansion, retry implementation or support-minimum change is warranted by this access result.
