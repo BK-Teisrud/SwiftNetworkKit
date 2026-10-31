@@ -1,5 +1,10 @@
 # Risk register
 
+## Complete retry contract approval — 2026-10-31
+
+The owner approves the complete [ADR-0014 contract](../decisions/ADR-0014-opt-in-retry-proposal.md) and expressly withholds code. #87/#106 await planning PR/main acceptance; [START-F3 #137](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/137) separately blocks selected I24–I27 (#107–#110). Existing F3 is now “F3 – Bounded read retries”; open unselected domain catalogs #12/#14/#15/#19/#24 stay outside this delivery milestone. No product code, default behavior, dependency, release/version/date or publication authorization. #132/#29 and accepted F2 remain unchanged.
+
+
 GATE-F2 disposition, 2026-10-31: the owner expressly accepts proceeding **only with the non-publishing F2 rehearsal** under the recorded runtime retention, call-rate/budget/payload and finite-memory-observation limitations. #86 reconciles accepted non-Watch/minimum evidence and the ADR-0013 Watch deferral. This is no production-fit or publication acceptance: #29 retains workload/security approval, #132 physical Watch, and #64 actual clean-consumer/archive rehearsal. No further product defect, generic refactor or extra issue is established by this review.
 
 
@@ -71,3 +76,7 @@ The new in-process loopback fixture advances existing #62/#63 ENV claims without
 The macOS 14 100-cycle NetworkKit RSS observation remained above warm baseline and higher than its direct Foundation control after 12 seconds. Local NET-03 RSS also includes its in-process server, test framework and allocator. Neither measurement identifies retained SDK objects or proves a universal bound. Continue bounded target/workload observations and explicit owner risk disposition under #62/#63/#86/#29; do not hide the delta, infer release acceptance or introduce a speculative scheduler/framework rewrite. No new generic risk issue is needed because the existing gates already own these requirements.
 
 Owner workload clarification, 2026-10-31: the first consuming app's use case, typical response size and required concurrency are unknown. Preserve measured synthetic workloads as observations only; do not convert them into app-specific suitability or residual-risk acceptance. Existing #62/#63/#86/#29 own the assessment; no arbitrary production limit, new generic issue or release permission is inferred. Continue executable verification and consumer-rehearsal preparation while this uncertainty remains explicit.
+
+## Retry planning risks — 2026-10-31
+
+Proposed ADR-0014 does not change the delivered no-library-retry default. Replay semantics, stale one-use signatures, non-shortened Retry-After, the one total budget, cancellation/shutdown boundaries, actual attempt-count schema and waiting-related resource retention are explicit #106–#110 contracts/evidence. App-managed Foundation storage is not frozen wire state. No raw reason/history logging or broad plugin/timer framework is selected. The current owner choices select planning boundaries, not production use or code start. Existing #132/#29 publication gates and F2-only resource disposition remain unchanged.

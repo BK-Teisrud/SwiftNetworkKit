@@ -1,5 +1,10 @@
 # Roadmap
 
+## Complete retry contract approval — 2026-10-31
+
+The owner approves the complete [ADR-0014 contract](../decisions/ADR-0014-opt-in-retry-proposal.md) and expressly withholds code. #87/#106 await planning PR/main acceptance; [START-F3 #137](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/137) separately blocks selected I24–I27 (#107–#110). Existing F3 is now “F3 – Bounded read retries”; open unselected domain catalogs #12/#14/#15/#19/#24 stay outside this delivery milestone. No product code, default behavior, dependency, release/version/date or publication authorization. #132/#29 and accepted F2 remain unchanged.
+
+
 Current phase status, 2026-10-31: F2 is CLOSED through PR #135/main 41242130528; #64/#27 are Done and open item connections are empty. [Final closeout](F2_CLOSEOUT_2026-10-31.md) records accepted evidence and counter discrepancy. #87 is Ready for retry planning only; physical Watch #132 and publication/workload/security #29 remain separate blockers. No F3 code or release authorization. Dated progress below preserves history.
 
 
@@ -61,3 +66,7 @@ Break domain epics into separate testable tasks before Ready. F0 acceptance cove
 ## Native lifecycle/storage follow-up — 2026-10-28
 
 NET-01 #115 is accepted on main 40644612904. [NET-02 #117](NATIVE_LIFECYCLE_STORAGE.md) adds actual Mac/iPhone cancellation, shutdown/session ownership and isolated cookie observations; local full suite 12/12 passed and PR #118/main 40745209513 are accepted. [Minimum-runtime candidates and authorization](MINIMUM_RUNTIME_ACCESS_2026-10-28.md) remain a separate #62 route: authenticated imports and [four minimum simulator regression results](MINIMUM_RUNTIME_EXECUTION_2026-10-28.md) passed locally at 215/215 each; PR/main acceptance remains pending. Earlier iOS migration timeouts are retained. macOS 14 and separate native/resource scenarios remain open. All unproved F2/native/resource/archive/release criteria remain open.
+
+## Historical F3 refresh before complete approval — 2026-10-31
+
+With F2 closed and main run 41244932962 accepted, #87/#106 now refine [the existing retry proposal](RETRY_INCREMENT_PLAN.md). Proposed ADR-0014 replaces only the draft's colliding identifier; accepted ADR-0013 remains the Watch decision. Owner choices narrow the initial increment and keep reason metadata/advanced resilience products deferred. #107–#110 remain Backlog until complete scope and explicit code-start approval. No new milestone, version/date or implicit dependency on publishing #29.

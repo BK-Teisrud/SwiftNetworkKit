@@ -1,5 +1,10 @@
 # Requirements traceability and initial backlog
 
+## Complete retry contract approval — 2026-10-31
+
+The owner approves the complete [ADR-0014 contract](../decisions/ADR-0014-opt-in-retry-proposal.md) and expressly withholds code. #87/#106 await planning PR/main acceptance; [START-F3 #137](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/137) separately blocks selected I24–I27 (#107–#110). Existing F3 is now “F3 – Bounded read retries”; open unselected domain catalogs #12/#14/#15/#19/#24 stay outside this delivery milestone. No product code, default behavior, dependency, release/version/date or publication authorization. #132/#29 and accepted F2 remain unchanged.
+
+
 Original planning baseline: 20 domain epics, seven decision issues, and three governance/release issues. The table below preserves the original domain classification/phase allocation, not live completion. I01–I16 are delivered; I01–I10 implement the initial HTTP slice; [F1 review](F1_REVIEW.md) accounts for delivered work and open domain epics continuing in F2. See the [GitHub register](GITHUB_REGISTER.md) for live links.
 
 | ID | Requirement / task | Classification | Phase |
@@ -50,3 +55,7 @@ I01–I23 are native subissues with criteria and dependencies; see [WORK_QUEUE.m
 ## Rolling planning review
 
 The [2026-10-26 audit](PLAN_REVIEW_2026-10-26.md) adds PREP-01 / #85, GATE-F2 / #86 and PLAN-F3–F6 / #87–#90. The owner selected retry/robustness as the first post-core planning priority. Future NK domains remain deferred; concrete extension implementation slices require selected contracts and a new scope decision. Follow PROJECT_MANAGEMENT.md at every task transition, not only weekly.
+
+## Historical selection refresh before complete approval — 2026-10-31
+
+F2 is closed; #87/#106 review Proposed [ADR-0014](../decisions/ADR-0014-opt-in-retry-proposal.md) and the [bounded retry plan](RETRY_INCREMENT_PLAN.md). Existing #107–#110 remain Backlog without I identifiers or implementation authorization. Owner selections: general safe app-data reads, per-call bodyless GET/HEAD one retry for exact allowlist, 250–500 ms jitter/30-second cap, auth preparation once and diagnostic attempt count only. Full contract/code start remain separate decisions. Preserve all core/host/native rows and #132/#29 publication gates; no duplicate task or new milestone.
