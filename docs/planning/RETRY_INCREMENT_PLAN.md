@@ -1,4 +1,8 @@
-# First resilience increment — approved contract, implementation held
+# First resilience increment — approved contract, implementation authorized
+
+## Current execution authorization — 2026-10-31
+
+Owner instruction: “Yes, authorize code start for I24–I27.” START-F3 #137 is completed after #87/#106 acceptance through PR #111/main 25e0d52b8316251bb6592d075caead9b05ed9edd/run 41248255517. This supersedes historical no-code/verification-pending statements below for these selected tasks only. I24 is the pure decision layer; I25 supplies per-call wiring, request validation and transport integration. I26/I27 retain their evidence/review scope. No publication or other extension is authorized.
 
 Refreshed: 2026-10-31. PLAN-F3 / #87; parent NK-07 / #14. Status: complete contract approved by the owner under [ADR-0014](../decisions/ADR-0014-opt-in-retry-proposal.md)/#106. Planning only; no extension code, dependency, date/version or implementation authorization. ADR-0013 is the separate accepted Watch decision.
 

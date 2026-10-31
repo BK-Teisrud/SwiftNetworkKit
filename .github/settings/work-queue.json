@@ -518,7 +518,7 @@
       "blocked_by": [],
       "parent": 14,
       "implementation_authorized": false,
-      "authorization_scope": "owner-approved contract only; planning PR/main pending, no code start"
+      "authorization_scope": "Contract/planning accepted through PR #111/main run 41248255517; subsequent I24–I27 code start recorded in START-F3 #137."
     },
     {
       "order": 30.15,
@@ -532,8 +532,8 @@
         "F3-DEC"
       ],
       "parent": 14,
-      "implementation_authorized": false,
-      "authorization_scope": "explicit owner code-start instruction withheld; no implementation"
+      "implementation_authorized": true,
+      "authorization_scope": "Owner explicitly authorized I24–I27 on 2026-10-31; planning main accepted; no publication or other extension."
     },
     {
       "order": 30.2,
@@ -548,7 +548,7 @@
         "START-F3"
       ],
       "parent": 14,
-      "implementation_authorized": false,
+      "implementation_authorized": true,
       "authorization_scope": "owner-approved contract only; explicit START-F3 code instruction and readiness required",
       "decision_gate": 106,
       "planning_key": "F3-C01",
@@ -568,7 +568,7 @@
         "START-F3"
       ],
       "parent": 14,
-      "implementation_authorized": false,
+      "implementation_authorized": true,
       "authorization_scope": "owner-approved contract only; explicit START-F3 code instruction and readiness required",
       "decision_gate": 106,
       "planning_key": "F3-C02",
@@ -588,7 +588,7 @@
         "START-F3"
       ],
       "parent": 14,
-      "implementation_authorized": false,
+      "implementation_authorized": true,
       "authorization_scope": "owner-approved contract only; explicit START-F3 code instruction and readiness required",
       "decision_gate": 106,
       "planning_key": "F3-V01",
@@ -608,7 +608,7 @@
         "START-F3"
       ],
       "parent": 14,
-      "implementation_authorized": false,
+      "implementation_authorized": true,
       "authorization_scope": "owner-approved contract only; explicit START-F3 code instruction and readiness required",
       "decision_gate": 106,
       "planning_key": "F3-GATE",
@@ -647,6 +647,6 @@
   ],
   "authorization_adr": "docs/decisions/ADR-0012-implementation-start.md",
   "status_source": "GitHub Issues and ProjectV2; this file records planned structure, not completion status",
-  "authorization_scope": "ADR-0012 authorizes the selected v1/core only. ADR-0014 approves the retry contract, not code. START-F3 must receive explicit implementation authorization.",
+  "authorization_scope": "Core under ADR-0012; bounded read-retry I24–I27 explicitly authorized by owner on 2026-10-31 under ADR-0014 and START-F3 #137. No publication or other extension authorization.",
   "extension_start_gate": 137
 }
