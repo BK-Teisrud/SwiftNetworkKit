@@ -23,7 +23,8 @@ def digest(path):
 
 def sources():
     paths = [ROOT / 'Package.swift', ROOT / 'scripts/benchmarks/Probe.swift',
-             ROOT / 'scripts/benchmarks/run.py', ROOT / 'scripts/ci/macos14.py']
+             ROOT / 'scripts/benchmarks/run.py', ROOT / 'scripts/ci/macos14.py',
+             ROOT / 'scripts/verification/NativeHTTPSProbe.swift']
     paths += sorted(p for p in (ROOT / 'Sources').rglob('*') if p.is_file())
     return {str(p.relative_to(ROOT)): digest(p) for p in paths}
 
@@ -46,7 +47,7 @@ def verify_payload(folder):
     return manifest
 
 
-def build(folder):
+def build(folder, https=False):
     if datetime.now(timezone.utc).date().isoformat() >= "2026-11-02":
         raise RuntimeError("The temporary GitHub macOS 14 route has reached its retirement date")
     version = command('xcodebuild', '-version')
@@ -58,24 +59,33 @@ def build(folder):
         target = package / 'Sources/ResourceProbe'
         target.mkdir(parents=True)
         shutil.copy2(ROOT / 'scripts/benchmarks/Probe.swift', target / 'Probe.swift')
+        extra_target = ''
+        if https:
+            native = package / 'Sources/NativeHTTPSProbe'
+            native.mkdir(parents=True)
+            shutil.copy2(ROOT / 'scripts/verification/NativeHTTPSProbe.swift', native / 'Probe.swift')
+            extra_target = ', .executableTarget(name: "NativeHTTPSProbe", dependencies: [.product(name: "NetworkKit", package: "SwiftNetworkKit")])'
         (package / 'Package.swift').write_text('''// swift-tools-version: 6.2
 import PackageDescription
 let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
  dependencies: [.package(path: %s)], targets: [.executableTarget(name: "ResourceProbe",
- dependencies: [.product(name: "NetworkKit", package: "SwiftNetworkKit")])], swiftLanguageModes: [.v6])
-''' % json.dumps(str(ROOT)))
+ dependencies: [.product(name: "NetworkKit", package: "SwiftNetworkKit")])%s], swiftLanguageModes: [.v6])
+''' % (json.dumps(str(ROOT)), extra_target))
         args = ['swift', 'build', '--package-path', package, '-c', 'release', '--triple', 'arm64-apple-macosx14.0']
         command(*args, '-Xswiftc', '-warnings-as-errors')
         products = Path(command(*args, '--show-bin-path'))
         shutil.copy2(products / 'ResourceProbe', folder / 'ResourceProbe')
+        if https:
+            shutil.copy2(products / 'NativeHTTPSProbe', folder / 'NativeHTTPSProbe')
         for bundle in products.glob('*.bundle'):
             shutil.copytree(bundle, folder / bundle.name)
-    binary = folder / 'ResourceProbe'
-    if 'arm64' not in command('lipo', '-archs', binary):
-        raise RuntimeError('Missing ARM64 consumer slice')
-    load = command('vtool', '-show-build', binary)
-    if 'minos 14.0' not in load:
-        raise RuntimeError('Consumer does not declare macOS 14.0 minimum')
+    for name in ['ResourceProbe'] + (['NativeHTTPSProbe'] if https else []):
+        binary = folder / name
+        if 'arm64' not in command('lipo', '-archs', binary):
+            raise RuntimeError('Missing ARM64 consumer slice')
+        load = command('vtool', '-show-build', binary)
+        if 'minos 14.0' not in load:
+            raise RuntimeError('Consumer does not declare macOS 14.0 minimum')
     files = {str(p.relative_to(folder)): digest(p) for p in folder.rglob('*') if p.is_file()}
     if sum(p.stat().st_size for p in folder.rglob('*') if p.is_file()) > 20 * 1024 * 1024:
         raise RuntimeError('Unexpectedly large transfer payload')
@@ -83,27 +93,45 @@ let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
                 'target': 'arm64-apple-macosx14.0', 'builder_xcode': version,
                 'builder_swift': command('xcrun', 'swift', '--version'),
                 'builder_os': command('sw_vers'), 'builder_architecture': platform.machine(),
-                'sdk': command('xcrun', '--sdk', 'macosx', '--show-sdk-version'), 'files': files}
+                'sdk': command('xcrun', '--sdk', 'macosx', '--show-sdk-version'),
+                'public_https_prepared': https, 'files': files}
     (folder / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
     verify_payload(folder)
     print('Built and verified exact-source ARM64/macOS 14.0 consumer; no test framework or toolchain is transferred.')
 
 
-def run(folder, output):
+def run(folder, output, https=False):
     if platform.system() != 'Darwin' or platform.mac_ver()[0].split('.')[0] != '14' or platform.machine() != 'arm64':
         raise RuntimeError('Actual ARM64 macOS 14 execution host required')
     manifest = verify_payload(folder)
+    if https and (not manifest.get('public_https_prepared') or 'NativeHTTPSProbe' not in manifest['files']):
+        raise ValueError('Explicit HTTPS execution requires the verified HTTPS payload')
     output.mkdir(parents=True, exist_ok=False)
-    for name, flags in [('smoke', ['--smoke']), ('post-budget', ['--post-budget', '--cycles', '100'])]:
+    workloads = [] if https else [('smoke', ['--smoke']), ('post-budget', ['--post-budget', '--cycles', '100'])]
+    for name, flags in workloads:
         command('python3', ROOT / 'scripts/benchmarks/run.py', '--executable', folder / 'ResourceProbe',
                 '--output', output / (name + '.json'), '--repetitions', '1', *flags, timeout=300)
     record = {'manifest': manifest, 'execution_os': command('sw_vers'),
               'execution_architecture': platform.machine(), 'results': {
                   name: json.loads((output / (name + '.json')).read_text())
-                  for name in ['smoke', 'post-budget']},
+                  for name, _ in workloads},
               'limits': ['Not the 218-test regression suite or HTTPS/TLS evidence.',
                          'Actual macOS 14 patch/build is recorded; no claim of macOS 14.0 execution.',
                          'No universal memory cap or owner release-risk acceptance.']}
+    if https:
+        # Capture raw Foundation stderr privately; publish only the executable's fixed scalar JSON.
+        result = subprocess.run([str(folder / 'NativeHTTPSProbe'), '--public-https'],
+                                cwd=folder, capture_output=True, text=True, timeout=180)
+        try:
+            observation = json.loads(result.stdout)
+        except ValueError:
+            raise RuntimeError('HTTPS probe produced no valid sanitized result') from None
+        record['public_https'] = observation
+        (output / 'public-https.json').write_text(json.dumps(observation, indent=2) + '\n')
+        if result.returncode != 0 or observation.get('result') != 'passed' or len(observation.get('cases', [])) != 10:
+            raise RuntimeError('HTTPS probe failed; sanitized result retained; no automatic rerun')
+        record['limits'][0] = 'Not the 218-test regression suite; ten explicit native HTTPS consumer cases are recorded separately.'
+        record['limits'].append('HTTPS-only execution does not repeat or replace the previously recorded resource measurements.')
     (output / 'evidence.json').write_text(json.dumps(record, indent=2) + '\n')
     print(json.dumps(record, indent=2))
 
@@ -113,10 +141,11 @@ if __name__ == '__main__':
     parser.add_argument('mode', choices=['build', 'run'])
     parser.add_argument('--payload', type=Path, required=True)
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--public-https', action='store_true', help='Prepare/execute the fixed public HTTPS consumer explicitly')
     args = parser.parse_args()
     if args.mode == 'build':
-        build(args.payload.resolve())
+        build(args.payload.resolve(), https=args.public_https)
     else:
         if args.output is None:
             parser.error('run requires --output')
-        run(args.payload.resolve(), args.output.resolve())
+        run(args.payload.resolve(), args.output.resolve(), https=args.public_https)

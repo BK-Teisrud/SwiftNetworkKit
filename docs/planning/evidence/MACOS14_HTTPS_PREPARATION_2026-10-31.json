@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-31",
+  "sdk_baseline_commit": "6cba25603ddd0bd8893306972c67b505ee3ddda0",
+  "verification_tool_working_tree_changes": true,
+  "local_execution_os": "macOS 15.8.1 / 24H32",
+  "local_execution_architecture": "x86_64",
+  "explicit_opt_in_gate_verified": true,
+  "local_public_https": {
+    "cases": [
+      {
+        "case": "typed-json",
+        "result": "passed"
+      },
+      {
+        "case": "typed-empty",
+        "result": "passed"
+      },
+      {
+        "case": "typed-valid-certificate",
+        "result": "passed"
+      },
+      {
+        "case": "typed-self-signed",
+        "foundation_exact_trust_code": "-67843",
+        "result": "passed",
+        "transport_code": "-1202"
+      },
+      {
+        "case": "typed-wrong-host",
+        "foundation_exact_trust_code": "-67602",
+        "result": "passed",
+        "transport_code": "-1202"
+      },
+      {
+        "case": "raw-json",
+        "result": "passed"
+      },
+      {
+        "case": "raw-empty",
+        "result": "passed"
+      },
+      {
+        "case": "raw-valid-certificate",
+        "result": "passed"
+      },
+      {
+        "case": "raw-self-signed",
+        "foundation_exact_trust_code": "-67843",
+        "result": "passed",
+        "transport_code": "-1202"
+      },
+      {
+        "case": "raw-wrong-host",
+        "foundation_exact_trust_code": "-67602",
+        "result": "passed",
+        "transport_code": "-1202"
+      }
+    ],
+    "result": "passed"
+  },
+  "negative_control": {
+    "compiled": true,
+    "injected_error": "NSURLErrorDomain/-1005",
+    "exit_code": 1,
+    "expected_rejection": {
+      "phase": "certificate-evidence-inconclusive",
+      "result": "failed"
+    },
+    "repository_source_unchanged": true,
+    "source_sha256": "3cf5763d31ff246f800aa6eb90350935926896906f92add40753baa49c0c0e08"
+  },
+  "cross_build": {
+    "target": "arm64-apple-macosx14.0",
+    "builder_xcode": "Xcode 26.3\nBuild version 17C529",
+    "builder_swift": "Apple Swift version 6.2.4 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)\nTarget: x86_64-apple-macosx15.0",
+    "sdk": "26.2",
+    "payload_bytes": 1465646,
+    "manifest_sha256": "3823285c72e5c4e7a328f1ebc2522f0bf07de90782e8213c1b1059dcc0cab1d6",
+    "public_https_prepared": true
+  },
+  "source_hashes": {
+    "scripts/verification/NativeHTTPSProbe.swift": "3cf5763d31ff246f800aa6eb90350935926896906f92add40753baa49c0c0e08",
+    "scripts/ci/macos14.py": "d9b2c8cdd923ae87dceae99f199a157b920542437e8b4acf56a910f82e1ebef6"
+  },
+  "actual_macos14_https_execution": false,
+  "limits": [
+    "Local checks and cross-compilation are not macOS 14 execution.",
+    "Require PR/main acceptance and manual workflow dispatch before native older-host evidence.",
+    "No automatic public-test retry, paid runner, support change, framework transfer or release approval."
+  ]
+}

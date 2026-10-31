@@ -52,3 +52,13 @@ class PrebuiltConsumerContracts(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 macos14.run(Path('/unused'), Path('/unused'))
             command.assert_not_called()
+
+    def test_https_request_without_reviewed_https_payload_never_starts_a_probe(self):
+        with patch.object(macos14.platform, 'system', return_value='Darwin'), \
+             patch.object(macos14.platform, 'mac_ver', return_value=('14.8.9', (), '')), \
+             patch.object(macos14.platform, 'machine', return_value='arm64'), \
+             patch.object(macos14, 'verify_payload', return_value={'files': {'ResourceProbe': 'verified'}}), \
+             patch.object(macos14, 'command') as command:
+            with self.assertRaisesRegex(ValueError, 'verified HTTPS payload'):
+                macos14.run(Path('/unused'), Path('/unused'), https=True)
+            command.assert_not_called()

@@ -12,7 +12,7 @@ The owner permits up to five concurrent work processes, including independent is
 
 Conservatively permit at most two heavy CI workflows at once (two matrix jobs each) plus one local heavy verification process, keeping the planned heavy-work budget within five. Do not fan out five workflows that each start two matrix jobs. Respect GitHub's actual runner limits and preserve standard runners. A PR is created before preparing the next independent PR; do not launch simultaneous publication operations. Stop adding work when capacity is reached.
 
-Do not wait or repeatedly poll for GitHub. The owner may authorize continuation after a stop. Independently Ready work can continue sequentially after a PR is created when the dependency/overlap/capacity review permits it; once useful progress requires GitHub results, stop and report the pending run. No unattended monitor or automatic resumption is implied. P0 means incident/gate; P1 necessary core work; P2 later extensions; P3 research. Priority does not authorize code.
+The owner explicitly reconfirmed on 2026-10-31: stop whenever a GitHub run is pending and await the owner's instruction to continue. Do not poll or continue independent work across that stop. Independent Ready work may be prepared only while this stop condition does not apply, after dependency/overlap/capacity review. No unattended monitor or automatic resumption is implied. P0 means incident/gate; P1 necessary core work; P2 later extensions; P3 research. Priority does not authorize code.
 
 ## Fields and views
 
