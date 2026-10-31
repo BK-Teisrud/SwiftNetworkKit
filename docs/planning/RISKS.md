@@ -1,5 +1,8 @@
 # Risk register
 
+GATE-F2 disposition, 2026-10-31: the owner expressly accepts proceeding **only with the non-publishing F2 rehearsal** under the recorded runtime retention, call-rate/budget/payload and finite-memory-observation limitations. #86 reconciles accepted non-Watch/minimum evidence and the ADR-0013 Watch deferral. This is no production-fit or publication acceptance: #29 retains workload/security approval, #132 physical Watch, and #64 actual clean-consumer/archive rehearsal. No further product defect, generic refactor or extra issue is established by this review.
+
+
 Approved phase update, 2026-10-31: [ADR-0013](../decisions/ADR-0013-watch-publication-gate.md) moves only physical Watch evidence to mandatory #132/#29 publication tracking. It does not waive product support, remaining non-Watch evidence or owner resource/security risk decisions. Non-Watch transition evidence is accepted through PR #131/main 41234106849; the [applicability matrix](F2_PHYSICAL_APPLICABILITY.md) awaits its scope-review PR/main. Historical claims below remain dated observations.
 
 
