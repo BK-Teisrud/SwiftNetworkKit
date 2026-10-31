@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-31",
+  "source_commit": "425360b919106478ac05392a2aaaec91e6e01d10",
+  "device": "Apple Watch Ultra 2",
+  "os": "watchOS 27.2 / 24S118",
+  "owner_confirmed": [
+    "Developer Mode enabled",
+    "same Wi-Fi as Mac; no VPN",
+    "Watch/Xcode restarted",
+    "Mac restarted; iPhone tethered/unlocked"
+  ],
+  "developer_mode_tool_verified": "enabled",
+  "post_restart_xcode_ui": "Preparing Watch, then developer disk image could not be mounted",
+  "mount_failure": {
+    "coredevice_code": 12040,
+    "mobiledevice_code_hex": "0xe8000076",
+    "mobiledevice_symbol": "kAMDMobileImageMounterImageMountFailed",
+    "description": "Could not support development",
+    "preceding_personalization_manifest_code": "0xe8003ffe"
+  },
+  "existing_apple_ddi_refresh": {
+    "no_clean": true,
+    "exit_code": 0,
+    "selected_watchos_build": "17C529",
+    "host_metadata_usable": true,
+    "mount_success": false
+  },
+  "recovered_root_test_build": {
+    "exit_code": 0,
+    "existing_host_and_test_profiles_verified": true,
+    "existing_signer_verified": true,
+    "new_profiles_or_certificates": false,
+    "temporary_build_invocation_warning_conflict_corrected": true
+  },
+  "physical_tests_started": false,
+  "limits": [
+    "Host-usable DDI metadata does not prove device mounting.",
+    "No definitive underlying compatibility, personalization-service or image-corruption cause established.",
+    "No unpairing, security bypass, new toolchain or account changes.",
+    "No repeated install/test loop; existing #63 retains this infrastructure blocker."
+  ]
+}

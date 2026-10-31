@@ -1,0 +1,251 @@
+{
+  "date": "2026-10-31",
+  "source_commit": "425360b919106478ac05392a2aaaec91e6e01d10",
+  "platform": "macOS",
+  "model_boundary": "Owner-reported MacBook Pro; Intel x86_64 host",
+  "owner_performed_wifi_interruption_and_restoration": true,
+  "report_sha256": "5b484d6bfbd6dd11573672d2e3c641f3baa06dd0cc5129672f2c829c32f029b2",
+  "verified": {
+    "background_http_status": 200,
+    "actual_background_and_foreground_while_pending": true,
+    "network_loss_transport_code": -1009,
+    "path_unsatisfied_delivery_after_terminal_seconds": 0.08011948999998708,
+    "same_client_recovery_statuses": [
+      204,
+      204
+    ],
+    "shutdown_joined": true,
+    "post_budget_seconds": 71.493250465,
+    "stable_terminal_diagnostic_count": 4,
+    "post_budget_process_rss_bytes": 58920960,
+    "cancelled_by_caller": false,
+    "truncated": false
+  },
+  "limits": [
+    "NWPathMonitor delivered unsatisfied approximately 0.08 seconds after transport completion; no unsatisfied callback during the pending call is claimed.",
+    "Finite whole-process RSS observations do not establish an SDK memory cap or owner workload suitability.",
+    "Public services provide no maintainer-owned destination counters.",
+    "Candidate evidence awaits its own PR and main acceptance."
+  ],
+  "report": {
+    "diagnostics": [
+      {
+        "duration": "8.350583301",
+        "outcome": "success",
+        "status": "200"
+      },
+      {
+        "duration": "2.729685499",
+        "outcome": "transport",
+        "status": "none"
+      },
+      {
+        "duration": "0.275714674",
+        "outcome": "success",
+        "status": "204"
+      },
+      {
+        "duration": "0.278502542",
+        "outcome": "success",
+        "status": "204"
+      }
+    ],
+    "events": [
+      {
+        "elapsed": 0.002391149,
+        "fields": {
+          "rss": "11218944"
+        },
+        "kind": "host-started"
+      },
+      {
+        "elapsed": 0.538871981,
+        "fields": {
+          "check": "none",
+          "during-call": "false",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 0.612322219,
+        "fields": {
+          "check": "none",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 7.532304959,
+        "fields": {
+          "check": "background",
+          "path": "satisfied",
+          "rss": "43819008"
+        },
+        "kind": "call-start"
+      },
+      {
+        "elapsed": 7.851521669,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "background"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 12.499814391,
+        "fields": {
+          "check": "background",
+          "during-call": "true",
+          "phase": "active"
+        },
+        "kind": "scene"
+      },
+      {
+        "elapsed": 15.909133628,
+        "fields": {
+          "bytes": "786",
+          "calls": "1",
+          "check": "background",
+          "outcome": "success",
+          "statuses": "200"
+        },
+        "kind": "call-terminal"
+      },
+      {
+        "elapsed": 15.911091191,
+        "fields": {
+          "check": "background",
+          "diagnostic-count": "1",
+          "rss": "55615488"
+        },
+        "kind": "call-joined"
+      },
+      {
+        "elapsed": 167.12535453,
+        "fields": {
+          "check": "network-loss",
+          "path": "satisfied",
+          "rss": "58462208"
+        },
+        "kind": "call-start"
+      },
+      {
+        "elapsed": 169.772388365,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "true",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 169.8740832,
+        "fields": {
+          "check": "network-loss",
+          "code": "-1009",
+          "known-system-domain": "true",
+          "outcome": "transport"
+        },
+        "kind": "call-terminal"
+      },
+      {
+        "elapsed": 169.875467445,
+        "fields": {
+          "check": "network-loss",
+          "diagnostic-count": "2",
+          "rss": "58937344"
+        },
+        "kind": "call-joined"
+      },
+      {
+        "elapsed": 169.95420269,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "",
+          "status": "unsatisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 319.956485261,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "",
+          "status": "unsatisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 320.097516841,
+        "fields": {
+          "check": "network-loss",
+          "during-call": "false",
+          "interfaces": "wifi",
+          "status": "satisfied"
+        },
+        "kind": "path"
+      },
+      {
+        "elapsed": 329.617053699,
+        "fields": {
+          "check": "recovery",
+          "path": "satisfied",
+          "rss": "52199424"
+        },
+        "kind": "call-start"
+      },
+      {
+        "elapsed": 329.915435501,
+        "fields": {
+          "bytes": "0",
+          "calls": "2",
+          "check": "recovery",
+          "outcome": "success",
+          "statuses": "204,204"
+        },
+        "kind": "call-terminal"
+      },
+      {
+        "elapsed": 329.917739529,
+        "fields": {
+          "diagnostic-count": "4"
+        },
+        "kind": "shutdown-joined"
+      },
+      {
+        "elapsed": 329.919460304,
+        "fields": {
+          "check": "recovery",
+          "diagnostic-count": "4",
+          "rss": "52477952"
+        },
+        "kind": "call-joined"
+      },
+      {
+        "elapsed": 401.412626681,
+        "fields": {
+          "diagnostic-count": "4",
+          "rss": "58920960",
+          "seconds-after-recovery-completion": "71.493250465"
+        },
+        "kind": "post-original-budget"
+      }
+    ],
+    "hostSourceSHA256": "ee2ffcaee9fa23d5d79c01d41479180ab6607dfeee273dd0b709aab76db63707",
+    "inactivitySeconds": 30,
+    "platform": "macOS",
+    "runID": "4557C7DE-547A-4CAE-A25A-7A89EDCB1385",
+    "runtime": "Version 15.8.1 (Build 24H32)",
+    "schema": 1,
+    "sdkCommit": "425360b919106478ac05392a2aaaec91e6e01d10",
+    "totalSeconds": 60,
+    "truncated": false
+  }
+}

@@ -1,6 +1,17 @@
 # Test-environment readiness — PREP-01
 
-## Current disposition — 2026-10-31
+## Current acceptance and remaining work — 2026-10-31
+
+PR #129 is accepted on main `425360b919106478ac05392a2aaaec91e6e01d10`, [run 41221803657](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41221803657). Full logs verified 218 Mac tests, four simulator runs of 215, 19 helper tests and all four manual-host provenance checks, with no failure/restart markers. #62 is closed and project Done; minimum-family evidence and physical iPhone/iPad transition reports are accepted under their recorded limits.
+
+The new [Mac transition report](evidence/F2_MAC_MANUAL_TRANSITIONS_2026-10-31.json) verifies actual background/foreground, HTTP 200, owner-driven Wi-Fi loss with transport -1009, restored same-client concurrent 204/204, joined shutdown and four diagnostics unchanged 71.493 seconds after recovery. NWPathMonitor delivered unsatisfied 0.080 seconds after transport completion; an unsatisfied callback during the call is not claimed. Finite whole-process RSS is observational, not a universal cap. This new result awaits its PR/main acceptance.
+
+[Watch follow-up](evidence/F2_WATCH_MOUNT_DIAGNOSIS_2026-10-31.json) positively verifies Developer Mode enabled. After the owner restarted Watch/Xcode and Mac, Xcode reached preparation but failed mounting the developer image: CoreDevice 12040 / MobileDevice 0xe8000076, preceded by personalization-manifest 0xe8003ffe. Refreshing existing Apple candidates retained build 17C529. Root artefacts were rebuilt and existing profiles/signatures verified; no physical Watch tests started. A supported working developer-image route remains required; the underlying cause is not conclusively attributed.
+
+Remaining execution under #63: owner-deferred TV transitions and physical Watch execution/applicability/resources. Accept the Mac result, finish #63, reconcile #86, then formal #64 and #27. #29 remains separate publication/workload-risk authorization. No additional issue, milestone, product change, paid service or support change is justified by these observations.
+
+
+## Earlier disposition — 2026-10-31 (superseded by current acceptance above)
 
 Accepted implementation/verification baseline: main 5d2ae116ec685c483b1dcc31db9e41a850c4e2ac, PR #125, [main run 41182672027](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41182672027). Full logs confirmed 218 macOS root tests, four simulator results of 215 each, two unsigned host builds, 16 helpers and the required native TLS/smoke/control checks without unexpected restart or test time-limit failure. Root-CI targets are newer configured runtimes; they are not the minimum results below.
 
@@ -58,12 +69,12 @@ The same Apple table lists Swift 6.2.3 for the general Xcode 26.3 row, while the
 | --- | --- | --- | --- |
 | iPhone | iPhone 17 Pro | iOS 27.2 / 24B119 | Accepted app-hosted regression/native evidence; candidate actual background/outage/recovery and post-budget report now verified, temporary host removed |
 | iPad | iPad Pro 11-inch, 3rd generation | iPadOS 27.2 / 24B119 | 215 regression / 20 of 21 native declarations with supplemental strict TLS evidence; candidate actual background/outage/recovery and post-budget report verified; temporary host removed |
-| Apple Watch | Apple Watch Ultra 2 | watchOS 27.2 / 24S118 | Owner enabled Developer Mode; Xcode still reports unavailable readiness/development-tunnel timeout. Signed generic builds verified; no physical tests started |
+| Apple Watch | Apple Watch Ultra 2 | watchOS 27.2 / 24S118 | Developer Mode verified enabled; post-restart developer-image mounting fails with CoreDevice 12040 / MobileDevice 0xe8000076. Rebuilt signed root host verified; no physical tests started |
 | Apple TV | Apple TV 4K, 3rd generation | tvOS 27.2 / 24K122 | Owner completed pairing; Developer Mode/DDI verified; candidate 215 regression and 21 native declarations passed; temporary host removed |
 | Mac | Current Intel host; owner reports MacBook Pro | macOS 15.8.1 / 24H32, x86_64 | Xcode 26.3 / Swift 6.2.4; accepted bounded local/native evidence and final 21-case suite. No universal workload-suitability claim |
 | macOS 14 route | Standard GitHub ARM64 host | macOS 14.8.9 / 23J631 | Accepted prebuilt consumer, cancellation/reuse and finite resource controls; actual run 41204068268 passed ten HTTPS cases. No full-suite/exact-14.0/Intel result claimed |
 
-Watch and TV registration/profiles/signing were specifically authorized for the existing three test IDs and existing certificate. No new certificate or optional service was added. The owner's Watch mode confirmation and tool-reported readiness disagree; repeated mode-toggle instructions or an assumption of compatibility do not resolve that discrepancy. See [Watch preparation](evidence/F2_WATCH_PHYSICAL_PREPARATION_2026-10-31.json), [TV execution](evidence/F2_TV_PHYSICAL_EXECUTION_2026-10-31.json) and [iPad diagnostic](evidence/F2_IPAD_TLS_DIAGNOSTIC_2026-10-31.json). Candidate follow-up evidence still requires PR/main acceptance.
+Watch and TV registration/profiles/signing were specifically authorized for the existing three test IDs and existing certificate. No new certificate or optional service was added. The earlier Watch mode discrepancy is resolved. Developer-image mounting now blocks execution; host-usable image metadata does not establish successful device mounting. See [Watch preparation](evidence/F2_WATCH_PHYSICAL_PREPARATION_2026-10-31.json), [TV execution](evidence/F2_TV_PHYSICAL_EXECUTION_2026-10-31.json) and [iPad diagnostic](evidence/F2_IPAD_TLS_DIAGNOSTIC_2026-10-31.json). Candidate follow-up evidence still requires PR/main acceptance.
 
 Before #63 execution, obtain the minimum necessary model/OS/build and connection details, or explicitly record inaccessible targets as gaps. Never collect/publish serial numbers, UDIDs, account identifiers or pairing records. “Current updates” is not a concrete OS version. Do not assume Xcode 26.3 can debug an unknown newer OS. Apple distinguishes [simulator testing from actual physical-device verification](https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices); neither substitutes for the other.
 

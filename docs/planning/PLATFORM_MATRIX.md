@@ -1,5 +1,16 @@
 # Platform and toolchain matrix
 
+## Current acceptance and remaining work — 2026-10-31
+
+PR #129 is accepted on main `425360b919106478ac05392a2aaaec91e6e01d10`, [run 41221803657](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41221803657). Full logs verified 218 Mac tests, four simulator runs of 215, 19 helper tests and all four manual-host provenance checks, with no failure/restart markers. #62 is closed and project Done; minimum-family evidence and physical iPhone/iPad transition reports are accepted under their recorded limits.
+
+The new [Mac transition report](evidence/F2_MAC_MANUAL_TRANSITIONS_2026-10-31.json) verifies actual background/foreground, HTTP 200, owner-driven Wi-Fi loss with transport -1009, restored same-client concurrent 204/204, joined shutdown and four diagnostics unchanged 71.493 seconds after recovery. NWPathMonitor delivered unsatisfied 0.080 seconds after transport completion; an unsatisfied callback during the call is not claimed. Finite whole-process RSS is observational, not a universal cap. This new result awaits its PR/main acceptance.
+
+[Watch follow-up](evidence/F2_WATCH_MOUNT_DIAGNOSIS_2026-10-31.json) positively verifies Developer Mode enabled. After the owner restarted Watch/Xcode and Mac, Xcode reached preparation but failed mounting the developer image: CoreDevice 12040 / MobileDevice 0xe8000076, preceded by personalization-manifest 0xe8003ffe. Refreshing existing Apple candidates retained build 17C529. Root artefacts were rebuilt and existing profiles/signatures verified; no physical Watch tests started. A supported working developer-image route remains required; the underlying cause is not conclusively attributed.
+
+Remaining execution under #63: owner-deferred TV transitions and physical Watch execution/applicability/resources. Accept the Mac result, finish #63, reconcile #86, then formal #64 and #27. #29 remains separate publication/workload-risk authorization. No additional issue, milestone, product change, paid service or support change is justified by these observations.
+
+
 ## Current verified evidence — 2026-10-31
 
 Latest accepted standard CI: PR #128 / main b8f2758530cca68ec819068ff3ac7748868e26dd, run 41203171039. All seven checks passed, with 218 Mac tests, four simulator runs of 215 each, six unsigned test-host builds and 17 helper controls. These PR runtimes remain distinct from minimum-family and physical execution.
@@ -12,7 +23,7 @@ Latest accepted standard CI: PR #128 / main b8f2758530cca68ec819068ff3ac7748868e
 | watchOS 10.0 | watchOS 10.0 simulator; 215 regression tests | Accepted revised 21-declaration / 44-case native suite; [NET-04](NET04_NATIVE_CONTROLS.md) | Watch Ultra 2 / 27.2: signed generic artefacts ready, physical development-tunnel/readiness unresolved; no runtime pass |
 | tvOS 17.0 | tvOS 17.0 simulator; 215 regression tests | Accepted revised 21-declaration / 44-case native suite | Apple TV 4K 3rd generation / 27.2: accepted 215 regression + 21 native declarations / 44 cases and finite resources; transitions remain |
 
-Product minimums and the Xcode 26.3 / Swift tools 6.2 / Swift 6 baseline are unchanged. An actual 14.8.9 run is evidence on the macOS 14 family, not proof of every patch or architecture. #62 minimum-family evidence reconciliation still requires its result-documentation PR/main acceptance. #63 physical transitions/Watch/resources and #86/#64/#29 remain separate gates. Manual transition tooling compiles for all four families; compilation alone is not device/transition acceptance.
+Product minimums and the Xcode 26.3 / Swift tools 6.2 / Swift 6 baseline are unchanged. An actual 14.8.9 run is evidence on the macOS 14 family, not proof of every patch or architecture. #62 minimum-family evidence is accepted through PR #129/main 41221803657; the issue is closed and project Done. #63 physical transitions/Watch/resources and #86/#64/#29 remain separate gates. Manual transition tooling compiles for all four families; compilation alone is not device/transition acceptance.
 
 The historical implementation snapshots below preserve their original counts and limits; they are superseded by the current evidence above where applicable.
 
