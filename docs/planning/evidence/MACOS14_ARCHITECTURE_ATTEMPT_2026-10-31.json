@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-31",
+  "run_url": "https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41178401513",
+  "source_commit": "db1e4100d3d8303cb90e9f39fdd46553f3a67b8b",
+  "conclusion": "failure",
+  "builder": {
+    "image": "macos-15-arm64",
+    "os": "15.8.2",
+    "result": "success"
+  },
+  "execution": {
+    "image": "macos-14-arm64",
+    "os": "14.8.9",
+    "result": "rejected before probe execution",
+    "reason": "Original route required x86_64 execution host"
+  },
+  "full_log_sha256": "9f7ad773256fbafefbe691f017f50afd6c43a45afbe15036f855bda4adb27a8f",
+  "correction": "Build arm64-apple-macosx14.0 and require native ARM64/macOS 14; no relaxed OS or provenance gates",
+  "corrected_local_validation": {
+    "cross_build": "passed; ARM64 and minos 14.0 checked; not executed on local Intel host",
+    "helper_tests": 4
+  },
+  "acceptance": "No macOS 14 probe result; I21 and F2 remain open"
+}

@@ -12,7 +12,7 @@ class PrebuiltConsumerContracts(unittest.TestCase):
     def payload(self, folder):
         (folder / 'ResourceProbe').write_bytes(b'synthetic executable control')
         manifest = {'source_commit': 'a' * 40, 'source_hashes': {'source': 'reviewed'},
-                    'target': 'x86_64-apple-macosx14.0',
+                    'target': 'arm64-apple-macosx14.0',
                     'files': {'ResourceProbe': hashlib.sha256((folder / 'ResourceProbe').read_bytes()).hexdigest()}}
         (folder / 'manifest.json').write_text(json.dumps(manifest))
         return manifest
@@ -43,6 +43,12 @@ class PrebuiltConsumerContracts(unittest.TestCase):
 
     def test_wrong_os_never_starts_a_probe(self):
         with patch.object(macos14.platform, 'system', return_value='Darwin'), patch.object(macos14.platform, 'mac_ver', return_value=('15.8.1', (), '')), patch.object(macos14, 'command') as command:
+            with self.assertRaises(RuntimeError):
+                macos14.run(Path('/unused'), Path('/unused'))
+            command.assert_not_called()
+
+    def test_wrong_architecture_never_starts_a_probe(self):
+        with patch.object(macos14.platform, 'system', return_value='Darwin'), patch.object(macos14.platform, 'mac_ver', return_value=('14.8.9', (), '')), patch.object(macos14.platform, 'machine', return_value='x86_64'), patch.object(macos14, 'command') as command:
             with self.assertRaises(RuntimeError):
                 macos14.run(Path('/unused'), Path('/unused'))
             command.assert_not_called()
