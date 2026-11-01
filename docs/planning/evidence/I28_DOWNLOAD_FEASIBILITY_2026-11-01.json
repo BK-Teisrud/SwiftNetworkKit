@@ -1,0 +1,223 @@
+{
+  "source_commit": "14051ce4a9f817d74ff30715b397a3df1752310c",
+  "host": {
+    "macOS": "15.8.1",
+    "architecture": "x86_64"
+  },
+  "probe_sha256": "2113527990cdc7e6e72ba4ea24579ab0841498b8e0b6d5a35f219416742b11c5",
+  "runner_sha256": "ebb85d2585e80ddb63f3d5dc96027c9c1e106edba4166ba6f2bd57bda7bc4f17",
+  "sdk_source_sha256": {
+    "Sources/NetworkKit/APIClient.swift": "e27aa515c8396d360957a6c3cd223260135e2bf494a8185b7dd10b8c8085783b",
+    "Sources/NetworkKit/Authentication.swift": "f0db6e385961df30c1a1a7680af6584db91b001c3a07416c9c489cfb478a5573",
+    "Sources/NetworkKit/ClientLifecycle.swift": "ba7d243eb266b79c7157c66341d48896f8693354d9aa369aba8d93abbacc25ae",
+    "Sources/NetworkKit/Diagnostics.swift": "84b24c4b28ab4d7783ce461cb5fb4ad71009140f9fbe9e283d5d9ff1561f7f40",
+    "Sources/NetworkKit/Endpoint.swift": "7b196e8ede8a9c031595e3ecdd72bfc3aaeecdc6610d055f383a787b976dec31",
+    "Sources/NetworkKit/ExecutionBoundaries.swift": "7431f0fa2688e11be5649b687b81c4bbd313c78bc613bb8d68bf1248daef494c",
+    "Sources/NetworkKit/HTTPHeaders.swift": "45bfe1c8779e3f39c048fc1a299bd6ee8a75fe28d71ea797ce704c7eccc4b4f4",
+    "Sources/NetworkKit/HTTPMethod.swift": "98bde648d1db468b7b29a1856ace61a7301f6daf057eb99cd6e5114a31456bdb",
+    "Sources/NetworkKit/HTTPStatus.swift": "84bde1bf4b8a3c92e66f9c8bacdf079b56de7fc92a851134723e54017257ca71",
+    "Sources/NetworkKit/HTTPStatusPolicy.swift": "f28eb6564f87d7988aa281683bd6c398f340eaa32434ee3d5245021355954722",
+    "Sources/NetworkKit/HTTPToken.swift": "d9053f6ff580b333c643e0209d8e001e008506a95f41581f9b60bc46402bb13b",
+    "Sources/NetworkKit/JSONDecodingOptions.swift": "d11a252a75f1a4cfb814d2ed0fbb3e4dbcb85200d5e9b978a1e1f83f3ca50904",
+    "Sources/NetworkKit/NetworkConfiguration.swift": "60faadba3b86ce8aa89501680958109807d5f051a6873f38306a8710cfc5596b",
+    "Sources/NetworkKit/NetworkError.swift": "bd9133325b2af1255af713b7d9557c476dac5483448f8c565eb961f4016eede4",
+    "Sources/NetworkKit/NetworkKit.swift": "7af95bcc95f8e800d953b02b1751b05bce237bc7d5107e58eaf042c22a1285d9",
+    "Sources/NetworkKit/NetworkOperation.swift": "ad25dd095bdba5943c1b8f45ce8ed7e3ae16ba4b0d7b64ce4dc611f94af19455",
+    "Sources/NetworkKit/NetworkResponse.swift": "2267de5fe325f2c310dfb875a2e1b3b230713d2397a423e53ba303a72674067d",
+    "Sources/NetworkKit/NetworkSecurityPolicy.swift": "cc85f6f2ab60f79731207d81e80f30bf5e032b0f2351ae42177e2ab62f29f3d9",
+    "Sources/NetworkKit/NetworkTaskDelegate.swift": "d9a97411a31d322a971685604d39de115112e606d7bb8e6837ea0005305f0bd8",
+    "Sources/NetworkKit/RequestBody.swift": "914d27be0edb4fa36fc91e57787bf6d9c0311acbeb0a2d8334e24f2bf2cbbcdb",
+    "Sources/NetworkKit/RequestBuilder.swift": "20358d3345bb6b9ca66a4edd9adee8aae81c5b7c7c60a7162e47435499ee3921",
+    "Sources/NetworkKit/RequestURLBuilder.swift": "404943fa36c0fe5e7df5c078412ad6da30e82882bc097c29c3c0c0af896fef1b",
+    "Sources/NetworkKit/ResponseMetadata.swift": "9bd34a8ecd6cfd7c5bfc1b9fdbc89909fa0564095232daf68d87f5d90dc9d07b",
+    "Sources/NetworkKit/ResponseStrategy.swift": "1cddc3a3ce3aa32a4ad304e250a0e3d01503853eedd4a7add3f011f26545bd86",
+    "Sources/NetworkKit/RetryPolicy.swift": "6eb67b32d63d859262709ecc0037e57422191d1bcf445ba57256a5ce69efb637",
+    "Sources/NetworkKit/RetryTiming.swift": "09ce036bc4f2e74b7dcbf3697c937d45e42ccecb23fec8bfdc330ee54eb9248a",
+    "Sources/NetworkKit/SessionStorageProfile.swift": "83ca939758de16bab5df13d94c280065ad46c89ba0c0335863870a8b81e59c66",
+    "Sources/NetworkKit/URLSessionTransport.swift": "1c1c5b7afdba3eb32905a0e4c54aabfb3efed7b8354375f11868f0beeaecc14d"
+  },
+  "scope": "I28 non-shipping local feasibility only",
+  "observations": [
+    {
+      "outcome": "passed",
+      "mode": "owned",
+      "scenario": "normal-async-lifetime-preserve-remove"
+    },
+    {
+      "outcome": "passed",
+      "mode": "owned",
+      "scenario": "empty-async-lifetime-preserve-remove"
+    },
+    {
+      "outcome": "passed",
+      "mode": "owned",
+      "scenario": "unknown-async-lifetime-preserve-remove"
+    },
+    {
+      "outcome": "passed",
+      "mode": "owned",
+      "scenario": "encoded-async-lifetime-preserve-remove"
+    },
+    {
+      "outcome": "passed",
+      "mode": "owned",
+      "scenario": "oversized-final-file-rejected-and-removed"
+    },
+    {
+      "outcome": "passed",
+      "mode": "owned",
+      "scenario": "partial-file-removed"
+    },
+    {
+      "outcome": "passed",
+      "mode": "owned",
+      "scenario": "status-file-removed"
+    },
+    {
+      "outcome": "passed",
+      "mode": "owned",
+      "scenario": "same-origin-redirect"
+    },
+    {
+      "outcome": "passed",
+      "mode": "owned",
+      "scenario": "cross-origin-redirect-not-followed"
+    },
+    {
+      "outcome": "passed",
+      "mode": "owned",
+      "scenario": "interrupted-no-successful-file"
+    },
+    {
+      "outcome": "passed",
+      "mode": "owned",
+      "scenario": "system-trust-rejects-local-self-signed"
+    },
+    {
+      "outcome": "passed",
+      "mode": "owned",
+      "scenario": "cancel-joined-no-successful-file"
+    },
+    {
+      "scenario": "owned-invalidation-joins-active-download",
+      "outcome": "passed",
+      "mode": "owned"
+    },
+    {
+      "scenario": "handed-off-file-survives-invalidate",
+      "outcome": "passed",
+      "mode": "owned"
+    },
+    {
+      "scenario": "normal-async-lifetime-preserve-remove",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "empty-async-lifetime-preserve-remove",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "unknown-async-lifetime-preserve-remove",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "encoded-async-lifetime-preserve-remove",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "oversized-final-file-rejected-and-removed",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "partial-file-removed",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "status-file-removed",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "same-origin-redirect",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "cross-origin-redirect-not-followed",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "interrupted-no-successful-file",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "system-trust-rejects-local-self-signed",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "cancel-joined-no-successful-file",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "handed-off-file-survives-invalidate",
+      "outcome": "passed",
+      "mode": "borrowed"
+    },
+    {
+      "scenario": "borrowed-session-remains-usable",
+      "outcome": "passed",
+      "mode": "borrowed"
+    }
+  ],
+  "server_contacts": {
+    "/normal": 7,
+    "/empty": 2,
+    "/unknown": 2,
+    "/encoded": 2,
+    "/oversized": 2,
+    "/partial": 2,
+    "/status": 2,
+    "/redirect": 2,
+    "/denied": 2,
+    "/interrupted": 2,
+    "/slow": 3
+  },
+  "limits": [
+    "No APIClient download integration or race proof",
+    "No hard transient disk bound",
+    "Foundation-owned partial file cleanup not observed",
+    "No trusted HTTPS success or full-platform runtime proof",
+    "No disk-error injection or crash-leftover recovery proof"
+  ],
+  "compile_only_platforms": [
+    {
+      "sdk": "iphonesimulator",
+      "target": "x86_64-apple-ios17.0-simulator",
+      "typecheck_exit": 0,
+      "runtime_executed": false
+    },
+    {
+      "sdk": "watchsimulator",
+      "target": "x86_64-apple-watchos10.0-simulator",
+      "typecheck_exit": 0,
+      "runtime_executed": false
+    },
+    {
+      "sdk": "appletvsimulator",
+      "target": "x86_64-apple-tvos17.0-simulator",
+      "typecheck_exit": 0,
+      "runtime_executed": false
+    }
+  ],
+  "specification_sha256": "cb37333cbac525ce4fafb8949940565291b049d65855c89e231e9a3ca92f42be"
+}
