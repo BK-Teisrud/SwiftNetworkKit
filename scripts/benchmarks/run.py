@@ -26,6 +26,8 @@ class Fixture(http.server.ThreadingHTTPServer):
         self.payload_connections = set()
         self.payload_requests = 0
         self.slow_started = 0
+        self.retry_hits = {}
+        self.retry_replied = 0
         self.stop_event = threading.Event()
         super().__init__(("127.0.0.1", 0), Handler)
 
@@ -40,7 +42,8 @@ class Fixture(http.server.ThreadingHTTPServer):
     def snapshot(self):
         with self.lock:
             return {"payload_requests": self.payload_requests,
-                    "payload_connections": len(self.payload_connections), "slow_started": self.slow_started}
+                    "payload_connections": len(self.payload_connections), "slow_started": self.slow_started,
+                    "retry_replied": self.retry_replied}
 
     def handle_error(self, request, client_address):
         # Only expected cancellation disconnects are silent; surface other fixture failures.
@@ -53,9 +56,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urllib.parse.urlsplit(self.path)
+        status = 200
         if parsed.path == "/stats":
             body = json.dumps(self.server.snapshot()).encode()
-        elif parsed.path in ("/payload", "/slow"):
+        elif parsed.path in ("/payload", "/slow", "/retry", "/retry-wait"):
             size = int(urllib.parse.parse_qs(parsed.query)["bytes"][0])
             if not 0 < size <= 1_048_576:
                 self.send_error(400)
@@ -66,18 +70,26 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 else:
                     self.server.payload_requests += 1
                     self.server.payload_connections.add(self.server.connection_ids[id(self.connection)])
+                if parsed.path in ("/retry", "/retry-wait"):
+                    key = urllib.parse.parse_qs(parsed.query)["call"][0]
+                    self.server.retry_hits[key] = self.server.retry_hits.get(key, 0) + 1
+                    status = 503 if self.server.retry_hits[key] == 1 else 200
             if parsed.path == "/slow":
                 self.server.stop_event.wait(5)
             body = b"x" * size
         else:
             self.send_error(404)
             return
-        self.send_response(200)
+        self.send_response(status)
+        if status == 503:
+            self.send_header("Retry-After", "3" if parsed.path == "/retry-wait" else "0")
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
         self.end_headers()
         try:
             self.wfile.write(body)
+            if parsed.path == "/retry-wait":
+                with self.server.lock: self.server.retry_replied += 1
         except (BrokenPipeError, ConnectionResetError):
             self.close_connection = True
 
@@ -92,7 +104,7 @@ def command(*args, **kwargs):
         raise RuntimeError(f"Command failed: {args[0]}\n{error.stdout}\n{error.stderr}") from error
 
 
-def run(package, output, repetitions, smoke, post_budget, post_budget_cycles, executable=None):
+def run(package, output, repetitions, smoke, post_budget, post_budget_cycles, executable=None, retry=False):
     if platform.system() != "Darwin":
         raise SystemExit("This opt-in resource probe requires macOS; no other platform result is implied.")
     package = package.resolve()
@@ -123,6 +135,9 @@ let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
             cases = [("reuse", 1, 65536, 4, 1), ("cancel", 8, 65536, 8, 0)]
         if post_budget:
             cases = [("reuse", 32, 65536, 64, post_budget_cycles), ("direct", 32, 65536, 64, post_budget_cycles)]
+        if retry:
+            cases = [("reuse", 8, 65536, 32, 3), ("retry", 8, 65536, 32, 3),
+                     ("retry", 8, 1048576, 32, 3), ("retry-cancel", 8, 65536, 8, 0)]
         for mode, concurrency, size, calls, cycles in cases:
             for repetition in range(repetitions):
                 server = Fixture()
@@ -131,21 +146,21 @@ let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
                 try:
                     timing = root / "time.txt"
                     raw = command("/usr/bin/time", "-l", "-o", str(timing), str(binary),
-                                  f"http://127.0.0.1:{server.server_port}", mode, str(concurrency), str(size), str(calls), str(cycles), "post-budget" if post_budget else "default", timeout=120 if cycles > 100 else 45)
+                                  f"http://127.0.0.1:{server.server_port}", mode, str(concurrency), str(size), str(calls), str(cycles), "post-budget" if post_budget or retry else "default", timeout=120 if cycles > 100 else 45)
                     result = json.loads(raw)
                     peak = re.search(r"(\d+)\s+maximum resident set size", timing.read_text())
                     if not peak:
                         raise RuntimeError("Missing macOS maximum RSS measurement")
                     result.update(server.snapshot())
                     result.update(repetition=repetition + 1, peak_rss_bytes=int(peak[1]))
-                    expected = 1 if mode == "cancel" else 1 + calls * cycles
+                    expected = 1 if mode == "cancel" else 1 + concurrency if mode == "retry-cancel" else 1 + calls * cycles * (2 if mode == "retry" else 1)
                     if result["payload_requests"] != expected:
                         raise RuntimeError(f"Unexpected payload request count: {result}")
                     if mode in ("reuse", "direct") and result["payload_connections"] >= result["payload_requests"]:
                         raise RuntimeError("No native connection reuse was observed")
                     if mode == "fresh" and result["payload_connections"] != expected:
                         raise RuntimeError("Fresh-client control did not create distinct native connections")
-                    if mode == "cancel" and (result["slow_started"] < 1 or result["cancelled_calls"] != concurrency):
+                    if mode in ("cancel", "retry-cancel") and ((result["slow_started"] < 1 if mode == "cancel" else result["retry_replied"] != concurrency) or result["cancelled_calls"] != concurrency):
                         raise RuntimeError("Cancellation did not join all calls after native contact")
                     results.append(result)
                     print(f"Completed {mode}, concurrency={concurrency}, bytes={size}, cycles={cycles}, repetition={repetition + 1}", flush=True)
@@ -164,8 +179,9 @@ let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
                 "xcode": command("xcodebuild", "-version"), "swift": command("xcrun", "swift", "--version"),
                 "sdk": command("xcrun", "--sdk", "macosx", "--show-sdk-version"),
                 "python": platform.python_version(), "build": "prebuilt; see verified builder manifest" if executable else "release; Swift 6; warnings-as-errors",
-                "repetitions": repetitions, "smoke": smoke, "post_budget": post_budget,
-                "sampling": "fresh process per repetition; RSS in bytes; " + ("12s" if post_budget else "100ms") + " post-shutdown sample"}
+                "repetitions": repetitions, "smoke": smoke, "post_budget": post_budget, "retry": retry,
+                "product_sources_sha256": hashlib.sha256(b"".join(p.relative_to(package).as_posix().encode() + b"\0" + p.read_bytes() for p in sorted((package / "Sources").rglob("*")) if p.is_file())).hexdigest(),
+                "sampling": "fresh process per repetition; RSS in bytes; " + ("12s" if post_budget or retry else "100ms") + " post-shutdown sample"}
     output.write_text(json.dumps({"environment": metadata, "results": results}, indent=2) + "\n")
     print(f"Wrote {output}", flush=True)
 
@@ -176,14 +192,15 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--repetitions", type=int, choices=range(1, 6), default=3)
     parser.add_argument("--smoke", action="store_true", help="Compile and exercise only a short reuse/cancellation case; no performance thresholds")
+    parser.add_argument("--retry", action="store_true", help="Native bounded retry/disabled/cancellation controls with post-original-budget RSS and malloc samples")
     parser.add_argument("--post-budget", action="store_true", help="Run only long reuse/direct controls with a 12-second post-shutdown sample")
     parser.add_argument("--cycles", type=int, metavar="1..1000", default=100, help="Cycle count for --post-budget only (default 100)")
     parser.add_argument("--executable", type=Path, help="Run an explicitly selected prebuilt consumer; caller must verify its provenance and target")
     args = parser.parse_args()
-    if args.smoke and args.post_budget:
-        parser.error("--smoke and --post-budget are separate workloads")
+    if sum([args.smoke, args.post_budget, args.retry]) > 1:
+        parser.error("--smoke, --post-budget and --retry are separate workloads")
     if not 1 <= args.cycles <= 1000:
         parser.error("--cycles must be between 1 and 1000")
     if args.cycles != 100 and not args.post_budget:
         parser.error("--cycles requires --post-budget")
-    run(args.package, args.output, args.repetitions, args.smoke, args.post_budget, args.cycles, args.executable)
+    run(args.package, args.output, args.repetitions, args.smoke, args.post_budget, args.cycles, args.executable, args.retry)

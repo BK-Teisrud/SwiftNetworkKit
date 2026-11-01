@@ -1,0 +1,363 @@
+{
+  "environment": {
+    "product_commit": "dc76e9cca4f96c73424dcbc0d2eee88bf589705a",
+    "tracked_checkout_clean": false,
+    "probe_sha256": "ee17286fc6b3f6824bbf4a8817da573890aeba56dca034a420edb4efa58219c4",
+    "runner_sha256": "a5bee171b45bba55f07d71dddd6a13f8fe9c39249770c069bbb30754848f696b",
+    "os": "ProductName:\t\tmacOS\nProductVersion:\t\t15.8.1\nBuildVersion:\t\t24H32",
+    "architecture": "x86_64",
+    "xcode": "Xcode 26.3\nBuild version 17C529",
+    "swift": "Apple Swift version 6.2.4 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)\nTarget: x86_64-apple-macosx15.0",
+    "sdk": "26.2",
+    "python": "3.13.5",
+    "build": "release; Swift 6; warnings-as-errors",
+    "repetitions": 2,
+    "smoke": false,
+    "post_budget": false,
+    "retry": true,
+    "product_sources_sha256": "e8a3be492f013e05bef2cf9d47d7e24a7848a1b0b8d476db83e0d64723c5a473",
+    "sampling": "fresh process per repetition; RSS in bytes; 12s post-shutdown sample"
+  },
+  "results": [
+    {
+      "call_p50_seconds": 0.004045296,
+      "call_p95_seconds": 0.008100216,
+      "calls_per_cycle": 32,
+      "cancellation_join_seconds": 0,
+      "cancelled_calls": 0,
+      "concurrency": 8,
+      "cycle_seconds": [
+        0.022675305,
+        0.018721593,
+        0.017766948
+      ],
+      "cycles": 3,
+      "malloc_settled": {
+        "blocks": 4120,
+        "bytes": 425072
+      },
+      "malloc_shutdown": {
+        "blocks": 6193,
+        "bytes": 696400
+      },
+      "malloc_warm": {
+        "blocks": 2924,
+        "bytes": 367552
+      },
+      "mode": "reuse",
+      "payload_bytes": 65536,
+      "rss_cycle_bytes": [
+        7278592,
+        7495680,
+        7704576
+      ],
+      "rss_initial_bytes": 1835008,
+      "rss_settled_bytes": 7516160,
+      "rss_shutdown_bytes": 7704576,
+      "rss_warm_bytes": 5566464,
+      "shutdown_seconds": 2.317e-05,
+      "payload_requests": 97,
+      "payload_connections": 6,
+      "slow_started": 0,
+      "retry_replied": 0,
+      "repetition": 1,
+      "peak_rss_bytes": 7720960
+    },
+    {
+      "call_p50_seconds": 0.005178244,
+      "call_p95_seconds": 0.010593731,
+      "calls_per_cycle": 32,
+      "cancellation_join_seconds": 0,
+      "cancelled_calls": 0,
+      "concurrency": 8,
+      "cycle_seconds": [
+        0.030169377,
+        0.024563834,
+        0.024878861
+      ],
+      "cycles": 3,
+      "malloc_settled": {
+        "blocks": 4179,
+        "bytes": 443040
+      },
+      "malloc_shutdown": {
+        "blocks": 6251,
+        "bytes": 725040
+      },
+      "malloc_warm": {
+        "blocks": 2927,
+        "bytes": 370496
+      },
+      "mode": "reuse",
+      "payload_bytes": 65536,
+      "rss_cycle_bytes": [
+        7258112,
+        7553024,
+        7766016
+      ],
+      "rss_initial_bytes": 1835008,
+      "rss_settled_bytes": 7610368,
+      "rss_shutdown_bytes": 7766016,
+      "rss_warm_bytes": 5632000,
+      "shutdown_seconds": 4.6992e-05,
+      "payload_requests": 97,
+      "payload_connections": 6,
+      "slow_started": 0,
+      "retry_replied": 0,
+      "repetition": 2,
+      "peak_rss_bytes": 7790592
+    },
+    {
+      "call_p50_seconds": 0.38683956,
+      "call_p95_seconds": 0.521642351,
+      "calls_per_cycle": 32,
+      "cancellation_join_seconds": 0,
+      "cancelled_calls": 0,
+      "concurrency": 8,
+      "cycle_seconds": [
+        2.023840808,
+        1.943100497,
+        1.983022811
+      ],
+      "cycles": 3,
+      "malloc_settled": {
+        "blocks": 4344,
+        "bytes": 477968
+      },
+      "malloc_shutdown": {
+        "blocks": 6429,
+        "bytes": 750928
+      },
+      "malloc_warm": {
+        "blocks": 2920,
+        "bytes": 339744
+      },
+      "mode": "retry",
+      "payload_bytes": 65536,
+      "rss_cycle_bytes": [
+        7008256,
+        7389184,
+        7626752
+      ],
+      "rss_initial_bytes": 1851392,
+      "rss_settled_bytes": 7520256,
+      "rss_shutdown_bytes": 7626752,
+      "rss_warm_bytes": 5500928,
+      "shutdown_seconds": 6.5379e-05,
+      "payload_requests": 193,
+      "payload_connections": 6,
+      "slow_started": 0,
+      "retry_replied": 0,
+      "repetition": 1,
+      "peak_rss_bytes": 7643136
+    },
+    {
+      "call_p50_seconds": 0.430136913,
+      "call_p95_seconds": 0.519402913,
+      "calls_per_cycle": 32,
+      "cancellation_join_seconds": 0,
+      "cancelled_calls": 0,
+      "concurrency": 8,
+      "cycle_seconds": [
+        2.060868988,
+        2.036523738,
+        2.00298582
+      ],
+      "cycles": 3,
+      "malloc_settled": {
+        "blocks": 4382,
+        "bytes": 439104
+      },
+      "malloc_shutdown": {
+        "blocks": 6496,
+        "bytes": 707424
+      },
+      "malloc_warm": {
+        "blocks": 2912,
+        "bytes": 345168
+      },
+      "mode": "retry",
+      "payload_bytes": 65536,
+      "rss_cycle_bytes": [
+        6922240,
+        7311360,
+        7413760
+      ],
+      "rss_initial_bytes": 1835008,
+      "rss_settled_bytes": 7307264,
+      "rss_shutdown_bytes": 7417856,
+      "rss_warm_bytes": 5521408,
+      "shutdown_seconds": 0.000136701,
+      "payload_requests": 193,
+      "payload_connections": 6,
+      "slow_started": 0,
+      "retry_replied": 0,
+      "repetition": 2,
+      "peak_rss_bytes": 7430144
+    },
+    {
+      "call_p50_seconds": 0.397147577,
+      "call_p95_seconds": 0.536162004,
+      "calls_per_cycle": 32,
+      "cancellation_join_seconds": 0,
+      "cancelled_calls": 0,
+      "concurrency": 8,
+      "cycle_seconds": [
+        1.9415588480000001,
+        2.136561242,
+        2.043871338
+      ],
+      "cycles": 3,
+      "malloc_settled": {
+        "blocks": 4352,
+        "bytes": 465792
+      },
+      "malloc_shutdown": {
+        "blocks": 6438,
+        "bytes": 749136
+      },
+      "malloc_warm": {
+        "blocks": 2911,
+        "bytes": 349328
+      },
+      "mode": "retry",
+      "payload_bytes": 1048576,
+      "rss_cycle_bytes": [
+        19070976,
+        18202624,
+        17764352
+      ],
+      "rss_initial_bytes": 1835008,
+      "rss_settled_bytes": 17666048,
+      "rss_shutdown_bytes": 17764352,
+      "rss_warm_bytes": 7467008,
+      "shutdown_seconds": 7.8362e-05,
+      "payload_requests": 193,
+      "payload_connections": 6,
+      "slow_started": 0,
+      "retry_replied": 0,
+      "repetition": 1,
+      "peak_rss_bytes": 20021248
+    },
+    {
+      "call_p50_seconds": 0.403903811,
+      "call_p95_seconds": 0.542394166,
+      "calls_per_cycle": 32,
+      "cancellation_join_seconds": 0,
+      "cancelled_calls": 0,
+      "concurrency": 8,
+      "cycle_seconds": [
+        1.9744186209999999,
+        2.07973899,
+        2.180534808
+      ],
+      "cycles": 3,
+      "malloc_settled": {
+        "blocks": 4351,
+        "bytes": 452688
+      },
+      "malloc_shutdown": {
+        "blocks": 6437,
+        "bytes": 726144
+      },
+      "malloc_warm": {
+        "blocks": 2912,
+        "bytes": 350416
+      },
+      "mode": "retry",
+      "payload_bytes": 1048576,
+      "rss_cycle_bytes": [
+        15405056,
+        15671296,
+        18100224
+      ],
+      "rss_initial_bytes": 1835008,
+      "rss_settled_bytes": 18018304,
+      "rss_shutdown_bytes": 18100224,
+      "rss_warm_bytes": 7520256,
+      "shutdown_seconds": 5.4757e-05,
+      "payload_requests": 193,
+      "payload_connections": 6,
+      "slow_started": 0,
+      "retry_replied": 0,
+      "repetition": 2,
+      "peak_rss_bytes": 18731008
+    },
+    {
+      "call_p50_seconds": 0,
+      "call_p95_seconds": 0,
+      "calls_per_cycle": 8,
+      "cancellation_join_seconds": 0.000204225,
+      "cancelled_calls": 8,
+      "concurrency": 8,
+      "cycle_seconds": [],
+      "cycles": 0,
+      "malloc_settled": {
+        "blocks": 2912,
+        "bytes": 367520
+      },
+      "malloc_shutdown": {
+        "blocks": 4855,
+        "bytes": 617232
+      },
+      "malloc_warm": {
+        "blocks": 2909,
+        "bytes": 332400
+      },
+      "mode": "retry-cancel",
+      "payload_bytes": 65536,
+      "rss_cycle_bytes": [
+        6406144
+      ],
+      "rss_initial_bytes": 1835008,
+      "rss_settled_bytes": 6246400,
+      "rss_shutdown_bytes": 6414336,
+      "rss_warm_bytes": 5447680,
+      "shutdown_seconds": 7.1064e-05,
+      "payload_requests": 9,
+      "payload_connections": 6,
+      "slow_started": 0,
+      "retry_replied": 8,
+      "repetition": 1,
+      "peak_rss_bytes": 6443008
+    },
+    {
+      "call_p50_seconds": 0,
+      "call_p95_seconds": 0,
+      "calls_per_cycle": 8,
+      "cancellation_join_seconds": 0.0005513,
+      "cancelled_calls": 8,
+      "concurrency": 8,
+      "cycle_seconds": [],
+      "cycles": 0,
+      "malloc_settled": {
+        "blocks": 2900,
+        "bytes": 370912
+      },
+      "malloc_shutdown": {
+        "blocks": 4858,
+        "bytes": 610016
+      },
+      "malloc_warm": {
+        "blocks": 2909,
+        "bytes": 351888
+      },
+      "mode": "retry-cancel",
+      "payload_bytes": 65536,
+      "rss_cycle_bytes": [
+        6365184
+      ],
+      "rss_initial_bytes": 1835008,
+      "rss_settled_bytes": 6213632,
+      "rss_shutdown_bytes": 6377472,
+      "rss_warm_bytes": 5505024,
+      "shutdown_seconds": 0.000255743,
+      "payload_requests": 9,
+      "payload_connections": 6,
+      "slow_started": 0,
+      "retry_replied": 8,
+      "repetition": 2,
+      "peak_rss_bytes": 6402048
+    }
+  ]
+}

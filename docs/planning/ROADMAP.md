@@ -1,5 +1,9 @@
 # Roadmap
 
+## I26 native/resource execution — 2026-11-01
+
+I25 #108 is accepted through PR #139/main run 41287067291. I26 #109 adds [native retry/resource evidence](NATIVE_RETRY_VERIFICATION.md): actual Mac URLSession contacts, TLS exclusion, public HTTPS ownership composition and bounded release measurements. Candidate CI and target-applicability review remain pending; no new minimum/physical pass or publication acceptance is inferred. Existing #109/#110 and #132/#29 retain their distinct gates; no new feature issue or broad refactor is justified.
+
 ## I25 execution — 2026-11-01
 
 I24 #107 is accepted through PR #138/main run 41250907636 (223 Mac tests, four 220-test simulator runs, 19 helpers). I25 #108 integrates explicit per-call retry inside one admitted operation/deadline; see [integration evidence](RETRY_INTEGRATION.md). I26/I27 remain dependent native/resource/API review tasks. No extra issue, dependency, broad refactor or release scope is justified by this change. This supersedes earlier I24-active/no-loop status below; required I25 PR/main acceptance is pending.
