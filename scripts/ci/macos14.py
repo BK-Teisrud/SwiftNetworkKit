@@ -101,14 +101,33 @@ let package = Package(name: "ResourceProbe", platforms: [.macOS(.v14)],
     print('Built and verified exact-source ARM64/macOS 14.0 consumer; no test framework or toolchain is transferred.')
 
 
-def run(folder, output, https=False):
+def validate_https_observation(observation, retry=False):
+    suffixes = ['retry-disabled', 'retry-enabled', 'retry-tls'] if retry else ['json', 'empty', 'valid-certificate', 'self-signed', 'wrong-host']
+    expected = {mode + '-' + suffix for mode in ['typed', 'raw'] for suffix in suffixes}
+    cases = observation.get('cases', [])
+    if observation.get('result') != 'passed' or len(cases) != len(expected) or {case.get('case') for case in cases} != expected:
+        raise RuntimeError('Native HTTPS probe has missing, duplicate or unexpected cases')
+    for case in cases:
+        if case.get('result') != 'passed':
+            raise RuntimeError('Native HTTPS case did not pass')
+        if retry:
+            attempts = '2' if case['case'].endswith('retry-enabled') else '1'
+            if case.get('attempt_count') != attempts:
+                raise RuntimeError('Native read-retry invocation evidence is invalid')
+            if case['case'].endswith('retry-tls') and case.get('transport_code') not in ['-1200', '-1202', '-1203']:
+                raise RuntimeError('Native read-retry TLS identity is missing')
+
+
+def run(folder, output, https=False, retry=False):
+    if retry and not https:
+        raise ValueError("Read retry verification requires explicit public HTTPS opt-in")
     if platform.system() != 'Darwin' or platform.mac_ver()[0].split('.')[0] != '14' or platform.machine() != 'arm64':
         raise RuntimeError('Actual ARM64 macOS 14 execution host required')
     manifest = verify_payload(folder)
     if https and (not manifest.get('public_https_prepared') or 'NativeHTTPSProbe' not in manifest['files']):
         raise ValueError('Explicit HTTPS execution requires the verified HTTPS payload')
     output.mkdir(parents=True, exist_ok=False)
-    workloads = [] if https else [('smoke', ['--smoke']), ('post-budget', ['--post-budget', '--cycles', '100'])]
+    workloads = [('retry', ['--retry'])] if retry else ([] if https else [('smoke', ['--smoke']), ('post-budget', ['--post-budget', '--cycles', '100'])])
     for name, flags in workloads:
         command('python3', ROOT / 'scripts/benchmarks/run.py', '--executable', folder / 'ResourceProbe',
                 '--output', output / (name + '.json'), '--repetitions', '1', *flags, timeout=300)
@@ -116,23 +135,24 @@ def run(folder, output, https=False):
               'execution_architecture': platform.machine(), 'results': {
                   name: json.loads((output / (name + '.json')).read_text())
                   for name, _ in workloads},
-              'limits': ['Not the 218-test regression suite or HTTPS/TLS evidence.',
+              'limits': ['Not the full root regression suite or HTTPS/TLS evidence.',
                          'Actual macOS 14 patch/build is recorded; no claim of macOS 14.0 execution.',
                          'No universal memory cap or owner release-risk acceptance.']}
     if https:
         # Capture raw Foundation stderr privately; publish only the executable's fixed scalar JSON.
-        result = subprocess.run([str(folder / 'NativeHTTPSProbe'), '--public-https'],
+        result = subprocess.run([str(folder / 'NativeHTTPSProbe'), '--read-retry' if retry else '--public-https'],
                                 cwd=folder, capture_output=True, text=True, timeout=180)
         try:
             observation = json.loads(result.stdout)
         except ValueError:
             raise RuntimeError('HTTPS probe produced no valid sanitized result') from None
-        record['public_https'] = observation
-        (output / 'public-https.json').write_text(json.dumps(observation, indent=2) + '\n')
-        if result.returncode != 0 or observation.get('result') != 'passed' or len(observation.get('cases', [])) != 10:
+        record['native_read_retry' if retry else 'public_https'] = observation
+        (output / ('read-retry.json' if retry else 'public-https.json')).write_text(json.dumps(observation, indent=2) + '\n')
+        if result.returncode != 0:
             raise RuntimeError('HTTPS probe failed; sanitized result retained; no automatic rerun')
-        record['limits'][0] = 'Not the 218-test regression suite; ten explicit native HTTPS consumer cases are recorded separately.'
-        record['limits'].append('HTTPS-only execution does not repeat or replace the previously recorded resource measurements.')
+        validate_https_observation(observation, retry=retry)
+        record['limits'][0] = 'Not the full root regression suite; explicit native HTTPS consumer cases are recorded separately.'
+        record['limits'].append('One actual macOS 14 patch/architecture does not establish every minimum/physical target or a memory bound.')
     (output / 'evidence.json').write_text(json.dumps(record, indent=2) + '\n')
     print(json.dumps(record, indent=2))
 
@@ -142,11 +162,14 @@ if __name__ == '__main__':
     parser.add_argument('mode', choices=['build', 'run'])
     parser.add_argument('--payload', type=Path, required=True)
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--read-retry', action='store_true', help='Select bounded native retry and resource verification; requires --public-https')
     parser.add_argument('--public-https', action='store_true', help='Prepare/execute the fixed public HTTPS consumer explicitly')
     args = parser.parse_args()
+    if args.read_retry and not args.public_https:
+        parser.error('--read-retry requires --public-https')
     if args.mode == 'build':
         build(args.payload.resolve(), https=args.public_https)
     else:
         if args.output is None:
             parser.error('run requires --output')
-        run(args.payload.resolve(), args.output.resolve(), https=args.public_https)
+        run(args.payload.resolve(), args.output.resolve(), https=args.public_https, retry=args.read_retry)

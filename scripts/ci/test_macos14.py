@@ -79,3 +79,28 @@ class PrebuiltConsumerContracts(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'verified HTTPS payload'):
                 macos14.run(Path('/unused'), Path('/unused'), https=True)
             command.assert_not_called()
+
+    def test_read_retry_without_https_opt_in_never_starts_a_probe(self):
+        with patch.object(macos14, 'command') as command:
+            with self.assertRaisesRegex(ValueError, 'explicit public HTTPS opt-in'):
+                macos14.run(Path('/unused'), Path('/unused'), retry=True)
+            command.assert_not_called()
+
+    def test_retry_probe_missing_duplicate_and_wrong_attempt_cases_fail(self):
+        cases = [{'case': mode + '-' + suffix, 'result': 'passed',
+                  'attempt_count': '2' if suffix == 'retry-enabled' else '1', 'transport_code': '-1202'}
+                 for mode in ['typed', 'raw'] for suffix in ['retry-disabled', 'retry-enabled', 'retry-tls']]
+        good = {'result': 'passed', 'cases': cases}
+        macos14.validate_https_observation(good, retry=True)
+        for changed in [cases[:-1], cases[:-1] + [cases[0]],
+                        [dict(case, attempt_count='0') for case in cases],
+                        [dict(case, result='skipped') for case in cases]]:
+            with self.subTest(cases=changed), self.assertRaises(RuntimeError):
+                macos14.validate_https_observation({'result': 'passed', 'cases': changed}, retry=True)
+
+    def test_original_https_case_set_remains_valid_and_complete(self):
+        cases = [{'case': mode + '-' + suffix, 'result': 'passed'}
+                 for mode in ['typed', 'raw'] for suffix in ['json', 'empty', 'valid-certificate', 'self-signed', 'wrong-host']]
+        macos14.validate_https_observation({'result': 'passed', 'cases': cases})
+        with self.assertRaises(RuntimeError):
+            macos14.validate_https_observation({'result': 'passed', 'cases': cases[:-1] + [cases[0]]})

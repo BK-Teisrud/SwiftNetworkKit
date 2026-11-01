@@ -59,18 +59,25 @@ private final class TrustControl: NSObject, URLSessionTaskDelegate {
     }
 }
 
+private final class ReadRetryObservation: NetworkDiagnosticSink {
+    private let state = OSAllocatedUnfairLock(initialState: [NetworkDiagnosticEvent]())
+    var events: [NetworkDiagnosticEvent] { state.withLock { $0 } }
+    func record(_ event: NetworkDiagnosticEvent) { state.withLock { $0.append(event) } }
+}
+
 @main struct NativeHTTPSProbe {
     private static func perform<Value: Sendable>(_ typed: Bool, base: URL, path: [String],
-                                                 response: ResponseStrategy<Value>) async throws -> NetworkResponse<Value> {
-        let client = try APIClient(configuration: .init(baseURL: base))
+                                                 response: ResponseStrategy<Value>, options: NetworkCallOptions = .default,
+                                                 diagnostics: (any NetworkDiagnosticSink)? = nil) async throws -> NetworkResponse<Value> {
+        let client = try APIClient(configuration: .init(baseURL: base, diagnostics: diagnostics))
         do {
             let result: NetworkResponse<Value>
             if typed {
                 result = try await client.send(ProbeEndpoint(path: .init(segments: path),
-                    responseStrategy: response, options: .init()))
+                    responseStrategy: response, options: options))
             } else {
                 let url = path.reduce(base) { $0.appendingPathComponent($1) }
-                result = try await client.send(URLRequest(url: url), response: response)
+                result = try await client.send(URLRequest(url: url), response: response, options: options)
             }
             await client.shutdown()
             return result
@@ -82,9 +89,10 @@ private final class TrustControl: NSObject, URLSessionTaskDelegate {
         return url
     }
 
-    private static func rejection(_ typed: Bool, base: URL, expected: Int) async throws -> Int {
+    private static func rejection(_ typed: Bool, base: URL, expected: Int, options: NetworkCallOptions = .default,
+                                  diagnostics: (any NetworkDiagnosticSink)? = nil) async throws -> Int {
         do {
-            _ = try await perform(typed, base: base, path: [], response: .data)
+            _ = try await perform(typed, base: base, path: [], response: .data, options: options, diagnostics: diagnostics)
             throw ProbeFailure(phase: "invalid-certificate-accepted")
         } catch NetworkError.transport(let failure) {
             guard failure.domain == NSURLErrorDomain, [-1200, -1202, -1203].contains(failure.code),
@@ -94,9 +102,38 @@ private final class TrustControl: NSObject, URLSessionTaskDelegate {
         }
     }
 
+    private static func readRetry(_ typed: Bool) async throws -> [[String: String]] {
+        let mode = typed ? "typed" : "raw"
+        var results: [[String: String]] = []
+        for enabled in [false, true] {
+            let label = mode + (enabled ? "-retry-enabled" : "-retry-disabled")
+            let observation = ReadRetryObservation()
+            do {
+                _ = try await perform(typed, base: url("https://httpbingo.org"), path: ["status", "503"],
+                    response: .empty, options: NetworkCallOptions(retry: enabled ? .oneRetryForSafeReads : .disabled),
+                    diagnostics: observation)
+                throw ProbeFailure(phase: label)
+            } catch NetworkError.httpStatus(let status, _) {
+                guard status.code == 503 else { throw ProbeFailure(phase: label) }
+            }
+            guard observation.events.count == 1, observation.events[0].attemptCount == (enabled ? 2 : 1),
+                  observation.events[0].status?.code == 503, observation.events[0].outcome == .httpStatus
+            else { throw ProbeFailure(phase: label) }
+            results.append(["case": label, "result": "passed", "attempt_count": enabled ? "2" : "1"])
+        }
+        let observation = ReadRetryObservation()
+        let code = try await rejection(typed, base: url("https://self-signed.badssl.com"), expected: Int(errSecNotTrusted),
+            options: NetworkCallOptions(retry: .oneRetryForSafeReads), diagnostics: observation)
+        guard observation.events.count == 1, observation.events[0].attemptCount == 1 else {
+            throw ProbeFailure(phase: mode + "-retry-tls")
+        }
+        results.append(["case": mode + "-retry-tls", "result": "passed", "attempt_count": "1", "transport_code": String(code)])
+        return results
+    }
+
     static func main() async {
-        guard CommandLine.arguments.count == 2, CommandLine.arguments[1] == "--public-https" else {
-            print("Explicit --public-https selection required; no requests started.")
+        guard CommandLine.arguments.count == 2, ["--public-https", "--read-retry"].contains(CommandLine.arguments[1]) else {
+            print("Explicit --public-https or --read-retry selection required; no requests started.")
             exit(2)
         }
         var phase = "setup"
@@ -104,6 +141,11 @@ private final class TrustControl: NSObject, URLSessionTaskDelegate {
         do {
             for typed in [true, false] {
                 let mode = typed ? "typed" : "raw"
+                if CommandLine.arguments[1] == "--read-retry" {
+                    phase = mode + "-read-retry"
+                    results += try await readRetry(typed)
+                    continue
+                }
                 let bingo = try url("https://httpbingo.org")
                 phase = mode + "-json"
                 let json = try await perform(typed, base: bingo, path: ["json"], response: .json(SlideShow.self))

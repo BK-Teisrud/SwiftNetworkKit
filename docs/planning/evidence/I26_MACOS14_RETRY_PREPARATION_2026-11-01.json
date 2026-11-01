@@ -1,0 +1,106 @@
+{
+  "date": "2026-11-01",
+  "preparation_only": true,
+  "tracked_checkout_clean": false,
+  "base_commit": "24d030580cc8be0e2b219536184d3381bd91519a",
+  "local_execution_os": "ProductName:\t\tmacOS\nProductVersion:\t\t15.8.1\nBuildVersion:\t\t24H32",
+  "local_architecture": "x86_64",
+  "missing_opt_in_exit_code": 2,
+  "local_native_read_retry": {
+    "cases": [
+      {
+        "attempt_count": "1",
+        "case": "typed-retry-disabled",
+        "result": "passed"
+      },
+      {
+        "attempt_count": "2",
+        "case": "typed-retry-enabled",
+        "result": "passed"
+      },
+      {
+        "attempt_count": "1",
+        "case": "typed-retry-tls",
+        "result": "passed",
+        "transport_code": "-1202"
+      },
+      {
+        "attempt_count": "1",
+        "case": "raw-retry-disabled",
+        "result": "passed"
+      },
+      {
+        "attempt_count": "2",
+        "case": "raw-retry-enabled",
+        "result": "passed"
+      },
+      {
+        "attempt_count": "1",
+        "case": "raw-retry-tls",
+        "result": "passed",
+        "transport_code": "-1202"
+      }
+    ],
+    "result": "passed"
+  },
+  "arm64_payload_manifest": {
+    "source_commit": "24d030580cc8be0e2b219536184d3381bd91519a",
+    "source_hashes": {
+      "Package.swift": "f345ef3bc7f89ca9a934ce09f4d68da5829363f82d3ce72d04f368ba626745ad",
+      "scripts/benchmarks/Probe.swift": "ee17286fc6b3f6824bbf4a8817da573890aeba56dca034a420edb4efa58219c4",
+      "scripts/benchmarks/run.py": "a5bee171b45bba55f07d71dddd6a13f8fe9c39249770c069bbb30754848f696b",
+      "scripts/ci/macos14.py": "f505b6432158363a1c500589b27732c0745a68274bc39c6c01b1c87e75160e5b",
+      "scripts/verification/NativeHTTPSProbe.swift": "8ba7e2972eb68d1a68adc76456e93af50d60fa2f100a31cddda9505bd5ca03d0",
+      "Sources/NetworkKit/APIClient.swift": "960c9f6e8c960bd76ff34217c357bfa49214ede597834ae8d72b5a047850b2e3",
+      "Sources/NetworkKit/Authentication.swift": "f0db6e385961df30c1a1a7680af6584db91b001c3a07416c9c489cfb478a5573",
+      "Sources/NetworkKit/ClientLifecycle.swift": "ba7d243eb266b79c7157c66341d48896f8693354d9aa369aba8d93abbacc25ae",
+      "Sources/NetworkKit/Diagnostics.swift": "84b24c4b28ab4d7783ce461cb5fb4ad71009140f9fbe9e283d5d9ff1561f7f40",
+      "Sources/NetworkKit/Endpoint.swift": "7b196e8ede8a9c031595e3ecdd72bfc3aaeecdc6610d055f383a787b976dec31",
+      "Sources/NetworkKit/ExecutionBoundaries.swift": "7431f0fa2688e11be5649b687b81c4bbd313c78bc613bb8d68bf1248daef494c",
+      "Sources/NetworkKit/HTTPHeaders.swift": "45bfe1c8779e3f39c048fc1a299bd6ee8a75fe28d71ea797ce704c7eccc4b4f4",
+      "Sources/NetworkKit/HTTPMethod.swift": "98bde648d1db468b7b29a1856ace61a7301f6daf057eb99cd6e5114a31456bdb",
+      "Sources/NetworkKit/HTTPStatus.swift": "84bde1bf4b8a3c92e66f9c8bacdf079b56de7fc92a851134723e54017257ca71",
+      "Sources/NetworkKit/HTTPStatusPolicy.swift": "f28eb6564f87d7988aa281683bd6c398f340eaa32434ee3d5245021355954722",
+      "Sources/NetworkKit/HTTPToken.swift": "d9053f6ff580b333c643e0209d8e001e008506a95f41581f9b60bc46402bb13b",
+      "Sources/NetworkKit/JSONDecodingOptions.swift": "d11a252a75f1a4cfb814d2ed0fbb3e4dbcb85200d5e9b978a1e1f83f3ca50904",
+      "Sources/NetworkKit/NetworkConfiguration.swift": "b47374e9f127bc77498e6e833ac300bf0be5dfb96e23336b891bf45c40c6f5b9",
+      "Sources/NetworkKit/NetworkError.swift": "bd9133325b2af1255af713b7d9557c476dac5483448f8c565eb961f4016eede4",
+      "Sources/NetworkKit/NetworkKit.docc/IntegrationGuide.md": "0a90783943447c37469de8094eb3671d6440d419139e9d132bf409e9abdb7ea3",
+      "Sources/NetworkKit/NetworkKit.docc/NetworkKit.md": "0b31b5c2ccb23570d1b2e2735aca8020001f0ec7a28a3313f9720826e4c1e057",
+      "Sources/NetworkKit/NetworkKit.swift": "7af95bcc95f8e800d953b02b1751b05bce237bc7d5107e58eaf042c22a1285d9",
+      "Sources/NetworkKit/NetworkOperation.swift": "ad25dd095bdba5943c1b8f45ce8ed7e3ae16ba4b0d7b64ce4dc611f94af19455",
+      "Sources/NetworkKit/NetworkResponse.swift": "2267de5fe325f2c310dfb875a2e1b3b230713d2397a423e53ba303a72674067d",
+      "Sources/NetworkKit/NetworkSecurityPolicy.swift": "cc85f6f2ab60f79731207d81e80f30bf5e032b0f2351ae42177e2ab62f29f3d9",
+      "Sources/NetworkKit/NetworkTaskDelegate.swift": "d9a97411a31d322a971685604d39de115112e606d7bb8e6837ea0005305f0bd8",
+      "Sources/NetworkKit/PrivacyInfo.xcprivacy": "528ab3fca910d2ac2f3ef256d5ea4c2327303a7a4a5efb9236987f3018e311f3",
+      "Sources/NetworkKit/RequestBody.swift": "914d27be0edb4fa36fc91e57787bf6d9c0311acbeb0a2d8334e24f2bf2cbbcdb",
+      "Sources/NetworkKit/RequestBuilder.swift": "20358d3345bb6b9ca66a4edd9adee8aae81c5b7c7c60a7162e47435499ee3921",
+      "Sources/NetworkKit/RequestURLBuilder.swift": "404943fa36c0fe5e7df5c078412ad6da30e82882bc097c29c3c0c0af896fef1b",
+      "Sources/NetworkKit/ResponseMetadata.swift": "9bd34a8ecd6cfd7c5bfc1b9fdbc89909fa0564095232daf68d87f5d90dc9d07b",
+      "Sources/NetworkKit/ResponseStrategy.swift": "1cddc3a3ce3aa32a4ad304e250a0e3d01503853eedd4a7add3f011f26545bd86",
+      "Sources/NetworkKit/RetryPolicy.swift": "6eb67b32d63d859262709ecc0037e57422191d1bcf445ba57256a5ce69efb637",
+      "Sources/NetworkKit/RetryTiming.swift": "09ce036bc4f2e74b7dcbf3697c937d45e42ccecb23fec8bfdc330ee54eb9248a",
+      "Sources/NetworkKit/SessionStorageProfile.swift": "83ca939758de16bab5df13d94c280065ad46c89ba0c0335863870a8b81e59c66",
+      "Sources/NetworkKit/URLSessionTransport.swift": "1c1c5b7afdba3eb32905a0e4c54aabfb3efed7b8354375f11868f0beeaecc14d"
+    },
+    "target": "arm64-apple-macosx14.0",
+    "builder_xcode": "Xcode 26.3\nBuild version 17C529",
+    "builder_swift": "Apple Swift version 6.2.4 (swiftlang-6.2.4.1.4 clang-1700.6.4.2)\nTarget: x86_64-apple-macosx15.0",
+    "builder_os": "ProductName:\t\tmacOS\nProductVersion:\t\t15.8.1\nBuildVersion:\t\t24H32",
+    "builder_architecture": "x86_64",
+    "sdk": "26.2",
+    "public_https_prepared": true,
+    "files": {
+      "NativeHTTPSProbe": "81297779c856fce010766b3e326f68f1bb0eec084dfffeca7fc1410c28950274",
+      "ResourceProbe": "a2eb6d79b4106b448d75bc61c801ddec90d35557b5523e11c77539f8633a57bb",
+      "SwiftNetworkKit_NetworkKit.bundle/PrivacyInfo.xcprivacy": "528ab3fca910d2ac2f3ef256d5ea4c2327303a7a4a5efb9236987f3018e311f3"
+    }
+  },
+  "limits": [
+    "Local native execution is macOS 15, not macOS 14.",
+    "ARM64/macOS 14.0 compilation and exact source/payload checks are preparation only.",
+    "The workflow must rebuild from accepted main; no local dirty-checkout payload is uploaded for execution.",
+    "Standard macOS 14 route retires November 2, 2026; actual availability is unproven until execution."
+  ],
+  "local_helper_tests_passed": 22
+}
