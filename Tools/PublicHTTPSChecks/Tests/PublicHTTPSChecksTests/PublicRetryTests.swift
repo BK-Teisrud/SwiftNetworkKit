@@ -29,8 +29,9 @@ private final class HTTPSRetrySink: NetworkDiagnosticSink {
         let cookieName = "snk_retry_" + UUID().uuidString.replacingOccurrences(of: "-", with: "")
         let store: HTTPCookieStorage?
         if profile == .borrowedAppManaged {
-            store = try #require(settings.httpCookieStorage)
-            try #require(store !== HTTPCookieStorage.shared)
+            let isolatedStore = try #require(settings.httpCookieStorage)
+            try #require(isolatedStore !== HTTPCookieStorage.shared)
+            store = isolatedStore
             settings.urlCache = URLCache(memoryCapacity: 131072, diskCapacity: 0)
             let cookie = try #require(HTTPCookie(properties: [.domain: "httpbingo.org", .path: "/",
                 .name: cookieName, .value: "synthetic-memory-only", .secure: "TRUE",
