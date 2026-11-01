@@ -4,7 +4,7 @@
 
 F3 is formally closed: I27 #110 is Done after final PR #144/main b4511c5efe9a349a9f91eb0448974f1bf49b8d3f/run 41302196774; all seven checks passed. [F3 closeout](F3_CLOSEOUT_2026-11-01.md) preserves its bounded technical acceptance and source-specific evidence.
 
-F4 planning/I28 #88/#146 are Done after accepted PR #154/main run 41323512108. The owner explicitly authorized selected I29–I32 under ADR-0015, in order. [I29 implementation](I29_FOREGROUND_DOWNLOAD.md) adds the bounded GET-to-file lifecycle and critical-path tests; PR/main acceptance is pending. I29 #147 is In Review; I30–I32 #148–#150 remain Blocked by their delivery predecessors. No new signing/device installation, purchase or publication is authorized.
+F4 planning/I28 #88/#146 and I29 #147 are Done after accepted PR #155/main run 41329332271. The owner-authorized I30 [verification matrix](I30_DOWNLOAD_VERIFICATION.md) passes 267 local Mac declarations, with no production-source changes; PR/main acceptance is pending. I30 #148 is In Review; I31/#149 native/resource and I32/#150 final API/docs/gate remain predecessor-blocked. No new signing/device installation, purchase or publication is authorized.
 
 #14 advanced resilience remains Backlog; #89/#90 remain independent planning. #29 actual app/workload/security/publication and physical Watch #132 remain mandatory separate barriers. No new milestone/date or publication authorization follows.
 
@@ -12,7 +12,7 @@ F4 planning/I28 #88/#146 are Done after accepted PR #154/main run 41323512108. T
 
 The [F2 closeout](F2_CLOSEOUT_2026-10-31.md) records accepted core hardening/rehearsal, final main d0a522770269617f95660d67e9d0198838dc2bb5/run 41244932962 and the milestone-counter discrepancy. Original submission-time evidence/failure limits remain immutable. The F2-only resource disposition is not F3 or production acceptance.
 
-F4 selected I29–I32 code start is explicitly authorized after completed I28/#88. Start with I29 #147; only after its PR/main acceptance proceed to I30 #148. #89/#90 remain independent research, and deferred domain catalogs stay open. Stop whenever GitHub execution is pending; resume only after the owner's next instruction, without queue polling or independent work across that stop.
+F4 selected I29–I32 code start is explicitly authorized after completed I28/#88. I29 #147 is accepted; finish I30 #148 PR/main before I31 #149. #89/#90 remain independent research, and deferred domain catalogs stay open. Stop whenever GitHub execution is pending; resume only after the owner's next instruction, without queue polling or independent work across that stop.
 
 ## Accepted core implementation history
 
@@ -97,9 +97,9 @@ Minimum macOS follow-up, 2026-10-29: [temporary standard GitHub macOS 14 executi
 
 - Order 40.2: [I28 / #146](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/146) — Done after PR #154/main run 41323512108; detailed design accepted. See download plan for dependencies.
 
-- Order 40.3: [I29 / #147](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/147) — Authorized in sequence; predecessor acceptance required. See download plan for dependencies.
+- Order 40.3: [I29 / #147](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/147) — Done after PR #155/main run 41329332271. See download plan for dependencies.
 
-- Order 40.4: [I30 / #148](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/148) — Authorized in sequence; predecessor acceptance required. See download plan for dependencies.
+- Order 40.4: [I30 / #148](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/148) — In Review; local matrix passes, PR/main acceptance pending. See download plan for dependencies.
 
 - Order 40.5: [I31 / #149](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/149) — Authorized in sequence; predecessor acceptance required. See download plan for dependencies.
 
