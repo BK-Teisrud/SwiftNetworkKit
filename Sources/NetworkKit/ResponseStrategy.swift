@@ -18,19 +18,13 @@ public struct ResponseStrategy<Value: Sendable>: Sendable, CustomStringConvertib
     public func decode(_ data: Data, response: URLResponse,
                        acceptedStatuses: HTTPStatusPolicy = .successful) throws -> NetworkResponse<Value> {
         try Task.checkCancellation()
-        guard let http = response as? HTTPURLResponse else {
-            throw NetworkError.invalidResponse(.nonHTTPResponse)
-        }
-        let status = try HTTPStatus(http.statusCode)
-        var fields: [String: String] = [:]
-        for (key, value) in http.allHeaderFields {
-            guard let name = key as? String, let text = value as? String,
-                  fields[name] == nil else { throw NetworkError.invalidResponse(.invalidHeaders) }
-            fields[name] = text
-        }
-        let headers: HTTPHeaders
-        do { headers = try HTTPHeaders(fields) }
-        catch { throw NetworkError.invalidResponse(.invalidHeaders) }
+        return try decode(data, metadata: ResponseMetadata(response), acceptedStatuses: acceptedStatuses)
+    }
+
+    internal func decode(_ data: Data, metadata: ResponseMetadata,
+                         acceptedStatuses: HTTPStatusPolicy) throws -> NetworkResponse<Value> {
+        try Task.checkCancellation()
+        let status = metadata.status, headers = metadata.headers
         guard acceptedStatuses.accepts(status) else { throw NetworkError.httpStatus(status, headers: headers) }
         try validate(headers)
         let value: Value

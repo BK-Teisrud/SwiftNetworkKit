@@ -70,6 +70,6 @@ internal enum RequestAuthentication {
         request.allHTTPHeaderFields = fields
         _ = try configuration.security.validateRequest(request, baseURL: configuration.baseURL)
         try checkpoint()
-        return PreparedRequest(request: request, timeouts: prepared.timeouts, acceptedStatuses: prepared.acceptedStatuses)
+        return PreparedRequest(request: request, timeouts: prepared.timeouts, acceptedStatuses: prepared.acceptedStatuses, retry: prepared.retry)
     }
 }

@@ -59,7 +59,7 @@ private struct DiagnosticModel: Decodable, Sendable, CustomStringConvertible {
             #expect(!text.contains(diagnosticCanary), sourceLocation: sourceLocation)
             #expect(!text.contains("https://"), sourceLocation: sourceLocation)
             #expect(Set(Mirror(reflecting: event).children.compactMap(\.label)) ==
-                ["requestID", "method", "status", "duration", "outcome"], sourceLocation: sourceLocation)
+                ["requestID", "method", "status", "duration", "attemptCount", "outcome"], sourceLocation: sourceLocation)
             #expect(event.duration.isFinite && event.duration >= 0, sourceLocation: sourceLocation)
         }
     }

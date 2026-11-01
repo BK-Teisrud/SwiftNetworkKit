@@ -4,6 +4,7 @@ internal struct PreparedRequest: Sendable, CustomStringConvertible, CustomDebugS
     let request: URLRequest
     let timeouts: NetworkTimeouts
     let acceptedStatuses: HTTPStatusPolicy
+    let retry: RetryPolicy
     var description: String { "PreparedRequest" }
     var debugDescription: String { description }
 }
@@ -33,6 +34,7 @@ internal enum RequestBuilder {
         try validateHeaders(snapshot.headers)
         let method = endpoint.method
         let body = endpoint.body
+        try RetryDecision.validate(options.retry, method: method, hasBody: body != nil, hasBodyStream: false)
         try validateBody(method: method, hasBody: body != nil)
         let url = try endpoint.url(relativeTo: snapshot.baseURL)
         var request = URLRequest(url: url)
@@ -51,7 +53,7 @@ internal enum RequestBuilder {
         request.timeoutInterval = snapshot.timeouts.inactivity
         _ = try configuration.security.validateRequest(request, baseURL: configuration.baseURL)
         try Task.checkCancellation()
-        return PreparedRequest(request: request, timeouts: snapshot.timeouts, acceptedStatuses: snapshot.acceptedStatuses)
+        return PreparedRequest(request: request, timeouts: snapshot.timeouts, acceptedStatuses: snapshot.acceptedStatuses, retry: options.retry)
     }
 
     static func prepare(_ input: URLRequest, configuration: NetworkConfiguration,
@@ -60,8 +62,10 @@ internal enum RequestBuilder {
         _ = try URLInputValidation.components(configuration.baseURL, isBase: true)
         let origin = try configuration.security.validateRequest(input, baseURL: configuration.baseURL, allowAdditionalOrigins: true)
         let sameOrigin = origin == (try NetworkOrigin(configuration.baseURL))
-        guard input.httpBodyStream == nil else { throw NetworkError.invalidRequest(.unsupportedRequest) }
         let method = try HTTPMethod(input.httpMethod ?? "GET")
+        try RetryDecision.validate(options.retry, method: method, hasBody: input.httpBody != nil,
+                                   hasBodyStream: input.httpBodyStream != nil)
+        guard input.httpBodyStream == nil else { throw NetworkError.invalidRequest(.unsupportedRequest) }
         try validateBody(method: method, hasBody: input.httpBody != nil)
         let rawHeaders = try HTTPHeaders(input.allHTTPHeaderFields ?? [:])
         try validateHeaders(configuration.headers)
@@ -71,7 +75,7 @@ internal enum RequestBuilder {
         let headers = try HTTPHeaders(rawHeaders.fields.merging(options.headers.fields) { _, call in call })
         let mergedOptions = try NetworkCallOptions(headers: headers,
             inactivityTimeout: options.inactivityTimeout, totalTimeout: options.totalTimeout, acceptedStatuses: options.acceptedStatuses,
-            authentication: options.authentication)
+            authentication: options.authentication, retry: options.retry)
         let rawConfiguration = NetworkConfiguration(baseURL: configuration.baseURL,
             headers: sameOrigin ? configuration.headers : HTTPHeaders(), timeouts: configuration.timeouts, security: configuration.security)
         let snapshot = try ConfigurationSnapshot(configuration: rawConfiguration, options: mergedOptions)
@@ -84,6 +88,6 @@ internal enum RequestBuilder {
         request.timeoutInterval = snapshot.timeouts.inactivity
         _ = try configuration.security.validateRequest(request, baseURL: configuration.baseURL, allowAdditionalOrigins: true)
         try Task.checkCancellation()
-        return PreparedRequest(request: request, timeouts: snapshot.timeouts, acceptedStatuses: snapshot.acceptedStatuses)
+        return PreparedRequest(request: request, timeouts: snapshot.timeouts, acceptedStatuses: snapshot.acceptedStatuses, retry: options.retry)
     }
 }

@@ -60,6 +60,12 @@ func guideReadExplicitErrorBody(using client: any NetworkClient, url: URL) async
     return try await client.send(URLRequest(url: url), response: .data, options: options).value
 }
 
+/// Opt in only when the service's read semantics permit replay.
+func guideReadWithOneRetry(using client: any NetworkClient, url: URL) async throws -> Data {
+    let options = try NetworkCallOptions(retry: .oneRetryForSafeReads)
+    return try await client.send(URLRequest(url: url), response: .data, options: options).value
+}
+
 func guideEncodeItem(_ item: GuideItem, baseURL: URL) throws -> URLRequest {
     struct CreateItem: Endpoint {
         typealias Response = EmptyResponse
@@ -165,7 +171,7 @@ The provider runs once within the operation's cancellation/budget and never on H
 
 Catch CancellationError separately from NetworkError. `guideSafeFailureCategory` demonstrates safe category handling without formatting arbitrary underlying errors. Ordinary failures cover invalid request, transport identity, HTTP status/headers, invalid response, encoding, decoding and timeout. Native unexplained URLError.cancelled is a transport error, not automatically caller cancellation. The optional `transportFailure` accessor supplies a safe code/domain identity for transport and known system timeout; do not infer retry safety from a category or log arbitrary app error objects.
 
-Diagnostics are disabled unless NetworkConfiguration receives a NetworkDiagnosticSink. Its synchronous nonthrowing record method must be concurrency-safe, fast and nonblocking. Only random request ID, allowlisted method, status, duration and safe outcome reach it; raw URLs/headers/bodies/account/error descriptions are excluded. Never block the sink awaiting the same client's shutdown. Detailed public-consumer sink assertions live in PublicResponseAPITests; no external telemetry sink is included.
+Diagnostics are disabled unless NetworkConfiguration receives a NetworkDiagnosticSink. Its synchronous nonthrowing record method must be concurrency-safe, fast and nonblocking. Only random request ID, allowlisted method, final-attempt status, total duration, library attempt count (0–2) and safe outcome reach it; raw URLs/headers/bodies/account/error descriptions are excluded. Never block the sink awaiting the same client's shutdown. Detailed public-consumer sink assertions live in PublicResponseAPITests; no external telemetry sink is included.
 
 ## Injecting a client into app tests
 
@@ -207,4 +213,12 @@ RES-01 attributes the observed local trend to runtime sleep-helper/dispatch rete
 
 ## Delivery limits
 
-DocC and compiled examples establish current API usability on selected build/runtime destinations. They do not replace full security/privacy review, actual minimum-OS/native trust/physical-device results, resource measurements or release authorization. The repository's API review and contract-evidence ledger identify the remaining gate owners. This guide adds no retry/cache/transfer/WebSocket/advanced TLS feature.
+DocC and compiled examples establish current API usability on selected build/runtime destinations. They do not replace full security/privacy review, actual minimum-OS/native trust/physical-device results, resource measurements or release authorization. The repository's API review and contract-evidence ledger identify the remaining gate owners. Per-call bounded read retry is opt-in under ADR-0014; cache/transfer/WebSocket/advanced TLS features remain excluded.
+
+## Opt-in read retry
+
+NetworkCallOptions.retry defaults to disabled. Select oneRetryForSafeReads only for bodyless GET/HEAD calls whose server semantics permit replay; an enabled policy on another method/body is invalid configuration before authentication or networking. At most one new library attempt is allowed for otherwise-unaccepted 429/503 or exact URL connection-lost/cannot-connect-to-host errors. Accepted statuses are decoded normally. No retry for timeout, DNS/offline/TLS, authentication, decoding or cancellation.
+
+The initial call and retry share the original total budget, prepared request/auth binding and session. Waiting uses 250–500 ms jitter, respecting a valid Retry-After up to 30 seconds without shortening it; malformed/ambiguous/oversized hints or insufficient remaining budget preserve the current failure. Cancellation and shutdown interrupt waiting. No token refresh or provider repeat occurs; one-use signatures must keep retry disabled. Retries restart at the original target with normal per-attempt redirect security. Redirects and Foundation's internal wire attempts do not increment the library counter.
+
+Foundation can normalize response headers before delivery. The library rejects duplicate/combined retry hints still visible through that boundary, but cannot reconstruct discarded wire fields. App-managed cookie/cache state is not frozen wire state. Native retry/resource/minimum-platform acceptance and publication remain separate gates.
