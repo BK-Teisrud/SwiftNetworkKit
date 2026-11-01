@@ -638,7 +638,7 @@
       "blocked_by": [],
       "parent": 16,
       "implementation_authorized": false,
-      "authorization_scope": "ADR-0015 planning approval only; START-F4 requires explicit feasibility-only instruction. I29–I32 additionally require a later implementation decision. No publication.",
+      "authorization_scope": "Explicit owner I28-only feasibility instruction on 2026-11-01; START-F4 #145 completed. No I29–I32, public API, signing/device install or publication authorization.",
       "decision_adr": "docs/decisions/ADR-0015-foreground-file-download.md",
       "start_gate": 145
     },
@@ -653,8 +653,8 @@
         "START-F4"
       ],
       "parent": 16,
-      "implementation_authorized": false,
-      "authorization_scope": "ADR-0015 planning approval only; START-F4 requires explicit feasibility-only instruction. I29–I32 additionally require a later implementation decision. No publication.",
+      "implementation_authorized": true,
+      "authorization_scope": "Explicit owner I28-only feasibility instruction on 2026-11-01; START-F4 #145 completed. No I29–I32, public API, signing/device install or publication authorization.",
       "decision_adr": "docs/decisions/ADR-0015-foreground-file-download.md",
       "start_gate": 145
     },
@@ -746,6 +746,6 @@
   ],
   "authorization_adr": "docs/decisions/ADR-0012-implementation-start.md",
   "status_source": "GitHub Issues and ProjectV2; this file records planned structure, not completion status",
-  "authorization_scope": "Core under ADR-0012; bounded read-retry I24–I27 explicitly authorized by owner on 2026-10-31 under ADR-0014 and START-F3 #137. No publication or other extension authorization.",
+  "authorization_scope": "Core under ADR-0012; bounded read-retry I24–I27 explicitly authorized by owner on 2026-10-31 under ADR-0014 and START-F3 #137. No publication or other extension authorization. I28 non-shipping bounded feasibility only explicitly authorized on 2026-11-01 under ADR-0015 / START-F4 #145; I29–I32 remain unauthorized.",
   "extension_start_gate": 137
 }

@@ -1,7 +1,7 @@
 # F4 foreground download plan
 
 Date: 2026-11-01
-Status: Owner-approved revision 1 planning contract; planning PR/main acceptance pending. No code authorized.
+Status: Owner-approved revision 1 planning contract; PR #151/main run 41312825323 accepted. Subsequent I28-only feasibility authorized; no I29–I32/public API authorization.
 Owner: PLAN-F4 #88; domains #16 / specification §4.9 and #26 / §4.19.
 
 ## Need and approval
@@ -44,12 +44,16 @@ Apple's [pause/resume documentation](https://developer.apple.com/documentation/f
 | 40.5 | [I31 / #149](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/149) | I30 / #148 |
 | 40.6 | [I32 / #150](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/150) | I31 / #149 |
 
-All new tasks are Blocked/P2. START-F4 is a feasibility-only authorization request, not a grant of shipping implementation. #88 is blocked by I28 because native feasibility remains one of its original acceptance criteria. START-F4 does not require #88 closure: it requires acceptance of this planning PR/main and the explicit bounded owner instruction. This avoids a dependency cycle. I29 requires both I28 and #88 plus a later explicit owner implementation decision; later tasks inherit this dependency but receive no code authorization from planning.
+START-F4 #145 is Done; I28 #146 is In Progress under explicit feasibility-only permission. I29–I32 remain Blocked/P2. START-F4 grants no shipping implementation permission. #88 is blocked by I28 because native feasibility remains one of its original acceptance criteria. START-F4 does not require #88 closure: it requires acceptance of this planning PR/main and the explicit bounded owner instruction. This avoids a dependency cycle. I29 requires both I28 and #88 plus a later explicit owner implementation decision; later tasks inherit this dependency but receive no code authorization from planning.
 
 No new delivery milestone or date is needed. Existing F4 retains selected downloads and domain #16/#26 retain deferred catalogs; no domain is complete. #14 advanced resilience is Backlog, #89/#90 remain independent planning, and #29/#132 remain mandatory publication barriers. Reassess the plan after each completed task. Stop at every pending GitHub run until the owner resumes work.
 
 ## Evidence and unresolved feasibility
 
-Read-only source inspection shows existing per-task delegate enforcement and rejection of unsupported borrowed/background sessions. The installed Xcode 26.3 SDK exposes `download(for:delegate:)`; task-delegate availability in the local headers is below project minimums. These are inspection findings, not native download results. No source change, prototype, build or runtime check was made.
+Read-only source inspection shows existing per-task delegate enforcement and rejection of unsupported borrowed/background sessions. The installed Xcode 26.3 SDK exposes `download(for:delegate:)`; task-delegate availability in the local headers is below project minimums. These are inspection findings, not native download results. This describes the pre-experiment planning inspection. The subsequent [I28 checkpoint](I28_DOWNLOAD_FEASIBILITY_2026-11-01.md) records actual local non-shipping evidence and remaining gaps; no shipping source changed.
 
 I28 must resolve exact API labels, error/diagnostic mapping, handoff/cancellation linearization, async versus callback file lifetime and the per-platform/minimum feasibility matrix. Original specification decomposition and stable subrequirement IDs remain #88 work; no ID is invented from an incomplete PDF reconciliation. Failures of feasibility trigger explicit re-planning, not a wider framework. #88 is not complete merely because this document and its decision are approved.
+
+## Subsequent I28 checkpoint
+
+The owner authorized only I28 after planning acceptance. [The report](I28_DOWNLOAD_FEASIBILITY_2026-11-01.md) allocates NK-09/NK-19 IDs from the original specification and records partial Mac/typecheck evidence. #88 remains Blocked and #146 In Progress; I29–I32 remain unauthorized. No selected requirement is delivered by the experiment.

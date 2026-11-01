@@ -1,7 +1,7 @@
 # ADR-0015: Bounded foreground file download
 
 Date: 2026-11-01
-Status: Accepted planning contract only; no feasibility or implementation code authorized
+Status: Accepted planning contract; subsequent I28-only feasibility authorized, I29–I32/public API remain unauthorized
 Owner: @BK-Teisrud
 Issue / requirement: PLAN-F4 #88; NK-09 #16 / specification §4.9; platform domain #26 / §4.19
 
@@ -30,3 +30,7 @@ F4 uses one selected delivery lane; no extra background milestone or date is jus
 ## Supersedes / superseded by
 
 Selects one post-core extension for planning; no change to the historical F2 release candidate, ADR-0014 read-retry contract or ADR-0013 Watch publication decision.
+
+## Subsequent feasibility-only instruction — 2026-11-01
+
+After PR #151/main run 41312825323 passed, the owner explicitly authorized only I28's bounded non-shipping local synthetic experiment. START-F4 #145 is completed. [The first checkpoint](../planning/I28_DOWNLOAD_FEASIBILITY_2026-11-01.md) provides partial native evidence and unresolved feasibility criteria; #88/#146 remain open. Earlier no-code statements retain their original planning scope and are superseded only for I28. I29–I32/public API, signing/device installation and publication remain unauthorized.
