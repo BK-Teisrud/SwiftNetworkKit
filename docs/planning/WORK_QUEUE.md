@@ -2,9 +2,9 @@
 
 ## Current delivery — 2026-11-01
 
-F2 is closed. The bounded read-retry contract/code start is approved under ADR-0014/#137. I24–I26 are Done; I26 final acceptance is PR #142/main run 41296068624. I27 #110 reviews the additive API, diagnostics, evidence and residual risks; its source-compatible initializer and final-budget corrections pass 245 local tests. Owner F3 gate disposition and candidate PR/main acceptance remain pending. See [I27 review](I27_RETRY_REVIEW_2026-11-01.md).
+The bounded F3 technical gate is accepted on PR #143/main e0282dc29ac2247a7c2b6e142e37e7ed3cb5be24/run 41299838862 after the owner's explicit limited approval. [Final closeout](F3_CLOSEOUT_2026-11-01.md) records scope, evidence and preserved release barriers. Formal I27/milestone closure follows the final documentation's required PR/main acceptance and is recorded in #110/milestone 4. I24–I26 are Done; no remaining feature implementation is selected for F3.
 
-Physical Watch #132 and actual app/workload/security/publication #29 remain mandatory separate gates. No release, version/date, unknown-workload suitability or further extension code is authorized. [Preserved status history](F3_STATUS_HISTORY_2026-11-01.md) retains superseded summaries without presenting them as live next steps.
+#132 physical Watch and #29 actual app/workload/security/publication remain mandatory. Existing PLAN-F4 #88 is the next planning candidate only after confirming an actual transfer need; no further extension code or release is authorized. [Status history](F3_STATUS_HISTORY_2026-11-01.md) preserves earlier snapshots separately from this live summary.
 
 ## Accepted F2 and next lanes
 
@@ -52,7 +52,7 @@ Choose the lowest Order with closed blockers and satisfied Ready criteria. This 
 | 23.75 | [WATCH-01: physical Watch publication evidence](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/132) | #29; publication milestone | Supported Watch development route; ADR-0013 |
 | 24 | [REL-01: Actual v1 release gate](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/29) | Governance | #64 and selected core epics |
 
-Current review: preparation PR #103 is accepted through main run 40550211780. [TLS-01 / #104](NATIVE_TLS_REJECTION.md), Order 20.75, adds independently executable native macOS untrusted-certificate rejection coverage. It blocks #86 while #62/#63 remain Blocked for actual minimum/physical execution. System-trusted positive HTTPS and independent hostname-mismatch evidence are still missing. No support/tool change or owner-risk acceptance is inferred.
+Historical review, 2026-10-27: preparation PR #103 is accepted through main run 40550211780. [TLS-01 / #104](NATIVE_TLS_REJECTION.md), Order 20.75, adds independently executable native macOS untrusted-certificate rejection coverage. It blocks #86 while #62/#63 remain Blocked for actual minimum/physical execution. System-trusted positive HTTPS and independent hostname-mismatch evidence are still missing. No support/tool change or owner-risk acceptance is inferred.
 
 ## Why this sequence
 

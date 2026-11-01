@@ -4,7 +4,7 @@
 
 A native networking library for Apple platforms, distributed as a Swift package with no external package dependencies.
 
-**Status: F2 is closed after the accepted non-publishing HTTP-core rehearsal.** The selected core and recorded minimum/non-Watch evidence are documented in the [F2 closeout](docs/planning/F2_CLOSEOUT_2026-10-31.md). No stable version/tag or release exists. Physical Watch #132 and actual workload/security/publication #29 remain mandatory. Bounded retry implementation I24–I27 is authorized under ADR-0014/#137. I24–I26 are accepted; I27 API/evidence/risk review is in progress.
+**Status: F2 is closed after the accepted non-publishing HTTP-core rehearsal.** The selected core and recorded minimum/non-Watch evidence are documented in the [F2 closeout](docs/planning/F2_CLOSEOUT_2026-10-31.md). No stable version/tag or release exists. Physical Watch #132 and actual workload/security/publication #29 remain mandatory. Bounded retry implementation I24–I27 is authorized under ADR-0014/#137. The bounded F3 technical gate is accepted with recorded limitations; see the [F3 closeout](docs/planning/F3_CLOSEOUT_2026-11-01.md) and #110 for formal completion.
 
 Open the repository-root Package.swift in Xcode. The package is named SwiftNetworkKit and exposes the NetworkKit library. Tests cover HTTP values, configuration, construction, response interpretation, session ownership, network policy and client integration, with platform-specific evidence described in the guides. See [implementation authorization](docs/decisions/ADR-0012-implementation-start.md).
 
