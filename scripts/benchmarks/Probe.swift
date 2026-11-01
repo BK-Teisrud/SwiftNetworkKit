@@ -7,15 +7,18 @@ struct Call: Endpoint {
     let path: EndpointPath
     let query: [HTTPQueryItem]
     let responseStrategy: ResponseStrategy<Data> = .data
-    init(bytes: Int, slow: Bool = false) throws {
-        path = try EndpointPath(segments: [slow ? "slow" : "payload"])
-        query = [try HTTPQueryItem(name: "bytes", value: String(bytes))]
+    let options: NetworkCallOptions
+    init(bytes: Int, slow: Bool = false, retry: Bool = false) throws {
+        path = try EndpointPath(segments: [retry ? (slow ? "retry-wait" : "retry") : (slow ? "slow" : "payload")])
+        query = [try HTTPQueryItem(name: "bytes", value: String(bytes)),
+                 try HTTPQueryItem(name: "call", value: UUID().uuidString)]
+        options = try NetworkCallOptions(retry: retry ? .oneRetryForSafeReads : .disabled)
     }
 }
 
-func payloadRequest(base: URL, bytes: Int) -> URLRequest {
-    var url = URLComponents(url: base.appendingPathComponent("payload"), resolvingAgainstBaseURL: false)!
-    url.queryItems = [URLQueryItem(name: "bytes", value: String(bytes))]
+func payloadRequest(base: URL, bytes: Int, retry: Bool = false) -> URLRequest {
+    var url = URLComponents(url: base.appendingPathComponent(retry ? "retry" : "payload"), resolvingAgainstBaseURL: false)!
+    url.queryItems = [URLQueryItem(name: "bytes", value: String(bytes)), URLQueryItem(name: "call", value: UUID().uuidString)]
     return URLRequest(url: url.url!)
 }
 
@@ -33,6 +36,11 @@ func residentBytes() throws -> UInt64 {
     }
     guard result == KERN_SUCCESS else { throw ProbeFailure.measurement }
     return UInt64(info.resident_size)
+}
+func liveMalloc() -> [String: UInt64] {
+    var stats = malloc_statistics_t()
+    malloc_zone_statistics(nil, &stats)
+    return ["blocks": UInt64(stats.blocks_in_use), "bytes": UInt64(stats.size_in_use)]
 }
 enum ProbeFailure: Error { case measurement, invalidResult, noNativeRequest, unexpectedSuccess }
 
@@ -64,12 +72,13 @@ enum ProbeFailure: Error { case measurement, invalidResult, noNativeRequest, une
             guard try await client.send(Call(bytes: bytes)).value.count == bytes else { throw ProbeFailure.invalidResult }
         }
         let warmRSS = try residentBytes()
+        let warmMalloc = liveMalloc()
         var cycleRSS: [UInt64] = [], cycleSeconds: [Double] = [], latency: [Double] = []
         var cancelled = 0, cancellationSeconds = 0.0
-        if mode == "cancel" {
+        if mode == "cancel" || mode == "retry-cancel" {
             let tasks = (0..<concurrency).map { _ in Task {
                 do {
-                    _ = try await client.send(Call(bytes: bytes, slow: true))
+                    _ = try await client.send(Call(bytes: bytes, slow: true, retry: mode == "retry-cancel"))
                     throw ProbeFailure.unexpectedSuccess
                 } catch is CancellationError { return 1 }
             } }
@@ -83,7 +92,9 @@ enum ProbeFailure: Error { case measurement, invalidResult, noNativeRequest, une
             while clock.now < deadline {
                 let (data, _) = try await control.data(from: base.appendingPathComponent("stats"))
                 let stats = try JSONDecoder().decode([String: Int].self, from: data)
-                if (stats["slow_started"] ?? 0) > 0 { contacted = true; break }
+                if mode == "retry-cancel" {
+                    if (stats["retry_replied"] ?? 0) == concurrency { contacted = true; break }
+                } else if (stats["slow_started"] ?? 0) > 0 { contacted = true; break }
                 try await Task.sleep(for: .milliseconds(10))
             }
             let start = clock.now
@@ -104,9 +115,10 @@ enum ProbeFailure: Error { case measurement, invalidResult, noNativeRequest, une
                                 do {
                                     let value: Data
                                     if let direct { value = try await direct.data(for: payloadRequest(base: base, bytes: bytes)).0 }
-                                    else if index.isMultiple(of: 2) { value = try await chosen.send(Call(bytes: bytes)).value }
+                                    else if index.isMultiple(of: 2) { value = try await chosen.send(Call(bytes: bytes, retry: mode == "retry")).value }
                                     else {
-                                        value = try await chosen.send(payloadRequest(base: base, bytes: bytes), response: .data).value
+                                        value = try await chosen.send(payloadRequest(base: base, bytes: bytes, retry: mode == "retry"), response: .data,
+                                            options: NetworkCallOptions(retry: mode == "retry" ? .oneRetryForSafeReads : .disabled)).value
                                     }
                                     guard value.count == bytes, value.allSatisfy({ $0 == 120 }) else { throw ProbeFailure.invalidResult }
                                     if mode == "fresh" { await chosen.shutdown() }
@@ -132,10 +144,12 @@ enum ProbeFailure: Error { case measurement, invalidResult, noNativeRequest, une
         direct?.invalidateAndCancel()
         let shutdownSeconds = seconds(shutdownStart.duration(to: clock.now))
         let shutdownRSS = try residentBytes()
+        let shutdownMalloc = liveMalloc()
         // Optional attribution sample after every configured ten-second deadline.
         if args.count > 7 && args[7] == "post-budget" { try await Task.sleep(for: .seconds(12)) }
         else { try await Task.sleep(for: .milliseconds(100)) }
         let settledRSS = try residentBytes()
+        let settledMalloc = liveMalloc()
         latency.sort()
         func percentile(_ value: Double) -> Double {
             latency.isEmpty ? 0 : latency[min(latency.count - 1, Int(ceil(Double(latency.count) * value)) - 1)]
@@ -145,6 +159,7 @@ enum ProbeFailure: Error { case measurement, invalidResult, noNativeRequest, une
             "call_p50_seconds": percentile(0.5), "call_p95_seconds": percentile(0.95),
             "rss_initial_bytes": initialRSS, "rss_warm_bytes": warmRSS, "rss_cycle_bytes": cycleRSS,
             "rss_shutdown_bytes": shutdownRSS, "rss_settled_bytes": settledRSS,
+            "malloc_warm": warmMalloc, "malloc_shutdown": shutdownMalloc, "malloc_settled": settledMalloc,
             "shutdown_seconds": shutdownSeconds, "cancelled_calls": cancelled,
             "cancellation_join_seconds": cancellationSeconds]
         print(String(decoding: try JSONSerialization.data(withJSONObject: output, options: [.sortedKeys]), as: UTF8.self))

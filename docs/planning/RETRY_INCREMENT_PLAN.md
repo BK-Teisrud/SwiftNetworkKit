@@ -1,5 +1,7 @@
 # First resilience increment — approved contract, implementation authorized
 
+Current evidence update, 2026-11-01: I25 is accepted through PR #139/main run 41287067291. [I26 native/resource verification](NATIVE_RETRY_VERIFICATION.md) records actual local/public Mac results and target limitations; candidate checks and applicability review remain pending.
+
 Current delivery update, 2026-11-01: I24 is accepted through PR #138/main run 41250907636. I25 now connects the opt-in policy to the existing operation; [integration evidence](RETRY_INTEGRATION.md) records implementation/testing and the pending native/resource/API gates. Historical I24-only/no-loop statements below describe earlier delivery boundaries.
 
 ## Current execution authorization — 2026-10-31

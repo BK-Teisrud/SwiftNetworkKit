@@ -2,6 +2,7 @@
 import Foundation
 import Testing
 import NetworkKit
+import os
 
 /// Native system-trust rejection only; this fixture never installs a trust anchor.
 private final class UntrustedTLSServer {
@@ -99,8 +100,18 @@ server.serve_forever()
 
 private struct TLSCall: Endpoint {
     let path: EndpointPath
-    init() throws { path = try EndpointPath(segments: ["fixture"]) }
+    let options: NetworkCallOptions
+    init(options: NetworkCallOptions = .default) throws {
+        path = try EndpointPath(segments: ["fixture"])
+        self.options = options
+    }
     let responseStrategy: ResponseStrategy<EmptyResponse> = .empty
+}
+
+private final class TLSRetrySink: NetworkDiagnosticSink {
+    private let state = OSAllocatedUnfairLock(initialState: [NetworkDiagnosticEvent]())
+    var events: [NetworkDiagnosticEvent] { state.withLock { $0 } }
+    func record(_ event: NetworkDiagnosticEvent) { state.withLock { $0.append(event) } }
 }
 
 @Suite(.timeLimit(.minutes(1))) struct NativeTLSTests {
@@ -139,5 +150,27 @@ private struct TLSCall: Endpoint {
         }
         await client.shutdown()
     }
+    @Test(arguments: [false, true]) func optedInReadNeverRetriesUntrustedTLS(raw: Bool) async throws {
+        let server = try UntrustedTLSServer()
+        defer { do { try server.stop() } catch { Issue.record("TLS retry fixture teardown failed") } }
+        let sink = TLSRetrySink()
+        let client = try APIClient(configuration: NetworkConfiguration(baseURL: server.base,
+            timeouts: NetworkTimeouts(inactivity: 3, total: 10), diagnostics: sink))
+        let options = try NetworkCallOptions(retry: .oneRetryForSafeReads)
+        do {
+            if raw { _ = try await client.send(URLRequest(url: server.base.appendingPathComponent("fixture")), response: .empty, options: options) }
+            else { _ = try await client.send(TLSCall(options: options)) }
+            Issue.record("Untrusted TLS fixture unexpectedly accepted")
+        } catch let error as NetworkError {
+            guard case .transport(let identity) = error else { throw error }
+            #expect(identity.domain == NSURLErrorDomain)
+            #expect([URLError.serverCertificateUntrusted.rawValue, URLError.serverCertificateHasUnknownRoot.rawValue].contains(identity.code))
+        }
+        #expect(sink.events.count == 1)
+        #expect(sink.events.first?.attemptCount == 1)
+        #expect(sink.events.first?.status == nil)
+        await client.shutdown()
+    }
+
 }
 #endif
