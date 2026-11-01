@@ -17,10 +17,44 @@ import time
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def run_handoff(output):
+    """No network. Exercise candidate ownership around existing terminal arbitration."""
+    probe = Path(__file__).with_name('HandoffProbe.swift')
+    sources = sorted((ROOT / 'Sources/NetworkKit').glob('*.swift'))
+    with tempfile.TemporaryDirectory(prefix='snk-i28-handoff-') as tmp:
+        work = Path(tmp)
+        binary, result = work / 'probe', work / 'result.json'
+        subprocess.run(['xcrun', 'swiftc', '-swift-version', '6', '-warnings-as-errors',
+                        '-parse-as-library', *map(str, sources), str(probe),
+                        '-o', str(binary)], check=True, timeout=120)
+        subprocess.run([str(binary), str(work / 'files'), str(result)], check=True, timeout=20)
+        observations = json.loads(result.read_text())
+        assert len(observations) == 7 and len(set(observations)) == 7, observations
+        report = {
+            'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+            'host': {'macOS': platform.mac_ver()[0], 'architecture': platform.machine()},
+            'probe_sha256': hashlib.sha256(probe.read_bytes()).hexdigest(),
+            'runner_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            'sdk_source_sha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},
+            'scope': 'I28 non-shipping operation-scoped ownership protocol only',
+            'observations': observations,
+            'limits': ['No network in handoff experiment',
+                       'Synthetic finish-time clock, not inactivity watchdog proof',
+                       'Injected filesystem failures, not real disk exhaustion',
+                       'Foundation-owned partial files remain unobserved',
+                       'No APIClient download integration or public API authorization']}
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(report, indent=2) + '\n')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--handoff-only', action='store_true', help='No-network ownership/terminal-arbitration experiment')
     args = parser.parse_args()
+    if args.handoff_only:
+        run_handoff(args.output)
+        return
     counts = {}
     lock = threading.Lock()
 
