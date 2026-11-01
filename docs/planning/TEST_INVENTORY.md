@@ -1,6 +1,6 @@
 # Test declaration inventory — TLS-01
 
-Current candidate note: [I29 file-download implementation](I29_FOREGROUND_DOWNLOAD.md) passes 256 local Mac declarations in 32 suites, adding 11 DownloadTests declarations (24 parameter-expanded cases). Restored targeted tests pass after an ownership-order negative control. Simulator/minimum native execution and PR/main acceptance for this candidate remain unverified; no current simulator test count is inferred from typechecking. Earlier counts below remain source-specific history.
+Current candidate note: [I30 verification](I30_DOWNLOAD_VERIFICATION.md) passes 267 local Mac declarations in 32 suites. DownloadTests has 21 declarations / 55 expanded cases; a separate normal-import compatibility test checks public function signatures. Production source is unchanged from accepted I29. Required candidate PR/main and simulator/platform execution remain pending; older snapshots below are retained.
 
 Snapshot: 2026-10-27, TLS-01 candidate based on `dcf0a1b57c43ea5d96e06ee1d328e2d3d86a1a76`. This source index contains 218 `@Test` function declarations, including two macOS-only child-process tests and one macOS-only native TLS test; other selected runtime destinations retain 215 declarations. Parameterized cases are not additional function declarations. Runtime results must come from execution, not this count. See [contract evidence ledger](TEST_EVIDENCE.md) for coverage and limitations. Refresh this snapshot when the suite changes; historical run counts remain dated evidence.
 
@@ -326,3 +326,7 @@ Snapshot: 2026-10-27, TLS-01 candidate based on `dcf0a1b57c43ea5d96e06ee1d328e2d
 ## DownloadTests.swift — I29 addition
 
 [Source](../../Tests/NetworkKitTests/DownloadTests.swift) — 11 declarations covering successful/empty app ownership, invalid limits/requests before auth, rejected statuses without retry, actual file size, preserve/inspect/remove errors, original deadline discard, cancellation/cleanup precedence, exclusive target collisions, native-return adoption order and shutdown/join. See the I29 report for actual local results and unproved native boundaries.
+
+## I30 verification addition
+
+[DownloadTests](../../Tests/NetworkKitTests/DownloadTests.swift) now has 21 declarations / 55 expanded cases. [DocumentationExamplesTests](../../Tests/NetworkKitTests/DocumentationExamplesTests.swift) adds a regular-import public compatibility declaration. I30 adds 11 declarations in total; actual source-hashed results, negative controls and unproved native boundaries are in [the I30 report](I30_DOWNLOAD_VERIFICATION.md).

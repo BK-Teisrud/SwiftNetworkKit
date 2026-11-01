@@ -20,9 +20,11 @@ private final class FileSink: NetworkDiagnosticSink {
 }
 private actor FileProvider: AuthenticationHeaderProvider {
     private(set) var calls = 0
+    private let fields: [String: String]
+    init(fields: [String: String] = ["Authorization": "synthetic-file-secret"]) { self.fields = fields }
     func headers(for context: AuthenticationContext) async throws -> HTTPHeaders {
         calls += 1
-        return try HTTPHeaders(["Authorization": "synthetic-file-secret"])
+        return try HTTPHeaders(fields)
     }
 }
 private struct FileFixture: Sendable {
@@ -47,10 +49,24 @@ private struct FileFixture: Sendable {
     var sourceExists: Bool { FileManager.default.fileExists(atPath: source.path) }
     var destinationExists: Bool { FileManager.default.fileExists(atPath: destination.path) }
 }
-private func fileResponse(_ request: URLRequest, status: Int = 200) -> HTTPURLResponse {
-    HTTPURLResponse(url: request.url!, statusCode: status, httpVersion: nil, headerFields: ["X-File": "synthetic"])!
+private func fileResponse(_ request: URLRequest, status: Int = 200, headers: [String: String] = ["X-File": "synthetic"]) -> HTTPURLResponse {
+    HTTPURLResponse(url: request.url!, statusCode: status, httpVersion: nil, headerFields: headers)!
 }
 
+private actor ScopedFileProvider: AuthenticationHeaderProvider {
+    private(set) var contexts: [AuthenticationContext] = []
+    func headers(for context: AuthenticationContext) async throws -> HTTPHeaders {
+        contexts.append(context)
+        return try HTTPHeaders(["Authorization": "synthetic-" + (context.account ?? "none")])
+    }
+}
+private final class FileCommitSink: NetworkDiagnosticSink {
+    private let action = OSAllocatedUnfairLock<(@Sendable () -> Void)?>(initialState: nil)
+    func set(_ value: @escaping @Sendable () -> Void) { action.withLock { $0 = value } }
+    func record(_ event: NetworkDiagnosticEvent) {
+        if event.outcome == .success { action.withLock { $0 }?() }
+    }
+}
 @Suite(.timeLimit(.minutes(1))) struct DownloadTests {
     private let base = URL(string: "https://example.invalid")!
 
@@ -232,6 +248,212 @@ private func fileResponse(_ request: URLRequest, status: Int = 200) -> HTTPURLRe
         await #expect(throws: NetworkError.invalidRequest(.clientClosed)) {
             try await client.download(URLRequest(url: base), maximumBytes: 8)
         }
+    }
+
+    @Test(arguments: [7, 8, 9], ["absent", "short", "long", "encoded"])
+    func storedBytesOverrideLengthAndEncodingMetadata(limit: Int64, metadata: String) async throws {
+        let fixture = try FileFixture(); defer { fixture.remove() }
+        var fields: [String: String] = [:]
+        if metadata == "short" { fields["Content-Length"] = "1" }
+        if metadata == "long" { fields["Content-Length"] = "999999" }
+        if metadata == "encoded" { fields = ["Content-Encoding": "gzip", "Content-Length": "1"] }
+        let headers = fields
+        // Model the file returned by Foundation after transfer. No real decompression claim.
+        let transport = FileTestTransport { request, owner in owner.adopt(fixture.source); return fileResponse(request, headers: headers) }
+        let client = try APIClient(configuration: .init(baseURL: base), transport: transport, downloadFiles: fixture.files)
+        if limit < 8 {
+            await #expect(throws: DownloadError.sizeLimitExceeded) { try await client.download(URLRequest(url: base), maximumBytes: limit) }
+            #expect(!fixture.sourceExists && !fixture.destinationExists)
+        } else {
+            let response = try await client.download(URLRequest(url: base), maximumBytes: limit)
+            #expect(response.value.byteCount == 8 && fixture.destinationExists)
+            #expect(try Data(contentsOf: response.value.url) == Data(repeating: 65, count: 8))
+        }
+    }
+
+    @Test(arguments: ["foreign", "downgrade", "loop"])
+    func deniedRedirectCandidateIsDisposed(kind: String) async throws {
+        let fixture = try FileFixture(); defer { fixture.remove() }
+        let followed = OSAllocatedUnfairLock(initialState: 0)
+        let destination = kind == "foreign" ? URL(string: "https://other.invalid/file")!
+            : kind == "downgrade" ? URL(string: "http://example.invalid/file")! : base
+        let transport = try URLSessionTransport(downloadOperation: { _, request, delegate in
+            let redirect = fileResponse(request, status: 302, headers: ["Location": destination.absoluteString])
+            if delegate.redirectedRequest(response: redirect, proposed: URLRequest(url: destination)) != nil {
+                followed.withLock { $0 += 1 }
+            }
+            return (fixture.source, redirect)
+        })
+        let client = try APIClient(configuration: .init(baseURL: base), transport: transport, downloadFiles: fixture.files)
+        do { _ = try await client.download(URLRequest(url: base), maximumBytes: 8); Issue.record("Denied redirect succeeded") }
+        catch NetworkError.httpStatus(let status, _) { #expect(kind != "loop" && status.code == 302) }
+        catch NetworkError.invalidResponse(let reason) { #expect(kind == "loop" && reason == .redirectLimitExceeded) }
+        #expect(followed.withLock { $0 } == 0)
+        #expect(!fixture.sourceExists && !fixture.destinationExists)
+        await client.shutdown()
+    }
+
+    @Test(arguments: ["total", "system", "inactivity"])
+    func cleanupFailureCannotReplaceTimeout(mode: String) async throws {
+        let fixture = try FileFixture(); defer { fixture.remove() }
+        let clock = BudgetTestClock(), sink = FileSink()
+        var operations = fixture.files
+        operations.remove = { _ in throw CocoaError(.fileWriteNoPermission) }
+        if mode == "total" {
+            let inspect = operations.inspect
+            operations.inspect = { url in let bytes = try inspect(url); clock.advance(2); return bytes }
+        }
+        let transport = FileTestTransport { request, owner in
+            owner.adopt(fixture.source)
+            if mode == "system" { throw URLError(.timedOut) }
+            if mode == "inactivity" { throw NetworkError.timeout(.inactivity) }
+            return fileResponse(request)
+        }
+        let client = try APIClient(configuration: .init(baseURL: base, diagnostics: sink), transport: transport, clock: clock, downloadFiles: operations)
+        let reason: NetworkError.TimeoutReason = mode == "total" ? .totalBudget : mode == "system" ? .system : .inactivity
+        await #expect(throws: NetworkError.timeout(reason)) {
+            try await client.download(URLRequest(url: base), maximumBytes: 8, options: DownloadOptions(totalTimeout: 1))
+        }
+        #expect(fixture.sourceExists || fixture.destinationExists)
+        #expect(sink.events.first?.outcome == .timeout(reason))
+        #expect(clock.pending == 0)
+    }
+
+    @Test func cancelledAccountNeverCleansAnotherAccountsHandedOffFile() async throws {
+        let first = try FileFixture(), second = try FileFixture()
+        defer { first.remove(); second.remove() }
+        let provider = ScopedFileProvider(), started = BudgetLatch(), release = BudgetLatch()
+        let firstTransport = FileTestTransport { request, owner in
+            #expect(request.value(forHTTPHeaderField: "Authorization") == "synthetic-A")
+            owner.adopt(first.source); await started.open(); await release.wait()
+            return fileResponse(request)
+        }
+        let secondTransport = FileTestTransport { request, owner in
+            #expect(request.value(forHTTPHeaderField: "Authorization") == "synthetic-B")
+            owner.adopt(second.source); return fileResponse(request)
+        }
+        let a = try APIClient(configuration: .init(baseURL: base, authentication: .init(provider: provider, account: "A", environment: "test")), transport: firstTransport, downloadFiles: first.files)
+        let b = try APIClient(configuration: .init(baseURL: base, authentication: .init(provider: provider, account: "B", environment: "test")), transport: secondTransport, downloadFiles: second.files)
+        let pending = Task { try await a.download(URLRequest(url: base), maximumBytes: 8) }
+        await started.wait()
+        let result = try await b.download(URLRequest(url: base), maximumBytes: 8)
+        pending.cancel(); await release.open()
+        await #expect(throws: CancellationError.self) { try await pending.value }
+        await a.shutdown()
+        #expect(!first.sourceExists && !first.destinationExists)
+        #expect(second.destinationExists && result.value.url == second.destination)
+        let contexts = await provider.contexts
+        #expect(Set(contexts.compactMap(\.account)) == ["A", "B"])
+        #expect(Set(contexts.map(\.requestID)).count == 2 && contexts.count == 2)
+        await b.shutdown()
+        #expect(second.destinationExists)
+    }
+
+    @Test func cancellationAfterCommittedSuccessDoesNotLoseAppOwnedFile() async throws {
+        let fixture = try FileFixture(); defer { fixture.remove() }
+        let started = BudgetLatch(), release = BudgetLatch(), sink = FileCommitSink()
+        let transport = FileTestTransport { request, owner in
+            owner.adopt(fixture.source); await started.open(); await release.wait()
+            return fileResponse(request)
+        }
+        let client = try APIClient(configuration: .init(baseURL: base, diagnostics: sink), transport: transport, downloadFiles: fixture.files)
+        let call = Task { try await client.download(URLRequest(url: base), maximumBytes: 8) }
+        await started.wait()
+        sink.set { call.cancel() }
+        await release.open()
+        let result = try await call.value
+        #expect(call.isCancelled && result.value.url == fixture.destination && fixture.destinationExists)
+        await client.shutdown()
+        #expect(fixture.destinationExists)
+    }
+
+    @Test(arguments: [false, true]) func malformedResponseStillDisposesReturnedCandidate(nonHTTP: Bool) async throws {
+        let fixture = try FileFixture(); defer { fixture.remove() }
+        let transport = FileTestTransport { request, owner in
+            owner.adopt(fixture.source)
+            if nonHTTP { return URLResponse(url: request.url!, mimeType: nil, expectedContentLength: 8, textEncodingName: nil) }
+            return fileResponse(request, status: 999)
+        }
+        let client = try APIClient(configuration: .init(baseURL: base), transport: transport, downloadFiles: fixture.files)
+        await #expect(throws: NetworkError.invalidResponse(nonHTTP ? .nonHTTPResponse : .invalidStatusCode)) {
+            try await client.download(URLRequest(url: base), maximumBytes: 8)
+        }
+        #expect(!fixture.sourceExists && !fixture.destinationExists)
+    }
+
+    @Test func symbolicCandidateCannotExposeOrRemoveItsTarget() async throws {
+        let fixture = try FileFixture(); defer { fixture.remove() }
+        let protected = fixture.root.appendingPathComponent("unrelated-target")
+        try FileManager.default.moveItem(at: fixture.source, to: protected)
+        try FileManager.default.createSymbolicLink(at: fixture.source, withDestinationURL: protected)
+        let transport = FileTestTransport { request, owner in owner.adopt(fixture.source); return fileResponse(request) }
+        let client = try APIClient(configuration: .init(baseURL: base), transport: transport, downloadFiles: fixture.files)
+        await #expect(throws: DownloadError.fileSystem(.inspect)) { try await client.download(URLRequest(url: base), maximumBytes: 8) }
+        #expect(!fixture.sourceExists && !fixture.destinationExists)
+        #expect(try Data(contentsOf: protected) == Data(repeating: 65, count: 8))
+    }
+
+    @Test func diagnosticsAndErrorsRetainOnlyApprovedMetadata() async throws {
+        let fixture = try FileFixture(bytes: 9); defer { fixture.remove() }
+        let sink = FileSink(), secret = "synthetic-private-file-canary"
+        let transport = FileTestTransport { request, owner in
+            owner.adopt(fixture.source)
+            return fileResponse(request, headers: ["Set-Cookie": "synthetic-private-file-canary"])
+        }
+        let client = try APIClient(configuration: .init(baseURL: base, diagnostics: sink), transport: transport, downloadFiles: fixture.files)
+        await #expect(throws: DownloadError.sizeLimitExceeded) {
+            try await client.download(URLRequest(url: base.appending(queryItems: [.init(name: "private", value: secret)])), maximumBytes: 8)
+        }
+        let event = try #require(sink.events.first)
+        #expect(sink.events.count == 1 && event.outcome == .other && event.attemptCount == 1)
+        #expect(Set(Mirror(reflecting: event).children.compactMap(\.label)) == ["requestID", "method", "status", "duration", "attemptCount", "outcome"])
+        let descriptions = String(reflecting: event) + DownloadError.sizeLimitExceeded.localizedDescription
+            + String(reflecting: DownloadError.cleanupFailed(primary: .fileSystem))
+        #expect(!descriptions.contains(secret) && !descriptions.contains(fixture.root.path))
+    }
+
+
+
+    @Test(arguments: ["status", "size", "inspect", "transport", "response"])
+    func ordinaryCleanupFailureRetainsOnlyPrimaryCategory(mode: String) async throws {
+        let fixture = try FileFixture(bytes: 9); defer { fixture.remove() }
+        var operations = fixture.files
+        operations.remove = { _ in throw CocoaError(.fileWriteNoPermission) }
+        if mode == "inspect" { operations.inspect = { _ in throw CocoaError(.fileReadNoPermission) } }
+        let sink = FileSink()
+        let transport = FileTestTransport { request, owner in
+            owner.adopt(fixture.source)
+            if mode == "transport" { throw URLError(.networkConnectionLost) }
+            if mode == "response" { return URLResponse(url: request.url!, mimeType: nil, expectedContentLength: 9, textEncodingName: nil) }
+            return fileResponse(request, status: mode == "status" ? 503 : 200)
+        }
+        let client = try APIClient(configuration: .init(baseURL: base, diagnostics: sink), transport: transport, downloadFiles: operations)
+        let category: DownloadError.PrimaryFailure
+        switch mode {
+        case "status": category = .httpStatus
+        case "size": category = .sizeLimitExceeded
+        case "inspect": category = .fileSystem
+        case "transport": category = .transport
+        default: category = .invalidResponse
+        }
+        await #expect(throws: DownloadError.cleanupFailed(primary: category)) {
+            try await client.download(URLRequest(url: base), maximumBytes: 8)
+        }
+        #expect(fixture.sourceExists || fixture.destinationExists)
+        #expect(sink.events.count == 1 && sink.events.first?.outcome == .other)
+    }
+
+    @Test(arguments: ["Range", "If-Range"])
+    func providerCannotEnablePartialFileRequests(header: String) async throws {
+        let provider = FileProvider(fields: [header: "synthetic"]), sink = FileSink()
+        let transport = FileTestTransport { request, _ in fileResponse(request) }
+        let client = try APIClient(configuration: .init(baseURL: base, authentication: .init(provider: provider), diagnostics: sink), transport: transport)
+        await #expect(throws: NetworkError.invalidRequest(.unsupportedRequest)) {
+            try await client.download(URLRequest(url: base), maximumBytes: 8)
+        }
+        #expect(await provider.calls == 1)
+        #expect(await transport.calls == 0)
+        #expect(sink.events.first?.attemptCount == 0)
     }
 
 }

@@ -202,4 +202,24 @@ struct GuideStubClient: NetworkClient {
         #expect(errors.map(guideSafeFailureCategory) == ["cancelled", "invalid-request", "transport", "http-status",
             "invalid-response", "encoding", "decoding", "timeout", "unexpected"])
     }
+    // Regular import (no @testable): public visibility and original function arities matter.
+    @Test func legacyAndFileFunctionReferencesRemainPublic() async throws {
+        let initializer: (HTTPHeaders, TimeInterval?, TimeInterval?, HTTPStatusPolicy, AuthenticationPolicy) throws -> NetworkCallOptions =
+            NetworkCallOptions.init(headers:inactivityTimeout:totalTimeout:acceptedStatuses:authentication:)
+        let legacy = try initializer(HTTPHeaders(), nil, nil, .successful, .automatic)
+        #expect(legacy.retry == .disabled)
+        let factory: (NetworkConfiguration) throws -> APIClient = APIClient.init(configuration:)
+        let borrowedFactory: (NetworkConfiguration, URLSession, SessionStorageProfile) throws -> APIClient = APIClient.init(configuration:session:storage:)
+        _ = borrowedFactory
+        let conformer: any NetworkClient = GuideStubClient(data: Data(), status: 200)
+        await conformer.shutdown()
+        let base = URL(string: "https://example.invalid")!
+        let client = try factory(NetworkConfiguration(baseURL: base))
+        let raw: (URLRequest, ResponseStrategy<Data>, NetworkCallOptions) async throws -> NetworkResponse<Data> = client.send
+        _ = raw // Never perform live traffic in this compatibility check.
+        let file: (URLRequest, Int64, DownloadOptions) async throws -> NetworkResponse<DownloadedFile> = client.download
+        await #expect(throws: NetworkError.invalidRequest(.invalidConfiguration)) { try await file(URLRequest(url: base), 0, .default) }
+        await client.shutdown()
+    }
+
 }
