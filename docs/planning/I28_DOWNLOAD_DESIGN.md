@@ -1,7 +1,7 @@
 # I28 foreground download detailed design
 
 Date: 2026-11-01
-Status: Owner-approved detailed design and bounded feasibility disposition; final documentation PR/main acceptance pending. No I29–I32 authorization.
+Status: Owner-approved design/disposition; PR #154/main accepted and I28/#88 completed. Subsequent I29–I32 implementation instruction is recorded in ADR-0015; earlier no-code decisions below retain their original scope.
 Owner: #146 / #88; ADR-0015 revision 1 remains the approved planning baseline.
 
 ## Accepted evidence and decision boundary

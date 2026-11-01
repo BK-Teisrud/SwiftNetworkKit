@@ -1,7 +1,7 @@
 # ADR-0015: Bounded foreground file download
 
 Date: 2026-11-01
-Status: Accepted planning contract; subsequent I28-only feasibility authorized, I29–I32/public API remain unauthorized
+Status: Accepted planning/detailed design; I28 completed; subsequent explicit I29–I32 implementation authorization recorded below
 Owner: @BK-Teisrud
 Issue / requirement: PLAN-F4 #88; NK-09 #16 / specification §4.9; platform domain #26 / §4.19
 
@@ -38,3 +38,7 @@ After PR #151/main run 41312825323 passed, the owner explicitly authorized only 
 ## Detailed I28 disposition — 2026-11-01
 
 The owner explicitly approved the [exact API/error/diagnostic design and native-partial limitation](../planning/I28_DOWNLOAD_DESIGN.md): “Approve the detailed design and limitation; no I29 code.” Candidate ownership survives terminal arbitration; inaccessible Foundation-owned partial files cannot be enumerated or attested deleted. New file errors use existing diagnostic outcome .other; NetworkClient, existing error enums/signatures and core/retry behavior stay unchanged. Final documentation PR/main acceptance precedes I28/#88 metadata completion. This is bounded feasibility/plan acceptance, not I29–I32 code permission, production support or publication. Original source-specific experimental evidence remains unchanged.
+
+## Subsequent I29–I32 implementation instruction — 2026-11-01
+
+After accepted PR #154/main run 41323512108 and completed #88/#146, the owner explicitly replied: “Approve code start for I29–I32.” Only the accepted detailed download design is authorized, in order beginning I29 #147. Earlier no-I29 statements remain historical and are superseded for these four selected tasks. New signing/device-installation steps, purchases and publication remain excluded; #29/#132 retain their mandatory barriers.

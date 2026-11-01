@@ -1,7 +1,7 @@
 # F4 foreground download plan
 
 Date: 2026-11-01
-Status: Owner-approved revision 1 planning contract; PR #151/main run 41312825323 accepted. Subsequent I28-only feasibility authorized; no I29–I32/public API authorization.
+Status: Owner-approved planning and detailed design; I28/#88 completed after PR #154/main. Subsequent explicit I29–I32 implementation instruction recorded below; I29 candidate acceptance pending.
 Owner: PLAN-F4 #88; domains #16 / specification §4.9 and #26 / §4.19.
 
 ## Need and approval
@@ -44,7 +44,7 @@ Apple's [pause/resume documentation](https://developer.apple.com/documentation/f
 | 40.5 | [I31 / #149](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/149) | I30 / #148 |
 | 40.6 | [I32 / #150](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/150) | I31 / #149 |
 
-START-F4 #145 is Done; I28 #146 is In Review after explicit detailed-design approval; final documentation acceptance is pending. I29–I32 remain Blocked/P2. START-F4 grants no shipping implementation permission. #88 is blocked by I28 because native feasibility remains one of its original acceptance criteria. START-F4 does not require #88 closure: it requires acceptance of this planning PR/main and the explicit bounded owner instruction. This avoids a dependency cycle. I29 requires both I28 and #88 plus a later explicit owner implementation decision; later tasks inherit this dependency but receive no code authorization from planning.
+START-F4 #145 and I28/#88 are Done after their accepted evidence and PR/main checks. I29 is In Review; I30–I32 remain predecessor-blocked/P2 under the separate explicit owner implementation instruction. START-F4 itself grants no shipping permission. START-F4 does not require #88 closure: it requires acceptance of this planning PR/main and the explicit bounded owner instruction. This avoids a dependency cycle. I29 requires both I28 and #88 plus a later explicit owner implementation decision; later tasks inherit this dependency but receive no code authorization from planning.
 
 No new delivery milestone or date is needed. Existing F4 retains selected downloads and domain #16/#26 retain deferred catalogs; no domain is complete. #14 advanced resilience is Backlog, #89/#90 remain independent planning, and #29/#132 remain mandatory publication barriers. Reassess the plan after each completed task. Stop at every pending GitHub run until the owner resumes work.
 
@@ -65,3 +65,7 @@ The owner authorized only I28 after planning acceptance. [The report](I28_DOWNLO
 ## Final detailed-design disposition
 
 The owner explicitly approved [I28_DOWNLOAD_DESIGN.md](I28_DOWNLOAD_DESIGN.md), including the exact proposed API/error/diagnostic surface and unobservable Foundation-owned partial-file limitation. This later disposition resolves the earlier design alternatives while preserving source-specific experimental evidence. Final documentation PR/main acceptance precedes #146/#88 completion; their live issues/project record the actual result. I29–I32 remain unauthorized and need their separate implementation instruction. No new milestone/issue or generic operation refactor is justified.
+
+## Subsequent implementation instruction
+
+After completed I28/#88 and accepted PR #154/main, the owner explicitly authorized I29–I32 in order. [The I29 candidate](I29_FOREGROUND_DOWNLOAD.md) records implementation/test results and remaining gates. Earlier no-code statements retain their original planning scope and are superseded only for these four tasks; new signing/device installation, purchases and publication remain excluded.
