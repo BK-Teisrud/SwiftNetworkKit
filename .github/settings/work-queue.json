@@ -670,10 +670,10 @@
         "PLAN-F4"
       ],
       "parent": 16,
-      "implementation_authorized": false,
-      "authorization_scope": "ADR-0015 planning approval only; START-F4 requires explicit feasibility-only instruction. I29–I32 additionally require a later implementation decision. No publication.",
+      "implementation_authorized": true,
+      "authorization_scope": "Explicit owner I29–I32 implementation instruction on 2026-11-01 under ADR-0015 / accepted I28 design, in order starting I29 #147. New signing/device installation, purchases and publication excluded.",
       "decision_adr": "docs/decisions/ADR-0015-foreground-file-download.md",
-      "start_gate": 145
+      "start_gate": 147
     },
     {
       "order": 40.4,
@@ -686,10 +686,10 @@
         "I29"
       ],
       "parent": 16,
-      "implementation_authorized": false,
-      "authorization_scope": "ADR-0015 planning approval only; START-F4 requires explicit feasibility-only instruction. I29–I32 additionally require a later implementation decision. No publication.",
+      "implementation_authorized": true,
+      "authorization_scope": "Explicit owner I29–I32 implementation instruction on 2026-11-01 under ADR-0015 / accepted I28 design, in order starting I29 #147. New signing/device installation, purchases and publication excluded.",
       "decision_adr": "docs/decisions/ADR-0015-foreground-file-download.md",
-      "start_gate": 145
+      "start_gate": 147
     },
     {
       "order": 40.5,
@@ -702,10 +702,10 @@
         "I30"
       ],
       "parent": 16,
-      "implementation_authorized": false,
-      "authorization_scope": "ADR-0015 planning approval only; START-F4 requires explicit feasibility-only instruction. I29–I32 additionally require a later implementation decision. No publication.",
+      "implementation_authorized": true,
+      "authorization_scope": "Explicit owner I29–I32 implementation instruction on 2026-11-01 under ADR-0015 / accepted I28 design, in order starting I29 #147. New signing/device installation, purchases and publication excluded.",
       "decision_adr": "docs/decisions/ADR-0015-foreground-file-download.md",
-      "start_gate": 145
+      "start_gate": 147
     },
     {
       "order": 40.6,
@@ -718,10 +718,10 @@
         "I31"
       ],
       "parent": 16,
-      "implementation_authorized": false,
-      "authorization_scope": "ADR-0015 planning approval only; START-F4 requires explicit feasibility-only instruction. I29–I32 additionally require a later implementation decision. No publication.",
+      "implementation_authorized": true,
+      "authorization_scope": "Explicit owner I29–I32 implementation instruction on 2026-11-01 under ADR-0015 / accepted I28 design, in order starting I29 #147. New signing/device installation, purchases and publication excluded.",
       "decision_adr": "docs/decisions/ADR-0015-foreground-file-download.md",
-      "start_gate": 145
+      "start_gate": 147
     },
     {
       "order": 50,
@@ -746,6 +746,7 @@
   ],
   "authorization_adr": "docs/decisions/ADR-0012-implementation-start.md",
   "status_source": "GitHub Issues and ProjectV2; this file records planned structure, not completion status",
-  "authorization_scope": "Core under ADR-0012; bounded read-retry I24–I27 explicitly authorized by owner on 2026-10-31 under ADR-0014 and START-F3 #137. No publication or other extension authorization. I28 non-shipping bounded feasibility only explicitly authorized on 2026-11-01 under ADR-0015 / START-F4 #145; I29–I32 remain unauthorized.",
-  "extension_start_gate": 137
+  "authorization_scope": "Core under ADR-0012; bounded read-retry I24–I27 explicitly authorized by owner on 2026-10-31 under ADR-0014 and START-F3 #137. No publication or other extension authorization. I28 non-shipping bounded feasibility only explicitly authorized on 2026-11-01 under ADR-0015 / START-F4 #145; I29–I32 remain unauthorized. I29–I32 explicitly authorized by owner on 2026-11-01 under ADR-0015/I28; permission recorded in #147–#150, no new signing/device-installation or publication.",
+  "extension_start_gate": 137,
+  "download_start_decision": 147
 }

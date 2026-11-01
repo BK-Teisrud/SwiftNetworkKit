@@ -1,6 +1,6 @@
 # ``NetworkKit``
 
-Execute typed and raw buffered HTTP calls for Apple platforms.
+Execute typed/raw buffered HTTP calls and explicit foreground file downloads for Apple platforms.
 
 ## Overview
 
@@ -20,6 +20,10 @@ remaining implementation tasks, and the proprietary rights policy.
 ## Integration guide
 
 Start with <doc:IntegrationGuide> for compiled consumer examples, installation, formats, errors, session ownership, authentication and testing.
+
+## File downloads
+
+See <doc:FileDownloads> for the separate bodyless GET file operation, required size limit, temporary-file ownership and error/cleanup boundaries.
 
 ## Response interpretation
 

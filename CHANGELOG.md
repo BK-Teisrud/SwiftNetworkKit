@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Foreground file download — I29 implementation candidate
+
+- Added one explicit GET-to-file operation with a required output-size limit, HTTP 200-only completion and app ownership on successful return.
+- Reuse existing security/auth/session/deadline/shutdown behavior; preserve files across terminal arbitration and clean discarded candidates. No download retry, overwrite/copy fallback or NetworkClient conformance change.
+- File errors use bounded categories and existing diagnostic outcome other. Foundation-owned unexposed partial files and transient disk use retain the owner-approved limitations; I30–I32/native/publication gates remain outstanding.
+
 - F2 non-publishing hardening/rehearsal is accepted through PR #135/main 41242130528; no version/tag/release is created. Physical Watch and owner publication/workload decisions remain separate gates.
 
 ### Bounded read retries — accepted technical gate

@@ -10,10 +10,16 @@ internal actor URLSessionTransport: NetworkTransport {
         return TransportResponse(data: data, response: response)
     }
 
+    typealias DownloadOperation = @Sendable (URLSession, URLRequest, NetworkTaskDelegate) async throws -> (URL, URLResponse)
+    static let systemDownloadOperation: DownloadOperation = { session, request, delegate in
+        try await session.download(for: request, delegate: delegate)
+    }
+
     let session: URLSession
     let ownsSession: Bool
     private let storagePolicy: StoragePolicy
     private let dataOperation: DataOperation
+    private let downloadOperation: DownloadOperation
     private let securityPolicy: NetworkSecurityPolicy
     private let baseURL: URL?
     private var invalidated = false
@@ -37,6 +43,7 @@ internal actor URLSessionTransport: NetworkTransport {
     /// Custom protocolClasses are an internal test seam, never a public plugin system.
     init(ownedConfiguration: URLSessionConfiguration = URLSessionTransport.configuration(),
          dataOperation: @escaping DataOperation = URLSessionTransport.systemDataOperation,
+         downloadOperation: @escaping DownloadOperation = URLSessionTransport.systemDownloadOperation,
          securityPolicy: NetworkSecurityPolicy = .default, baseURL: URL? = nil) throws {
         guard let copy = ownedConfiguration.copy() as? URLSessionConfiguration else {
             throw NetworkError.invalidRequest(.invalidConfiguration)
@@ -46,12 +53,14 @@ internal actor URLSessionTransport: NetworkTransport {
         ownsSession = true
         storagePolicy = .strict
         self.dataOperation = dataOperation
+        self.downloadOperation = downloadOperation
         self.securityPolicy = securityPolicy
         self.baseURL = baseURL
     }
 
     init(session: URLSession, storagePolicy: StoragePolicy = .strict,
          dataOperation: @escaping DataOperation = URLSessionTransport.systemDataOperation,
+         downloadOperation: @escaping DownloadOperation = URLSessionTransport.systemDownloadOperation,
          securityPolicy: NetworkSecurityPolicy = .default, baseURL: URL? = nil) throws {
         guard session.delegate == nil else { throw NetworkError.invalidRequest(.unsupportedRequest) }
         try Self.validate(session.configuration, storagePolicy: storagePolicy)
@@ -59,6 +68,7 @@ internal actor URLSessionTransport: NetworkTransport {
         ownsSession = false
         self.storagePolicy = storagePolicy
         self.dataOperation = dataOperation
+        self.downloadOperation = downloadOperation
         self.securityPolicy = securityPolicy
         self.baseURL = baseURL
     }
@@ -84,7 +94,7 @@ internal actor URLSessionTransport: NetworkTransport {
         }
     }
 
-    func send(_ input: URLRequest) async throws -> TransportResponse {
+    private func validatedTask(_ input: URLRequest) throws -> (URLRequest, NetworkTaskDelegate) {
         try Task.checkCancellation()
         guard !invalidated else { throw NetworkError.invalidRequest(.clientClosed) }
         guard input.httpBodyStream == nil else { throw NetworkError.invalidRequest(.unsupportedRequest) }
@@ -109,11 +119,32 @@ internal actor URLSessionTransport: NetworkTransport {
         }
         let delegate = try NetworkTaskDelegate(request: request, policy: securityPolicy,
                                               disableAutomaticStorage: storagePolicy == .strict || foreignOrigin)
+        return (request, delegate)
+    }
+
+    func send(_ input: URLRequest) async throws -> TransportResponse {
+        let (request, delegate) = try validatedTask(input)
         do {
             let result = try await dataOperation(session, request, delegate)
             try Task.checkCancellation()
             if let failure = delegate.failure { throw failure }
             return result
+        } catch {
+            try Task.checkCancellation()
+            if let failure = delegate.failure { throw failure }
+            throw error
+        }
+    }
+
+    func download(_ input: URLRequest, owner: DownloadFileOwner) async throws -> URLResponse {
+        let (request, delegate) = try validatedTask(input)
+        do {
+            let (url, response) = try await downloadOperation(session, request, delegate)
+            // Native success can race cancellation. Register the file before any throwing check.
+            owner.adopt(url)
+            try Task.checkCancellation()
+            if let failure = delegate.failure { throw failure }
+            return response
         } catch {
             try Task.checkCancellation()
             if let failure = delegate.failure { throw failure }

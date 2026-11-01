@@ -4,7 +4,7 @@
 
 F3 is formally closed: I27 #110 is Done after final PR #144/main b4511c5efe9a349a9f91eb0448974f1bf49b8d3f/run 41302196774; all seven checks passed. [F3 closeout](F3_CLOSEOUT_2026-11-01.md) preserves its bounded technical acceptance and source-specific evidence.
 
-F4 foreground GET-to-file planning is owner-approved under [ADR-0015](../decisions/ADR-0015-foreground-file-download.md). Accepted planning PR #151, native checkpoint PR #152 and handoff PR #153 have passed main. [The detailed I28 design](I28_DOWNLOAD_DESIGN.md) and Foundation-owned partial-file limitation are explicitly owner-approved; final documentation PR/main acceptance remains pending. I28 #146 is In Review and #88 remains Blocked until that acceptance/metadata readback. I29–I32 #147–#150 remain Blocked and unauthorized; the next decision is separate I29–I32 implementation permission after planning closure. No public file API is implemented.
+F4 planning/I28 #88/#146 are Done after accepted PR #154/main run 41323512108. The owner explicitly authorized selected I29–I32 under ADR-0015, in order. [I29 implementation](I29_FOREGROUND_DOWNLOAD.md) adds the bounded GET-to-file lifecycle and critical-path tests; PR/main acceptance is pending. I29 #147 is In Review; I30–I32 #148–#150 remain Blocked by their delivery predecessors. No new signing/device installation, purchase or publication is authorized.
 
 #14 advanced resilience remains Backlog; #89/#90 remain independent planning. #29 actual app/workload/security/publication and physical Watch #132 remain mandatory separate barriers. No new milestone/date or publication authorization follows.
 
@@ -26,7 +26,7 @@ The owner-approved bounded technical gate is accepted through PR #143/main run 4
 
 ## F4 – File transfers
 
-One foreground GET-to-file increment is selected for planning only under ADR-0015. #88/I28 must establish native/session/file-lifetime feasibility before implementation. START-F4 #145 is completed for I28 feasibility only; I29–I32 need later implementation authorization. Upload, progress, resume, background and download retry remain deferred; no additional milestone is currently justified.
+One foreground GET-to-file increment is selected under ADR-0015. #88/I28 are completed after accepted feasibility/design documentation. START-F4 #145 covered I28 only; the owner subsequently explicitly authorized I29–I32, starting with the I29 implementation candidate. Upload, progress, resume, background and download retry remain deferred; no additional milestone is currently justified.
 
 ## F5 – Real-time communication
 

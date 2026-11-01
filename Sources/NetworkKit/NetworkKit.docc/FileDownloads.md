@@ -1,0 +1,27 @@
+# Foreground file downloads
+
+Download a complete HTTP 200 response to a temporary file with an explicit output-size limit.
+
+## Ownership and scope
+
+Call `APIClient.download(_:maximumBytes:options:)` on the concrete client with a bodyless GET URLRequest, a positive Int64 maximum and optional ``DownloadOptions``. The result is a ``NetworkResponse`` whose ``DownloadedFile`` exposes the temporary URL and actual stored byte count. Empty HTTP 200 files are allowed. Other statuses, including 206, fail; Range/If-Range requests and request bodies are unsupported.
+
+After successful return, the app owns moving or removing the file. Client shutdown never deletes a handed-off result. Keep the URL private; do not depend on indefinite temporary-file retention. Descriptions omit its path. The app owns retention, post-handoff file-protection/backup suitability and account deletion. No server filename selects a local path.
+
+``NetworkClient`` remains the existing buffered-call boundary; no new requirement is imposed on its conformers. Typed file endpoints, upload, progress events, pause/resume, background/relaunch, queues and download retry are outside this operation.
+
+## Size, timing and cleanup
+
+The required maximum bounds the successfully returned file, measured after transfer; it is not a hard limit on Foundation's transient disk use. The body is not accumulated in a library Data value. Preservation uses an exclusive same-volume rename, with no overwrite or cross-volume copy fallback. File inspection accepts a regular file and restricts permissions to its owner. This is not a secure-erasure, crash-durability or universal resource guarantee.
+
+Download options inherit client defaults: 30-second request inactivity and one original 60-second total budget, configurable per call. Auth preparation, transfer and validation share that budget. Cancellation/shutdown joins the worker and attempts cleanup before return. Filesystem work may delay return past the deadline.
+
+``DownloadError`` reports size and bounded file-operation/cleanup categories. Other request/HTTP/transport/timeouts remain ``NetworkError``; CancellationError remains separate. Cancellation/timeout keep precedence even when removal fails, without a separate cleanup-error channel. Ordinary failure plus failed removal reports a cleanup error with only a primary category. Paths, raw system messages and content are not retained in those errors.
+
+The library attempts removal of files it has actually acquired. Foundation can own internal partial files whose URL is never returned after interruption; their removal cannot be attested by NetworkKit. Filesystem refusal/crash can also leave files. No broad temporary-directory sweep is performed.
+
+## Diagnostics and evidence
+
+The existing optional terminal diagnostic keeps its six-field allowlist. Download file errors map to outcome `other`; no filenames, paths, byte counts, progress or cleanup event stream are added. Library attempt count is zero before invocation or one afterward. There is no automatic download retry.
+
+The I29 implementation has critical-path deterministic/file-backed tests; broader integration, current/minimum/native resource evidence and compiled examples remain the separate I30–I32 work. No production support, tag, release or publication follows from API availability. Consult the repository I29 report for exact candidate results and retained publication barriers.

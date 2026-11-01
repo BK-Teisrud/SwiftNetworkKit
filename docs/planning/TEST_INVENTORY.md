@@ -1,6 +1,6 @@
 # Test declaration inventory — TLS-01
 
-Current candidate note: [I27 retry review](I27_RETRY_REVIEW_2026-11-01.md) passes 245 local root declarations in 31 suites, including two reproduced/corrected review regressions. The accepted I26 predecessor main run 41296068624 passes 243 Mac/four 234-test simulator results. PR #143/main run 41299838862 and the owner's limited F3 technical disposition are now accepted; [closeout](F3_CLOSEOUT_2026-11-01.md) records formal completion. Prior numbered evidence below is not rewritten.
+Current candidate note: [I29 file-download implementation](I29_FOREGROUND_DOWNLOAD.md) passes 256 local Mac declarations in 32 suites, adding 11 DownloadTests declarations (24 parameter-expanded cases). Restored targeted tests pass after an ownership-order negative control. Simulator/minimum native execution and PR/main acceptance for this candidate remain unverified; no current simulator test count is inferred from typechecking. Earlier counts below remain source-specific history.
 
 Snapshot: 2026-10-27, TLS-01 candidate based on `dcf0a1b57c43ea5d96e06ee1d328e2d3d86a1a76`. This source index contains 218 `@Test` function declarations, including two macOS-only child-process tests and one macOS-only native TLS test; other selected runtime destinations retain 215 declarations. Parameterized cases are not additional function declarations. Runtime results must come from execution, not this count. See [contract evidence ledger](TEST_EVIDENCE.md) for coverage and limitations. Refresh this snapshot when the suite changes; historical run counts remain dated evidence.
 
@@ -322,3 +322,7 @@ Snapshot: 2026-10-27, TLS-01 candidate based on `dcf0a1b57c43ea5d96e06ee1d328e2d
 [Source](../../Tests/NetworkKitTests/NativeTLSTests.swift) — 1 macOS-only declaration.
 
 - `untrustedCertificateIsRejectedThroughBothPublicInputs`
+
+## DownloadTests.swift — I29 addition
+
+[Source](../../Tests/NetworkKitTests/DownloadTests.swift) — 11 declarations covering successful/empty app ownership, invalid limits/requests before auth, rejected statuses without retry, actual file size, preserve/inspect/remove errors, original deadline discard, cancellation/cleanup precedence, exclusive target collisions, native-return adoption order and shutdown/join. See the I29 report for actual local results and unproved native boundaries.
