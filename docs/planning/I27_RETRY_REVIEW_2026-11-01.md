@@ -1,6 +1,6 @@
 # I27 — bounded read-retry API and delivery review
 
-Status: review candidate; owner F3 gate disposition and required PR/main checks pending. I26 is completed through PR #142/main `7ece7cf5c26220a8d6654035585a20cb6f98218b`, verified run 41296068624 (243 Mac tests, four 234-test simulator runs, 22 helpers). The completed Mac route is removed and disabled. I27 implementation/review is explicitly authorized by ADR-0014 / #137; this is not production or publication authorization.
+Status: owner F3 technical-gate disposition approved with the limits below; PR #143/main e0282dc29ac2247a7c2b6e142e37e7ed3cb5be24/run 41299838862 accepted. Final documentation acceptance/formal state is recorded in [F3 closeout](F3_CLOSEOUT_2026-11-01.md) and #110. I26 is completed through PR #142/main `7ece7cf5c26220a8d6654035585a20cb6f98218b`, verified run 41296068624 (243 Mac tests, four 234-test simulator runs, 22 helpers). The completed Mac route is removed and disabled. I27 implementation/review is explicitly authorized by ADR-0014 / #137; this is not production or publication authorization.
 
 ## Outcome and concrete corrections
 
@@ -48,10 +48,10 @@ Approve only the bounded F3 technical increment after required candidate checks,
 - Actual minimum-simulator observations are iOS/iPadOS 17.0, tvOS 17.0 and watchOS 10.0 on Intel; actual Mac minimum-family observation is ARM64/macOS 14.8.9, not exact 14.0 or Intel Mac 14. Physical Watch #132 remains unexecuted/mandatory before publication. This candidate does not claim new physical-family results.
 - #29 still requires real app rate/payload/budget/device-memory fit, security, exact release-source selection and explicit publication approval. F3 acceptance does not silently expand the separately scoped first stable core release, authorize production suitability or create a tag/version/release.
 
-Owner disposition: **pending**. The prior F2-only resource approval and the I24–I27 code-start instruction do not by themselves approve these new measured F3 gate inputs. This is a concrete technical-phase decision, not a request to accept unknown production workloads.
+Owner disposition: **approved only for the F3 technical gate with these limitations**, explicitly recorded on 2026-11-01 in #110. Submission-time pending flags in the immutable review JSON retain their original context. The prior F2-only resource approval and the I24–I27 code-start instruction do not by themselves approve these new measured F3 gate inputs. This is a concrete technical-phase decision, not a request to accept unknown production workloads.
 
 ## Plan and quality assessment
 
-I24/I25/I26 are Done; I27 remains In Progress until owner disposition, this review's required PR/main checks and final reconciliation. The selected F3 milestone remains coherent; no new milestone or duplicate bug/planning issue is needed for the two small in-scope corrections. Live planning summaries are consolidated; original statuses remain in the linked history and immutable evidence.
+I24/I25/I26 are Done. Owner disposition and this review's PR/main checks are accepted; final documentation PR/main reconciliation precedes formal I27/F3 closure. The selected F3 milestone remains coherent; no new milestone or duplicate bug/planning issue is needed for the two small in-scope corrections. Live planning summaries are consolidated; original statuses remain in the linked history and immutable evidence.
 
 After F3, PLAN-F4 #88 remains the existing next planning candidate: confirm a real transfer use case and feasibility before selecting any implementation. PLAN-F5/#89 and PLAN-F6/#90 remain separate research/backlog, not automatic next-code permission. Existing #29/#132 remain the appropriate app/workload/publication/Watch owners; do not invent another generic production-readiness issue or implement advanced resilience without a new selected scope/start decision.

@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-01",
+  "phase": "F3 \u2013 Bounded read retries",
+  "technical_gate_approved_by_owner": true,
+  "owner_translated_reply": "Approve only the F3 gate with these limitations.",
+  "owner_decision_issue": 110,
+  "implementation_pr": 143,
+  "implementation_commit": "e0282dc29ac2247a7c2b6e142e37e7ed3cb5be24",
+  "implementation_main_ci": 41299838862,
+  "all_seven_main_jobs_passed": true,
+  "mac_tests": 245,
+  "simulator_runs": [
+    {
+      "family": "iPhone",
+      "tests": 236
+    },
+    {
+      "family": "iPad",
+      "tests": 236
+    },
+    {
+      "family": "watchOS",
+      "tests": 236
+    },
+    {
+      "family": "tvOS",
+      "tests": 236
+    }
+  ],
+  "helper_tests": 22,
+  "public_symbols": {
+    "baseline": 319,
+    "candidate": 326,
+    "removed": 0,
+    "retained_signatures_unchanged": true
+  },
+  "native_evidence": {
+    "minimum_simulator_parameter_cases": 16,
+    "minimum_families": [
+      "iOS 17.0",
+      "iPadOS 17.0",
+      "tvOS 17.0",
+      "watchOS 10.0"
+    ],
+    "macos14_run": 41294523457,
+    "macos14_execution": "ARM64 macOS 14.8.9 / 23J631",
+    "native_https_cases": 6,
+    "macos14_resource_modes": 4,
+    "temporary_workflow_state": "deleted"
+  },
+  "selected_issue_snapshot": {
+    "107": "closed",
+    "108": "closed",
+    "109": "closed",
+    "110": "open; final documentation acceptance pending"
+  },
+  "formal_closeout_requires_this_documentation_pr_main_acceptance": true,
+  "domain_14_remains_open": true,
+  "mandatory_publication_gates": [
+    29,
+    132
+  ],
+  "production_suitability_approved": false,
+  "release_or_tag_authorized": false,
+  "further_extension_implementation_authorized": false,
+  "residual_limits": [
+    "App-selected semantically safe bodyless GET/HEAD; retry disabled by default.",
+    "Foundation-internal wire attempts/redirects and discarded header identities cannot be reconstructed.",
+    "No hard buffered-response size cap or validated unknown app workload.",
+    "Finite environment-specific RSS/malloc observations, including 33.02 MiB peak RSS and about 3.41 MiB settled reported malloc; no leak verdict or universal memory bound.",
+    "Minimum/runtime evidence retains exact source/OS/architecture scope; no new physical-family pass or exact macOS 14.0/Intel macOS 14 claim."
+  ],
+  "implementation_main_log_sha256": "edf3d11974efa52c6a0285b3e809b51fae62710626f086b606995910a6a553e0"
+}

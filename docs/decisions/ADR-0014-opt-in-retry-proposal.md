@@ -1,7 +1,7 @@
 # ADR-0014: Bounded per-call read-retry contract
 
 Date: 2026-10-31 (refresh of the 2026-10-27 proposal)
-Status: Accepted contract/planning and explicit I24–I27 implementation authorization; I24–I26 completed; I27 gate review pending. Earlier no-code decisions below retain their original dated scope.
+Status: Accepted contract/planning and explicit I24–I27 implementation authorization; I24–I26 completed; I27 technical gate/owner limitations accepted through PR #143/main run 41299838862; formal phase closeout tracked in #110. Earlier no-code decisions below retain their original dated scope.
 Owner: @BK-Teisrud
 Issue / requirement: PLAN-F3 #87, NK-07 #14 / specification §4.7
 
@@ -48,3 +48,7 @@ Amends the future post-core planning boundary of ADR-0007 only for this explicit
 ## Subsequent explicit implementation instruction — 2026-10-31
 
 After accepted PR #111/main run 41248255517, the owner explicitly authorized code start for I24–I27 under this unchanged contract. START-F3 #137 is completed. Earlier no-code statements above record the prior decision and are superseded only for these four slices. No publication or other extension is authorized.
+
+## Technical-gate disposition — 2026-11-01
+
+The owner explicitly approved only the F3 technical gate with the [I27 limitations](../planning/I27_RETRY_REVIEW_2026-11-01.md). PR #143/main run 41299838862 passes; the [closeout](../planning/F3_CLOSEOUT_2026-11-01.md) records final documentation acceptance requirements and separate #132/#29 barriers. This is not production suitability, release or further extension authorization.
