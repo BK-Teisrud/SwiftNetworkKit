@@ -55,9 +55,18 @@ public struct NetworkCallOptions: Sendable, CustomStringConvertible, CustomDebug
     /// Disabled by default; opt in only for semantically safe bodyless reads.
     public let retry: RetryPolicy
 
+    /// Preserves the pre-retry initializer, including references used as function values.
     public init(headers: HTTPHeaders = HTTPHeaders(), inactivityTimeout: TimeInterval? = nil,
                 totalTimeout: TimeInterval? = nil, acceptedStatuses: HTTPStatusPolicy = .successful,
-                authentication: AuthenticationPolicy = .automatic, retry: RetryPolicy = .disabled) throws {
+                authentication: AuthenticationPolicy = .automatic) throws {
+        try self.init(headers: headers, inactivityTimeout: inactivityTimeout, totalTimeout: totalTimeout,
+                      acceptedStatuses: acceptedStatuses, authentication: authentication, retry: .disabled)
+    }
+
+    /// Explicit replay selection; all other call overrides retain their original defaults.
+    public init(headers: HTTPHeaders = HTTPHeaders(), inactivityTimeout: TimeInterval? = nil,
+                totalTimeout: TimeInterval? = nil, acceptedStatuses: HTTPStatusPolicy = .successful,
+                authentication: AuthenticationPolicy = .automatic, retry: RetryPolicy) throws {
         for limit in [inactivityTimeout, totalTimeout].compactMap({ $0 }) {
             guard limit.isFinite, limit > 0 else {
                 throw NetworkError.invalidRequest(.invalidConfiguration)

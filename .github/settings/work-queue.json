@@ -549,7 +549,7 @@
       ],
       "parent": 14,
       "implementation_authorized": true,
-      "authorization_scope": "owner-approved contract only; explicit START-F3 code instruction and readiness required",
+      "authorization_scope": "Explicit owner code-start instruction on 2026-10-31 under ADR-0014 / START-F3 #137; only selected bounded read-retry I24–I27, no publication or other extension.",
       "decision_gate": 106,
       "planning_key": "F3-C01",
       "start_gate": 137
@@ -569,7 +569,7 @@
       ],
       "parent": 14,
       "implementation_authorized": true,
-      "authorization_scope": "owner-approved contract only; explicit START-F3 code instruction and readiness required",
+      "authorization_scope": "Explicit owner code-start instruction on 2026-10-31 under ADR-0014 / START-F3 #137; only selected bounded read-retry I24–I27, no publication or other extension.",
       "decision_gate": 106,
       "planning_key": "F3-C02",
       "start_gate": 137
@@ -589,7 +589,7 @@
       ],
       "parent": 14,
       "implementation_authorized": true,
-      "authorization_scope": "owner-approved contract only; explicit START-F3 code instruction and readiness required",
+      "authorization_scope": "Explicit owner code-start instruction on 2026-10-31 under ADR-0014 / START-F3 #137; only selected bounded read-retry I24–I27, no publication or other extension.",
       "decision_gate": 106,
       "planning_key": "F3-V01",
       "start_gate": 137
@@ -609,7 +609,7 @@
       ],
       "parent": 14,
       "implementation_authorized": true,
-      "authorization_scope": "owner-approved contract only; explicit START-F3 code instruction and readiness required",
+      "authorization_scope": "Explicit owner code-start instruction on 2026-10-31 under ADR-0014 / START-F3 #137; only selected bounded read-retry I24–I27, no publication or other extension.",
       "decision_gate": 106,
       "planning_key": "F3-GATE",
       "start_gate": 137

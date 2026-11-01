@@ -1,47 +1,20 @@
-# Work sequence before and after implementation authorization
+# Work queue
 
-## I26 actual macOS 14 result — 2026-11-01
+## Current delivery — 2026-11-01
 
-[Actual ARM64/macOS 14.8.9 retry execution](I26_MACOS14_RETRY_EXECUTION_2026-11-01.md) passes run 41294523457 on accepted main 660f8c099faccdd4215ad5e4bf1d082faaa3e403. Six native cases and four bounded resource workloads pass with exact source/payload custody. The one-off workflow is disabled and removed in the cleanup candidate. I26's selected verification is satisfied under documented limits; await cleanup PR/main acceptance before Done and I27. Physical Watch #132, unknown workload/production suitability and publication #29 remain mandatory; no new feature issue or broad resource refactor is justified.
+F2 is closed. The bounded read-retry contract/code start is approved under ADR-0014/#137. I24–I26 are Done; I26 final acceptance is PR #142/main run 41296068624. I27 #110 reviews the additive API, diagnostics, evidence and residual risks; its source-compatible initializer and final-budget corrections pass 245 local tests. Owner F3 gate disposition and candidate PR/main acceptance remain pending. See [I27 review](I27_RETRY_REVIEW_2026-11-01.md).
 
-## I26 minimum retry priority — 2026-11-01
+Physical Watch #132 and actual app/workload/security/publication #29 remain mandatory separate gates. No release, version/date, unknown-workload suitability or further extension code is authorized. [Preserved status history](F3_STATUS_HISTORY_2026-11-01.md) retains superseded summaries without presenting them as live next steps.
 
-PR #140/main run 41290108646 is accepted. [Fresh minimum retry evidence](I26_MINIMUM_RETRY_2026-11-01.md) passes 16 actual native parameter cases across iOS/iPadOS 17, tvOS 17 and watchOS 10. Temporarily prioritize existing #109 as P1: the standard macOS 14 route retires November 2, so prepare its main-only exact-source retry/resource execution before I27. Actual macOS 14 execution and candidate PR/main acceptance remain pending; no physical pass, release waiver, new feature issue or paid route is implied. Remove the temporary workflow after disposition/retirement under existing #109/#110.
+## Accepted F2 and next lanes
 
-## I26 native/resource execution — 2026-11-01
+The [F2 closeout](F2_CLOSEOUT_2026-10-31.md) records accepted core hardening/rehearsal, final main d0a522770269617f95660d67e9d0198838dc2bb5/run 41244932962 and the milestone-counter discrepancy. Original submission-time evidence/failure limits remain immutable. The F2-only resource disposition is not F3 or production acceptance.
 
-I25 #108 is accepted through PR #139/main run 41287067291. I26 #109 adds [native retry/resource evidence](NATIVE_RETRY_VERIFICATION.md): actual Mac URLSession contacts, TLS exclusion, public HTTPS ownership composition and bounded release measurements. Candidate CI and target-applicability review remain pending; no new minimum/physical pass or publication acceptance is inferred. Existing #109/#110 and #132/#29 retain their distinct gates; no new feature issue or broad refactor is justified.
+After I27, existing PLAN-F4 #88 is the next planning candidate only after confirming a real transfer need; #89/#90 remain independent research. Domain #14 stays open for deferred advanced resilience. Publication #29 and Watch #132 retain their separate blockers. Stop whenever GitHub execution is pending; resume only after the owner's next instruction, without queue polling or independent work across that stop.
 
-## I25 execution — 2026-11-01
+## Accepted core implementation history
 
-I24 #107 is accepted through PR #138/main run 41250907636 (223 Mac tests, four 220-test simulator runs, 19 helpers). I25 #108 integrates explicit per-call retry inside one admitted operation/deadline; see [integration evidence](RETRY_INTEGRATION.md). I26/I27 remain dependent native/resource/API review tasks. No extra issue, dependency, broad refactor or release scope is justified by this change. This supersedes earlier I24-active/no-loop status below; required I25 PR/main acceptance is pending.
-
-## Current F3 execution — 2026-10-31
-
-Planning #87/#106 is accepted through PR #111/main `25e0d52b8316251bb6592d075caead9b05ed9edd`, verified run 41248255517. The owner explicitly authorized implementation of I24–I27 under ADR-0014; START-F3 #137 is completed. I24 #107 implements pure eligibility/delay decisions; I25–I27 remain dependent work. No retry transport loop, publication or other extension is delivered by I24. This status supersedes earlier no-code holds below. Existing four slices remain sufficient; no additional feature issue or broad refactor is justified.
-
-## Complete retry contract approval — 2026-10-31
-
-The owner approves the complete [ADR-0014 contract](../decisions/ADR-0014-opt-in-retry-proposal.md) and expressly withholds code. #87/#106 await planning PR/main acceptance; [START-F3 #137](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/137) separately blocks selected I24–I27 (#107–#110). Existing F3 is now “F3 – Bounded read retries”; open unselected domain catalogs #12/#14/#15/#19/#24 stay outside this delivery milestone. No product code, default behavior, dependency, release/version/date or publication authorization. #132/#29 and accepted F2 remain unchanged.
-
-
-## Accepted F2 closeout — 2026-10-31
-
-F2 is CLOSED after PR #135/main `cc654ab5faadc0fc7fe00d7ad238b2e3ed5a997c`, [run 41242130528](https://github.com/BK-Teisrud/SwiftNetworkKit/actions/runs/41242130528), with full-log verification of 218 Mac tests, four 215 simulator suites, 19 helpers and four manual-host provenance checks without failure/restart markers. #64/#27 are Done; direct item lists and GraphQL verify no open F2 issues/PRs. [Closeout evidence](F2_CLOSEOUT_2026-10-31.md) records the milestone summary-counter disagreement and actual verified states.
-
-Original candidate evidence files retain their submission-time pending flags and exact executed SDK/platform/failure limits. The owner resource approval is F2-only. #132 physical Watch and #29 actual workload/device-memory/security/publication decisions remain mandatory in their separate milestone, with support unchanged. No release/tag, production suitability or F3 implementation is authorized.
-
-PLAN-F3 #87/#106 are In Review; the complete contract is owner-approved, but START-F3 #137 withholds implementation. I24–I27 are Blocked. Planning PR/main acceptance and a separate explicit code-start instruction remain required. Closed F2 is not publication or extension authorization.
-
-## Next planning and publication lanes
-
-1. #87 is Ready for planning only. Review bounded retry/draft PR #111 against accepted F2, answer contract questions and prepare its delivery backlog. Obtain explicit scope/start approval before F3 code.
-2. #132 stays Blocked before #29 publication; actual physical Watch and owner workload/device-memory/security/publication decisions remain mandatory. Do not reopen F2 or mark Watch passed merely to publish.
-3. Preserve closed-phase evidence and historical failure limits. No new milestone, dependency, paid service, support change or production feature is selected by closeout.
-
-Stop whenever a GitHub run is pending and await the owner's instruction to continue. Do not poll CI or continue independent work across that stop, as reconfirmed on 2026-10-31. Conversation stays Norwegian; repository and project content stay English.
-
-**Current: implementation authorized on 2026-10-20; [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41) is closed.** [ADR-0012](../decisions/ADR-0012-implementation-start.md) records the instruction. I01 established the package baseline. I02 implements foundational HTTP values/errors and their tests; I03 adds isolated configuration snapshots and internal transport/clock seams; I04 adds safe endpoint/URL construction and shared raw-URL validation; I05 adds buffered request encoding, call headers/options, and raw preparation; I06 adds real platform/source/DocC CI and required quality-gate enforcement; I07 adds buffered response strategies and per-call status validation; I08 adds the internal owned/borrowed URLSession adapter; I09 adds shared HTTPS/origin/loopback policy and per-operation redirect/trust delegates; I10 connects typed/raw calls to the public shared HTTP pipeline. I11 verifies the F1 contract/evidence boundary; see [F1 review](F1_REVIEW.md) and #52 for actual acceptance. I12 adds per-call cancellation/terminal arbitration and the monotonic total budget; see [timing evidence](CANCELLATION_AND_BUDGET.md). I13 adds explicit shutdown, operation registration and concurrent-call verification; see [lifecycle evidence](SHUTDOWN_AND_CONCURRENCY.md). I14 adds the [bounded authentication-header provider](AUTHENTICATION_PROVIDER.md), with app-owned login/token storage and no refresh/replay. I15 adds [optional sanitized diagnostics](SANITIZED_DIAGNOSTICS.md), disabled by default with a fixed metadata allowlist. I16 verifies [storage profiles against a controlled local server](STORAGE_VERIFICATION.md) and exposes the explicit app-managed borrowed-session selection. I17 accepted the [contract/regression ledger](TEST_EVIDENCE.md) and [test inventory](TEST_INVENTORY.md) through PR #93 / main run 40377796452. I18 reviews the [public API and compiled integration guide](API_REVIEW.md); its acceptance remains recorded in #59. The 2026-10-26 planning review adds PREP-01 / #85 (Order 16.5) as the early planning action (accepted through PR #92 and main run 40374198746; see [environment readiness](ENVIRONMENT_READINESS.md) and #85) and GATE-F2 / #86 (Order 22.5) before rehearsal; see [plan audit](PLAN_REVIEW_2026-10-26.md).
+**Historical core authorization on 2026-10-20; [START-00 / #41](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/41) is closed.** [ADR-0012](../decisions/ADR-0012-implementation-start.md) records the instruction. I01 established the package baseline. I02 implements foundational HTTP values/errors and their tests; I03 adds isolated configuration snapshots and internal transport/clock seams; I04 adds safe endpoint/URL construction and shared raw-URL validation; I05 adds buffered request encoding, call headers/options, and raw preparation; I06 adds real platform/source/DocC CI and required quality-gate enforcement; I07 adds buffered response strategies and per-call status validation; I08 adds the internal owned/borrowed URLSession adapter; I09 adds shared HTTPS/origin/loopback policy and per-operation redirect/trust delegates; I10 connects typed/raw calls to the public shared HTTP pipeline. I11 verifies the F1 contract/evidence boundary; see [F1 review](F1_REVIEW.md) and #52 for actual acceptance. I12 adds per-call cancellation/terminal arbitration and the monotonic total budget; see [timing evidence](CANCELLATION_AND_BUDGET.md). I13 adds explicit shutdown, operation registration and concurrent-call verification; see [lifecycle evidence](SHUTDOWN_AND_CONCURRENCY.md). I14 adds the [bounded authentication-header provider](AUTHENTICATION_PROVIDER.md), with app-owned login/token storage and no refresh/replay. I15 adds [optional sanitized diagnostics](SANITIZED_DIAGNOSTICS.md), disabled by default with a fixed metadata allowlist. I16 verifies [storage profiles against a controlled local server](STORAGE_VERIFICATION.md) and exposes the explicit app-managed borrowed-session selection. I17 accepted the [contract/regression ledger](TEST_EVIDENCE.md) and [test inventory](TEST_INVENTORY.md) through PR #93 / main run 40377796452. I18 reviews the [public API and compiled integration guide](API_REVIEW.md); its acceptance remains recorded in #59. The 2026-10-26 planning review adds PREP-01 / #85 (Order 16.5) as the early planning action (accepted through PR #92 and main run 40374198746; see [environment readiness](ENVIRONMENT_READINESS.md) and #85) and GATE-F2 / #86 (Order 22.5) before rehearsal; see [plan audit](PLAN_REVIEW_2026-10-26.md).
 
 Choose the lowest Order with closed blockers and satisfied Ready criteria. This is a recommended serial sequence for one developer, not a schedule. Reordering requires dependency review rather than new scope. See the [Work Queue](https://github.com/users/BK-Teisrud/projects/6/views/7).
 
@@ -93,14 +66,14 @@ I21 may investigate access to older test environments as preparation without cod
 
 | Order | Planning task | Domain coverage | Readiness |
 | --- | --- | --- | --- |
-| 30 | [PLAN-F3 / #87](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/87) | #14 first; assess #12/#15/#19/#24 separately | Backlog; retry-first planning direction selected, feature contracts pending |
+| 30 | [PLAN-F3 / #87](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/87) | #14 first; assess #12/#15/#19/#24 separately | Done; ADR-0014 and selected I24–I27 decomposition accepted |
 | 40 | [PLAN-F4 / #88](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/88) | #16/#26 | Backlog; transfer use cases/feasibility pending |
 | 50 | [PLAN-F5 / #89](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/89) | #17 | Backlog; real-time use case/lifecycle pending |
 | 60 | [PLAN-F6 / #90](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/90) | #13/#18 | Backlog; research need/stop-go criteria pending |
 
-These are governance/planning tasks, not authorized extension implementation. F2 retains delivery priority. Future epics have no Order and require new scope decisions; only selected implementation slices receive I identifiers. Parent epics may span phases; individual subtasks' milestones define delivery requirements. Reassess phase boundaries after selection and sizing, without inventing dates.
+These are governance/planning tasks, not authorized extension implementation. F2 is complete; the selected F3 gate is current delivery work. Future epics have no Order and require new scope decisions; only selected implementation slices receive I identifiers. Parent epics may span phases; individual subtasks' milestones define delivery requirements. Reassess phase boundaries after selection and sizing, without inventing dates.
 
-## F2 closure preparation — 2026-10-27
+## Historical F2 closure preparation — 2026-10-27
 
 [Preliminary F2 review](F2_REVIEW.md) indexes the ten core epics and 79 original source bullets without changing approved scope. #104 is accepted through main run 40556606300; #62/#63 actual access/execution and complete HTTPS/resource evidence remain Blocked. Both precede #86; #64 and #27 rehearsal follow, and #29 retains separate release authorization. Preparation does not satisfy those gates. F3 candidate work in other branches remains outside this F2 baseline.
 

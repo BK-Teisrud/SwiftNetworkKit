@@ -167,6 +167,8 @@ public final class APIClient: NetworkClient {
                 // The attempt's stack and buffered data have unwound before waiting.
                 // This sleep is a joined child of the original admitted operation.
                 try checkpoint()
+                // Parsing/sampling can consume time after the earlier budget snapshot.
+                guard wait < remaining() else { throw candidate.failure }
                 do { try await clock.sleep(until: clock.now().advanced(by: .seconds(wait))) }
                 catch {
                     try checkpoint()
