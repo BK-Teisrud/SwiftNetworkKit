@@ -1,7 +1,7 @@
 # ADR-0014: Bounded per-call read-retry contract
 
 Date: 2026-10-31 (refresh of the 2026-10-27 proposal)
-Status: Owner-approved contract/planning on 2026-10-31; refreshed planning PR/main verification pending; implementation explicitly NOT authorized
+Status: Accepted contract/planning and explicit I24–I27 implementation authorization; I24–I26 completed; I27 gate review pending. Earlier no-code decisions below retain their original dated scope.
 Owner: @BK-Teisrud
 Issue / requirement: PLAN-F3 #87, NK-07 #14 / specification §4.7
 

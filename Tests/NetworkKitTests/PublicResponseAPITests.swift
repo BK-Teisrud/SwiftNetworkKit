@@ -4,6 +4,21 @@ import os
 import NetworkKit
 
 @Suite struct PublicResponseAPITests {
+    @Test func preRetryInitializerFunctionValuesRemainSourceCompatible() throws {
+        typealias LegacyFactory = (HTTPHeaders, TimeInterval?, TimeInterval?, HTTPStatusPolicy, AuthenticationPolicy) throws -> NetworkCallOptions
+        let labeled: LegacyFactory = NetworkCallOptions.init(headers:inactivityTimeout:totalTimeout:acceptedStatuses:authentication:)
+        let inferred: LegacyFactory = NetworkCallOptions.init
+        for factory in [labeled, inferred] {
+            let options = try factory(HTTPHeaders(), nil, 3, .successful, .automatic)
+            #expect(options.retry == .disabled)
+            #expect(options.totalTimeout == 3)
+            #expect(throws: NetworkError.invalidRequest(.invalidConfiguration)) {
+                try factory(HTTPHeaders(), nil, -1, .successful, .automatic)
+            }
+        }
+        #expect(try NetworkCallOptions(retry: .oneRetryForSafeReads).retry == .oneRetryForSafeReads)
+    }
+
     @Test(arguments: [SessionStorageProfile.strict, .appManaged])
     func externalConsumerSelectsBorrowedStorageProfile(storage: SessionStorageProfile) async throws {
         let settings = URLSessionConfiguration.ephemeral

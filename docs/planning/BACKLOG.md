@@ -1,29 +1,10 @@
-# Requirements traceability and initial backlog
+# Requirements traceability and backlog
 
-## I26 actual macOS 14 result — 2026-11-01
+## Current delivery — 2026-11-01
 
-[Actual ARM64/macOS 14.8.9 retry execution](I26_MACOS14_RETRY_EXECUTION_2026-11-01.md) passes run 41294523457 on accepted main 660f8c099faccdd4215ad5e4bf1d082faaa3e403. Six native cases and four bounded resource workloads pass with exact source/payload custody. The one-off workflow is disabled and removed in the cleanup candidate. I26's selected verification is satisfied under documented limits; await cleanup PR/main acceptance before Done and I27. Physical Watch #132, unknown workload/production suitability and publication #29 remain mandatory; no new feature issue or broad resource refactor is justified.
+F2 is closed. The bounded read-retry contract/code start is approved under ADR-0014/#137. I24–I26 are Done; I26 final acceptance is PR #142/main run 41296068624. I27 #110 reviews the additive API, diagnostics, evidence and residual risks; its source-compatible initializer and final-budget corrections pass 245 local tests. Owner F3 gate disposition and candidate PR/main acceptance remain pending. See [I27 review](I27_RETRY_REVIEW_2026-11-01.md).
 
-## I26 minimum retry priority — 2026-11-01
-
-PR #140/main run 41290108646 is accepted. [Fresh minimum retry evidence](I26_MINIMUM_RETRY_2026-11-01.md) passes 16 actual native parameter cases across iOS/iPadOS 17, tvOS 17 and watchOS 10. Temporarily prioritize existing #109 as P1: the standard macOS 14 route retires November 2, so prepare its main-only exact-source retry/resource execution before I27. Actual macOS 14 execution and candidate PR/main acceptance remain pending; no physical pass, release waiver, new feature issue or paid route is implied. Remove the temporary workflow after disposition/retirement under existing #109/#110.
-
-## I26 native/resource execution — 2026-11-01
-
-I25 #108 is accepted through PR #139/main run 41287067291. I26 #109 adds [native retry/resource evidence](NATIVE_RETRY_VERIFICATION.md): actual Mac URLSession contacts, TLS exclusion, public HTTPS ownership composition and bounded release measurements. Candidate CI and target-applicability review remain pending; no new minimum/physical pass or publication acceptance is inferred. Existing #109/#110 and #132/#29 retain their distinct gates; no new feature issue or broad refactor is justified.
-
-## I25 execution — 2026-11-01
-
-I24 #107 is accepted through PR #138/main run 41250907636 (223 Mac tests, four 220-test simulator runs, 19 helpers). I25 #108 integrates explicit per-call retry inside one admitted operation/deadline; see [integration evidence](RETRY_INTEGRATION.md). I26/I27 remain dependent native/resource/API review tasks. No extra issue, dependency, broad refactor or release scope is justified by this change. This supersedes earlier I24-active/no-loop status below; required I25 PR/main acceptance is pending.
-
-## Current F3 execution — 2026-10-31
-
-Planning #87/#106 is accepted through PR #111/main `25e0d52b8316251bb6592d075caead9b05ed9edd`, verified run 41248255517. The owner explicitly authorized implementation of I24–I27 under ADR-0014; START-F3 #137 is completed. I24 #107 implements pure eligibility/delay decisions; I25–I27 remain dependent work. No retry transport loop, publication or other extension is delivered by I24. This status supersedes earlier no-code holds below. Existing four slices remain sufficient; no additional feature issue or broad refactor is justified.
-
-## Complete retry contract approval — 2026-10-31
-
-The owner approves the complete [ADR-0014 contract](../decisions/ADR-0014-opt-in-retry-proposal.md) and expressly withholds code. #87/#106 await planning PR/main acceptance; [START-F3 #137](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/137) separately blocks selected I24–I27 (#107–#110). Existing F3 is now “F3 – Bounded read retries”; open unselected domain catalogs #12/#14/#15/#19/#24 stay outside this delivery milestone. No product code, default behavior, dependency, release/version/date or publication authorization. #132/#29 and accepted F2 remain unchanged.
-
+Physical Watch #132 and actual app/workload/security/publication #29 remain mandatory separate gates. No release, version/date, unknown-workload suitability or further extension code is authorized. [Preserved status history](F3_STATUS_HISTORY_2026-11-01.md) retains superseded summaries without presenting them as live next steps.
 
 Original planning baseline: 20 domain epics, seven decision issues, and three governance/release issues. The table below preserves the original domain classification/phase allocation, not live completion. I01–I16 are delivered; I01–I10 implement the initial HTTP slice; [F1 review](F1_REVIEW.md) accounts for delivered work and open domain epics continuing in F2. See the [GitHub register](GITHUB_REGISTER.md) for live links.
 
@@ -62,7 +43,7 @@ Original planning baseline: 20 domain epics, seven decision issues, and three go
 
 ## Approved scope
 
-[V1_SCOPE.md](V1_SCOPE.md) defines included/deferred scope across all 20 domains. Keep epics open until selected work is delivered. ADR-0005 defines the HTTP contract; ADR-0006 the lifecycle; ADR-0007 the security/network policy. Concrete verification tasks are still needed before Ready.
+[V1_SCOPE.md](V1_SCOPE.md) defines included/deferred scope across all 20 domains. Keep epics open until selected work is delivered. ADR-0005 defines the HTTP contract; ADR-0006 the lifecycle; ADR-0007 the security/network policy. Future feature slices require concrete verification before Ready; ADR-0014 governs only the selected bounded retry increment.
 
 ## Before development
 
@@ -70,7 +51,7 @@ Decompose feature families into testable issues with contracts, test plans, and 
 
 ## Concrete implementation queue
 
-I01–I23 are native subissues with criteria and dependencies; see [WORK_QUEUE.md](WORK_QUEUE.md). START-00 / #41 was closed after the owner instruction on 2026-10-20 (ADR-0012). I01 starts implementation; later tasks still require resolved dependencies and Ready checks. Decomposition itself did not authorize code. planning.json is the original seed rather than live status; work-queue.json describes the concrete queue.
+I01–I27 are selected native subissues with criteria and dependencies; see [WORK_QUEUE.md](WORK_QUEUE.md). START-00 / #41 was closed after the owner instruction on 2026-10-20 (ADR-0012). Core I01–I23 and retry I24–I26 are accepted; I27 remains the current review gate. Future tasks require selected scope, authorization, resolved dependencies and Ready checks. Decomposition itself did not authorize code. planning.json is the original seed rather than live status; work-queue.json describes the concrete queue.
 
 ## Rolling planning review
 

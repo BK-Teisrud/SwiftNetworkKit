@@ -4,7 +4,14 @@
 
 - F2 non-publishing hardening/rehearsal is accepted through PR #135/main 41242130528; no version/tag/release is created. Physical Watch and owner publication/workload decisions remain separate gates.
 
-### Selected buffered HTTP core
+### Bounded read retries — F3 review candidate
+
+- Added explicit disabled-by-default, bodyless safe-read retry with at most one new library invocation, strict bounded Retry-After/jitter and the original total budget/account/origin/session boundaries.
+- Added only attemptCount to one sanitized terminal event; no refresh, mutating replay or advanced resilience framework.
+- I27 restores original initializer function-value compatibility and rechecks the budget after delay classification; owner gate disposition and required candidate PR/main checks are pending.
+- Native/current/minimum/resource observations retain exact source/OS bounds. Physical Watch, actual workload suitability and publication remain separate mandatory gates; no release/version/date is created.
+
+### Selected buffered HTTP core — accepted F2 baseline
 
 - Implemented the shared typed-endpoint/raw-URLRequest client, buffered JSON/Data/UTF-8/empty responses and status/headers, safe structured errors and separate Swift cancellation.
 - Added independent inactivity/total budgets, operation-owned cancellation, joined shutdown and owned/compatible borrowed-session profiles.

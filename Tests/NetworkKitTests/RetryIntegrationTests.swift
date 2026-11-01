@@ -41,6 +41,31 @@ private func retryResponse(_ request: URLRequest, status: Int, headers: [String:
         httpVersion: nil, headerFields: headers)!)
 }
 
+/// Models time consumed after a budget snapshot without real-time timing assertions.
+/// Rejects an attempted sleep past admission's deadline instead of hanging a bad build.
+private final class RetryDecisionBudgetClock: NetworkClock {
+    let base = BudgetTestClock()
+    private let advance = OSAllocatedUnfairLock(initialState: 0.0)
+    private let violations = OSAllocatedUnfairLock(initialState: 0)
+    private let originalDeadline: ContinuousClock.Instant
+    init() { originalDeadline = base.now().advanced(by: .seconds(1)) }
+    func consumeAfterNextSnapshot(_ seconds: Double) { advance.withLock { $0 = seconds } }
+    var forbiddenSleeps: Int { violations.withLock { $0 } }
+    func now() -> ContinuousClock.Instant {
+        let snapshot = base.now()
+        let elapsed = advance.withLock { value in let result = value; value = 0; return result }
+        if elapsed > 0 { base.advance(elapsed) }
+        return snapshot
+    }
+    func sleep(until deadline: ContinuousClock.Instant) async throws {
+        if deadline > originalDeadline {
+            violations.withLock { $0 += 1 }
+            throw NetworkError.invalidRequest(.invalidConfiguration)
+        }
+        try await base.sleep(until: deadline)
+    }
+}
+
 @Suite(.timeLimit(.minutes(1))) struct RetryIntegrationTests {
     private let base = URL(string: "https://example.invalid")!
     private let timing = RetryTiming(wallNow: { Date(timeIntervalSince1970: 784111777) }, jitter: { 0.25 })
@@ -284,6 +309,22 @@ private func retryResponse(_ request: URLRequest, status: Int, headers: [String:
         await #expect(throws: CancellationError.self) { try await task.value }
         #expect(clock.pending == 0)
         #expect(sink.events.first?.attemptCount == 1)
+    }
+
+    @Test func budgetSpentAfterDelaySnapshotDoesNotEnterWait() async throws {
+        let clock = RetryDecisionBudgetClock()
+        let transport = RetryTransport { _, request in
+            await clock.base.waitForSleepers(1) // Original watchdog is already registered.
+            return retryResponse(request, status: 503)
+        }
+        let timing = RetryTiming(jitter: { clock.consumeAfterNextSnapshot(0.8); return 0.25 })
+        let client = try APIClient(configuration: .init(baseURL: base), transport: transport, clock: clock, retryTiming: timing)
+        await #expect(throws: NetworkError.httpStatus(try HTTPStatus(503), headers: HTTPHeaders())) {
+            try await send(client, options: NetworkCallOptions(totalTimeout: 1, retry: .oneRetryForSafeReads))
+        }
+        #expect(clock.forbiddenSleeps == 0)
+        #expect(await transport.requests.count == 1)
+        #expect(clock.base.pending == 0)
     }
 
 }

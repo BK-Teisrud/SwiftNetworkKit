@@ -1,0 +1,53 @@
+{
+  "baseline_commit": "d0a522770269617f95660d67e9d0198838dc2bb5",
+  "baseline_public_symbols": 319,
+  "candidate_public_symbols": 326,
+  "removed_public_symbols": [],
+  "added_public_symbols": [
+    {
+      "title": "retry",
+      "kind": "swift.property"
+    },
+    {
+      "title": "init(headers:inactivityTimeout:totalTimeout:acceptedStatuses:authentication:retry:)",
+      "kind": "swift.init"
+    },
+    {
+      "title": "attemptCount",
+      "kind": "swift.property"
+    },
+    {
+      "title": "RetryPolicy",
+      "kind": "swift.enum"
+    },
+    {
+      "title": "RetryPolicy.oneRetryForSafeReads",
+      "kind": "swift.enum.case"
+    },
+    {
+      "title": "RetryPolicy.disabled",
+      "kind": "swift.enum.case"
+    },
+    {
+      "title": "!=(_:_:)",
+      "kind": "swift.func.op"
+    }
+  ],
+  "date": "2026-11-01",
+  "compiler": "Xcode 26.3 / Swift 6.2.4",
+  "local_root_tests": 245,
+  "local_suites": 31,
+  "compiled_docc": true,
+  "source_function_value_regression": {
+    "before_fix": "compile fails for labeled and inferred original five-argument initializer references",
+    "after_fix": "passes; original initializer/defaults preserved with shared validation"
+  },
+  "budget_snapshot_regression": {
+    "before_fix": "two deterministic assertions fail; a wait would extend beyond original admission deadline",
+    "after_fix": "passes; current failure returned when post-classification remaining budget cannot fit wait"
+  },
+  "owner_f3_gate_disposition": "pending",
+  "candidate_pr_main_acceptance": "pending",
+  "product_source_sha256": "394b2f5cf051d39f47e0370bf4191fedf5b636cb159b94932d79593db3b9db85",
+  "retained_declarations_and_function_signatures_unchanged": true
+}
