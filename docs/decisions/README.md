@@ -16,6 +16,7 @@
 | [ADR-0012](ADR-0012-implementation-start.md) | Begin the approved HTTP-core implementation | Accepted through the owner instruction on 2026-10-20; start gate closed |
 | [ADR-0013](ADR-0013-watch-publication-gate.md) | Physical Watch timing and separate publication milestone | Accepted: mandatory WATCH-01 publication blocker; no physical pass or support change |
 | [ADR-0014](ADR-0014-opt-in-retry-proposal.md) | First bounded per-call retry increment | Accepted contract/planning; I24–I27 explicitly authorized through START-F3 |
+| [ADR-0015](ADR-0015-foreground-file-download.md) | Bounded foreground GET download | Owner-approved planning only; feasibility and implementation unauthorized |
 
 ADR-0009 records combined acceptance of the core choices and documented defaults in ADR-0002–ADR-0008. Those planning decisions did not authorize implementation; ADR-0012 records the later authorization.
 

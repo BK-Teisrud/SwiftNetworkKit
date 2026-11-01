@@ -2,15 +2,17 @@
 
 ## Current delivery — 2026-11-01
 
-The bounded F3 technical gate is accepted on PR #143/main e0282dc29ac2247a7c2b6e142e37e7ed3cb5be24/run 41299838862 after the owner's explicit limited approval. [Final closeout](F3_CLOSEOUT_2026-11-01.md) records scope, evidence and preserved release barriers. Formal I27/milestone closure follows the final documentation's required PR/main acceptance and is recorded in #110/milestone 4. I24–I26 are Done; no remaining feature implementation is selected for F3.
+F3 is formally closed: I27 #110 is Done after final PR #144/main b4511c5efe9a349a9f91eb0448974f1bf49b8d3f/run 41302196774; all seven checks passed. [F3 closeout](F3_CLOSEOUT_2026-11-01.md) preserves its bounded technical acceptance and source-specific evidence.
 
-#132 physical Watch and #29 actual app/workload/security/publication remain mandatory. Existing PLAN-F4 #88 is the next planning candidate only after confirming an actual transfer need; no further extension code or release is authorized. [Status history](F3_STATUS_HISTORY_2026-11-01.md) preserves earlier snapshots separately from this live summary.
+F4 foreground GET-to-file planning revision 1 is owner-approved under [ADR-0015](../decisions/ADR-0015-foreground-file-download.md) and the [download plan](F4_FOREGROUND_DOWNLOAD_PROPOSAL.md); documentation PR/main acceptance is pending. #88 remains open/Blocked for actual I28 feasibility and specification reconciliation. START-F4 #145 requests separate feasibility-only code permission; I28–I32 #146–#150 are Blocked and implementation_authorized=false. No F4 code is authorized.
+
+#14 advanced resilience remains Backlog; #89/#90 remain independent planning. #29 actual app/workload/security/publication and physical Watch #132 remain mandatory separate barriers. No new milestone/date or publication authorization follows.
 
 ## Accepted F2 and next lanes
 
 The [F2 closeout](F2_CLOSEOUT_2026-10-31.md) records accepted core hardening/rehearsal, final main d0a522770269617f95660d67e9d0198838dc2bb5/run 41244932962 and the milestone-counter discrepancy. Original submission-time evidence/failure limits remain immutable. The F2-only resource disposition is not F3 or production acceptance.
 
-After I27, existing PLAN-F4 #88 is the next planning candidate only after confirming a real transfer need; #89/#90 remain independent research. Domain #14 stays open for deferred advanced resilience. Publication #29 and Watch #132 retain their separate blockers. Stop whenever GitHub execution is pending; resume only after the owner's next instruction, without queue polling or independent work across that stop.
+F4 planning is selected under ADR-0015; #88 remains blocked by I28 native feasibility, and START-F4 #145 is the next owner decision after documentation acceptance. #89/#90 remain independent research. Domain #14 stays open for deferred advanced resilience. Publication #29 and Watch #132 retain their separate blockers. Stop whenever GitHub execution is pending; resume only after the owner's next instruction, without queue polling or independent work across that stop.
 
 ## Accepted core implementation history
 
@@ -67,7 +69,7 @@ I21 may investigate access to older test environments as preparation without cod
 | Order | Planning task | Domain coverage | Readiness |
 | --- | --- | --- | --- |
 | 30 | [PLAN-F3 / #87](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/87) | #14 first; assess #12/#15/#19/#24 separately | Done; ADR-0014 and selected I24–I27 decomposition accepted |
-| 40 | [PLAN-F4 / #88](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/88) | #16/#26 | Backlog; transfer use cases/feasibility pending |
+| 40 | [PLAN-F4 / #88](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/88) | #16/#26 | Blocked by I28 / #146; owner-approved planning, native feasibility pending |
 | 50 | [PLAN-F5 / #89](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/89) | #17 | Backlog; real-time use case/lifecycle pending |
 | 60 | [PLAN-F6 / #90](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/90) | #13/#18 | Backlog; research need/stop-go criteria pending |
 
@@ -90,3 +92,15 @@ Minimum macOS follow-up, 2026-10-29: [temporary standard GitHub macOS 14 executi
 ## Historical planning before complete approval — 2026-10-31
 
 #87 and F3-DEC #106 are planning work. [Proposed ADR-0014](../decisions/ADR-0014-opt-in-retry-proposal.md) and [contract/decomposition](RETRY_INCREMENT_PLAN.md) record owner selections; complete acceptance/code start remain pending. Existing candidates #107/#108/#109/#110 stay Backlog, no I identifiers. Planned order is decision → eligibility/delay contracts → one-operation integration → native/resource verification → increment gate. Preserve the accepted F2 rows and separate #132/#29 publication lane. A documentation PR or generic continue instruction does not authorize retry code.
+
+- Order 40.1: [START-F4 / #145](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/145) — Blocked; no code authorized. See download plan for dependencies.
+
+- Order 40.2: [I28 / #146](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/146) — Blocked; no code authorized. See download plan for dependencies.
+
+- Order 40.3: [I29 / #147](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/147) — Blocked; no code authorized. See download plan for dependencies.
+
+- Order 40.4: [I30 / #148](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/148) — Blocked; no code authorized. See download plan for dependencies.
+
+- Order 40.5: [I31 / #149](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/149) — Blocked; no code authorized. See download plan for dependencies.
+
+- Order 40.6: [I32 / #150](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/150) — Blocked; no code authorized. See download plan for dependencies.
