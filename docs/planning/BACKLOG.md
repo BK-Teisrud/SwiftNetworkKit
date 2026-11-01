@@ -2,9 +2,11 @@
 
 ## Current delivery — 2026-11-01
 
-The bounded F3 technical gate is accepted on PR #143/main e0282dc29ac2247a7c2b6e142e37e7ed3cb5be24/run 41299838862 after the owner's explicit limited approval. [Final closeout](F3_CLOSEOUT_2026-11-01.md) records scope, evidence and preserved release barriers. Formal I27/milestone closure follows the final documentation's required PR/main acceptance and is recorded in #110/milestone 4. I24–I26 are Done; no remaining feature implementation is selected for F3.
+F3 is formally closed: I27 #110 is Done after final PR #144/main b4511c5efe9a349a9f91eb0448974f1bf49b8d3f/run 41302196774; all seven checks passed. [F3 closeout](F3_CLOSEOUT_2026-11-01.md) preserves its bounded technical acceptance and source-specific evidence.
 
-#132 physical Watch and #29 actual app/workload/security/publication remain mandatory. Existing PLAN-F4 #88 is the next planning candidate only after confirming an actual transfer need; no further extension code or release is authorized. [Status history](F3_STATUS_HISTORY_2026-11-01.md) preserves earlier snapshots separately from this live summary.
+F4 foreground GET-to-file planning revision 1 is owner-approved under [ADR-0015](../decisions/ADR-0015-foreground-file-download.md) and the [download plan](F4_FOREGROUND_DOWNLOAD_PROPOSAL.md); documentation PR/main acceptance is pending. #88 remains open/Blocked for actual I28 feasibility and specification reconciliation. START-F4 #145 requests separate feasibility-only code permission; I28–I32 #146–#150 are Blocked and implementation_authorized=false. No F4 code is authorized.
+
+#14 advanced resilience remains Backlog; #89/#90 remain independent planning. #29 actual app/workload/security/publication and physical Watch #132 remain mandatory separate barriers. No new milestone/date or publication authorization follows.
 
 ## Original requirements allocation
 

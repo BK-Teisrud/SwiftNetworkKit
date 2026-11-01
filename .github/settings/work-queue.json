@@ -621,8 +621,107 @@
       "title": "[PLAN-F4] Establish transfer feasibility and decompose selected transfer scope",
       "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/88",
       "milestone": "F4 – File transfers",
+      "blocked_by": [
+        "I28"
+      ],
+      "parent": 16,
+      "implementation_authorized": false,
+      "authorization_scope": "Owner-approved ADR-0015 planning only on 2026-11-01; no feasibility or implementation code authorized."
+    },
+    {
+      "order": 40.1,
+      "key": "START-F4",
+      "number": 145,
+      "title": "[START-F4] Authorize only the bounded foreground download feasibility task",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/145",
+      "milestone": "F4 – File transfers",
       "blocked_by": [],
-      "parent": 16
+      "parent": 16,
+      "implementation_authorized": false,
+      "authorization_scope": "ADR-0015 planning approval only; START-F4 requires explicit feasibility-only instruction. I29–I32 additionally require a later implementation decision. No publication.",
+      "decision_adr": "docs/decisions/ADR-0015-foreground-file-download.md",
+      "start_gate": 145
+    },
+    {
+      "order": 40.2,
+      "key": "I28",
+      "number": 146,
+      "title": "[I28] Verify file download lifetime, security and cleanup feasibility",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/146",
+      "milestone": "F4 – File transfers",
+      "blocked_by": [
+        "START-F4"
+      ],
+      "parent": 16,
+      "implementation_authorized": false,
+      "authorization_scope": "ADR-0015 planning approval only; START-F4 requires explicit feasibility-only instruction. I29–I32 additionally require a later implementation decision. No publication.",
+      "decision_adr": "docs/decisions/ADR-0015-foreground-file-download.md",
+      "start_gate": 145
+    },
+    {
+      "order": 40.3,
+      "key": "I29",
+      "number": 147,
+      "title": "[I29] Implement the approved foreground file download lifecycle",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/147",
+      "milestone": "F4 – File transfers",
+      "blocked_by": [
+        "I28",
+        "PLAN-F4"
+      ],
+      "parent": 16,
+      "implementation_authorized": false,
+      "authorization_scope": "ADR-0015 planning approval only; START-F4 requires explicit feasibility-only instruction. I29–I32 additionally require a later implementation decision. No publication.",
+      "decision_adr": "docs/decisions/ADR-0015-foreground-file-download.md",
+      "start_gate": 145
+    },
+    {
+      "order": 40.4,
+      "key": "I30",
+      "number": 148,
+      "title": "[I30] Verify download boundaries, file failures and lifecycle races",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/148",
+      "milestone": "F4 – File transfers",
+      "blocked_by": [
+        "I29"
+      ],
+      "parent": 16,
+      "implementation_authorized": false,
+      "authorization_scope": "ADR-0015 planning approval only; START-F4 requires explicit feasibility-only instruction. I29–I32 additionally require a later implementation decision. No publication.",
+      "decision_adr": "docs/decisions/ADR-0015-foreground-file-download.md",
+      "start_gate": 145
+    },
+    {
+      "order": 40.5,
+      "key": "I31",
+      "number": 149,
+      "title": "[I31] Verify native download files and bounded resource observations",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/149",
+      "milestone": "F4 – File transfers",
+      "blocked_by": [
+        "I30"
+      ],
+      "parent": 16,
+      "implementation_authorized": false,
+      "authorization_scope": "ADR-0015 planning approval only; START-F4 requires explicit feasibility-only instruction. I29–I32 additionally require a later implementation decision. No publication.",
+      "decision_adr": "docs/decisions/ADR-0015-foreground-file-download.md",
+      "start_gate": 145
+    },
+    {
+      "order": 40.6,
+      "key": "I32",
+      "number": 150,
+      "title": "[I32] Review download compatibility, documentation and technical gate",
+      "url": "https://github.com/BK-Teisrud/SwiftNetworkKit/issues/150",
+      "milestone": "F4 – File transfers",
+      "blocked_by": [
+        "I31"
+      ],
+      "parent": 16,
+      "implementation_authorized": false,
+      "authorization_scope": "ADR-0015 planning approval only; START-F4 requires explicit feasibility-only instruction. I29–I32 additionally require a later implementation decision. No publication.",
+      "decision_adr": "docs/decisions/ADR-0015-foreground-file-download.md",
+      "start_gate": 145
     },
     {
       "order": 50,
