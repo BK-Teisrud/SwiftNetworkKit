@@ -57,3 +57,7 @@ I28 must resolve exact API labels, error/diagnostic mapping, handoff/cancellatio
 ## Subsequent I28 checkpoint
 
 The owner authorized only I28 after planning acceptance. [The report](I28_DOWNLOAD_FEASIBILITY_2026-11-01.md) allocates NK-09/NK-19 IDs from the original specification and records partial Mac/typecheck evidence. #88 remains Blocked and #146 In Progress; I29–I32 remain unauthorized. No selected requirement is delivered by the experiment.
+
+## Subsequent handoff direction
+
+[The I28 handoff experiment](I28_FILE_HANDOFF_2026-11-01.md) demonstrates an outer operation-scoped owner across terminal arbitration, without a generic NetworkOperation refactor. Seven observations pass; this is not integrated APIClient delivery or other-platform native proof. I28 remains active for exact API/error and native-partial ownership design; no I29 permission follows.
