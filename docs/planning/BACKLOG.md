@@ -1,5 +1,9 @@
 # Requirements traceability and initial backlog
 
+## I26 actual macOS 14 result — 2026-11-01
+
+[Actual ARM64/macOS 14.8.9 retry execution](I26_MACOS14_RETRY_EXECUTION_2026-11-01.md) passes run 41294523457 on accepted main 660f8c099faccdd4215ad5e4bf1d082faaa3e403. Six native cases and four bounded resource workloads pass with exact source/payload custody. The one-off workflow is disabled and removed in the cleanup candidate. I26's selected verification is satisfied under documented limits; await cleanup PR/main acceptance before Done and I27. Physical Watch #132, unknown workload/production suitability and publication #29 remain mandatory; no new feature issue or broad resource refactor is justified.
+
 ## I26 minimum retry priority — 2026-11-01
 
 PR #140/main run 41290108646 is accepted. [Fresh minimum retry evidence](I26_MINIMUM_RETRY_2026-11-01.md) passes 16 actual native parameter cases across iOS/iPadOS 17, tvOS 17 and watchOS 10. Temporarily prioritize existing #109 as P1: the standard macOS 14 route retires November 2, so prepare its main-only exact-source retry/resource execution before I27. Actual macOS 14 execution and candidate PR/main acceptance remain pending; no physical pass, release waiver, new feature issue or paid route is implied. Remove the temporary workflow after disposition/retirement under existing #109/#110.

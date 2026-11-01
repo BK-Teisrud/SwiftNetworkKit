@@ -1,5 +1,7 @@
 # I26 — native retry and resource verification
 
+Current disposition, 2026-11-01: [actual macOS 14 execution](I26_MACOS14_RETRY_EXECUTION_2026-11-01.md) succeeds in run 41294523457. The temporary workflow is disabled; its removal/evidence cleanup awaits PR/main acceptance. Earlier preparation/pending statements below are historical. No physical pass or production/release acceptance is inferred.
+
 Current follow-up, 2026-11-01: this Mac slice is accepted through PR #140/main run 41290108646. [New minimum retry observations and the expiring macOS 14 route](I26_MINIMUM_RETRY_2026-11-01.md) supersede the candidate-pending/minimum-not-executed status below only where explicitly recorded. I26 remains open; no physical or publication pass is inferred.
 
 Date: 2026-11-01. Tracking: #109; ADR-0014 / NK-07-01/02/03/04/08/09. Accepted product base: PR #139/main `dc76e9cca4f96c73424dcbc0d2eee88bf589705a`, all seven jobs verified in main run 41287067291. This slice changes verification tools/tests/docs, not product sources. Required candidate PR/main CI and target-applicability review remain pending before I26 acceptance.

@@ -71,3 +71,7 @@ The completed temporary workflow is removed. Do not dispatch another run or keep
 ## I26 retry follow-up — 2026-11-01
 
 The earlier F2 HTTPS execution remains immutable historical evidence. [I26 minimum retry preparation](I26_MINIMUM_RETRY_2026-11-01.md) restores the same manual-only standard route for the now-authorized bounded retry increment. It is additionally main-only and selects `--public-https --read-retry`; actual runtime/resources and six new SDK-invocation/TLS cases remain pending. Guard, manifest, target/OS/architecture checks, approved builder, SHA-pinned GitHub-owned actions and one-day sanitized artifacts remain in place. No larger runner, new toolchain, unsupported fallback or publication is authorized. Remove the temporary workflow after disposition or retirement.
+
+## Retry route completed and disabled — 2026-11-01
+
+[Actual I26 execution](I26_MACOS14_RETRY_EXECUTION_2026-11-01.md) passes on native ARM64/macOS 14.8.9 with accepted source/payload custody. The completed workflow is disabled and removed in the cleanup candidate before retirement. Do not redispatch it or treat earlier pending-route descriptions as current instructions. The original F2 and I26 evidence remain immutable and distinct; no runtime/support or publication requirement is waived.

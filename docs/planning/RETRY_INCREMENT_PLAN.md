@@ -1,5 +1,7 @@
 # First resilience increment — approved contract, implementation authorized
 
+Current I26 disposition, 2026-11-01: [actual macOS 14 retry results](I26_MACOS14_RETRY_EXECUTION_2026-11-01.md) pass on accepted main in run 41294523457. Await evidence/workflow cleanup PR/main acceptance before I26 Done/I27. No additional feature or release authorization follows from these bounded results.
+
 Current minimum follow-up, 2026-11-01: [I26 minimum retry evidence](I26_MINIMUM_RETRY_2026-11-01.md) records 16 passing native minimum-simulator cases. Existing #109 is temporarily P1 for the expiring standard macOS 14 execution route. I26 stays open until its pending exact-source execution/acceptance is dispositioned; I27 and publication retain their separate gates.
 
 Current evidence update, 2026-11-01: I25 is accepted through PR #139/main run 41287067291. [I26 native/resource verification](NATIVE_RETRY_VERIFICATION.md) records actual local/public Mac results and target limitations; candidate checks and applicability review remain pending.

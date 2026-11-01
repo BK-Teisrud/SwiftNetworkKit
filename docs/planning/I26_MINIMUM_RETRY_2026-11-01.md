@@ -1,5 +1,7 @@
 # I26 — minimum-runtime retry evidence and remaining Mac route
 
+Current disposition, 2026-11-01: [actual macOS 14 execution](I26_MACOS14_RETRY_EXECUTION_2026-11-01.md) succeeds in run 41294523457. The temporary workflow is disabled; its removal/evidence cleanup awaits PR/main acceptance. Earlier preparation/pending statements below are historical. No physical pass or production/release acceptance is inferred.
+
 Date: 2026-11-01. Tracking: #109, P1 temporarily; contract ADR-0014. PR #140/main `24d030580cc8be0e2b219536184d3381bd91519a` is accepted through run 41290108646: 243 Mac tests, four 234-test simulator runs, 19 helpers. New verification source remains subject to candidate PR/main acceptance; product sources are unchanged.
 
 ## Actual minimum execution
