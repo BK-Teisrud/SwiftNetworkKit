@@ -34,3 +34,7 @@ Selects one post-core extension for planning; no change to the historical F2 rel
 ## Subsequent feasibility-only instruction — 2026-11-01
 
 After PR #151/main run 41312825323 passed, the owner explicitly authorized only I28's bounded non-shipping local synthetic experiment. START-F4 #145 is completed. [The first checkpoint](../planning/I28_DOWNLOAD_FEASIBILITY_2026-11-01.md) provides partial native evidence and unresolved feasibility criteria; #88/#146 remain open. Earlier no-code statements retain their original planning scope and are superseded only for I28. I29–I32/public API, signing/device installation and publication remain unauthorized.
+
+## Detailed I28 disposition — 2026-11-01
+
+The owner explicitly approved the [exact API/error/diagnostic design and native-partial limitation](../planning/I28_DOWNLOAD_DESIGN.md): “Approve the detailed design and limitation; no I29 code.” Candidate ownership survives terminal arbitration; inaccessible Foundation-owned partial files cannot be enumerated or attested deleted. New file errors use existing diagnostic outcome .other; NetworkClient, existing error enums/signatures and core/retry behavior stay unchanged. Final documentation PR/main acceptance precedes I28/#88 metadata completion. This is bounded feasibility/plan acceptance, not I29–I32 code permission, production support or publication. Original source-specific experimental evidence remains unchanged.
