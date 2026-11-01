@@ -1,5 +1,7 @@
 # I26 — native retry and resource verification
 
+Current follow-up, 2026-11-01: this Mac slice is accepted through PR #140/main run 41290108646. [New minimum retry observations and the expiring macOS 14 route](I26_MINIMUM_RETRY_2026-11-01.md) supersede the candidate-pending/minimum-not-executed status below only where explicitly recorded. I26 remains open; no physical or publication pass is inferred.
+
 Date: 2026-11-01. Tracking: #109; ADR-0014 / NK-07-01/02/03/04/08/09. Accepted product base: PR #139/main `dc76e9cca4f96c73424dcbc0d2eee88bf589705a`, all seven jobs verified in main run 41287067291. This slice changes verification tools/tests/docs, not product sources. Required candidate PR/main CI and target-applicability review remain pending before I26 acceptance.
 
 ## Native macOS execution
@@ -41,7 +43,7 @@ Provenance records accepted product commit, a product-source-tree SHA-256, probe
 | Environment | Retry evidence from this slice | Boundary |
 | --- | --- | --- |
 | This macOS 15.8.1 host | Actual URLSession loopback, TLS, public HTTPS storage composition and release resources | Not macOS 14 or a device-memory guarantee |
-| Required current macOS/iOS/iPadOS/watchOS/tvOS CI destinations | Candidate PR/main runs pending | Accepted I25 already passed 237 Mac/four 234-test simulator runs; these are prior-source controls |
+| Required current macOS/iOS/iPadOS/watchOS/tvOS CI destinations | Accepted PR #140/main run 41290108646: 243 Mac/four 234-test simulator runs | New minimum follow-up still requires its own candidate checks |
 | Actual minimum OS / physical families | No new I26 execution claimed here | Prior F2 evidence remains historical, not retry-native proof; review exact applicability and unavailable environments in #109/#110 |
 | Physical Watch and publication | Mandatory #132 and #29 remain open | No support, phase, workload-risk or release acceptance is inferred |
 

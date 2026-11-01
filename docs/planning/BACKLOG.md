@@ -1,5 +1,9 @@
 # Requirements traceability and initial backlog
 
+## I26 minimum retry priority — 2026-11-01
+
+PR #140/main run 41290108646 is accepted. [Fresh minimum retry evidence](I26_MINIMUM_RETRY_2026-11-01.md) passes 16 actual native parameter cases across iOS/iPadOS 17, tvOS 17 and watchOS 10. Temporarily prioritize existing #109 as P1: the standard macOS 14 route retires November 2, so prepare its main-only exact-source retry/resource execution before I27. Actual macOS 14 execution and candidate PR/main acceptance remain pending; no physical pass, release waiver, new feature issue or paid route is implied. Remove the temporary workflow after disposition/retirement under existing #109/#110.
+
 ## I26 native/resource execution — 2026-11-01
 
 I25 #108 is accepted through PR #139/main run 41287067291. I26 #109 adds [native retry/resource evidence](NATIVE_RETRY_VERIFICATION.md): actual Mac URLSession contacts, TLS exclusion, public HTTPS ownership composition and bounded release measurements. Candidate CI and target-applicability review remain pending; no new minimum/physical pass or publication acceptance is inferred. Existing #109/#110 and #132/#29 retain their distinct gates; no new feature issue or broad refactor is justified.

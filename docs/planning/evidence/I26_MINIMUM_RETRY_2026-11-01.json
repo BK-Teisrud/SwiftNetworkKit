@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-01",
+  "accepted_product_source": "24d030580cc8be0e2b219536184d3381bd91519a",
+  "route": "Existing task-owned minimum simulators; existing SwiftPM scheme; only nativeLoopbackReadRetryCounters; unsigned; Swift warnings as errors; serialized; no public traffic",
+  "host_architecture": "x86_64",
+  "source_hashes": {
+    "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/NativeLoopbackTests.swift": "4e6d807a0ac5622c66e68498785c82591a738da224da8e9c5a46f22151ac0b01",
+    "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicHTTPSTests.swift": "9cf689601a53b7cd10851227a976948d1b411f01e4ed1ba8f4a15a3371929a20",
+    "Package.swift": "f345ef3bc7f89ca9a934ce09f4d68da5829363f82d3ce72d04f368ba626745ad",
+    "Tools/PublicHTTPSChecks/Package.swift": "57ea65e6920f13f89773a0edf4e25c4f28606bfed9b46c08b4c53a91f5c98f69",
+    "Tools/PublicHTTPSChecks/Tests/PublicHTTPSChecksTests/PublicRetryTests.swift": "79eb6b3e334879331478fa07f187da9292d36c488db7a48c6f2a883df8c2f2b0"
+  },
+  "results": [
+    {
+      "family": "iOS",
+      "runtime": "17.0",
+      "runtime_build": "21A328",
+      "exit_code": 0,
+      "cleanup_exit_codes": [
+        0
+      ],
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 1,
+        "passedTests": 1,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "four_native_parameter_cases_passed": true,
+      "log_sha256": "b1afa1e3e80c6dfda5295ada6231fbb6f81786b282b4b8e3400e8d70f2575aed",
+      "environment": {
+        "architecture": "x86_64",
+        "modelName": "iPhone 14 Pro",
+        "osBuildNumber": "21A328",
+        "osVersion": "17.0",
+        "platform": "iOS Simulator"
+      }
+    },
+    {
+      "family": "tvOS",
+      "runtime": "17.0",
+      "runtime_build": "21J353",
+      "exit_code": 0,
+      "cleanup_exit_codes": [
+        0
+      ],
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 1,
+        "passedTests": 1,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "four_native_parameter_cases_passed": true,
+      "log_sha256": "b36202d2a113d01beb7c6004c6fa79652d8642eb3ca15f559a1007e62ad7a594",
+      "environment": {
+        "architecture": "x86_64",
+        "modelName": "Apple TV 4K (3rd generation)",
+        "osBuildNumber": "21J353",
+        "osVersion": "17.0",
+        "platform": "tvOS Simulator"
+      }
+    },
+    {
+      "family": "watchOS",
+      "runtime": "10.0",
+      "runtime_build": "21R355",
+      "exit_code": 0,
+      "cleanup_exit_codes": [
+        0,
+        0
+      ],
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 1,
+        "passedTests": 1,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "four_native_parameter_cases_passed": true,
+      "log_sha256": "37a2be9e072186dc0395786fada1144fff8ec20053908b45b3bf24e626fbea85",
+      "environment": {
+        "architecture": "x86_64",
+        "modelName": "Apple Watch Series 9 (45mm)",
+        "osBuildNumber": "21R355",
+        "osVersion": "10.0",
+        "platform": "watchOS Simulator"
+      }
+    },
+    {
+      "family": "iPadOS",
+      "runtime": "17.0",
+      "runtime_build": "21A328",
+      "exit_code": 0,
+      "cleanup_exit_codes": [
+        0
+      ],
+      "summary": {
+        "result": "Passed",
+        "totalTestCount": 1,
+        "passedTests": 1,
+        "failedTests": 0,
+        "skippedTests": 0,
+        "expectedFailures": 0
+      },
+      "four_native_parameter_cases_passed": true,
+      "log_sha256": "26699a1de227b6aa11cc89b62443485b9bf71945e8244a2c1abf75530dd5855a",
+      "environment": {
+        "architecture": "x86_64",
+        "modelName": "iPad (10th generation)",
+        "osBuildNumber": "21A328",
+        "osVersion": "17.0",
+        "platform": "iOS Simulator"
+      }
+    }
+  ],
+  "accepted_main_ci": 41290108646,
+  "limits": [
+    "One native declaration with four typed/raw x ownership cases per actual simulator; not the complete root suite or physical devices.",
+    "No macOS 14 native execution is inferred; physical Watch/publication gates remain mandatory.",
+    "Raw result bundles/logs/unique simulator identifiers remain private."
+  ]
+}

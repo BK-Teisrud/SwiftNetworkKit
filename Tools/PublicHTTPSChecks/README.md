@@ -53,3 +53,11 @@ swift test --package-path Tools/PublicHTTPSChecks --filter PublicRetryTests
 ```
 
 I26 adds one declaration with six typed/raw × ownership cases against fixed HTTPBingo 503 responses. It compares disabled/enabled invocation counts, including an isolated synthetic HTTPS cookie and memory-only cache in appManaged mode, owner-session reuse after shutdown and cookie deletion. This is a correctness check, not a public load test; no external wire counter, cache-hit guarantee or device/minimum result is implied. Normal root/CI tests do not execute it. See [native retry evidence](../../docs/planning/NATIVE_RETRY_VERIFICATION.md).
+
+## Explicit portable read-retry counters
+
+```sh
+swift test --package-path Tools/PublicHTTPSChecks -Xswiftc -warnings-as-errors --filter nativeLoopbackReadRetryCounters
+```
+
+This new local-only declaration has four typed/raw × owned/borrowed cases and contacts only kernel-assigned IPv4 loopback fixtures. Actual iOS/iPadOS 17, tvOS 17 and watchOS 10 simulator results, source hashes and the separately pending macOS 14 route are recorded in [I26 minimum retry evidence](../../docs/planning/I26_MINIMUM_RETRY_2026-11-01.md). The previously documented seven-declaration local selection now includes this eighth declaration; older numbered evidence remains historical. It is not a new physical-device or all-network guarantee.
