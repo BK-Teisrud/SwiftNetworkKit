@@ -44,7 +44,7 @@ Apple's [pause/resume documentation](https://developer.apple.com/documentation/f
 | 40.5 | [I31 / #149](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/149) | I30 / #148 |
 | 40.6 | [I32 / #150](https://github.com/BK-Teisrud/SwiftNetworkKit/issues/150) | I31 / #149 |
 
-START-F4 #145 is Done; I28 #146 is In Progress under explicit feasibility-only permission. I29–I32 remain Blocked/P2. START-F4 grants no shipping implementation permission. #88 is blocked by I28 because native feasibility remains one of its original acceptance criteria. START-F4 does not require #88 closure: it requires acceptance of this planning PR/main and the explicit bounded owner instruction. This avoids a dependency cycle. I29 requires both I28 and #88 plus a later explicit owner implementation decision; later tasks inherit this dependency but receive no code authorization from planning.
+START-F4 #145 is Done; I28 #146 is In Review after explicit detailed-design approval; final documentation acceptance is pending. I29–I32 remain Blocked/P2. START-F4 grants no shipping implementation permission. #88 is blocked by I28 because native feasibility remains one of its original acceptance criteria. START-F4 does not require #88 closure: it requires acceptance of this planning PR/main and the explicit bounded owner instruction. This avoids a dependency cycle. I29 requires both I28 and #88 plus a later explicit owner implementation decision; later tasks inherit this dependency but receive no code authorization from planning.
 
 No new delivery milestone or date is needed. Existing F4 retains selected downloads and domain #16/#26 retain deferred catalogs; no domain is complete. #14 advanced resilience is Backlog, #89/#90 remain independent planning, and #29/#132 remain mandatory publication barriers. Reassess the plan after each completed task. Stop at every pending GitHub run until the owner resumes work.
 
@@ -61,3 +61,7 @@ The owner authorized only I28 after planning acceptance. [The report](I28_DOWNLO
 ## Subsequent handoff direction
 
 [The I28 handoff experiment](I28_FILE_HANDOFF_2026-11-01.md) demonstrates an outer operation-scoped owner across terminal arbitration, without a generic NetworkOperation refactor. Seven observations pass; this is not integrated APIClient delivery or other-platform native proof. I28 remains active for exact API/error and native-partial ownership design; no I29 permission follows.
+
+## Final detailed-design disposition
+
+The owner explicitly approved [I28_DOWNLOAD_DESIGN.md](I28_DOWNLOAD_DESIGN.md), including the exact proposed API/error/diagnostic surface and unobservable Foundation-owned partial-file limitation. This later disposition resolves the earlier design alternatives while preserving source-specific experimental evidence. Final documentation PR/main acceptance precedes #146/#88 completion; their live issues/project record the actual result. I29–I32 remain unauthorized and need their separate implementation instruction. No new milestone/issue or generic operation refactor is justified.
