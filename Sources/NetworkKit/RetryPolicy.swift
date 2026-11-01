@@ -1,7 +1,7 @@
 import Foundation
 
-/// Opt-in replay policy for safe, bodyless reads. Integration with per-call
-/// options is introduced separately; this value alone never sends a request.
+/// Opt-in replay policy for safe, bodyless reads, selected through NetworkCallOptions.
+/// Disabled by default; never enables token refresh or mutating replay.
 public enum RetryPolicy: Sendable, Equatable {
     case disabled
     /// At most one additional library attempt for the approved failure allowlist.

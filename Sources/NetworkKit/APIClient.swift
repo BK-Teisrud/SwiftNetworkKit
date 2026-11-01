@@ -19,19 +19,21 @@ extension NetworkClient {
 
 /// Buffered foreground HTTP client with one immutable configuration and shared pipeline.
 ///
-/// Calls do not retry or refresh credentials. The configured inactivity timeout is
+/// Calls retry only when explicitly opted in; credentials are never refreshed. The inactivity timeout is
 /// applied to each request; a monotonic total budget covers preparation through delivery.
 public final class APIClient: NetworkClient {
     private let configuration: NetworkConfiguration
     private let transport: any NetworkTransport
     private let clock: any NetworkClock
     private let lifecycle = ClientLifecycle()
+    private let retryTiming: RetryTiming
 
     /// Creates and reuses a private session with automatic stores disabled.
     public init(configuration: NetworkConfiguration) throws {
         try Self.validate(configuration)
         self.configuration = configuration
         clock = ContinuousNetworkClock()
+        retryTiming = RetryTiming()
         transport = try URLSessionTransport(
             ownedConfiguration: URLSessionTransport.configuration(timeouts: configuration.timeouts),
             securityPolicy: configuration.security, baseURL: configuration.baseURL)
@@ -47,17 +49,19 @@ public final class APIClient: NetworkClient {
         try Self.validate(configuration)
         self.configuration = configuration
         clock = ContinuousNetworkClock()
+        retryTiming = RetryTiming()
         transport = try URLSessionTransport(session: session, storagePolicy: storage,
             securityPolicy: configuration.security, baseURL: configuration.baseURL)
     }
 
     /// Internal test boundary; consumers inject NetworkClient, not a transport plugin.
     internal init(configuration: NetworkConfiguration, transport: any NetworkTransport,
-                  clock: any NetworkClock = ContinuousNetworkClock()) throws {
+                  clock: any NetworkClock = ContinuousNetworkClock(), retryTiming: RetryTiming = RetryTiming()) throws {
         try Self.validate(configuration)
         self.configuration = configuration
         self.transport = transport
         self.clock = clock
+        self.retryTiming = retryTiming
     }
 
     private static func validate(_ configuration: NetworkConfiguration) throws {
@@ -80,7 +84,8 @@ public final class APIClient: NetworkClient {
                     checkpoint: { try operation.checkpoint() })
                 try operation.checkpoint()
                 return try await self.execute(prepared, response: endpoint.responseStrategy,
-                    diagnostic: diagnostic, checkpoint: { try operation.checkpoint() })
+                    diagnostic: diagnostic, remaining: { operation.remainingBudget() },
+                    checkpoint: { try operation.checkpoint() })
             }
         }
     }
@@ -99,7 +104,7 @@ public final class APIClient: NetworkClient {
                     checkpoint: { try operation.checkpoint() })
                 try operation.checkpoint()
                 return try await self.execute(prepared, response: response, diagnostic: diagnostic,
-                    checkpoint: { try operation.checkpoint() })
+                    remaining: { operation.remainingBudget() }, checkpoint: { try operation.checkpoint() })
             }
         }
     }
@@ -135,27 +140,72 @@ public final class APIClient: NetworkClient {
         }
     }
 
+    /// Contains only sanitized failure metadata, never a failed response payload.
+    private struct AttemptFailure: Error {
+        let failure: NetworkError
+        var retryAfterFields: [String] = []
+        let receipt: Date
+    }
+
     private func execute<Value: Sendable>(_ prepared: PreparedRequest, response: ResponseStrategy<Value>,
-                                          diagnostic: DiagnosticObservation, checkpoint: @Sendable () throws -> Void) async throws -> NetworkResponse<Value> {
+        diagnostic: DiagnosticObservation, remaining: @Sendable () -> TimeInterval,
+        checkpoint: @Sendable () throws -> Void) async throws -> NetworkResponse<Value> {
+        var attempts = 0
+        while true {
+            try checkpoint()
+            attempts += 1
+            do {
+                return try await attempt(prepared, response: response, diagnostic: diagnostic, checkpoint: checkpoint)
+            } catch let candidate as AttemptFailure {
+                try checkpoint()
+                guard prepared.retry == .oneRetryForSafeReads, attempts == 1,
+                      RetryDecision.isEligible(candidate.failure, accepted: prepared.acceptedStatuses),
+                      let wait = RetryDecision.delay(policy: prepared.retry, attempts: attempts,
+                    failure: candidate.failure, accepted: prepared.acceptedStatuses,
+                    retryAfterFields: candidate.retryAfterFields, receipt: candidate.receipt,
+                    jitter: retryTiming.jitter(), remaining: remaining()) else { throw candidate.failure }
+                // The attempt's stack and buffered data have unwound before waiting.
+                // This sleep is a joined child of the original admitted operation.
+                try checkpoint()
+                do { try await clock.sleep(until: clock.now().advanced(by: .seconds(wait))) }
+                catch {
+                    try checkpoint()
+                    if error is CancellationError { throw CancellationError() }
+                    throw NetworkError.invalidRequest(.invalidConfiguration)
+                }
+                try checkpoint()
+            }
+        }
+    }
+
+    private func attempt<Value: Sendable>(_ prepared: PreparedRequest, response: ResponseStrategy<Value>,
+        diagnostic: DiagnosticObservation, checkpoint: @Sendable () throws -> Void) async throws -> NetworkResponse<Value> {
         try checkpoint()
+        diagnostic.attemptStarted()
         let received: TransportResponse
         do {
             received = try await transport.send(prepared.request)
         } catch {
-            // Actual task cancellation wins over a system cancellation signal.
-            // An unexplained URLError.cancelled is an ordinary transport failure.
-            try Task.checkCancellation()
+            try checkpoint()
             if error is CancellationError { throw CancellationError() }
-            if let failure = error as? NetworkError { throw failure }
-            let underlying = error as NSError
-            if underlying.domain == NSURLErrorDomain && underlying.code == URLError.timedOut.rawValue {
-                throw NetworkError.timeout(.system)
+            let failure: NetworkError
+            if let mapped = error as? NetworkError { failure = mapped }
+            else {
+                let underlying = error as NSError
+                if underlying.domain == NSURLErrorDomain && underlying.code == URLError.timedOut.rawValue {
+                    failure = .timeout(.system)
+                } else { failure = .transport(.init(domain: underlying.domain, code: underlying.code)) }
             }
-            throw NetworkError.transport(.init(domain: underlying.domain, code: underlying.code))
+            throw AttemptFailure(failure: failure, receipt: retryTiming.wallNow())
         }
+        let receipt = retryTiming.wallNow()
         diagnostic.received(received.response)
         try checkpoint()
-        return try response.decode(received.data, response: received.response,
-                                   acceptedStatuses: prepared.acceptedStatuses)
+        let metadata = try ResponseMetadata(received.response)
+        guard prepared.acceptedStatuses.accepts(metadata.status) else {
+            throw AttemptFailure(failure: .httpStatus(metadata.status, headers: metadata.headers),
+                                 retryAfterFields: metadata.retryAfterFields, receipt: receipt)
+        }
+        return try response.decode(received.data, metadata: metadata, acceptedStatuses: prepared.acceptedStatuses)
     }
 }

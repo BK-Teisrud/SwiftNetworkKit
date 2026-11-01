@@ -1,5 +1,9 @@
 # Requirements traceability and initial backlog
 
+## I25 execution — 2026-11-01
+
+I24 #107 is accepted through PR #138/main run 41250907636 (223 Mac tests, four 220-test simulator runs, 19 helpers). I25 #108 integrates explicit per-call retry inside one admitted operation/deadline; see [integration evidence](RETRY_INTEGRATION.md). I26/I27 remain dependent native/resource/API review tasks. No extra issue, dependency, broad refactor or release scope is justified by this change. This supersedes earlier I24-active/no-loop status below; required I25 PR/main acceptance is pending.
+
 ## Current F3 execution — 2026-10-31
 
 Planning #87/#106 is accepted through PR #111/main `25e0d52b8316251bb6592d075caead9b05ed9edd`, verified run 41248255517. The owner explicitly authorized implementation of I24–I27 under ADR-0014; START-F3 #137 is completed. I24 #107 implements pure eligibility/delay decisions; I25–I27 remain dependent work. No retry transport loop, publication or other extension is delivered by I24. This status supersedes earlier no-code holds below. Existing four slices remain sufficient; no additional feature issue or broad refactor is justified.

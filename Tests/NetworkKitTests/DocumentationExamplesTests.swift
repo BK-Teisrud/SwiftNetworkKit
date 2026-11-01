@@ -40,6 +40,12 @@ func guideReadExplicitErrorBody(using client: any NetworkClient, url: URL) async
     return try await client.send(URLRequest(url: url), response: .data, options: options).value
 }
 
+/// Opt in only when the service's read semantics permit replay.
+func guideReadWithOneRetry(using client: any NetworkClient, url: URL) async throws -> Data {
+    let options = try NetworkCallOptions(retry: .oneRetryForSafeReads)
+    return try await client.send(URLRequest(url: url), response: .data, options: options).value
+}
+
 func guideEncodeItem(_ item: GuideItem, baseURL: URL) throws -> URLRequest {
     struct CreateItem: Endpoint {
         typealias Response = EmptyResponse

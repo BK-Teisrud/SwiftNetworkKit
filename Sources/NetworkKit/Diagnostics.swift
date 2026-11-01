@@ -34,6 +34,8 @@ public struct NetworkDiagnosticEvent: Sendable, Equatable {
     public let status: HTTPStatus?
     /// Monotonic call-entry through joined cleanup, excluding the sink callback itself.
     public let duration: TimeInterval
+    /// Actual library transport invocations (0...2), excluding redirects/OS attempts.
+    public let attemptCount: Int
     public let outcome: Outcome
 }
 
@@ -43,6 +45,7 @@ internal final class DiagnosticObservation: Sendable {
     private struct State: Sendable {
         var method: NetworkDiagnosticEvent.Method?
         var status: HTTPStatus?
+        var attemptCount = 0
         var cancellation: NetworkDiagnosticEvent.CancellationCause?
     }
     private let state = OSAllocatedUnfairLock(initialState: State())
@@ -55,6 +58,9 @@ internal final class DiagnosticObservation: Sendable {
     func prepared(_ request: URLRequest) {
         let method = NetworkDiagnosticEvent.Method(request.httpMethod ?? "GET")
         state.withLock { $0.method = method }
+    }
+    func attemptStarted() {
+        state.withLock { $0.attemptCount += 1; $0.status = nil }
     }
     func received(_ response: URLResponse) {
         let status = (response as? HTTPURLResponse).flatMap { try? HTTPStatus($0.statusCode) }
@@ -84,6 +90,6 @@ internal final class DiagnosticObservation: Sendable {
         let components = start.duration(to: clock.now()).components
         let duration = max(0, Double(components.seconds) + Double(components.attoseconds) / 1e18)
         sink.record(NetworkDiagnosticEvent(requestID: requestID, method: snapshot.method,
-            status: snapshot.status, duration: duration, outcome: outcome))
+            status: snapshot.status, duration: duration, attemptCount: snapshot.attemptCount, outcome: outcome))
     }
 }

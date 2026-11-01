@@ -57,8 +57,8 @@ physical-device, TLS and lifecycle gates.
 
 Create ``APIClient`` with immutable ``NetworkConfiguration`` and reuse it across calls.
 Use `try await client.send(endpoint)` or `try await client.send(request, response: .text)`.
-Both return ``NetworkResponse`` with value/status/headers. No automatic retry or token
-refresh occurs. The client can own a strict session or borrow a compatible app-owned
+Both return ``NetworkResponse`` with value/status/headers. Retry is disabled by default;
+``NetworkCallOptions`` can opt safe bodyless reads into one bounded retry. No token refresh occurs. The client can own a strict session or borrow a compatible app-owned
 session, which it never invalidates. Public injection defaults to strict storage; explicit appManaged selection permits only the documented app-owned HTTPS cookie/cache profile.
 Default request inactivity is 30 seconds; the monotonic total budget is 60 seconds.
 Explicit call options override client defaults. Preparation, transport and response handling

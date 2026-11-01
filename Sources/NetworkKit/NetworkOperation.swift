@@ -32,6 +32,9 @@ internal final class NetworkOperation<Value: Sendable>: Sendable {
         return nil
     }
 
+    /// Reads the original budget; retries never create a new operation or deadline.
+    func remainingBudget() -> TimeInterval { max(0, total - elapsed()) }
+
     func checkpoint() throws {
         let result: ((any Error)?, CheckedContinuation<Void, Never>?) = state.withLock { state in
             if case .failure(let error) = state.result { return (error, nil) }

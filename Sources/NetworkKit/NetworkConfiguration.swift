@@ -52,10 +52,12 @@ public struct NetworkCallOptions: Sendable, CustomStringConvertible, CustomDebug
     public let totalTimeout: TimeInterval?
     public let acceptedStatuses: HTTPStatusPolicy
     public let authentication: AuthenticationPolicy
+    /// Disabled by default; opt in only for semantically safe bodyless reads.
+    public let retry: RetryPolicy
 
     public init(headers: HTTPHeaders = HTTPHeaders(), inactivityTimeout: TimeInterval? = nil,
                 totalTimeout: TimeInterval? = nil, acceptedStatuses: HTTPStatusPolicy = .successful,
-                authentication: AuthenticationPolicy = .automatic) throws {
+                authentication: AuthenticationPolicy = .automatic, retry: RetryPolicy = .disabled) throws {
         for limit in [inactivityTimeout, totalTimeout].compactMap({ $0 }) {
             guard limit.isFinite, limit > 0 else {
                 throw NetworkError.invalidRequest(.invalidConfiguration)
@@ -66,6 +68,7 @@ public struct NetworkCallOptions: Sendable, CustomStringConvertible, CustomDebug
         self.totalTimeout = totalTimeout
         self.acceptedStatuses = acceptedStatuses
         self.authentication = authentication
+        self.retry = retry
     }
 
     public static let `default` = NetworkCallOptions()
@@ -76,6 +79,7 @@ public struct NetworkCallOptions: Sendable, CustomStringConvertible, CustomDebug
         totalTimeout = nil
         acceptedStatuses = .successful
         authentication = .automatic
+        retry = .disabled
     }
 
     public var description: String { "NetworkCallOptions(headerCount: \(headers.count))" }

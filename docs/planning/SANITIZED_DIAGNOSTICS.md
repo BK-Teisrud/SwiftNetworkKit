@@ -23,14 +23,15 @@ let configuration = NetworkConfiguration(
 ```
 
 NetworkDiagnosticSink is Sendable, synchronous and nonthrowing. Its only input is the
-library-constructed NetworkDiagnosticEvent with these five fields:
+library-constructed NetworkDiagnosticEvent with these six fields:
 
 | Field | Meaning and bound |
 | --- | --- |
-| requestID | A new random UUID for each send attempt, including rejected admission; shared with AuthenticationContext for the original operation |
+| requestID | A new random UUID for each logical send, including rejected admission; shared with AuthenticationContext for the original operation |
 | method | GET, HEAD, POST, PUT, PATCH, DELETE or OPTIONS by exact prepared spelling; every other method is `custom`; nil if preparation never completed |
-| status | Validated HTTPStatus if transport returned an HTTP response; nil for absent/non-HTTP/invalid status, even when a thrown error contains other metadata |
+| status | Validated HTTPStatus from the final started attempt if transport returned an HTTP response; nil for absent/non-HTTP/invalid status, even when a thrown error contains other metadata |
 | duration | Nonnegative finite monotonic seconds from call entry through joined worker/watchdog/provider cleanup, excluding sink recording |
+| attemptCount | Actual library transport invocations: 0 before networking, 1 for the initial attempt, 2 only after the retry starts; redirects/OS wire attempts are excluded |
 | outcome | Closed safe category: success, invalid-request reason, transport, HTTP-status failure, invalid-response reason, encoding, decoding, timeout reason, cancellation cause or other |
 
 No hostname, origin, path, query, fragment, full URL, header name/value, payload, account,
@@ -92,7 +93,7 @@ new diagnostic-suite functions with parameterized cases cover:
   bodies, provider account/environment/output/errors, NSError domain/userInfo/text,
   Encodable/Decodable failures, invalid requests and non-HTTP responses. Default event
   descriptions/reflection and returned error descriptions exclude the canary.
-- Exactly the five allowlisted event fields; exact standard/custom method classification;
+- Exactly the six allowlisted event fields; exact standard/custom method classification;
   observed status on success/status/decode failure and no invented status otherwise.
 - Enabled/disabled request/result parity and no extra endpoint property/description reads.
 - Pre-cancellation and closed admission; caller/shutdown/unspecified cancellation, both
@@ -118,3 +119,7 @@ Negative control: an isolated source copy added a rawURL event field and copied 
 prepared request URL into it. The selected canary test built successfully, then failed
 57 assertions across 11 cases, detecting canary/HTTPS leakage and the extra field.
 Repository source was unchanged by this control.
+
+## I25 diagnostic addition — 2026-11-01
+
+The approved retry contract adds only attemptCount to the existing terminal event. Status is cleared at each actual transport invocation, so a second-attempt transport failure cannot expose the first attempt's HTTP status as final-attempt metadata. One request ID, duration, cancellation cause and terminal outcome cover the entire admitted operation and joined cleanup. No retry reason, extra event stream or response history is added. Earlier dated evidence describes its original schema; new PR/main acceptance is required for this addition.

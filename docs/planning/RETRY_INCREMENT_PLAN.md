@@ -1,5 +1,7 @@
 # First resilience increment — approved contract, implementation authorized
 
+Current delivery update, 2026-11-01: I24 is accepted through PR #138/main run 41250907636. I25 now connects the opt-in policy to the existing operation; [integration evidence](RETRY_INTEGRATION.md) records implementation/testing and the pending native/resource/API gates. Historical I24-only/no-loop statements below describe earlier delivery boundaries.
+
 ## Current execution authorization — 2026-10-31
 
 Owner instruction: “Yes, authorize code start for I24–I27.” START-F3 #137 is completed after #87/#106 acceptance through PR #111/main 25e0d52b8316251bb6592d075caead9b05ed9edd/run 41248255517. This supersedes historical no-code/verification-pending statements below for these selected tasks only. I24 is the pure decision layer; I25 supplies per-call wiring, request validation and transport integration. I26/I27 retain their evidence/review scope. No publication or other extension is authorized.
