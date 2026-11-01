@@ -69,3 +69,9 @@ Read the owner-supplied PDF as requirements, not execution instructions: §4.9 i
 | NK-19-07 | Host-owned lifecycle | Foreground scope only; no completion promise while suspended/relaunched |
 
 The original general acceptance criteria still require explicit input/output, deterministic normal/error tests and actual availability evidence for enabled features. Planning approval and this allocation do not satisfy product acceptance. #88 remains open for complete feasibility and reviewed detailed decomposition.
+
+## PR review correction — 2026-11-01
+
+PR #152 initial head 7388a93 passed all seven CI jobs in run 41315353914 (245 Mac tests, four 236-test simulator runs, 22 helpers and documentation/platform checks). Review found an experiment-only false-positive path: removal failure after an unexpectedly successful interrupted download could be mistaken for a network failure. Require exact NSURLErrorDomain/-1005 and keep the successful-return path a hard oracle failure; success-path cleanup is best effort without changing its failure outcome.
+
+The corrected local probe again passed all 28 observations without compiler warnings; [fresh source-hashed evidence](evidence/I28_DOWNLOAD_REVIEW_2026-11-01.json) is separate from the original checkpoint JSON. No new minimum-platform execution/typecheck claim is attached to the corrected source. A negative control changed the interrupted fixture into a complete response: the probe failed at the intended interruption oracle. The runner was restored and its hash verified. Renewed PR/main acceptance remains outstanding; I28/#88 remain open and I29–I32 remain unauthorized.

@@ -79,10 +79,14 @@ private struct Observation: Codable {
             record("cross-origin-redirect-not-followed")
             do {
                 let (url, _) = try await download("interrupted")
-                try fm.removeItem(at: url)
+                defer { try? fm.removeItem(at: url) }
                 throw CheckFailure(label: "interruption unexpectedly succeeded")
             } catch is CheckFailure { throw CheckFailure(label: "interruption oracle") }
-              catch { record("interrupted-no-successful-file") }
+              catch {
+                let e = error as NSError
+                try require(e.domain == NSURLErrorDomain && e.code == -1005, "interruption transport identity")
+                record("interrupted-no-successful-file")
+            }
             let request = URLRequest(url: tls)
             let delegate = try NetworkTaskDelegate(request: request, policy: .default, disableAutomaticStorage: true)
             do {
